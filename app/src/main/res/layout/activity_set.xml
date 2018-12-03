@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yiwo.friendscometogether.pages.SetActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/activity_set_rl_top"
+            style="@style/rl_top_bar">
+
+            <TextView
+                style="@style/tv_top_title"
+                android:text="设置" />
+
+            <RelativeLayout
+                android:id="@+id/activity_set_rl_back"
+                android:layout_width="100px"
+                android:layout_height="match_parent">
+
+                <ImageView style="@style/iv_return" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="12px"-->
+            <!--android:background="@color/black_f8f8f8" />-->
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/activity_set_rl_upload"
+            android:layout_width="match_parent"
+            android:layout_height="88px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40px"
+                android:text="检查更新"
+                android:textColor="@color/black_333333"
+                android:textSize="28px" />
+
+            <ImageView
+                android:layout_width="12px"
+                android:layout_height="24px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="42px"
+                android:src="@mipmap/right" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="12px"
+            android:background="@color/line" />
+
+        <RelativeLayout
+            android:id="@+id/activity_set_rl_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="88px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40px"
+                android:text="意见反馈"
+                android:textColor="@color/black_333333"
+                android:textSize="28px" />
+
+            <ImageView
+                android:layout_width="12px"
+                android:layout_height="24px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="42px"
+                android:src="@mipmap/right" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="12px"
+            android:background="@color/line" />
+
+        <RelativeLayout
+            android:id="@+id/activity_set_rl_clear_cache"
+            android:layout_width="match_parent"
+            android:layout_height="88px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40px"
+                android:text="清除缓存"
+                android:textColor="@color/black_333333"
+                android:textSize="28px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="42px"
+                android:text="0MB"
+                android:textColor="@color/black_333333"
+                android:textSize="28px" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="12px"
+            android:background="@color/line" />
+
+        <RelativeLayout
+            android:id="@+id/activity_set_rl_user_agreement"
+            android:layout_width="match_parent"
+            android:layout_height="88px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40px"
+                android:text="用户协议"
+                android:textColor="@color/black_333333"
+                android:textSize="28px" />
+
+            <ImageView
+                android:layout_width="12px"
+                android:layout_height="24px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="42px"
+                android:src="@mipmap/right" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="12px"
+            android:background="@color/line" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/activity_set_exit_login_bt"
+        android:layout_width="match_parent"
+        android:layout_height="98px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/yellow_ff9d00"
+        android:text="注销登录"
+        android:textColor="@color/white_ffffff"
+        android:textSize="30px" />
+</RelativeLayout>

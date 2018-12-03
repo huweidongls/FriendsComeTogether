@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yiwo.friendscometogether.pages.MyOrderActivity">
+
+    <RelativeLayout
+        android:id="@+id/activity_my_order_rl_top"
+        style="@style/rl_top_bar">
+
+        <TextView
+            android:id="@+id/activity_my_order_top_title"
+            android:text="全部订单"
+            style="@style/tv_top_title" />
+
+        <RelativeLayout
+            android:id="@+id/activity_my_order_rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView
+                style="@style/iv_return" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <android.support.design.widget.TabLayout
+        app:tabBackground="@null"
+        android:layout_below="@+id/activity_my_order_rl_top"
+        android:id="@+id/activity_my_order_tab"
+        android:layout_width="match_parent"
+        android:layout_height="86px"
+        app:tabIndicatorColor="#FF9D00"
+        app:tabSelectedTextColor="#333333"
+        app:tabTextColor="#333333"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/activity_my_order_viewpager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/activity_my_order_tab"
+        android:layout_gravity="center"
+        android:background="#ffffff"
+        android:flipInterval="30"
+        android:persistentDrawingCache="animation" />
+
+</RelativeLayout>

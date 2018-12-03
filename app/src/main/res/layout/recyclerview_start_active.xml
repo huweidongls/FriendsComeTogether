@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/recyclerview_start_active_tv_title"
+            android:layout_marginLeft="40px"
+            android:layout_marginTop="20px"
+            android:textSize="32px"
+            android:textColor="@color/black_333333"
+            android:text="活动标题"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textSize="28px"
+            android:visibility="gone"
+            android:id="@+id/tv_draft"
+            android:layout_marginRight="40px"
+            android:layout_marginTop="20px"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/yellow_ff9d00"
+            android:text="草稿"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300px">
+
+        <ImageView
+            android:id="@+id/activity_start_active_rv_iv_title"
+            android:layout_marginLeft="40px"
+            android:layout_marginTop="20px"
+            android:scaleType="centerCrop"
+            android:layout_width="300px"
+            android:layout_height="200px" />
+
+        <LinearLayout
+            android:layout_marginLeft="49px"
+            android:layout_marginTop="20px"
+            android:layout_toRightOf="@+id/activity_start_active_rv_iv_title"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/recyclerview_start_active_tv_begin_time"
+                android:lines="1"
+                android:ellipsize="end"
+                android:layout_marginTop="10px"
+                android:textColor="@color/black_333333"
+                android:textSize="28px"
+                android:text="开始时间：2018.04.01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/recyclerview_start_active_tv_end_time"
+                android:lines="1"
+                android:ellipsize="end"
+                android:layout_marginTop="4px"
+                android:textColor="@color/black_333333"
+                android:textSize="28px"
+                android:text="结束时间：2018.04.30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/recyclerview_start_active_tv_price"
+                android:lines="1"
+                android:ellipsize="end"
+                android:layout_marginTop="4px"
+                android:textColor="@color/black_333333"
+                android:textSize="28px"
+                android:text="人均费用：¥888.88"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/recyclerview_start_active_tv_apply_num"
+                android:lines="1"
+                android:ellipsize="end"
+                android:layout_marginTop="4px"
+                android:textColor="@color/black_333333"
+                android:textSize="28px"
+                android:text="报名人数：123"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="40px"
+            android:layout_below="@+id/activity_start_active_rv_iv_title"
+            android:layout_marginTop="16px"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/views"
+                android:layout_width="40px"
+                android:layout_height="40px" />
+
+            <TextView
+                android:id="@+id/recyclerview_start_active_tv_views_num"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="2px"
+                android:textSize="28px"
+                android:textColor="@color/black_333333"
+                android:text="浏览: 1234"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="12px"
+                android:src="@mipmap/focus_on_y"
+                android:layout_width="32px"
+                android:layout_height="28px" />
+
+            <TextView
+                android:id="@+id/recyclerview_start_active_tv_focus_on_num"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="2px"
+                android:textSize="28px"
+                android:textColor="@color/black_333333"
+                android:text="关注: 14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_marginRight="40px"
+        android:layout_marginLeft="40px"
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="2px"/>
+
+    <LinearLayout
+        android:layout_marginRight="40px"
+        android:layout_marginLeft="40px"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="90px">
+
+        <RelativeLayout
+            android:id="@+id/recyclerview_start_active_rl_editor_activity"
+            android:layout_weight="1"
+            android:layout_width="0px"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/editor"
+                    android:layout_width="40px"
+                    android:layout_height="40px" />
+
+                <TextView
+                    android:layout_marginLeft="6px"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px"
+                    android:text="编辑"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_chat_room"
+            android:layout_weight="1"
+            android:layout_width="0px"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/enter_chat"
+                    android:layout_width="40px"
+                    android:layout_height="40px" />
+
+                <TextView
+                    android:id="@+id/tv_enter_team"
+                    android:layout_marginLeft="6px"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px"
+                    android:text="进入群聊"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/recyclerview_start_active_rl_cancle_activity"
+            android:layout_weight="1"
+            android:layout_width="0px"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/delete"
+                    android:layout_width="40px"
+                    android:layout_height="40px" />
+
+                <TextView
+                    android:id="@+id/tv_delete"
+                    android:layout_marginLeft="6px"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px"
+                    android:text="取消活动"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="12px"/>
+
+</LinearLayout>

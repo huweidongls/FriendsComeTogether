@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_ffffff"
+    android:orientation="vertical">
+
+    <RelativeLayout style="@style/rl_top_bar">
+
+        <TextView
+            style="@style/tv_top_title"
+            android:text="友聚" />
+    </RelativeLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/fragment_friend_together_refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/activity_my_focus_rl_top">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64px"
+                    android:layout_marginTop="20px"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/locationRl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px">
+
+                        <ImageView
+                            android:id="@+id/locationLv"
+                            android:layout_width="42px"
+                            android:layout_height="42px"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/index_location" />
+
+                        <TextView
+                            android:id="@+id/cityTv"
+                            android:layout_width="120px"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10px"
+                            android:layout_toRightOf="@+id/locationLv"
+                            android:ellipsize="end"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:text="选择城市"
+                            android:textColor="@color/black_333333"
+                            android:textSize="26px" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/searchLl"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30px"
+                        android:layout_marginRight="30px"
+                        android:layout_toRightOf="@+id/locationRl"
+                        android:background="@drawable/bg_search1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/explore_search_icon" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20px"
+                            android:text="搜索标题/队长"
+                            android:textSize="28px" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+                
+                <View
+                    android:layout_marginTop="24px"
+                    android:background="@color/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/fragment_friend_together_rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="130px"-->
+                    <!--android:background="#F8F8F8">-->
+
+                    <!--<View-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="2px"-->
+                        <!--android:layout_marginTop="20px"-->
+                        <!--android:background="#E5E5E5" />-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_centerInParent="true"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<View-->
+                            <!--android:layout_width="80px"-->
+                            <!--android:layout_height="2px"-->
+                            <!--android:layout_gravity="center_vertical"-->
+                            <!--android:background="#979797" />-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="20px"-->
+                            <!--android:layout_marginRight="20px"-->
+                            <!--android:text="已经到底了"-->
+                            <!--android:textColor="#6A6A6A"-->
+                            <!--android:textSize="30px" />-->
+
+                        <!--<View-->
+                            <!--android:layout_width="80px"-->
+                            <!--android:layout_height="2px"-->
+                            <!--android:layout_gravity="center_vertical"-->
+                            <!--android:background="#979797" />-->
+
+                    <!--</LinearLayout>-->
+
+                <!--</RelativeLayout>-->
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</LinearLayout>

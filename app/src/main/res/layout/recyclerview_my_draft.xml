@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="250px">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30px"
+            android:id="@+id/activity_my_draft_rv_iv"
+            android:scaleType="centerCrop"
+            android:layout_width="300px"
+            android:layout_height="200px" />
+
+        <RelativeLayout
+            android:layout_alignBottom="@+id/activity_my_draft_rv_iv"
+            android:layout_marginLeft="20px"
+            android:layout_toRightOf="@+id/activity_my_draft_rv_iv"
+            android:layout_width="match_parent"
+            android:layout_height="200px">
+
+            <TextView
+                android:id="@+id/activity_my_draft_rv_tv_title"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="4px"
+                android:lines="3"
+                android:ellipsize="end"
+                android:textColor="@color/black_333333"
+                android:textSize="32px"
+                android:text="香港一日游香港一日游"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/activity_my_draft_rv_tv_c_time"
+                android:ellipsize="end"
+                android:lines="1"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/black_333333"
+                android:textSize="24px"
+                android:text="创建时间：2018-4-15 15：45：33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    
+    <View
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="20px"/>
+    
+</LinearLayout>

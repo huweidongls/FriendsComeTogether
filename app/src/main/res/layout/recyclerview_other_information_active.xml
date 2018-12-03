@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/activity_other_information_rv_active_ll_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/activity_other_information_rv_active_iv"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="372px" />
+
+    <TextView
+        android:id="@+id/activity_other_information_rv_active_tv_title"
+        android:layout_marginTop="20px"
+        android:layout_marginLeft="35px"
+        android:layout_marginRight="35px"
+        android:textColor="@color/white_ffffff"
+        android:textSize="32px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginBottom="20px"
+        android:layout_marginTop="20px"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_marginLeft="35px"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/views"
+            android:layout_width="28px"
+            android:layout_height="19px" />
+
+        <TextView
+            android:id="@+id/activity_other_information_rv_active_tv_look_num"
+            android:layout_marginLeft="6px"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white_ffffff"
+            android:textSize="26px"
+            android:text="浏览：3678"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        
+        <ImageView
+            android:layout_marginLeft="20px"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/index_message"
+            android:layout_width="26px"
+            android:layout_height="24px" />
+
+        <TextView
+            android:id="@+id/activity_other_information_rv_active_tv_comment_num"
+            android:layout_marginLeft="6px"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white_ffffff"
+            android:textSize="26px"
+            android:text="评论：12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_marginLeft="20px"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/star_y"
+            android:layout_width="35px"
+            android:layout_height="35px" />
+
+        <TextView
+            android:id="@+id/activity_other_information_rv_active_tv_collection_num"
+            android:layout_marginLeft="6px"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white_ffffff"
+            android:textSize="26px"
+            android:text="评论：12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    
+    <View
+        android:background="@color/white_ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="10px"/>
+
+</LinearLayout>

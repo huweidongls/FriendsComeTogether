@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="20px"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="78px">
+
+        <TextView
+            android:id="@+id/fragment_return_price_rv_tv_title"
+            android:layout_marginLeft="40px"
+            android:layout_centerVertical="true"
+            android:textColor="#333333"
+            android:textSize="30px"
+            android:text="云南旅游"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/fragment_return_price_rv_tv_status"
+            android:layout_marginRight="40px"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#333333"
+            android:textSize="28px"
+            android:text="退款中"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fragment_return_price_rv_rl_details"
+        android:background="#F1F1F1"
+        android:layout_width="match_parent"
+        android:layout_height="210px">
+
+        <ImageView
+            android:id="@+id/fragment_return_price_rv_iv"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="40px"
+            android:layout_centerVertical="true"
+            android:layout_width="262px"
+            android:layout_height="170px" />
+
+        <TextView
+            android:id="@+id/fragment_return_price_rv_tv_content"
+            android:lines="2"
+            android:ellipsize="end"
+            android:layout_marginRight="98px"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="20px"
+            android:layout_toRightOf="@+id/fragment_return_price_rv_iv"
+            android:textSize="30px"
+            android:textColor="#333333"
+            android:text="云南旅游活动云南旅游活 动云南旅游活动云南2222222222"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/fragment_to_trip_rv_tv_time"
+            android:layout_marginTop="10px"
+            android:layout_below="@+id/fragment_return_price_rv_tv_content"
+            android:layout_marginLeft="20px"
+            android:layout_toRightOf="@+id/fragment_return_price_rv_iv"
+            android:textColor="#333333"
+            android:textSize="24px"
+            android:text="活动时间：2018.1.3-2018.1.5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="5px"
+            android:layout_below="@+id/fragment_to_trip_rv_tv_time"
+            android:textColor="#333333"
+            android:textSize="24px"
+            android:layout_marginLeft="20px"
+            android:layout_toRightOf="@+id/fragment_return_price_rv_iv"
+            android:id="@+id/fragment_to_trip_rv_tv_people_num"
+            android:text="参加人数：122"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80px">
+
+        <TextView
+            android:id="@+id/fragment_return_price_rv_tv_price_details"
+            android:layout_marginLeft="40px"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black_333333"
+            android:textSize="28px"
+            android:text="自费"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/fragment_return_price_rv_tv_price"
+            android:layout_marginRight="40px"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#FF9D00"
+            android:textSize="28px"
+            android:text="合计费用：¥8888"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="40px"
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="2px"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="86px">
+
+        <TextView
+            android:id="@+id/fragment_return_price_rv_tv_payment"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/bg_fragment_to_pay_payment"
+            android:gravity="center"
+            android:layout_marginRight="40px"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textSize="24px"
+            android:text="退款中"
+            android:layout_width="120px"
+            android:layout_height="44px" />
+
+        <TextView
+            android:id="@+id/fragment_return_price_rv_tv_cancle_trip"
+            android:background="@drawable/bg_fragment_to_pay_cancle"
+            android:layout_marginRight="30px"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/fragment_return_price_rv_tv_payment"
+            android:gravity="center"
+            android:textSize="24px"
+            android:textColor="@color/black_333333"
+            android:text="删除活动"
+            android:layout_width="120px"
+            android:layout_height="44px" />
+
+    </RelativeLayout>
+
+</LinearLayout>

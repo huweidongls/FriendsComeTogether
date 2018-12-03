@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_delete_friend"
+        android:textSize="16sp"
+        android:textColor="@color/black_333333"
+        android:gravity="center"
+        android:text="删除好友"
+        android:layout_width="260dp"
+        android:layout_height="50dp" />
+    
+    <View
+        android:background="@color/line"
+        android:layout_width="260dp"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/tv_add_black"
+        android:textSize="16sp"
+        android:textColor="@color/black_333333"
+        android:gravity="center"
+        android:text="加入黑名单"
+        android:layout_width="260dp"
+        android:layout_height="50dp" />
+
+    <View
+        android:background="@color/line"
+        android:layout_width="260dp"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/tv_information"
+        android:textSize="16sp"
+        android:textColor="@color/black_333333"
+        android:gravity="center"
+        android:text="查看ta的主页"
+        android:layout_width="260dp"
+        android:layout_height="50dp" />
+
+</LinearLayout>

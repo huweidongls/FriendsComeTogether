@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_marginBottom="24px"
+        android:layout_marginTop="24px"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/activity_my_pictures_rv_rl_add"
+        android:background="@drawable/bg_dialog_content"
+        android:layout_width="300px"
+        android:layout_height="200px">
+
+        <ImageView
+            android:layout_centerInParent="true"
+            android:src="@mipmap/add_image"
+            android:layout_width="50px"
+            android:layout_height="50px" />
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/activity_my_pictures_rv_rl_iv"
+        android:layout_marginBottom="24px"
+        android:layout_marginTop="24px"
+        android:layout_centerHorizontal="true"
+        android:layout_width="300px"
+        android:layout_height="200px">
+
+        <ImageView
+            android:id="@+id/activity_my_pictures_rv_iv"
+            android:scaleType="centerCrop"
+            android:layout_width="300px"
+            android:layout_height="200px" />
+        
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:id="@+id/activity_my_pictures_rv_iv_delete"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="10px"
+            android:src="@mipmap/delete"
+            android:layout_width="30px"
+            android:layout_height="30px" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yiwo.friendscometogether.pages.ArticleCommentActivity">
+
+    <RelativeLayout
+        android:id="@+id/activity_article_comment_rl_top"
+        style="@style/rl_top_bar">
+
+        <TextView
+            android:text="文章评论"
+            style="@style/tv_top_title" />
+
+        <RelativeLayout
+            android:id="@+id/activity_article_comment_rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView
+                style="@style/iv_return" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_above="@+id/activity_article_comment_rl_bottom"
+        android:layout_below="@+id/activity_article_comment_rl_top"
+        android:id="@+id/activity_article_comment_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/activity_article_comment_rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+
+        <EditText
+            android:layout_marginRight="10px"
+            android:layout_toLeftOf="@+id/activity_article_comment_tv_comment"
+            android:id="@+id/activity_article_comment_et_comment"
+            android:paddingLeft="30px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20px"
+            android:background="@drawable/bg_article_comment"
+            android:gravity="center_vertical"
+            android:textSize="28px"
+            android:hint="输入评论..."
+            android:layout_width="match_parent"
+            android:layout_height="64px" />
+
+        <TextView
+            android:layout_marginRight="10px"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:textColor="#FF9D00"
+            android:textSize="28px"
+            android:id="@+id/activity_article_comment_tv_comment"
+            android:text="发送"
+            android:layout_width="70px"
+            android:layout_height="64px" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

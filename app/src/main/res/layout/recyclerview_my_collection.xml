@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_my_collection_rv_ll"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="248px">
+
+        <ImageView
+            android:id="@+id/activity_my_collection_rv_iv"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="40px"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerCrop"
+            android:layout_width="300px"
+            android:layout_height="200px" />
+        
+        <RelativeLayout
+            android:layout_alignBottom="@+id/activity_my_collection_rv_iv"
+            android:orientation="vertical"
+            android:layout_marginLeft="40px"
+            android:layout_marginRight="18px"
+            android:layout_toLeftOf="@+id/activity_my_collection_rv_iv"
+            android:layout_width="match_parent"
+            android:layout_height="200px">
+
+            <TextView
+                android:layout_marginTop="6px"
+                android:id="@+id/activity_my_collection_rv_tv_title"
+                android:textColor="@color/black_333333"
+                android:textSize="32px"
+                android:lines="3"
+                android:ellipsize="end"
+                android:text="香港也是购物的天堂香港 也是购物的天堂香港也是 购物的天堂香港"
+                android:layout_width="352px"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_above="@+id/activity_my_collection_rv_tv_time"
+                android:textSize="24px"
+                android:textColor="@color/black_333333"
+                android:text="开始时间:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:id="@+id/activity_my_collection_rv_tv_time"
+                android:textSize="24px"
+                android:textColor="@color/black_333333"
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    
+    <View
+        android:background="@color/line"
+        android:layout_marginRight="40px"
+        android:layout_marginLeft="40px"
+        android:layout_width="match_parent"
+        android:layout_height="2px"/>
+
+</LinearLayout>

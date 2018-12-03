@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yiwo.friendscometogether.pages.CreateFriendTogetherActivity">
+
+    <RelativeLayout
+        android:id="@+id/activity_create_friend_together_rl_top"
+        style="@style/rl_top_bar">
+
+        <TextView
+            style="@style/tv_top_title"
+            android:text="创建友聚" />
+
+        <RelativeLayout
+            android:id="@+id/activity_create_friend_together_rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView style="@style/iv_return" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/activity_create_friend_together_rl_complete"
+            android:layout_width="100px"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="完成"
+                android:textColor="@color/white_ffffff"
+                android:textSize="30px" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/activity_create_friend_together_rl_top">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/activity_create_friend_together_rl_edit_title"
+                android:layout_width="match_parent"
+                android:layout_height="88px"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <EditText
+                    android:id="@+id/activity_create_friend_together_tv_title"
+                    android:layout_width="490px"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40px"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:gravity="start"
+                    android:hint="请输入活动标题"
+                    android:lines="1"
+                    android:maxLength="30"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+                <TextView
+                    android:id="@+id/activity_create_friend_together_tv_title_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="40px"
+                    android:text="0/30"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/activity_create_friend_together_rl_edit_content"
+                android:layout_width="match_parent"
+                android:layout_height="250px"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:layout_marginTop="24px"
+                    android:text="具体内容"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+                <TextView
+                    android:id="@+id/activity_create_friend_together_tv_content_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="40px"
+                    android:layout_marginTop="24px"
+                    android:text="0/2000"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+                <EditText
+                    android:id="@+id/activity_create_friend_together_tv_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="170px"
+                    android:layout_below="@+id/activity_create_friend_together_tv_content_num"
+                    android:layout_marginLeft="40px"
+                    android:layout_marginRight="40px"
+                    android:layout_marginTop="8px"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:gravity="start"
+                    android:hint="请输入具体内容"
+                    android:lines="4"
+                    android:maxLength="2000"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="370px">
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_add"
+                    android:layout_width="120px"
+                    android:layout_height="120px"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/bg_dialog_price_un_select"
+                    android:padding="20px"
+                    android:src="@mipmap/add_image" />
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="330px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30px"
+                    android:layout_marginRight="30px"
+                    android:scaleType="centerCrop"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_delete"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10px"
+                    android:src="@mipmap/delete"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/activity_create_friend_together_tv_first_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="80px"
+                    android:layout_alignBottom="@+id/activity_create_friend_together_iv_title"
+                    android:layout_marginLeft="30px"
+                    android:layout_marginRight="30px"
+                    android:background="#4D000000"
+                    android:gravity="center"
+                    android:text="首图"
+                    android:textColor="@color/white_ffffff"
+                    android:textSize="28px"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/activity_create_friend_together_rl_time_start"
+                android:layout_width="match_parent"
+                android:layout_height="88px">
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_time_start"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40px"
+                    android:src="@mipmap/time_start" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12px"
+                    android:layout_toRightOf="@+id/activity_create_friend_together_iv_time_start"
+                    android:text="开始时间"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_time_start_right"
+                    android:layout_width="14px"
+                    android:layout_height="24px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="40px"
+                    android:src="@mipmap/right" />
+
+                <TextView
+                    android:id="@+id/activity_create_friend_together_tv_time_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10px"
+                    android:layout_toLeftOf="@+id/activity_create_friend_together_iv_time_start_right"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/activity_create_friend_together_rl_time_end"
+                android:layout_width="match_parent"
+                android:layout_height="88px">
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_time_end"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40px"
+                    android:src="@mipmap/time_end" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12px"
+                    android:layout_toRightOf="@+id/activity_create_friend_together_iv_time_end"
+                    android:text="结束时间"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_time_end_right"
+                    android:layout_width="14px"
+                    android:layout_height="24px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="40px"
+                    android:src="@mipmap/right" />
+
+                <TextView
+                    android:id="@+id/activity_create_friend_together_tv_time_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10px"
+                    android:layout_toLeftOf="@+id/activity_create_friend_together_iv_time_end_right"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/activity_create_friend_together_rl_activity_city"
+                android:layout_width="match_parent"
+                android:layout_height="88px">
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_activity_city"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40px"
+                    android:src="@mipmap/activity_place" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12px"
+                    android:layout_toRightOf="@+id/activity_create_friend_together_iv_activity_city"
+                    android:text="活动地点"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_activity_city_right"
+                    android:layout_width="14px"
+                    android:layout_height="24px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="40px"
+                    android:src="@mipmap/right" />
+
+                <TextView
+                    android:id="@+id/activity_create_friend_together_tv_activity_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10px"
+                    android:layout_toLeftOf="@+id/activity_create_friend_together_iv_activity_city_right"
+                    android:text="城市名字"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/activity_create_friend_together_rl_price"
+                android:layout_width="match_parent"
+                android:layout_height="88px">
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_price"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40px"
+                    android:src="@mipmap/price" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12px"
+                    android:layout_toRightOf="@+id/activity_create_friend_together_iv_price"
+                    android:text="费用"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_price_right"
+                    android:layout_width="14px"
+                    android:layout_height="24px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="40px"
+                    android:src="@mipmap/right" />
+
+                <TextView
+                    android:id="@+id/activity_create_friend_together_tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10px"
+                    android:layout_toLeftOf="@+id/activity_create_friend_together_iv_price_right"
+                    android:text="¥000.00"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/activity_create_friend_together_rl_person_require"
+                android:layout_width="match_parent"
+                android:layout_height="88px">
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_person_require"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40px"
+                    android:src="@mipmap/person" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12px"
+                    android:layout_toRightOf="@+id/activity_create_friend_together_iv_person_require"
+                    android:text="人数要求"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_person_require_right"
+                    android:layout_width="14px"
+                    android:layout_height="24px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="40px"
+                    android:src="@mipmap/right" />
+
+                <TextView
+                    android:id="@+id/activity_create_friend_together_tv_price_require"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10px"
+                    android:layout_toLeftOf="@+id/activity_create_friend_together_iv_person_require_right"
+                    android:text="最少，最多"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/activity_create_friend_together_rl_activities_require"
+                android:layout_width="match_parent"
+                android:layout_height="88px">
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_activities_require"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40px"
+                    android:src="@mipmap/activities_require_r" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12px"
+                    android:layout_toRightOf="@+id/activity_create_friend_together_iv_activities_require"
+                    android:text="活动要求"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_activities_require_right"
+                    android:layout_width="14px"
+                    android:layout_height="24px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="40px"
+                    android:src="@mipmap/right" />
+
+                <TextView
+                    android:id="@+id/activity_create_friend_together_tv_activity_require"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10px"
+                    android:layout_toLeftOf="@+id/activity_create_friend_together_iv_activities_require_right"
+                    android:text=""
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/activity_create_friend_remember_rl_label"
+                android:layout_width="match_parent"
+                android:layout_height="88px">
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_remember_iv_label"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40px"
+                    android:src="@mipmap/label_create_friend_remember" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12px"
+                    android:layout_toRightOf="@+id/activity_create_friend_remember_iv_label"
+                    android:text="标签"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_remember_iv_label_right"
+                    android:layout_width="14px"
+                    android:layout_height="24px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="40px"
+                    android:src="@mipmap/right" />
+
+                <TextView
+                    android:id="@+id/activity_create_friend_remember_tv_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10px"
+                    android:layout_toLeftOf="@+id/activity_create_friend_remember_iv_label_right"
+                    android:gravity="end"
+                    android:hint="选择活动标签"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/activity_create_friend_together_rl_enter_activities"
+                android:layout_width="match_parent"
+                android:layout_height="88px">
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_enter_activities"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40px"
+                    android:src="@mipmap/enter_activity" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12px"
+                    android:layout_toRightOf="@+id/activity_create_friend_together_iv_enter_activities"
+                    android:text="进入活动"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+                <ImageView
+                    android:id="@+id/activity_create_friend_together_iv_enter_activities_right"
+                    android:layout_width="14px"
+                    android:layout_height="24px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="40px"
+                    android:src="@mipmap/right" />
+
+                <TextView
+                    android:id="@+id/activity_create_friend_together_tv_pwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10px"
+                    android:layout_toLeftOf="@+id/activity_create_friend_together_iv_enter_activities_right"
+                    android:text="不设密码"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

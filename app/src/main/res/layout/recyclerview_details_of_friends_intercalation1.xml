@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_marginRight="40px"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="20px"
+        android:id="@+id/activity_details_of_friends_rv_tv_title"
+        android:textSize="36px"
+        android:textColor="@color/black_333333"
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_marginRight="40px"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="20px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="100px"
+            android:layout_height="100px" />
+
+        <TextView
+            android:layout_marginLeft="10px"
+            android:gravity="center"
+            android:textSize="28px"
+            android:textColor="@color/black_333333"
+            android:id="@+id/tv_nickname"
+            android:layout_toRightOf="@+id/iv_avatar"
+            android:text="昵称"
+            android:layout_width="wrap_content"
+            android:layout_height="50px" />
+
+        <TextView
+            android:layout_marginLeft="10px"
+            android:id="@+id/tv_time"
+            android:gravity="center"
+            android:textSize="28px"
+            android:textColor="@color/black_333333"
+            android:layout_below="@+id/tv_nickname"
+            android:layout_toRightOf="@+id/iv_avatar"
+            android:text="昵称"
+            android:layout_width="wrap_content"
+            android:layout_height="50px" />
+
+        <TextView
+            android:textSize="26px"
+            android:id="@+id/tv_is_focus"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/white_ffffff"
+            android:background="@drawable/bg_btn_red"
+            android:gravity="center"
+            android:text="+关注"
+            android:layout_width="140px"
+            android:layout_height="60px" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_marginRight="40px"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="20px"
+        android:id="@+id/activity_details_of_friends_rv_tv_content"
+        android:textSize="30px"
+        android:textColor="@color/black_333333"
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_marginTop="30px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/activity_details_of_friends_rv_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</LinearLayout>

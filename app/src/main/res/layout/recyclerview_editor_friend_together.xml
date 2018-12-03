@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100px"
+    android:id="@+id/activity_editor_friend_together_rv_rl">
+
+    <TextView
+        android:layout_marginTop="24px"
+        android:id="@+id/activity_editor_friend_together_rv_tv"
+        android:layout_marginLeft="40px"
+        android:textSize="28px"
+        android:textColor="@color/black_333333"
+        android:text="子标题"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+    <ImageView
+        android:layout_marginRight="40px"
+        android:layout_marginTop="32px"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/right"
+        android:layout_width="14px"
+        android:layout_height="24px" />
+
+    <View
+        android:layout_alignParentBottom="true"
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="12px"/>
+
+</RelativeLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:elevation="4px"
+        android:id="@+id/item_ll"
+        android:layout_width="670px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40px"
+        android:background="@drawable/bg_message_view"
+        android:orientation="vertical"
+        android:padding="20px">
+
+        <TextView
+            android:id="@+id/message_view_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="完全搞不清楚状况的我"
+            android:textColor="@color/black_333333"
+            android:textSize="30px" />
+
+        <ImageView
+            android:id="@+id/message_view_pic_iv"
+            android:layout_width="match_parent"
+            android:layout_height="312px"
+            android:layout_marginTop="20px"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/message_view_content_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:gravity="center_vertical"
+            android:text="你这内容属实简短"
+            android:textColor="@color/black_626262"
+            android:textSize="28px" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginTop="20px"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:layout_marginTop="20px">
+
+            <TextView
+                android:id="@+id/tv_no"
+                android:textColor="@color/white_ffffff"
+                android:background="@color/yellow_ff9d00"
+                android:gravity="center"
+                android:textSize="30px"
+                android:text="拒绝"
+                android:layout_weight="1"
+                android:layout_width="0px"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_ok"
+                android:layout_marginLeft="130px"
+                android:textColor="@color/white_ffffff"
+                android:background="@color/yellow_ff9d00"
+                android:gravity="center"
+                android:textSize="30px"
+                android:text="同意"
+                android:layout_weight="1"
+                android:layout_width="0px"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

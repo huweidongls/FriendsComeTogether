@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yiwo.friendscometogether.pages.OtherPicActivity">
+
+    <RelativeLayout
+        android:id="@+id/activity_other_pic_rl_top"
+        style="@style/rl_top_bar">
+
+        <TextView
+            android:text="他的相册"
+            style="@style/tv_top_title" />
+
+        <RelativeLayout
+            android:id="@+id/activity_other_pic_rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView
+                style="@style/iv_return" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:background="#000000"
+        android:layout_below="@+id/activity_other_pic_rl_top"
+        android:id="@+id/activity_other_pic_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

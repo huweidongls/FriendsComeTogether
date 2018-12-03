@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yiwo.friendscometogether.pages.InsertIntercalationActivity">
+
+    <RelativeLayout
+        android:id="@+id/activity_insert_intercalation_rl_top"
+        style="@style/rl_top_bar">
+
+        <TextView
+            android:text="创建插文"
+            style="@style/tv_top_title" />
+
+        <RelativeLayout
+            android:id="@+id/activity_insert_intercalation_rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="30px"
+                android:textColor="@color/white_ffffff"
+                android:text="取消"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/activity_insert_intercalation_rl_complete"
+            android:layout_alignParentRight="true"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="30px"
+                android:textColor="@color/white_ffffff"
+                android:text="发布"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="match_parent"
+        android:layout_height="88px">
+
+        <EditText
+            android:id="@+id/activity_insert_intercalation_et_title"
+            android:textColor="@color/black_333333"
+            android:layout_marginLeft="40px"
+            android:layout_centerVertical="true"
+            android:gravity="start"
+            android:hint="请输入标题"
+            android:textSize="28px"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <View
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="12px"/>
+
+    <RelativeLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="match_parent"
+        android:layout_height="308px">
+
+        <TextView
+            android:layout_marginTop="24px"
+            android:layout_marginLeft="40px"
+            android:textColor="@color/black_333333"
+            android:textSize="28px"
+            android:text="具体内容"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/activity_insert_intercalation_tv_text_num"
+            android:layout_marginRight="40px"
+            android:layout_marginTop="24px"
+            android:layout_alignParentRight="true"
+            android:text="0/2000"
+            android:textColor="@color/black_333333"
+            android:textSize="28px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:maxLength="2000"
+            android:id="@+id/activity_insert_intercalation_et_content"
+            android:textColor="@color/black_333333"
+            android:layout_marginBottom="10px"
+            android:layout_marginTop="10px"
+            android:layout_below="@+id/activity_insert_intercalation_tv_text_num"
+            android:layout_marginLeft="40px"
+            android:layout_marginRight="40px"
+            android:gravity="start"
+            android:textSize="28px"
+            android:hint="请输入内容"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activity_insert_intercalation_rv"
+        android:layout_marginRight="40px"
+        android:layout_marginLeft="40px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    
+    <View
+        android:layout_marginTop="20px"
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="12px"/>
+
+    <RelativeLayout
+        android:id="@+id/activity_insert_intercalation_rl_intercalation_location"
+        android:layout_width="match_parent"
+        android:layout_height="90px">
+
+        <TextView
+            android:layout_marginLeft="40px"
+            android:layout_centerVertical="true"
+            android:text="插文位置"
+            android:textColor="@color/black_333333"
+            android:textSize="28px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        
+        <ImageView
+            android:id="@+id/activity_insert_intercalation_iv_right"
+            android:layout_marginRight="40px"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/right"
+            android:layout_width="14px"
+            android:layout_height="24px" />
+
+        <TextView
+            android:id="@+id/activity_insert_intercalation_tv_select"
+            android:layout_marginRight="10px"
+            android:layout_toLeftOf="@+id/activity_insert_intercalation_iv_right"
+            android:layout_centerVertical="true"
+            android:textSize="28px"
+            android:textColor="@color/black_333333"
+            android:text="请选择"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <View
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="12px"/>
+
+</LinearLayout>

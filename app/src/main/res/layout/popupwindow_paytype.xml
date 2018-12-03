@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/popupwindow_complete_tv_release"
+        android:background="@color/white_ffffff"
+        android:gravity="center"
+        android:textSize="28px"
+        android:textColor="@color/black_333333"
+        android:text="微信"
+        android:layout_width="match_parent"
+        android:layout_height="98px" />
+    
+    <View
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="2px"/>
+
+    <!--<TextView-->
+        <!--android:id="@+id/popupwindow_complete_tv_save"-->
+        <!--android:background="@color/white_ffffff"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="28px"-->
+        <!--android:textColor="@color/black_333333"-->
+        <!--android:text="保存草稿"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="98px" />-->
+
+    <!--<View-->
+        <!--android:background="@color/line"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2px"/>-->
+
+    <TextView
+        android:id="@+id/popupwindow_complete_tv_next"
+        android:background="@color/white_ffffff"
+        android:gravity="center"
+        android:textSize="28px"
+        android:textColor="@color/black_333333"
+        android:text="支付宝"
+        android:layout_width="match_parent"
+        android:layout_height="98px" />
+
+    <View
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="2px"/>
+
+    <TextView
+        android:id="@+id/popupwindow_complete_tv_cancel"
+        android:background="#FF9D00"
+        android:gravity="center"
+        android:textSize="28px"
+        android:textColor="@color/white_ffffff"
+        android:text="取消"
+        android:layout_width="match_parent"
+        android:layout_height="98px" />
+
+</LinearLayout>

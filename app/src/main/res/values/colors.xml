@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="colorPrimary">#3F51B5</color>
+  <color name="colorPrimaryDark">#000000</color>
+  <color name="colorAccent">#FF9d00</color>
+  <!--颜色面板-->
+  <color name="yellow_ffc822">#ffc822</color>
+  <color name="blue_2681fc">#2681fc</color>
+  <color name="purple_8071f9">#8071f9</color>
+  <color name="blue_3dc4ff">#3dc4ff</color>
+  <color name="gray_c4ced3">#c4ced3</color>
+  <color name="gray_a0a0a0">#a0a0a0</color>
+  <color name="red_ff3e50">#ff3e50</color>
+  <color name="green_06d413">#06d413</color>
+  <color name="black_252323">#252323</color>
+  <color name="white_ffffff">#ffffff</color>
+  <color name="translate">#00000000</color>
+  <color name="blue_54affd">#54affd</color>
+  <color name="yellow_ff9d00">#ff9d00</color>
+  <color name="yellow_F5A623">#F5A623</color>
+  <color name="black_626262">#626262</color>
+  <color name="gray_979797">#979797</color>
+  <color name="gray_cacaca">#cacaca</color>
+  <color name="blue_449CFA">#449CFA</color>
+  <color name="black_333333">#333333</color>
+  <color name="black_f8f8f8">#f2f2f2</color>
+  <color name="yellow_fea81f">#fea81f</color>
+  <color name="gray_e5e5e5">#e5e5e5</color>
+  <color name="gray_101010">#10101000</color>
+  <color name="red_F71F1F">#F71F1F</color>
+  <color name="gray_909090">#909090</color>
+  <color name="line">#f2f2f2</color>
+
+  <color name="background">#FFFFFF</color>
+  <color name="split_line">#11112233</color>
+  <color name="text1">#ff9d00</color>
+  <color name="text2">#333333</color>
+
+  <color name="color1">#F0F0F0</color>
+  <color name="color2">#FFFFFF</color>
+  <color name="color3">#B0B0B0</color>
+  <color name="color4">#666666</color>
+  <color name="color5">#57C5E8</color>
+
+</resources>

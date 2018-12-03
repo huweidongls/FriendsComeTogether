@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yiwo.friendscometogether.pages.MessageCenterDetailsActivity">
+
+    <RelativeLayout
+        android:id="@+id/activity_message_center_details_rl_top"
+        style="@style/rl_top_bar">
+
+        <TextView
+            style="@style/tv_top_title"
+            android:text="消息中心" />
+
+        <RelativeLayout
+            android:id="@+id/activity_message_center_details_rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView style="@style/iv_return" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/activity_message_center_details_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_marginRight="40px"
+                android:layout_marginTop="30px"
+                android:maxLength="30"
+                android:maxLines="2"
+                android:text=""
+                android:textColor="@color/black_333333"
+                android:textSize="30px" />
+
+            <ImageView
+                android:id="@+id/activity_message_center_details_pic_iv"
+                android:layout_width="match_parent"
+                android:layout_height="332px"
+                android:layout_marginLeft="40px"
+                android:layout_marginRight="40px"
+                android:layout_marginTop="20px"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/activity_message_center_details_content_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_marginRight="40px"
+                android:layout_marginTop="20px"
+                android:text=""
+                android:textColor="@color/black_333333"
+                android:textSize="28px" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

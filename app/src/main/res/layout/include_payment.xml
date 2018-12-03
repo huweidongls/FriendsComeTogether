@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_marginLeft="40px"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="140px"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="支付方式:"
+            android:textSize="28px" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="40px"
+        android:background="@color/line" />
+
+    <RelativeLayout
+        android:id="@+id/wechat_pay"
+        android:layout_width="match_parent"
+        android:layout_height="76px"
+        android:layout_marginLeft="40px">
+
+        <ImageView
+            android:id="@+id/wechat"
+            android:layout_width="36px"
+            android:layout_height="36px"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/wechat" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="6px"
+            android:layout_toRightOf="@+id/wechat"
+            android:gravity="center_vertical"
+            android:text="微信支付"
+            android:textSize="28px" />
+
+        <ImageView
+            android:id="@+id/wechatIv"
+            android:layout_width="30px"
+            android:layout_height="30px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="40px"
+            android:src="@mipmap/apply_true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/alipay_pay"
+        android:layout_width="match_parent"
+        android:layout_height="76px"
+        android:layout_marginLeft="40px">
+
+        <ImageView
+            android:id="@+id/alipay"
+            android:layout_width="36px"
+            android:layout_height="36px"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/alipay" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="6px"
+            android:layout_toRightOf="@+id/alipay"
+            android:gravity="center_vertical"
+            android:text="支付宝"
+            android:textSize="28px" />
+
+        <ImageView
+            android:id="@+id/alipayIv"
+            android:layout_width="30px"
+            android:layout_height="30px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="40px"
+            android:src="@mipmap/apply_false" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="12px"
+        android:background="@color/line" />
+</LinearLayout>

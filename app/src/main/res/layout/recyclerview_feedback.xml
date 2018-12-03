@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_hot_vessel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="32px"
+    android:paddingRight="32px">
+
+    <TextView
+        android:id="@+id/recyclerview_feedback_content_tv"
+        android:layout_width="match_parent"
+        android:layout_height="98px"
+        android:text="【2018年4月15日 13：16：45】阿斯顿联发科技士大意见"
+        android:textColor="@color/black_333333"
+        android:textSize="26px" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60px"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/recyclerview_feedback_reply_bt"
+            android:layout_width="130px"
+            android:layout_height="60px"
+            android:background="@drawable/bg_btn"
+            android:padding="0px"
+            android:text="回复"
+            android:textColor="@color/white_ffffff"
+            android:textSize="26px" />
+
+        <TextView
+            android:id="@+id/recyclerview_feedback_reply_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25px"
+            android:maxLines="1"
+            android:text="谢谢您的建议【2018年4月7日】"
+            android:textColor="@color/black_626262"
+            android:textSize="26px" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginTop="30px"
+        android:background="@color/line" />
+</LinearLayout>

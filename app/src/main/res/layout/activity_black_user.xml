@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yiwo.friendscometogether.pages.BlackUserActivity">
+
+    <RelativeLayout
+        android:id="@+id/activity_black_user_rl_top"
+        style="@style/rl_top_bar">
+
+        <TextView
+            android:text="我的黑名单"
+            style="@style/tv_top_title" />
+        
+        <RelativeLayout
+            android:id="@+id/activity_black_user_rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView
+                style="@style/iv_return" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <ListView
+        android:layout_below="@+id/activity_black_user_rl_top"
+        android:id="@+id/activity_black_user_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

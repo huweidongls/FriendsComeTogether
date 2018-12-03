@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="24px"
+        android:layout_marginLeft="40px"
+        android:id="@+id/avatar"
+        android:layout_width="90px"
+        android:layout_height="90px" />
+
+    <LinearLayout
+        android:layout_marginRight="40px"
+        android:layout_marginTop="24px"
+        android:layout_marginLeft="20px"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/nickname"
+            android:textStyle="bold"
+            android:textColor="@color/black_333333"
+            android:textSize="30px"
+            android:text="昵称：帅气的小迷糊"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_marginTop="20px"
+            android:textSize="28px"
+            android:textColor="@color/black_333333"
+            android:text="我爱旅游我爱旅游我爱旅游我爱旅游我爱旅游我爱旅游我爱旅游我爱旅游爱旅游"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        
+        <View
+            android:layout_marginTop="24px"
+            android:background="@color/line"
+            android:layout_width="match_parent"
+            android:layout_height="2px"/>
+
+    </LinearLayout>
+
+</LinearLayout>

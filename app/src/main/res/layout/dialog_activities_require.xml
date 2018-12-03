@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="600px"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/dialog_activities_require_rl_close"
+        android:layout_width="58px"
+        android:layout_height="58px"
+        android:layout_alignParentRight="true">
+
+        <ImageView
+            android:layout_width="18px"
+            android:layout_height="18px"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/close" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/dialog_activities_require_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_activities_require_rl_close"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="2px"
+        android:text="活动要求"
+        android:textColor="@color/black_333333"
+        android:textSize="32px" />
+
+    <LinearLayout
+        android:id="@+id/dialog_activities_require_age_ll"
+        android:layout_width="match_parent"
+        android:layout_height="50px"
+        android:layout_below="@+id/dialog_activities_require_tv"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="30px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="年龄："
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+        <RelativeLayout
+            android:layout_width="120px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16px"
+            android:background="@drawable/bg_dialog_price_un_select">
+
+            <EditText
+                android:id="@+id/dialog_activities_require_age_min_et"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请输入年龄"
+                android:inputType="phone"
+                android:textColor="@color/black_333333"
+                android:textSize="20px" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20px"
+            android:gravity="center"
+            android:text="~"
+            android:textColor="@color/black_333333"
+            android:textSize="36px" />
+
+        <RelativeLayout
+            android:layout_width="120px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20px"
+            android:background="@drawable/bg_dialog_price_un_select">
+
+            <EditText
+                android:id="@+id/dialog_activities_require_age_max_et"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10px"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请输入年龄"
+                android:inputType="phone"
+                android:textColor="@color/black_333333"
+                android:textSize="20px" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dialog_activities_require_sex_ll"
+        android:layout_width="match_parent"
+        android:layout_height="50px"
+        android:layout_below="@+id/dialog_activities_require_age_ll"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="40px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="性别："
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/dialog_activities_require_sex_none_tv"
+            android:layout_width="120px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16px"
+            android:background="@drawable/bg_dialog_price_un_select"
+            android:gravity="center"
+            android:text="不限"
+            android:textColor="@color/black_333333"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/dialog_activities_require_sex_man_tv"
+            android:layout_width="120px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20px"
+            android:background="@drawable/bg_dialog_price_un_select"
+            android:gravity="center"
+            android:text="男"
+            android:textColor="@color/black_333333"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/dialog_activities_require_sex_woman_tv"
+            android:layout_width="120px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20px"
+            android:background="@drawable/bg_dialog_price_un_select"
+            android:gravity="center"
+            android:text="女"
+            android:textColor="@color/black_333333"
+            android:textSize="24px" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/dialog_activities_require_equal_tv"
+        android:layout_width="120px"
+        android:layout_height="50px"
+        android:layout_below="@+id/dialog_activities_require_sex_ll"
+        android:layout_marginLeft="140px"
+        android:layout_marginTop="20px"
+        android:background="@drawable/bg_dialog_price_un_select"
+        android:gravity="center"
+        android:text="男女均等"
+        android:textColor="@color/black_333333"
+        android:textSize="24px" />
+
+    <LinearLayout
+        android:id="@+id/dialog_activities_require_marriage_ll"
+        android:layout_width="match_parent"
+        android:layout_height="56px"
+        android:layout_below="@+id/dialog_activities_require_equal_tv"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="40px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="单身："
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/dialog_activities_require_unmarriage_tv"
+            android:layout_width="160px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10px"
+            android:background="@drawable/bg_dialog_price_un_select"
+            android:gravity="center"
+            android:text="是"
+            android:textColor="@color/black_333333"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/dialog_activities_require_marriage_tv"
+            android:layout_width="160px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20px"
+            android:background="@drawable/bg_dialog_price_un_select"
+            android:gravity="center"
+            android:text="不限"
+            android:textColor="@color/black_333333"
+            android:textSize="24px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dialog_activities_require_other_ll"
+        android:layout_width="match_parent"
+        android:layout_height="56px"
+        android:layout_below="@+id/dialog_activities_require_marriage_ll"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="40px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="其他："
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+        <RelativeLayout
+            android:layout_width="350px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10px"
+            android:background="@drawable/bg_dialog_price_un_select">
+
+            <EditText
+                android:id="@+id/dialog_activities_require_other_et"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请输入要求"
+                android:textColor="@color/black_333333"
+                android:textSize="24px" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/dialog_activities_require_submit_tv"
+        android:layout_width="260px"
+        android:layout_height="56px"
+        android:layout_below="@+id/dialog_activities_require_other_ll"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50px"
+        android:layout_marginTop="50px"
+        android:background="@drawable/bg_dialog_button"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="#FFFFFF"
+        android:textSize="24px" />
+</RelativeLayout>

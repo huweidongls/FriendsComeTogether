@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/activity_create_intercalation_rv_rl_img"
+        android:layout_marginTop="18px"
+        android:layout_centerHorizontal="true"
+        android:layout_width="180px"
+        android:layout_height="120px">
+
+        <ImageView
+            android:id="@+id/activity_create_intercalation_rv_iv_img"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:textColorHint="@color/white_ffffff"
+            android:hint="编辑图片描述"
+            android:lines="1"
+            android:ellipsize="end"
+            android:padding="3px"
+            android:id="@+id/activity_create_intercalation_rv_tv_content"
+            android:textColor="@color/white_ffffff"
+            android:gravity="center"
+            android:textSize="20px"
+            android:background="#449CFA"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_marginLeft="-17px"
+        android:layout_toRightOf="@+id/activity_create_intercalation_rv_rl_img"
+        android:id="@+id/activity_create_intercalation_rv_iv_delete"
+        android:src="@mipmap/delete"
+        android:layout_width="35px"
+        android:layout_height="35px" />
+
+</RelativeLayout>

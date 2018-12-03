@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yiwo.friendscometogether.MainActivity">
+
+    <!--<FrameLayout-->
+    <!--android:id="@+id/realtabcontent"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:layout_marginBottom="49dp" />-->
+
+    <!--<android.support.v4.app.FragmentTabHost-->
+    <!--android:id="@android:id/tabhost"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="49dp"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:background="@color/white_ffffff">-->
+
+    <!--<FrameLayout-->
+    <!--android:id="@android:id/tabcontent"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="0" />-->
+    <!--</android.support.v4.app.FragmentTabHost>-->
+
+    <LinearLayout
+        android:id="@+id/system_ll_button"
+        android:layout_width="match_parent"
+        android:layout_height="98px"
+        android:layout_alignParentBottom="true"
+        android:background="#fdfdfd"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/menu1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:layout_marginTop="15px"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/menu_index"
+                android:layout_width="43px"
+                android:layout_height="43px"
+                android:background="@drawable/select_index"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_index"
+                android:layout_marginTop="6px"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/menu_index"
+                android:textColor="@drawable/select_color"
+                android:textSize="20px"
+                android:text="首页"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/menu2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:layout_marginTop="15px"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/menu_friend_together"
+                android:layout_width="43px"
+                android:layout_height="43px"
+                android:background="@drawable/select_friends_together"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_friend_together"
+                android:layout_marginTop="6px"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/menu_friend_together"
+                android:textColor="@drawable/select_color"
+                android:textSize="20px"
+                android:text="友聚"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/menu3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:layout_marginTop="15px"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/menu_friend_remember"
+                android:layout_width="43px"
+                android:layout_height="43px"
+                android:background="@drawable/select_friends_remember"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_friend_remember"
+                android:layout_marginTop="6px"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/menu_friend_remember"
+                android:textColor="@drawable/select_color"
+                android:textSize="20px"
+                android:text="友记"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/menu4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:layout_marginTop="15px"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/menu_chat"
+                android:layout_width="43px"
+                android:layout_height="43px"
+                android:background="@drawable/select_chat"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_chat"
+                android:layout_marginTop="6px"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/menu_chat"
+                android:textColor="@drawable/select_color"
+                android:textSize="20px"
+                android:text="聊天"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/menu5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:layout_marginTop="15px"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/menu_wd"
+                android:layout_width="43px"
+                android:layout_height="43px"
+                android:background="@drawable/select_my"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_my"
+                android:layout_marginTop="6px"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/menu_wd"
+                android:textColor="@drawable/select_color"
+                android:textSize="20px"
+                android:text="我的"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/system_ll_button"></FrameLayout>
+
+</RelativeLayout>

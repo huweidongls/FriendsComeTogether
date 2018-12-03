@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="600px"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/dialog_people_require_rl_close"
+        android:layout_width="58px"
+        android:layout_height="58px"
+        android:layout_alignParentRight="true">
+
+        <ImageView
+            android:layout_width="18px"
+            android:layout_height="18px"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/close" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/dialog_people_require_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_people_require_rl_close"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="2px"
+        android:text="人数要求"
+        android:textColor="@color/black_333333"
+        android:textSize="32px" />
+
+    <LinearLayout
+        android:id="@+id/dialog_people_require_little_ll"
+        android:layout_width="match_parent"
+        android:layout_height="60px"
+        android:layout_below="@+id/dialog_people_require_tv"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="40px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="最少人数"
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+        <RelativeLayout
+            android:layout_width="200px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20px"
+            android:background="@drawable/bg_dialog_price_un_select">
+
+            <EditText
+                android:id="@+id/dialog_people_require_et_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请输入人数"
+                android:inputType="phone"
+                android:textColor="@color/black_333333"
+                android:textSize="24px" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dialog_people_require_more_ll"
+        android:layout_width="match_parent"
+        android:layout_height="60px"
+        android:layout_below="@+id/dialog_people_require_little_ll"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="24px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="最多人数"
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+        <RelativeLayout
+            android:layout_width="200px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20px"
+            android:background="@drawable/bg_dialog_price_un_select">
+
+            <EditText
+                android:id="@+id/dialog_people_require_et_max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请输入人数"
+                android:inputType="phone"
+                android:textColor="@color/black_333333"
+                android:textSize="24px" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/dialog_people_require_bt_submit"
+        android:layout_width="260px"
+        android:layout_height="56px"
+        android:layout_below="@+id/dialog_people_require_more_ll"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50px"
+        android:layout_marginTop="50px"
+        android:background="@drawable/bg_dialog_button"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="#FFFFFF"
+        android:textSize="24px" />
+</RelativeLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="600px"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/dialog_shield_reason_rl_close"
+        android:layout_alignParentRight="true"
+        android:layout_width="58px"
+        android:layout_height="58px">
+
+        <ImageView
+            android:layout_centerInParent="true"
+            android:src="@mipmap/close"
+            android:layout_width="18px"
+            android:layout_height="18px" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/dialog_shield_reason_tv"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="2px"
+        android:layout_below="@+id/dialog_shield_reason_rl_close"
+        android:textSize="32px"
+        android:textColor="@color/black_333333"
+        android:text="屏蔽原因"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:background="@drawable/bg_dialog_content"
+        android:id="@+id/dialog_shield_reason_rl_content"
+        android:layout_marginTop="20px"
+        android:layout_marginLeft="40px"
+        android:layout_below="@+id/dialog_shield_reason_tv"
+        android:layout_width="520px"
+        android:layout_height="200px">
+
+        <EditText
+            android:id="@+id/dialog_shield_reason_et_content"
+            android:textColor="@color/black_333333"
+            android:gravity="start"
+            android:textSize="28px"
+            android:hint="请输入原因"
+            android:background="@null"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="10px"
+            android:layout_width="479px"
+            android:layout_height="180px" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/dialog_shield_reason_btn_ok"
+        android:textSize="24px"
+        android:layout_marginBottom="50px"
+        android:layout_marginTop="50px"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:text="确定"
+        android:background="@drawable/bg_dialog_button"
+        android:layout_below="@+id/dialog_shield_reason_rl_content"
+        android:layout_width="260px"
+        android:layout_height="56px" />
+
+</RelativeLayout>

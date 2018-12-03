@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/activity_other_pictures_rv_rl_iv"
+        android:layout_marginBottom="24px"
+        android:layout_marginTop="24px"
+        android:layout_centerHorizontal="true"
+        android:layout_width="600px"
+        android:layout_height="400px">
+
+        <ImageView
+            android:id="@+id/activity_other_pictures_rv_iv"
+            android:scaleType="centerCrop"
+            android:layout_width="600px"
+            android:layout_height="400px" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

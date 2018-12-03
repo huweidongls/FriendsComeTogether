@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="20px"
+    android:layout_marginBottom="20px"
+    android:id="@+id/rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_margin="10px"
+        android:id="@+id/message_view_pic_iv"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_marginRight="20px"
+        android:layout_toLeftOf="@+id/ll"
+        android:layout_toRightOf="@+id/message_view_pic_iv"
+        android:id="@+id/item_ll"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:orientation="vertical">
+
+        <TextView
+            android:ellipsize="end"
+            android:lines="1"
+            android:id="@+id/message_view_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="完全搞不清楚状况的我"
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+        <TextView
+            android:ellipsize="end"
+            android:lines="1"
+            android:layout_marginTop="20px"
+            android:id="@+id/message_view_content_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="完全搞不清楚状况的我"
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginRight="10px"
+        android:id="@+id/ll"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        android:layout_width="120px"
+        android:layout_height="120px">
+
+        <TextView
+            android:id="@+id/tv_ok"
+            android:textColor="@color/white_ffffff"
+            android:background="@color/yellow_ff9d00"
+            android:gravity="center"
+            android:textSize="30px"
+            android:text="同意"
+            android:layout_width="120px"
+            android:layout_height="50px" />
+
+        <TextView
+            android:layout_marginTop="20px"
+            android:id="@+id/tv_no"
+            android:textColor="@color/white_ffffff"
+            android:background="@color/yellow_ff9d00"
+            android:gravity="center"
+            android:textSize="30px"
+            android:text="忽略"
+            android:layout_width="120px"
+            android:layout_height="50px" />
+
+    </LinearLayout>
+
+</RelativeLayout>

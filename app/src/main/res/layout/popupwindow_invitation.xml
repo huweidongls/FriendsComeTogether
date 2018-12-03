@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white_ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--<TextView-->
+    <!--android:gravity="center"-->
+    <!--android:textSize="32px"-->
+    <!--android:textColor="@color/black_333333"-->
+    <!--android:text="取消"-->
+    <!--android:layout_width="100px"-->
+    <!--android:layout_height="80px" />-->
+
+    <!--<TextView-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:gravity="center"-->
+    <!--android:textSize="32px"-->
+    <!--android:textColor="@color/black_333333"-->
+    <!--android:text="确定"-->
+    <!--android:layout_width="100px"-->
+    <!--android:layout_height="80px" />-->
+
+    <!--</RelativeLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="12px"
+            android:background="@color/line" />
+
+        <RelativeLayout
+            android:id="@+id/activity_create_friend_remember_rl_active_title"
+            android:layout_width="match_parent"
+            android:layout_height="88px">
+
+            <ImageView
+                android:id="@+id/activity_create_friend_remember_iv_active_title"
+                android:layout_width="40px"
+                android:layout_height="40px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40px"
+                android:src="@mipmap/activities_require_r" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12px"
+                android:layout_toRightOf="@+id/activity_create_friend_remember_iv_active_title"
+                android:text="请选择活动"
+                android:textColor="@color/black_333333"
+                android:textSize="28px" />
+
+            <ImageView
+                android:id="@+id/activity_create_friend_remember_iv_active_title_right"
+                android:layout_width="14px"
+                android:layout_height="24px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="40px"
+                android:src="@mipmap/right" />
+
+            <TextView
+                android:gravity="end"
+                android:ellipsize="end"
+                android:lines="1"
+                android:id="@+id/activity_create_friend_remember_tv_active_title"
+                android:layout_width="300px"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10px"
+                android:layout_toLeftOf="@+id/activity_create_friend_remember_iv_active_title_right"
+                android:textColor="@color/black_333333"
+                android:textSize="28px" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="12px"
+            android:background="@color/line" />
+
+        <!--<RadioGroup-->
+            <!--android:id="@+id/rg"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="20px"-->
+            <!--android:orientation="vertical"-->
+            <!--android:visibility="gone">-->
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/rb1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginRight="30px"-->
+                <!--android:checked="true"-->
+                <!--android:text="我请客"-->
+                <!--android:textSize="28px" />-->
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/rb2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginRight="30px"-->
+                <!--android:text="自费"-->
+                <!--android:textSize="28px" />-->
+
+        <!--</RadioGroup>-->
+
+        <CheckBox
+            android:visibility="gone"
+            android:id="@+id/cb"
+            android:textSize="28px"
+            android:text="我请客"
+            android:layout_marginLeft="20px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/et"
+            android:layout_width="match_parent"
+            android:layout_height="300px"
+            android:layout_marginLeft="40px"
+            android:layout_marginRight="40px"
+            android:layout_marginTop="20px"
+            android:background="@null"
+            android:gravity="start"
+            android:hint="邀请说明"
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/tv_ok"
+            android:textSize="32px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/yellow_ff9d00"
+            android:gravity="center"
+            android:textColor="@color/white_ffffff"
+            android:text="确定"
+            android:layout_width="match_parent"
+            android:layout_height="100px" />
+
+    </LinearLayout>
+
+</RelativeLayout>

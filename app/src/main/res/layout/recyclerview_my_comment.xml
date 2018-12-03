@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/activity_article_comment_rv_iv_avatar"
+            android:layout_marginTop="24px"
+            android:layout_marginLeft="40px"
+            android:layout_width="100px"
+            android:layout_height="100px" />
+
+        <RelativeLayout
+            android:layout_marginLeft="20px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--<LinearLayout-->
+            <!--android:layout_marginTop="32px"-->
+            <!--android:layout_marginRight="40px"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+
+            <!--<ImageView-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:src="@mipmap/praise_g"-->
+            <!--android:layout_width="35px"-->
+            <!--android:layout_height="35px" />-->
+
+            <!--<TextView-->
+            <!--android:gravity="center"-->
+            <!--android:layout_marginLeft="6px"-->
+            <!--android:textColor="#CACACA"-->
+            <!--android:textSize="30px"-->
+            <!--android:text="246"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="42px" />-->
+
+            <!--</LinearLayout>-->
+
+            <TextView
+                android:id="@+id/activity_article_comment_rv_tv_nickname"
+                android:layout_marginTop="40px"
+                android:textColor="@color/black_333333"
+                android:textSize="30px"
+                android:text="昵称：帅气的小迷糊"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/activity_article_comment_rv_tv_title"
+                android:layout_marginTop="4px"
+                android:layout_below="@+id/activity_article_comment_rv_tv_nickname"
+                android:textSize="24px"
+                android:textColor="#626262"
+                android:text="文章标题文章标题"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/activity_article_comment_rv_tv_content"
+                android:layout_marginRight="80px"
+                android:layout_marginTop="20px"
+                android:textColor="@color/black_333333"
+                android:textSize="28px"
+                android:layout_below="@+id/activity_article_comment_rv_tv_title"
+                android:text="我爱旅游我爱旅游我爱旅游我爱旅游我 我爱旅游我爱旅游我爱旅游我爱旅游爱 旅游"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/activity_article_comment_rv_tv_time"
+                android:layout_marginTop="10px"
+                android:textColor="#626262"
+                android:textSize="24px"
+                android:text="2018-02-04 12：41"
+                android:layout_below="@+id/activity_article_comment_rv_tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/activity_article_comment_rv_tv_delete"
+                android:layout_marginTop="10px"
+                android:layout_below="@+id/activity_article_comment_rv_tv_content"
+                android:layout_marginRight="40px"
+                android:layout_alignParentRight="true"
+                android:textSize="26px"
+                android:textColor="@color/black_333333"
+                android:text="删除"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:padding="20px"
+        android:background="#E5E5E5"
+        android:id="@+id/activity_article_comment_rv_rv"
+        android:layout_marginTop="16px"
+        android:layout_marginLeft="160px"
+        android:layout_marginRight="40px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="40px"
+        android:layout_marginTop="20px"
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="2px"/>
+
+</LinearLayout>

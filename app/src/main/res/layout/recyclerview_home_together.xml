@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_together__item_rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="24px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginRight="10px"
+            android:layout_toLeftOf="@+id/ll_focus"
+            android:layout_centerVertical="true"
+            android:id="@+id/home_together_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="活动活动"
+            android:textColor="@color/black_333333"
+            android:textSize="36px"
+            android:textStyle="bold" />
+
+        <Button
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/activity_details_of_friends_btn_focus"
+            android:textSize="28px"
+            android:textColor="@color/white_ffffff"
+            android:text="+ 关注"
+            android:background="@drawable/bg_btn_red"
+            android:layout_width="120px"
+            android:layout_height="56px" />
+
+        <LinearLayout
+            android:id="@+id/ll_focus"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_focus"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/focus_on_y"
+                android:layout_width="37px"
+                android:layout_height="34px" />
+
+            <TextView
+                android:layout_marginLeft="6px"
+                android:layout_gravity="center_vertical"
+                android:textSize="30px"
+                android:textColor="@color/black_333333"
+                android:text="关注"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="24px"
+        android:id="@+id/home_together_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/home_together_pic_iv"
+            android:layout_width="262px"
+            android:layout_height="176px"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25px"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:layout_marginTop="11px"
+            android:id="@+id/home_together_content_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25px"
+            android:layout_marginRight="6px"
+            android:layout_toLeftOf="@+id/home_together_pic_iv"
+            android:ellipsize="end"
+            android:lines="3"
+            android:text="开头讲个段子。在决定下笔写游记之前，我在朋友圈征集和酒有关旅行故事，很多人问我，要和酒有关的故事，还是要旅行故事？我说两者兼..."
+            android:textColor="#636363"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/active_start_time"
+            android:layout_marginTop="10px"
+            android:textColor="#424242"
+            android:textSize="28px"
+            android:text="开始时间：2018-08-21"
+            android:layout_below="@+id/home_together_content_tv"
+            android:layout_marginLeft="25px"
+            android:layout_marginRight="6px"
+            android:layout_toLeftOf="@+id/home_together_pic_iv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="27px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_marginLeft="25px"
+            android:id="@+id/headIv"
+            android:layout_width="70px"
+            android:layout_height="70px" />
+
+        <TextView
+            android:layout_marginLeft="10px"
+            android:id="@+id/nickname"
+            android:textSize="28px"
+            android:textColor="@color/black_333333"
+            android:layout_toRightOf="@+id/headIv"
+            android:text="nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/rl_level"
+            android:layout_width="102px"
+            android:layout_height="30px"
+            android:layout_below="@+id/nickname"
+            android:layout_marginLeft="10px"
+            android:layout_marginTop="6px"
+            android:layout_toRightOf="@+id/headIv">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@mipmap/level_bg" />
+
+            <TextView
+                android:id="@+id/tv_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="19px"
+                android:text="LV"
+                android:textColor="#FFFFFF"
+                android:textSize="18px" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_level"
+            android:layout_marginLeft="12px"
+            android:layout_toRightOf="@+id/rl_level"
+            android:layout_below="@+id/nickname"
+            android:src="@mipmap/sign_gray"
+            android:layout_width="42px"
+            android:layout_height="42px" />
+
+        <TextView
+            android:layout_marginRight="25px"
+            android:layout_alignParentRight="true"
+            android:id="@+id/time"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textColor="#686868"
+            android:textSize="24px"
+            android:text="2018-04-04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_marginRight="25px"
+            android:layout_below="@+id/time"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_marginLeft="20px"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/eyes_gray"
+                android:layout_width="28px"
+                android:layout_height="19px" />
+
+            <TextView
+                android:id="@+id/look_num"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:layout_marginLeft="6px"
+                android:textColor="#969696"
+                android:textSize="24px"
+                android:text="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_marginLeft="30px"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/comment_gray"
+                android:layout_width="26px"
+                android:layout_height="24px" />
+
+            <TextView
+                android:id="@+id/comment_num"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:layout_marginLeft="6px"
+                android:textColor="#969696"
+                android:textSize="24px"
+                android:text="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginBottom="10px"
+        android:layout_marginTop="24px"
+        android:background="@color/line" />
+
+</LinearLayout>

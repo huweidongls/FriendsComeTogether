@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yiwo.friendscometogether.pages.MessageCenterActivity">
+
+    <RelativeLayout
+        android:id="@+id/activity_message_center_rl_top"
+        style="@style/rl_top_bar">
+
+        <TextView
+            style="@style/tv_top_title"
+            android:text="消息中心" />
+
+        <RelativeLayout
+            android:id="@+id/activity_message_center_rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView style="@style/iv_return" />
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/rl_clean"
+            android:layout_alignParentRight="true"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textColor="@color/white_ffffff"
+                android:textSize="28px"
+                android:text="清空"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/hot_message_rl"
+        android:layout_width="match_parent"
+        android:layout_height="170px">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/headIv"
+            android:layout_width="120px"
+            android:layout_height="120px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25px"
+            android:src="@mipmap/hot_message" />
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="41px"
+            android:layout_toRightOf="@+id/headIv"
+            android:maxLines="1"
+            android:text="热门消息"
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+        <TextView
+            android:lines="1"
+            android:ellipsize="end"
+            android:id="@+id/contentTv"
+            android:layout_width="444px"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleTv"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="20px"
+            android:layout_toRightOf="@+id/headIv"
+            android:text=""
+            android:textColor="@color/gray_909090"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/timeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="24px"
+            android:layout_marginTop="45px"
+            android:text="04月03日"
+            android:textColor="@color/black_626262"
+            android:textSize="24px" />
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/iv_hot"
+            android:layout_width="15px"
+            android:layout_height="15px"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/timeTv"
+            android:layout_marginRight="24px"
+            android:layout_marginTop="16px"
+            android:background="@drawable/bg_red" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:background="@color/line" />
+
+    <RelativeLayout
+        android:id="@+id/set_message_rl"
+        android:layout_width="match_parent"
+        android:layout_height="170px">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/set_headIv"
+            android:layout_width="120px"
+            android:layout_height="120px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25px"
+            android:src="@mipmap/system_message" />
+
+        <TextView
+            android:id="@+id/set_titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="41px"
+            android:layout_toRightOf="@+id/set_headIv"
+            android:maxLines="1"
+            android:text="系统消息"
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+        <TextView
+            android:lines="1"
+            android:ellipsize="end"
+            android:id="@+id/set_contentTv"
+            android:layout_width="444px"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/set_titleTv"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="20px"
+            android:layout_toRightOf="@+id/set_headIv"
+            android:text=""
+            android:textColor="@color/gray_909090"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/set_timeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="24px"
+            android:layout_marginTop="45px"
+            android:text="04月03日"
+            android:textColor="@color/black_626262"
+            android:textSize="24px" />
+
+        <ImageView
+            android:id="@+id/iv_system"
+            android:visibility="gone"
+            android:layout_width="15px"
+            android:layout_height="15px"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/set_timeTv"
+            android:layout_marginRight="24px"
+            android:layout_marginTop="16px"
+            android:background="@drawable/bg_red" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:background="@color/line" />
+
+    <RelativeLayout
+        android:id="@+id/invitation_message_rl"
+        android:layout_width="match_parent"
+        android:layout_height="170px">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/invitation_headIv"
+            android:layout_width="120px"
+            android:layout_height="120px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25px"
+            android:src="@mipmap/invitation" />
+
+        <TextView
+            android:id="@+id/invitation_titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="41px"
+            android:layout_toRightOf="@+id/invitation_headIv"
+            android:maxLines="1"
+            android:text="邀请消息"
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+        <TextView
+            android:lines="1"
+            android:ellipsize="end"
+            android:id="@+id/invitation_contentTv"
+            android:layout_width="444px"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/invitation_titleTv"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="20px"
+            android:layout_toRightOf="@+id/invitation_headIv"
+            android:text=""
+            android:textColor="@color/gray_909090"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/invitation_timeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="24px"
+            android:layout_marginTop="45px"
+            android:text="04月03日"
+            android:textColor="@color/black_626262"
+            android:textSize="24px" />
+
+        <ImageView
+            android:id="@+id/iv_invitation"
+            android:visibility="gone"
+            android:layout_width="15px"
+            android:layout_height="15px"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/invitation_timeTv"
+            android:layout_marginRight="24px"
+            android:layout_marginTop="16px"
+            android:background="@drawable/bg_red" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:background="@color/line" />
+
+    <RelativeLayout
+        android:id="@+id/comment_message_rl"
+        android:layout_width="match_parent"
+        android:layout_height="170px">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/comment_headIv"
+            android:layout_width="120px"
+            android:layout_height="120px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25px"
+            android:src="@mipmap/comment" />
+
+        <TextView
+            android:id="@+id/comment_titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="41px"
+            android:layout_toRightOf="@+id/comment_headIv"
+            android:maxLines="1"
+            android:text="评价消息"
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+        <TextView
+            android:lines="1"
+            android:ellipsize="end"
+            android:id="@+id/comment_contentTv"
+            android:layout_width="444px"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/comment_titleTv"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="20px"
+            android:layout_toRightOf="@+id/comment_headIv"
+            android:text=""
+            android:textColor="@color/gray_909090"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/comment_timeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="24px"
+            android:layout_marginTop="45px"
+            android:text="04月03日"
+            android:textColor="@color/black_626262"
+            android:textSize="24px" />
+
+        <ImageView
+            android:id="@+id/iv_comment"
+            android:visibility="gone"
+            android:layout_width="15px"
+            android:layout_height="15px"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/comment_timeTv"
+            android:layout_marginRight="24px"
+            android:layout_marginTop="16px"
+            android:background="@drawable/bg_red" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:background="@color/line" />
+
+    <RelativeLayout
+        android:id="@+id/friend_message_rl"
+        android:layout_width="match_parent"
+        android:layout_height="170px">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/friend_headIv"
+            android:layout_width="120px"
+            android:layout_height="120px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25px"
+            android:src="@mipmap/friend" />
+
+        <TextView
+            android:id="@+id/friend_titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="41px"
+            android:layout_toRightOf="@+id/friend_headIv"
+            android:maxLines="1"
+            android:text="好友消息"
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+        <TextView
+            android:lines="1"
+            android:ellipsize="end"
+            android:id="@+id/friend_contentTv"
+            android:layout_width="444px"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/friend_titleTv"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="20px"
+            android:layout_toRightOf="@+id/friend_headIv"
+            android:text=""
+            android:textColor="@color/gray_909090"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/friend_timeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="24px"
+            android:layout_marginTop="45px"
+            android:text="04月03日"
+            android:textColor="@color/black_626262"
+            android:textSize="24px" />
+
+        <ImageView
+            android:id="@+id/iv_friend"
+            android:visibility="gone"
+            android:layout_width="15px"
+            android:layout_height="15px"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/friend_timeTv"
+            android:layout_marginRight="24px"
+            android:layout_marginTop="16px"
+            android:background="@drawable/bg_red" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:background="@color/line" />
+</LinearLayout>

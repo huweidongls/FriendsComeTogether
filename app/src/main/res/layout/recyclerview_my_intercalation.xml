@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/activity_my_intercalation_rv_tv_title"
+        android:layout_marginTop="40px"
+        android:layout_marginLeft="40px"
+        android:textSize="32px"
+        android:textColor="@color/black_333333"
+        android:text="队友的插文，想说什么就说什么呗！"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="20px"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/activity_my_intercalation_rv_tv_state"
+            android:textColor="#F71F1F"
+            android:textSize="28px"
+            android:text="待审核"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/activity_my_intercalation_rv_tv_reason"
+            android:textSize="28px"
+            android:textColor="@color/black_333333"
+            android:layout_marginLeft="10px"
+            android:text="理由理由理由理由"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/activity_my_intercalation_rv_iv"
+        android:layout_marginTop="20px"
+        android:layout_marginRight="35px"
+        android:layout_marginLeft="35px"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="453px" />
+
+    <TextView
+        android:id="@+id/activity_my_intercalation_rv_tv_location"
+        android:layout_marginRight="40px"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="30px"
+        android:textColor="#000000"
+        android:textSize="28px"
+        android:text="插文位置：03/士大夫"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/activity_my_intercalation_rv_tv_remember_title"
+        android:layout_marginRight="40px"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="10px"
+        android:textColor="#000000"
+        android:textSize="28px"
+        android:text="文章标题：标题标题标题标题标题标题"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/activity_my_intercalation_rv_tv_activity"
+        android:layout_marginRight="40px"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="10px"
+        android:textColor="#000000"
+        android:textSize="28px"
+        android:text="参与的活动：标题标题标题标题标题标题标题标 题标题标题标题标题"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/activity_my_intercalation_rv_tv_time"
+        android:layout_marginRight="40px"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="10px"
+        android:textColor="#000000"
+        android:textSize="28px"
+        android:text="上次编辑时间：2018-04-12 14:33:33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_marginTop="30px"
+        android:layout_marginLeft="35px"
+        android:layout_marginRight="35px"
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="2px"/>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="93px">
+
+        <LinearLayout
+            android:id="@+id/activity_my_intercalation_rv_ll_delete"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="50px"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/delete_b"
+                android:layout_width="24px"
+                android:layout_height="25px" />
+
+            <TextView
+                android:layout_marginLeft="10px"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black_333333"
+                android:textSize="24px"
+                android:text="删除"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    
+    <View
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="12px"/>
+
+</LinearLayout>

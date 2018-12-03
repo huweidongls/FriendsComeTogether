@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_look_history_rv_ll"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="250px">
+
+        <ImageView
+            android:id="@+id/activity_look_history_rv_iv"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40px"
+            android:scaleType="centerCrop"
+            android:layout_width="300px"
+            android:layout_height="200px" />
+
+        <RelativeLayout
+            android:layout_marginRight="28px"
+            android:layout_marginLeft="20px"
+            android:layout_alignBottom="@+id/activity_look_history_rv_iv"
+            android:layout_toRightOf="@+id/activity_look_history_rv_iv"
+            android:layout_width="match_parent"
+            android:layout_height="200px">
+
+            <TextView
+                android:lines="1"
+                android:ellipsize="end"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/activity_look_history_rv_tv_time"
+                android:textSize="26px"
+                android:textColor="@color/black_333333"
+                android:text="2018.04.21 11:34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/activity_look_history_rv_tv_title"
+                android:lines="4"
+                android:ellipsize="end"
+                android:layout_marginTop="6px"
+                android:textColor="@color/black_333333"
+                android:textSize="30px"
+                android:text="云南旅游活动云南旅游活动云南旅游活动云南"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    
+    <View
+        android:layout_marginRight="40px"
+        android:layout_marginLeft="40px"
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="2px"/>
+
+</LinearLayout>

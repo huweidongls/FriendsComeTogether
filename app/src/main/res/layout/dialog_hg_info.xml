@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="20px"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="500px"
+        android:layout_height="100px">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/sign_yellow"
+            android:layout_width="50px"
+            android:layout_height="50px" />
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10px"
+            android:text="认证队长，官网认证指定队长，活动由官网审核"
+            android:textSize="28px"
+            android:textColor="@color/black_333333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="500px"
+        android:layout_height="100px">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/sign_gray"
+            android:layout_width="50px"
+            android:layout_height="50px" />
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10px"
+            android:text="普通队长，活动自发组织，未经官网审核"
+            android:textSize="28px"
+            android:textColor="@color/black_333333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>
