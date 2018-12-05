@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="456px">
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60px"
+            android:textStyle="bold"
+            android:textSize="36px"
+            android:textColor="@color/black_333333"
+            android:text="未登录"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_marginTop="60px"
+            android:layout_alignParentRight="true"
+            android:layout_width="110px"
+            android:layout_height="50px">
+
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/black_333333"
+                android:textSize="32px"
+                android:text="设置"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="164px"
+            android:layout_marginLeft="32px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:src="@mipmap/hhh"
+                android:layout_width="166px"
+                android:layout_height="166px" />
+
+            <TextView
+                android:paddingRight="10px"
+                android:paddingLeft="10px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="14px"
+                android:gravity="center"
+                android:background="@drawable/bg_blue"
+                android:textColor="@color/white_ffffff"
+                android:textSize="20px"
+                android:text="LV.10"
+                android:layout_width="wrap_content"
+                android:layout_height="32px" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
