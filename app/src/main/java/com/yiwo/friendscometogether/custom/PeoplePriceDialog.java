@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -64,6 +65,7 @@ public class PeoplePriceDialog extends Dialog {
 
     private void init() {
 
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_people_price, null);
         setContentView(view);
         ScreenAdapterTools.getInstance().loadView(view);

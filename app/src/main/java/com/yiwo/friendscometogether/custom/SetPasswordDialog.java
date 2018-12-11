@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -45,6 +46,7 @@ public class SetPasswordDialog extends Dialog {
 
     private void init() {
 
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_set_password, null);
         setContentView(view);
         ScreenAdapterTools.getInstance().loadView(view);

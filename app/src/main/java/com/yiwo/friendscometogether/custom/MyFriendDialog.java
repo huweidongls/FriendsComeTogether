@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 
 import com.yiwo.friendscometogether.R;
@@ -40,6 +41,7 @@ public class MyFriendDialog extends Dialog {
 
     private void init() {
 
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_my_friend, null);
         setContentView(view);
         tvDelete = view.findViewById(R.id.tv_delete_friend);
