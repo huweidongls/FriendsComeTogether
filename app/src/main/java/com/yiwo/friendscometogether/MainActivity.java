@@ -28,6 +28,7 @@ import com.yiwo.friendscometogether.fragment.FriendsRememberFragment;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment;
 import com.yiwo.friendscometogether.fragment.HomeFragment;
 import com.yiwo.friendscometogether.fragment.MyFragment;
+import com.yiwo.friendscometogether.fragment.MyFragment1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,7 +130,7 @@ public class MainActivity extends FragmentActivity {
         Fragment fragmentFriendTogether = new FriendsTogetherFragment();
         Fragment fragmentFriendRemember = new FriendsRememberFragment();
         Fragment fragmentChat = new ChatFragment();
-        Fragment fragmentMy = new MyFragment();
+        Fragment fragmentMy = new MyFragment1();
 
         fragmentList.add(fragmentHome);
         fragmentList.add(fragmentFriendTogether);
