@@ -139,22 +139,18 @@
         <activity android:name=".pages.InsertIntercalationActivity" />
         <activity android:name=".pages.OtherInformationActivity" />
         <activity android:name=".pages.FriendTogetherAddContentActivity" />
-
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
-
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
@@ -269,7 +265,8 @@
         </receiver>
 
         <activity android:name=".pages.BlackUserActivity" />
-        <activity android:name=".imagepreview.ImagePreviewActivity"></activity>
+        <activity android:name=".imagepreview.ImagePreviewActivity" />
+        <activity android:name=".newpage.AllRememberActivity"></activity>
     </application>
 
 </manifest>

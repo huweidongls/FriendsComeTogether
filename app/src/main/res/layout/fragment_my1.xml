@@ -115,6 +115,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_remember"
                     android:layout_width="0px"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"

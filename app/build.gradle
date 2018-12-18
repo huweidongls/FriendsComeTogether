@@ -119,4 +119,5 @@ dependencies {
     implementation 'com.github.dueeeke.dkplayer:dkplayer-x86_64:2.5.3'
     compile 'me.zhouzhuo.zzletterssidebar:zz-letters-sidebar:1.0.2'
     implementation files('libs/alipaySdk-20180601.jar')
+    compile 'com.github.hackware1993:MagicIndicator:1.5.0'
 }
