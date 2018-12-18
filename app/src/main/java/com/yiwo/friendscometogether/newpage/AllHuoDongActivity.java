@@ -2,17 +2,21 @@ package com.yiwo.friendscometogether.newpage;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.TypedValue;
 import android.view.View;
 
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.newadapter.AllRememberViewpagerAdapter;
+import com.yiwo.friendscometogether.newfragment.AllApplyHuoDongFragment;
 import com.yiwo.friendscometogether.newfragment.AllChawenFragment;
+import com.yiwo.friendscometogether.newfragment.AllHistoryHuoDongFragment;
 import com.yiwo.friendscometogether.newfragment.AllRememberFragment;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -51,6 +55,7 @@ public class AllHuoDongActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_huodong);
 
+
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(AllHuoDongActivity.this);
 
@@ -63,8 +68,8 @@ public class AllHuoDongActivity extends BaseActivity {
     private void initData() {
 
         fragmentList = new ArrayList<>();
-        fragmentList.add(new AllRememberFragment());
-        fragmentList.add(new AllChawenFragment());
+        fragmentList.add(new AllApplyHuoDongFragment());
+        fragmentList.add(new AllHistoryHuoDongFragment());
         mViewPagerFragmentAdapter = new AllRememberViewpagerAdapter(mFragmentManager, fragmentList);
         mViewPager.setAdapter(mViewPagerFragmentAdapter);
 
@@ -83,6 +88,9 @@ public class AllHuoDongActivity extends BaseActivity {
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
                 simplePagerTitleView.setText(mTitleDataList.get(index));
+                //设置字体
+                simplePagerTitleView.setTextSize(18);
+                simplePagerTitleView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
                 simplePagerTitleView.setNormalColor(Color.BLACK);
                 simplePagerTitleView.setSelectedColor(Color.BLACK);
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
