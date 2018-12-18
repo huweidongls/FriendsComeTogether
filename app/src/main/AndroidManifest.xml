@@ -267,6 +267,7 @@
         <activity android:name=".pages.BlackUserActivity" />
         <activity android:name=".imagepreview.ImagePreviewActivity" />
         <activity android:name=".newpage.AllRememberActivity"></activity>
+        <activity android:name=".newpage.AllHuoDongActivity"></activity>
     </application>
 
 </manifest>
