@@ -2,10 +2,12 @@ package com.yiwo.friendscometogether.newpage;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.TypedValue;
 import android.view.View;
 
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -82,6 +84,9 @@ public class AllRememberActivity extends BaseActivity {
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
+                //设置字体
+                simplePagerTitleView.setTextSize(18);
+                simplePagerTitleView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
                 simplePagerTitleView.setText(mTitleDataList.get(index));
                 simplePagerTitleView.setNormalColor(Color.BLACK);
                 simplePagerTitleView.setSelectedColor(Color.BLACK);
