@@ -17,7 +17,7 @@
                 android:id="@+id/rl_top"
                 android:layout_width="match_parent"
                 android:layout_height="492px"
-                android:background="#FFAB26">
+                android:background="#FB473F">
 
                 <LinearLayout
                     android:id="@+id/ll_person_page"
