@@ -1,5 +1,7 @@
 package com.yiwo.friendscometogether.model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 
 /**
@@ -11,6 +13,7 @@ public class CityModel implements Serializable {
     private String name;
 
     public String getId() {
+        Log.d("test", "getId: ");
         return id;
     }
 
