@@ -1,12 +1,14 @@
 package com.yiwo.friendscometogether.newpage;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -16,6 +18,8 @@ import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.newadapter.AllRememberViewpagerAdapter;
 import com.yiwo.friendscometogether.newfragment.AllChawenFragment;
 import com.yiwo.friendscometogether.newfragment.AllRememberFragment;
+import com.yiwo.friendscometogether.pages.LoginActivity;
+import com.yiwo.friendscometogether.pages.MyDraftActivity;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -32,6 +36,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class AllRememberActivity extends BaseActivity {
 
@@ -113,6 +118,20 @@ public class AllRememberActivity extends BaseActivity {
 //        titleContainer.setDividerDrawable(getResources().getDrawable(R.drawable.simple_splitter));
         ViewPagerHelper.bind(magicIndicator, mViewPager);
 
+    }
+
+    @OnClick({R.id.rl_back, R.id.rl_draft})
+    public void onClick(View view){
+        Intent intent = new Intent();
+        switch (view.getId()){
+            case R.id.rl_back:
+                finish();
+                break;
+            case R.id.rl_draft:
+                intent.setClass(context, MyDraftActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
 }

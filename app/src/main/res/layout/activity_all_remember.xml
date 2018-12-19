@@ -12,6 +12,7 @@
         android:layout_height="90px">
 
         <RelativeLayout
+            android:id="@+id/rl_back"
             android:layout_width="100px"
             android:layout_height="match_parent">
 
@@ -24,6 +25,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_draft"
             android:layout_alignParentRight="true"
             android:layout_width="140px"
             android:layout_height="match_parent">

@@ -11,11 +11,13 @@
         android:layout_height="88px">
 
         <RelativeLayout
+            android:id="@+id/rl1"
             android:layout_weight="1"
             android:layout_width="0px"
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tv1"
                 android:layout_centerInParent="true"
                 android:textSize="28px"
                 android:textColor="#FFAB26"
@@ -26,11 +28,13 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl2"
             android:layout_weight="1"
             android:layout_width="0px"
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tv2"
                 android:layout_centerInParent="true"
                 android:textSize="28px"
                 android:textColor="@color/black_333333"
@@ -49,6 +53,7 @@
         android:layout_height="match_parent"/>
 
     <android.support.v7.widget.RecyclerView
+        android:visibility="gone"
         android:layout_below="@+id/ll_top"
         android:id="@+id/rv2"
         android:layout_width="match_parent"
