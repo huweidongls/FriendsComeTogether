@@ -245,4 +245,7 @@ public class NetConfig {
     public static String otherCityUrl = "action/ac_public/get_country";
     //删除评论
     public static String deleteCommentUrl = "action/ac_article/CommentaryDeleting";
+
+    //获取参加的活动（报名活动、往期活动）
+    public static String activityJoin = "action/ac_activity/activity_join";
 }

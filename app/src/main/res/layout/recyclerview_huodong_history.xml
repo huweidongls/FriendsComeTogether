@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:id="@+id/ll_huodong_history"
     android:background="@color/white_ffffff"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
+        android:id="@+id/tv_huodong_title"
         android:layout_marginTop="30px"
         android:layout_marginLeft="32px"
         android:layout_marginRight="32px"
@@ -15,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <ImageView
+        android:id="@+id/iv_image_huodong"
         android:layout_marginTop="30px"
         android:layout_marginLeft="32px"
         android:layout_marginRight="32px"
@@ -32,13 +35,15 @@
             android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_icon_owner"
                 android:src="@mipmap/my_head"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10px"
                 android:layout_width="60px"
                 android:layout_height="60px" />
             <TextView
+                android:id="@+id/tv_name_owner"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:text="扁脸折耳猫"
@@ -61,6 +66,7 @@
                 android:layout_width="30px"
                 android:layout_height="30px" />
             <TextView
+                android:id="@+id/tv_timeinfo"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:text="活动已结束3天"
@@ -78,6 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="1px"></LinearLayout>
     <TextView
+        android:id="@+id/btn_gochatroom"
         android:background="@drawable/bg_yellow_border_26px"
         android:gravity="center"
         android:textSize="24px"

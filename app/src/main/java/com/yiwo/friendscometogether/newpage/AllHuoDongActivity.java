@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
@@ -15,6 +16,7 @@ import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.newadapter.AllRememberViewpagerAdapter;
 import com.yiwo.friendscometogether.newfragment.HuoDongApplyFragment;
 import com.yiwo.friendscometogether.newfragment.HuoDongHistoryFragment;
+import com.yiwo.friendscometogether.pages.MyDraftActivity;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -31,6 +33,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class AllHuoDongActivity extends BaseActivity {
 
@@ -40,6 +43,8 @@ public class AllHuoDongActivity extends BaseActivity {
     MagicIndicator magicIndicator;
     @BindView(R.id.vp)
     ViewPager mViewPager;
+    @BindView(R.id.btn_back)
+    ImageView btn_back;
 
     private FragmentManager mFragmentManager;
     private AllRememberViewpagerAdapter mViewPagerFragmentAdapter;
@@ -111,5 +116,14 @@ public class AllHuoDongActivity extends BaseActivity {
         ViewPagerHelper.bind(magicIndicator, mViewPager);
 
     }
+    @OnClick({R.id.btn_back})
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.btn_back:
+                finish();
+                break;
+        }
+    }
+
 
 }
