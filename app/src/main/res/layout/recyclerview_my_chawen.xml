@@ -31,7 +31,6 @@
 
     <ImageView
         android:id="@+id/iv"
-        android:layout_marginBottom="20px"
         android:layout_marginTop="24px"
         android:layout_marginLeft="32px"
         android:layout_marginRight="32px"
@@ -39,6 +38,19 @@
         android:src="@mipmap/welcome"
         android:layout_width="match_parent"
         android:layout_height="300px" />
+
+    <TextView
+        android:id="@+id/tv_editor"
+        android:gravity="center"
+        android:background="@drawable/bg_yellow_26px"
+        android:textColor="@color/white_ffffff"
+        android:textSize="24px"
+        android:text="继续编辑"
+        android:layout_marginBottom="20px"
+        android:layout_marginTop="30px"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="236px"
+        android:layout_height="52px" />
 
     <View
         android:background="@color/line"

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white_ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_marginTop="30px"
+            android:layout_marginLeft="32px"
+            android:src="@mipmap/welcome"
+            android:layout_width="90px"
+            android:layout_height="90px" />
+
+        <LinearLayout
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="40px"
+            android:layout_marginTop="30px"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="#9A9A9A"
+                android:textSize="26px"
+                android:text="2018-12-07 11：36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginTop="10px"
+                android:textSize="28px"
+                android:textColor="@color/black_333333"
+                android:text="队友插文插文插文插文插文插文插文插文插文 插文插文。"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_marginTop="24px"
+                android:src="@mipmap/welcome"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="300px" />
+
+            <TextView
+                android:layout_marginTop="24px"
+                android:textStyle="bold"
+                android:textColor="@color/black_333333"
+                android:textSize="30px"
+                android:text="就让我们“偶然相聚”吧！"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginTop="24px"
+                android:background="@drawable/bg_yellow_border_10px"
+                android:gravity="center"
+                android:textColor="@color/black_333333"
+                android:textSize="28px"
+                android:text="待审核"
+                android:layout_width="172px"
+                android:layout_height="64px" />
+
+            <RelativeLayout
+                android:layout_marginTop="20px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_marginRight="20px"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/activity_team_intercalation_rv_ll_show"
+                    android:layout_toLeftOf="@+id/activity_team_intercalation_rv_ll_shield"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/show"
+                        android:layout_width="31px"
+                        android:layout_height="23px" />
+
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:textSize="24px"
+                        android:textColor="@color/black_333333"
+                        android:text="允许展示"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:id="@+id/activity_team_intercalation_rv_ll_shield"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/shield"
+                        android:layout_width="24px"
+                        android:layout_height="24px" />
+
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="4px"
+                        android:textColor="@color/black_333333"
+                        android:textSize="24px"
+                        android:text="屏蔽"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    
+    <View
+        android:layout_marginTop="30px"
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="20px"/>
+
+</LinearLayout>
