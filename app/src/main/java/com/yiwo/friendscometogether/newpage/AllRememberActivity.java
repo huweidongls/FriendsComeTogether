@@ -77,7 +77,7 @@ public class AllRememberActivity extends BaseActivity {
 
         mTitleDataList = new ArrayList<>();
         mTitleDataList.add("全部友记");
-        mTitleDataList.add("全部插文");
+        mTitleDataList.add("我的插文");
 
         CommonNavigator commonNavigator = new CommonNavigator(this);
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {

@@ -4,58 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/ll_top"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="88px">
-
-        <RelativeLayout
-            android:id="@+id/rl1"
-            android:layout_weight="1"
-            android:layout_width="0px"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/tv1"
-                android:layout_centerInParent="true"
-                android:textSize="28px"
-                android:textColor="#FFAB26"
-                android:text="我的插文"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl2"
-            android:layout_weight="1"
-            android:layout_width="0px"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/tv2"
-                android:layout_centerInParent="true"
-                android:textSize="28px"
-                android:textColor="@color/black_333333"
-                android:text="队友插文"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
     <android.support.v7.widget.RecyclerView
         android:layout_below="@+id/ll_top"
         android:id="@+id/rv1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:visibility="gone"
-        android:layout_below="@+id/ll_top"
-        android:id="@+id/rv2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

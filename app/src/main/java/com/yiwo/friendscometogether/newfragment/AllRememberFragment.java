@@ -96,6 +96,45 @@ public class AllRememberFragment extends BaseFragment {
                                 LinearLayoutManager manager = new LinearLayoutManager(getContext());
                                 rv1.setLayoutManager(manager);
                                 rv1.setAdapter(adapter);
+                                adapter.setListener(new MyRememberAdapter.OnDeleteListener() {
+                                    @Override
+                                    public void onDelete(final int i) {
+                                        toDialog(getContext(), "提示", "是否删除友记", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(final DialogInterface dialogInterface, int which) {
+                                                ViseHttp.POST(NetConfig.deleteFriendRememberUrl)
+                                                        .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl+NetConfig.deleteFriendRememberUrl))
+                                                        .addParam("id", mList.get(i).getFmID())
+                                                        .request(new ACallback<String>() {
+                                                            @Override
+                                                            public void onSuccess(String data) {
+                                                                try {
+                                                                    JSONObject jsonObject = new JSONObject(data);
+                                                                    if(jsonObject.getInt("code") == 200){
+                                                                        toToast(getContext(), jsonObject.getString("message"));
+                                                                        mList.remove(i);
+                                                                        adapter.notifyDataSetChanged();
+                                                                        dialogInterface.dismiss();
+                                                                    }
+                                                                } catch (JSONException e) {
+                                                                    e.printStackTrace();
+                                                                }
+                                                            }
+
+                                                            @Override
+                                                            public void onFail(int errCode, String errMsg) {
+
+                                                            }
+                                                        });
+                                            }
+                                        }, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int which) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        });
+                                    }
+                                });
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -124,6 +163,48 @@ public class AllRememberFragment extends BaseFragment {
                                 LinearLayoutManager manager = new LinearLayoutManager(getContext());
                                 rv2.setLayoutManager(manager);
                                 rv2.setAdapter(adapter1);
+                                adapter1.setListener(new AllCollectionAdapter.OnCancelListener() {
+                                    @Override
+                                    public void onCancel(final int i) {
+                                        toDialog(getContext(), "提示", "是否取消收藏", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(final DialogInterface dialog, int which) {
+                                                String token = getToken(NetConfig.BaseUrl + NetConfig.articleCollectionUrl);
+                                                ViseHttp.POST(NetConfig.articleCollectionUrl)
+                                                        .addParam("app_key", token)
+                                                        .addParam("id", mList1.get(i).getFID())
+                                                        .addParam("uid", uid)
+                                                        .addParam("type", "1")
+                                                        .request(new ACallback<String>() {
+                                                            @Override
+                                                            public void onSuccess(String data) {
+                                                                try {
+                                                                    JSONObject jsonObject1 = new JSONObject(data);
+                                                                    if(jsonObject1.getInt("code") == 200){
+                                                                        toToast(getContext(), "取消收藏成功");
+                                                                        mList1.remove(i);
+                                                                        adapter1.notifyDataSetChanged();
+                                                                        dialog.dismiss();
+                                                                    }
+                                                                } catch (JSONException e) {
+                                                                    e.printStackTrace();
+                                                                }
+                                                            }
+
+                                                            @Override
+                                                            public void onFail(int errCode, String errMsg) {
+
+                                                            }
+                                                        });
+                                            }
+                                        }, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        });
+                                    }
+                                });
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

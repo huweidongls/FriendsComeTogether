@@ -27,6 +27,11 @@ public class AllCollectionAdapter extends RecyclerView.Adapter<AllCollectionAdap
 
     private Context context;
     private List<UserCollectionModel.ObjBean> data;
+    private OnCancelListener listener;
+
+    public void setListener(OnCancelListener listener) {
+        this.listener = listener;
+    }
 
     public AllCollectionAdapter(List<UserCollectionModel.ObjBean> data) {
         this.data = data;
@@ -44,7 +49,7 @@ public class AllCollectionAdapter extends RecyclerView.Adapter<AllCollectionAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.tvTitle.setText(data.get(position).getFtitle());
-        holder.tvLookNum.setText("12345阅读了这篇友记");
+        holder.tvLookNum.setText("12345人阅读了这篇友记");
         Glide.with(context).load(data.get(position).getFpic()).into(holder.iv);
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +66,12 @@ public class AllCollectionAdapter extends RecyclerView.Adapter<AllCollectionAdap
                 }
             }
         });
+        holder.tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onCancel(position);
+            }
+        });
     }
 
     @Override
@@ -74,6 +85,7 @@ public class AllCollectionAdapter extends RecyclerView.Adapter<AllCollectionAdap
         private TextView tvLookNum;
         private ImageView iv;
         private LinearLayout ll;
+        private TextView tvCancel;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -81,7 +93,12 @@ public class AllCollectionAdapter extends RecyclerView.Adapter<AllCollectionAdap
             tvLookNum = itemView.findViewById(R.id.tv_look_num);
             iv = itemView.findViewById(R.id.iv);
             ll = itemView.findViewById(R.id.ll);
+            tvCancel = itemView.findViewById(R.id.tv_cancel);
         }
+    }
+
+    public interface OnCancelListener{
+        void onCancel(int i);
     }
 
 }

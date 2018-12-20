@@ -16,6 +16,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.UserRememberModel;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
 import com.yiwo.friendscometogether.pages.EditorFriendRememberActivity;
+import com.yiwo.friendscometogether.pages.TeamIntercalationActivity;
 
 import java.util.List;
 
@@ -27,6 +28,11 @@ public class MyRememberAdapter extends RecyclerView.Adapter<MyRememberAdapter.Vi
 
     private Context context;
     private List<UserRememberModel.ObjBean> data;
+    private OnDeleteListener listener;
+
+    public void setListener(OnDeleteListener listener) {
+        this.listener = listener;
+    }
 
     public MyRememberAdapter(List<UserRememberModel.ObjBean> data) {
         this.data = data;
@@ -67,6 +73,23 @@ public class MyRememberAdapter extends RecyclerView.Adapter<MyRememberAdapter.Vi
                 context.startActivity(intent);
             }
         });
+
+        holder.tvDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onDelete(position);
+            }
+        });
+
+        holder.tvTeamChawen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("id", data.get(position).getFmID());
+                intent.setClass(context, TeamIntercalationActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -81,6 +104,8 @@ public class MyRememberAdapter extends RecyclerView.Adapter<MyRememberAdapter.Vi
         private ImageView iv;
         private LinearLayout ll;
         private TextView tvEditor;
+        private TextView tvDelete;
+        private TextView tvTeamChawen;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -89,7 +114,13 @@ public class MyRememberAdapter extends RecyclerView.Adapter<MyRememberAdapter.Vi
             iv = itemView.findViewById(R.id.iv);
             ll = itemView.findViewById(R.id.ll);
             tvEditor = itemView.findViewById(R.id.tv_editor);
+            tvDelete = itemView.findViewById(R.id.tv_delete);
+            tvTeamChawen = itemView.findViewById(R.id.tv_team_chawen);
         }
+    }
+
+    public interface OnDeleteListener{
+        void onDelete(int i);
     }
 
 }

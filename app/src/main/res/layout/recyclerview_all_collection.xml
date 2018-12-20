@@ -40,7 +40,20 @@
         android:layout_width="match_parent"
         android:layout_height="300px" />
 
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10px"
+        android:background="@drawable/bg_red_border_26px"
+        android:gravity="center"
+        android:textColor="#E51B23"
+        android:textSize="24px"
+        android:text="取消收藏"
+        android:layout_width="236px"
+        android:layout_height="52px" />
+
     <View
+        android:layout_marginTop="30px"
         android:background="@color/line"
         android:layout_width="match_parent"
         android:layout_height="2px"/>

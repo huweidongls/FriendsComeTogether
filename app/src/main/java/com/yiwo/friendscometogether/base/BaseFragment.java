@@ -1,7 +1,9 @@
 package com.yiwo.friendscometogether.base;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -142,5 +144,15 @@ public class BaseFragment extends Fragment implements NetBroadcastReceiver.NetEv
         return false;
     }
 
+    public void toDialog(Context context, String title, String message, DialogInterface.OnClickListener listener, DialogInterface.OnClickListener listener1){
+        AlertDialog.Builder normalDialog = new AlertDialog.Builder(context);
+//        normalDialog.setIcon(R.mipmap.ic_launcher);
+        normalDialog.setTitle(title);
+        normalDialog.setMessage(message);
+        normalDialog.setPositiveButton("确定", listener);
+        normalDialog.setNegativeButton("关闭", listener1);
+        // 显示
+        normalDialog.show();
+    }
 
 }

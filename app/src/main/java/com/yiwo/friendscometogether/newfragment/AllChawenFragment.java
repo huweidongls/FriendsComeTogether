@@ -1,6 +1,5 @@
 package com.yiwo.friendscometogether.newfragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.vise.xsnow.http.ViseHttp;
@@ -20,13 +18,11 @@ import com.yiwo.friendscometogether.base.BaseFragment;
 import com.yiwo.friendscometogether.model.UserIntercalationListModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.MyChawenAdapter;
-import com.yiwo.friendscometogether.newadapter.TeamChawenAdapter;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,19 +35,11 @@ import butterknife.OnClick;
 
 public class AllChawenFragment extends BaseFragment {
 
-    @BindView(R.id.tv1)
-    TextView tv1;
-    @BindView(R.id.tv2)
-    TextView tv2;
     @BindView(R.id.rv1)
     RecyclerView rv1;
-    @BindView(R.id.rv2)
-    RecyclerView rv2;
 
     private MyChawenAdapter adapter;
     private List<UserIntercalationListModel.ObjBean> mList;
-    private TeamChawenAdapter adapter1;
-    private List<String> mList1;
 
     private SpImp spImp;
     private String uid = "";
@@ -102,32 +90,12 @@ public class AllChawenFragment extends BaseFragment {
                     }
                 });
 
-        mList1 = new ArrayList<>();
-        mList1.add("");
-        mList1.add("");
-        mList1.add("");
-        adapter1 = new TeamChawenAdapter(mList1);
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        rv2.setLayoutManager(manager);
-        rv2.setAdapter(adapter1);
-
     }
 
-    @OnClick({R.id.rl1, R.id.rl2})
+    @OnClick({})
     public void onClick(View view){
         switch (view.getId()){
-            case R.id.rl1:
-                tv1.setTextColor(Color.parseColor("#FFAB26"));
-                tv2.setTextColor(Color.parseColor("#333333"));
-                rv1.setVisibility(View.VISIBLE);
-                rv2.setVisibility(View.GONE);
-                break;
-            case R.id.rl2:
-                tv1.setTextColor(Color.parseColor("#333333"));
-                tv2.setTextColor(Color.parseColor("#FFAB26"));
-                rv1.setVisibility(View.GONE);
-                rv2.setVisibility(View.VISIBLE);
-                break;
+
         }
     }
 
