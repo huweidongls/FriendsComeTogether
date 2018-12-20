@@ -20,6 +20,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.HuoDongListModel;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
+import com.yiwo.friendscometogether.pages.OtherInformationActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
 
@@ -53,7 +54,7 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 //        Glide.with(context).load(data.get(position).getFmpic()).into(holder.iv);
         final HuoDongListModel.ObjBean bean = data.get(position);
         holder.btn_gochatroom.setFocusable(false);
@@ -75,7 +76,22 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
         holder.tv_title.setText(bean.getPftitle());
         Glide.with(context).load(bean.getPfpic()).into(holder.iv_image_huodong);
         holder.tv_name_owner.setText(bean.getUsername());
+        holder.tv_name_owner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         Glide.with(context).load(data.get(position).getUserpic()).into(holder.iv_icon_owner);
+        holder.iv_icon_owner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.putExtra("uid", bean.);
+//                intent.setClass(context, OtherInformationActivity.class);
+//                context.startActivity(intent);
+            }
+        });
         holder.tv_timeinfo.setText(bean.getActivities_data());
     }
 

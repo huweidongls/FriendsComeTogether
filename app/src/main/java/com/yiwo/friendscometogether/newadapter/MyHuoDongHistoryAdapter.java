@@ -18,6 +18,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.HuoDongListModel;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
+import com.yiwo.friendscometogether.pages.OtherInformationActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import java.util.List;
@@ -69,7 +70,23 @@ public class MyHuoDongHistoryAdapter extends RecyclerView.Adapter<MyHuoDongHisto
         holder.tv_title.setText(bean.getPftitle());
         Glide.with(context).load(bean.getPfpic()).into(holder.iv_image_huodong);
         holder.tv_name_owner.setText(bean.getUsername());
+        holder.tv_name_owner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.putExtra("uid", data.get(position).getCaptain());
+//                intent.setClass(context, OtherInformationActivity.class);
+//                context.startActivity(intent);
+            }
+        });
+
         Glide.with(context).load(data.get(position).getUserpic()).into(holder.iv_icon_owner);
+        holder.iv_icon_owner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         holder.tv_timeinfo.setText(bean.getActivities_data());
     }
 
