@@ -169,12 +169,10 @@ public class AllRememberFragment extends BaseFragment {
                                         toDialog(getContext(), "提示", "是否取消收藏", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(final DialogInterface dialog, int which) {
-                                                String token = getToken(NetConfig.BaseUrl + NetConfig.articleCollectionUrl);
-                                                ViseHttp.POST(NetConfig.articleCollectionUrl)
+                                                String token = getToken(NetConfig.BaseUrl + NetConfig.deleteCollectionUrl);
+                                                ViseHttp.POST(NetConfig.deleteCollectionUrl)
                                                         .addParam("app_key", token)
                                                         .addParam("id", mList1.get(i).getFID())
-                                                        .addParam("uid", uid)
-                                                        .addParam("type", "1")
                                                         .request(new ACallback<String>() {
                                                             @Override
                                                             public void onSuccess(String data) {
