@@ -95,13 +95,11 @@
 
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
-        android:background="@color/blue_3dc4ff"
         android:layout_below="@+id/ll_top"
         android:id="@+id/rv_woguanzhude"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <android.support.v7.widget.RecyclerView
-        android:background="@color/red_F71F1F"
         android:visibility="gone"
         android:layout_below="@+id/ll_top"
         android:id="@+id/rv_guanzhuwode"

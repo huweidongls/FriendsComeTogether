@@ -38,7 +38,7 @@
                     android:text="昵称：帅气的小迷糊"
                     android:layout_width="274px"
                     android:layout_height="40px" />
-                
+
                 <ImageView
                     android:id="@+id/activity_my_focus_rv_iv_sex"
                     android:layout_gravity="center_vertical"
@@ -59,7 +59,7 @@
                     android:src="@mipmap/article_focus"
                     android:layout_width="24px"
                     android:layout_height="24px" />
-                
+
                 <TextView
                     android:id="@+id/activity_my_focus_rv_tv_article_num"
                     android:gravity="center"
@@ -69,14 +69,14 @@
                     android:text="文章：45"
                     android:layout_width="wrap_content"
                     android:layout_height="33px" />
-                
+
                 <ImageView
                     android:layout_marginLeft="22px"
                     android:layout_gravity="center_vertical"
                     android:src="@mipmap/heart_blue"
                     android:layout_width="32px"
                     android:layout_height="28px" />
-                
+
                 <TextView
                     android:id="@+id/activity_my_focus_rv_tv_like_num"
                     android:gravity="center"
@@ -102,7 +102,7 @@
                     android:src="@mipmap/stopwatch"
                     android:layout_width="26px"
                     android:layout_height="26px" />
-                
+
                 <TextView
                     android:id="@+id/activity_my_focus_rv_tv_activity_id"
                     android:layout_marginLeft="8px"

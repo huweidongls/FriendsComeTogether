@@ -248,4 +248,6 @@ public class NetConfig {
 
     //获取参加的活动（报名活动、往期活动）
     public static String activityJoin = "action/ac_activity/activity_join";
+    //获取关注我的人
+    public static String guanZhuWoDe = "action/ac_user/get_AttentionTome";
 }
