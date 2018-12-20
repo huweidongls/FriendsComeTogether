@@ -26,6 +26,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.fragment.ChatFragment;
 import com.yiwo.friendscometogether.fragment.FriendsRememberFragment;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment;
+import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment1;
 import com.yiwo.friendscometogether.fragment.HomeFragment;
 import com.yiwo.friendscometogether.fragment.MyFragment;
 import com.yiwo.friendscometogether.fragment.MyFragment1;
@@ -127,7 +128,7 @@ public class MainActivity extends FragmentActivity {
         rl4.setOnClickListener(listener);
         rl5.setOnClickListener(listener);
         Fragment fragmentHome = new HomeFragment();
-        Fragment fragmentFriendTogether = new FriendsTogetherFragment();
+        Fragment fragmentFriendTogether = new FriendsTogetherFragment1();
         Fragment fragmentFriendRemember = new FriendsRememberFragment();
         Fragment fragmentChat = new ChatFragment();
         Fragment fragmentMy = new MyFragment1();

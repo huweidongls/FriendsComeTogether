@@ -1,5 +1,6 @@
 package com.yiwo.friendscometogether.newfragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -78,6 +79,45 @@ public class AllChawenFragment extends BaseFragment {
                                 LinearLayoutManager manager = new LinearLayoutManager(getContext());
                                 rv1.setLayoutManager(manager);
                                 rv1.setAdapter(adapter);
+                                adapter.setListener(new MyChawenAdapter.OnDeleteListener() {
+                                    @Override
+                                    public void onDelete(final int position) {
+                                        toDialog(getContext(), "提示", "是否删除插文", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(final DialogInterface dialogInterface, final int i) {
+                                                ViseHttp.POST(NetConfig.userDeleteIntercalationFocusUrl)
+                                                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.userDeleteIntercalationFocusUrl))
+                                                        .addParam("id", mList.get(position).getFfpID())
+                                                        .request(new ACallback<String>() {
+                                                            @Override
+                                                            public void onSuccess(String data) {
+                                                                try {
+                                                                    JSONObject jsonObject1 = new JSONObject(data);
+                                                                    if(jsonObject1.getInt("code") == 200){
+                                                                        toToast(getContext(), "删除成功");
+                                                                        mList.remove(position);
+                                                                        adapter.notifyDataSetChanged();
+                                                                        dialogInterface.dismiss();
+                                                                    }
+                                                                } catch (JSONException e) {
+                                                                    e.printStackTrace();
+                                                                }
+                                                            }
+
+                                                            @Override
+                                                            public void onFail(int errCode, String errMsg) {
+
+                                                            }
+                                                        });
+                                            }
+                                        }, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                            }
+                                        });
+                                    }
+                                });
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

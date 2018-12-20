@@ -42,10 +42,10 @@
     <TextView
         android:id="@+id/tv_editor"
         android:gravity="center"
-        android:background="@drawable/bg_yellow_26px"
-        android:textColor="@color/white_ffffff"
+        android:background="@drawable/bg_red_border_26px"
+        android:textColor="#E51B23"
         android:textSize="24px"
-        android:text="继续编辑"
+        android:text="删除"
         android:layout_marginBottom="20px"
         android:layout_marginTop="30px"
         android:layout_gravity="center_horizontal"

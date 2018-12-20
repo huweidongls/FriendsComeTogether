@@ -24,6 +24,11 @@ public class MyChawenAdapter extends RecyclerView.Adapter<MyChawenAdapter.ViewHo
 
     private Context context;
     private List<UserIntercalationListModel.ObjBean> data;
+    private OnDeleteListener listener;
+
+    public void setListener(OnDeleteListener listener) {
+        this.listener = listener;
+    }
 
     public MyChawenAdapter(List<UserIntercalationListModel.ObjBean> data) {
         this.data = data;
@@ -39,9 +44,15 @@ public class MyChawenAdapter extends RecyclerView.Adapter<MyChawenAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.tvTitle.setText(data.get(position).getNewstitle());
         Glide.with(context).load(data.get(position).getFfpurl()).into(holder.iv);
+        holder.tvEditor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onDelete(position);
+            }
+        });
     }
 
     @Override
@@ -65,6 +76,10 @@ public class MyChawenAdapter extends RecyclerView.Adapter<MyChawenAdapter.ViewHo
             ll = itemView.findViewById(R.id.ll);
             tvEditor = itemView.findViewById(R.id.tv_editor);
         }
+    }
+
+    public interface OnDeleteListener{
+        void onDelete(int position);
     }
 
 }
