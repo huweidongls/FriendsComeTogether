@@ -99,8 +99,22 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30px"
             android:layout_marginBottom="30px"
-            android:layout_marginLeft="55px"
-            android:layout_width="236px"
+            android:layout_marginLeft="13px"
+            android:layout_width="190px"
+            android:layout_height="52px" />
+        <TextView
+            android:layout_centerInParent="true"
+            android:id="@+id/btn_zixun"
+            android:textSize="24px"
+            android:background="@drawable/bg_yellow_border_26px"
+            android:gravity="center"
+            android:text="咨询"
+            android:textColor="#FFAB26"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30px"
+            android:layout_marginBottom="30px"
+            android:layout_marginRight="13px"
+            android:layout_width="190px"
             android:layout_height="52px" />
         <TextView
             android:layout_alignParentRight="true"
@@ -113,8 +127,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30px"
             android:layout_marginBottom="30px"
-            android:layout_marginRight="55px"
-            android:layout_width="236px"
+            android:layout_marginRight="13px"
+            android:layout_width="190px"
             android:layout_height="52px" />
     </RelativeLayout>
 

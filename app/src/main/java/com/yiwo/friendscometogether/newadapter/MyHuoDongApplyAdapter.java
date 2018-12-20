@@ -3,6 +3,7 @@ package com.yiwo.friendscometogether.newadapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +13,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.custom.EditContentDialog;
+import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.HuoDongListModel;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
 import com.yiwo.friendscometogether.pages.OtherInformationActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.utils.StringUtils;
 import com.yiwo.friendscometogether.utils.TokenUtils;
 
 import org.json.JSONException;
@@ -62,6 +67,56 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
             @Override
             public void onClick(View v) {
                 team(bean.getRoomid());
+            }
+        });
+        holder.btn_cancel.setFocusable(false);
+        holder.btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                EditContentDialog dialog = new EditContentDialog(context, new EditContentDialog.OnReturnListener() {
+//                    @Override
+//                    public void onReturn(String content) {
+//                        if (StringUtils.isEmpty(content)) {
+//                            Toast.makeText(context, "取消原因不能为空", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            ViseHttp.POST(NetConfig.cancleActivityUrl)
+//                                    .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.cancleActivityUrl))
+//                                    .addParam("user_id", spImp.getUID())
+//                                    .addParam("pfID", bean.getPfID())
+//                                    .addParam("info", content)
+//                                    .request(new ACallback<String>() {
+//                                        @Override
+//                                        public void onSuccess(String obj) {
+//                                            Log.e("222", obj+"uid"+spImp.getUID()+"pfid"+data.get(position).getPfID());
+//                                            try {
+//                                                JSONObject jsonObject = new JSONObject(obj);
+//                                                if (jsonObject.getInt("code") == 200) {
+//                                                    FocusOnToFriendTogetherModel model = new Gson().fromJson(obj, FocusOnToFriendTogetherModel.class);
+//                                                    data.remove(position);
+//                                                    notifyItemRemoved(position);
+//                                                    notifyDataSetChanged();
+//                                                    Toast.makeText(context, "活动取消成功", Toast.LENGTH_SHORT).show();
+//                                                }
+//                                            } catch (JSONException e) {
+//                                                e.printStackTrace();
+//                                            }
+//                                        }
+//
+//                                        @Override
+//                                        public void onFail(int errCode, String errMsg) {
+//
+//                                        }
+//                                    });
+//                        }
+//                    }
+//                });
+//                dialog.show();
+            }
+        });
+        holder.btn_zixun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
         holder.ll_huodong_apply.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +164,8 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
     class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView btn_gochatroom;
+        private TextView btn_zixun;
+        private TextView btn_cancel;
         private TextView tv_title;
         private ImageView iv_icon_owner;
         private TextView tv_name_owner;
@@ -118,6 +175,8 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
         public ViewHolder(View itemView) {
             super(itemView);
             btn_gochatroom = itemView.findViewById(R.id.btn_gochatroom);
+            btn_zixun = itemView.findViewById(R.id.btn_zixun);
+            btn_cancel = itemView.findViewById(R.id.btn_cancel);
             tv_title = itemView.findViewById(R.id.tv_huodong_title);
             iv_icon_owner = itemView.findViewById(R.id.iv_icon_owner);
             tv_name_owner = itemView.findViewById(R.id.tv_name_owner);

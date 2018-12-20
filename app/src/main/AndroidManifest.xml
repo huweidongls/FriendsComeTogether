@@ -144,13 +144,13 @@
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
@@ -266,8 +266,9 @@
 
         <activity android:name=".pages.BlackUserActivity" />
         <activity android:name=".imagepreview.ImagePreviewActivity" />
-        <activity android:name=".newpage.AllRememberActivity"></activity>
-        <activity android:name=".newpage.AllHuoDongActivity"></activity>
+        <activity android:name=".newpage.AllRememberActivity" />
+        <activity android:name=".newpage.AllHuoDongActivity" />
+        <activity android:name=".newpage.GuanZhuActivity"></activity>
     </application>
 
 </manifest>
