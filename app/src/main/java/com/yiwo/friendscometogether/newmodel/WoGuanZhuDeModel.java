@@ -33,7 +33,6 @@ public class WoGuanZhuDeModel {
     public void setMessage(String message) {
         this.message = message;
     }
-
     public List<ObjBean> getObj() {
         return obj;
     }

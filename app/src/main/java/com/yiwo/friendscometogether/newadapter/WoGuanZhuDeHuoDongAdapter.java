@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.model.MyFocusActiveModel;
 import com.yiwo.friendscometogether.newmodel.HuoDongListModel;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -27,10 +28,11 @@ import java.util.List;
 public class WoGuanZhuDeHuoDongAdapter extends RecyclerView.Adapter<WoGuanZhuDeHuoDongAdapter.ViewHolder> {
 
     private Context context;
-    private List<HuoDongListModel.ObjBean> data;
+    private List<MyFocusActiveModel.ObjBean> data;
     private SpImp spImp;
+    private CancelGuanZhuListion listion;
 
-    public WoGuanZhuDeHuoDongAdapter(List<HuoDongListModel.ObjBean> data) {
+    public WoGuanZhuDeHuoDongAdapter(List<MyFocusActiveModel.ObjBean> data) {
         this.data = data;
     }
 
@@ -47,6 +49,22 @@ public class WoGuanZhuDeHuoDongAdapter extends RecyclerView.Adapter<WoGuanZhuDeH
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 //
+        holder.tv_title.setText(data.get(position).getPftitle());
+        Glide.with(context).load(data.get(position).getPfpic()).into(holder.iv_image_huodong);
+        holder.tv_title.setText(data.get(position).getPftitle());
+
+        holder.btn_gochatroom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        holder.btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listion.cancleGuanzhu(position);
+            }
+        });
     }
 
     @Override
@@ -81,6 +99,12 @@ public class WoGuanZhuDeHuoDongAdapter extends RecyclerView.Adapter<WoGuanZhuDeH
             iv_image_huodong = itemView.findViewById(R.id.iv_image_huodong);
             ll_huodong_apply = itemView.findViewById(R.id.ll_huodong_apply);
         }
+    }
+    public void setCancelGuanZHuLis(CancelGuanZhuListion listion){
+        this.listion = listion;
+    }
+    public interface CancelGuanZhuListion{
+        void cancleGuanzhu(int posion);
     }
 
 }

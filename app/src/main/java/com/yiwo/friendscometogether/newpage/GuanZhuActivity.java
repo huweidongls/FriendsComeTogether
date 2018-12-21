@@ -3,6 +3,7 @@ package com.yiwo.friendscometogether.newpage;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,10 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.netease.nim.uikit.common.adapter.TViewHolder;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -31,6 +36,7 @@ import com.yiwo.friendscometogether.newadapter.WoGuanZhuDeHuoDongAdapter;
 import com.yiwo.friendscometogether.newmodel.GuanZhuWoDeModel;
 import com.yiwo.friendscometogether.newmodel.HuoDongListModel;
 import com.yiwo.friendscometogether.newmodel.WoGuanZhuDeModel;
+import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import org.json.JSONException;
@@ -47,6 +53,8 @@ public class GuanZhuActivity extends BaseActivity {
 
     private Context context = GuanZhuActivity.this;
 
+    @BindView(R.id.rl_back)
+    RelativeLayout rl_back;
     @BindView(R.id.rl_woguanhude)
     RelativeLayout rl_woguanzhude;
     @BindView(R.id.rl_guanzhuwode)
@@ -69,16 +77,22 @@ public class GuanZhuActivity extends BaseActivity {
     @BindView(R.id.rv_guanzhuhuodong)
     RecyclerView rv_guanzhuhuodong;
 
+    @BindView(R.id.guanzhu_refreshlayout)
+    RefreshLayout refreshLayout;
 
     private SpImp spImp;
-    private int page = 1;
+    private int page_woguanzhude = 1;
+    private int page_guanzhuwode = 1;
+    private int page_guanzhuhuodong = 1;
+
+    private int type_showLayout = 0;//0为我关注的，1为关注我的，2 为关注活动
     private List<UserFocusModel.ObjBean> mWoGuanZhuDeList ;
     private WoGuanZhuDeAdapter woGuanZhuDeAdapter;
 
     private List<GuanZhuWoDeModel.ObjBean> mGuanZhuWoDeList ;
     private GuanZhuWoDeAdapter guanZhuWoDeAdapter;
 
-    private List<HuoDongListModel.ObjBean> mGuanZhuHuoDongList ;
+    private List<MyFocusActiveModel.ObjBean> mGuanZhuHuoDongList ;
     private WoGuanZhuDeHuoDongAdapter guanZhuDeHuoDongAdapter;
 
 
@@ -90,8 +104,151 @@ public class GuanZhuActivity extends BaseActivity {
         spImp = new SpImp(GuanZhuActivity.this);
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(GuanZhuActivity.this);
-
+        initRefresh();
         initData();
+    }
+
+    private void initRefresh() {
+        refreshLayout.setRefreshHeader(new ClassicsHeader(GuanZhuActivity.this));
+        refreshLayout.setRefreshFooter(new ClassicsFooter(GuanZhuActivity.this));
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
+                switch (type_showLayout){
+                    case 0:
+                        ViseHttp.POST(NetConfig.userFocus)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userFocus))
+                                .addParam("page", "1")
+                                .addParam("userID", spImp.getUID())
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if (jsonObject.getInt("code") == 200) {
+                                                Gson gson = new Gson();
+                                                UserFocusModel userFocusModel = gson.fromJson(data, UserFocusModel.class);
+                                                mWoGuanZhuDeList.clear();
+                                                mWoGuanZhuDeList.addAll(userFocusModel.getObj());
+                                                woGuanZhuDeAdapter.notifyDataSetChanged();
+                                                page_woguanzhude = 2;
+                                                Log.e("222page_woguanzhude", page_woguanzhude+"");
+                                                refreshLayout.finishRefresh(1000);
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+                                        refreshLayout.finishRefresh(1000);
+                                    }
+                                });
+                        break;
+                    case 1:
+                        ViseHttp.POST(NetConfig.guanZhuWoDe)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.guanZhuWoDe))
+                                .addParam("page", "1")
+                                .addParam("userID", spImp.getUID())
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if (jsonObject.getInt("code") == 200) {
+                                                Gson gson = new Gson();
+                                                GuanZhuWoDeModel guanZhuWoDeModel = gson.fromJson(data, GuanZhuWoDeModel.class);
+                                                mGuanZhuWoDeList.clear();
+                                                mGuanZhuWoDeList.addAll(guanZhuWoDeModel.getObj());
+                                                guanZhuWoDeAdapter.notifyDataSetChanged();
+                                                page_guanzhuwode = 2 ;
+                                                Log.e("222page_guanzhuwode", page_guanzhuwode+"");
+                                                refreshLayout.finishRefresh(1000);
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+                                        refreshLayout.finishRefresh(1000);
+                                    }
+                                });
+                        break;
+                    case 2:
+                        break;
+                }
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull final RefreshLayout refreshLayout) {
+                switch (type_showLayout){
+                    case 0:
+                        ViseHttp.POST(NetConfig.userFocus)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userFocus))
+                                .addParam("page", page_woguanzhude+"")
+                                .addParam("userID", spImp.getUID())
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if (jsonObject.getInt("code") == 200) {
+                                                Gson gson = new Gson();
+                                                UserFocusModel userFocusModel = gson.fromJson(data, UserFocusModel.class);
+                                                mWoGuanZhuDeList.addAll(userFocusModel.getObj());
+                                                woGuanZhuDeAdapter.notifyDataSetChanged();
+                                                page_woguanzhude++;
+                                                Log.e("222page_woguanzhude", page_woguanzhude+"");
+                                                refreshLayout.finishLoadMore(1000);
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+                                        refreshLayout.finishLoadMore(1000);
+                                    }
+                                });
+                        break;
+                    case 1:
+                        ViseHttp.POST(NetConfig.guanZhuWoDe)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.guanZhuWoDe))
+                                .addParam("page", page_guanzhuwode+"")
+                                .addParam("userID", spImp.getUID())
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if (jsonObject.getInt("code") == 200) {
+                                                Gson gson = new Gson();
+                                                GuanZhuWoDeModel guanZhuWoDeModel = gson.fromJson(data, GuanZhuWoDeModel.class);
+                                                mGuanZhuWoDeList.addAll(guanZhuWoDeModel.getObj());
+                                                guanZhuWoDeAdapter.notifyDataSetChanged();
+                                                page_guanzhuwode++ ;
+                                                Log.e("222page_guanzhuwode", page_guanzhuwode+"");
+                                                refreshLayout.finishLoadMore(1000);
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+                                        refreshLayout.finishLoadMore(1000);
+                                    }
+                                });
+                        break;
+                    case 2:
+                        break;
+                }
+            }
+        });
     }
 
     private void initData() {
@@ -116,8 +273,8 @@ public class GuanZhuActivity extends BaseActivity {
                                 LinearLayoutManager manager = new LinearLayoutManager(GuanZhuActivity.this);
                                 rv_woguanzhude.setLayoutManager(manager);
                                 rv_woguanzhude.setAdapter(woGuanZhuDeAdapter);
-                                page = 2;
-                                Log.e("222", page+"");
+                                page_woguanzhude = 2;
+                                Log.e("222", page_woguanzhude+"");
                                 woGuanZhuDeAdapter.setListener(new WoGuanZhuDeAdapter.OnCancelFocusListener() {
                                     @Override
                                     public void onCancel(final int i) {
@@ -181,12 +338,50 @@ public class GuanZhuActivity extends BaseActivity {
                                 GuanZhuWoDeModel guanZhuWoDeModel = gson.fromJson(data, GuanZhuWoDeModel.class);
                                 mGuanZhuWoDeList = guanZhuWoDeModel.getObj();
                                 guanZhuWoDeAdapter = new GuanZhuWoDeAdapter(mGuanZhuWoDeList);
+                                guanZhuWoDeAdapter.setGuanZhuListionner(new GuanZhuWoDeAdapter.GuanZhuListion() {
+                                    @Override
+                                    public void guanzhu(final int posion) {
+                                        ViseHttp.POST(NetConfig.userFocusUrl)
+                                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userFocusUrl))
+                                                .addParam("uid", spImp.getUID())
+                                                .addParam("likeId", mGuanZhuWoDeList.get(posion).getUserID())
+                                                .request(new ACallback<String>() {
+                                                    @Override
+                                                    public void onSuccess(String data) {
+                                                        try {
+                                                            JSONObject jsonObject = new JSONObject(data);
+                                                            if (jsonObject.getInt("code") == 200) {
+                                                                toToast(GuanZhuActivity.this, "关注成功");
+                                                                mGuanZhuWoDeList.get(posion).setIs_follow("1");
+                                                                guanZhuWoDeAdapter.notifyDataSetChanged();
+
+                                                            }else {
+                                                                toToast(GuanZhuActivity.this, jsonObject.getString("message"));
+                                                            }
+                                                        } catch (JSONException e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onFail(int errCode, String errMsg) {
+
+                                                    }
+                                                });
+                                    }
+                                });
+                                guanZhuWoDeAdapter.setCancelGuanZhu(new GuanZhuWoDeAdapter.CancelGuanZhuListion() {
+                                    @Override
+                                    public void cancel_guanzhu(final int posion) {
+
+                                    }
+                                });
                                 LinearLayoutManager manager = new LinearLayoutManager(GuanZhuActivity.this);
                                 rv_guanzhuwode.setLayoutManager(manager);
                                 rv_guanzhuwode.setAdapter(guanZhuWoDeAdapter);
 
-                                page = 2;
-                                Log.e("222", page+"");
+                                page_guanzhuwode = 2;
+                                Log.e("222", page_guanzhuwode+"");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -198,29 +393,28 @@ public class GuanZhuActivity extends BaseActivity {
                     }
                 });
         //---------------关注活动-------------------
+        Log.d("app_key",getToken(NetConfig.BaseUrl+NetConfig.MyFocusActiveUrl));
         ViseHttp.POST(NetConfig.MyFocusActiveUrl)
                 .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.MyFocusActiveUrl))
                 .addParam("uid", spImp.getUID())
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
+                        Log.d("ljc_",data);
                         try {
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.getInt("code") == 200){
                                 Gson gson = new Gson();
-                                HuoDongListModel.ObjBean bean = new HuoDongListModel.ObjBean();
-
-                                mGuanZhuHuoDongList = new ArrayList<>();
-                                mGuanZhuHuoDongList.add(bean);
-                                mGuanZhuHuoDongList.add(bean);
-                                mGuanZhuHuoDongList.add(bean);
-
+                                MyFocusActiveModel model = gson.fromJson(data, MyFocusActiveModel.class);
+                                mGuanZhuHuoDongList = model.getObj();
                                 guanZhuDeHuoDongAdapter = new WoGuanZhuDeHuoDongAdapter(mGuanZhuHuoDongList);
-                                LinearLayoutManager manager = new LinearLayoutManager(GuanZhuActivity.this);
-                                rv_guanzhuhuodong.setLayoutManager(manager);
+                                guanZhuDeHuoDongAdapter.setCancelGuanZHuLis(new WoGuanZhuDeHuoDongAdapter.CancelGuanZhuListion() {
+                                    @Override
+                                    public void cancleGuanzhu(int posion) {
+
+                                    }
+                                });
                                 rv_guanzhuhuodong.setAdapter(guanZhuDeHuoDongAdapter);
-                                page = 2;
-                                Log.e("222", page+"");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -235,32 +429,41 @@ public class GuanZhuActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_woguanhude,R.id.rl_guanzhuwode,R.id.rl_guanzhuhuodong})
+    @OnClick({R.id.rl_woguanhude,R.id.rl_guanzhuwode,R.id.rl_guanzhuhuodong,R.id.rl_back})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.rl_woguanhude:
+                type_showLayout = 0;
                 tv_woguanzhude.setTextColor(Color.parseColor("#FFAB26"));
                 tv_guanzhuwode.setTextColor(Color.parseColor("#333333"));
                 tv_guanzhuhuodong.setTextColor(Color.parseColor("#333333"));
                 rv_woguanzhude.setVisibility(View.VISIBLE);
                 rv_guanzhuwode.setVisibility(View.GONE);
                 rv_guanzhuhuodong.setVisibility(View.GONE);
+                initData();
                 break;
             case R.id.rl_guanzhuwode:
+                type_showLayout = 1;
                 tv_guanzhuwode.setTextColor(Color.parseColor("#FFAB26"));
                 tv_guanzhuhuodong.setTextColor(Color.parseColor("#333333"));
                 tv_woguanzhude.setTextColor(Color.parseColor("#333333"));
                 rv_guanzhuwode.setVisibility(View.VISIBLE);
                 rv_guanzhuhuodong.setVisibility(View.GONE);
                 rv_woguanzhude.setVisibility(View.GONE);
+                initData();
                 break;
             case R.id.rl_guanzhuhuodong:
+                type_showLayout = 2;
                 tv_guanzhuhuodong.setTextColor(Color.parseColor("#FFAB26"));
                 tv_woguanzhude.setTextColor(Color.parseColor("#333333"));
                 tv_guanzhuwode.setTextColor(Color.parseColor("#333333"));
                 rv_guanzhuhuodong.setVisibility(View.VISIBLE);
                 rv_woguanzhude.setVisibility(View.GONE);
                 rv_guanzhuwode.setVisibility(View.GONE);
+                initData();
+                break;
+            case R.id.rl_back:
+               finish();
                 break;
         }
     }
