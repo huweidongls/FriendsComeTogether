@@ -1,6 +1,8 @@
 package com.yiwo.friendscometogether.newpage;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,8 +15,13 @@ import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
+import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
 import com.yiwo.friendscometogether.model.HomeMessageCenterModel;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.pages.MessageCenterActivity;
+import com.yiwo.friendscometogether.pages.MessageCommentActivity;
+import com.yiwo.friendscometogether.pages.MessageInvitationActivity;
+import com.yiwo.friendscometogether.pages.MessageViewActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import org.json.JSONException;
@@ -54,6 +61,7 @@ public class MessageActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
+        StatusBarUtils.setStatusBar(MessageActivity.this, Color.parseColor("#ffffff"));
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(MessageActivity.this);
         spImp = new SpImp(context);
@@ -115,11 +123,32 @@ public class MessageActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back})
+    @OnClick({R.id.rl_back, R.id.rl_hot_message, R.id.rl_tongzhi_message, R.id.rl_shoudaoyaoqing, R.id.rl_pinglun})
     public void onClick(View view){
+        Intent intent = new Intent();
         switch (view.getId()){
             case R.id.rl_back:
                 finish();
+                break;
+            case R.id.rl_hot_message:
+                ivHot.setVisibility(View.GONE);
+                intent.setClass(context, MessageViewActivity.class);
+                intent.putExtra("type", "1");
+                startActivity(intent);
+                break;
+            case R.id.rl_tongzhi_message:
+                ivSystem.setVisibility(View.GONE);
+                intent.setClass(context, MessageViewActivity.class);
+                intent.putExtra("type", "0");
+                startActivity(intent);
+                break;
+            case R.id.rl_shoudaoyaoqing:
+                intent.setClass(context, MessageInvitationActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.rl_pinglun:
+                intent.setClass(context, MessageCommentActivity.class);
+                startActivity(intent);
                 break;
         }
     }

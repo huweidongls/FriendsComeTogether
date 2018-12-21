@@ -1,18 +1,23 @@
 package com.yiwo.friendscometogether.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.MessageInvitationListModel;
+import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
 
 import java.util.List;
 
@@ -45,21 +50,38 @@ public class MessageInvitationAdapter extends RecyclerView.Adapter<MessageInvita
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        if(!TextUtils.isEmpty(data.get(position).getPfpic())){
-            Picasso.with(context).load(data.get(position).getPfpic()).into(holder.picIv);
+        if(data.get(position).getSex().equals("0")){
+            Glide.with(context).load(R.mipmap.yaoqing_nan).into(holder.ivSex);
+        }else {
+            Glide.with(context).load(R.mipmap.yaoqing_nv).into(holder.ivSex);
         }
+        if(!TextUtils.isEmpty(data.get(position).getPfpic())){
+            Glide.with(context).load(data.get(position).getPfpic()).into(holder.picIv);
+        }
+//        holder.tvTime.setText(data.get(position).getYqtime());
         holder.titleTv.setText(data.get(position).getPftitle());
-        holder.contentTv.setText(data.get(position).getPfcontent());
-        holder.tvNo.setOnClickListener(new View.OnClickListener() {
+//        holder.contentTv.setText(data.get(position).getPfcontent());
+        String str = "哇哦！您收到来自<font color='#FF0000'><small>"+"@"+data.get(position).getUsername()+"</small></font>美女的活动邀请。";
+        holder.tvNickname.setText(Html.fromHtml(str));
+        holder.llNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.onApply(0, position);
             }
         });
-        holder.tvOk.setOnClickListener(new View.OnClickListener() {
+        holder.llYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.onApply(1, position);
+            }
+        });
+        holder.llDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("pfID", data.get(position).getTid());
+                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                context.startActivity(intent);
             }
         });
     }
@@ -72,17 +94,23 @@ public class MessageInvitationAdapter extends RecyclerView.Adapter<MessageInvita
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView titleTv;
         private ImageView picIv;
-        private TextView contentTv;
-        private TextView tvOk;
-        private TextView tvNo;
+        private LinearLayout llDetails;
+        private LinearLayout llYes;
+        private LinearLayout llNo;
+        private TextView tvNickname;
+        private TextView tvTime;
+        private ImageView ivSex;
 
         public ViewHolder(View itemView) {
             super(itemView);
             titleTv = (itemView).findViewById(R.id.message_view_title_tv);
             picIv = (itemView).findViewById(R.id.message_view_pic_iv);
-            contentTv = (itemView).findViewById(R.id.message_view_content_tv);
-            tvOk = itemView.findViewById(R.id.tv_ok);
-            tvNo = itemView.findViewById(R.id.tv_no);
+            llDetails = itemView.findViewById(R.id.ll_huodong_details);
+            llYes = itemView.findViewById(R.id.ll_yes);
+            llNo = itemView.findViewById(R.id.ll_no);
+            tvNickname = itemView.findViewById(R.id.tv_nickname);
+            tvTime = itemView.findViewById(R.id.tv_time);
+            ivSex = itemView.findViewById(R.id.iv_sex);
         }
     }
 

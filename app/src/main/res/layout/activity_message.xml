@@ -73,6 +73,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_shoudaoyaoqing"
             android:layout_weight="1"
             android:layout_width="0px"
             android:layout_height="match_parent">
@@ -103,6 +104,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_pinglun"
             android:layout_weight="1"
             android:layout_width="0px"
             android:layout_height="match_parent">
@@ -135,6 +137,7 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_tongzhi_message"
         android:background="@color/white_ffffff"
         android:layout_width="match_parent"
         android:layout_height="141px">
@@ -191,6 +194,7 @@
                 android:layout_height="wrap_content" />
 
             <ImageView
+                android:visibility="gone"
                 android:layout_marginTop="30px"
                 android:layout_gravity="right"
                 android:id="@+id/iv_hot1"
@@ -203,6 +207,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_hot_message"
         android:layout_marginTop="20px"
         android:background="@color/white_ffffff"
         android:layout_width="match_parent"
@@ -260,6 +265,7 @@
                 android:layout_height="wrap_content" />
 
             <ImageView
+                android:visibility="gone"
                 android:layout_marginTop="30px"
                 android:layout_gravity="right"
                 android:id="@+id/iv_hot2"
@@ -329,6 +335,7 @@
                 android:layout_height="wrap_content" />
 
             <ImageView
+                android:visibility="gone"
                 android:layout_marginTop="30px"
                 android:layout_gravity="right"
                 android:id="@+id/iv_hot3"

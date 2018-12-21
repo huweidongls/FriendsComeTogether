@@ -11,7 +11,7 @@ public class MessageInvitationListModel {
     /**
      * code : 200
      * message : 操作成功!
-     * obj : [{"id":"2","tid":"3","type":"1","pftitle":"您的好友--吃了邀请您参加活动--三亚一月游","pfcontent":"哈哈哈","pfpic":"http://47.92.136.19/uploads/xingcheng/20180817/20180817/fd21c17ebfb3e16d863ef22403df6986.jpeg"}]
+     * obj : [{"id":"37","tid":"102","type":"1","text":"123","read_type":"1","pftitle":"减肥减肥家","username":"一样一样","pfpic":"http://47.92.136.19/uploads/xingcheng/20180930/f5ab478ba5edee62102e9b8b499b8d86.jpg","sex":"1"}]
      */
 
     private int code;
@@ -44,20 +44,26 @@ public class MessageInvitationListModel {
 
     public static class ObjBean {
         /**
-         * id : 2
-         * tid : 3
+         * id : 37
+         * tid : 102
          * type : 1
-         * pftitle : 您的好友--吃了邀请您参加活动--三亚一月游
-         * pfcontent : 哈哈哈
-         * pfpic : http://47.92.136.19/uploads/xingcheng/20180817/20180817/fd21c17ebfb3e16d863ef22403df6986.jpeg
+         * text : 123
+         * read_type : 1
+         * pftitle : 减肥减肥家
+         * username : 一样一样
+         * pfpic : http://47.92.136.19/uploads/xingcheng/20180930/f5ab478ba5edee62102e9b8b499b8d86.jpg
+         * sex : 1
          */
 
         private String id;
         private String tid;
         private String type;
+        private String text;
+        private String read_type;
         private String pftitle;
-        private String pfcontent;
+        private String username;
         private String pfpic;
+        private String sex;
 
         public String getId() {
             return id;
@@ -83,6 +89,22 @@ public class MessageInvitationListModel {
             this.type = type;
         }
 
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        public String getRead_type() {
+            return read_type;
+        }
+
+        public void setRead_type(String read_type) {
+            this.read_type = read_type;
+        }
+
         public String getPftitle() {
             return pftitle;
         }
@@ -91,12 +113,12 @@ public class MessageInvitationListModel {
             this.pftitle = pftitle;
         }
 
-        public String getPfcontent() {
-            return pfcontent;
+        public String getUsername() {
+            return username;
         }
 
-        public void setPfcontent(String pfcontent) {
-            this.pfcontent = pfcontent;
+        public void setUsername(String username) {
+            this.username = username;
         }
 
         public String getPfpic() {
@@ -105,6 +127,14 @@ public class MessageInvitationListModel {
 
         public void setPfpic(String pfpic) {
             this.pfpic = pfpic;
+        }
+
+        public String getSex() {
+            return sex;
+        }
+
+        public void setSex(String sex) {
+            this.sex = sex;
         }
     }
 }
