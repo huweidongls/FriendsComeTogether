@@ -58,11 +58,16 @@ public class MessageInvitationAdapter extends RecyclerView.Adapter<MessageInvita
         if(!TextUtils.isEmpty(data.get(position).getPfpic())){
             Glide.with(context).load(data.get(position).getPfpic()).into(holder.picIv);
         }
-//        holder.tvTime.setText(data.get(position).getYqtime());
+        holder.tvTime.setText(data.get(position).getYqtime());
         holder.titleTv.setText(data.get(position).getPftitle());
 //        holder.contentTv.setText(data.get(position).getPfcontent());
-        String str = "哇哦！您收到来自<font color='#FF0000'><small>"+"@"+data.get(position).getUsername()+"</small></font>美女的活动邀请。";
-        holder.tvNickname.setText(Html.fromHtml(str));
+        if(data.get(position).getSex().equals("0")){
+            String str = "哇哦！您收到来自<font color='#0765AA'>"+"@"+data.get(position).getUsername()+"</font>帅哥的活动邀请。";
+            holder.tvNickname.setText(Html.fromHtml(str));
+        }else {
+            String str = "哇哦！您收到来自<font color='#0765AA'>"+"@"+data.get(position).getUsername()+"</font>美女的活动邀请。";
+            holder.tvNickname.setText(Html.fromHtml(str));
+        }
         holder.llNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

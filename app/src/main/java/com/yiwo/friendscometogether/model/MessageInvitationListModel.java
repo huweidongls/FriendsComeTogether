@@ -11,7 +11,7 @@ public class MessageInvitationListModel {
     /**
      * code : 200
      * message : 操作成功!
-     * obj : [{"id":"37","tid":"102","type":"1","text":"123","read_type":"1","pftitle":"减肥减肥家","username":"一样一样","pfpic":"http://47.92.136.19/uploads/xingcheng/20180930/f5ab478ba5edee62102e9b8b499b8d86.jpg","sex":"1"}]
+     * obj : [{"id":"38","tid":"102","type":"1","yqtime":"2018-12-21 16:58:12","text":"","read_type":"1","pftitle":"减肥减肥家","username":"一样一样","pfpic":"http://47.92.136.19/uploads/xingcheng/20180930/f5ab478ba5edee62102e9b8b499b8d86.jpg","sex":"1"}]
      */
 
     private int code;
@@ -44,10 +44,11 @@ public class MessageInvitationListModel {
 
     public static class ObjBean {
         /**
-         * id : 37
+         * id : 38
          * tid : 102
          * type : 1
-         * text : 123
+         * yqtime : 2018-12-21 16:58:12
+         * text :
          * read_type : 1
          * pftitle : 减肥减肥家
          * username : 一样一样
@@ -58,6 +59,7 @@ public class MessageInvitationListModel {
         private String id;
         private String tid;
         private String type;
+        private String yqtime;
         private String text;
         private String read_type;
         private String pftitle;
@@ -87,6 +89,14 @@ public class MessageInvitationListModel {
 
         public void setType(String type) {
             this.type = type;
+        }
+
+        public String getYqtime() {
+            return yqtime;
+        }
+
+        public void setYqtime(String yqtime) {
+            this.yqtime = yqtime;
         }
 
         public String getText() {
