@@ -427,6 +427,12 @@ public class GuanZhuActivity extends BaseActivity {
                                                 });
                                     }
                                 });
+                                guanZhuWoDeAdapter.setListener_invitation(new GuanZhuWoDeAdapter.OnFocusInvitationListener() {
+                                    @Override
+                                    public void onInvitation(int position) {
+                                        showInvitationPopupwindow(mGuanZhuWoDeList.get(position).getUserID());
+                                    }
+                                });
                                 guanZhuWoDeAdapter.setCancelGuanZhu(new GuanZhuWoDeAdapter.CancelGuanZhuListion() {
                                     @Override
                                     public void cancel_guanzhu(final int posion) {
@@ -524,7 +530,7 @@ public class GuanZhuActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.rl_woguanhude:
                 type_showLayout = 0;
-                tv_woguanzhude.setTextColor(Color.parseColor("#FFAB26"));
+                tv_woguanzhude.setTextColor(Color.parseColor("#D84C37"));
                 tv_guanzhuwode.setTextColor(Color.parseColor("#333333"));
                 tv_guanzhuhuodong.setTextColor(Color.parseColor("#333333"));
                 rv_woguanzhude.setVisibility(View.VISIBLE);
@@ -534,7 +540,7 @@ public class GuanZhuActivity extends BaseActivity {
                 break;
             case R.id.rl_guanzhuwode:
                 type_showLayout = 1;
-                tv_guanzhuwode.setTextColor(Color.parseColor("#FFAB26"));
+                tv_guanzhuwode.setTextColor(Color.parseColor("#D84C37"));
                 tv_guanzhuhuodong.setTextColor(Color.parseColor("#333333"));
                 tv_woguanzhude.setTextColor(Color.parseColor("#333333"));
                 rv_guanzhuwode.setVisibility(View.VISIBLE);
@@ -544,7 +550,7 @@ public class GuanZhuActivity extends BaseActivity {
                 break;
             case R.id.rl_guanzhuhuodong:
                 type_showLayout = 2;
-                tv_guanzhuhuodong.setTextColor(Color.parseColor("#FFAB26"));
+                tv_guanzhuhuodong.setTextColor(Color.parseColor("#D84C37"));
                 tv_woguanzhude.setTextColor(Color.parseColor("#333333"));
                 tv_guanzhuwode.setTextColor(Color.parseColor("#333333"));
                 rv_guanzhuhuodong.setVisibility(View.VISIBLE);

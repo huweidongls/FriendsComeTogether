@@ -45,19 +45,36 @@
                 android:layout_height="wrap_content" />
 
         </RelativeLayout>
-
-        <TextView
-            android:background="@drawable/bg_yellow_10px"
-            android:id="@+id/btn_guanhu"
-            android:layout_marginRight="32px"
-            android:layout_alignParentRight="true"
+        <LinearLayout
             android:layout_centerVertical="true"
-            android:textSize="28px"
-            android:gravity="center"
-            android:textColor="@color/white_ffffff"
-            android:text="关注"
-            android:layout_width="130px"
-            android:layout_height="58px" />
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:background="@drawable/bg_red_10px"
+                android:id="@+id/btn_guanhu"
+                android:layout_marginRight="32px"
+                android:layout_marginBottom="12px"
+                android:layout_alignParentRight="true"
+                android:textSize="28px"
+                android:gravity="center"
+                android:textColor="@color/white_ffffff"
+                android:text="关注"
+                android:layout_width="130px"
+                android:layout_height="58px" />
+            <TextView
+                android:background="@drawable/bg_red_10px"
+                android:layout_above="@+id/activity_my_focus_rv_tv_2"
+                android:id="@+id/btn_yaoqing"
+                android:layout_marginRight="32px"
+                android:textSize="28px"
+                android:gravity="center"
+                android:textColor="@color/white_ffffff"
+                android:text="邀请他"
+                android:layout_width="130px"
+                android:layout_height="58px" />
+        </LinearLayout>
 
     </RelativeLayout>
     

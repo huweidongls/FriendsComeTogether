@@ -88,7 +88,6 @@ public class HuoDongHistoryFragment extends BaseFragment {
 
                     @Override
                     public void onSuccess(String data) {
-                        Log.d("ljc_data",data);
                         try {
                             JSONObject jsonObject = new JSONObject(data);
                             if (jsonObject.getInt("code") == 200) {
@@ -121,6 +120,7 @@ public class HuoDongHistoryFragment extends BaseFragment {
 
                             @Override
                             public void onSuccess(String data) {
+                                Log.d("ljc_data", "onSuccess: "+data);
                                 try {
                                     JSONObject jsonObject = new JSONObject(data);
                                     if (jsonObject.getInt("code") == 200) {
@@ -155,6 +155,7 @@ public class HuoDongHistoryFragment extends BaseFragment {
                             }
                             @Override
                             public void onSuccess(String data) {
+
                                 try {
                                     JSONObject jsonObject = new JSONObject(data);
                                     if (jsonObject.getInt("code") == 200) {

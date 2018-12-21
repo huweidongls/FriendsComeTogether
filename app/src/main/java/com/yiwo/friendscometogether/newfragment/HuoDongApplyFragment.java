@@ -89,8 +89,8 @@ public class HuoDongApplyFragment extends BaseFragment {
                     }
                     @Override
                     public void onSuccess(String data) {
+                        Log.d("ljc_data", "onSuccess: "+data);
                         try {
-                            Log.d("ljc_data",data);
                             JSONObject jsonObject = new JSONObject(data);
                             if (jsonObject.getInt("code") == 200) {
                                 HuoDongListModel model = new Gson().fromJson(data, HuoDongListModel.class);
@@ -123,6 +123,7 @@ public class HuoDongApplyFragment extends BaseFragment {
 
                             @Override
                             public void onSuccess(String data) {
+                                Log.d("ljc_data", "onSuccess: "+data);
                                 try {
                                     JSONObject jsonObject = new JSONObject(data);
                                     if (jsonObject.getInt("code") == 200) {

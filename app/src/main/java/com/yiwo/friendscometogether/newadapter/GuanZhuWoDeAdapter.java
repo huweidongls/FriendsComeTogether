@@ -33,6 +33,11 @@ public class GuanZhuWoDeAdapter extends RecyclerView.Adapter<GuanZhuWoDeAdapter.
 
     private GuanZhuListion guanZhulistion;
     private CancelGuanZhuListion cancelGuanZhuListion;
+    private OnFocusInvitationListener listener_invitation;
+
+    public void setListener_invitation(OnFocusInvitationListener listener_invitation) {
+        this.listener_invitation = listener_invitation;
+    }
 
     public GuanZhuWoDeAdapter(List<GuanZhuWoDeModel.ObjBean> data) {
         this.data = data;
@@ -63,12 +68,19 @@ public class GuanZhuWoDeAdapter extends RecyclerView.Adapter<GuanZhuWoDeAdapter.
         Glide.with(context).load(bean.getUpicurl()).into(holder.iv_icon_user);
         holder.tv_user_name.setText(bean.getUsername());
         holder.tv_user_fans_num.setText("粉丝数："+bean.getLike_num());
+        holder.btn_yaoqing.setFocusable(false);
+        holder.btn_yaoqing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener_invitation.onInvitation(position);
+            }
+        });
         holder.btn_guanzhu.setFocusable(false);
         //当前用户是否关注该人 0是未关注 1为已关注
         if (bean.getIs_follow().equals("1")){
             holder.btn_guanzhu.setText("互相关注");
-            holder.btn_guanzhu.setTextColor(Color.parseColor("#5C5C5C"));
-            holder.btn_guanzhu.setBackgroundResource(R.drawable.bg_yellow_border_10px);
+            holder.btn_guanzhu.setTextColor(Color.parseColor("#D84C37"));
+            holder.btn_guanzhu.setBackgroundResource(R.drawable.bg_red_border_10px);
             holder.btn_guanzhu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -79,7 +91,7 @@ public class GuanZhuWoDeAdapter extends RecyclerView.Adapter<GuanZhuWoDeAdapter.
         }else if (bean.getIs_follow().equals("0")){
             holder.btn_guanzhu.setText("关注");
             holder.btn_guanzhu.setTextColor(Color.parseColor("#ffffff"));
-            holder.btn_guanzhu.setBackgroundResource(R.drawable.bg_yellow_10px);
+            holder.btn_guanzhu.setBackgroundResource(R.drawable.bg_red_10px);
             holder.btn_guanzhu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -102,6 +114,7 @@ public class GuanZhuWoDeAdapter extends RecyclerView.Adapter<GuanZhuWoDeAdapter.
         private TextView tv_user_name;
         private TextView tv_user_fans_num;
         private TextView btn_guanzhu;
+        private TextView btn_yaoqing;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -110,6 +123,7 @@ public class GuanZhuWoDeAdapter extends RecyclerView.Adapter<GuanZhuWoDeAdapter.
             tv_user_name = itemView.findViewById(R.id.tv_user_name);
             tv_user_fans_num = itemView.findViewById(R.id.tv_user_fans_num);
             btn_guanzhu = itemView.findViewById(R.id.btn_guanhu);
+            btn_yaoqing = itemView.findViewById(R.id.btn_yaoqing);
         }
     }
     public void setGuanZhuListionner( GuanZhuListion listion){
@@ -123,5 +137,8 @@ public class GuanZhuWoDeAdapter extends RecyclerView.Adapter<GuanZhuWoDeAdapter.
     }
     public interface CancelGuanZhuListion{
         void cancel_guanzhu(int posion);
+    }
+    public interface OnFocusInvitationListener{
+        void onInvitation(int position);
     }
 }

@@ -55,7 +55,7 @@
                 android:id="@+id/tv_woguanzhude"
                 android:layout_centerInParent="true"
                 android:textSize="28px"
-                android:textColor="#FFAB26"
+                android:textColor="#D84C37"
                 android:text="我关注的"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
