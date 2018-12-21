@@ -8,7 +8,7 @@
     <RelativeLayout
         android:background="@color/white_ffffff"
         android:layout_width="match_parent"
-        android:layout_height="152px">
+        android:layout_height="170px">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_icon_user"
@@ -45,21 +45,39 @@
                 android:layout_height="wrap_content" />
 
         </RelativeLayout>
-
-        <TextView
-            android:background="@drawable/bg_yellow_border_10px"
-            android:layout_marginBottom="14px"
-            android:layout_above="@+id/activity_my_focus_rv_tv_2"
-            android:id="@+id/btn_yiguanhu"
-            android:layout_marginRight="32px"
-            android:layout_alignParentRight="true"
+        <LinearLayout
             android:layout_centerVertical="true"
-            android:textSize="28px"
-            android:gravity="center"
-            android:textColor="#5c5c5c"
-            android:text="已关注"
-            android:layout_width="130px"
-            android:layout_height="58px" />
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:background="@drawable/bg_yellow_border_10px"
+                android:layout_marginBottom="14px"
+                android:layout_above="@+id/activity_my_focus_rv_tv_2"
+                android:id="@+id/btn_yiguanzhu"
+                android:layout_marginRight="32px"
+                android:layout_centerVertical="true"
+                android:textSize="28px"
+                android:gravity="center"
+                android:textColor="#5c5c5c"
+                android:text="已关注"
+                android:layout_width="130px"
+                android:layout_height="58px" />
+            <TextView
+                android:background="@drawable/bg_yellow_10px"
+                android:layout_marginBottom="14px"
+                android:layout_above="@+id/activity_my_focus_rv_tv_2"
+                android:id="@+id/btn_yaoqing"
+                android:layout_marginRight="32px"
+                android:layout_centerVertical="true"
+                android:textSize="28px"
+                android:gravity="center"
+                android:textColor="@color/white_ffffff"
+                android:text="邀请"
+                android:layout_width="130px"
+                android:layout_height="58px" />
+        </LinearLayout>
 
     </RelativeLayout>
     

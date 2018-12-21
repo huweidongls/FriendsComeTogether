@@ -490,6 +490,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onFocus(final int position) {
                 if (!StringUtils.isEmpty(data.get(position).getCaptain()) && !data.get(position).getCaptain().equals("0")) {
+                    Log.d("ljc_focusgetPfID",data.get(position).getPfID());
                     ViseHttp.POST(NetConfig.focusOnToFriendTogetherUrl)
                             .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.focusOnToFriendTogetherUrl))
                             .addParam("userID", spImp.getUID())
@@ -497,6 +498,7 @@ public class HomeFragment extends BaseFragment {
                             .request(new ACallback<String>() {
                                 @Override
                                 public void onSuccess(String data) {
+                                    Log.d("ljc_focus",data);
                                     FocusOnToFriendTogetherModel model = new Gson().fromJson(data, FocusOnToFriendTogetherModel.class);
                                     if (model.getCode() == 200) {
                                         if (model.getObj().equals("1")) {
@@ -508,7 +510,6 @@ public class HomeFragment extends BaseFragment {
                                         }
                                     }
                                 }
-
                                 @Override
                                 public void onFail(int errCode, String errMsg) {
 

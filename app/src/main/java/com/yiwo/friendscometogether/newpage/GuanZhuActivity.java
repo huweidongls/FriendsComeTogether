@@ -1,15 +1,25 @@
 package com.yiwo.friendscometogether.newpage;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -27,16 +37,19 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.adapter.MyFocusActiveAdapter;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.model.MyFocusActiveModel;
+import com.yiwo.friendscometogether.model.UserActiveListModel;
 import com.yiwo.friendscometogether.model.UserFocusModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.GuanZhuWoDeAdapter;
 import com.yiwo.friendscometogether.newadapter.MyHuoDongApplyAdapter;
 import com.yiwo.friendscometogether.newadapter.WoGuanZhuDeAdapter;
 import com.yiwo.friendscometogether.newadapter.WoGuanZhuDeHuoDongAdapter;
+import com.yiwo.friendscometogether.newmodel.GuanZhuHuoDongModel;
 import com.yiwo.friendscometogether.newmodel.GuanZhuWoDeModel;
 import com.yiwo.friendscometogether.newmodel.HuoDongListModel;
 import com.yiwo.friendscometogether.newmodel.WoGuanZhuDeModel;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
+import com.yiwo.friendscometogether.pages.MyFocusActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import org.json.JSONException;
@@ -85,6 +98,16 @@ public class GuanZhuActivity extends BaseActivity {
     private int page_guanzhuwode = 1;
     private int page_guanzhuhuodong = 1;
 
+    private PopupWindow popupWindow;
+
+    private String[] block;
+    private String[] activeId;
+    private String[] activeName;
+    private String yourChoiceActiveId = "";
+    private String yourChoiceActiveName = "";
+    private List<UserActiveListModel.ObjBean> activeList;
+    private int type = 3;
+
     private int type_showLayout = 0;//0为我关注的，1为关注我的，2 为关注活动
     private List<UserFocusModel.ObjBean> mWoGuanZhuDeList ;
     private WoGuanZhuDeAdapter woGuanZhuDeAdapter;
@@ -92,7 +115,7 @@ public class GuanZhuActivity extends BaseActivity {
     private List<GuanZhuWoDeModel.ObjBean> mGuanZhuWoDeList ;
     private GuanZhuWoDeAdapter guanZhuWoDeAdapter;
 
-    private List<MyFocusActiveModel.ObjBean> mGuanZhuHuoDongList ;
+    private List<GuanZhuHuoDongModel.ObjBean> mGuanZhuHuoDongList ;
     private WoGuanZhuDeHuoDongAdapter guanZhuDeHuoDongAdapter;
 
 
@@ -177,6 +200,32 @@ public class GuanZhuActivity extends BaseActivity {
                                 });
                         break;
                     case 2:
+                        ViseHttp.POST(NetConfig.MyFocusActiveUrl)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.MyFocusActiveUrl))
+                                .addParam("uid", spImp.getUID())
+                                .request(new ACallback<String>() {
+
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if(jsonObject.getInt("code") == 200){
+                                                Gson gson = new Gson();
+                                                GuanZhuHuoDongModel model = gson.fromJson(data, GuanZhuHuoDongModel.class);
+                                                mGuanZhuHuoDongList = model.getObj();
+                                                guanZhuDeHuoDongAdapter.notifyDataSetChanged();
+                                                refreshLayout.finishRefresh(1000);
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+                                        refreshLayout.finishRefresh(1000);
+                                    }
+                                });
+
                         break;
                 }
             }
@@ -245,6 +294,7 @@ public class GuanZhuActivity extends BaseActivity {
                                 });
                         break;
                     case 2:
+                        refreshLayout.finishLoadMore();
                         break;
                 }
             }
@@ -267,7 +317,6 @@ public class GuanZhuActivity extends BaseActivity {
                             if (jsonObject.getInt("code") == 200) {
                                 Gson gson = new Gson();
                                 UserFocusModel userFocusModel = gson.fromJson(data, UserFocusModel.class);
-
                                 mWoGuanZhuDeList = userFocusModel.getObj();
                                 woGuanZhuDeAdapter = new WoGuanZhuDeAdapter(mWoGuanZhuDeList);
                                 LinearLayoutManager manager = new LinearLayoutManager(GuanZhuActivity.this);
@@ -275,6 +324,7 @@ public class GuanZhuActivity extends BaseActivity {
                                 rv_woguanzhude.setAdapter(woGuanZhuDeAdapter);
                                 page_woguanzhude = 2;
                                 Log.e("222", page_woguanzhude+"");
+                                //取消关注监听回调
                                 woGuanZhuDeAdapter.setListener(new WoGuanZhuDeAdapter.OnCancelFocusListener() {
                                     @Override
                                     public void onCancel(final int i) {
@@ -311,6 +361,13 @@ public class GuanZhuActivity extends BaseActivity {
 
                                             }
                                         });
+                                    }
+                                });
+                                //邀请监听回调
+                                woGuanZhuDeAdapter.setListener_invitation(new WoGuanZhuDeAdapter.OnFocusInvitationListener() {
+                                    @Override
+                                    public void onInvitation(int position) {
+                                        showInvitationPopupwindow(mWoGuanZhuDeList.get(position).getLikeuserID());
                                     }
                                 });
                             }
@@ -405,22 +462,55 @@ public class GuanZhuActivity extends BaseActivity {
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.getInt("code") == 200){
                                 Gson gson = new Gson();
-                                MyFocusActiveModel model = gson.fromJson(data, MyFocusActiveModel.class);
+                                GuanZhuHuoDongModel model = gson.fromJson(data, GuanZhuHuoDongModel.class);
                                 mGuanZhuHuoDongList = model.getObj();
                                 guanZhuDeHuoDongAdapter = new WoGuanZhuDeHuoDongAdapter(mGuanZhuHuoDongList);
                                 guanZhuDeHuoDongAdapter.setCancelGuanZHuLis(new WoGuanZhuDeHuoDongAdapter.CancelGuanZhuListion() {
                                     @Override
-                                    public void cancleGuanzhu(int posion) {
+                                    public void cancleGuanzhu(final int posion) {
+                                        toDialog(context, "提示：", "是否取消关注", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                ViseHttp.POST(NetConfig.focusOnToFriendTogetherUrl)
+                                                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.focusOnToFriendTogetherUrl))
+                                                        .addParam("userID", spImp.getUID())
+                                                        .addParam("pfID", mGuanZhuHuoDongList.get(posion).getPfID())
+                                                        .request(new ACallback<String>() {
+                                                            @Override
+                                                            public void onSuccess(String data) {
+                                                                try {
+                                                                    JSONObject jsonObject = new JSONObject(data);
+                                                                    if(jsonObject.getInt("code") == 200){
+                                                                        toToast(context,"取消关注成功");
+                                                                        mGuanZhuHuoDongList.remove(posion);
+                                                                        guanZhuDeHuoDongAdapter.notifyDataSetChanged();
+                                                                    }
+                                                                } catch (JSONException e) {
+                                                                    e.printStackTrace();
+                                                                }
+                                                            }
+                                                            @Override
+                                                            public void onFail(int errCode, String errMsg) {
 
+                                                            }
+                                                        });
+                                            }
+                                        }, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        });
                                     }
                                 });
+                                LinearLayoutManager manager = new LinearLayoutManager(GuanZhuActivity.this);
+                                rv_guanzhuhuodong.setLayoutManager(manager);
                                 rv_guanzhuhuodong.setAdapter(guanZhuDeHuoDongAdapter);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
-
                     @Override
                     public void onFail(int errCode, String errMsg) {
 
@@ -466,5 +556,193 @@ public class GuanZhuActivity extends BaseActivity {
                finish();
                 break;
         }
+    }
+    private void showInvitationPopupwindow(final String otherUid) {
+
+        View view = LayoutInflater.from(GuanZhuActivity.this).inflate(R.layout.popupwindow_invitation, null);
+        ScreenAdapterTools.getInstance().loadView(view);
+
+        RelativeLayout rl = view.findViewById(R.id.activity_create_friend_remember_rl_active_title);
+//        final RadioGroup radioGroup = view.findViewById(R.id.rg);
+        final TextView tvActiveTitle = view.findViewById(R.id.activity_create_friend_remember_tv_active_title);
+        TextView tvOk = view.findViewById(R.id.tv_ok);
+        final EditText et = view.findViewById(R.id.et);
+        final CheckBox checkBox = view.findViewById(R.id.cb);
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    type = 0;
+//                    toToast(MyFocusActivity.this, type+"");
+                }else {
+                    type = 1;
+//                    toToast(MyFocusActivity.this, type+"");
+                }
+            }
+        });
+
+        ViseHttp.POST(NetConfig.activeInvitationListUrl)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.activeInvitationListUrl))
+                .addParam("uid", spImp.getUID())
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200) {
+                                Gson gson = new Gson();
+                                UserActiveListModel model = gson.fromJson(data, UserActiveListModel.class);
+                                activeList = model.getObj();
+                                activeId = new String[model.getObj().size()];
+                                activeName = new String[model.getObj().size()];
+                                block = new String[model.getObj().size()];
+                                for (int i = 0; i < model.getObj().size(); i++) {
+                                    activeId[i] = model.getObj().get(i).getPfID();
+                                    activeName[i] = model.getObj().get(i).getPftitle();
+                                    block[i] = model.getObj().get(i).getBlock();
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
+
+//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+//                switch (i) {
+//                    case R.id.rb1:
+//                        toToast(MyFocusActivity.this, "我请客");
+//                        type = 0;
+//                        break;
+////                    case R.id.rb2:
+////                        toToast(MyFocusActivity.this, "自费");
+////                        type = 1;
+////                        break;
+//                }
+//            }
+//        });
+
+        popupWindow = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setTouchable(true);
+        popupWindow.setFocusable(true);
+        // 设置点击窗口外边窗口消失
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
+        // 设置popWindow的显示和消失动画
+        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.alpha = 0.5f;
+        getWindow().setAttributes(params);
+        popupWindow.update();
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            // 在dismiss中恢复透明度
+            public void onDismiss() {
+                WindowManager.LayoutParams params = getWindow().getAttributes();
+                params.alpha = 1f;
+                getWindow().setAttributes(params);
+            }
+        });
+
+        rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //活动标题
+                if (activeList.size() > 0) {
+                    AlertDialog.Builder singleChoiceDialog1 =
+                            new AlertDialog.Builder(GuanZhuActivity.this);
+                    singleChoiceDialog1.setTitle("请选择活动");
+                    // 第二个参数是默认选项，此处设置为0
+                    singleChoiceDialog1.setSingleChoiceItems(activeName, 0,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    yourChoiceActiveName = activeName[which];
+                                    yourChoiceActiveId = activeId[which];
+                                    if(block[which].equals("0")){
+                                        checkBox.setVisibility(View.GONE);
+                                        type = 3;
+                                    }else {
+                                        checkBox.setVisibility(View.VISIBLE);
+                                        type = 1;
+                                    }
+                                }
+                            });
+                    singleChoiceDialog1.setPositiveButton("确定",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (TextUtils.isEmpty(yourChoiceActiveName)) {
+                                        tvActiveTitle.setText(activeName[0]);
+                                        yourChoiceActiveId = activeId[0];
+                                    } else {
+                                        tvActiveTitle.setText(yourChoiceActiveName);
+                                        yourChoiceActiveName = "";
+                                    }
+                                }
+                            });
+                    singleChoiceDialog1.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    singleChoiceDialog1.show();
+                } else {
+                    toToast(GuanZhuActivity.this, "暂无活动");
+                }
+            }
+        });
+
+        tvOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //确定
+                ViseHttp.POST(NetConfig.activeInvitationUrl)
+                        .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.activeInvitationUrl))
+                        .addParam("uid", spImp.getUID())
+                        .addParam("bid", otherUid)
+                        .addParam("tid", yourChoiceActiveId)
+                        .addParam("type", type + "")
+                        .addParam("text", et.getText().toString())
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(data);
+                                    if(jsonObject.getInt("code") == 200){
+                                        toToast(GuanZhuActivity.this, "邀请成功");
+                                        popupWindow.dismiss();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+
+                            }
+                        });
+            }
+        });
+
+//        tvCancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                popupWindow.dismiss();
+//            }
+//        });
+
     }
 }

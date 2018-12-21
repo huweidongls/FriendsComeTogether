@@ -77,7 +77,6 @@ public class HuoDongApplyFragment extends BaseFragment {
         refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
         refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
         String tokens = getToken(NetConfig.BaseUrl + NetConfig.activityJoin);
-        Log.d("ljc",tokens+"///"+spImp.getUID());
         ViseHttp.POST(NetConfig.activityJoin)
                 .addParam("app_key", tokens)
                 .addParam("page", "1")
@@ -91,6 +90,7 @@ public class HuoDongApplyFragment extends BaseFragment {
                     @Override
                     public void onSuccess(String data) {
                         try {
+                            Log.d("ljc_data",data);
                             JSONObject jsonObject = new JSONObject(data);
                             if (jsonObject.getInt("code") == 200) {
                                 HuoDongListModel model = new Gson().fromJson(data, HuoDongListModel.class);

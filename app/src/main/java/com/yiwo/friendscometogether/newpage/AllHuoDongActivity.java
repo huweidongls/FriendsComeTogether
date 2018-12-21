@@ -59,9 +59,7 @@ public class AllHuoDongActivity extends BaseActivity {
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(AllHuoDongActivity.this);
         mFragmentManager = getSupportFragmentManager();
-
         initData();
-
     }
 
     private void initData() {
@@ -116,14 +114,12 @@ public class AllHuoDongActivity extends BaseActivity {
         ViewPagerHelper.bind(magicIndicator, mViewPager);
 
     }
-    @OnClick({R.id.btn_back})
+    @OnClick({R.id.rl_back})
     public void onClick(View view){
         switch (view.getId()){
-            case R.id.btn_back:
+            case R.id.rl_back:
                 finish();
                 break;
         }
     }
-
-
 }
