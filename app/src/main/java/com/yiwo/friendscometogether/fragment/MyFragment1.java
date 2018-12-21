@@ -25,6 +25,7 @@ import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newpage.AllHuoDongActivity;
 import com.yiwo.friendscometogether.newpage.AllRememberActivity;
 import com.yiwo.friendscometogether.newpage.GuanZhuActivity;
+import com.yiwo.friendscometogether.newpage.MessageActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.LookHistoryActivity;
 import com.yiwo.friendscometogether.pages.MyCommentActivity;
@@ -148,7 +149,7 @@ public class MyFragment1 extends BaseFragment {
     }
 
     @OnClick({R.id.ll_order_all, R.id.ll_to_pay, R.id.ll_to_trip, R.id.ll_to_comment, R.id.ll_return_money, R.id.rl_my_picture, R.id.rl_my_friend,
-    R.id.rl_my_comment, R.id.rl_history, R.id.rl_person_set, R.id.ll_remember,R.id.ll_guanzhu, R.id.ll_huodong})
+    R.id.rl_my_comment, R.id.rl_history, R.id.rl_person_set, R.id.ll_remember,R.id.ll_guanzhu, R.id.ll_huodong, R.id.ll_message})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -268,6 +269,15 @@ public class MyFragment1 extends BaseFragment {
             case R.id.ll_huodong:
                 if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
                     intent.setClass(getContext(), AllHuoDongActivity.class);
+                    startActivity(intent);
+                } else {
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.ll_message:
+                if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                    intent.setClass(getContext(), MessageActivity.class);
                     startActivity(intent);
                 } else {
                     intent.setClass(getContext(), LoginActivity.class);
