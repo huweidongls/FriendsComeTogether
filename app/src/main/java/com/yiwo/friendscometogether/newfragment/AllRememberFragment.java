@@ -221,14 +221,14 @@ public class AllRememberFragment extends BaseFragment {
     public void onClick(View view){
         switch (view.getId()){
             case R.id.rl1:
-                tv1.setTextColor(Color.parseColor("#FFAB26"));
+                tv1.setTextColor(Color.parseColor("#D84C37"));
                 tv2.setTextColor(Color.parseColor("#333333"));
                 rv1.setVisibility(View.VISIBLE);
                 rv2.setVisibility(View.GONE);
                 break;
             case R.id.rl2:
                 tv1.setTextColor(Color.parseColor("#333333"));
-                tv2.setTextColor(Color.parseColor("#FFAB26"));
+                tv2.setTextColor(Color.parseColor("#D84C37"));
                 rv1.setVisibility(View.GONE);
                 rv2.setVisibility(View.VISIBLE);
                 break;

@@ -11,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.activecard.CardAdapter;
@@ -19,7 +22,12 @@ import com.yiwo.friendscometogether.activecard.CardLayoutManager;
 import com.yiwo.friendscometogether.activecard.OnSwipeListener;
 import com.yiwo.friendscometogether.base.BaseFragment;
 import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
+import com.yiwo.friendscometogether.model.FriendsTogethermodel;
+import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.sp.SpImp;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +45,7 @@ public class FriendsTogetherFragment1 extends BaseFragment {
     RecyclerView rv;
 
     private CardAdapter adapter;
-    private List<String> data;
+    private List<FriendsTogethermodel.ObjBean> mList;
 
     private SpImp spImp;
 
@@ -72,41 +80,55 @@ public class FriendsTogetherFragment1 extends BaseFragment {
 
     private void initData() {
 
-        data = new ArrayList<>();
-        data.add("1");
-        data.add("2");
-        data.add("3");
-        adapter = new CardAdapter(data);
-        rv.setItemAnimator(new DefaultItemAnimator());
-        rv.setAdapter(adapter);
-        CardItemTouchHelperCallback cardCallback = new CardItemTouchHelperCallback(rv.getAdapter(), data);
-        cardCallback.setOnSwipedListener(new OnSwipeListener() {
-            @Override
-            public void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
+        String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
+        ViseHttp.POST(NetConfig.friendsTogetherUrl)
+                .addParam("app_key", token)
+                .addParam("page", "1")
+                .addParam("userID", spImp.getUID())
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200) {
+                                Log.e("222", data);
+                                FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
+                                mList = model.getObj();
+                                adapter = new CardAdapter(mList);
+                                rv.setItemAnimator(new DefaultItemAnimator());
+                                rv.setAdapter(adapter);
+                                CardItemTouchHelperCallback cardCallback = new CardItemTouchHelperCallback(rv.getAdapter(), mList);
+                                cardCallback.setOnSwipedListener(new OnSwipeListener() {
+                                    @Override
+                                    public void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
 
-            }
+                                    }
 
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, String o, int direction) {
+                                    @Override
+                                    public void onSwiped(RecyclerView.ViewHolder viewHolder, FriendsTogethermodel.ObjBean o, int direction) {
 //                Toast.makeText(Main2Activity.this, o, Toast.LENGTH_SHORT).show();
-            }
+                                    }
 
-            @Override
-            public void onSwipedClear() {
-//                Toast.makeText(Main2Activity.this, "data clear", Toast.LENGTH_SHORT).show();
-                data = new ArrayList<>();
-                data.add("");
-                data.add("");
-                data.add("");
-                data.add("");
-                data.add("");
-                adapter.notifyDataSetChanged();
-            }
-        });
-        ItemTouchHelper touchHelper = new ItemTouchHelper(cardCallback);
-        CardLayoutManager cardLayoutManager = new CardLayoutManager(rv, touchHelper);
-        rv.setLayoutManager(cardLayoutManager);
-        touchHelper.attachToRecyclerView(rv);
+                                    @Override
+                                    public void onSwipedClear() {
+
+                                    }
+                                });
+                                ItemTouchHelper touchHelper = new ItemTouchHelper(cardCallback);
+                                CardLayoutManager cardLayoutManager = new CardLayoutManager(rv, touchHelper);
+                                rv.setLayoutManager(cardLayoutManager);
+                                touchHelper.attachToRecyclerView(rv);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
 
     }
 

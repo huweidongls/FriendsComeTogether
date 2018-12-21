@@ -7,6 +7,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 
+import com.yiwo.friendscometogether.model.FriendsTogethermodel;
+
 import java.util.List;
 
 /**
@@ -16,15 +18,15 @@ import java.util.List;
 public class CardItemTouchHelperCallback<T> extends ItemTouchHelper.Callback {
 
     private final RecyclerView.Adapter adapter;
-    private List<String> dataList;
+    private List<FriendsTogethermodel.ObjBean> dataList;
     private OnSwipeListener<T> mListener;
 
-    public CardItemTouchHelperCallback(@NonNull RecyclerView.Adapter adapter, @NonNull List<String> dataList) {
+    public CardItemTouchHelperCallback(@NonNull RecyclerView.Adapter adapter, @NonNull List<FriendsTogethermodel.ObjBean> dataList) {
         this.adapter = checkIsNull(adapter);
         this.dataList = checkIsNull(dataList);
     }
 
-    public CardItemTouchHelperCallback(@NonNull RecyclerView.Adapter adapter, @NonNull List<String> dataList, OnSwipeListener<T> listener) {
+    public CardItemTouchHelperCallback(@NonNull RecyclerView.Adapter adapter, @NonNull List<FriendsTogethermodel.ObjBean> dataList, OnSwipeListener<T> listener) {
         this.adapter = checkIsNull(adapter);
         this.dataList = checkIsNull(dataList);
         this.mListener = listener;
@@ -62,7 +64,7 @@ public class CardItemTouchHelperCallback<T> extends ItemTouchHelper.Callback {
         // 移除 onTouchListener,否则触摸滑动会乱了
         viewHolder.itemView.setOnTouchListener(null);
         int layoutPosition = viewHolder.getLayoutPosition();
-        String remove = dataList.remove(layoutPosition);
+        FriendsTogethermodel.ObjBean remove = dataList.remove(layoutPosition);
 //        dataList.add(remove);
         Log.e("123123", layoutPosition+"");
         adapter.notifyDataSetChanged();

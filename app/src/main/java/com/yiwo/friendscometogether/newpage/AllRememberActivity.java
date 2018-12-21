@@ -107,7 +107,7 @@ public class AllRememberActivity extends BaseActivity {
             @Override
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator indicator = new LinePagerIndicator(context);
-                indicator.setColors(Color.parseColor("#FFAB25"));
+                indicator.setColors(Color.parseColor("#D84C37"));
                 return indicator;
             }
         });

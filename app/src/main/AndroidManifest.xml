@@ -268,7 +268,8 @@
         <activity android:name=".imagepreview.ImagePreviewActivity" />
         <activity android:name=".newpage.AllRememberActivity" />
         <activity android:name=".newpage.AllHuoDongActivity" />
-        <activity android:name=".newpage.GuanZhuActivity"></activity>
+        <activity android:name=".newpage.GuanZhuActivity" />
+        <activity android:name=".newpage.MessageActivity"></activity>
     </application>
 
 </manifest>
