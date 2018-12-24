@@ -78,6 +78,7 @@
             android:layout_height="380px" />
 
         <TextView
+            android:id="@+id/tv_start_time"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16px"
             android:textColor="#424242"
@@ -87,6 +88,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/tv_renjun"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="6px"
             android:textColor="#424242"
@@ -96,6 +98,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/tv_baoming"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="6px"
             android:textColor="#424242"
@@ -113,6 +116,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tv_shengyu"
                 android:layout_centerVertical="true"
                 android:textColor="@color/black_333333"
                 android:textSize="26px"
@@ -123,7 +127,7 @@
             <RelativeLayout
                 android:background="@drawable/bg_gray_8px"
                 android:layout_alignParentRight="true"
-                android:layout_width="114px"
+                android:layout_width="wrap_content"
                 android:layout_height="52px">
 
                 <LinearLayout
@@ -141,6 +145,7 @@
                         android:layout_height="28px" />
 
                     <TextView
+                        android:id="@+id/tv_address"
                         android:layout_marginLeft="4px"
                         android:layout_gravity="center_vertical"
                         android:textColor="#272A2C"

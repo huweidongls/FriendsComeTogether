@@ -64,12 +64,18 @@ public class CardItemTouchHelperCallback<T> extends ItemTouchHelper.Callback {
         // 移除 onTouchListener,否则触摸滑动会乱了
         viewHolder.itemView.setOnTouchListener(null);
         int layoutPosition = viewHolder.getLayoutPosition();
-        FriendsTogethermodel.ObjBean remove = dataList.remove(layoutPosition);
+        if(direction == ItemTouchHelper.LEFT){
+            FriendsTogethermodel.ObjBean remove = dataList.remove(layoutPosition);
+            dataList.add(remove);
+        }else if(direction == ItemTouchHelper.RIGHT) {
+            FriendsTogethermodel.ObjBean remove = dataList.remove(dataList.size()-1);
+            dataList.add(0, remove);
+        }
 //        dataList.add(remove);
         Log.e("123123", layoutPosition+"");
         adapter.notifyDataSetChanged();
         if (mListener != null) {
-            mListener.onSwiped(viewHolder, remove, direction == ItemTouchHelper.LEFT ? CardConfig.SWIPED_LEFT : CardConfig.SWIPED_RIGHT);
+            mListener.onSwiped(viewHolder, dataList.get(0), direction == ItemTouchHelper.LEFT ? CardConfig.SWIPED_LEFT : CardConfig.SWIPED_RIGHT);
         }
         // 当没有数据时回调 mListener
         if (adapter.getItemCount() == 0) {

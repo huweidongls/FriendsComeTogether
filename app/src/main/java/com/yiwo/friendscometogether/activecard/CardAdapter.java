@@ -49,6 +49,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         holder.tvNickname.setText(data.get(position).getUsername());
         holder.tvTitle.setText(data.get(position).getPftitle());
         Glide.with(context).load(data.get(position).getPfpic()).into(holder.ivTitle);
+        holder.tvFabuTime.setText(data.get(position).getPftime());
+        holder.tvStartTime.setText("开始时间: "+data.get(position).getPfgotime());
+        holder.tvRenjun.setText("人均消费: RMB"+data.get(position).getPfspend()+"/人");
+        holder.tvBaoming.setText("报名人数: "+data.get(position).getHave_num()+"人");
+        holder.tvShengyu.setText("剩余名额: "+data.get(position).getSurplus()+"人");
+        holder.tvAddress.setText(data.get(position).getPfaddress());
     }
 
     @Override
@@ -63,6 +69,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         private TextView tvFabuTime;
         private TextView tvTitle;
         private ImageView ivTitle;
+        private TextView tvStartTime;
+        private TextView tvRenjun;
+        private TextView tvBaoming;
+        private TextView tvShengyu;
+        private TextView tvAddress;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -71,6 +82,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             tvFabuTime = itemView.findViewById(R.id.tv_fabu_time);
             tvTitle = itemView.findViewById(R.id.tv_title);
             ivTitle = itemView.findViewById(R.id.iv_title);
+            tvStartTime = itemView.findViewById(R.id.tv_start_time);
+            tvRenjun = itemView.findViewById(R.id.tv_renjun);
+            tvBaoming = itemView.findViewById(R.id.tv_baoming);
+            tvShengyu = itemView.findViewById(R.id.tv_shengyu);
+            tvAddress = itemView.findViewById(R.id.tv_address);
         }
     }
 
