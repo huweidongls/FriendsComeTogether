@@ -9,6 +9,7 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
+            android:background="@color/white_F8F8F8"
             android:id="@+id/fragment_return_price_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

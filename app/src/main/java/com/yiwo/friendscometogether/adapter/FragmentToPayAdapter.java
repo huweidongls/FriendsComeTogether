@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.AbsoluteSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +81,18 @@ public class FragmentToPayAdapter extends RecyclerView.Adapter<FragmentToPayAdap
         holder.tvContent.setText(data.get(position).getInfo());
         holder.tvTime.setText("活动时间: " + data.get(position).getTime_info());
         holder.tvPeopleNum.setText("参加人数: " + data.get(position).getJoin_num());
-        holder.tvPrice.setText("合计费用: " + data.get(position).getOpaymoney());
+
+        String str_money = "合计："+data.get(position).getOpaymoney();
+//        String str_money = "合计："+"48.90";
+        SpannableStringBuilder ssb_money = new SpannableStringBuilder(str_money);
+        AbsoluteSizeSpan ab = new AbsoluteSizeSpan(12,true);
+        ssb_money.setSpan(ab,0,str_money.indexOf("："), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        AbsoluteSizeSpan ab0 = new AbsoluteSizeSpan(16,true);
+        ssb_money.setSpan(ab0,str_money.indexOf("：")+1,str_money.indexOf("."), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        AbsoluteSizeSpan ab1 = new AbsoluteSizeSpan(12,true);
+        ssb_money.setSpan(ab1,str_money.indexOf(".")+1,str_money.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        holder.tvPrice.setText(ssb_money);
         holder.tvPriceDetails.setText(data.get(position).getPrice_type());
         holder.tvStatus.setText(data.get(position).getStatus());
         if(data.get(position).getOrder_type().equals("7")){

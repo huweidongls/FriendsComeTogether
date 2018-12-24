@@ -9,7 +9,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.AbsoluteSizeSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -94,6 +97,8 @@ public class DetailsToBePaidActivity extends BaseActivity {
     TextView tvOkReturn;
     @BindView(R.id.details_to_pay_rv_tv_returning)
     TextView tvReturning;
+    @BindView(R.id.tv_order_status)
+    TextView tvOrderStatus;
 
     private SpImp spImp;
     private String uid = "";
@@ -136,7 +141,8 @@ public class DetailsToBePaidActivity extends BaseActivity {
                             if (jsonObject.getInt("code") == 200) {
                                 Gson gson = new Gson();
                                 DetailsOrderModel model = gson.fromJson(data, DetailsOrderModel.class);
-                                tvStatus.setText(model.getObj().getStatus());
+//                                tvStatus.setText(model.getObj().getStatus());
+                                tvOrderStatus.setText(model.getObj().getStatus());
                                 tvTitle.setText(model.getObj().getTitle());
                                 if (!TextUtils.isEmpty(model.getObj().getPicture())) {
                                     Picasso.with(DetailsToBePaidActivity.this).load(model.getObj().getPicture()).into(ivTitle);
@@ -145,7 +151,18 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                 tvTime.setText("活动时间: " + model.getObj().getTime());
                                 tvPeopleNum.setText("参加人数: " + model.getObj().getGo_num());
                                 tvPriceDetails.setText(model.getObj().getPrice_type());
-                                tvPrice.setText("合计费用: " + model.getObj().getPrice());
+
+                                String str_money = "合计："+model.getObj().getPrice();
+                                //        String str_money = "合计："+"48.90";
+                                SpannableStringBuilder ssb_money = new SpannableStringBuilder(str_money);
+                                AbsoluteSizeSpan ab = new AbsoluteSizeSpan(12,true);
+                                ssb_money.setSpan(ab,0,str_money.indexOf("："), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                AbsoluteSizeSpan ab0 = new AbsoluteSizeSpan(16,true);
+                                ssb_money.setSpan(ab0,str_money.indexOf("：")+1,str_money.indexOf("."), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                AbsoluteSizeSpan ab1 = new AbsoluteSizeSpan(12,true);
+                                ssb_money.setSpan(ab1,str_money.indexOf(".")+1,str_money.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                tvPrice.setText(ssb_money);
+
                                 tvOrderNumber.setText("订单编号: " + model.getObj().getOrder_sn());
                                 if (model.getObj().getPay_type().equals("0")) {
                                     tvTradeNumber.setText("微信交易号: " + model.getObj().getPaycode());
