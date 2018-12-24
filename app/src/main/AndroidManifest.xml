@@ -269,7 +269,8 @@
         <activity android:name=".newpage.AllRememberActivity" />
         <activity android:name=".newpage.AllHuoDongActivity" />
         <activity android:name=".newpage.GuanZhuActivity" />
-        <activity android:name=".newpage.MessageActivity"></activity>
+        <activity android:name=".newpage.MessageActivity" />
+        <activity android:name=".newpage.YoujuShaixuanActivity"></activity>
     </application>
 
 </manifest>
