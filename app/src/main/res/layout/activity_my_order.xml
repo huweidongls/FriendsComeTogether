@@ -4,16 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F8F8F8"
     tools:context="com.yiwo.friendscometogether.pages.MyOrderActivity">
 
     <RelativeLayout
         android:id="@+id/activity_my_order_rl_top"
         style="@style/rl_top_bar">
-
         <TextView
             android:id="@+id/activity_my_order_top_title"
-            android:text="全部订单"
-            style="@style/tv_top_title" />
+            android:text="我的订单"
+            android:textSize="36px"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <RelativeLayout
             android:id="@+id/activity_my_order_rl_back"
@@ -21,21 +26,26 @@
             android:layout_height="match_parent">
 
             <ImageView
-                style="@style/iv_return" />
+                android:id="@+id/btn_back"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/back_b"
+                android:layout_width="21px"
+                android:layout_height="36px" />
 
         </RelativeLayout>
 
     </RelativeLayout>
 
     <android.support.design.widget.TabLayout
+        android:background="@color/white_ffffff"
         app:tabBackground="@null"
         android:layout_below="@+id/activity_my_order_rl_top"
         android:id="@+id/activity_my_order_tab"
         android:layout_width="match_parent"
         android:layout_height="86px"
-        app:tabIndicatorColor="#FF9D00"
-        app:tabSelectedTextColor="#333333"
-        app:tabTextColor="#333333"/>
+        app:tabIndicatorColor="#D84C37"
+        app:tabSelectedTextColor="#D84C37"
+        app:tabTextColor="#5F6365" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/activity_my_order_viewpager"

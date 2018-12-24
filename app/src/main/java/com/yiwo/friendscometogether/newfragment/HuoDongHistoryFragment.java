@@ -50,7 +50,7 @@ public class HuoDongHistoryFragment extends BaseFragment {
     RefreshLayout refreshLayout;
 
     private List<HuoDongListModel.ObjBean> mList ;
-    private MyHuoDongHistoryAdapter applyAdapter;
+    private MyHuoDongHistoryAdapter historyAdapter;
 
     private SpImp spImp;
     private int page = 1;
@@ -68,10 +68,17 @@ public class HuoDongHistoryFragment extends BaseFragment {
     private void initData() {
         mList = new ArrayList<>();
 
-        applyAdapter = new MyHuoDongHistoryAdapter(mList);
+        historyAdapter = new MyHuoDongHistoryAdapter(mList);
+        historyAdapter.setDeleteListion(new MyHuoDongHistoryAdapter.DeleteListion() {
+            @Override
+            public void deleteHuoDong(int posion) {
+                toToast(getContext(),"删除");
+
+            }
+        });
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         rv_history_huodong.setLayoutManager(manager);
-        rv_history_huodong.setAdapter(applyAdapter);
+        rv_history_huodong.setAdapter(historyAdapter);
         refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
         refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
         String tokens = getToken(NetConfig.BaseUrl + NetConfig.activityJoin);
@@ -95,7 +102,7 @@ public class HuoDongHistoryFragment extends BaseFragment {
                                 page = 2;
                                 mList.clear();
                                 mList.addAll(model.getObj());
-                                applyAdapter.notifyDataSetChanged();
+                                historyAdapter.notifyDataSetChanged();
                             }
                             refreshLayout.finishRefresh(1000);
                         } catch (JSONException e) {
@@ -128,7 +135,7 @@ public class HuoDongHistoryFragment extends BaseFragment {
                                         page = 2;
                                         mList.clear();
                                         mList.addAll(model.getObj());
-                                        applyAdapter.notifyDataSetChanged();
+                                        historyAdapter.notifyDataSetChanged();
                                     }
                                     refreshLayout.finishRefresh(1000);
                                 } catch (JSONException e) {
@@ -162,7 +169,7 @@ public class HuoDongHistoryFragment extends BaseFragment {
                                         HuoDongListModel model = new Gson().fromJson(data, HuoDongListModel.class);
                                         page = page + 1;
                                         mList.addAll(model.getObj());
-                                        applyAdapter.notifyDataSetChanged();
+                                        historyAdapter.notifyDataSetChanged();
                                     }
                                     refreshLayout.finishLoadMore(1000);
                                 } catch (JSONException e) {

@@ -47,7 +47,7 @@ public class MyOrderActivity extends BaseActivity {
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
 
         ButterKnife.bind(this);
-
+        tvTopTitle.setText("我的订单");
         init();
 
     }
@@ -64,56 +64,6 @@ public class MyOrderActivity extends BaseActivity {
         //将tablayout与fragment关联
         mTb.setupWithViewPager(mVp);
         mTb.getTabAt(position).select();
-        switch (position){
-            case 0:
-                tvTopTitle.setText("全部订单");
-                break;
-            case 1:
-                tvTopTitle.setText("待支付");
-                break;
-            case 2:
-                tvTopTitle.setText("进行中");
-                break;
-            case 3:
-                tvTopTitle.setText("待评价");
-                break;
-            case 4:
-                tvTopTitle.setText("退款");
-                break;
-        }
-
-        mVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                switch (position){
-                    case 0:
-                        tvTopTitle.setText("全部订单");
-                        break;
-                    case 1:
-                        tvTopTitle.setText("待支付");
-                        break;
-                    case 2:
-                        tvTopTitle.setText("进行中");
-                        break;
-                    case 3:
-                        tvTopTitle.setText("待评价");
-                        break;
-                    case 4:
-                        tvTopTitle.setText("退款");
-                        break;
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
 
     }
 

@@ -113,10 +113,11 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
 //                dialog.show();
             }
         });
+        //咨询
         holder.btn_zixun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+//                liaotian(data.get(position).getWy_accid());
             }
         });
         holder.ll_huodong_apply.setOnClickListener(new View.OnClickListener() {
@@ -160,7 +161,11 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
         NimUIKit.setAccount(account);
         NimUIKit.startTeamSession(context, teamId);
     }
-
+    private void liaotian(String liaotianAccount) {
+        String account = spImp.getYXID();
+        NimUIKit.setAccount(account);
+        NimUIKit.startP2PSession(context, liaotianAccount);
+    }
     class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView btn_gochatroom;
