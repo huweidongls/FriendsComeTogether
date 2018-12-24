@@ -1,5 +1,6 @@
 package com.yiwo.friendscometogether.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ import com.yiwo.friendscometogether.base.BaseFragment;
 import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
 import com.yiwo.friendscometogether.model.FriendsTogethermodel;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newpage.YoujuShaixuanActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import org.json.JSONException;
@@ -34,6 +36,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2018/12/20.
@@ -132,4 +135,115 @@ public class FriendsTogetherFragment1 extends BaseFragment {
 
     }
 
+    @OnClick({R.id.iv_shaixuan})
+    public void onClick(View view){
+        Intent intent = new Intent();
+        switch (view.getId()){
+            case R.id.iv_shaixuan:
+                intent.setClass(getContext(), YoujuShaixuanActivity.class);
+                startActivityForResult(intent, 1);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == 2){
+            String min = data.getStringExtra("min");
+            String max = data.getStringExtra("max");
+            String price = min+","+max;
+            String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
+            ViseHttp.POST(NetConfig.friendsTogetherUrl)
+                    .addParam("app_key", token)
+                    .addParam("page", "1")
+                    .addParam("userID", spImp.getUID())
+                    .addParam("price", price)
+                    .request(new ACallback<String>() {
+                        @Override
+                        public void onSuccess(String data) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(data);
+                                if (jsonObject.getInt("code") == 200) {
+                                    Log.e("222", data);
+                                    FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
+                                    mList.clear();
+                                    mList.addAll(model.getObj());
+                                    adapter.notifyDataSetChanged();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onFail(int errCode, String errMsg) {
+
+                        }
+                    });
+        }else if(resultCode == 3){
+            String min = data.getStringExtra("min");
+            String max = data.getStringExtra("max");
+            String label = data.getStringExtra("label");
+            String price = min+","+max;
+            String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
+            ViseHttp.POST(NetConfig.friendsTogetherUrl)
+                    .addParam("app_key", token)
+                    .addParam("page", "1")
+                    .addParam("userID", spImp.getUID())
+                    .addParam("price", price)
+                    .addParam("sign", label)
+                    .request(new ACallback<String>() {
+                        @Override
+                        public void onSuccess(String data) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(data);
+                                if (jsonObject.getInt("code") == 200) {
+                                    Log.e("222", data);
+                                    FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
+                                    mList.clear();
+                                    mList.addAll(model.getObj());
+                                    adapter.notifyDataSetChanged();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onFail(int errCode, String errMsg) {
+
+                        }
+                    });
+        }else if(resultCode == 5){
+            String label = data.getStringExtra("label");
+            String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
+            ViseHttp.POST(NetConfig.friendsTogetherUrl)
+                    .addParam("app_key", token)
+                    .addParam("page", "1")
+                    .addParam("userID", spImp.getUID())
+                    .addParam("sign", label)
+                    .request(new ACallback<String>() {
+                        @Override
+                        public void onSuccess(String data) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(data);
+                                if (jsonObject.getInt("code") == 200) {
+                                    Log.e("222", data);
+                                    FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
+                                    mList.clear();
+                                    mList.addAll(model.getObj());
+                                    adapter.notifyDataSetChanged();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onFail(int errCode, String errMsg) {
+
+                        }
+                    });
+        }
+    }
 }

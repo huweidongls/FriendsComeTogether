@@ -55,6 +55,8 @@
             android:layout_height="wrap_content" />
 
         <RelativeLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_marginRight="46px"
             android:layout_marginLeft="46px"
             android:layout_marginTop="32px"
@@ -63,6 +65,8 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:inputType="number"
+                android:id="@+id/et_min"
                 android:textColor="@color/black_333333"
                 android:textColorHint="#BFBFC4"
                 android:textSize="26px"
@@ -81,6 +85,8 @@
                 android:layout_height="wrap_content" />
 
             <EditText
+                android:inputType="number"
+                android:id="@+id/et_max"
                 android:layout_alignParentRight="true"
                 android:textColor="@color/black_333333"
                 android:textColorHint="#BFBFC4"
@@ -142,6 +148,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tv_reset"
                 android:gravity="center"
                 android:text="重置"
                 android:textColor="@color/black_333333"
@@ -151,6 +158,7 @@
                 android:layout_height="match_parent" />
 
             <TextView
+                android:id="@+id/tv_sure"
                 android:background="#D84C37"
                 android:gravity="center"
                 android:text="确定"
