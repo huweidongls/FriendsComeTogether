@@ -1,9 +1,350 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/white_ffffff"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.yiwo.friendscometogether.newpage.OtherMainActivity">
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="90px">
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/back_b"
+                android:layout_width="21px"
+                android:layout_height="36px" />
+
+        </RelativeLayout>
+        <TextView
+            android:layout_centerInParent="true"
+            android:textSize="36px"
+            android:text="他的主页"
+            android:textColor="@color/black_333333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:scaleType="centerCrop"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="34px"
+                android:src="@mipmap/my_head"
+                android:layout_marginLeft="34px"
+                android:layout_width="150px"
+                android:layout_height="150px" />
+            <RelativeLayout
+                android:layout_alignParentRight="true"
+                android:background="@drawable/bg_red_left_35px"
+                android:layout_marginTop="55px"
+                android:layout_width="287px"
+                android:layout_height="70px">
+                <RelativeLayout
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="155px"
+                    android:layout_height="70px">
+                    <ImageView
+                        android:layout_width="38px"
+                        android:layout_height="37px"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="69px"
+                        android:src="@mipmap/tarenzhuye_tianjiahaoyou"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_alignParentRight="true"
+                    android:layout_width="130px"
+                    android:layout_height="70px">
+                    <ImageView
+                        android:layout_width="38px"
+                        android:layout_height="37px"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="69px"
+                        android:src="@mipmap/tarenzhuye_heart"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_centerVertical="true"
+                    android:background="@color/white_ffffff"
+                    android:layout_marginLeft="155px"
+                    android:layout_width="2px"
+                    android:layout_height="48px"></RelativeLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="139px">
+            <TextView
+                android:layout_marginLeft="32px"
+                android:layout_marginTop="20px"
+                android:textStyle="bold"
+                android:text="吃货萌探"
+                android:textColor="@color/black_333333"
+                android:textSize="48px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="32px"
+                android:textSize="30px"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/black_333333"
+                android:text="Hi,填写个性签名更容易获得别人关注哦！"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_marginRight="51px"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:src="@mipmap/tarenzhuye_aixin"
+                android:layout_width="71px"
+                android:layout_height="62px" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_marginTop="16px"
+            android:layout_width="match_parent"
+            android:layout_height="72px">
+            <ImageView
+                android:layout_marginRight="20px"
+                android:src="@mipmap/tarenhzuye_icon_boy"
+                android:layout_marginLeft="39px"
+                android:layout_gravity="center_vertical"
+                android:layout_width="38px"
+                android:layout_height="38px" />
+            <TextView
+                android:layout_marginRight="20px"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:textSize="26px"
+                android:text="28岁"
+                android:background="@drawable/bg_gray_d8d8d8_8px"
+                android:layout_width="110px"
+                android:layout_height="56px" />
+            <TextView
+                android:layout_gravity="center_vertical"
+
+                android:gravity="center"
+                android:textSize="26px"
+                android:text="哈尔滨"
+                android:background="@drawable/bg_gray_d8d8d8_8px"
+                android:layout_width="110px"
+                android:layout_height="56px" />
+        </LinearLayout>
+        <LinearLayout
+            android:background="@drawable/bg_yellow_10px"
+            android:layout_marginTop="20px"
+            android:layout_marginRight="28px"
+            android:layout_marginLeft="28px"
+            android:layout_width="match_parent"
+            android:layout_height="143px">
+            <LinearLayout
+                android:padding="21px"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_marginBottom="4px"
+                    android:textSize="40px"
+                    android:textColor="@color/white_ffffff"
+                    android:layout_gravity="center_horizontal"
+                    android:text="134"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textSize="28px"
+                    android:textColor="@color/white_ffffff"
+                    android:layout_gravity="center_horizontal"
+                    android:text="友聚"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:padding="21px"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_marginBottom="4px"
+                    android:textSize="40px"
+                    android:textColor="@color/white_ffffff"
+                    android:layout_gravity="center_horizontal"
+                    android:text="200"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textSize="28px"
+                    android:textColor="@color/white_ffffff"
+                    android:layout_gravity="center_horizontal"
+                    android:text="获赞"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:padding="21px"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_marginBottom="4px"
+                    android:textSize="40px"
+                    android:textColor="@color/white_ffffff"
+                    android:layout_gravity="center_horizontal"
+                    android:text="5888"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textSize="28px"
+                    android:textColor="@color/white_ffffff"
+                    android:layout_gravity="center_horizontal"
+                    android:text="粉丝"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+            <RelativeLayout
+                android:layout_marginTop="50px"
+                android:layout_marginBottom="10px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginLeft="32px"
+                    android:layout_alignParentLeft="true"
+                    android:text="他的照片"
+                    android:textStyle="bold"
+                    android:textSize="36px"
+                    android:textColor="@color/black_333333"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginRight="30px"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_marginRight="7px"
+                        android:textSize="26px"
+                        android:textColor="@color/black_333333"
+                        android:text="查看全部"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@mipmap/tarenzhuye_right"
+                        android:layout_width="13px"
+                        android:layout_height="19px" />
+                </LinearLayout>
+            </RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_pics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="32px"
+                android:layout_marginLeft="32px"
+                android:layout_marginBottom="10px">
+            </android.support.v7.widget.RecyclerView>
+            <RelativeLayout
+                android:layout_marginTop="50px"
+                android:layout_marginBottom="10px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginLeft="32px"
+                    android:layout_alignParentLeft="true"
+                    android:text="他的友记"
+                    android:textStyle="bold"
+                    android:textSize="36px"
+                    android:textColor="@color/black_333333"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginRight="30px"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_marginRight="7px"
+                        android:textSize="26px"
+                        android:textColor="@color/black_333333"
+                        android:text="查看全部"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@mipmap/tarenzhuye_right"
+                        android:layout_width="13px"
+                        android:layout_height="19px" />
+                </LinearLayout>
+            </RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_youji"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="32px"
+                android:layout_marginLeft="32px"
+                android:layout_marginBottom="10px">
+            </android.support.v7.widget.RecyclerView>
+            <RelativeLayout
+                android:layout_marginTop="50px"
+                android:layout_marginBottom="10px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginLeft="32px"
+                    android:layout_alignParentLeft="true"
+                    android:text="他的友聚"
+                    android:textStyle="bold"
+                    android:textSize="36px"
+                    android:textColor="@color/black_333333"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginRight="30px"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_marginRight="7px"
+                        android:textSize="26px"
+                        android:textColor="@color/black_333333"
+                        android:text="查看全部"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@mipmap/tarenzhuye_right"
+                        android:layout_width="13px"
+                        android:layout_height="19px" />
+                </LinearLayout>
+            </RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_youju"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="32px"
+                android:layout_marginLeft="32px"
+                android:layout_marginBottom="10px">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

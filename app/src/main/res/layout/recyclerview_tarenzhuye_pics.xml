@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_taren_pics"
+    android:background="@color/white_ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_taren_pics"
+            android:src="@mipmap/welcome"
+            android:scaleType="centerCrop"
+            android:layout_width="200px"
+            android:layout_height="200px" />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/ll_lookmore"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="+10"
+            android:textColor="@color/white_ffffff"
+            android:textSize="36px"
+            android:background="@drawable/bg_yellow_8px"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@+id/tv_taren_lookmore"
+            android:scaleType="centerCrop"
+            android:layout_width="200px"
+            android:layout_height="200px" />
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -43,6 +43,8 @@
                 android:layout_width="60px"
                 android:layout_height="60px" />
             <TextView
+                android:lines="1"
+                android:ellipsize="end"
                 android:id="@+id/tv_name_owner"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
@@ -66,6 +68,8 @@
                 android:layout_width="30px"
                 android:layout_height="30px" />
             <TextView
+                android:lines="1"
+                android:ellipsize="end"
                 android:id="@+id/tv_timeinfo"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
