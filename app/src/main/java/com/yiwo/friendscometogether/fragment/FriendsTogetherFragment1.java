@@ -109,7 +109,7 @@ public class FriendsTogetherFragment1 extends BaseFragment {
 
                                     @Override
                                     public void onSwiped(RecyclerView.ViewHolder viewHolder, FriendsTogethermodel.ObjBean o, int direction) {
-//                Toast.makeText(Main2Activity.this, o, Toast.LENGTH_SHORT).show();
+                                        toToast(getContext(), o.getPftitle());
                                     }
 
                                     @Override
