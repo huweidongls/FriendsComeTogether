@@ -17,7 +17,6 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.MyFocusActiveModel;
 import com.yiwo.friendscometogether.newmodel.GuanZhuHuoDongModel;
-import com.yiwo.friendscometogether.newmodel.HuoDongListModel;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 

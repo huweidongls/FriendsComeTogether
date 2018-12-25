@@ -73,63 +73,63 @@ public class MyHuoDongHistoryAdapter extends RecyclerView.Adapter<MyHuoDongHisto
         holder.btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteListion.deleteHuoDong(position);
+//                deleteListion.deleteHuoDong(position);
 //                删除 活动
-//                AlertDialog.Builder normalDialog = new AlertDialog.Builder(context);
-////        normalDialog.setIcon(R.mipmap.ic_launcher);
-//                normalDialog.setTitle("提示");
-//                normalDialog.setMessage("是否删除");
-//                normalDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        ViseHttp.POST(NetConfig.deleteActiveUrl)
-//                                .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl+NetConfig.deleteActiveUrl))
-//                                .addParam("type", "1")
-//                                .addParam("ujID", data.get(position).getUjID())
-//                                .request(new ACallback<String>() {
-//                                    @Override
-//                                    public void onSuccess(String obj) {
-//                                        try {
-//                                            JSONObject jsonObject = new JSONObject(obj);
-//                                            if(jsonObject.getInt("code") == 200){
-//                                                data.remove(position);
-//                                                notifyItemRemoved(position);
-//                                                notifyDataSetChanged();
-//                                                Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show();
-//                                            }
-//                                        } catch (JSONException e) {
-//                                            e.printStackTrace();
-//                                        }
-//                                    }
-//
-//                                    @Override
-//                                    public void onFail(int errCode, String errMsg) {
-//
-//                                    }
-//                                });
-//                    }
-//                });
-//                normalDialog.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                    }
-//                });
-//                // 显示
-//                normalDialog.show();
+                AlertDialog.Builder normalDialog = new AlertDialog.Builder(context);
+//        normalDialog.setIcon(R.mipmap.ic_launcher);
+                normalDialog.setTitle("提示");
+                normalDialog.setMessage("是否删除");
+                normalDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ViseHttp.POST(NetConfig.deleteActiveUrl)
+                                .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl+NetConfig.deleteActiveUrl))
+                                .addParam("type", "1")
+                                .addParam("ujID", data.get(position).getUjID())
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String obj) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(obj);
+                                            if(jsonObject.getInt("code") == 200){
+                                                data.remove(position);
+                                                notifyItemRemoved(position);
+                                                notifyDataSetChanged();
+                                                Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show();
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+
+                                    }
+                                });
+                    }
+                });
+                normalDialog.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                // 显示
+                normalDialog.show();
             }
         });
         holder.btn_pingjia.setFocusable(false);
         holder.btn_pingjia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"评价",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context,"评价",Toast.LENGTH_SHORT).show();
                 //评价
-//                Intent intent = new Intent();
-//                intent.putExtra("type", "1");
-//                intent.putExtra("orderid", data.get(position).getUjID());
-//                intent.setClass(context, OrderCommentActivity.class);
-//                context.startActivity(intent);
+                Intent intent = new Intent();
+                intent.putExtra("type", "1");
+                intent.putExtra("orderid", data.get(position).getUjID());
+                intent.setClass(context, OrderCommentActivity.class);
+                context.startActivity(intent);
             }
         });
         holder.ll_huodong_history.setOnClickListener(new View.OnClickListener() {

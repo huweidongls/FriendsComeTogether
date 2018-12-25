@@ -121,7 +121,6 @@ public class DetailsToBePaidActivity extends BaseActivity {
         spImp = new SpImp(DetailsToBePaidActivity.this);
 
         initData();
-
     }
 
     private void initData() {
@@ -151,7 +150,7 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                 tvTime.setText("活动时间: " + model.getObj().getTime());
                                 tvPeopleNum.setText("参加人数: " + model.getObj().getGo_num());
                                 tvPriceDetails.setText(model.getObj().getPrice_type());
-
+                                //-----设置合计金额字体------------
                                 String str_money = "合计："+model.getObj().getPrice();
                                 //        String str_money = "合计："+"48.90";
                                 SpannableStringBuilder ssb_money = new SpannableStringBuilder(str_money);
@@ -161,6 +160,7 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                 ssb_money.setSpan(ab0,str_money.indexOf("：")+1,str_money.indexOf("."), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                                 AbsoluteSizeSpan ab1 = new AbsoluteSizeSpan(12,true);
                                 ssb_money.setSpan(ab1,str_money.indexOf(".")+1,str_money.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                //----------------------------------------------------
                                 tvPrice.setText(ssb_money);
 
                                 tvOrderNumber.setText("订单编号: " + model.getObj().getOrder_sn());

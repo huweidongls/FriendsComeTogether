@@ -153,6 +153,7 @@
             android:layout_height="wrap_content">
             <TextView
                 android:text="订单信息"
+                android:textSize="28px"
                 android:textColor="@color/color_black_333333"
                 android:layout_marginTop="40px"
                 android:layout_marginLeft="38px"

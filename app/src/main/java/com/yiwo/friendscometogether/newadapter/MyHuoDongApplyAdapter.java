@@ -73,51 +73,51 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
         holder.btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                EditContentDialog dialog = new EditContentDialog(context, new EditContentDialog.OnReturnListener() {
-//                    @Override
-//                    public void onReturn(String content) {
-//                        if (StringUtils.isEmpty(content)) {
-//                            Toast.makeText(context, "取消原因不能为空", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            ViseHttp.POST(NetConfig.cancleActivityUrl)
-//                                    .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.cancleActivityUrl))
-//                                    .addParam("user_id", spImp.getUID())
-//                                    .addParam("pfID", bean.getPfID())
-//                                    .addParam("info", content)
-//                                    .request(new ACallback<String>() {
-//                                        @Override
-//                                        public void onSuccess(String obj) {
-//                                            Log.e("222", obj+"uid"+spImp.getUID()+"pfid"+data.get(position).getPfID());
-//                                            try {
-//                                                JSONObject jsonObject = new JSONObject(obj);
-//                                                if (jsonObject.getInt("code") == 200) {
-//                                                    FocusOnToFriendTogetherModel model = new Gson().fromJson(obj, FocusOnToFriendTogetherModel.class);
-//                                                    data.remove(position);
-//                                                    notifyItemRemoved(position);
-//                                                    notifyDataSetChanged();
-//                                                    Toast.makeText(context, "活动取消成功", Toast.LENGTH_SHORT).show();
-//                                                }
-//                                            } catch (JSONException e) {
-//                                                e.printStackTrace();
-//                                            }
-//                                        }
-//
-//                                        @Override
-//                                        public void onFail(int errCode, String errMsg) {
-//
-//                                        }
-//                                    });
-//                        }
-//                    }
-//                });
-//                dialog.show();
+                EditContentDialog dialog = new EditContentDialog(context, new EditContentDialog.OnReturnListener() {
+                    @Override
+                    public void onReturn(String content) {
+                        if (StringUtils.isEmpty(content)) {
+                            Toast.makeText(context, "取消原因不能为空", Toast.LENGTH_SHORT).show();
+                        } else {
+                            ViseHttp.POST(NetConfig.cancleActivityUrl)
+                                    .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.cancleActivityUrl))
+                                    .addParam("user_id", spImp.getUID())
+                                    .addParam("pfID", bean.getPfID())
+                                    .addParam("info", content)
+                                    .request(new ACallback<String>() {
+                                        @Override
+                                        public void onSuccess(String obj) {
+                                            Log.e("222", obj+"uid"+spImp.getUID()+"pfid"+data.get(position).getPfID());
+                                            try {
+                                                JSONObject jsonObject = new JSONObject(obj);
+                                                if (jsonObject.getInt("code") == 200) {
+                                                    FocusOnToFriendTogetherModel model = new Gson().fromJson(obj, FocusOnToFriendTogetherModel.class);
+                                                    data.remove(position);
+                                                    notifyItemRemoved(position);
+                                                    notifyDataSetChanged();
+                                                    Toast.makeText(context, "活动取消成功", Toast.LENGTH_SHORT).show();
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFail(int errCode, String errMsg) {
+
+                                        }
+                                    });
+                        }
+                    }
+                });
+                dialog.show();
             }
         });
         //咨询
         holder.btn_zixun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                liaotian(data.get(position).getWy_accid());
+                liaotian(data.get(position).getWy_accid());
             }
         });
         holder.ll_huodong_apply.setOnClickListener(new View.OnClickListener() {

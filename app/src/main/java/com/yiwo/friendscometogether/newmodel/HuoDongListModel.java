@@ -64,6 +64,8 @@ public class HuoDongListModel {
         private String username;
         private String userpic;
         private String activities_data;
+        private String ujID;
+        private String wy_accid;
 
         public String getRoomid() {
             return roomid;
@@ -135,6 +137,22 @@ public class HuoDongListModel {
 
         public void setActivities_data(String activities_data) {
             this.activities_data = activities_data;
+        }
+
+        public String getUjID() {
+            return ujID;
+        }
+
+        public void setUjID(String ujID) {
+            this.ujID = ujID;
+        }
+
+        public String getWy_accid() {
+            return wy_accid;
+        }
+
+        public void setWy_accid(String wy_accid) {
+            this.wy_accid = wy_accid;
         }
     }
 }

@@ -69,13 +69,6 @@ public class HuoDongHistoryFragment extends BaseFragment {
         mList = new ArrayList<>();
 
         historyAdapter = new MyHuoDongHistoryAdapter(mList);
-        historyAdapter.setDeleteListion(new MyHuoDongHistoryAdapter.DeleteListion() {
-            @Override
-            public void deleteHuoDong(int posion) {
-                toToast(getContext(),"删除");
-
-            }
-        });
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         rv_history_huodong.setLayoutManager(manager);
         rv_history_huodong.setAdapter(historyAdapter);
