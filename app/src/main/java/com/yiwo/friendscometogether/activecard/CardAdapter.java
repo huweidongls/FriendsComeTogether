@@ -60,29 +60,29 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         holder.tvBaoming.setText("报名人数: "+data.get(position).getHave_num()+"人");
         holder.tvShengyu.setText("剩余名额: "+data.get(position).getSurplus()+"人");
         holder.tvAddress.setText(data.get(position).getPfaddress());
-        holder.ivTitle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent intent = new Intent();
-                if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
-                    intent.setClass(context, DetailsOfFriendTogetherActivity.class);
-                    intent.putExtra("pfID", data.get(position).getPfID());
-                    context.startActivity(intent);
-                } else {
-                    LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(context, new LookPasswordDialog.SetPasswordListener() {
-                        @Override
-                        public void setActivityText(String s) {
-                            if (s.equals(data.get(position).getPfpwd())) {
-                                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
-                                intent.putExtra("pfID", data.get(position).getPfID());
-                                context.startActivity(intent);
-                            }
-                        }
-                    });
-                    lookPasswordDialog.show();
-                }
-            }
-        });
+//        holder.ivTitle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final Intent intent = new Intent();
+//                if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
+//                    intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+//                    intent.putExtra("pfID", data.get(position).getPfID());
+//                    context.startActivity(intent);
+//                } else {
+//                    LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(context, new LookPasswordDialog.SetPasswordListener() {
+//                        @Override
+//                        public void setActivityText(String s) {
+//                            if (s.equals(data.get(position).getPfpwd())) {
+//                                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+//                                intent.putExtra("pfID", data.get(position).getPfID());
+//                                context.startActivity(intent);
+//                            }
+//                        }
+//                    });
+//                    lookPasswordDialog.show();
+//                }
+//            }
+//        });
     }
 
     @Override

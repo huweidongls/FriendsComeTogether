@@ -75,7 +75,16 @@ public class CardItemTouchHelperCallback<T> extends ItemTouchHelper.Callback {
         Log.e("123123", layoutPosition+"");
         adapter.notifyDataSetChanged();
         if (mListener != null) {
-            mListener.onSwiped(viewHolder, dataList.get(0), direction == ItemTouchHelper.LEFT ? CardConfig.SWIPED_LEFT : CardConfig.SWIPED_RIGHT);
+            if(direction == ItemTouchHelper.RIGHT){
+                Log.e("123", "1");
+                mListener.onSwiped(viewHolder, dataList.get(0), CardConfig.SWIPED_RIGHT);
+            }else if(direction == ItemTouchHelper.LEFT){
+                Log.e("123", "2");
+                mListener.onSwiped(viewHolder, dataList.get(0), CardConfig.SWIPED_LEFT);
+            }else {
+                Log.e("123", "13");
+                mListener.onSwiped(viewHolder, dataList.get(0), CardConfig.SWIPED_NONE);
+            }
         }
         // 当没有数据时回调 mListener
         if (adapter.getItemCount() == 0) {

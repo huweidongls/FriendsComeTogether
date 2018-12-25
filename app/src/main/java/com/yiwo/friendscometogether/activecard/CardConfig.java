@@ -41,5 +41,9 @@ public final class CardConfig {
      * 卡片从右边滑出
      */
     public static final int SWIPED_RIGHT = 1 << 2;
+    /**
+     * 卡片滑动后不偏左也不偏右
+     */
+    public static final int SWIPED_NONE = 123;
 
 }
