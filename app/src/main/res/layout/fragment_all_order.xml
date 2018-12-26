@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black_f8f8f8">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/fragment_all_order_refreshLayout"
@@ -9,7 +10,6 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:background="@color/black_f8f8f8"
             android:id="@+id/fragment_order_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

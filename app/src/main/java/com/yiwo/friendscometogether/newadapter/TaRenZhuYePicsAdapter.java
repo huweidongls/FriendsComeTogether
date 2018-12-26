@@ -39,7 +39,8 @@ public class TaRenZhuYePicsAdapter extends RecyclerView.Adapter<TaRenZhuYePicsAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if (position>=6){
+        if (position>=5){
+            holder.imageView.setVisibility(View.GONE);
             holder.ll_lookmore.setVisibility(View.VISIBLE);
             holder.tv_morePicNum.setText("+"+(data.size()-5));
         }else {
@@ -59,7 +60,6 @@ public class TaRenZhuYePicsAdapter extends RecyclerView.Adapter<TaRenZhuYePicsAd
         }else {
             return 0;
         }
-
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

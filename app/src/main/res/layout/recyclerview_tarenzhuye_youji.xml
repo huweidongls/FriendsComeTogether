@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_taren_youji"
+    android:orientation="vertical"
+    android:background="@color/white_ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:text="12月20日"
+        android:textSize="30px"
+        android:textStyle="bold"
+        android:textColor="@color/black_333333"
+        android:layout_marginTop="26px"
+        android:lines="1"
+        android:ellipsize="end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+    <ImageView
+        android:layout_marginTop="20px"
+        android:id="@+id/iv_taren_pics"
+        android:src="@mipmap/welcome"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="354px" />
+    <LinearLayout
+        android:layout_marginTop="6px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@mipmap/welcome"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_marginRight="3.5px"
+            android:layout_height="176px" />
+        <ImageView
+            android:layout_marginRight="3.5px"
+            android:layout_marginLeft="3.5px"
+            android:src="@mipmap/welcome"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="176px" />
+        <ImageView
+            android:layout_marginLeft="3.5px"
+            android:src="@mipmap/welcome"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="176px" />
+    </LinearLayout>
+    <TextView
+        android:lines="1"
+        android:ellipsize="end"
+        android:layout_marginTop="20px"
+        android:text="一次神秘的智慧之旅"
+        android:textSize="44px"
+        android:textColor="#272A2C"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        android:layout_marginTop="20px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:background="@drawable/bg_white_efeff3_8px"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="52px">
+            <ImageView
+                android:layout_marginRight="4px"
+                android:layout_marginLeft="18px"
+                android:src="@mipmap/location_blue"
+                android:layout_width="22px"
+                android:layout_height="28px" />
+            <TextView
+                android:layout_marginRight="18px"
+                android:textColor="#272A2C"
+                android:textSize="26px"
+                android:text="北京北京"
+                android:lines="1"
+                android:ellipsize="end"
+                android:maxWidth="300px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="52px">
+            <ImageView
+                android:layout_marginRight="12px"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/eye_black"
+                android:layout_width="48px"
+                android:layout_height="31px" />
+            <TextView
+                android:layout_marginRight="30px"
+                android:lines="1"
+                android:ellipsize="end"
+                android:text="35"
+                android:layout_gravity="center_vertical"
+                android:textSize="28px"
+                android:textColor="#272A2C"
+                android:maxWidth="150px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_marginRight="12px"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/xiaoxi_rv"
+                android:layout_width="42px"
+                android:layout_height="37px" />
+            <TextView
+                android:lines="1"
+                android:ellipsize="end"
+                android:text="26"
+                android:layout_gravity="center_vertical"
+                android:textSize="28px"
+                android:textColor="#272A2C"
+                android:maxWidth="100px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+    <TextView
+        android:lines="1"
+        android:ellipsize="end"
+        android:layout_marginTop="10px"
+        android:text="3636人觉得很赞"
+        android:textColor="#505050"
+        android:textSize="24px"
+
+        android:layout_width="400px"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="10px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="吃货萌："
+            android:textColor="#272A2C"
+            android:textSize="28px"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="middle"
+            android:maxWidth="200px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="上海来一局吃货大趴"
+            android:maxLength="85"
+            android:ellipsize="end"
+            android:textColor="#505050"
+            android:textSize="28px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="4px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="吃货萌吃货萌吃货萌吃货萌："
+            android:textColor="#272A2C"
+            android:textSize="28px"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="middle"
+            android:maxWidth="200px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="上海来一局吃货大趴上海来一局吃货大趴"
+            android:maxLength="85"
+            android:ellipsize="end"
+            android:textColor="#505050"
+            android:textSize="28px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <TextView
+        android:layout_marginTop="10px"
+        android:textSize="24px"
+        android:textColor="#D84C37"
+        android:lines="1"
+        android:ellipsize="end"
+        android:text="全部40条回复"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_marginTop="40px"
+        android:background="#979797"
+        android:layout_width="match_parent"
+        android:layout_height="2px"></LinearLayout>
+
+
+</LinearLayout>
