@@ -138,7 +138,16 @@
 
             </RelativeLayout>
 
+            <android.support.v7.widget.RecyclerView
+                android:layout_marginBottom="18px"
+                android:id="@+id/activity_create_intercalation_rv"
+                android:layout_marginRight="40px"
+                android:layout_marginLeft="40px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="370px">
 

@@ -271,10 +271,10 @@ public class InsertIntercalationActivity extends BaseActivity {
      */
     private void complete() {
 
+        dialog = WeiboDialogUtils.createLoadingDialog(InsertIntercalationActivity.this, "请等待...");
         Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
             @Override
             public void subscribe(final ObservableEmitter<Map<String, File>> e) throws Exception {
-                dialog = WeiboDialogUtils.createLoadingDialog(InsertIntercalationActivity.this, "请等待...");
                 final Map<String, File> map = new LinkedHashMap<>();
                 final List<String> list = new ArrayList<>();
                 for (int i = 0; i < mList.size(); i++) {
@@ -373,8 +373,8 @@ public class InsertIntercalationActivity extends BaseActivity {
 
             }
         };
-        observable.observeOn(Schedulers.newThread())
-                .subscribeOn(AndroidSchedulers.mainThread())
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
 
     }

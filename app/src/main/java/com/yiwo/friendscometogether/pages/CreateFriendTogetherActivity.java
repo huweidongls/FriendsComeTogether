@@ -872,8 +872,8 @@ public class CreateFriendTogetherActivity extends TakePhotoActivity {
 
                 }
             };
-            observable.observeOn(Schedulers.newThread())
-                    .subscribeOn(AndroidSchedulers.mainThread())
+            observable.subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer);
         } else {
             Toast.makeText(CreateFriendTogetherActivity.this, "请输入完整的创建活动信息", Toast.LENGTH_SHORT).show();

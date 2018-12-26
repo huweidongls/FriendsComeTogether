@@ -10,6 +10,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -42,10 +44,12 @@ import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.adapter.IntercalationAdapter;
 import com.yiwo.friendscometogether.custom.SetPasswordDialog;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.model.GetFriendActiveListModel;
 import com.yiwo.friendscometogether.model.JsonBean;
+import com.yiwo.friendscometogether.model.UserIntercalationPicModel;
 import com.yiwo.friendscometogether.model.UserLabelModel;
 import com.yiwo.friendscometogether.model.UserReleaseModel;
 import com.yiwo.friendscometogether.network.NetConfig;
@@ -64,8 +68,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -143,6 +149,11 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
     RelativeLayout rlMore;
     @BindView(R.id.ll_content)
     LinearLayout llContent;
+    @BindView(R.id.activity_create_intercalation_rv)
+    RecyclerView recyclerView;
+
+    private IntercalationAdapter adapter;
+    private List<UserIntercalationPicModel> mList;
 
     private int mYear;
     private int mMonth;
@@ -155,6 +166,9 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
     private PopupWindow popupWindow;
 
     private static final int REQUEST_CODE = 0x00000011;
+    private static final int REQUEST_CODE1 = 0x00000012;
+
+    private List<File> files = new ArrayList<>();
 
     /**
      * 标签id
@@ -198,6 +212,44 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
 
         init();
         initDatePicker();
+        initUpData();
+
+    }
+
+    /**
+     * 初始化上传图片
+     */
+    private void initUpData() {
+
+        mList = new ArrayList<>();
+        GridLayoutManager manager = new GridLayoutManager(CreateFriendRememberActivity.this, 3);
+        recyclerView.setLayoutManager(manager);
+        adapter = new IntercalationAdapter(mList);
+        recyclerView.setAdapter(adapter);
+        adapter.setListener(new IntercalationAdapter.OnAddImgListener() {
+            @Override
+            public void onAddImg() {
+                //限数量的多选(比喻最多9张)
+                ImageSelector.builder()
+                        .useCamera(true) // 设置是否使用拍照
+                        .setSingle(false)  //设置是否单选
+                        .setMaxSelectCount(9 - mList.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+//                        .setSelected(selected) // 把已选的图片传入默认选中。
+                        .start(CreateFriendRememberActivity.this, REQUEST_CODE1); // 打开相册
+            }
+        }, new IntercalationAdapter.OnDeleteImgListener() {
+            @Override
+            public void onDeleteImg(int i) {
+                mList.remove(i);
+                adapter.notifyDataSetChanged();
+            }
+        }, new IntercalationAdapter.OnAddDescribeListener() {
+            @Override
+            public void onAddDescribe(int i, String s) {
+                mList.get(i).setDescribe(s);
+                adapter.notifyDataSetChanged();
+            }
+        });
 
     }
 
@@ -406,8 +458,10 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
 
                 break;
             case R.id.activity_create_friend_remember_rl_complete:
-                if(TextUtils.isEmpty(etTitle.getText().toString())||TextUtils.isEmpty(images)||TextUtils.isEmpty(tvLabel.getText().toString())){
+                if(TextUtils.isEmpty(etTitle.getText().toString())||TextUtils.isEmpty(tvLabel.getText().toString())){
                     Toast.makeText(CreateFriendRememberActivity.this, "请完善信息", Toast.LENGTH_SHORT).show();
+                }else if(mList.size()<4){
+                    Toast.makeText(CreateFriendRememberActivity.this, "请至少上传4张照片", Toast.LENGTH_SHORT).show();
                 }else {
                     showCompletePopupwindow();
                 }
@@ -609,6 +663,15 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
             tvFirstIv.setVisibility(View.VISIBLE);
             ivDelete.setVisibility(View.VISIBLE);
         }
+        if (requestCode == REQUEST_CODE1 && data != null) {
+            //获取选择器返回的数据
+            List<String> pic = data.getStringArrayListExtra(ImageSelector.SELECT_RESULT);
+            for (int i = 0; i < pic.size(); i++) {
+                Log.i("333", pic.get(i));
+                mList.add(new UserIntercalationPicModel(pic.get(i), ""));
+            }
+            adapter.notifyDataSetChanged();
+        }
     }
 
     /**
@@ -795,13 +858,45 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
         tvRelease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Observable<File> observable = Observable.create(new ObservableOnSubscribe<File>() {
+                dialog = WeiboDialogUtils.createLoadingDialog(CreateFriendRememberActivity.this, "请等待...");
+                Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
                     @Override
-                    public void subscribe(final ObservableEmitter<File> e) throws Exception {
+                    public void subscribe(final ObservableEmitter<Map<String, File>> e) throws Exception {
 //                        File file = new File(images);
-                        dialog = WeiboDialogUtils.createLoadingDialog(CreateFriendRememberActivity.this, "请等待...");
+//                        Luban.with(CreateFriendRememberActivity.this)
+//                                .load(images)
+//                                .ignoreBy(100)
+//                                .filter(new CompressionPredicate() {
+//                                    @Override
+//                                    public boolean apply(String path) {
+//                                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+//                                    }
+//                                })
+//                                .setCompressListener(new OnCompressListener() {
+//                                    @Override
+//                                    public void onStart() {
+//                                        // TODO 压缩开始前调用，可以在方法内启动 loading UI
+//                                    }
+//
+//                                    @Override
+//                                    public void onSuccess(File file) {
+//                                        // TODO 压缩成功后调用，返回压缩后的图片文件
+//                                        e.onNext(file);
+//                                    }
+//
+//                                    @Override
+//                                    public void onError(Throwable e) {
+//                                        // TODO 当压缩过程出现问题时调用
+//                                    }
+//                                }).launch();
+
+                        final Map<String, File> map = new LinkedHashMap<>();
+                        final List<String> list = new ArrayList<>();
+                        for (int i = 0; i < mList.size(); i++) {
+                            list.add(mList.get(i).getPic());
+                        }
                         Luban.with(CreateFriendRememberActivity.this)
-                                .load(images)
+                                .load(list)
                                 .ignoreBy(100)
                                 .filter(new CompressionPredicate() {
                                     @Override
@@ -818,7 +913,15 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                                     @Override
                                     public void onSuccess(File file) {
                                         // TODO 压缩成功后调用，返回压缩后的图片文件
-                                        e.onNext(file);
+                                        files.add(file);
+                                        Log.e("222", list.size() + "..." + files.size());
+                                        if (files.size() == list.size()) {
+                                            for (int i = 0; i < files.size(); i++) {
+                                                map.put("fmpic[" + i + "]", files.get(i));
+                                            }
+                                            Log.e("222", map.size() + "");
+                                            e.onNext(map);
+                                        }
                                     }
 
                                     @Override
@@ -826,16 +929,17 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                                         // TODO 当压缩过程出现问题时调用
                                     }
                                 }).launch();
+
                     }
                 });
-                Observer<File> observer = new Observer<File>() {
+                Observer<Map<String, File>> observer = new Observer<Map<String, File>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(File value) {
+                    public void onNext(Map<String, File> value) {
                         ViseHttp.UPLOAD(NetConfig.userRelease)
                                 .addHeader("Content-Type","multipart/form-data")
                                 .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userRelease))
@@ -851,7 +955,7 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                                 .addParam("insertatext", tvIsIntercalation.getText().toString().equals("是")?"0":"1")
                                 .addParam("accesspassword", password)
                                 .addParam("type", "0")
-                                .addFile("fmpic", value)
+                                .addFiles(value)
                                 .request(new ACallback<String>() {
                                     @Override
                                     public void onSuccess(String data) {
@@ -889,8 +993,8 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
 
                     }
                 };
-                observable.observeOn(Schedulers.newThread())
-                        .subscribeOn(AndroidSchedulers.mainThread())
+                observable.subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(observer);
             }
         });
@@ -996,11 +1100,11 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
         tvNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog = WeiboDialogUtils.createLoadingDialog(CreateFriendRememberActivity.this, "请等待...");
                 Observable<File> observable = Observable.create(new ObservableOnSubscribe<File>() {
                     @Override
                     public void subscribe(final ObservableEmitter<File> e) throws Exception {
 //                        File file = new File(images);
-                        dialog = WeiboDialogUtils.createLoadingDialog(CreateFriendRememberActivity.this, "请等待...");
                         Luban.with(CreateFriendRememberActivity.this)
                                 .load(images)
                                 .ignoreBy(100)
@@ -1095,8 +1199,8 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
 
                     }
                 };
-                observable.observeOn(Schedulers.newThread())
-                        .subscribeOn(AndroidSchedulers.mainThread())
+                observable.subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(observer);
             }
         });

@@ -1,6 +1,8 @@
 package com.yiwo.friendscometogether;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +14,7 @@ import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -30,6 +33,9 @@ import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment1;
 import com.yiwo.friendscometogether.fragment.HomeFragment;
 import com.yiwo.friendscometogether.fragment.MyFragment;
 import com.yiwo.friendscometogether.fragment.MyFragment1;
+import com.yiwo.friendscometogether.pages.CreateFriendRememberActivity;
+import com.yiwo.friendscometogether.pages.LoginActivity;
+import com.yiwo.friendscometogether.sp.SpImp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +44,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends FragmentActivity {
+
+    private Context context = MainActivity.this;
+
     public static FragmentTabHost tabHost;
     // Tab选项卡的文字
     private String mTextviewArray[] = {"首页", "友聚", "友记", "聊天", "我的"};
@@ -97,6 +106,9 @@ public class MainActivity extends FragmentActivity {
 
     private long exitTime = 0;
 
+    private SpImp spImp;
+    private String uid = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,11 +116,18 @@ public class MainActivity extends FragmentActivity {
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(MainActivity.this);
         MyApplication.getInstance().addActivity(this);
+        spImp = new SpImp(context);
         getPermissions();
 //        initView();
 
         init();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        uid = spImp.getUID();
     }
 
     /**
@@ -157,6 +176,7 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public void onClick(View v) {
+            Intent intent = new Intent();
             switch (v.getId()) {
                 case R.id.menu_index:
                     selectButton(ibIndex);
@@ -169,9 +189,16 @@ public class MainActivity extends FragmentActivity {
                     switchFragment(1);
                     break;
                 case R.id.menu_friend_remember:
-                    selectButton(ibFriendRemember);
+//                    selectButton(ibFriendRemember);
 //                    selectText(tvFriendRemember);
-                    switchFragment(2);
+//                    switchFragment(2);
+                    if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                        intent.setClass(context, CreateFriendRememberActivity.class);
+                        startActivity(intent);
+                    } else {
+                        intent.setClass(context, LoginActivity.class);
+                        startActivity(intent);
+                    }
                     break;
                 case R.id.menu_chat:
                     selectButton(ibChat);
@@ -194,9 +221,16 @@ public class MainActivity extends FragmentActivity {
                     switchFragment(1);
                     break;
                 case R.id.menu3:
-                    selectButton(ibFriendRemember);
+//                    selectButton(ibFriendRemember);
 //                    selectText(tvFriendRemember);
-                    switchFragment(2);
+//                    switchFragment(2);
+                    if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                        intent.setClass(context, CreateFriendRememberActivity.class);
+                        startActivity(intent);
+                    } else {
+                        intent.setClass(context, LoginActivity.class);
+                        startActivity(intent);
+                    }
                     break;
                 case R.id.menu4:
                     selectButton(ibChat);
