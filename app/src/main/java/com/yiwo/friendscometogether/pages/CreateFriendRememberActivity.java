@@ -225,6 +225,7 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
         GridLayoutManager manager = new GridLayoutManager(CreateFriendRememberActivity.this, 3);
         recyclerView.setLayoutManager(manager);
         adapter = new IntercalationAdapter(mList);
+        adapter.setDescribe(false);
         recyclerView.setAdapter(adapter);
         adapter.setListener(new IntercalationAdapter.OnAddImgListener() {
             @Override
@@ -1101,12 +1102,44 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
             @Override
             public void onClick(View view) {
                 dialog = WeiboDialogUtils.createLoadingDialog(CreateFriendRememberActivity.this, "请等待...");
-                Observable<File> observable = Observable.create(new ObservableOnSubscribe<File>() {
+                Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
                     @Override
-                    public void subscribe(final ObservableEmitter<File> e) throws Exception {
+                    public void subscribe(final ObservableEmitter<Map<String, File>> e) throws Exception {
 //                        File file = new File(images);
+//                        Luban.with(CreateFriendRememberActivity.this)
+//                                .load(images)
+//                                .ignoreBy(100)
+//                                .filter(new CompressionPredicate() {
+//                                    @Override
+//                                    public boolean apply(String path) {
+//                                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+//                                    }
+//                                })
+//                                .setCompressListener(new OnCompressListener() {
+//                                    @Override
+//                                    public void onStart() {
+//                                        // TODO 压缩开始前调用，可以在方法内启动 loading UI
+//                                    }
+//
+//                                    @Override
+//                                    public void onSuccess(File file) {
+//                                        // TODO 压缩成功后调用，返回压缩后的图片文件
+//                                        e.onNext(file);
+//                                    }
+//
+//                                    @Override
+//                                    public void onError(Throwable e) {
+//                                        // TODO 当压缩过程出现问题时调用
+//                                    }
+//                                }).launch();
+
+                        final Map<String, File> map = new LinkedHashMap<>();
+                        final List<String> list = new ArrayList<>();
+                        for (int i = 0; i < mList.size(); i++) {
+                            list.add(mList.get(i).getPic());
+                        }
                         Luban.with(CreateFriendRememberActivity.this)
-                                .load(images)
+                                .load(list)
                                 .ignoreBy(100)
                                 .filter(new CompressionPredicate() {
                                     @Override
@@ -1123,7 +1156,15 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                                     @Override
                                     public void onSuccess(File file) {
                                         // TODO 压缩成功后调用，返回压缩后的图片文件
-                                        e.onNext(file);
+                                        files.add(file);
+                                        Log.e("222", list.size() + "..." + files.size());
+                                        if (files.size() == list.size()) {
+                                            for (int i = 0; i < files.size(); i++) {
+                                                map.put("fmpic[" + i + "]", files.get(i));
+                                            }
+                                            Log.e("222", map.size() + "");
+                                            e.onNext(map);
+                                        }
                                     }
 
                                     @Override
@@ -1131,16 +1172,17 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                                         // TODO 当压缩过程出现问题时调用
                                     }
                                 }).launch();
+
                     }
                 });
-                Observer<File> observer = new Observer<File>() {
+                Observer<Map<String, File>> observer = new Observer<Map<String, File>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(File value) {
+                    public void onNext(Map<String, File> value) {
                         ViseHttp.UPLOAD(NetConfig.userRelease)
                                 .addHeader("Content-Type","multipart/form-data")
                                 .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userRelease))
@@ -1156,7 +1198,7 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                                 .addParam("insertatext", tvIsIntercalation.getText().toString().equals("是")?"0":"1")
                                 .addParam("accesspassword", password)
                                 .addParam("type", "1")
-                                .addFile("fmpic", value)
+                                .addFiles(value)
                                 .request(new ACallback<String>() {
                                     @Override
                                     public void onSuccess(String data) {

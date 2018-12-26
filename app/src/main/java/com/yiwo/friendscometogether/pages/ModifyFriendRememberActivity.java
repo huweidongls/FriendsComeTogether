@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -38,11 +39,13 @@ import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.adapter.IntercalationAdapter;
 import com.yiwo.friendscometogether.custom.SetPasswordDialog;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.model.JsonBean;
 import com.yiwo.friendscometogether.model.ModifyFriendRememberModel;
 import com.yiwo.friendscometogether.model.UserActiveListModel;
+import com.yiwo.friendscometogether.model.UserIntercalationPicModel;
 import com.yiwo.friendscometogether.model.UserLabelModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -135,6 +138,11 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
     TextView tvIsIntercalation;
     @BindView(R.id.activity_create_friend_remember_tv_encryption)
     TextView tvPassword;
+    @BindView(R.id.activity_create_intercalation_rv)
+    RecyclerView recyclerView;
+
+    private IntercalationAdapter adapter;
+    private List<UserIntercalationPicModel> mList;
 
     private String fmId = "";
 

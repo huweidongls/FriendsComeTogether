@@ -32,6 +32,12 @@ public class IntercalationAdapter extends RecyclerView.Adapter<IntercalationAdap
 
     private int picNum;
 
+    private boolean isDescribe = true;
+
+    public void setDescribe(boolean describe) {
+        isDescribe = describe;
+    }
+
     private OnAddImgListener addListener;
     private OnDeleteImgListener deleteImgListener;
     private OnAddDescribeListener describeListener;
@@ -61,6 +67,9 @@ public class IntercalationAdapter extends RecyclerView.Adapter<IntercalationAdap
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        if(!isDescribe){
+            holder.tvContent.setVisibility(View.GONE);
+        }
         if (data.size() >= MAX_SIZE) {
             //最多9张
             holder.rlAdd.setVisibility(View.GONE);
