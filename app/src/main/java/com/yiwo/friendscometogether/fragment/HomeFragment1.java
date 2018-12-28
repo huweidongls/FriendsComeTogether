@@ -3,6 +3,7 @@ package com.yiwo.friendscometogether.fragment;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -39,6 +41,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2018/12/4.
@@ -53,6 +56,16 @@ public class HomeFragment1 extends BaseFragment {
     RecyclerView recyclerView;
     @BindView(R.id.tv_city_name)
     TextView cityTv;
+    @BindView(R.id.ll_home_youji_all)
+    LinearLayout youji_all;
+    @BindView(R.id.ll_home_youji_lvxing)
+    LinearLayout youji_lvxing;
+    @BindView(R.id.ll_home_youji_meishi)
+    LinearLayout youji_meishi;
+    @BindView(R.id.ll_home_youji_tandian)
+    LinearLayout youji_tandian;
+    @BindView(R.id.ll_home_youji_gonglue)
+    LinearLayout youji_gonglue;
 
     private LocationManager locationManager;
     private double latitude = 0.0;
@@ -204,5 +217,20 @@ public class HomeFragment1 extends BaseFragment {
             e.printStackTrace();
         }
     }
-
+    @OnClick({R.id.ll_home_youji_gonglue,R.id.ll_home_youji_all,
+                    R.id.ll_home_youji_meishi,R.id.ll_home_youji_tandian,R.id.ll_home_youji_lvxing})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_home_youji_all:
+                break;
+            case R.id.ll_home_youji_lvxing:
+                break;
+            case R.id.ll_home_youji_meishi:
+                break;
+            case R.id.ll_home_youji_tandian:
+                break;
+            case R.id.ll_home_youji_gonglue:
+                break;
+        }
+    }
 }

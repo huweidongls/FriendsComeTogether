@@ -112,6 +112,7 @@
                         android:layout_height="wrap_content">
 
                         <LinearLayout
+                            android:id="@+id/ll_home_youji_lvxing"
                             android:orientation="vertical"
                             android:layout_weight="1"
                             android:layout_width="0px"
@@ -135,6 +136,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/ll_home_youji_meishi"
                             android:orientation="vertical"
                             android:layout_weight="1"
                             android:layout_width="0px"
@@ -158,6 +160,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/ll_home_youji_tandian"
                             android:orientation="vertical"
                             android:layout_weight="1"
                             android:layout_width="0px"
@@ -181,6 +184,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/ll_home_youji_gonglue"
                             android:orientation="vertical"
                             android:layout_weight="1"
                             android:layout_width="0px"
@@ -204,6 +208,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/ll_home_youji_all"
                             android:orientation="vertical"
                             android:layout_weight="1"
                             android:layout_width="0px"
