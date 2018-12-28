@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_f8f8f8">
+    android:background="@color/white_F8F8F8">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/fragment_all_order_refreshLayout"

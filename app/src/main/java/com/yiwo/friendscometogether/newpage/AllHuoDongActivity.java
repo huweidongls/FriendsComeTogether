@@ -16,6 +16,7 @@ import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.newadapter.AllRememberViewpagerAdapter;
 import com.yiwo.friendscometogether.newfragment.HuoDongApplyFragment;
 import com.yiwo.friendscometogether.newfragment.HuoDongHistoryFragment;
+import com.yiwo.friendscometogether.newfragment.YouJiFragment;
 import com.yiwo.friendscometogether.pages.MyDraftActivity;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -66,7 +67,8 @@ public class AllHuoDongActivity extends BaseActivity {
 
         fragmentList = new ArrayList<>();
         fragmentList.add(new HuoDongApplyFragment());
-        fragmentList.add(new HuoDongHistoryFragment());
+//        fragmentList.add(new HuoDongHistoryFragment());
+        fragmentList.add(new YouJiFragment());
         mViewPagerFragmentAdapter = new AllRememberViewpagerAdapter(mFragmentManager, fragmentList);
         mViewPager.setAdapter(mViewPagerFragmentAdapter);
 

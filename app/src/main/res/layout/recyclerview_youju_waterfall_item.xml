@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_youju_item"
+    android:layout_marginLeft="13px"
+    android:layout_marginRight="13px"
+    android:layout_marginTop="24px"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:background="@drawable/bg_white_16px"
+        android:id="@+id/rv_youji"
+        android:layout_width="match_parent"
+        android:layout_height="546px">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+                test:left_top_radius1="16px"
+                test:right_top_radius1="16px"
+                android:id="@+id/iv_youju"
+                android:src="@mipmap/welcome"
+                android:scaleType="centerCrop"
+                android:layout_width="wrap_content"
+                android:layout_height="220px" />
+            <TextView
+                android:layout_marginLeft="21px"
+                android:layout_marginRight="21px"
+                android:layout_marginTop="20px"
+                android:layout_marginBottom="20px"
+                android:textColor="#424242"
+                android:textSize="32px"
+                android:text="巴厘岛小众神秘彭丽普兰，被认为是世界上最清洁的三个村庄之一巴厘岛小众神秘彭丽普兰，被认为是世界上最清洁的三个村庄之一"
+                android:maxLines="4"
+                android:ellipsize="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <View
+                android:background="@color/line"
+                android:layout_width="match_parent"
+                android:layout_height="1px"/>
+            <RelativeLayout
+                android:layout_marginLeft="16px"
+                android:layout_marginRight="16px"
+                android:layout_marginBottom="22px"
+                android:layout_width="match_parent"
+                android:layout_height="112px">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_icon_user"
+                    android:src="@mipmap/my_head"
+                    android:layout_marginRight="8px"
+                    android:layout_marginTop="20px"
+                    android:layout_width="70px"
+                    android:layout_height="70px"
+                    />
+                <RelativeLayout
+                    android:layout_toRightOf="@+id/iv_icon_user"
+                    android:layout_marginTop="22px"
+                    android:layout_marginBottom="2px"
+                    android:layout_width="145px"
+                    android:layout_height="66px">
+                    <TextView
+                        android:text="扁脸折耳猫"
+                        android:textSize="26px"
+                        android:textColor="@color/black_333333"
+                        android:layout_alignParentTop="true"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+
+                        android:text="15小时前"
+                        android:textSize="24px"
+                        android:textColor="@color/black_333333"
+                        android:layout_alignParentBottom="true"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <LinearLayout
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="21px"
+                    android:layout_marginRight="16px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_marginRight="6px"
+                        android:src="@mipmap/youji_dianzan_red"
+                        android:layout_width="34px"
+                        android:layout_height="34px" />
+                    <TextView
+                        android:textColor="@color/black_333333"
+                        android:textSize="26px"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:maxWidth="50px"
+                        android:text="15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+           
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:background="@drawable/bg_white_16px"
+        android:id="@+id/rv_video"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="458px">
+       <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+           android:id="@+id/iv_video"
+           test:radius1="16px"
+           android:scaleType="centerCrop"
+           android:src="@mipmap/welcome"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent" />
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16px"
+            android:layout_marginRight="16px"
+            android:src="@mipmap/youji_video"
+            android:layout_width="55px"
+            android:layout_height="55px" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_taren_youji"
     android:orientation="vertical"
     android:background="@color/white_ffffff"
@@ -16,7 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </TextView>
-    <ImageView
+    <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+        test:radius1="16px"
         android:layout_marginTop="20px"
         android:id="@+id/iv_taren_pics"
         android:src="@mipmap/welcome"
@@ -27,14 +30,16 @@
         android:layout_marginTop="6px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
+        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            test:radius1="16px"
             android:src="@mipmap/welcome"
             android:layout_weight="1"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_marginRight="3.5px"
             android:layout_height="176px" />
-        <ImageView
+        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            test:radius1="16px"
             android:layout_marginRight="3.5px"
             android:layout_marginLeft="3.5px"
             android:src="@mipmap/welcome"
@@ -42,7 +47,8 @@
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="176px" />
-        <ImageView
+        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            test:radius1="16px"
             android:layout_marginLeft="3.5px"
             android:src="@mipmap/welcome"
             android:layout_weight="1"
@@ -197,11 +203,11 @@
         android:text="全部40条回复"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <LinearLayout
+    <View
         android:layout_marginTop="40px"
         android:background="#979797"
         android:layout_width="match_parent"
-        android:layout_height="2px"></LinearLayout>
+        android:layout_height="2px"></View>
 
 
 </LinearLayout>

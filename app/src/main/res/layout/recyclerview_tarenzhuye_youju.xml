@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:test="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -60,9 +62,11 @@
 
         </RelativeLayout>
 
-        <ImageView
+        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            test:radius1="12px"
+            android:scaleType="centerCrop"
             android:layout_marginTop="25px"
-            android:src="@drawable/bg_blue"
+            android:src="@mipmap/welcome"
             android:layout_width="match_parent"
             android:layout_height="426px" />
 

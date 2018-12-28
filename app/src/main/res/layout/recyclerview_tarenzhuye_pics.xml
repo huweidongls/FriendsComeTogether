@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:test="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_taren_pics"
     android:background="@color/white_ffffff"
     android:layout_width="match_parent"
@@ -9,7 +11,8 @@
         android:layout_marginTop="20px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <ImageView
+        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            test:radius1="8px"
             android:id="@+id/iv_taren_pics"
             android:src="@mipmap/welcome"
             android:scaleType="centerCrop"
