@@ -1,188 +1,476 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:test="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:visibility="gone"
+        android:id="@+id/ll_youju"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <RelativeLayout
-            android:layout_marginTop="30px"
             android:layout_width="match_parent"
-            android:layout_height="76px">
+            android:layout_height="76px"
+            android:layout_marginTop="30px">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_avatar"
-                android:src="@mipmap/hhh"
+                android:id="@+id/iv_youju_avatar"
                 android:layout_width="76px"
-                android:layout_height="76px" />
+                android:layout_height="76px"
+                android:src="@mipmap/hhh" />
 
             <RelativeLayout
-                android:layout_marginLeft="10px"
-                android:layout_toRightOf="@+id/iv_avatar"
-                android:layout_toLeftOf="@+id/tv_focus"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10px"
+                android:layout_toLeftOf="@+id/tv_focus"
+                android:layout_toRightOf="@+id/iv_youju_avatar">
 
                 <TextView
-                    android:id="@+id/tv_name"
-                    android:textStyle="bold"
+                    android:id="@+id/tv_youju_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="友聚官方"
                     android:textColor="@color/black_333333"
                     android:textSize="32px"
-                    android:text="友聚官方"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:textColor="#484848"
-                    android:textSize="24px"
+                    android:id="@+id/tv_youju_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:text="1天前"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textColor="#484848"
+                    android:textSize="24px" />
 
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/tv_focus"
-                android:background="@drawable/bg_home_focus"
-                android:gravity="center"
-                android:textColor="@color/white_ffffff"
-                android:textSize="28px"
-                android:text="已关注"
+                android:id="@+id/tv_youju_focus"
+                android:layout_width="130px"
+                android:layout_height="48px"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10px"
-                android:layout_alignParentRight="true"
-                android:layout_width="130px"
-                android:layout_height="48px" />
+                android:background="@drawable/bg_home_focus"
+                android:gravity="center"
+                android:text="已关注"
+                android:textColor="@color/white_ffffff"
+                android:textSize="28px" />
 
         </RelativeLayout>
 
         <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
-            test:radius1="12px"
+            android:scaleType="centerCrop"
+            android:id="@+id/iv_youju_title"
+            android:layout_width="match_parent"
+            android:layout_height="426px"
             android:layout_marginTop="25px"
             android:src="@drawable/bg_blue"
-            android:layout_width="match_parent"
-            android:layout_height="426px" />
+            test:radius1="12px" />
 
         <TextView
-            android:lines="1"
-            android:ellipsize="end"
+            android:id="@+id/tv_youju_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20px"
-            android:textStyle="bold"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="一次神秘的智慧之旅"
             android:textColor="#272A2C"
             android:textSize="44px"
-            android:text="一次神秘的智慧之旅"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textStyle="bold" />
 
         <TextView
-            android:text="从全国各地赶来北京参加【未知饭局】局长会议的各位局长，我们一起度过的不仅仅是一个周末！我们不仅对饭局的点滴进行…"
+            android:id="@+id/tv_youju_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20px"
             android:ellipsize="end"
             android:lines="3"
+            android:text="从全国各地赶来北京参加【未知饭局】局长会议的各位局长，我们一起度过的不仅仅是一个周末！我们不仅对饭局的点滴进行…"
             android:textColor="@color/black_333333"
-            android:textSize="36px"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textSize="36px" />
 
         <RelativeLayout
-            android:layout_marginTop="20px"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px">
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:background="@drawable/bg_gray"
                 android:layout_width="wrap_content"
-                android:layout_height="52px">
+                android:layout_height="52px"
+                android:background="@drawable/bg_gray"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_marginLeft="18px"
-                    android:layout_gravity="center_vertical"
-                    android:src="@mipmap/location_blue"
                     android:layout_width="22px"
-                    android:layout_height="28px" />
+                    android:layout_height="28px"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="18px"
+                    android:src="@mipmap/location_blue" />
 
                 <TextView
-                    android:layout_marginRight="18px"
-                    android:layout_marginLeft="5px"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="#272A2C"
-                    android:textSize="26px"
-                    android:text="北京"
+                    android:id="@+id/tv_youju_address"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5px"
+                    android:layout_marginRight="18px"
+                    android:text="北京"
+                    android:textColor="#272A2C"
+                    android:textSize="26px" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_gravity="center_vertical"
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_gravity="center_vertical"
-                        android:src="@mipmap/eye_black"
                         android:layout_width="48px"
-                        android:layout_height="31px" />
+                        android:layout_height="31px"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/eye_black" />
 
                     <TextView
+                        android:id="@+id/tv_youju_look_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10px"
-                        android:textColor="#272A2C"
-                        android:textSize="28px"
                         android:text="3570"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="30px"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_gravity="center_vertical"
-                        android:src="@mipmap/xiaoxi_rv"
-                        android:layout_width="42px"
-                        android:layout_height="37px" />
-
-                    <TextView
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10px"
-                        android:text="26"
                         android:textColor="#272A2C"
-                        android:textSize="28px"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textSize="28px" />
 
                 </LinearLayout>
+
+                <!--<LinearLayout-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:layout_marginLeft="30px"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<ImageView-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:src="@mipmap/xiaoxi_rv"-->
+                <!--android:layout_width="42px"-->
+                <!--android:layout_height="37px" />-->
+
+                <!--<TextView-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:layout_marginLeft="10px"-->
+                <!--android:text="26"-->
+                <!--android:textColor="#272A2C"-->
+                <!--android:textSize="28px"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--</LinearLayout>-->
 
             </LinearLayout>
 
         </RelativeLayout>
-        
+
         <View
-            android:layout_marginTop="40px"
-            android:background="#DDDDDD"
             android:layout_width="match_parent"
-            android:layout_height="1px"/>
+            android:layout_height="1px"
+            android:layout_marginTop="40px"
+            android:background="#DDDDDD" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="visible"
+        android:id="@+id/ll_youji"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_ffffff"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_marginTop="26px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_youji_avatar"
+                android:src="@mipmap/welcome"
+                android:layout_width="76px"
+                android:layout_height="76px" />
+
+            <TextView
+                android:id="@+id/tv_youji_nickname"
+                android:layout_marginLeft="18px"
+                android:layout_toRightOf="@+id/iv_youji_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="哆啦A梦"
+                android:textColor="@color/black_333333"
+                android:textSize="32px"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_youji_time"
+                android:textColor="#484848"
+                android:textSize="24px"
+                android:text="1天前"
+                android:layout_below="@+id/tv_youji_nickname"
+                android:layout_marginLeft="18px"
+                android:layout_toRightOf="@+id/iv_youji_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            
+            <TextView
+                android:id="@+id/tv_youji_focus"
+                android:textColor="@color/white_ffffff"
+                android:textSize="28px"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:background="@drawable/bg_red_24px"
+                android:text="已关注"
+                android:layout_width="130px"
+                android:layout_height="50px" />
+
+        </RelativeLayout>
+
+        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            test:radius1="16px"
+            android:id="@+id/iv_youji_title1"
+            android:layout_width="match_parent"
+            android:layout_height="354px"
+            android:layout_marginTop="20px"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/welcome" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6px">
+
+            <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+                android:id="@+id/iv_youji_title2"
+                test:radius1="16px"
+                android:layout_width="match_parent"
+                android:layout_height="176px"
+                android:layout_marginRight="3.5px"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/welcome" />
+
+            <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+                android:id="@+id/iv_youji_title3"
+                test:radius1="16px"
+                android:layout_width="match_parent"
+                android:layout_height="176px"
+                android:layout_marginLeft="3.5px"
+                android:layout_marginRight="3.5px"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/welcome" />
+
+            <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+                android:id="@+id/iv_youji_title4"
+                test:radius1="16px"
+                android:layout_width="match_parent"
+                android:layout_height="176px"
+                android:layout_marginLeft="3.5px"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/welcome" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_youji_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="一次神秘的智慧之旅"
+            android:textColor="#272A2C"
+            android:textSize="44px"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20px"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="52px"
+                android:background="@drawable/bg_white_efeff3_8px"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="22px"
+                    android:layout_height="28px"
+                    android:layout_marginLeft="18px"
+                    android:layout_marginRight="4px"
+                    android:src="@mipmap/location_blue" />
+
+                <TextView
+                    android:id="@+id/tv_youji_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="18px"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:maxWidth="300px"
+                    android:text="北京北京"
+                    android:textColor="#272A2C"
+                    android:textSize="26px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="52px"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="48px"
+                    android:layout_height="31px"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="12px"
+                    android:src="@mipmap/eye_black" />
+
+                <TextView
+                    android:id="@+id/tv_youji_look_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="30px"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:maxWidth="150px"
+                    android:text="35"
+                    android:textColor="#272A2C"
+                    android:textSize="28px" />
+
+                <ImageView
+                    android:layout_width="42px"
+                    android:layout_height="37px"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="12px"
+                    android:src="@mipmap/xiaoxi_rv" />
+
+                <TextView
+                    android:id="@+id/tv_youji_comment_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:maxWidth="100px"
+                    android:text="26"
+                    android:textColor="#272A2C"
+                    android:textSize="28px" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="400px"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="3636人觉得很赞"
+
+            android:textColor="#505050"
+            android:textSize="24px" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="middle"
+                android:maxWidth="200px"
+                android:singleLine="true"
+                android:text="吃货萌："
+                android:textColor="#272A2C"
+                android:textSize="28px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLength="85"
+                android:text="上海来一局吃货大趴"
+                android:textColor="#505050"
+                android:textSize="28px" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="middle"
+                android:maxWidth="200px"
+                android:singleLine="true"
+                android:text="吃货萌吃货萌吃货萌吃货萌："
+                android:textColor="#272A2C"
+                android:textSize="28px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLength="85"
+                android:text="上海来一局吃货大趴上海来一局吃货大趴"
+                android:textColor="#505050"
+                android:textSize="28px" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="全部40条回复"
+            android:textColor="#D84C37"
+            android:textSize="24px" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginTop="40px"
+            android:background="@color/line" />
 
     </LinearLayout>
 

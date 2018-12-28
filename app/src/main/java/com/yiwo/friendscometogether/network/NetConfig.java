@@ -251,4 +251,6 @@ public class NetConfig {
     public static String activityJoin = "action/ac_activity/activity_join";
     //获取关注我的人
     public static String guanZhuWoDe = "action/ac_user/get_AttentionTome";
+    //首页新的列表数据接口
+    public static String newHomeData = "action/ac_activity/Home_data";
 }
