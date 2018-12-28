@@ -65,8 +65,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -191,9 +193,12 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
      * 获取首图及其他图片的recyclerview
      */
     private NewIntercalationAdapter adapter;
-    private List<UserIntercalationPicModel> mList;
+    private List<ModifyFriendRememberModel.ObjBean.FmpicBean> mList;
     private List<ModifyFriendRememberModel.ObjBean.FmpicBean> mOldList;
     private static final int REQUEST_CODE1 = 0x00000012;
+
+    private String deleteid = "";
+    private List<File> files = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -338,11 +343,12 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
 //                                tvFirstIv.setVisibility(View.VISIBLE);
 //                                ivDelete.setVisibility(View.VISIBLE);
 
-                                mOldList = model.getObj().getFmpic();
-                                mList = new ArrayList<>();
-                                for (int i = 0; i<mOldList.size(); i++){
-                                    mList.add(new UserIntercalationPicModel(mOldList.get(i).getPic(), ""));
-                                }
+//                                mOldList = model.getObj().getFmpic();
+//                                mList = new ArrayList<>();
+//                                for (int i = 0; i<mOldList.size(); i++){
+//                                    mList.add(new UserIntercalationPicModel(mOldList.get(i).getPic(), ""));
+//                                }
+                                mList = model.getObj().getFmpic();
                                 GridLayoutManager manager = new GridLayoutManager(ModifyFriendRememberActivity.this, 3);
                                 recyclerView.setLayoutManager(manager);
                                 adapter = new NewIntercalationAdapter(mList);
@@ -362,13 +368,15 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
                                 }, new NewIntercalationAdapter.OnDeleteImgListener() {
                                     @Override
                                     public void onDeleteImg(int i) {
-                                        mList.remove(i);
+                                        ModifyFriendRememberModel.ObjBean.FmpicBean bean = mList.remove(i);
+                                        if(!TextUtils.isEmpty(bean.getId())){
+                                            deleteid = deleteid + bean.getId() + ",";
+                                        }
                                         adapter.notifyDataSetChanged();
                                     }
                                 }, new NewIntercalationAdapter.OnAddDescribeListener() {
                                     @Override
                                     public void onAddDescribe(int i, String s) {
-                                        mList.get(i).setDescribe(s);
                                         adapter.notifyDataSetChanged();
                                     }
                                 });
@@ -489,7 +497,7 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
             List<String> pic = data.getStringArrayListExtra(ImageSelector.SELECT_RESULT);
             for (int i = 0; i < pic.size(); i++) {
                 Log.i("333", pic.get(i));
-                mList.add(new UserIntercalationPicModel("file://"+pic.get(i), ""));
+                mList.add(new ModifyFriendRememberModel.ObjBean.FmpicBean("", "", pic.get(i)));
             }
             adapter.notifyDataSetChanged();
         }
@@ -546,6 +554,8 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
             case R.id.activity_create_friend_remember_rl_complete:
                 if(TextUtils.isEmpty(etTitle.getText().toString())||TextUtils.isEmpty(tvLabel.getText().toString())){
                     Toast.makeText(ModifyFriendRememberActivity.this, "请完善信息", Toast.LENGTH_SHORT).show();
+                }else if(mList.size()<4){
+                    Toast.makeText(ModifyFriendRememberActivity.this, "请至少上传4张图片", Toast.LENGTH_SHORT).show();
                 }else {
                     onSave();
                 }
@@ -731,13 +741,55 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
     private void onSave() {
 
         dialog = WeiboDialogUtils.createLoadingDialog(ModifyFriendRememberActivity.this, "请等待...");
+        for (int i = 0; i<mList.size(); i++){
+            if(TextUtils.isEmpty(mList.get(i).getId())){
+                isPic = true;
+            }
+        }
+        if(!TextUtils.isEmpty(deleteid)){
+            deleteid = deleteid.substring(0,deleteid.length() - 1);
+        }
         if(isPic){
-            Observable<File> observable = Observable.create(new ObservableOnSubscribe<File>() {
+            Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
                 @Override
-                public void subscribe(final ObservableEmitter<File> e) throws Exception {
+                public void subscribe(final ObservableEmitter<Map<String, File>> e) throws Exception {
 //                        File file = new File(images);
+//                    Luban.with(ModifyFriendRememberActivity.this)
+//                            .load(images)
+//                            .ignoreBy(100)
+//                            .filter(new CompressionPredicate() {
+//                                @Override
+//                                public boolean apply(String path) {
+//                                    return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+//                                }
+//                            })
+//                            .setCompressListener(new OnCompressListener() {
+//                                @Override
+//                                public void onStart() {
+//                                    // TODO 压缩开始前调用，可以在方法内启动 loading UI
+//                                }
+//
+//                                @Override
+//                                public void onSuccess(File file) {
+//                                    // TODO 压缩成功后调用，返回压缩后的图片文件
+//                                    e.onNext(file);
+//                                }
+//
+//                                @Override
+//                                public void onError(Throwable e) {
+//                                    // TODO 当压缩过程出现问题时调用
+//                                }
+//                            }).launch();
+                    final Map<String, File> map = new LinkedHashMap<>();
+                    final List<String> list = new ArrayList<>();
+
+                    for (int i = 0; i<mList.size(); i++){
+                        if(TextUtils.isEmpty(mList.get(i).getId())){
+                            list.add(mList.get(i).getPic());
+                        }
+                    }
                     Luban.with(ModifyFriendRememberActivity.this)
-                            .load(images)
+                            .load(list)
                             .ignoreBy(100)
                             .filter(new CompressionPredicate() {
                                 @Override
@@ -754,7 +806,15 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
                                 @Override
                                 public void onSuccess(File file) {
                                     // TODO 压缩成功后调用，返回压缩后的图片文件
-                                    e.onNext(file);
+                                    files.add(file);
+                                    Log.e("222", list.size() + "..." + files.size());
+                                    if (files.size() == list.size()) {
+                                        for (int i = 0; i < files.size(); i++) {
+                                            map.put("fmpic[" + i + "]", files.get(i));
+                                        }
+                                        Log.e("222", map.size() + "");
+                                        e.onNext(map);
+                                    }
                                 }
 
                                 @Override
@@ -762,16 +822,17 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
                                     // TODO 当压缩过程出现问题时调用
                                 }
                             }).launch();
+
                 }
             });
-            Observer<File> observer = new Observer<File>() {
+            Observer<Map<String, File>> observer = new Observer<Map<String, File>>() {
                 @Override
                 public void onSubscribe(Disposable d) {
 
                 }
 
                 @Override
-                public void onNext(File value) {
+                public void onNext(Map<String, File> value) {
                     ViseHttp.UPLOAD(NetConfig.saveFriendRememberUrl)
                             .addHeader("Content-Type","multipart/form-data")
                             .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.saveFriendRememberUrl))
@@ -786,7 +847,8 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
                             .addParam("insertatext", tvIsIntercalation.getText().toString().equals("是")?"0":"1")
                             .addParam("accesspassword", password)
                             .addParam("id", fmId)
-                            .addFile("fmpic", value)
+                            .addParam("deleteid", deleteid)
+                            .addFiles(value)
                             .request(new ACallback<String>() {
                                 @Override
                                 public void onSuccess(String data) {
@@ -838,6 +900,7 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
                     .addParam("insertatext", tvIsIntercalation.getText().toString().equals("是")?"0":"1")
                     .addParam("accesspassword", password)
                     .addParam("id", fmId)
+                    .addParam("deleteid", deleteid)
                     .request(new ACallback<String>() {
                         @Override
                         public void onSuccess(String data) {

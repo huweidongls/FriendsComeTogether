@@ -1,5 +1,6 @@
 package com.yiwo.friendscometogether.newfragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
+import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
 import com.yiwo.friendscometogether.newadapter.YouJiAdapter;
 import com.yiwo.friendscometogether.newmodel.YouJiListModel;
 import com.yiwo.friendscometogether.sp.SpImp;

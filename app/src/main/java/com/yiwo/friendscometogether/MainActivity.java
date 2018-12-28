@@ -34,6 +34,7 @@ import com.yiwo.friendscometogether.fragment.HomeFragment;
 import com.yiwo.friendscometogether.fragment.HomeFragment1;
 import com.yiwo.friendscometogether.fragment.MyFragment;
 import com.yiwo.friendscometogether.fragment.MyFragment1;
+import com.yiwo.friendscometogether.newfragment.YouJiFragment;
 import com.yiwo.friendscometogether.pages.CreateFriendRememberActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -149,7 +150,7 @@ public class MainActivity extends FragmentActivity {
         rl5.setOnClickListener(listener);
         Fragment fragmentHome = new HomeFragment1();
         Fragment fragmentFriendTogether = new FriendsTogetherFragment1();
-        Fragment fragmentFriendRemember = new FriendsRememberFragment();
+        Fragment fragmentFriendRemember = new YouJiFragment();
         Fragment fragmentChat = new ChatFragment();
         Fragment fragmentMy = new MyFragment1();
 
@@ -253,7 +254,7 @@ public class MainActivity extends FragmentActivity {
      *
      * @param index 显示的Frgament的角标
      */
-    private void switchFragment(int index) {
+    public void switchFragment(int index) {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         for (int i = 0; i < fragmentList.size(); i++) {

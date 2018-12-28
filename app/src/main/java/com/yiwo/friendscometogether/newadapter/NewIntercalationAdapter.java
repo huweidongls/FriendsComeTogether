@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.custom.PicDescribeDialog;
+import com.yiwo.friendscometogether.model.ModifyFriendRememberModel;
 import com.yiwo.friendscometogether.model.UserIntercalationPicModel;
 
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.List;
 public class NewIntercalationAdapter extends RecyclerView.Adapter<NewIntercalationAdapter.ViewHolder> {
 
     private Context context;
-    private List<UserIntercalationPicModel> data;
+    private List<ModifyFriendRememberModel.ObjBean.FmpicBean> data;
 
     private static final int TYPE_ADD = 1;
     private static final int TYPE_PIC = 2;
@@ -48,7 +49,7 @@ public class NewIntercalationAdapter extends RecyclerView.Adapter<NewIntercalati
         this.describeListener = describeListener;
     }
 
-    public NewIntercalationAdapter(List<UserIntercalationPicModel> data) {
+    public NewIntercalationAdapter(List<ModifyFriendRememberModel.ObjBean.FmpicBean> data) {
         this.data = data;
     }
 
@@ -87,11 +88,6 @@ public class NewIntercalationAdapter extends RecyclerView.Adapter<NewIntercalati
             holder.rlImg.setVisibility(View.VISIBLE);
             holder.ivDelete.setVisibility(View.VISIBLE);
             Glide.with(context).load(data.get(position).getPic()).into(holder.iv);
-            if (!data.get(position).getDescribe().equals("")) {
-                holder.tvContent.setText(data.get(position).getDescribe());
-            } else {
-                holder.tvContent.setText(null);
-            }
         }
         holder.rlAdd.setOnClickListener(new View.OnClickListener() {
             @Override

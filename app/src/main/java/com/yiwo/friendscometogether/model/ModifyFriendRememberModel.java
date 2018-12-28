@@ -198,6 +198,12 @@ public class ModifyFriendRememberModel {
             private String fid;
             private String pic;
 
+            public FmpicBean(String id, String fid, String pic) {
+                this.id = id;
+                this.fid = fid;
+                this.pic = pic;
+            }
+
             public String getId() {
                 return id;
             }

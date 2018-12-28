@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
+import com.yiwo.friendscometogether.MainActivity;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
 import com.yiwo.friendscometogether.model.BaiduCityModel;
@@ -220,8 +221,10 @@ public class HomeFragment1 extends BaseFragment {
     @OnClick({R.id.ll_home_youji_gonglue,R.id.ll_home_youji_all,
                     R.id.ll_home_youji_meishi,R.id.ll_home_youji_tandian,R.id.ll_home_youji_lvxing})
     public void onClick(View view) {
+        MainActivity mainActivity = (MainActivity) getActivity();
         switch (view.getId()) {
             case R.id.ll_home_youji_all:
+                mainActivity.switchFragment(2);
                 break;
             case R.id.ll_home_youji_lvxing:
                 break;

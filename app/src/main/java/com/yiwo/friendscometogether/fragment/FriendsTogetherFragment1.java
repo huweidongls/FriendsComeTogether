@@ -109,7 +109,9 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                                 Log.e("222", data);
                                 final FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
                                 mList = model.getObj();
-                                bean = mList.get(0);
+                                if(mList.size()>0){
+                                    bean = mList.get(0);
+                                }
                                 adapter = new CardAdapter(mList);
                                 rv.setItemAnimator(new DefaultItemAnimator());
                                 rv.setAdapter(adapter);
