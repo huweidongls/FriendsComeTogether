@@ -1,5 +1,7 @@
 package com.yiwo.friendscometogether.model;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2018/8/10.
  */
@@ -9,7 +11,7 @@ public class ModifyFriendRememberModel {
     /**
      * code : 200
      * message : 获取成功
-     * obj : {"fmID":"85","fmtitle":"我去泰山玩了","fmcontent":"那里好好玩啊，下次有谁一起去吗？请告诉我那里好好玩啊，下次有谁一起去吗？请告诉我那里好好玩啊，下次有谁一起去吗？请告诉我那里好好玩啊，下次有谁一起去吗？请告诉我那里好好玩啊，下次有谁一起去吗？请告诉我","fmpic":"http://47.92.136.19/uploads/article/20180810/20180810/a5fba7bdbdef8beb653129c024d56cb8.jpeg","fmpartyID":"56","fmpartyName":"登峨眉山！","fmgotime":"2018-08-10","fmendtime":"2018-08-31","fmaddress":"山东省-泰安市-泰山区","percapitacost":"150.00","accesspassword":"2616","insertatext":"1","fmlable":"5","fmlableName":"烧烤"}
+     * obj : {"fmID":"253","fmtitle":"测试2","fmcontent":"","fmpic":[{"id":"14","fid":"253","pic":"http://47.92.136.19/uploads/article/20181228/0-2c289a933b288b4b8b6d7c0252ea4ebc3660.jpg"},{"id":"15","fid":"253","pic":"http://47.92.136.19/uploads/article/20181228/1-77fd8566e0537861146d3ecbc36761cd5176.jpg"},{"id":"16","fid":"253","pic":"http://47.92.136.19/uploads/article/20181228/2-18ed8e8f95a437f4bd10c78d6bb491bb7861.jpeg"},{"id":"17","fid":"253","pic":"http://47.92.136.19/uploads/article/20181228/3-18de54cef62efdf13747bb8cafacaafa5643.jpeg"}],"fmpartyID":"0","fmpartyName":"","fmgotime":"","fmendtime":"","fmaddress":"","percapitacost":"","accesspassword":"","insertatext":"1","fmlable":"6","fmlableName":"蹦极"}
      */
 
     private int code;
@@ -42,26 +44,25 @@ public class ModifyFriendRememberModel {
 
     public static class ObjBean {
         /**
-         * fmID : 85
-         * fmtitle : 我去泰山玩了
-         * fmcontent : 那里好好玩啊，下次有谁一起去吗？请告诉我那里好好玩啊，下次有谁一起去吗？请告诉我那里好好玩啊，下次有谁一起去吗？请告诉我那里好好玩啊，下次有谁一起去吗？请告诉我那里好好玩啊，下次有谁一起去吗？请告诉我
-         * fmpic : http://47.92.136.19/uploads/article/20180810/20180810/a5fba7bdbdef8beb653129c024d56cb8.jpeg
-         * fmpartyID : 56
-         * fmpartyName : 登峨眉山！
-         * fmgotime : 2018-08-10
-         * fmendtime : 2018-08-31
-         * fmaddress : 山东省-泰安市-泰山区
-         * percapitacost : 150.00
-         * accesspassword : 2616
+         * fmID : 253
+         * fmtitle : 测试2
+         * fmcontent :
+         * fmpic : [{"id":"14","fid":"253","pic":"http://47.92.136.19/uploads/article/20181228/0-2c289a933b288b4b8b6d7c0252ea4ebc3660.jpg"},{"id":"15","fid":"253","pic":"http://47.92.136.19/uploads/article/20181228/1-77fd8566e0537861146d3ecbc36761cd5176.jpg"},{"id":"16","fid":"253","pic":"http://47.92.136.19/uploads/article/20181228/2-18ed8e8f95a437f4bd10c78d6bb491bb7861.jpeg"},{"id":"17","fid":"253","pic":"http://47.92.136.19/uploads/article/20181228/3-18de54cef62efdf13747bb8cafacaafa5643.jpeg"}]
+         * fmpartyID : 0
+         * fmpartyName :
+         * fmgotime :
+         * fmendtime :
+         * fmaddress :
+         * percapitacost :
+         * accesspassword :
          * insertatext : 1
-         * fmlable : 5
-         * fmlableName : 烧烤
+         * fmlable : 6
+         * fmlableName : 蹦极
          */
 
         private String fmID;
         private String fmtitle;
         private String fmcontent;
-        private String fmpic;
         private String fmpartyID;
         private String fmpartyName;
         private String fmgotime;
@@ -72,6 +73,7 @@ public class ModifyFriendRememberModel {
         private String insertatext;
         private String fmlable;
         private String fmlableName;
+        private List<FmpicBean> fmpic;
 
         public String getFmID() {
             return fmID;
@@ -95,14 +97,6 @@ public class ModifyFriendRememberModel {
 
         public void setFmcontent(String fmcontent) {
             this.fmcontent = fmcontent;
-        }
-
-        public String getFmpic() {
-            return fmpic;
-        }
-
-        public void setFmpic(String fmpic) {
-            this.fmpic = fmpic;
         }
 
         public String getFmpartyID() {
@@ -183,6 +177,50 @@ public class ModifyFriendRememberModel {
 
         public void setFmlableName(String fmlableName) {
             this.fmlableName = fmlableName;
+        }
+
+        public List<FmpicBean> getFmpic() {
+            return fmpic;
+        }
+
+        public void setFmpic(List<FmpicBean> fmpic) {
+            this.fmpic = fmpic;
+        }
+
+        public static class FmpicBean {
+            /**
+             * id : 14
+             * fid : 253
+             * pic : http://47.92.136.19/uploads/article/20181228/0-2c289a933b288b4b8b6d7c0252ea4ebc3660.jpg
+             */
+
+            private String id;
+            private String fid;
+            private String pic;
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+
+            public String getFid() {
+                return fid;
+            }
+
+            public void setFid(String fid) {
+                this.fid = fid;
+            }
+
+            public String getPic() {
+                return pic;
+            }
+
+            public void setPic(String pic) {
+                this.pic = pic;
+            }
         }
     }
 }

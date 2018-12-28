@@ -1,4 +1,4 @@
-package com.yiwo.friendscometogether.adapter;
+package com.yiwo.friendscometogether.newadapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.custom.PicDescribeDialog;
@@ -19,10 +18,10 @@ import com.yiwo.friendscometogether.model.UserIntercalationPicModel;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/7/26.
+ * Created by Administrator on 2018/12/28.
  */
 
-public class IntercalationAdapter extends RecyclerView.Adapter<IntercalationAdapter.ViewHolder> {
+public class NewIntercalationAdapter extends RecyclerView.Adapter<NewIntercalationAdapter.ViewHolder> {
 
     private Context context;
     private List<UserIntercalationPicModel> data;
@@ -49,7 +48,7 @@ public class IntercalationAdapter extends RecyclerView.Adapter<IntercalationAdap
         this.describeListener = describeListener;
     }
 
-    public IntercalationAdapter(List<UserIntercalationPicModel> data) {
+    public NewIntercalationAdapter(List<UserIntercalationPicModel> data) {
         this.data = data;
     }
 
@@ -87,7 +86,7 @@ public class IntercalationAdapter extends RecyclerView.Adapter<IntercalationAdap
             holder.rlAdd.setVisibility(View.GONE);
             holder.rlImg.setVisibility(View.VISIBLE);
             holder.ivDelete.setVisibility(View.VISIBLE);
-            Glide.with(context).load("file://" + data.get(position).getPic()).into(holder.iv);
+            Glide.with(context).load(data.get(position).getPic()).into(holder.iv);
             if (!data.get(position).getDescribe().equals("")) {
                 holder.tvContent.setText(data.get(position).getDescribe());
             } else {

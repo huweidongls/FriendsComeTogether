@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -48,6 +49,7 @@ import com.yiwo.friendscometogether.model.UserActiveListModel;
 import com.yiwo.friendscometogether.model.UserIntercalationPicModel;
 import com.yiwo.friendscometogether.model.UserLabelModel;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newadapter.NewIntercalationAdapter;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.GetJsonDataUtil;
 import com.yiwo.friendscometogether.utils.StringUtils;
@@ -141,9 +143,6 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
     @BindView(R.id.activity_create_intercalation_rv)
     RecyclerView recyclerView;
 
-    private IntercalationAdapter adapter;
-    private List<UserIntercalationPicModel> mList;
-
     private String fmId = "";
 
     private int mYear;
@@ -187,6 +186,14 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
     private String now;
 
     private List<UserLabelModel.ObjBean> labelList;
+
+    /**
+     * 获取首图及其他图片的recyclerview
+     */
+    private NewIntercalationAdapter adapter;
+    private List<UserIntercalationPicModel> mList;
+    private List<ModifyFriendRememberModel.ObjBean.FmpicBean> mOldList;
+    private static final int REQUEST_CODE1 = 0x00000012;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -326,10 +333,46 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
                                 }else {
                                     tvIsIntercalation.setText("否");
                                 }
-                                Picasso.with(ModifyFriendRememberActivity.this).load(model.getObj().getFmpic()).into(ivTitle);
-                                ivTitle.setVisibility(View.VISIBLE);
-                                tvFirstIv.setVisibility(View.VISIBLE);
-                                ivDelete.setVisibility(View.VISIBLE);
+//                                Picasso.with(ModifyFriendRememberActivity.this).load(model.getObj().getFmpic()).into(ivTitle);
+//                                ivTitle.setVisibility(View.VISIBLE);
+//                                tvFirstIv.setVisibility(View.VISIBLE);
+//                                ivDelete.setVisibility(View.VISIBLE);
+
+                                mOldList = model.getObj().getFmpic();
+                                mList = new ArrayList<>();
+                                for (int i = 0; i<mOldList.size(); i++){
+                                    mList.add(new UserIntercalationPicModel(mOldList.get(i).getPic(), ""));
+                                }
+                                GridLayoutManager manager = new GridLayoutManager(ModifyFriendRememberActivity.this, 3);
+                                recyclerView.setLayoutManager(manager);
+                                adapter = new NewIntercalationAdapter(mList);
+                                adapter.setDescribe(false);
+                                recyclerView.setAdapter(adapter);
+                                adapter.setListener(new NewIntercalationAdapter.OnAddImgListener() {
+                                    @Override
+                                    public void onAddImg() {
+                                        //限数量的多选(比喻最多9张)
+                                        ImageSelector.builder()
+                                                .useCamera(true) // 设置是否使用拍照
+                                                .setSingle(false)  //设置是否单选
+                                                .setMaxSelectCount(9 - mList.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+//                        .setSelected(selected) // 把已选的图片传入默认选中。
+                                                .start(ModifyFriendRememberActivity.this, REQUEST_CODE1); // 打开相册
+                                    }
+                                }, new NewIntercalationAdapter.OnDeleteImgListener() {
+                                    @Override
+                                    public void onDeleteImg(int i) {
+                                        mList.remove(i);
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                }, new NewIntercalationAdapter.OnAddDescribeListener() {
+                                    @Override
+                                    public void onAddDescribe(int i, String s) {
+                                        mList.get(i).setDescribe(s);
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                });
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -440,6 +483,15 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
             ivTitle.setVisibility(View.VISIBLE);
             tvFirstIv.setVisibility(View.VISIBLE);
             ivDelete.setVisibility(View.VISIBLE);
+        }
+        if (requestCode == REQUEST_CODE1 && data != null) {
+            //获取选择器返回的数据
+            List<String> pic = data.getStringArrayListExtra(ImageSelector.SELECT_RESULT);
+            for (int i = 0; i < pic.size(); i++) {
+                Log.i("333", pic.get(i));
+                mList.add(new UserIntercalationPicModel("file://"+pic.get(i), ""));
+            }
+            adapter.notifyDataSetChanged();
         }
     }
 
@@ -769,8 +821,8 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
 
                 }
             };
-            observable.observeOn(Schedulers.newThread())
-                    .subscribeOn(AndroidSchedulers.mainThread())
+            observable.subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer);
         }else {
             ViseHttp.POST(NetConfig.saveFriendRememberUrl)
