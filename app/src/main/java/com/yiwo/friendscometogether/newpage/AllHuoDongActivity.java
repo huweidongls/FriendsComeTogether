@@ -67,8 +67,7 @@ public class AllHuoDongActivity extends BaseActivity {
 
         fragmentList = new ArrayList<>();
         fragmentList.add(new HuoDongApplyFragment());
-//        fragmentList.add(new HuoDongHistoryFragment());
-        fragmentList.add(new YouJiFragment());
+        fragmentList.add(new HuoDongHistoryFragment());
         mViewPagerFragmentAdapter = new AllRememberViewpagerAdapter(mFragmentManager, fragmentList);
         mViewPager.setAdapter(mViewPagerFragmentAdapter);
 
