@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:test="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:id="@+id/ll_huodong_history"
     android:background="@color/white_ffffff"
@@ -16,7 +18,8 @@
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <ImageView
+    <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+        test:radius1="12px"
         android:id="@+id/iv_image_huodong"
         android:layout_marginTop="30px"
         android:layout_marginLeft="32px"
@@ -51,7 +54,7 @@
                 android:text="扁脸折耳猫"
                 android:textColor="#333333"
                 android:textSize="32px"
-                android:layout_width="wrap_content"
+                android:layout_width="300px"
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout

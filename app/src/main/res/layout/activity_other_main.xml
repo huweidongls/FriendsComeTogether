@@ -51,6 +51,7 @@
                 android:layout_width="150px"
                 android:layout_height="150px" />
             <RelativeLayout
+                android:visibility="visible"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/bg_red_left_35px"
                 android:layout_marginTop="55px"
@@ -85,6 +86,20 @@
                     android:layout_width="2px"
                     android:layout_height="48px"></RelativeLayout>
 
+            </RelativeLayout>
+            <RelativeLayout
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/bg_red_left_35px"
+                android:layout_marginTop="55px"
+                android:layout_width="164px"
+                android:layout_height="70px">
+                <ImageView
+                    android:layout_width="38px"
+                    android:layout_height="37px"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="69px"
+                    android:src="@mipmap/tongxunlu"/>
             </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
