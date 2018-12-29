@@ -76,6 +76,15 @@ public class HomeDataModel {
         private String data_type;
         private List<String> pfpic;
         private List<CommentListBean> comment_list;
+        private String userID;
+
+        public String getUserID() {
+            return userID;
+        }
+
+        public void setUserID(String userID) {
+            this.userID = userID;
+        }
 
         public String getPfID() {
             return pfID;

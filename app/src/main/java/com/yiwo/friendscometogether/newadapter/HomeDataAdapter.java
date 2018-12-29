@@ -1,18 +1,33 @@
 package com.yiwo.friendscometogether.newadapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
+import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
+import com.yiwo.friendscometogether.pages.LoginActivity;
+import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.utils.TokenUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -24,6 +39,8 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
 
     private Context context;
     private List<HomeDataModel.ObjBean> data;
+    private SpImp spImp;
+    private String uid = "";
 
     public HomeDataAdapter(List<HomeDataModel.ObjBean> data) {
         this.data = data;
@@ -32,6 +49,7 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
+        spImp = new SpImp(context);
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_fragment_home_rv_new, parent, false);
         ScreenAdapterTools.getInstance().loadView(view);
         ViewHolder holder = new ViewHolder(view);
@@ -39,7 +57,7 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         if(data.get(position).getData_type().equals("1")){
             holder.llYouju.setVisibility(View.VISIBLE);
             holder.llYouji.setVisibility(View.GONE);
@@ -47,10 +65,67 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
             holder.tvYoujuName.setText(data.get(position).getUsername());
             holder.tvYoujuTime.setText(data.get(position).getPftime());
             if(data.get(position).getFollow().equals("1")){
+                holder.tvYoujuFocus.setBackgroundResource(R.drawable.bg_red_24px);
+                holder.tvYoujuFocus.setTextColor(Color.parseColor("#ffffff"));
                 holder.tvYoujuFocus.setText("已关注");
             }else {
+                holder.tvYoujuFocus.setBackgroundResource(R.drawable.bg_gray_border_24px);
+                holder.tvYoujuFocus.setTextColor(Color.parseColor("#363636"));
                 holder.tvYoujuFocus.setText("+关注");
             }
+            holder.tvYoujuFocus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    uid = spImp.getUID();
+                    Intent intent = new Intent();
+                    if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                        ViseHttp.POST(NetConfig.focusOnToFriendTogetherUrl)
+                                .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.focusOnToFriendTogetherUrl))
+                                .addParam("userID", uid)
+                                .addParam("pfID", data.get(position).getPfID())
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String result) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(result);
+                                            if(jsonObject.getInt("code") == 200){
+                                                FocusOnToFriendTogetherModel model = new Gson().fromJson(result, FocusOnToFriendTogetherModel.class);
+                                                if (model.getCode() == 200) {
+                                                    if (model.getObj().equals("1")) {
+                                                        holder.tvYoujuFocus.setBackgroundResource(R.drawable.bg_red_24px);
+                                                        holder.tvYoujuFocus.setTextColor(Color.parseColor("#ffffff"));
+                                                        holder.tvYoujuFocus.setText("已关注");
+                                                        data.get(position).setFollow("1");
+                                                        notifyDataSetChanged();
+                                                        Toast.makeText(context, "关注成功", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        holder.tvYoujuFocus.setBackgroundResource(R.drawable.bg_gray_border_24px);
+                                                        holder.tvYoujuFocus.setTextColor(Color.parseColor("#363636"));
+                                                        holder.tvYoujuFocus.setText("+关注");
+                                                        data.get(position).setFollow("0");
+                                                        notifyDataSetChanged();
+                                                        Toast.makeText(context, "取消关注成功", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            }else if(jsonObject.getInt("code") == 400) {
+                                                Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+
+                                    }
+                                });
+                    } else {
+                        intent.setClass(context, LoginActivity.class);
+                        context.startActivity(intent);
+                    }
+                }
+            });
             Glide.with(context).load(data.get(position).getPfpic().get(0)).into(holder.ivYoujuTitle);
             holder.tvYoujuTitle.setText(data.get(position).getPftitle());
             holder.tvYoujuContent.setText(data.get(position).getPfcontent());
@@ -63,10 +138,57 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
             holder.tvYoujiNickname.setText(data.get(position).getUsername());
             holder.tvYoujiTime.setText(data.get(position).getPftime());
             if(data.get(position).getFollow().equals("1")){
+                holder.tvYoujiFocus.setBackgroundResource(R.drawable.bg_red_24px);
+                holder.tvYoujiFocus.setTextColor(Color.parseColor("#ffffff"));
                 holder.tvYoujiFocus.setText("已关注");
             }else {
+                holder.tvYoujiFocus.setBackgroundResource(R.drawable.bg_gray_border_24px);
+                holder.tvYoujiFocus.setTextColor(Color.parseColor("#363636"));
                 holder.tvYoujiFocus.setText("+关注");
             }
+            holder.tvYoujiFocus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    uid = spImp.getUID();
+                    Intent intent = new Intent();
+                    if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                        if(data.get(position).getFollow().equals("0")){
+                            ViseHttp.POST(NetConfig.userFocusUrl)
+                                    .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userFocusUrl))
+                                    .addParam("uid", uid)
+                                    .addParam("likeId", data.get(position).getUserID())
+                                    .request(new ACallback<String>() {
+                                        @Override
+                                        public void onSuccess(String result) {
+                                            try {
+                                                JSONObject jsonObject = new JSONObject(result);
+                                                if (jsonObject.getInt("code") == 200) {
+                                                    data.get(position).setFollow("1");
+                                                    notifyDataSetChanged();
+                                                    holder.tvYoujiFocus.setBackgroundResource(R.drawable.bg_red_24px);
+                                                    holder.tvYoujiFocus.setTextColor(Color.parseColor("#ffffff"));
+                                                    holder.tvYoujiFocus.setText("已关注");
+                                                    Toast.makeText(context, "关注成功", Toast.LENGTH_SHORT).show();
+                                                }else if(jsonObject.getInt("code") == 400){
+
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFail(int errCode, String errMsg) {
+
+                                        }
+                                    });
+                        }
+                    }else {
+                        intent.setClass(context, LoginActivity.class);
+                        context.startActivity(intent);
+                    }
+                }
+            });
             Glide.with(context).load(data.get(position).getPfpic().get(0)).into(holder.ivYoujiTitle1);
             Glide.with(context).load(data.get(position).getPfpic().get(1)).into(holder.ivYoujiTitle2);
             Glide.with(context).load(data.get(position).getPfpic().get(2)).into(holder.ivYoujiTitle3);
