@@ -28,11 +28,16 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.MainActivity;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
+import com.yiwo.friendscometogether.model.AllBannerModel;
 import com.yiwo.friendscometogether.model.BaiduCityModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.HomeDataAdapter;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
+import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
+import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,6 +58,8 @@ public class HomeFragment1 extends BaseFragment {
     private Context context = getContext();
     View rootView;
 
+    @BindView(R.id.fragment_home_banner)
+    Banner banner;
     @BindView(R.id.rv_home)
     RecyclerView recyclerView;
     @BindView(R.id.tv_city_name)
@@ -120,6 +127,48 @@ public class HomeFragment1 extends BaseFragment {
     }
 
     private void initData() {
+
+        ViseHttp.POST(NetConfig.allBannerUrl)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.allBannerUrl))
+                .addParam("type", "1")
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200) {
+                                Gson gson = new Gson();
+                                final AllBannerModel bannerModel = gson.fromJson(data, AllBannerModel.class);
+                                List<String> list = new ArrayList<>();
+                                for (int i = 0; i < bannerModel.getObj().size(); i++) {
+                                    list.add(bannerModel.getObj().get(i).getPic());
+                                }
+                                init(banner, list);
+                                banner.setOnBannerListener(new OnBannerListener() {
+                                    @Override
+                                    public void OnBannerClick(int position) {
+                                        if (bannerModel.getObj().get(position).getFirst_type().equals("0")) {
+                                            Intent intent = new Intent(getContext(), DetailsOfFriendTogetherActivity.class);
+                                            intent.putExtra("pfID", bannerModel.getObj().get(position).getLeftid());
+                                            startActivity(intent);
+                                        } else if (bannerModel.getObj().get(position).getFirst_type().equals("1")) {
+                                            Intent intent = new Intent(getContext(), DetailsOfFriendsActivity.class);
+                                            intent.putExtra("fmid", bannerModel.getObj().get(position).getLeftid());
+                                            startActivity(intent);
+                                        }
+                                    }
+                                });
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
 
         uid = spImp.getUID();
         ViseHttp.POST(NetConfig.newHomeData)
