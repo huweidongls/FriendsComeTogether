@@ -21,6 +21,7 @@ import com.yiwo.friendscometogether.newmodel.YouJiListModel;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -66,6 +67,7 @@ public class YouJiFragment extends BaseFragment {
                 listModels.add(model1);
             }
         }
+        Collections.shuffle(listModels);
         rv_youji.setAdapter(new YouJiAdapter(listModels));
 
     }

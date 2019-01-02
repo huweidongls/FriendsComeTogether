@@ -23,6 +23,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -67,6 +70,8 @@ public class HomeFragment1 extends BaseFragment {
     private Context context = getContext();
     View rootView;
 
+    @BindView(R.id.home_refreshlayout)
+    RefreshLayout refreshLayout;
     @BindView(R.id.fragment_home_banner)
     Banner banner;
     @BindView(R.id.rv_home)
@@ -139,6 +144,8 @@ public class HomeFragment1 extends BaseFragment {
 
     private void initData() {
 
+        refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
+        refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
         ViseHttp.POST(NetConfig.allBannerUrl)
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.allBannerUrl))
                 .addParam("type", "1")
