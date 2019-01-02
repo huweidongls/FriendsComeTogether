@@ -286,6 +286,7 @@ public class HomeFragment1 extends BaseFragment {
         switch (view.getId()) {
             case R.id.ll_home_youji_all:
                 mainActivity.switchFragment(2);
+                mainActivity.startYouji();
                 break;
             case R.id.ll_home_youji_lvxing:
                 break;

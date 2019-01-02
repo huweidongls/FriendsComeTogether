@@ -100,9 +100,9 @@
                 android:layout_marginTop="15px"
                 android:layout_centerInParent="true"
                 android:id="@+id/menu_friend_remember"
-                android:layout_width="43px"
-                android:layout_height="43px"
-                android:background="@drawable/select_friends_remember"
+                android:layout_width="92px"
+                android:layout_height="68px"
+                android:background="@mipmap/jiahao"
                 android:scaleType="centerCrop" />
 
             <!--<TextView-->

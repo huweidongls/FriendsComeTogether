@@ -41,6 +41,14 @@ public class YouJiFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_youji,null);
         ScreenAdapterTools.getInstance().loadView(view);
         ButterKnife.bind(this, view);
+
+        initData();
+
+        return view;
+    }
+
+    private void initData() {
+
         refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
         refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
         // /设置布局管理器为2列，纵向
@@ -59,6 +67,6 @@ public class YouJiFragment extends BaseFragment {
             }
         }
         rv_youji.setAdapter(new YouJiAdapter(listModels));
-        return view;
+
     }
 }

@@ -267,6 +267,10 @@ public class MainActivity extends FragmentActivity {
         fragmentTransaction.commit();
     }
 
+    public void startYouji(){
+        ibIndex.setSelected(false);
+    }
+
     public void selectText(View v) {
 //        tvIndex.setSelected(false);
 //        tvFriendTogether.setSelected(false);
