@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether.newadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,11 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.YouJiListModel;
+import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
+import com.yiwo.friendscometogether.pages.VideoActivity;
 
 import java.util.List;
 
@@ -22,9 +26,9 @@ import java.util.List;
 
 public class YouJiAdapter extends RecyclerView.Adapter<YouJiAdapter.ViewHolder>{
 
-    private List<YouJiListModel> data;
+    private List<YouJiListModel.ObjBean> data;
     private Context context;
-    public YouJiAdapter(List<YouJiListModel> data){
+    public YouJiAdapter(List<YouJiListModel.ObjBean> data){
         this.data = data;
     }
     @Override
@@ -37,22 +41,49 @@ public class YouJiAdapter extends RecyclerView.Adapter<YouJiAdapter.ViewHolder>{
         return holder;
     }
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        if (data.get(position).getType() == 1){
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        if (data.get(position).getType().equals("1")){
 //            ViewGroup.LayoutParams layoutParams = holder.rv_youji.getLayoutParams();
 //            layoutParams.height = 546;//获取最终图片高度
 //            holder.rv_youji.setLayoutParams(layoutParams);//应用高度到布局中
             holder.rv_youji.setVisibility(View.VISIBLE);
             holder.rv_video.setVisibility(View.GONE);
-            Glide.with(context).load("http://s4.sinaimg.cn/bmiddle/4ecbc7eah83f76e6fdf73&690").into(holder.iv_youji);
+            Glide.with(context).load(data.get(position).getFmpic()).into(holder.iv_youji);
+            holder.tvYoujiTitle.setText(data.get(position).getFmtitle());
+            Glide.with(context).load(data.get(position).getUserpic()).into(holder.ivAvatar);
+            holder.tvUsername.setText(data.get(position).getUsername());
+            holder.tvTime.setText(data.get(position).getFmtime());
+            holder.tvGoodNum.setText(data.get(position).getFmgood());
         }else {
 //            ViewGroup.LayoutParams layoutParams = holder.rv_video.getLayoutParams();
 //            layoutParams.height = 458;//获取最终图片高度
 //            holder.rv_video.setLayoutParams(layoutParams);//应用高度到布局中
             holder.rv_video.setVisibility(View.VISIBLE);
             holder.rv_youji.setVisibility(View.GONE);
-            Glide.with(context).load("http://s4.sinaimg.cn/bmiddle/4ecbc7eah83f76e6fdf73&690").into(holder.iv_video);
+            Glide.with(context).load(data.get(position).getFmpic()).into(holder.iv_video);
         }
+
+        holder.rv_video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(context, VideoActivity.class);
+                it.putExtra("videoUrl", data.get(position).getVurl());
+                it.putExtra("title", data.get(position).getFmtitle());
+                it.putExtra("picUrl", data.get(position).getFmpic());
+                it.putExtra("vid", data.get(position).getFmID());
+                context.startActivity(it);
+            }
+        });
+
+        holder.rv_youji.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(context, DetailsOfFriendsActivity.class);
+                intent.putExtra("fmid", data.get(position).getFmID());
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -66,6 +97,11 @@ public class YouJiAdapter extends RecyclerView.Adapter<YouJiAdapter.ViewHolder>{
         private RelativeLayout rv_video;
         private ImageView iv_youji;
         private ImageView iv_video;
+        private TextView tvYoujiTitle;
+        private ImageView ivAvatar;
+        private TextView tvUsername;
+        private TextView tvTime;
+        private TextView tvGoodNum;
         //        https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=3585167714,172627266&fm=173&app=49&f=JPEG?w=640&h=497&s=1E8E136D4E4A74559805DDA20300F009
         public ViewHolder(View itemView) {
             super(itemView);
@@ -73,6 +109,11 @@ public class YouJiAdapter extends RecyclerView.Adapter<YouJiAdapter.ViewHolder>{
             rv_youji = itemView.findViewById(R.id.rv_youji);
             iv_youji = itemView.findViewById(R.id.iv_youju);
             iv_video = itemView.findViewById(R.id.iv_video);
+            tvYoujiTitle = itemView.findViewById(R.id.tv_youji_title);
+            ivAvatar = itemView.findViewById(R.id.iv_icon_user);
+            tvUsername = itemView.findViewById(R.id.tv_username);
+            tvTime = itemView.findViewById(R.id.tv_time);
+            tvGoodNum = itemView.findViewById(R.id.tv_good_num);
         }
     }
 }

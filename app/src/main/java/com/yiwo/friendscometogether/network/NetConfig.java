@@ -253,4 +253,6 @@ public class NetConfig {
     public static String guanZhuWoDe = "action/ac_user/get_AttentionTome";
     //首页新的列表数据接口
     public static String newHomeData = "action/ac_activity/Home_data";
+    //友记新的列表数据接口
+    public static String newYoujiData = "action/ac_article/Friends_List";
 }
