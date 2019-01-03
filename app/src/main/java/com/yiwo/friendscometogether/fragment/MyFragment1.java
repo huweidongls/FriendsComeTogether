@@ -289,7 +289,6 @@ public class MyFragment1 extends BaseFragment {
                 if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
                     Intent intent0 = new Intent();
                     intent0.setClass(getContext(), PersonMainActivity.class);
-                    intent0.putExtra("type_tade_or_wode",1);
                     intent0.putExtra("person_id",uid);
                     startActivity(intent0);
                 } else {

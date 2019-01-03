@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.newmodel.PersonMainModel;
 
 import java.util.List;
 
@@ -21,8 +22,8 @@ import java.util.List;
 public class TaRenZhuYeYouJiAdapter extends RecyclerView.Adapter<TaRenZhuYeYouJiAdapter.ViewHolder>{
 
     private Context context;
-    private List<String> data;
-    public TaRenZhuYeYouJiAdapter(List<String> list){
+    private List<PersonMainModel.ObjBean.FriendBean> data;
+    public TaRenZhuYeYouJiAdapter(List<PersonMainModel.ObjBean.FriendBean> list){
         this.data = list;
     }
     @Override

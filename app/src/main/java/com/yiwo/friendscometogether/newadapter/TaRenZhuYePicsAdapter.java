@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.UserFocusModel;
+import com.yiwo.friendscometogether.newmodel.PersonMainModel;
 import com.yiwo.friendscometogether.pages.MyPicturesActivity;
 import com.yiwo.friendscometogether.pages.OtherInformationActivity;
 import com.yiwo.friendscometogether.pages.OtherPicActivity;
@@ -28,9 +29,9 @@ import java.util.List;
 public class TaRenZhuYePicsAdapter extends RecyclerView.Adapter<TaRenZhuYePicsAdapter.ViewHolder>{
 
     private Context context;
-    private List<String> data;
+    private List<PersonMainModel.ObjBean.PhotoBean> data;
     private String person_id;
-    public TaRenZhuYePicsAdapter(List<String> data,String person_id){
+    public TaRenZhuYePicsAdapter(List<PersonMainModel.ObjBean.PhotoBean> data,String person_id){
         this.person_id = person_id;
         this.data = data;
     }
@@ -64,7 +65,7 @@ public class TaRenZhuYePicsAdapter extends RecyclerView.Adapter<TaRenZhuYePicsAd
             holder.tv_morePicNum.setText("+"+(data.size()-5));
         }else {
             holder.ll_lookmore.setVisibility(View.GONE);
-            Glide.with(context).load(data.get(position)).into(holder.imageView);
+            Glide.with(context).load(data.get(position).getUpicurl()).into(holder.imageView);
         }
     }
 

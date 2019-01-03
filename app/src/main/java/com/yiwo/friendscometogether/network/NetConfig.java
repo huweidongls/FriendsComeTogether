@@ -255,4 +255,6 @@ public class NetConfig {
     public static String newHomeData = "action/ac_activity/Home_data";
     //友记新的列表数据接口
     public static String newYoujiData = "action/ac_article/Friends_List";
+    //他人主页接口
+    public static String personMain = "action/ac_user/Homepage";
 }

@@ -20,6 +20,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.UserFocusModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.WoGuanZhuDeModel;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.pages.MyFocusActivity;
 import com.yiwo.friendscometogether.pages.OtherInformationActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -72,9 +73,10 @@ public class WoGuanZhuDeAdapter extends RecyclerView.Adapter<WoGuanZhuDeAdapter.
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(context, OtherInformationActivity.class);
-                it.putExtra("uid", bean.getLikeuserID());
+                Intent it = new Intent(context, PersonMainActivity.class);
+                it.putExtra("person_id", bean.getLikeuserID());
                 context.startActivity(it);
+
             }
         });
         holder.btn_yiguanzhu.setFocusable(false);
@@ -97,8 +99,6 @@ public class WoGuanZhuDeAdapter extends RecyclerView.Adapter<WoGuanZhuDeAdapter.
     public int getItemCount() {
         return data == null ? 0 : data.size();
     }
-
-
     class ViewHolder extends RecyclerView.ViewHolder{
         private LinearLayout ll;
         private ImageView iv_icon_user;
