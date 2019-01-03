@@ -271,7 +271,8 @@
         <activity android:name=".newpage.GuanZhuActivity" />
         <activity android:name=".newpage.MessageActivity" />
         <activity android:name=".newpage.YoujuShaixuanActivity" />
-        <activity android:name=".newpage.PersonMainActivity"></activity>
+        <activity android:name=".newpage.PersonMainActivity" />
+        <activity android:name=".newpage.PersonRememberActivity"></activity>
     </application>
 
 </manifest>

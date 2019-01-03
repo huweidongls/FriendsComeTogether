@@ -22,6 +22,8 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
+import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
+import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
@@ -61,6 +63,15 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
         if(data.get(position).getData_type().equals("1")){
             holder.llYouju.setVisibility(View.VISIBLE);
             holder.llYouji.setVisibility(View.GONE);
+            holder.llYouju.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                    intent.putExtra("pfID",data.get(position).getPfID());
+                    context.startActivity(intent);
+                }
+            });
             Glide.with(context).load(data.get(position).getHeadportrait()).into(holder.ivYoujuAvatar);
             holder.tvYoujuName.setText(data.get(position).getUsername());
             holder.tvYoujuTime.setText(data.get(position).getPftime());
@@ -134,6 +145,15 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
         }else {
             holder.llYouju.setVisibility(View.GONE);
             holder.llYouji.setVisibility(View.VISIBLE);
+            holder.llYouji.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(context, DetailsOfFriendsActivity.class);
+                    intent.putExtra("fmid", data.get(position).getPfID());
+                    context.startActivity(intent);
+                }
+            });
             Glide.with(context).load(data.get(position).getHeadportrait()).into(holder.ivYoujiAvatar);
             holder.tvYoujiNickname.setText(data.get(position).getUsername());
             holder.tvYoujiTime.setText(data.get(position).getPftime());
