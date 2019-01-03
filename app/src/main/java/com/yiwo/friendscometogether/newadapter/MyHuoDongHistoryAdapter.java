@@ -22,7 +22,9 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.HuoDongListModel;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
+import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.OrderCommentActivity;
 import com.yiwo.friendscometogether.pages.OtherInformationActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -147,6 +149,10 @@ public class MyHuoDongHistoryAdapter extends RecyclerView.Adapter<MyHuoDongHisto
         holder.tv_name_owner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent0 = new Intent();
+                intent0.setClass(context, PersonMainActivity.class);
+                intent0.putExtra("type_tade_or_wode",0);
+                context.startActivity(intent0);
 //                Intent intent = new Intent();
 //                intent.putExtra("uid", data.get(position).getCaptain());
 //                intent.setClass(context, OtherInformationActivity.class);

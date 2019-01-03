@@ -749,6 +749,5 @@ public class GuanZhuActivity extends BaseActivity {
 //                popupWindow.dismiss();
 //            }
 //        });
-
     }
 }

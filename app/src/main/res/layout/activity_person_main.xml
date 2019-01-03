@@ -6,7 +6,7 @@
     android:background="@color/white_ffffff"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.yiwo.friendscometogether.newpage.OtherMainActivity">
+    tools:context="com.yiwo.friendscometogether.newpage.PersonMainActivity">
     <RelativeLayout
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
@@ -25,6 +25,7 @@
 
         </RelativeLayout>
         <TextView
+            android:id="@+id/tv_title_wode_or_tade"
             android:layout_centerInParent="true"
             android:textSize="36px"
             android:text="他的主页"
@@ -51,6 +52,7 @@
                 android:layout_width="150px"
                 android:layout_height="150px" />
             <RelativeLayout
+                android:id="@+id/rl_algin_right_tade"
                 android:visibility="visible"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/bg_red_left_35px"
@@ -88,6 +90,7 @@
 
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/rl_algin_right_wode"
                 android:visibility="gone"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/bg_red_left_35px"
@@ -240,6 +243,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/tv_pics_wode_or_tade"
                     android:layout_marginLeft="32px"
                     android:layout_alignParentLeft="true"
                     android:text="他的照片"
@@ -249,6 +253,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <LinearLayout
+                    android:id="@+id/ll_person_all_pics"
                     android:layout_marginRight="30px"
                     android:layout_centerVertical="true"
                     android:gravity="center_vertical"
@@ -282,6 +287,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/tv_youji_wode_or_tade"
                     android:layout_marginLeft="32px"
                     android:layout_alignParentLeft="true"
                     android:text="他的友记"
@@ -324,6 +330,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/tv_youju_wode_or_tade"
                     android:layout_marginLeft="32px"
                     android:layout_alignParentLeft="true"
                     android:text="他的友聚"

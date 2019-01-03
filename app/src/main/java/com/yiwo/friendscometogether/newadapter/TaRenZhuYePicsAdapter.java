@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether.newadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,10 @@ import com.bumptech.glide.Glide;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.UserFocusModel;
+import com.yiwo.friendscometogether.pages.MyPicturesActivity;
+import com.yiwo.friendscometogether.pages.OtherInformationActivity;
+import com.yiwo.friendscometogether.pages.OtherPicActivity;
+import com.yiwo.friendscometogether.sp.SpImp;
 
 import java.util.List;
 
@@ -24,8 +29,9 @@ public class TaRenZhuYePicsAdapter extends RecyclerView.Adapter<TaRenZhuYePicsAd
 
     private Context context;
     private List<String> data;
-
-    public TaRenZhuYePicsAdapter(List<String> data){
+    private String person_id;
+    public TaRenZhuYePicsAdapter(List<String> data,String person_id){
+        this.person_id = person_id;
         this.data = data;
     }
     @Override
@@ -42,6 +48,19 @@ public class TaRenZhuYePicsAdapter extends RecyclerView.Adapter<TaRenZhuYePicsAd
         if (position>=5){
             holder.imageView.setVisibility(View.GONE);
             holder.ll_lookmore.setVisibility(View.VISIBLE);
+            holder.ll_lookmore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    if (person_id.equals(new SpImp(context).getUID())){
+                        intent.setClass(context, MyPicturesActivity.class);
+                    }else {
+                        intent.putExtra("otheruid",person_id);
+                        intent.setClass(context, OtherPicActivity.class);
+                    }
+                    context.startActivity(intent);
+                }
+            });
             holder.tv_morePicNum.setText("+"+(data.size()-5));
         }else {
             holder.ll_lookmore.setVisibility(View.GONE);
