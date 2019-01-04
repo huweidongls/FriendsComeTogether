@@ -272,7 +272,8 @@
         <activity android:name=".newpage.MessageActivity" />
         <activity android:name=".newpage.YoujuShaixuanActivity" />
         <activity android:name=".newpage.PersonMainActivity" />
-        <activity android:name=".newpage.PersonRememberActivity"></activity>
+        <activity android:name=".newpage.PersonRememberActivity" />
+        <activity android:name=".newpage.PersonTogetherActivity"></activity>
     </application>
 
 </manifest>

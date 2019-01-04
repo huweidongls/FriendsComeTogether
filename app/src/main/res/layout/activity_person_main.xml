@@ -61,10 +61,12 @@
                 android:layout_width="287px"
                 android:layout_height="70px">
                 <RelativeLayout
+                    android:id="@+id/rl_add_friend"
                     android:layout_alignParentLeft="true"
                     android:layout_width="155px"
                     android:layout_height="70px">
                     <ImageView
+                        android:id="@+id/iv_addfriend"
                         android:layout_width="38px"
                         android:layout_height="37px"
                         android:layout_centerVertical="true"
@@ -72,10 +74,12 @@
                         android:src="@mipmap/tarenzhuye_tianjiahaoyou"/>
                 </RelativeLayout>
                 <RelativeLayout
+                    android:id="@+id/rl_guanzhu"
                     android:layout_alignParentRight="true"
                     android:layout_width="130px"
                     android:layout_height="70px">
                     <ImageView
+                        android:id="@+id/iv_image_guanzhu"
                         android:layout_width="38px"
                         android:layout_height="37px"
                         android:layout_centerInParent="true"
@@ -165,9 +169,10 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:textSize="26px"
-                android:text="哈尔滨"
+                android:text="哈尔滨哈尔滨哈尔滨哈尔滨哈尔滨哈尔滨哈尔滨哈尔滨哈尔滨哈尔滨哈尔滨哈尔滨哈尔滨哈尔滨哈尔滨哈尔滨哈尔滨"
                 android:ellipsize="end"
-                android:maxWidth="350px"
+                android:maxLines="1"
+                android:maxLength="10"
                 android:background="@drawable/bg_gray_d8d8d8_8px"
                 android:layout_width="wrap_content"
                 android:layout_height="56px" />
@@ -186,7 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/tv_youju_num"
+                    android:id="@+id/tv_guanzhu_num"
                     android:layout_marginBottom="4px"
                     android:textSize="40px"
                     android:textColor="@color/white_ffffff"
@@ -198,7 +203,7 @@
                     android:textSize="28px"
                     android:textColor="@color/white_ffffff"
                     android:layout_gravity="center_horizontal"
-                    android:text="友聚"
+                    android:text="关注"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -329,14 +334,19 @@
                         android:layout_height="19px" />
                 </LinearLayout>
             </RelativeLayout>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view_youji"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="32px"
-                android:layout_marginLeft="32px"
-                android:layout_marginBottom="10px">
-            </android.support.v7.widget.RecyclerView>
+                android:descendantFocusability="blocksDescendants">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_youji"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32px"
+                    android:layout_marginLeft="32px"
+                    android:layout_marginBottom="10px">
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
             <RelativeLayout
                 android:layout_marginTop="50px"
                 android:layout_marginBottom="10px"
@@ -373,6 +383,10 @@
                         android:layout_height="19px" />
                 </LinearLayout>
             </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants">
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view_youju"
                 android:layout_width="match_parent"
@@ -381,6 +395,7 @@
                 android:layout_marginLeft="32px"
                 android:layout_marginBottom="10px">
             </android.support.v7.widget.RecyclerView>
+        </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.imagepreview.Consts;
+import com.yiwo.friendscometogether.imagepreview.ImagePreviewActivity;
 import com.yiwo.friendscometogether.model.UserFocusModel;
 import com.yiwo.friendscometogether.newmodel.PersonMainModel;
 import com.yiwo.friendscometogether.pages.MyPicturesActivity;
@@ -20,6 +22,7 @@ import com.yiwo.friendscometogether.pages.OtherInformationActivity;
 import com.yiwo.friendscometogether.pages.OtherPicActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,7 +48,7 @@ public class TaRenZhuYePicsAdapter extends RecyclerView.Adapter<TaRenZhuYePicsAd
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         if (position>=5){
             holder.imageView.setVisibility(View.GONE);
             holder.ll_lookmore.setVisibility(View.VISIBLE);
@@ -67,6 +70,26 @@ public class TaRenZhuYePicsAdapter extends RecyclerView.Adapter<TaRenZhuYePicsAd
             holder.ll_lookmore.setVisibility(View.GONE);
             Glide.with(context).load(data.get(position).getUpicurl()).into(holder.imageView);
         }
+        final int list_image_size ;
+        if (data.size()>=5){
+            list_image_size = 5;
+        }else {
+            list_image_size = data.size();
+        }
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<String> urlList = new ArrayList<>();
+                for (int i = 0; i<list_image_size; i++){
+                    urlList.add(data.get(i).getUpicurl());
+                }
+                Intent intent = new Intent(context, ImagePreviewActivity.class);
+                intent.putStringArrayListExtra("imageList", (ArrayList<String>) urlList);
+                intent.putExtra(Consts.START_ITEM_POSITION, position);
+                intent.putExtra(Consts.START_IAMGE_POSITION, position);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -22,7 +22,7 @@
     <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
         test:radius1="16px"
         android:layout_marginTop="20px"
-        android:id="@+id/iv_taren_pics"
+        android:id="@+id/iv_taren_pics0"
         android:src="@mipmap/welcome"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
@@ -32,6 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            android:id="@+id/iv_taren_pics1"
             test:radius1="16px"
             android:src="@mipmap/welcome"
             android:layout_weight="1"
@@ -40,6 +41,7 @@
             android:layout_marginRight="3.5px"
             android:layout_height="176px" />
         <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            android:id="@+id/iv_taren_pics2"
             test:radius1="16px"
             android:layout_marginRight="3.5px"
             android:layout_marginLeft="3.5px"
@@ -49,6 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="176px" />
         <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            android:id="@+id/iv_taren_pics3"
             test:radius1="16px"
             android:layout_marginLeft="3.5px"
             android:src="@mipmap/welcome"
@@ -58,6 +61,7 @@
             android:layout_height="176px" />
     </LinearLayout>
     <TextView
+        android:id="@+id/tv_youji_name"
         android:lines="1"
         android:ellipsize="end"
         android:layout_marginTop="20px"
@@ -74,6 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:id="@+id/ll_youji_location"
             android:background="@drawable/bg_white_efeff3_8px"
             android:gravity="center_vertical"
             android:layout_width="wrap_content"
@@ -85,6 +90,7 @@
                 android:layout_width="22px"
                 android:layout_height="28px" />
             <TextView
+                android:id="@+id/tv_youji_location"
                 android:layout_marginRight="18px"
                 android:textColor="#272A2C"
                 android:textSize="26px"
@@ -109,6 +115,7 @@
                 android:layout_width="48px"
                 android:layout_height="31px" />
             <TextView
+                android:id="@+id/tv_youji_see_num"
                 android:layout_marginRight="30px"
                 android:lines="1"
                 android:ellipsize="end"
@@ -126,6 +133,7 @@
                 android:layout_width="42px"
                 android:layout_height="37px" />
             <TextView
+                android:id="@+id/tv_youji_pinglun_num"
                 android:lines="1"
                 android:ellipsize="end"
                 android:text="26"

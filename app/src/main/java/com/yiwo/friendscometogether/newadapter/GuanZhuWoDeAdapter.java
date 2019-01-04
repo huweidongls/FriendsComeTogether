@@ -61,13 +61,12 @@ public class GuanZhuWoDeAdapter extends RecyclerView.Adapter<GuanZhuWoDeAdapter.
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(context, OtherInformationActivity.class);
-                it.putExtra("uid", bean.getUserID());
-                context.startActivity(it);
-
-//                Intent it = new Intent(context, PersonMainActivity.class);
-//                it.putExtra("person_id", bean.getUserID());
+//                Intent it = new Intent(context, OtherInformationActivity.class);
+//                it.putExtra("uid", bean.getUserID());
 //                context.startActivity(it);
+                Intent it = new Intent(context, PersonMainActivity.class);
+                it.putExtra("person_id", bean.getUserID());
+                context.startActivity(it);
             }
         });
         Glide.with(context).load(bean.getUpicurl()).into(holder.iv_icon_user);

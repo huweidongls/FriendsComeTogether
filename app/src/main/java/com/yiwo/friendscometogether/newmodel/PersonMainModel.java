@@ -1,5 +1,6 @@
 package com.yiwo.friendscometogether.newmodel;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
