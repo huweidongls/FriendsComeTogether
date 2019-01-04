@@ -246,26 +246,38 @@
                     android:layout_height="120px">
 
                     <RelativeLayout
+                        android:id="@+id/rl1"
                         android:layout_weight="1"
                         android:layout_width="0px"
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/tv_rl1"
+                            android:textStyle="bold"
                             android:layout_centerInParent="true"
                             android:textColor="@color/black_333333"
-                            android:textSize="32px"
+                            android:textSize="42px"
                             android:text="推荐"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
+                        <View
+                            android:id="@+id/v1"
+                            android:layout_alignParentBottom="true"
+                            android:background="#D84C37"
+                            android:layout_width="match_parent"
+                            android:layout_height="10px"/>
+
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/rl2"
                         android:layout_weight="1"
                         android:layout_width="0px"
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/tv_rl2"
                             android:layout_centerInParent="true"
                             android:textColor="@color/black_333333"
                             android:textSize="32px"
@@ -273,14 +285,24 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
+                        <View
+                            android:visibility="gone"
+                            android:id="@+id/v2"
+                            android:layout_alignParentBottom="true"
+                            android:background="#D84C37"
+                            android:layout_width="match_parent"
+                            android:layout_height="10px"/>
+
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/rl3"
                         android:layout_weight="1"
                         android:layout_width="0px"
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/tv_rl3"
                             android:layout_centerInParent="true"
                             android:textColor="@color/black_333333"
                             android:textSize="32px"
@@ -288,20 +310,38 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
+                        <View
+                            android:visibility="gone"
+                            android:id="@+id/v3"
+                            android:layout_alignParentBottom="true"
+                            android:background="#D84C37"
+                            android:layout_width="match_parent"
+                            android:layout_height="10px"/>
+
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/rl4"
                         android:layout_weight="1"
                         android:layout_width="0px"
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/tv_rl4"
                             android:layout_centerInParent="true"
                             android:textColor="@color/black_333333"
                             android:textSize="32px"
                             android:text="我的关注"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
+
+                        <View
+                            android:visibility="gone"
+                            android:id="@+id/v4"
+                            android:layout_alignParentBottom="true"
+                            android:background="#D84C37"
+                            android:layout_width="match_parent"
+                            android:layout_height="10px"/>
 
                     </RelativeLayout>
 

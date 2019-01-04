@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -60,6 +61,29 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         holder.tvBaoming.setText("报名人数: "+data.get(position).getHave_num()+"人");
         holder.tvShengyu.setText("剩余名额: "+data.get(position).getSurplus()+"人");
         holder.tvAddress.setText(data.get(position).getPfaddress());
+
+        holder.touchConflictLayout.setmSetOnSlideListener(new SolveClickTouchConflictLayout.OnSlideListener() {
+            @Override
+            public void onRightToLeftSlide() {
+                Toast.makeText(context, "left", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLeftToRightSlide() {
+                Toast.makeText(context, "right", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onUpToDownSlide() {
+
+            }
+
+            @Override
+            public void onDownToUpSlide() {
+
+            }
+        });
+
 //        holder.ivTitle.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -103,6 +127,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         private TextView tvShengyu;
         private TextView tvAddress;
         private LinearLayout ll;
+        private SolveClickTouchConflictLayout touchConflictLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -117,6 +142,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             tvShengyu = itemView.findViewById(R.id.tv_shengyu);
             tvAddress = itemView.findViewById(R.id.tv_address);
             ll = itemView.findViewById(R.id.ll);
+            touchConflictLayout = itemView.findViewById(R.id.click_layout);
         }
     }
 

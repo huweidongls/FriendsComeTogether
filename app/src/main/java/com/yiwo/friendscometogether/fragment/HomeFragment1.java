@@ -5,17 +5,20 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +29,7 @@ import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -88,6 +92,23 @@ public class HomeFragment1 extends BaseFragment {
     LinearLayout youji_tandian;
     @BindView(R.id.ll_home_youji_gonglue)
     LinearLayout youji_gonglue;
+    @BindView(R.id.tv_rl1)
+    TextView tvRl1;
+    @BindView(R.id.tv_rl2)
+    TextView tvRl2;
+    @BindView(R.id.tv_rl3)
+    TextView tvRl3;
+    @BindView(R.id.tv_rl4)
+    TextView tvRl4;
+    @BindView(R.id.v1)
+    View v1;
+    @BindView(R.id.v2)
+    View v2;
+    @BindView(R.id.v3)
+    View v3;
+    @BindView(R.id.v4)
+    View v4;
+
 
     private LocationManager locationManager;
     private double latitude = 0.0;
@@ -112,6 +133,7 @@ public class HomeFragment1 extends BaseFragment {
     private List<HomeDataModel.ObjBean> mList;
 
     private String cityId = "";
+    private String type = "1";
 
     @Nullable
     @Override
@@ -146,6 +168,13 @@ public class HomeFragment1 extends BaseFragment {
 
         refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
         refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                refresh(type);
+                refreshLayout.finishRefresh(1000);
+            }
+        });
         ViseHttp.POST(NetConfig.allBannerUrl)
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.allBannerUrl))
                 .addParam("type", "1")
@@ -191,7 +220,7 @@ public class HomeFragment1 extends BaseFragment {
         uid = spImp.getUID();
         ViseHttp.POST(NetConfig.newHomeData)
                 .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.newHomeData))
-                .addParam("type", "1")
+                .addParam("type", type)
                 .addParam("uid", uid)
                 .request(new ACallback<String>() {
                     @Override
@@ -286,7 +315,8 @@ public class HomeFragment1 extends BaseFragment {
         }
     }
     @OnClick({R.id.ll_home_youji_gonglue,R.id.ll_home_youji_all,
-                    R.id.ll_home_youji_meishi,R.id.ll_home_youji_tandian,R.id.ll_home_youji_lvxing, R.id.locationRl, R.id.ll_search, R.id.iv_msg})
+                    R.id.ll_home_youji_meishi,R.id.ll_home_youji_tandian,R.id.ll_home_youji_lvxing, R.id.locationRl, R.id.ll_search, R.id.iv_msg,
+    R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl4})
     public void onClick(View view) {
         MainActivity mainActivity = (MainActivity) getActivity();
         Intent intent = new Intent();
@@ -327,7 +357,102 @@ public class HomeFragment1 extends BaseFragment {
                     startActivity(intent);
                 }
                 break;
+            case R.id.rl1:
+                tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                tvRl2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                tvRl3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                tvRl4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                tvRl4.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                v1.setVisibility(View.VISIBLE);
+                v2.setVisibility(View.GONE);
+                v3.setVisibility(View.GONE);
+                v4.setVisibility(View.GONE);
+                refresh("1");
+                break;
+            case R.id.rl2:
+                tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                tvRl2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                tvRl3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                tvRl4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                tvRl4.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                v1.setVisibility(View.GONE);
+                v2.setVisibility(View.VISIBLE);
+                v3.setVisibility(View.GONE);
+                v4.setVisibility(View.GONE);
+                refresh("2");
+                break;
+            case R.id.rl3:
+                tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                tvRl2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                tvRl3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                tvRl4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                tvRl4.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                v1.setVisibility(View.GONE);
+                v2.setVisibility(View.GONE);
+                v3.setVisibility(View.VISIBLE);
+                v4.setVisibility(View.GONE);
+                refresh("3");
+                break;
+            case R.id.rl4:
+                tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                tvRl2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                tvRl3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                tvRl4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                tvRl4.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                v1.setVisibility(View.GONE);
+                v2.setVisibility(View.GONE);
+                v3.setVisibility(View.GONE);
+                v4.setVisibility(View.VISIBLE);
+                if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                    refresh("4");
+                } else {
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
         }
+    }
+
+    private void refresh(String type1){
+        type = type1;
+        ViseHttp.POST(NetConfig.newHomeData)
+                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.newHomeData))
+                .addParam("type", type)
+                .addParam("uid", uid)
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.getInt("code") == 200){
+                                Gson gson = new Gson();
+                                HomeDataModel model = gson.fromJson(data, HomeDataModel.class);
+                                mList.clear();
+                                mList.addAll(model.getObj());
+                                adapter.notifyDataSetChanged();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
     }
 
     @Override
