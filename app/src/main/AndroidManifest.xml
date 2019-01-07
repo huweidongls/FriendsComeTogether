@@ -274,7 +274,8 @@
         <activity android:name=".newpage.PersonMainActivity" />
         <activity android:name=".newpage.PersonRememberActivity" />
         <activity android:name=".newpage.PersonTogetherActivity" />
-        <activity android:name=".newpage.SuperLikeActivity"></activity>
+        <activity android:name=".newpage.SuperLikeActivity" />
+        <activity android:name=".newpage.SuperLikeSxActivity"></activity>
     </application>
 
 </manifest>
