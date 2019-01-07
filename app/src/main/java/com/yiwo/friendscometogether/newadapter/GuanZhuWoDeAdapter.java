@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class GuanZhuWoDeAdapter extends RecyclerView.Adapter<GuanZhuWoDeAdapter.
 //                context.startActivity(it);
                 Intent it = new Intent(context, PersonMainActivity.class);
                 it.putExtra("person_id", bean.getUserID());
+                Log.d("person_id",bean.getUserID());
                 context.startActivity(it);
             }
         });

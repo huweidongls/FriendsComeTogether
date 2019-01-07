@@ -138,7 +138,7 @@ public class TaRenZhuYeYouJuAdapter extends RecyclerView.Adapter<TaRenZhuYeYouJu
         holder.tv_content.setText(data.get(position).getPfcontent());
         holder.tv_location.setText(data.get(position).getPfaddress());
         holder.tv_see_num.setText(data.get(position).getPflook());
-        holder.tv_pinglun_num.setText("*");
+        holder.tv_pinglun_num.setText(data.get(position).getPfcomment());
         holder.tv_time.setText(data.get(position).getPftime());
 
     }

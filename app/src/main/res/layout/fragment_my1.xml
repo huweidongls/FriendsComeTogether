@@ -366,9 +366,9 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="33px"
                         android:id="@+id/iv1"
-                        android:src="@mipmap/unpay"
+                        android:src="@mipmap/wode_xiangce"
                         android:layout_width="48px"
-                        android:layout_height="40px" />
+                        android:layout_height="41px" />
 
                     <TextView
                         android:layout_centerVertical="true"
@@ -400,9 +400,9 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="33px"
                         android:id="@+id/iv2"
-                        android:src="@mipmap/unpay"
+                        android:src="@mipmap/wode_haoyou"
                         android:layout_width="48px"
-                        android:layout_height="40px" />
+                        android:layout_height="42px" />
 
                     <TextView
                         android:layout_centerVertical="true"
@@ -434,7 +434,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="33px"
                         android:id="@+id/iv3"
-                        android:src="@mipmap/unpay"
+                        android:src="@mipmap/wode_pinglun"
                         android:layout_width="48px"
                         android:layout_height="40px" />
 
@@ -468,7 +468,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="33px"
                         android:id="@+id/iv4"
-                        android:src="@mipmap/unpay"
+                        android:src="@mipmap/wode_lishi"
                         android:layout_width="48px"
                         android:layout_height="40px" />
 
@@ -506,11 +506,11 @@
                 android:layout_height="105px">
 
                 <ImageView
-                    android:src="@mipmap/price"
+                    android:src="@mipmap/wode_shezhi"
                     android:layout_centerVertical="true"
                     android:id="@+id/iv5"
                     android:layout_marginLeft="33px"
-                    android:layout_width="42px"
+                    android:layout_width="48px"
                     android:layout_height="44px" />
 
                 <TextView

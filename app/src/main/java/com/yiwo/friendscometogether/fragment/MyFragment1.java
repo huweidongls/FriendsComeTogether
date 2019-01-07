@@ -34,6 +34,7 @@ import com.yiwo.friendscometogether.pages.MyFriendActivity;
 import com.yiwo.friendscometogether.pages.MyInformationActivity;
 import com.yiwo.friendscometogether.pages.MyOrderActivity;
 import com.yiwo.friendscometogether.pages.MyPicturesActivity;
+import com.yiwo.friendscometogether.pages.SetActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import org.json.JSONException;
@@ -150,7 +151,7 @@ public class MyFragment1 extends BaseFragment {
     }
 
     @OnClick({R.id.ll_order_all, R.id.ll_to_pay, R.id.ll_to_trip, R.id.ll_to_comment, R.id.ll_return_money, R.id.rl_my_picture, R.id.rl_my_friend,
-    R.id.rl_my_comment, R.id.rl_history, R.id.rl_person_set, R.id.ll_remember,R.id.ll_guanzhu, R.id.ll_huodong, R.id.ll_message,R.id.ll_person_page})
+    R.id.rl_my_comment, R.id.rl_history, R.id.rl_person_set, R.id.ll_remember,R.id.ll_guanzhu, R.id.ll_huodong, R.id.ll_message,R.id.ll_person_page,R.id.iv_avatar})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -242,7 +243,7 @@ public class MyFragment1 extends BaseFragment {
                 break;
             case R.id.rl_person_set:
                 if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
-                    intent.setClass(getContext(), MyInformationActivity.class);
+                    intent.setClass(getContext(), SetActivity.class);
                     startActivity(intent);
                 } else {
                     intent.setClass(getContext(), LoginActivity.class);
@@ -291,6 +292,15 @@ public class MyFragment1 extends BaseFragment {
                     intent0.setClass(getContext(), PersonMainActivity.class);
                     intent0.putExtra("person_id",uid);
                     startActivity(intent0);
+                } else {
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.iv_avatar:
+                if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                    intent.setClass(getContext(), MyInformationActivity.class);
+                    startActivity(intent);
                 } else {
                     intent.setClass(getContext(), LoginActivity.class);
                     startActivity(intent);

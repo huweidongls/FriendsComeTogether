@@ -1,6 +1,5 @@
 package com.yiwo.friendscometogether.newmodel;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,10 +8,11 @@ import java.util.List;
 
 public class PersonMainModel {
 
+
     /**
      * code : 200
      * message : 获取成功!
-     * obj : {"info":{"age":"19岁","address":"上海","userpic":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","autograph":"与嘿嘿嘿","sex":"1","userlike":"6","GiveCount":0,"friends":"1","follow":"1","fans":"2"},"Friend":[{"pfID":"255","pftitle":"测试1","pfcontent":"","pfpic":["http://47.92.136.19/uploads/article/20190102/0-0e0b140da0a63100da9b1d232f75634b5528.jpeg","http://47.92.136.19/uploads/article/20190102/1-3df8f46d81c343fb9c28c64c295c5afd5398.jpeg","http://47.92.136.19/uploads/article/20190102/2-bdb8edca03f1c22a38a7bb2dbde9f79a3775.jpeg","http://47.92.136.19/uploads/article/20190102/3-8dd6d7e4c2fbf5da736b98995813835f8150.jpeg"],"userID":"38","pfaddress":"","pflook":"7","pftime":"23小时前","fmcomment":"0","headportrait":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","comment_list":[],"commentcount":"0"},{"pfID":"256","pftitle":"测试2","pfcontent":"","pfpic":["http://47.92.136.19/uploads/article/20190102/0-8c3978afb9c26ce9ec36077fa6129b352911.jpeg","http://47.92.136.19/uploads/article/20190102/1-a03590c7e11f13f13c72073851b9d5ca9691.jpeg","http://47.92.136.19/uploads/article/20190102/2-35f897e48347866abcb46477e9539b095082.jpeg","http://47.92.136.19/uploads/article/20190102/3-9765b714be3404b6c193192e547a921a6047.jpeg","http://47.92.136.19/uploads/article/20190102/4-182513ed25fd537421d19da1c4deb4be4228.jpeg","http://47.92.136.19/uploads/article/20190102/5-d18db348b7d2e9cc3eab7d1fb656fbdb6769.jpeg"],"userID":"38","pfaddress":"","pflook":"8","pftime":"23小时前","fmcomment":"0","headportrait":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","comment_list":[],"commentcount":"0"},{"pfID":"257","pftitle":"测试3","pfcontent":"","pfpic":["http://47.92.136.19/uploads/article/20190102/0-5a522a353191fcb453880be7b11d92645621.jpeg","http://47.92.136.19/uploads/article/20190102/1-e183eccb97a142e007c33fab37c047b88391.jpeg","http://47.92.136.19/uploads/article/20190102/2-e2a7babb799c5054767abf36df888f883609.jpeg","http://47.92.136.19/uploads/article/20190102/3-5246fc9ed4204e7f4845918862d169ba4652.jpeg","http://47.92.136.19/uploads/article/20190102/4-e5d837fd19e812005384aac91ca1d1361966.jpeg","http://47.92.136.19/uploads/article/20190102/5-7f1db6e048a73f1737e29fe0758e11522211.jpeg"],"userID":"38","pfaddress":"","pflook":"9","pftime":"23小时前","fmcomment":"0","headportrait":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","comment_list":[],"commentcount":"0"}],"activity":[{"pfID":"111","pftitle":"这是一个测试活动","pfcontent":"测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试","pfpic":["http://47.92.136.19/uploads/xingcheng/20181225/1558b898215c6a63fa2fba4523880e94.png"],"pfaddress":"故宫","pflook":"97","pftime":"1星期前","follow":"1","headportrait":"http://47.92.136.19/uploads/header/2018/12/25/03b037823c230dd7aea6a34123aed9e7154571847112.jpg","username":"哈尔滨精纳科技有限公司","author":"1"}],"Photo":[{"uid":"66","userID":"38","upicurl":"http://47.92.136.19/uploads/header/2018/08/16/e833291d6bf838e3be831414c4346960153439944612.jpg","utime":"2018-08-16 14:04:06","udel":"0"},{"uid":"74","userID":"38","upicurl":"http://47.92.136.19/uploads/header/2018/08/27/dbd10defbc78146ac28d044c611230df153536143412.jpg","utime":"2018-08-27 17:17:14","udel":"0"},{"uid":"89","userID":"38","upicurl":"http://47.92.136.19/uploads/header/2018/09/03/9ba011e84ec5e52f41d837ae403a3e59153595464016.jpg","utime":"2018-09-03 14:04:00","udel":"0"}]}
+     * obj : {"info":{"wy_accid":"yy18346038613","age":"19岁","address":"上海","userpic":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","autograph":"与嘿嘿嘿","sex":"1","userlike":"7","GiveCount":6,"friends":"1","follow":"1","fans":"4"},"Friend":[{"pfID":"255","pftitle":"测试1","pfcontent":"","pfpic":["http://47.92.136.19/uploads/article/20190102/0-0e0b140da0a63100da9b1d232f75634b5528.jpeg","http://47.92.136.19/uploads/article/20190102/1-3df8f46d81c343fb9c28c64c295c5afd5398.jpeg","http://47.92.136.19/uploads/article/20190102/2-bdb8edca03f1c22a38a7bb2dbde9f79a3775.jpeg","http://47.92.136.19/uploads/article/20190102/3-8dd6d7e4c2fbf5da736b98995813835f8150.jpeg"],"userID":"38","pfaddress":"","pflook":"34","pftime":"4天前","fmcomment":"3","headportrait":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","comment_list":[{"fcID":"200","fmID":"255","fctitle":"123","fctime":"1546592951","userID":"38","buserID":"0","fcreply":"0","fcquote":null,"fcquoteid":null,"which_fcID":"0","greatcomment":"0"},{"fcID":"201","fmID":"255","fctitle":"一样一样回复:一样一样:1","fctime":"1546593290","userID":"38","buserID":"38","fcreply":"200","fcquote":null,"fcquoteid":null,"which_fcID":"200","greatcomment":"200"}],"commentcount":"3"},{"pfID":"256","pftitle":"测试2","pfcontent":"","pfpic":["http://47.92.136.19/uploads/article/20190102/0-8c3978afb9c26ce9ec36077fa6129b352911.jpeg","http://47.92.136.19/uploads/article/20190102/1-a03590c7e11f13f13c72073851b9d5ca9691.jpeg","http://47.92.136.19/uploads/article/20190102/2-35f897e48347866abcb46477e9539b095082.jpeg","http://47.92.136.19/uploads/article/20190102/3-9765b714be3404b6c193192e547a921a6047.jpeg","http://47.92.136.19/uploads/article/20190102/4-182513ed25fd537421d19da1c4deb4be4228.jpeg","http://47.92.136.19/uploads/article/20190102/5-d18db348b7d2e9cc3eab7d1fb656fbdb6769.jpeg"],"userID":"38","pfaddress":"","pflook":"32","pftime":"4天前","fmcomment":"0","headportrait":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","comment_list":[],"commentcount":"0"},{"pfID":"257","pftitle":"测试3","pfcontent":"","pfpic":["http://47.92.136.19/uploads/article/20190102/0-5a522a353191fcb453880be7b11d92645621.jpeg","http://47.92.136.19/uploads/article/20190102/1-e183eccb97a142e007c33fab37c047b88391.jpeg","http://47.92.136.19/uploads/article/20190102/2-e2a7babb799c5054767abf36df888f883609.jpeg","http://47.92.136.19/uploads/article/20190102/3-5246fc9ed4204e7f4845918862d169ba4652.jpeg","http://47.92.136.19/uploads/article/20190102/4-e5d837fd19e812005384aac91ca1d1361966.jpeg","http://47.92.136.19/uploads/article/20190102/5-7f1db6e048a73f1737e29fe0758e11522211.jpeg"],"userID":"38","pfaddress":"","pflook":"31","pftime":"4天前","fmcomment":"1","headportrait":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","comment_list":[{"fcID":"199","fmID":"257","fctitle":"恩兔","fctime":"1546569325","userID":"38","buserID":"0","fcreply":"0","fcquote":null,"fcquoteid":null,"which_fcID":"0","greatcomment":"0"}],"commentcount":"1"}],"activity":[{"pfID":"111","pftitle":"这是一个测试活动","pfcomment":"20","pfcontent":"测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试","pfpic":"http://47.92.136.19/uploads/xingcheng/20181225/1558b898215c6a63fa2fba4523880e94.png","pfaddress":"故宫","pflook":"125","pftime":"1星期前","follow":"1","headportrait":"http://47.92.136.19/uploads/header/2018/12/25/03b037823c230dd7aea6a34123aed9e7154571847112.jpg","username":"哈尔滨精纳科技有限公司","author":"1"}],"Photo":[{"uid":"66","userID":"38","upicurl":"http://47.92.136.19/uploads/header/2018/08/16/e833291d6bf838e3be831414c4346960153439944612.jpg","utime":"2018-08-16 14:04:06","udel":"0"},{"uid":"74","userID":"38","upicurl":"http://47.92.136.19/uploads/header/2018/08/27/dbd10defbc78146ac28d044c611230df153536143412.jpg","utime":"2018-08-27 17:17:14","udel":"0"},{"uid":"89","userID":"38","upicurl":"http://47.92.136.19/uploads/header/2018/09/03/9ba011e84ec5e52f41d837ae403a3e59153595464016.jpg","utime":"2018-09-03 14:04:00","udel":"0"}]}
      */
 
     private int code;
@@ -45,9 +45,9 @@ public class PersonMainModel {
 
     public static class ObjBean {
         /**
-         * info : {"age":"19岁","address":"上海","userpic":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","autograph":"与嘿嘿嘿","sex":"1","userlike":"6","GiveCount":0,"friends":"1","follow":"1","fans":"2"}
-         * Friend : [{"pfID":"255","pftitle":"测试1","pfcontent":"","pfpic":["http://47.92.136.19/uploads/article/20190102/0-0e0b140da0a63100da9b1d232f75634b5528.jpeg","http://47.92.136.19/uploads/article/20190102/1-3df8f46d81c343fb9c28c64c295c5afd5398.jpeg","http://47.92.136.19/uploads/article/20190102/2-bdb8edca03f1c22a38a7bb2dbde9f79a3775.jpeg","http://47.92.136.19/uploads/article/20190102/3-8dd6d7e4c2fbf5da736b98995813835f8150.jpeg"],"userID":"38","pfaddress":"","pflook":"7","pftime":"23小时前","fmcomment":"0","headportrait":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","comment_list":[],"commentcount":"0"},{"pfID":"256","pftitle":"测试2","pfcontent":"","pfpic":["http://47.92.136.19/uploads/article/20190102/0-8c3978afb9c26ce9ec36077fa6129b352911.jpeg","http://47.92.136.19/uploads/article/20190102/1-a03590c7e11f13f13c72073851b9d5ca9691.jpeg","http://47.92.136.19/uploads/article/20190102/2-35f897e48347866abcb46477e9539b095082.jpeg","http://47.92.136.19/uploads/article/20190102/3-9765b714be3404b6c193192e547a921a6047.jpeg","http://47.92.136.19/uploads/article/20190102/4-182513ed25fd537421d19da1c4deb4be4228.jpeg","http://47.92.136.19/uploads/article/20190102/5-d18db348b7d2e9cc3eab7d1fb656fbdb6769.jpeg"],"userID":"38","pfaddress":"","pflook":"8","pftime":"23小时前","fmcomment":"0","headportrait":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","comment_list":[],"commentcount":"0"},{"pfID":"257","pftitle":"测试3","pfcontent":"","pfpic":["http://47.92.136.19/uploads/article/20190102/0-5a522a353191fcb453880be7b11d92645621.jpeg","http://47.92.136.19/uploads/article/20190102/1-e183eccb97a142e007c33fab37c047b88391.jpeg","http://47.92.136.19/uploads/article/20190102/2-e2a7babb799c5054767abf36df888f883609.jpeg","http://47.92.136.19/uploads/article/20190102/3-5246fc9ed4204e7f4845918862d169ba4652.jpeg","http://47.92.136.19/uploads/article/20190102/4-e5d837fd19e812005384aac91ca1d1361966.jpeg","http://47.92.136.19/uploads/article/20190102/5-7f1db6e048a73f1737e29fe0758e11522211.jpeg"],"userID":"38","pfaddress":"","pflook":"9","pftime":"23小时前","fmcomment":"0","headportrait":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","comment_list":[],"commentcount":"0"}]
-         * activity : [{"pfID":"111","pftitle":"这是一个测试活动","pfcontent":"测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试","pfpic":["http://47.92.136.19/uploads/xingcheng/20181225/1558b898215c6a63fa2fba4523880e94.png"],"pfaddress":"故宫","pflook":"97","pftime":"1星期前","follow":"1","headportrait":"http://47.92.136.19/uploads/header/2018/12/25/03b037823c230dd7aea6a34123aed9e7154571847112.jpg","username":"哈尔滨精纳科技有限公司","author":"1"}]
+         * info : {"wy_accid":"yy18346038613","age":"19岁","address":"上海","userpic":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","autograph":"与嘿嘿嘿","sex":"1","userlike":"7","GiveCount":6,"friends":"1","follow":"1","fans":"4"}
+         * Friend : [{"pfID":"255","pftitle":"测试1","pfcontent":"","pfpic":["http://47.92.136.19/uploads/article/20190102/0-0e0b140da0a63100da9b1d232f75634b5528.jpeg","http://47.92.136.19/uploads/article/20190102/1-3df8f46d81c343fb9c28c64c295c5afd5398.jpeg","http://47.92.136.19/uploads/article/20190102/2-bdb8edca03f1c22a38a7bb2dbde9f79a3775.jpeg","http://47.92.136.19/uploads/article/20190102/3-8dd6d7e4c2fbf5da736b98995813835f8150.jpeg"],"userID":"38","pfaddress":"","pflook":"34","pftime":"4天前","fmcomment":"3","headportrait":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","comment_list":[{"fcID":"200","fmID":"255","fctitle":"123","fctime":"1546592951","userID":"38","buserID":"0","fcreply":"0","fcquote":null,"fcquoteid":null,"which_fcID":"0","greatcomment":"0"},{"fcID":"201","fmID":"255","fctitle":"一样一样回复:一样一样:1","fctime":"1546593290","userID":"38","buserID":"38","fcreply":"200","fcquote":null,"fcquoteid":null,"which_fcID":"200","greatcomment":"200"}],"commentcount":"3"},{"pfID":"256","pftitle":"测试2","pfcontent":"","pfpic":["http://47.92.136.19/uploads/article/20190102/0-8c3978afb9c26ce9ec36077fa6129b352911.jpeg","http://47.92.136.19/uploads/article/20190102/1-a03590c7e11f13f13c72073851b9d5ca9691.jpeg","http://47.92.136.19/uploads/article/20190102/2-35f897e48347866abcb46477e9539b095082.jpeg","http://47.92.136.19/uploads/article/20190102/3-9765b714be3404b6c193192e547a921a6047.jpeg","http://47.92.136.19/uploads/article/20190102/4-182513ed25fd537421d19da1c4deb4be4228.jpeg","http://47.92.136.19/uploads/article/20190102/5-d18db348b7d2e9cc3eab7d1fb656fbdb6769.jpeg"],"userID":"38","pfaddress":"","pflook":"32","pftime":"4天前","fmcomment":"0","headportrait":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","comment_list":[],"commentcount":"0"},{"pfID":"257","pftitle":"测试3","pfcontent":"","pfpic":["http://47.92.136.19/uploads/article/20190102/0-5a522a353191fcb453880be7b11d92645621.jpeg","http://47.92.136.19/uploads/article/20190102/1-e183eccb97a142e007c33fab37c047b88391.jpeg","http://47.92.136.19/uploads/article/20190102/2-e2a7babb799c5054767abf36df888f883609.jpeg","http://47.92.136.19/uploads/article/20190102/3-5246fc9ed4204e7f4845918862d169ba4652.jpeg","http://47.92.136.19/uploads/article/20190102/4-e5d837fd19e812005384aac91ca1d1361966.jpeg","http://47.92.136.19/uploads/article/20190102/5-7f1db6e048a73f1737e29fe0758e11522211.jpeg"],"userID":"38","pfaddress":"","pflook":"31","pftime":"4天前","fmcomment":"1","headportrait":"http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg","username":"一样一样","comment_list":[{"fcID":"199","fmID":"257","fctitle":"恩兔","fctime":"1546569325","userID":"38","buserID":"0","fcreply":"0","fcquote":null,"fcquoteid":null,"which_fcID":"0","greatcomment":"0"}],"commentcount":"1"}]
+         * activity : [{"pfID":"111","pftitle":"这是一个测试活动","pfcomment":"20","pfcontent":"测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试","pfpic":"http://47.92.136.19/uploads/xingcheng/20181225/1558b898215c6a63fa2fba4523880e94.png","pfaddress":"故宫","pflook":"125","pftime":"1星期前","follow":"1","headportrait":"http://47.92.136.19/uploads/header/2018/12/25/03b037823c230dd7aea6a34123aed9e7154571847112.jpg","username":"哈尔滨精纳科技有限公司","author":"1"}]
          * Photo : [{"uid":"66","userID":"38","upicurl":"http://47.92.136.19/uploads/header/2018/08/16/e833291d6bf838e3be831414c4346960153439944612.jpg","utime":"2018-08-16 14:04:06","udel":"0"},{"uid":"74","userID":"38","upicurl":"http://47.92.136.19/uploads/header/2018/08/27/dbd10defbc78146ac28d044c611230df153536143412.jpg","utime":"2018-08-27 17:17:14","udel":"0"},{"uid":"89","userID":"38","upicurl":"http://47.92.136.19/uploads/header/2018/09/03/9ba011e84ec5e52f41d837ae403a3e59153595464016.jpg","utime":"2018-09-03 14:04:00","udel":"0"}]
          */
 
@@ -90,19 +90,21 @@ public class PersonMainModel {
 
         public static class InfoBean {
             /**
+             * wy_accid : yy18346038613
              * age : 19岁
              * address : 上海
              * userpic : http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg
              * username : 一样一样
              * autograph : 与嘿嘿嘿
              * sex : 1
-             * userlike : 6
-             * GiveCount : 0
+             * userlike : 7
+             * GiveCount : 6
              * friends : 1
              * follow : 1
-             * fans : 2
+             * fans : 4
              */
 
+            private String wy_accid;
             private String age;
             private String address;
             private String userpic;
@@ -114,6 +116,14 @@ public class PersonMainModel {
             private String friends;
             private String follow;
             private String fans;
+
+            public String getWy_accid() {
+                return wy_accid;
+            }
+
+            public void setWy_accid(String wy_accid) {
+                this.wy_accid = wy_accid;
+            }
 
             public String getAge() {
                 return age;
@@ -212,13 +222,13 @@ public class PersonMainModel {
              * pfpic : ["http://47.92.136.19/uploads/article/20190102/0-0e0b140da0a63100da9b1d232f75634b5528.jpeg","http://47.92.136.19/uploads/article/20190102/1-3df8f46d81c343fb9c28c64c295c5afd5398.jpeg","http://47.92.136.19/uploads/article/20190102/2-bdb8edca03f1c22a38a7bb2dbde9f79a3775.jpeg","http://47.92.136.19/uploads/article/20190102/3-8dd6d7e4c2fbf5da736b98995813835f8150.jpeg"]
              * userID : 38
              * pfaddress :
-             * pflook : 7
-             * pftime : 23小时前
-             * fmcomment : 0
+             * pflook : 34
+             * pftime : 4天前
+             * fmcomment : 3
              * headportrait : http://47.92.136.19/uploads/header/2018/09/07/0f66d4f7a98dc1bf8a0cb3a80f846a3815363073806.jpg
              * username : 一样一样
-             * comment_list : []
-             * commentcount : 0
+             * comment_list : [{"fcID":"200","fmID":"255","fctitle":"123","fctime":"1546592951","userID":"38","buserID":"0","fcreply":"0","fcquote":null,"fcquoteid":null,"which_fcID":"0","greatcomment":"0"},{"fcID":"201","fmID":"255","fctitle":"一样一样回复:一样一样:1","fctime":"1546593290","userID":"38","buserID":"38","fcreply":"200","fcquote":null,"fcquoteid":null,"which_fcID":"200","greatcomment":"200"}]
+             * commentcount : 3
              */
 
             private String pfID;
@@ -233,7 +243,7 @@ public class PersonMainModel {
             private String username;
             private String commentcount;
             private List<String> pfpic;
-            private List<?> comment_list;
+            private List<CommentListBean> comment_list;
 
             public String getPfID() {
                 return pfID;
@@ -331,12 +341,128 @@ public class PersonMainModel {
                 this.pfpic = pfpic;
             }
 
-            public List<?> getComment_list() {
+            public List<CommentListBean> getComment_list() {
                 return comment_list;
             }
 
-            public void setComment_list(List<?> comment_list) {
+            public void setComment_list(List<CommentListBean> comment_list) {
                 this.comment_list = comment_list;
+            }
+
+            public static class CommentListBean {
+                /**
+                 * fcID : 200
+                 * fmID : 255
+                 * fctitle : 123
+                 * fctime : 1546592951
+                 * userID : 38
+                 * buserID : 0
+                 * fcreply : 0
+                 * fcquote : null
+                 * fcquoteid : null
+                 * which_fcID : 0
+                 * greatcomment : 0
+                 */
+
+                private String fcID;
+                private String fmID;
+                private String fctitle;
+                private String fctime;
+                private String userID;
+                private String buserID;
+                private String fcreply;
+                private Object fcquote;
+                private Object fcquoteid;
+                private String which_fcID;
+                private String greatcomment;
+
+                public String getFcID() {
+                    return fcID;
+                }
+
+                public void setFcID(String fcID) {
+                    this.fcID = fcID;
+                }
+
+                public String getFmID() {
+                    return fmID;
+                }
+
+                public void setFmID(String fmID) {
+                    this.fmID = fmID;
+                }
+
+                public String getFctitle() {
+                    return fctitle;
+                }
+
+                public void setFctitle(String fctitle) {
+                    this.fctitle = fctitle;
+                }
+
+                public String getFctime() {
+                    return fctime;
+                }
+
+                public void setFctime(String fctime) {
+                    this.fctime = fctime;
+                }
+
+                public String getUserID() {
+                    return userID;
+                }
+
+                public void setUserID(String userID) {
+                    this.userID = userID;
+                }
+
+                public String getBuserID() {
+                    return buserID;
+                }
+
+                public void setBuserID(String buserID) {
+                    this.buserID = buserID;
+                }
+
+                public String getFcreply() {
+                    return fcreply;
+                }
+
+                public void setFcreply(String fcreply) {
+                    this.fcreply = fcreply;
+                }
+
+                public Object getFcquote() {
+                    return fcquote;
+                }
+
+                public void setFcquote(Object fcquote) {
+                    this.fcquote = fcquote;
+                }
+
+                public Object getFcquoteid() {
+                    return fcquoteid;
+                }
+
+                public void setFcquoteid(Object fcquoteid) {
+                    this.fcquoteid = fcquoteid;
+                }
+
+                public String getWhich_fcID() {
+                    return which_fcID;
+                }
+
+                public void setWhich_fcID(String which_fcID) {
+                    this.which_fcID = which_fcID;
+                }
+
+                public String getGreatcomment() {
+                    return greatcomment;
+                }
+
+                public void setGreatcomment(String greatcomment) {
+                    this.greatcomment = greatcomment;
+                }
             }
         }
 
@@ -344,10 +470,11 @@ public class PersonMainModel {
             /**
              * pfID : 111
              * pftitle : 这是一个测试活动
+             * pfcomment : 20
              * pfcontent : 测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试
-             * pfpic : ["http://47.92.136.19/uploads/xingcheng/20181225/1558b898215c6a63fa2fba4523880e94.png"]
+             * pfpic : http://47.92.136.19/uploads/xingcheng/20181225/1558b898215c6a63fa2fba4523880e94.png
              * pfaddress : 故宫
-             * pflook : 97
+             * pflook : 125
              * pftime : 1星期前
              * follow : 1
              * headportrait : http://47.92.136.19/uploads/header/2018/12/25/03b037823c230dd7aea6a34123aed9e7154571847112.jpg
@@ -357,7 +484,9 @@ public class PersonMainModel {
 
             private String pfID;
             private String pftitle;
+            private String pfcomment;
             private String pfcontent;
+            private String pfpic;
             private String pfaddress;
             private String pflook;
             private String pftime;
@@ -365,7 +494,6 @@ public class PersonMainModel {
             private String headportrait;
             private String username;
             private String author;
-            private List<String> pfpic;
 
             public String getPfID() {
                 return pfID;
@@ -383,12 +511,28 @@ public class PersonMainModel {
                 this.pftitle = pftitle;
             }
 
+            public String getPfcomment() {
+                return pfcomment;
+            }
+
+            public void setPfcomment(String pfcomment) {
+                this.pfcomment = pfcomment;
+            }
+
             public String getPfcontent() {
                 return pfcontent;
             }
 
             public void setPfcontent(String pfcontent) {
                 this.pfcontent = pfcontent;
+            }
+
+            public String getPfpic() {
+                return pfpic;
+            }
+
+            public void setPfpic(String pfpic) {
+                this.pfpic = pfpic;
             }
 
             public String getPfaddress() {
@@ -445,14 +589,6 @@ public class PersonMainModel {
 
             public void setAuthor(String author) {
                 this.author = author;
-            }
-
-            public List<String> getPfpic() {
-                return pfpic;
-            }
-
-            public void setPfpic(List<String> pfpic) {
-                this.pfpic = pfpic;
             }
         }
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_f8f8f8"
     tools:context="com.yiwo.friendscometogether.pages.SetActivity">
 
     <LinearLayout
@@ -13,10 +14,17 @@
 
         <RelativeLayout
             android:id="@+id/activity_set_rl_top"
-            style="@style/rl_top_bar">
+            android:background="@color/white_ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="88px">
 
             <TextView
-                style="@style/tv_top_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/black_333333"
+                android:textStyle="bold"
+                android:textSize="36px"
                 android:text="设置" />
 
             <RelativeLayout
@@ -24,7 +32,11 @@
                 android:layout_width="100px"
                 android:layout_height="match_parent">
 
-                <ImageView style="@style/iv_return" />
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/back_b"
+                    android:layout_width="21px"
+                    android:layout_height="36px" />
 
             </RelativeLayout>
 
@@ -61,103 +73,128 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="12px"
-            android:background="@color/line" />
+            android:layout_height="30px"
+             />
 
         <RelativeLayout
+            android:background="@color/white_ffffff"
             android:id="@+id/activity_set_rl_feedback"
             android:layout_width="match_parent"
-            android:layout_height="88px">
+            android:layout_height="94px">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="40px"
+                android:layout_marginLeft="30px"
                 android:text="意见反馈"
-                android:textColor="@color/black_333333"
-                android:textSize="28px" />
+                android:textColor="#5A5A5A"
+                android:textSize="30px" />
 
             <ImageView
                 android:layout_width="12px"
                 android:layout_height="24px"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="42px"
+                android:layout_marginRight="30px"
                 android:src="@mipmap/right" />
         </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="12px"
+            android:layout_height="2px"
             android:background="@color/line" />
 
         <RelativeLayout
             android:id="@+id/activity_set_rl_clear_cache"
             android:layout_width="match_parent"
-            android:layout_height="88px">
+            android:layout_height="94px"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/white_ffffff">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="40px"
+                android:layout_marginLeft="30px"
                 android:text="清除缓存"
-                android:textColor="@color/black_333333"
-                android:textSize="28px" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:textColor="#5A5A5A"
+                android:textSize="30px" />
+            <LinearLayout
                 android:layout_centerVertical="true"
-                android:layout_marginRight="42px"
-                android:text="0MB"
-                android:textColor="@color/black_333333"
-                android:textSize="28px" />
+                android:layout_marginRight="30px"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10px"
+                    android:text="0MB"
+                    android:textColor="#5A5A5A"
+                    android:textSize="28px"
+                    />
+                <ImageView
+                    android:layout_width="12px"
+                    android:layout_height="24px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/right" />
+            </LinearLayout>
+
         </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="12px"
-            android:background="@color/line" />
+            android:layout_height="2px" />
 
         <RelativeLayout
+            android:background="@color/white_ffffff"
             android:id="@+id/activity_set_rl_user_agreement"
             android:layout_width="match_parent"
-            android:layout_height="88px">
+            android:layout_height="94px">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="40px"
+                android:layout_marginLeft="30px"
                 android:text="用户协议"
-                android:textColor="@color/black_333333"
-                android:textSize="28px" />
+                android:textColor="#5A5A5A"
+                android:textSize="30px" />
 
             <ImageView
                 android:layout_width="12px"
                 android:layout_height="24px"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="42px"
+                android:layout_marginRight="30px"
                 android:src="@mipmap/right" />
         </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="12px"
-            android:background="@color/line" />
+            android:layout_height="30px"
+            />
+        <Button
+            android:id="@+id/activity_set_exit_login_bt"
+            android:layout_width="match_parent"
+            android:layout_height="94px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white_ffffff"
+            android:textAlignment="gravity"
+            android:layout_gravity="start"
+            android:paddingLeft="30px"
+            android:gravity="start|center_vertical"
+            android:text="注销登录"
+            android:textColor="#5a5a5a"
+            android:textSize="30px" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/activity_set_exit_login_bt"
-        android:layout_width="match_parent"
-        android:layout_height="98px"
-        android:layout_alignParentBottom="true"
-        android:background="@color/yellow_ff9d00"
-        android:text="注销登录"
-        android:textColor="@color/white_ffffff"
-        android:textSize="30px" />
+
 </RelativeLayout>

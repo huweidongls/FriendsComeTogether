@@ -114,6 +114,7 @@ public class PersonMainActivity extends BaseActivity {
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(PersonMainActivity.this);
         person_id = getIntent().getStringExtra("person_id");
+        Log.d("person_id",person_id);
         spImp = new SpImp(PersonMainActivity.this);
         if (spImp.getUID().equals(person_id)){
             type_tade_or_wode = 1;
@@ -138,6 +139,7 @@ public class PersonMainActivity extends BaseActivity {
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.personMain))
                 .addParam("uid", spImp.getUID())
                 .addParam("tid", person_id)
+                .addParam("type", "0")
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
@@ -247,14 +249,18 @@ public class PersonMainActivity extends BaseActivity {
                 break;
             case  R.id.ll_person_all_youji:
                 if (model.getObj().getFriend().size()>0){
-
+                    intent.setClass(PersonMainActivity.this,PersonRememberActivity.class);
+                    intent.putExtra("person_id",person_id);
+                    startActivity(intent);
                 }else {
                     toToast(PersonMainActivity.this,"他还没有发过友记");
                 }
                 break;
             case  R.id.ll_person_all_youju:
                 if (model.getObj().getActivity().size()>0){
-
+                    intent.setClass(PersonMainActivity.this,PersonTogetherActivity.class);
+                    intent.putExtra("person_id",person_id);
+                    startActivity(intent);
                 }else {
                     toToast(PersonMainActivity.this,"他还没有参加过友聚");
                 }
@@ -269,7 +275,7 @@ public class PersonMainActivity extends BaseActivity {
                     startActivity(intent);
                 } else {
                     if (model.getObj().getInfo().getFriends().equals("1")) {
-//                        liaotian(person_id);
+                        liaotian(model.getObj().getInfo().getWy_accid());
                     } else if (model.getObj().getInfo().getFriends().equals("0")) {
                         FriendDescribeDialog dialog = new FriendDescribeDialog(PersonMainActivity.this);
                         dialog.show();
