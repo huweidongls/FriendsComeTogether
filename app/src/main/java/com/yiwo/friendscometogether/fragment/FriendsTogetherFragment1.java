@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
@@ -13,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -21,27 +22,27 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.activecard.CardAdapter;
 import com.yiwo.friendscometogether.activecard.CardConfig;
-import com.yiwo.friendscometogether.activecard.CardItemTouchHelperCallback;
-import com.yiwo.friendscometogether.activecard.CardLayoutManager;
 import com.yiwo.friendscometogether.activecard.OnSwipeListener;
+import com.yiwo.friendscometogether.activecard.OverLayCardLayoutManager;
+import com.yiwo.friendscometogether.activecard.RenRenCallback;
 import com.yiwo.friendscometogether.base.BaseFragment;
-import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
+import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.model.FriendsTogetherDetailsModel;
 import com.yiwo.friendscometogether.model.FriendsTogethermodel;
 import com.yiwo.friendscometogether.model.IsRealNameModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newpage.YoujuShaixuanActivity;
 import com.yiwo.friendscometogether.pages.ApplyActivity;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.RealNameActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.utils.TokenUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -56,11 +57,14 @@ public class FriendsTogetherFragment1 extends BaseFragment {
 
     @BindView(R.id.rv)
     RecyclerView rv;
+    @BindView(R.id.iv_youju_focus)
+    ImageView ivFocus;
 
     private CardAdapter adapter;
     private List<FriendsTogethermodel.ObjBean> mList;
 
     private SpImp spImp;
+    private String uid = "";
 
     private FriendsTogethermodel.ObjBean bean;
 
@@ -93,6 +97,12 @@ public class FriendsTogetherFragment1 extends BaseFragment {
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        uid = spImp.getUID();
+    }
+
     private void initData() {
 
         String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
@@ -109,53 +119,33 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                                 Log.e("222", data);
                                 final FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
                                 mList = model.getObj();
-                                if(mList.size()>0){
+                                if (mList.size() > 0) {
                                     bean = mList.get(0);
-                                }
-                                adapter = new CardAdapter(mList);
-                                rv.setItemAnimator(new DefaultItemAnimator());
-                                rv.setAdapter(adapter);
-                                CardItemTouchHelperCallback cardCallback = new CardItemTouchHelperCallback(rv.getAdapter(), mList);
-                                cardCallback.setOnSwipedListener(new OnSwipeListener() {
-                                    @Override
-                                    public void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
-
+                                    if (bean.getFocusOn().equals("0")) {
+                                        Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                                    } else {
+                                        Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
                                     }
-
+                                }
+                                Collections.reverse(mList);
+                                adapter = new CardAdapter(mList);
+                                rv.setLayoutManager(new OverLayCardLayoutManager());
+                                rv.setAdapter(adapter);
+                                CardConfig.initConfig(getContext());
+                                RenRenCallback callback = new RenRenCallback(rv, adapter, mList);
+                                callback.setOnSwipedListener(new OnSwipeListener() {
                                     @Override
-                                    public void onSwiped(RecyclerView.ViewHolder viewHolder, FriendsTogethermodel.ObjBean o, int direction) {
-                                        bean = o;
-                                        if(direction == CardConfig.SWIPED_NONE){
-                                            final Intent intent = new Intent();
-                                            if (TextUtils.isEmpty(bean.getPfpwd())) {
-                                                intent.setClass(getContext(), DetailsOfFriendTogetherActivity.class);
-                                                intent.putExtra("pfID", bean.getPfID());
-                                                startActivity(intent);
-                                            } else {
-                                                LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(getContext(), new LookPasswordDialog.SetPasswordListener() {
-                                                    @Override
-                                                    public void setActivityText(String s) {
-                                                        if (s.equals(bean.getPfpwd())) {
-                                                            intent.setClass(getContext(), DetailsOfFriendTogetherActivity.class);
-                                                            intent.putExtra("pfID", bean.getPfID());
-                                                            startActivity(intent);
-                                                        }
-                                                    }
-                                                });
-                                                lookPasswordDialog.show();
-                                            }
+                                    public void onSwiped(RecyclerView.ViewHolder viewHolder, FriendsTogethermodel.ObjBean t, int direction) {
+                                        bean = t;
+                                        if (t.getFocusOn().equals("0")) {
+                                            Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                                        } else {
+                                            Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
                                         }
                                     }
-
-                                    @Override
-                                    public void onSwipedClear() {
-
-                                    }
                                 });
-                                ItemTouchHelper touchHelper = new ItemTouchHelper(cardCallback);
-                                CardLayoutManager cardLayoutManager = new CardLayoutManager(rv, touchHelper);
-                                rv.setLayoutManager(cardLayoutManager);
-                                touchHelper.attachToRecyclerView(rv);
+                                ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+                                itemTouchHelper.attachToRecyclerView(rv);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -170,10 +160,10 @@ public class FriendsTogetherFragment1 extends BaseFragment {
 
     }
 
-    @OnClick({R.id.iv_shaixuan, R.id.iv_baoming})
-    public void onClick(View view){
+    @OnClick({R.id.iv_shaixuan, R.id.iv_baoming, R.id.iv_youju_focus})
+    public void onClick(View view) {
         Intent intent = new Intent();
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.iv_shaixuan:
                 intent.setClass(getContext(), YoujuShaixuanActivity.class);
                 startActivityForResult(intent, 1);
@@ -248,15 +238,55 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                             });
                 }
                 break;
+            case R.id.iv_youju_focus:
+                if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                    ViseHttp.POST(NetConfig.focusOnToFriendTogetherUrl)
+                            .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.focusOnToFriendTogetherUrl))
+                            .addParam("userID", uid)
+                            .addParam("pfID", bean.getPfID())
+                            .request(new ACallback<String>() {
+                                @Override
+                                public void onSuccess(String result) {
+                                    try {
+                                        JSONObject jsonObject = new JSONObject(result);
+                                        if (jsonObject.getInt("code") == 200) {
+                                            FocusOnToFriendTogetherModel model = new Gson().fromJson(result, FocusOnToFriendTogetherModel.class);
+                                            if (model.getCode() == 200) {
+                                                if (model.getObj().equals("1")) {
+                                                    Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
+                                                    Toast.makeText(getContext(), "关注成功", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                                                    Toast.makeText(getContext(), "取消关注成功", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        } else if (jsonObject.getInt("code") == 400) {
+                                            Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onFail(int errCode, String errMsg) {
+
+                                }
+                            });
+                } else {
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == 2){
+        if (resultCode == 2) {
             String min = data.getStringExtra("min");
             String max = data.getStringExtra("max");
-            String price = min+","+max;
+            String price = min + "," + max;
             String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
             ViseHttp.POST(NetConfig.friendsTogetherUrl)
                     .addParam("app_key", token)
@@ -286,11 +316,11 @@ public class FriendsTogetherFragment1 extends BaseFragment {
 
                         }
                     });
-        }else if(resultCode == 3){
+        } else if (resultCode == 3) {
             String min = data.getStringExtra("min");
             String max = data.getStringExtra("max");
             String label = data.getStringExtra("label");
-            String price = min+","+max;
+            String price = min + "," + max;
             String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
             ViseHttp.POST(NetConfig.friendsTogetherUrl)
                     .addParam("app_key", token)
@@ -321,7 +351,7 @@ public class FriendsTogetherFragment1 extends BaseFragment {
 
                         }
                     });
-        }else if(resultCode == 5){
+        } else if (resultCode == 5) {
             String label = data.getStringExtra("label");
             String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
             ViseHttp.POST(NetConfig.friendsTogetherUrl)

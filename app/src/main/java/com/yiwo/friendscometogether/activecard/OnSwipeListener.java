@@ -10,15 +10,15 @@ import com.yiwo.friendscometogether.model.FriendsTogethermodel;
 
 public interface OnSwipeListener<T> {
 
-    /**
-     * 卡片还在滑动时回调
-     *
-     * @param viewHolder 该滑动卡片的viewHolder
-     * @param ratio      滑动进度的比例
-     * @param direction  卡片滑动的方向，CardConfig.SWIPING_LEFT 为向左滑，CardConfig.SWIPING_RIGHT 为向右滑，
-     *                   CardConfig.SWIPING_NONE 为不偏左也不偏右
-     */
-    void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction);
+//    /**
+//     * 卡片还在滑动时回调
+//     *
+//     * @param viewHolder 该滑动卡片的viewHolder
+//     * @param ratio      滑动进度的比例
+//     * @param direction  卡片滑动的方向，CardConfig.SWIPING_LEFT 为向左滑，CardConfig.SWIPING_RIGHT 为向右滑，
+//     *                   CardConfig.SWIPING_NONE 为不偏左也不偏右
+//     */
+//    void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction);
 
     /**
      * 卡片完全滑出时回调
@@ -29,9 +29,9 @@ public interface OnSwipeListener<T> {
      */
     void onSwiped(RecyclerView.ViewHolder viewHolder, FriendsTogethermodel.ObjBean t, int direction);
 
-    /**
-     * 所有的卡片全部滑出时回调
-     */
-    void onSwipedClear();
+//    /**
+//     * 所有的卡片全部滑出时回调
+//     */
+//    void onSwipedClear();
 
 }

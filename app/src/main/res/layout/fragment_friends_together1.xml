@@ -35,6 +35,7 @@
         android:layout_height="200px">
 
         <ImageView
+            android:id="@+id/iv_youju_focus"
             android:layout_marginLeft="110px"
             android:layout_centerVertical="true"
             android:src="@mipmap/youju_heart_kong"

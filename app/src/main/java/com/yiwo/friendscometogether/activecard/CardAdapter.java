@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,51 +63,29 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         holder.tvShengyu.setText("剩余名额: "+data.get(position).getSurplus()+"人");
         holder.tvAddress.setText(data.get(position).getPfaddress());
 
-        holder.touchConflictLayout.setmSetOnSlideListener(new SolveClickTouchConflictLayout.OnSlideListener() {
+        holder.rl.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onRightToLeftSlide() {
-                Toast.makeText(context, "left", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onLeftToRightSlide() {
-                Toast.makeText(context, "right", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onUpToDownSlide() {
-
-            }
-
-            @Override
-            public void onDownToUpSlide() {
-
+            public void onClick(View v) {
+                final Intent intent = new Intent();
+                if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
+                    intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                    intent.putExtra("pfID", data.get(position).getPfID());
+                    context.startActivity(intent);
+                } else {
+                    LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(context, new LookPasswordDialog.SetPasswordListener() {
+                        @Override
+                        public void setActivityText(String s) {
+                            if (s.equals(data.get(position).getPfpwd())) {
+                                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                                intent.putExtra("pfID", data.get(position).getPfID());
+                                context.startActivity(intent);
+                            }
+                        }
+                    });
+                    lookPasswordDialog.show();
+                }
             }
         });
-
-//        holder.ivTitle.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final Intent intent = new Intent();
-//                if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
-//                    intent.setClass(context, DetailsOfFriendTogetherActivity.class);
-//                    intent.putExtra("pfID", data.get(position).getPfID());
-//                    context.startActivity(intent);
-//                } else {
-//                    LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(context, new LookPasswordDialog.SetPasswordListener() {
-//                        @Override
-//                        public void setActivityText(String s) {
-//                            if (s.equals(data.get(position).getPfpwd())) {
-//                                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
-//                                intent.putExtra("pfID", data.get(position).getPfID());
-//                                context.startActivity(intent);
-//                            }
-//                        }
-//                    });
-//                    lookPasswordDialog.show();
-//                }
-//            }
-//        });
     }
 
     @Override
@@ -127,7 +106,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         private TextView tvShengyu;
         private TextView tvAddress;
         private LinearLayout ll;
-        private SolveClickTouchConflictLayout touchConflictLayout;
+        private RelativeLayout rl;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -142,7 +121,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             tvShengyu = itemView.findViewById(R.id.tv_shengyu);
             tvAddress = itemView.findViewById(R.id.tv_address);
             ll = itemView.findViewById(R.id.ll);
-            touchConflictLayout = itemView.findViewById(R.id.click_layout);
+            rl = itemView.findViewById(R.id.click_layout);
         }
     }
 
