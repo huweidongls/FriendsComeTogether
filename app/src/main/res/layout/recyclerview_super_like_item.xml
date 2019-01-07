@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/rl_youju_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="19px"
+    android:layout_marginRight="19px"
+    android:layout_marginTop="15px"
+    android:layout_marginBottom="15px">
+
+    <FrameLayout
+        android:id="@+id/fl_bg_info"
+        android:layout_width="match_parent"
+        android:layout_height="504px"
+        android:background="@drawable/bg_white_16px">
+        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            android:id="@+id/iv_youju"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/welcome"
+            test:radius1="18px"
+            />
+        <RelativeLayout
+            android:background="@drawable/bg_black_18px_transparent"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="249px">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="112px"
+                android:layout_marginBottom="22px"
+                android:layout_marginLeft="5px"
+                android:layout_marginRight="14px">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="72px"
+                    android:layout_height="72px"
+                    android:layout_marginLeft="13px"
+                    android:layout_marginRight="18px"
+                    android:layout_marginTop="22px"
+                    android:src="@color/white_ffffff" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_icon_user"
+                    android:layout_width="68px"
+                    android:layout_height="68px"
+                    android:layout_marginRight="15px"
+                    android:layout_marginLeft="15px"
+                    android:layout_marginTop="24px"
+                    android:src="@mipmap/my_head" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="72px"
+                    android:layout_marginBottom="2px"
+                    android:layout_marginTop="22px"
+                    android:layout_toRightOf="@+id/iv_icon_user">
+
+                    <TextView
+                        android:id="@+id/tv_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="安静的守候你"
+                        android:textColor="@color/white_ffffff"
+                        android:textSize="28px" />
+
+                    <TextView
+                        android:id="@+id/tv_age"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="27岁"
+                        android:textColor="@color/white_ffffff"
+                        android:textSize="24px" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginRight="10px"
+                android:paddingLeft="14px"
+                android:paddingBottom="20px"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_width="202px"
+                android:layout_height="135px">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:paddingBottom="1px"
+                        android:paddingTop="1px"
+                        android:paddingRight="10px"
+                        android:paddingLeft="10px"
+                        android:layout_marginRight="14px"
+                        android:background="@drawable/bg_pink_15px"
+                        android:textSize="20px"
+                        android:text="90后"
+                        android:textColor="@color/white_ffffff"
+                        android:maxLength="4"
+                        android:lines="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:paddingBottom="1px"
+                        android:paddingTop="1px"
+                        android:paddingRight="10px"
+                        android:paddingLeft="10px"
+                        android:background="@drawable/bg_pink_15px"
+                        android:textSize="20px"
+                        android:text="江南妹子"
+                        android:textColor="@color/white_ffffff"
+                        android:maxLength="4"
+                        android:lines="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="15px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:paddingBottom="1px"
+                        android:paddingTop="1px"
+                        android:paddingRight="10px"
+                        android:paddingLeft="10px"
+                        android:background="@drawable/bg_pink_15px"
+                        android:textSize="20px"
+                        android:text="想去美国逛逛"
+                        android:textColor="@color/white_ffffff"
+                        android:maxLength="10"
+                        android:lines="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="15px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_marginRight="15px"
+                        android:paddingBottom="1px"
+                        android:paddingTop="1px"
+                        android:paddingRight="10px"
+                        android:paddingLeft="10px"
+                        android:background="@drawable/bg_pink_15px"
+                        android:textSize="20px"
+                        android:text="抖腿"
+                        android:textColor="@color/white_ffffff"
+                        android:maxLength="4"
+                        android:lines="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:paddingBottom="1px"
+                        android:paddingTop="1px"
+                        android:paddingRight="10px"
+                        android:paddingLeft="10px"
+                        android:background="@drawable/bg_pink_15px"
+                        android:textSize="20px"
+                        android:text="抖腿"
+                        android:textColor="@color/white_ffffff"
+                        android:maxLength="4"
+                        android:lines="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_marginRight="14px"
+                android:layout_marginBottom="25px"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_width="105px"
+                android:layout_height="100px">
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#FF4081"
+                    android:text="匹配度°"
+                    android:textSize="22px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#FF4081"
+                    android:text="93%"
+                    android:textSize="48px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+    </FrameLayout>
+    <TextView
+        android:background="@drawable/bg_pink_30px"
+        android:gravity="center"
+        android:text="打个招呼"
+        android:textSize="28px"
+        android:textColor="@color/white_ffffff"
+        android:layout_marginTop="19px"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_width="326px"
+        android:layout_height="60px" />
+
+
+</LinearLayout>

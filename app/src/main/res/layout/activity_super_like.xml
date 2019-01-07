@@ -1,9 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_ffffff"
     tools:context="com.yiwo.friendscometogether.newpage.SuperLikeActivity">
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="90px">
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/back_b"
+                android:layout_width="21px"
+                android:layout_height="36px" />
+
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_title_wode_or_tade"
+            android:layout_centerInParent="true"
+            android:textSize="36px"
+            android:text="超级喜欢"
+            android:textStyle="bold"
+            android:textColor="@color/black_333333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:src="@mipmap/youju_shaixuan"
+            android:layout_marginRight="32px"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="39px"
+            android:layout_height="36px" />
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/my_head"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="324px"
+                android:layout_height="398px"
+                android:layout_marginTop="110px"/>
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="70px"
+                android:text="成功为你匹配两位好友！还等什么快去打招呼吧!"
+                android:textSize="36px"
+                android:textColor="@color/black_333333"
+                android:lines="2"
+                android:layout_width="408px"
+                android:layout_height="wrap_content" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_super_like"
+                android:layout_marginTop="10px"
+                android:layout_marginLeft="11px"
+                android:layout_marginRight="11px"
+                android:layout_marginBottom="10px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
