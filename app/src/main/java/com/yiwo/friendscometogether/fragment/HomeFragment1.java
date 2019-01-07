@@ -45,6 +45,7 @@ import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.HomeDataAdapter;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
 import com.yiwo.friendscometogether.newpage.MessageActivity;
+import com.yiwo.friendscometogether.newpage.SuperLikeSxActivity;
 import com.yiwo.friendscometogether.pages.CityActivity;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
@@ -326,6 +327,8 @@ public class HomeFragment1 extends BaseFragment {
                 mainActivity.startYouji();
                 break;
             case R.id.ll_home_youji_lvxing:
+                intent.setClass(getContext(), SuperLikeSxActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_home_youji_meishi:
                 break;
