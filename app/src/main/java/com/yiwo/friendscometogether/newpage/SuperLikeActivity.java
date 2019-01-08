@@ -61,15 +61,15 @@ public class SuperLikeActivity extends BaseActivity {
         superLikeAdapter = new SuperLikeAdapter(data);
         recyclerView.setAdapter(superLikeAdapter);
     }
-    @OnClick({R.id.rl_back,R.id.iv_Sx})
+    @OnClick({R.id.rl_back,R.id.rl_Sx})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.rl_back:
                 finish();
                 break;
-            case R.id.iv_Sx:
-                intent.setClass(context,SuperLikeSxActivity.class);
+            case R.id.rl_Sx:
+                intent.setClass(context,EditorMyLabelActivity.class);
                 context.startActivity(intent);
                 break;
             default:
