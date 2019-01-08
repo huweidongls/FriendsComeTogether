@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_margin="6px"
+        android:paddingLeft="10px"
+        android:paddingRight="10px"
+        android:gravity="center"
+        android:textColor="@color/white_ffffff"
+        android:text="90后"
+        android:textSize="20px"
+        android:background="@drawable/bg_pink_15px"
+        android:id="@+id/tv_flowlayout_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

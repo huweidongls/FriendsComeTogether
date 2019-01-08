@@ -83,95 +83,18 @@
 
             </RelativeLayout>
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_marginRight="10px"
-                android:paddingLeft="14px"
-                android:paddingBottom="20px"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentBottom="true"
                 android:layout_width="202px"
                 android:layout_height="135px">
-                <LinearLayout
+                <com.yiwo.friendscometogether.widget.FlowLayout
+                    android:layout_margin="2px"
+                    android:paddingLeft="14px"
+                    android:paddingBottom="20px"
+                    android:id="@+id/flow_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:paddingBottom="1px"
-                        android:paddingTop="1px"
-                        android:paddingRight="10px"
-                        android:paddingLeft="10px"
-                        android:layout_marginRight="14px"
-                        android:background="@drawable/bg_pink_15px"
-                        android:textSize="20px"
-                        android:text="90后"
-                        android:textColor="@color/white_ffffff"
-                        android:maxLength="4"
-                        android:lines="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:paddingBottom="1px"
-                        android:paddingTop="1px"
-                        android:paddingRight="10px"
-                        android:paddingLeft="10px"
-                        android:background="@drawable/bg_pink_15px"
-                        android:textSize="20px"
-                        android:text="江南妹子"
-                        android:textColor="@color/white_ffffff"
-                        android:maxLength="4"
-                        android:lines="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginTop="15px"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:paddingBottom="1px"
-                        android:paddingTop="1px"
-                        android:paddingRight="10px"
-                        android:paddingLeft="10px"
-                        android:background="@drawable/bg_pink_15px"
-                        android:textSize="20px"
-                        android:text="想去美国逛逛"
-                        android:textColor="@color/white_ffffff"
-                        android:maxLength="10"
-                        android:lines="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginTop="15px"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_marginRight="15px"
-                        android:paddingBottom="1px"
-                        android:paddingTop="1px"
-                        android:paddingRight="10px"
-                        android:paddingLeft="10px"
-                        android:background="@drawable/bg_pink_15px"
-                        android:textSize="20px"
-                        android:text="抖腿"
-                        android:textColor="@color/white_ffffff"
-                        android:maxLength="4"
-                        android:lines="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:paddingBottom="1px"
-                        android:paddingTop="1px"
-                        android:paddingRight="10px"
-                        android:paddingLeft="10px"
-                        android:background="@drawable/bg_pink_15px"
-                        android:textSize="20px"
-                        android:text="抖腿"
-                        android:textColor="@color/white_ffffff"
-                        android:maxLength="4"
-                        android:lines="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                    android:layout_height="match_parent"/>
             </LinearLayout>
             <RelativeLayout
                 android:layout_marginRight="14px"

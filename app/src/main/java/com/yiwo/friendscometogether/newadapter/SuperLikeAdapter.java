@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,7 +17,9 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.YouJiListModel;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
 import com.yiwo.friendscometogether.pages.VideoActivity;
+import com.yiwo.friendscometogether.widget.FlowLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +29,7 @@ import java.util.List;
 public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.ViewHolder>{
 
     private List<String> data;
+
     private Context context;
     public SuperLikeAdapter(List<String> data){
         this.data = data;
@@ -40,7 +44,39 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
     }
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+        final List<String> list_biaoqian = new ArrayList<>();
+        list_biaoqian.add("漫画");
+        list_biaoqian.add("高科技");
+        list_biaoqian.add("韩国电影");
+        list_biaoqian.add("高富帅");
+        list_biaoqian.add("大叔");
+        list_biaoqian.add("非主流");
 
+        flowLayout.setAdapter(new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return list_biaoqian.size();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return position;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return position;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = LayoutInflater.from(context).inflate(R.layout.flowlayout_item, parent, false);
+                TextView textView = view.findViewById(R.id.tv_flowlayout_item);
+                ScreenAdapterTools.getInstance().loadView(view);
+                textView.setText(list_biaoqian.get(position));
+                return view;
+            }
+        });
     }
 
     @Override
@@ -48,9 +84,12 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
         return data == null ? 0 : data.size();
     }
 
+    private FlowLayout flowLayout;
+
     class ViewHolder extends RecyclerView.ViewHolder{
         public ViewHolder(View itemView) {
             super(itemView);
+            flowLayout = itemView.findViewById(R.id.flow_layout);
         }
     }
 }
