@@ -34,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageView
+            android:id="@+id/iv_Sx"
             android:src="@mipmap/youju_shaixuan"
             android:layout_marginRight="32px"
             android:layout_centerVertical="true"

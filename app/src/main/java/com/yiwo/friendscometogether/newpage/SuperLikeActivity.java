@@ -1,11 +1,13 @@
 package com.yiwo.friendscometogether.newpage;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.View;
 
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
@@ -19,6 +21,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SuperLikeActivity extends BaseActivity {
 
@@ -57,5 +60,20 @@ public class SuperLikeActivity extends BaseActivity {
         data.add("");
         superLikeAdapter = new SuperLikeAdapter(data);
         recyclerView.setAdapter(superLikeAdapter);
+    }
+    @OnClick({R.id.rl_back,R.id.iv_Sx})
+    public void onClick(View view) {
+        Intent intent = new Intent();
+        switch (view.getId()) {
+            case R.id.rl_back:
+                finish();
+                break;
+            case R.id.iv_Sx:
+                intent.setClass(context,SuperLikeSxActivity.class);
+                context.startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 }

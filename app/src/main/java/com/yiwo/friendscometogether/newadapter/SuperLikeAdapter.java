@@ -45,12 +45,11 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final List<String> list_biaoqian = new ArrayList<>();
-        list_biaoqian.add("漫画");
-        list_biaoqian.add("高科技");
-        list_biaoqian.add("韩国电影");
-        list_biaoqian.add("高富帅");
-        list_biaoqian.add("大叔");
-        list_biaoqian.add("非主流");
+        list_biaoqian.add("90后");
+        list_biaoqian.add("江南妹子");
+        list_biaoqian.add("想去美国逛逛");
+        list_biaoqian.add("抖腿");
+        list_biaoqian.add("古典风");
 
         flowLayout.setAdapter(new BaseAdapter() {
             @Override
