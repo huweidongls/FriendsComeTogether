@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yiwo.friendscometogether.newpage.EditorLabelListActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:background="#D84C37"
+        android:layout_width="match_parent"
+        android:layout_height="88px">
+
+        <TextView
+            android:layout_centerInParent="true"
+            android:textColor="@color/white_ffffff"
+            android:textSize="36px"
+            android:text="我的标签"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:src="@mipmap/back_w"
+                android:layout_width="21px"
+                android:layout_height="36px" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_add"
+        android:layout_below="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="102px">
+
+        <ImageView
+            android:src="@mipmap/label_add"
+            android:id="@+id/iv_add"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30px"
+            android:layout_width="28px"
+            android:layout_height="28px" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="31px"
+            android:layout_toRightOf="@+id/iv_add"
+            android:textColor="#626060"
+            android:textSize="30px"
+            android:text="创建我自己的标签"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        
+        <ImageView
+            android:layout_width="15px"
+            android:layout_height="25px" />
+
+        <View
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="30px"
+            android:background="#DBDBDB"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/rl_add"
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
