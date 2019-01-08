@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="102px">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="30px"
-        android:textColor="#626060"
-        android:textSize="30px"
-        android:text="随性"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <View
-        android:layout_marginLeft="30px"
-        android:layout_alignParentBottom="true"
-        android:background="#DBDBDB"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="1px"/>
+        android:layout_height="102px">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30px"
+            android:textColor="#626060"
+            android:textSize="30px"
+            android:text="随性"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_marginLeft="30px"
+            android:layout_alignParentBottom="true"
+            android:background="#DBDBDB"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

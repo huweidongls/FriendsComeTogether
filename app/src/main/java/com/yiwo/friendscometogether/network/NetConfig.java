@@ -257,4 +257,8 @@ public class NetConfig {
     public static String newYoujiData = "action/ac_article/Friends_List";
     //他人主页接口
     public static String personMain = "action/ac_user/Homepage";
+    //获取标签列表
+    public static String userlabel = "action/ac_user/userlabel";
+    //获取用户以保存的标签
+    public static String usersavelabel = "action/ac_user/User_Label_List";
 }

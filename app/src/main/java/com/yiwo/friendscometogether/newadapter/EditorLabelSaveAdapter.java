@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
-import com.yiwo.friendscometogether.newmodel.EditorLabelModel;
+import com.yiwo.friendscometogether.newmodel.UserSaveLabelModel;
 
 import java.util.List;
 
@@ -17,19 +17,19 @@ import java.util.List;
  * Created by Administrator on 2019/1/8.
  */
 
-public class EditorLabelListAdapter extends RecyclerView.Adapter<EditorLabelListAdapter.ViewHolder> {
+public class EditorLabelSaveAdapter extends RecyclerView.Adapter<EditorLabelSaveAdapter.ViewHolder> {
 
     private Context context;
-    private List<EditorLabelModel.ObjBean> data;
+    private List<UserSaveLabelModel.ObjBean> data;
 
-    public EditorLabelListAdapter(List<EditorLabelModel.ObjBean> data) {
+    public EditorLabelSaveAdapter(List<UserSaveLabelModel.ObjBean> data) {
         this.data = data;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_editor_label_list, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_editor_label_save_list, parent, false);
         ScreenAdapterTools.getInstance().loadView(view);
         ViewHolder holder = new ViewHolder(view);
         return holder;
