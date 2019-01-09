@@ -26,10 +26,10 @@
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="10px"
-        android:layout_marginRight="32px"
-        android:layout_marginLeft="32px"
-        android:layout_marginBottom="10px"
+        android:paddingTop="10px"
+        android:paddingRight="32px"
+        android:paddingLeft="32px"
+        android:paddingBottom="10px"
         android:layout_below="@+id/rl_top"
         android:id="@+id/rv_together"
         android:layout_width="match_parent"

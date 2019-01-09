@@ -436,7 +436,6 @@ public class GuanZhuActivity extends BaseActivity {
                                 guanZhuWoDeAdapter.setCancelGuanZhu(new GuanZhuWoDeAdapter.CancelGuanZhuListion() {
                                     @Override
                                     public void cancel_guanzhu(final int posion) {
-
                                     }
                                 });
                                 LinearLayoutManager manager = new LinearLayoutManager(GuanZhuActivity.this);

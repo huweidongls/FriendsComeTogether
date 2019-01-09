@@ -10,6 +10,7 @@ import com.yiwo.friendscometogether.MyApplication;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.custom.PopDialog;
+import com.yiwo.friendscometogether.custom.PopDialog1;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.sp.SpImp;
 
@@ -48,12 +49,21 @@ public class SetActivity extends BaseActivity {
                 break;
             case R.id.activity_set_rl_clear_cache:
 
-                PopDialog cleardialog = new PopDialog(this, "清除缓存", "清除", "取消",
-                        new PopDialog.PopDialogListener() {
+//                PopDialog cleardialog = new PopDialog(this, "清除缓存", "清除", "取消",
+//                        new PopDialog.PopDialogListener() {
+//                            @Override
+//                            public void sureBtnListener() {
+////                            finish();
+//                                toToast(SetActivity.this, "清除缓存");
+//                            }
+//                        });
+//                cleardialog.show();
+                PopDialog1 cleardialog = new PopDialog1(this, "清除缓存","缓存可让浏览流畅，确定要清除吗？","算了", "清除",
+                        new PopDialog1.PopDialogListener() {
+
                             @Override
-                            public void sureBtnListener() {
-//                            finish();
-                                toToast(SetActivity.this, "清除缓存");
+                            public void sureBtnListen() {
+                                toToast(SetActivity.this,"清除缓存");
                             }
                         });
                 cleardialog.show();
@@ -67,10 +77,23 @@ public class SetActivity extends BaseActivity {
                 break;
             case R.id.activity_set_exit_login_bt:
 //                toToast(this,"退出登录");
-                PopDialog dialog = new PopDialog(this, "提示：为了保证您的信息安全，在注销登录后，应用程序将会关闭。再次使用请手动启动程序。", "确认", "取消",
-                        new PopDialog.PopDialogListener() {
+//                PopDialog dialog = new PopDialog(this, "提示：为了保证您的信息安全，在注销登录后，应用程序将会关闭。再次使用请手动启动程序。", "确认", "取消",
+//                        new PopDialog.PopDialogListener() {
+//                            @Override
+//                            public void sureBtnListener() {
+//                                spImp.setUID("0");
+//                                spImp.setYXID("0");
+//                                spImp.setYXTOKEN("0");
+//                                NimUIKit.logout();
+//                                MyApplication.getInstance().exit();
+//                            }
+//                        });
+//                dialog.show();
+                PopDialog1 dialog1 = new PopDialog1(this, "提示","为了保证您的信息安全，在注销登录后，应用程序将会关闭。再次使用请手动启动程序。", "取消", "确认",
+                        new PopDialog1.PopDialogListener() {
+
                             @Override
-                            public void sureBtnListener() {
+                            public void sureBtnListen() {
                                 spImp.setUID("0");
                                 spImp.setYXID("0");
                                 spImp.setYXTOKEN("0");
@@ -78,7 +101,7 @@ public class SetActivity extends BaseActivity {
                                 MyApplication.getInstance().exit();
                             }
                         });
-                dialog.show();
+                dialog1.show();
 //                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 //                builder.setTitle("退出登录")
 //                        .setMessage("是否退出登录")

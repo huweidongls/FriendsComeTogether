@@ -42,7 +42,12 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
         list_biaoqian.add("想去美国逛逛");
         list_biaoqian.add("抖腿");
         list_biaoqian.add("古典风");
-        FlowLayoutManager manager = new FlowLayoutManager();
+        FlowLayoutManager manager = new FlowLayoutManager(){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
         holder.rv_label.setLayoutManager(manager);
         holder.rv_label.setAdapter(new SuperLikeLabelAdapter(list_biaoqian));
     }

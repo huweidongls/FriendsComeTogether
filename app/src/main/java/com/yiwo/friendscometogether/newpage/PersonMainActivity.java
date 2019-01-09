@@ -107,6 +107,16 @@ public class PersonMainActivity extends BaseActivity {
     private List<PersonMainModel.ObjBean.PhotoBean> list_pics = new ArrayList<>();
     private List<PersonMainModel.ObjBean.FriendBean> list_youji = new ArrayList<>();
     private List<PersonMainModel.ObjBean.ActivityBean> list_youju = new ArrayList<>();
+
+    private GuanZhuListener guanZhuListener;
+
+    public void setGuanZhuListener(GuanZhuListener guanZhuListener) {
+        this.guanZhuListener = guanZhuListener;
+    }
+
+    public interface GuanZhuListener{
+        void guanzhuListen();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -330,6 +340,7 @@ public class PersonMainActivity extends BaseActivity {
                                         if (jsonObject.getInt("code") == 200) {
                                             toToast(PersonMainActivity.this, "关注成功");
                                             Glide.with(PersonMainActivity.this).load(R.mipmap.heart_blue).into(iv_image_guanzhu);
+                                            guanZhuListener.guanzhuListen();
                                         } else {
                                             toToast(PersonMainActivity.this, jsonObject.getString("message"));
                                         }
