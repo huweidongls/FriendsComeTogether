@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether.newpage;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ import com.yiwo.friendscometogether.sp.SpImp;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,6 +43,7 @@ public class EditorLabelListActivity extends BaseActivity {
 
     private SpImp spImp;
     private String uid = "";
+    private String type = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class EditorLabelListActivity extends BaseActivity {
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(EditorLabelListActivity.this);
         spImp = new SpImp(context);
+        type = getIntent().getStringExtra("type");
 
         initData();
 
@@ -61,7 +65,7 @@ public class EditorLabelListActivity extends BaseActivity {
         uid = spImp.getUID();
         ViseHttp.POST(NetConfig.userlabel)
                 .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.userlabel))
-                .addParam("type", "1")
+                .addParam("type", type)
                 .addParam("uid", uid)
                 .request(new ACallback<String>() {
                     @Override
@@ -90,13 +94,48 @@ public class EditorLabelListActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back})
+    @OnClick({R.id.rl_back, R.id.rl_add, R.id.rl_save})
     public void onClick(View view){
+        Intent intent = new Intent();
         switch (view.getId()){
             case R.id.rl_back:
+                finish();
+                break;
+            case R.id.rl_add:
+                intent.setClass(context, EditorMyLabelActivity.class);
+                startActivityForResult(intent, 1);
+                break;
+            case R.id.rl_save:
+                List<EditorLabelModel.ObjBean> list = new ArrayList<>();
+                for (int i = 0; i < mList.size(); i++){
+                    if(mList.get(i).getDatetype().equals("1")){
+                        list.add(mList.get(i));
+                    }
+                }
+                String label = "";
+                for (int a = 0; a < list.size(); a++){
+                    if(a == list.size()-1){
+                        label = label + list.get(a).getT_name();
+                    }else {
+                        label = label + list.get(a).getT_name() + ",";
+                    }
+                }
+                Intent intent1 = new Intent();
+                intent1.putExtra("type", type);
+                intent1.putExtra("label", label);
+                setResult(1, intent1);
                 finish();
                 break;
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 1){
+            String label = data.getStringExtra("value");
+            mList.add(0, new EditorLabelModel.ObjBean(label, "", "1"));
+            adapter.notifyDataSetChanged();
+        }
+    }
 }

@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -26,6 +27,10 @@ public class EditorLabelListAdapter extends RecyclerView.Adapter<EditorLabelList
         this.data = data;
     }
 
+    public List<EditorLabelModel.ObjBean> getList(){
+        return data;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
@@ -36,8 +41,25 @@ public class EditorLabelListAdapter extends RecyclerView.Adapter<EditorLabelList
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.tv.setText(data.get(position).getT_name());
+        if(data.get(position).getDatetype().equals("1")){
+            holder.ivSure.setVisibility(View.VISIBLE);
+        }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(data.get(position).getDatetype().equals("1")){
+                    holder.ivSure.setVisibility(View.GONE);
+                    data.get(position).setDatetype("0");
+                    notifyDataSetChanged();
+                }else {
+                    holder.ivSure.setVisibility(View.VISIBLE);
+                    data.get(position).setDatetype("1");
+                    notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     @Override
@@ -48,10 +70,12 @@ public class EditorLabelListAdapter extends RecyclerView.Adapter<EditorLabelList
     class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView tv;
+        private ImageView ivSure;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tv = itemView.findViewById(R.id.tv);
+            ivSure = itemView.findViewById(R.id.iv_sure);
         }
     }
 

@@ -261,4 +261,6 @@ public class NetConfig {
     public static String userlabel = "action/ac_user/userlabel";
     //获取用户以保存的标签
     public static String usersavelabel = "action/ac_user/User_Label_List";
+    //保存用户选择的标签
+    public static String saveuserlabel = "action/ac_user/SaveUserLabel";
 }
