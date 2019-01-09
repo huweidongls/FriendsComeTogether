@@ -11,7 +11,7 @@
     android:layout_marginTop="15px"
     android:layout_marginBottom="15px">
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/fl_bg_info"
         android:layout_width="match_parent"
         android:layout_height="504px"
@@ -25,6 +25,7 @@
             test:radius1="18px"
             />
         <RelativeLayout
+            android:layout_alignParentBottom="true"
             android:background="@drawable/bg_black_18px_transparent"
             android:layout_gravity="bottom"
             android:layout_width="match_parent"
@@ -82,20 +83,20 @@
                 </RelativeLayout>
 
             </RelativeLayout>
-            <LinearLayout
+            <RelativeLayout
                 android:layout_marginRight="10px"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentBottom="true"
-                android:layout_width="202px"
+                android:layout_width="208px"
                 android:layout_height="135px">
-                <com.yiwo.friendscometogether.widget.FlowLayout
+                <android.support.v7.widget.RecyclerView
                     android:layout_margin="2px"
                     android:paddingLeft="14px"
                     android:paddingBottom="20px"
-                    android:id="@+id/flow_layout"
+                    android:id="@+id/rv_label"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
-            </LinearLayout>
+            </RelativeLayout>
             <RelativeLayout
                 android:layout_marginRight="14px"
                 android:layout_marginBottom="25px"
@@ -122,7 +123,7 @@
         </RelativeLayout>
 
 
-    </FrameLayout>
+    </RelativeLayout>
     <TextView
         android:background="@drawable/bg_pink_30px"
         android:gravity="center"

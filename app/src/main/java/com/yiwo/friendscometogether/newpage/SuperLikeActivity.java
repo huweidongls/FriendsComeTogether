@@ -69,7 +69,7 @@ public class SuperLikeActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_Sx:
-                intent.setClass(context,EditorMyLabelActivity.class);
+                intent.setClass(context,SuperLikeSxActivity.class);
                 context.startActivity(intent);
                 break;
             default:
