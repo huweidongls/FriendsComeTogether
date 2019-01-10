@@ -127,6 +127,7 @@
 
     </RelativeLayout>
     <TextView
+        android:id="@+id/tv_say_hello"
         android:elevation="2px"
         android:background="@drawable/bg_pink_30px"
         android:gravity="center"

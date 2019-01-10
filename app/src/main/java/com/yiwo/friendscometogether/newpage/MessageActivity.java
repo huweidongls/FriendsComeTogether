@@ -48,11 +48,11 @@ public class MessageActivity extends BaseActivity {
     @BindView(R.id.iv_hot2)
     ImageView ivHot;
     @BindView(R.id.tv3_tv)
-    TextView tvFriendContent;
+    TextView tvPrivateMessageContent;
     @BindView(R.id.tv_sixin_time)
-    TextView tvFriendTime;
+    TextView tvPrivateMessageTime;
     @BindView(R.id.iv_hot3)
-    ImageView ivFriend;
+    ImageView ivPrivateMessage;
 
     private SpImp spImp;
 
@@ -104,10 +104,17 @@ public class MessageActivity extends BaseActivity {
 //                                if (model.getObj().getComment().getType().equals("1")) {
 //                                    ivComment.setVisibility(View.VISIBLE);
 //                                }
-                                tvFriendContent.setText(model.getObj().getFriends().getMessage());
-                                tvFriendTime.setText(model.getObj().getFriends().getTime());
-                                if (model.getObj().getFriends().getType().equals("1")) {
-                                    ivFriend.setVisibility(View.VISIBLE);
+
+//                                tvFriendContent.setText(model.getObj().getFriends().getMessage());
+//                                tvFriendTime.setText(model.getObj().getFriends().getTime());
+//                                if (model.getObj().getFriends().getType().equals("1")) {
+//                                    ivFriend.setVisibility(View.VISIBLE);
+//                                }
+                                //私信消息
+                                tvPrivateMessageContent.setText(model.getObj().getPrivate().getMessage());
+                                tvPrivateMessageTime.setText(model.getObj().getPrivate().getTime());
+                                if (model.getObj().getPrivate().getType().equals("1")) {
+                                    ivPrivateMessage.setVisibility(View.VISIBLE);
                                 }
                             }
                         } catch (JSONException e) {
@@ -123,7 +130,7 @@ public class MessageActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.rl_hot_message, R.id.rl_tongzhi_message, R.id.rl_shoudaoyaoqing, R.id.rl_pinglun})
+    @OnClick({R.id.rl_back, R.id.rl_hot_message, R.id.rl_tongzhi_message, R.id.rl_shoudaoyaoqing, R.id.rl_pinglun,R.id.rl_private_message})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -148,6 +155,11 @@ public class MessageActivity extends BaseActivity {
                 break;
             case R.id.rl_pinglun:
                 intent.setClass(context, MessageCommentActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.rl_private_message:
+                ivPrivateMessage.setVisibility(View.GONE);
+                intent.setClass(context,PrivateMessageActivity.class);
                 startActivity(intent);
                 break;
         }

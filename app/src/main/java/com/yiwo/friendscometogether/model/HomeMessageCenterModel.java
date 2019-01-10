@@ -6,10 +6,11 @@ package com.yiwo.friendscometogether.model;
 
 public class HomeMessageCenterModel {
 
+
     /**
      * code : 200
      * message : 获取成功!
-     * obj : {"comment":{"type":"1","message":"吃了回复了你：你也好","time":"2018-08-18-"},"hot":{"type":"1","message":"奥巴马来了","time":"1970-01-15"},"system":{"type":"1","message":"奥巴马来了","time":"1970-01-15"},"yq":{"type":"0","message":"暂无邀请消息","time":""},"friends":{"type":"0","message":"暂无好友信息","time":"2018-08-20"}}
+     * obj : {"comment":{"type":"0","message":"暂无评论消息","time":""},"hot":{"type":"0","message":"暂无热门消息","time":""},"system":{"type":"0","message":"暂无系统新消息","time":""},"yq":{"type":"0","message":"暂无邀请消息","time":""},"friends":{"type":"0","message":"暂无好友消息","time":""},"Private":{"type":"1","message":"一样一样跟你打了个招呼!","time":"2019-01-10"}}
      */
 
     private int code;
@@ -42,11 +43,12 @@ public class HomeMessageCenterModel {
 
     public static class ObjBean {
         /**
-         * comment : {"type":"1","message":"吃了回复了你：你也好","time":"2018-08-18-"}
-         * hot : {"type":"1","message":"奥巴马来了","time":"1970-01-15"}
-         * system : {"type":"1","message":"奥巴马来了","time":"1970-01-15"}
+         * comment : {"type":"0","message":"暂无评论消息","time":""}
+         * hot : {"type":"0","message":"暂无热门消息","time":""}
+         * system : {"type":"0","message":"暂无系统新消息","time":""}
          * yq : {"type":"0","message":"暂无邀请消息","time":""}
-         * friends : {"type":"0","message":"暂无好友信息","time":"2018-08-20"}
+         * friends : {"type":"0","message":"暂无好友消息","time":""}
+         * Private : {"type":"1","message":"一样一样跟你打了个招呼!","time":"2019-01-10"}
          */
 
         private CommentBean comment;
@@ -54,6 +56,7 @@ public class HomeMessageCenterModel {
         private SystemBean system;
         private YqBean yq;
         private FriendsBean friends;
+        private PrivateBean Private;
 
         public CommentBean getComment() {
             return comment;
@@ -95,11 +98,19 @@ public class HomeMessageCenterModel {
             this.friends = friends;
         }
 
+        public PrivateBean getPrivate() {
+            return Private;
+        }
+
+        public void setPrivate(PrivateBean Private) {
+            this.Private = Private;
+        }
+
         public static class CommentBean {
             /**
-             * type : 1
-             * message : 吃了回复了你：你也好
-             * time : 2018-08-18-
+             * type : 0
+             * message : 暂无评论消息
+             * time :
              */
 
             private String type;
@@ -133,9 +144,9 @@ public class HomeMessageCenterModel {
 
         public static class HotBean {
             /**
-             * type : 1
-             * message : 奥巴马来了
-             * time : 1970-01-15
+             * type : 0
+             * message : 暂无热门消息
+             * time :
              */
 
             private String type;
@@ -169,9 +180,9 @@ public class HomeMessageCenterModel {
 
         public static class SystemBean {
             /**
-             * type : 1
-             * message : 奥巴马来了
-             * time : 1970-01-15
+             * type : 0
+             * message : 暂无系统新消息
+             * time :
              */
 
             private String type;
@@ -242,8 +253,44 @@ public class HomeMessageCenterModel {
         public static class FriendsBean {
             /**
              * type : 0
-             * message : 暂无好友信息
-             * time : 2018-08-20
+             * message : 暂无好友消息
+             * time :
+             */
+
+            private String type;
+            private String message;
+            private String time;
+
+            public String getType() {
+                return type;
+            }
+
+            public void setType(String type) {
+                this.type = type;
+            }
+
+            public String getMessage() {
+                return message;
+            }
+
+            public void setMessage(String message) {
+                this.message = message;
+            }
+
+            public String getTime() {
+                return time;
+            }
+
+            public void setTime(String time) {
+                this.time = time;
+            }
+        }
+
+        public static class PrivateBean {
+            /**
+             * type : 1
+             * message : 一样一样跟你打了个招呼!
+             * time : 2019-01-10
              */
 
             private String type;

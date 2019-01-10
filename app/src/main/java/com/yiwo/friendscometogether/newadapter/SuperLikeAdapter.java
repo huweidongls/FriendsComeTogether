@@ -26,8 +26,17 @@ import java.util.List;
 public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.ViewHolder>{
 
     private List<SuperLikeModel.ObjBean> data;
-
     private Context context;
+
+    private SayHelloListener sayHelloListener;
+
+    public void setSayHelloListener(SayHelloListener sayHelloListener) {
+        this.sayHelloListener = sayHelloListener;
+    }
+
+    public interface  SayHelloListener{
+        void sayHelloListen(int postion);
+    }
     public SuperLikeAdapter(List<SuperLikeModel.ObjBean> data){
         this.data = data;
     }
@@ -62,6 +71,13 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
         holder.tv_degree.setText(data.get(position).getMatching_degree());
         Glide.with(context).load(data.get(position).getUserpic()).into(holder.iv_icon_user);
 
+        holder.tv_say_hello.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sayHelloListener.sayHelloListen(position);
+            }
+        });
+
     }
 
     @Override
@@ -75,6 +91,7 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
         private TextView tv_username;
         private TextView tv_age;
         private TextView tv_degree;
+        private TextView tv_say_hello;
         public ViewHolder(View itemView) {
             super(itemView);
             rv_label = itemView.findViewById(R.id.rv_label);
@@ -82,6 +99,7 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
             tv_username = itemView.findViewById(R.id.tv_username);
             tv_age = itemView.findViewById(R.id.tv_age);
             tv_degree = itemView.findViewById(R.id.tv_degree);
+            tv_say_hello = itemView.findViewById(R.id.tv_say_hello);
         }
     }
 }

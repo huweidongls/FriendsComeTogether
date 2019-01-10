@@ -88,6 +88,7 @@ public class SuperLikeActivity extends BaseActivity {
                                 tv_matching_text.setText("成功为您匹配 "+list_data.size()+" 名瞳伴！ 还等什么赶快去打招呼吧");
                                 recyclerView.setLayoutManager(layoutManager);
                                 superLikeAdapter = new SuperLikeAdapter(list_data);
+                                superLikeAdapter.setSayHelloListener(sayHelloListener);
                                 recyclerView.setAdapter(superLikeAdapter);
                             }
                         } catch (JSONException e) {
@@ -116,4 +117,26 @@ public class SuperLikeActivity extends BaseActivity {
                 break;
         }
     }
+    SuperLikeAdapter.SayHelloListener sayHelloListener = new SuperLikeAdapter.SayHelloListener() {
+
+        @Override
+        public void sayHelloListen(int postion) {
+            ViseHttp.POST(NetConfig.sayHello)
+                    .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.sayHello))
+                    .addForm("uid",spImp.getUID())
+                    .addForm("bid",list_data.get(postion).getUserID())
+                    .request(new ACallback<String>() {
+                        @Override
+                        public void onSuccess(String data) {
+                            Log.d("22222",data);
+                            toToast(context,"打招呼成功！");
+                        }
+
+                        @Override
+                        public void onFail(int errCode, String errMsg) {
+
+                        }
+                    });
+        }
+    };
 }

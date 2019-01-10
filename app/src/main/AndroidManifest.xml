@@ -278,7 +278,8 @@
         <activity android:name=".newpage.SuperLikeSxActivity" />
         <activity android:name=".newpage.EditorLabelActivity" />
         <activity android:name=".newpage.EditorLabelListActivity" />
-        <activity android:name=".newpage.EditorMyLabelActivity"></activity>
+        <activity android:name=".newpage.EditorMyLabelActivity" />
+        <activity android:name=".newpage.PrivateMessageActivity"></activity>
     </application>
 
 </manifest>

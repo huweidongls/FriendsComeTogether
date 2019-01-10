@@ -265,4 +265,8 @@ public class NetConfig {
     public static String saveuserlabel = "action/ac_user/SaveUserLabel";
     //超级喜欢匹配好友
     public static String matching_user = "action/ac_user/matching_user";
+    //http://47.92.136.19/index.php/action/ac_user/Sayhello匹配成功、打招呼
+    public static String sayHello = "action/ac_user/Sayhello";
+    //私信列表 http://47.92.136.19/index.php/action/ac_user/Privateletterlist
+    public static String privateLetterList = "action/ac_user/Privateletterlist";
 }
