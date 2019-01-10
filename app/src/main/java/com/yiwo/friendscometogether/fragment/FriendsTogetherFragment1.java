@@ -32,6 +32,7 @@ import com.yiwo.friendscometogether.model.FriendsTogetherDetailsModel;
 import com.yiwo.friendscometogether.model.FriendsTogethermodel;
 import com.yiwo.friendscometogether.model.IsRealNameModel;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newpage.MessageActivity;
 import com.yiwo.friendscometogether.newpage.YoujuShaixuanActivity;
 import com.yiwo.friendscometogether.pages.ApplyActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
@@ -160,7 +161,7 @@ public class FriendsTogetherFragment1 extends BaseFragment {
 
     }
 
-    @OnClick({R.id.iv_shaixuan, R.id.iv_baoming, R.id.iv_youju_focus})
+    @OnClick({R.id.iv_shaixuan, R.id.iv_baoming, R.id.iv_youju_focus, R.id.rl_xiaoxi})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -273,6 +274,15 @@ public class FriendsTogetherFragment1 extends BaseFragment {
 
                                 }
                             });
+                } else {
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.rl_xiaoxi:
+                if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                    intent.setClass(getContext(), MessageActivity.class);
+                    startActivity(intent);
                 } else {
                     intent.setClass(getContext(), LoginActivity.class);
                     startActivity(intent);

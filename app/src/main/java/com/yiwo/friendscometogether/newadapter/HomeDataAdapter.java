@@ -22,6 +22,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
+import com.yiwo.friendscometogether.pages.ArticleCommentActivity;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
@@ -217,6 +218,33 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
             holder.tvYoujiAddress.setText(data.get(position).getPfaddress());
             holder.tvYoujiLookNum.setText(data.get(position).getPflook());
             holder.tvYoujiCommentNum.setText(data.get(position).getCommentcount());
+            holder.tvYoujiGoodNum.setText(data.get(position).getFmgood()+"人觉得很赞");
+            holder.llYoujiComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    if (TextUtils.isEmpty(spImp.getUID()) || spImp.getUID().equals("0")) {
+                        intent.setClass(context, LoginActivity.class);
+                        context.startActivity(intent);
+                    } else {
+                        intent.setClass(context, ArticleCommentActivity.class);
+                        intent.putExtra("id", data.get(position).getPfID());
+                        context.startActivity(intent);
+                    }
+                }
+            });
+
+            //评论信息
+            if(data.get(position).getComment_list().size()>2){
+                
+            }else if(data.get(position).getComment_list().size()==2){
+
+            }else if(data.get(position).getComment_list().size()==1){
+
+            }else {
+
+            }
+
         }
     }
 
@@ -250,6 +278,14 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
         private TextView tvYoujiAddress;
         private TextView tvYoujiLookNum;
         private TextView tvYoujiCommentNum;
+        private LinearLayout llYoujiComment;
+        private TextView tvYoujiGoodNum;
+        private LinearLayout llComment1;
+        private TextView tvName1;
+        private TextView tvComment1;
+        private LinearLayout llComment2;
+        private TextView tvName2;
+        private TextView tvComment2;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -276,6 +312,14 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
             tvYoujiAddress = itemView.findViewById(R.id.tv_youji_address);
             tvYoujiLookNum = itemView.findViewById(R.id.tv_youji_look_num);
             tvYoujiCommentNum = itemView.findViewById(R.id.tv_youji_comment_num);
+            llYoujiComment = itemView.findViewById(R.id.ll_youji_comment);
+            tvYoujiGoodNum = itemView.findViewById(R.id.tv_youji_good_num);
+            llComment1 = itemView.findViewById(R.id.ll_comment1);
+            tvName1 = itemView.findViewById(R.id.tv_name1);
+            tvComment1 = itemView.findViewById(R.id.tv_comment1);
+            llComment2 = itemView.findViewById(R.id.ll_comment2);
+            tvName2 = itemView.findViewById(R.id.tv_name2);
+            tvComment2 = itemView.findViewById(R.id.tv_comment2);
         }
     }
 

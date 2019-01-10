@@ -77,6 +77,15 @@ public class HomeDataModel {
         private List<String> pfpic;
         private List<CommentListBean> comment_list;
         private String userID;
+        private String fmgood;
+
+        public String getFmgood() {
+            return fmgood;
+        }
+
+        public void setFmgood(String fmgood) {
+            this.fmgood = fmgood;
+        }
 
         public String getUserID() {
             return userID;
@@ -232,6 +241,15 @@ public class HomeDataModel {
             private Object fcquoteid;
             private String which_fcID;
             private String greatcomment;
+            private String username;
+
+            public String getUsername() {
+                return username;
+            }
+
+            public void setUsername(String username) {
+                this.username = username;
+            }
 
             public String getFcID() {
                 return fcID;

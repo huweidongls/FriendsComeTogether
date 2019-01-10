@@ -19,6 +19,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <RelativeLayout
+            android:id="@+id/rl_xiaoxi"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="100px"
+            android:layout_height="88px">
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:src="@mipmap/youju_xiaoxi"
+                android:layout_width="52px"
+                android:layout_height="46px" />
+
+        </RelativeLayout>
+
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
