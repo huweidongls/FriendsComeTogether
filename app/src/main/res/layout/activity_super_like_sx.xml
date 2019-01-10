@@ -12,6 +12,7 @@
         android:layout_height="88px">
 
         <RelativeLayout
+            android:id="@+id/rl_back"
             android:layout_width="100px"
             android:layout_height="match_parent">
 
@@ -30,7 +31,21 @@
             android:textSize="36px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:id="@+id/rl_sure"
+            android:layout_alignParentRight="true"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
 
+            <TextView
+                android:layout_centerInParent="true"
+                android:text="确定"
+                android:textSize="30px"
+                android:textColor="#D84C37"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
     </RelativeLayout>
 
     <TextView
@@ -168,7 +183,7 @@
             android:id="@+id/seekbar"
             android:layout_below="@+id/tv_age"
             android:layout_width="match_parent"
-            android:layout_height="25px"
+            android:layout_height="32px"
             app:min="1"
             app:max="100"
             app:lineColorEdge="#BBBBBB"
@@ -200,6 +215,7 @@
             android:layout_height="wrap_content" />
 
         <ImageView
+            android:id="@+id/iv_expand_search"
             android:src="@mipmap/switch_on"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

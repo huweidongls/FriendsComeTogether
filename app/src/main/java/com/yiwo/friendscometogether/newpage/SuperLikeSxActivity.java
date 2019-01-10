@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -31,7 +33,10 @@ public class SuperLikeSxActivity extends BaseActivity {
     TextView tv3;
     @BindView(R.id.tv4)
     TextView tv4;
+    @BindView(R.id.iv_expand_search)
+    ImageView iv_expand_search;
 
+    private int type_expand_search = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,9 +61,15 @@ public class SuperLikeSxActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4})
+    @OnClick({R.id.rl_back,R.id.rl_sure,R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4,R.id.iv_expand_search})
     public void onClick(View view){
         switch (view.getId()){
+            case R.id.rl_back:
+                finish();
+                break;
+            case R.id.rl_sure:
+
+                break;
             case R.id.tv1:
                 tv1.setTextColor(Color.parseColor("#ffffff"));
                 tv1.setBackgroundResource(R.drawable.bg_red_20px);
@@ -82,6 +93,15 @@ public class SuperLikeSxActivity extends BaseActivity {
                 tv3.setBackgroundResource(R.drawable.bg_gray_20px);
                 tv4.setTextColor(Color.parseColor("#ffffff"));
                 tv4.setBackgroundResource(R.drawable.bg_red_20px);
+                break;
+            case R.id.iv_expand_search:
+                if (type_expand_search == 1){
+                    type_expand_search = 0;
+                    iv_expand_search.setImageResource(R.mipmap.switch_off);
+                }else {
+                    type_expand_search = 1;
+                    iv_expand_search.setImageResource(R.mipmap.switch_on);
+                }
                 break;
         }
     }

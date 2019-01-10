@@ -2,13 +2,18 @@ package com.yiwo.friendscometogether.newadapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.model.SuperLikeModel;
 import com.yiwo.friendscometogether.widget.FlowLayoutManager;
 
 import java.util.ArrayList;
@@ -20,10 +25,10 @@ import java.util.List;
 
 public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.ViewHolder>{
 
-    private List<String> data;
+    private List<SuperLikeModel.ObjBean> data;
 
     private Context context;
-    public SuperLikeAdapter(List<String> data){
+    public SuperLikeAdapter(List<SuperLikeModel.ObjBean> data){
         this.data = data;
     }
     @Override
@@ -37,11 +42,13 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final List<String> list_biaoqian = new ArrayList<>();
-        list_biaoqian.add("90后");
-        list_biaoqian.add("江南妹子");
-        list_biaoqian.add("想去美国逛逛");
-        list_biaoqian.add("抖腿");
-        list_biaoqian.add("古典风");
+        String[] strs = data.get(position).getLabel().split(",");
+        if (strs!=null&&!strs[0].equals("")){
+            for (int i = 0;i<strs.length;i++){
+                list_biaoqian.add(strs[i]);
+            }
+        }
+        Log.d("333",list_biaoqian.size()+"");
         FlowLayoutManager manager = new FlowLayoutManager(){
             @Override
             public boolean canScrollVertically() {
@@ -50,6 +57,11 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
         };
         holder.rv_label.setLayoutManager(manager);
         holder.rv_label.setAdapter(new SuperLikeLabelAdapter(list_biaoqian));
+        holder.tv_username.setText(data.get(position).getUsername());
+        holder.tv_age.setText(data.get(position).getUserbirthday()+"");
+        holder.tv_degree.setText(data.get(position).getMatching_degree());
+        Glide.with(context).load(data.get(position).getUserpic()).into(holder.iv_icon_user);
+
     }
 
     @Override
@@ -59,9 +71,17 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
 
     class ViewHolder extends RecyclerView.ViewHolder{
         private RecyclerView rv_label;
+        private ImageView iv_icon_user;
+        private TextView tv_username;
+        private TextView tv_age;
+        private TextView tv_degree;
         public ViewHolder(View itemView) {
             super(itemView);
             rv_label = itemView.findViewById(R.id.rv_label);
+            iv_icon_user = itemView.findViewById(R.id.iv_icon_user);
+            tv_username = itemView.findViewById(R.id.tv_username);
+            tv_age = itemView.findViewById(R.id.tv_age);
+            tv_degree = itemView.findViewById(R.id.tv_degree);
         }
     }
 }

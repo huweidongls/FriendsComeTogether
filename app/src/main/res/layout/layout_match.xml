@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:background="@color/white_ffffff"
     android:layout_marginLeft="32px"
     android:layout_marginRight="32px"
     android:layout_marginTop="32px"
+    android:elevation="4px"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
@@ -22,6 +24,8 @@
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/tv_pipeidu"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
         android:layout_marginTop="10px"
         android:layout_marginLeft="30px"
         android:layout_marginRight="30px"
@@ -30,9 +34,10 @@
         android:textColor="@color/color_black_333333"
         android:layout_below="@+id/tv_from_address"
         android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <RelativeLayout
+        android:layout_gravity="center_horizontal"
         android:id="@+id/rv_icons"
         android:layout_marginTop="48px"
         android:layout_marginRight="63px"
@@ -80,23 +85,70 @@
                 android:layout_height="match_parent" />
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_margin="2px"
-                android:src="@mipmap/my_head"
+                android:src="@mipmap/hhh"
                 android:layout_centerInParent="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </RelativeLayout>
     </RelativeLayout>
-    <RelativeLayout
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="38px"
-        android:layout_below="@+id/rv_icons"
+        android:layout_marginLeft="38px"
+        android:layout_marginRight="26px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <LinearLayout
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/circle_black"
+            android:layout_width="20px"
+            android:layout_height="20px" />
+        <TextView
+            android:text="属于你们两人共同的标签：单身，哈尔滨，旅行"
+            android:textSize="28px"
+            android:textColor="@color/color_black_333333"
+            android:layout_marginLeft="18px"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_width="20px"
-                android:layout_height="20px" />
-        </LinearLayout>
-    </RelativeLayout>
-</RelativeLayout>
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16px"
+        android:layout_marginLeft="38px"
+        android:layout_marginRight="26px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/circle_black"
+            android:layout_width="20px"
+            android:layout_height="20px" />
+        <TextView
+            android:text="你们都是好看的90后"
+            android:textSize="28px"
+            android:textColor="@color/color_black_333333"
+            android:layout_marginLeft="18px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16px"
+        android:layout_marginLeft="38px"
+        android:layout_marginRight="26px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/circle_black"
+            android:layout_width="20px"
+            android:layout_height="20px" />
+        <TextView
+            android:text="跟ta聊聊这辈子做过的最疯狂的事情吧"
+            android:textSize="28px"
+            android:textColor="@color/color_black_333333"
+            android:layout_marginLeft="18px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

@@ -64,6 +64,7 @@
                 android:layout_height="398px"
                 android:layout_marginTop="110px"/>
             <TextView
+                android:id="@+id/tv_matching_text"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="70px"
                 android:text="成功为你匹配两位好友！还等什么快去打招呼吧!"

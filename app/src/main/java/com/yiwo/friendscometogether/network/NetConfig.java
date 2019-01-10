@@ -263,4 +263,6 @@ public class NetConfig {
     public static String usersavelabel = "action/ac_user/User_Label_List";
     //保存用户选择的标签
     public static String saveuserlabel = "action/ac_user/SaveUserLabel";
+    //超级喜欢匹配好友
+    public static String matching_user = "action/ac_user/matching_user";
 }
