@@ -317,6 +317,7 @@
             android:gravity="center_vertical">
 
             <LinearLayout
+                android:id="@+id/ll_city"
                 android:layout_width="wrap_content"
                 android:layout_height="52px"
                 android:background="@drawable/bg_white_efeff3_8px"
@@ -471,6 +472,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_all_comment_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10px"

@@ -54,6 +54,7 @@
             android:orientation="horizontal">
 
             <RelativeLayout
+                android:background="@drawable/sl_pop_dialog_l"
                 android:layout_marginRight="0.5px"
                 android:id="@+id/rl_pop_dialog_cancel"
                 android:layout_width="0dp"
@@ -76,6 +77,7 @@
                 android:layout_width="1px"
                 android:layout_height="match_parent"/>
             <RelativeLayout
+                android:background="@drawable/sl_pop_dialog_l"
                 android:layout_marginLeft="0.5px"
                 android:id="@+id/rl_pop_dialog_sure"
                 android:layout_width="0dp"

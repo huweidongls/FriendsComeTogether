@@ -215,6 +215,9 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
             Glide.with(context).load(data.get(position).getPfpic().get(2)).into(holder.ivYoujiTitle3);
             Glide.with(context).load(data.get(position).getPfpic().get(3)).into(holder.ivYoujiTitle4);
             holder.tvYoujiTitle.setText(data.get(position).getPftitle());
+            if(TextUtils.isEmpty(data.get(position).getPfaddress())){
+                holder.llCity.setVisibility(View.GONE);
+            }
             holder.tvYoujiAddress.setText(data.get(position).getPfaddress());
             holder.tvYoujiLookNum.setText(data.get(position).getPflook());
             holder.tvYoujiCommentNum.setText(data.get(position).getCommentcount());
@@ -235,15 +238,37 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
             });
 
             //评论信息
-            if(data.get(position).getComment_list().size()>2){
-                
-            }else if(data.get(position).getComment_list().size()==2){
-
+            if(data.get(position).getComment_list().size()>=2){
+                holder.tvName1.setText(data.get(position).getComment_list().get(0).getUsername()+": ");
+                holder.tvComment1.setText(data.get(position).getComment_list().get(0).getFctitle());
+                holder.tvName2.setText(data.get(position).getComment_list().get(1).getUsername()+": ");
+                holder.tvComment2.setText(data.get(position).getComment_list().get(1).getFctitle());
+                holder.llComment1.setVisibility(View.VISIBLE);
+                holder.llComment2.setVisibility(View.VISIBLE);
             }else if(data.get(position).getComment_list().size()==1){
-
+                holder.tvName1.setText(data.get(position).getComment_list().get(0).getUsername()+": ");
+                holder.tvComment1.setText(data.get(position).getComment_list().get(0).getFctitle());
+                holder.llComment1.setVisibility(View.VISIBLE);
+                holder.llComment2.setVisibility(View.GONE);
             }else {
-
+                holder.llComment1.setVisibility(View.GONE);
+                holder.llComment2.setVisibility(View.GONE);
             }
+            holder.tvAllCommentNum.setText("全部"+data.get(position).getCommentcount()+"条评论");
+            holder.tvAllCommentNum.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    if (TextUtils.isEmpty(spImp.getUID()) || spImp.getUID().equals("0")) {
+                        intent.setClass(context, LoginActivity.class);
+                        context.startActivity(intent);
+                    } else {
+                        intent.setClass(context, ArticleCommentActivity.class);
+                        intent.putExtra("id", data.get(position).getPfID());
+                        context.startActivity(intent);
+                    }
+                }
+            });
 
         }
     }
@@ -286,6 +311,8 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
         private LinearLayout llComment2;
         private TextView tvName2;
         private TextView tvComment2;
+        private TextView tvAllCommentNum;
+        private LinearLayout llCity;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -320,6 +347,8 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
             llComment2 = itemView.findViewById(R.id.ll_comment2);
             tvName2 = itemView.findViewById(R.id.tv_name2);
             tvComment2 = itemView.findViewById(R.id.tv_comment2);
+            tvAllCommentNum = itemView.findViewById(R.id.tv_all_comment_num);
+            llCity = itemView.findViewById(R.id.ll_city);
         }
     }
 
