@@ -43,30 +43,32 @@
         android:layout_height="195px">
 
         <RelativeLayout
+            android:id="@+id/rl_z_and_sc"
             android:layout_weight="1"
             android:layout_width="0px"
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_centerInParent="true"
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/zan_and_shoucang"
                     android:layout_width="63px"
-                    android:layout_height="62px" />
+                    android:layout_height="62px"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/zan_and_shoucang" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="25px"
-                    android:textSize="28px"
-                    android:textColor="@color/black_333333"
                     android:text="赞和收藏"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
 
             </LinearLayout>
 

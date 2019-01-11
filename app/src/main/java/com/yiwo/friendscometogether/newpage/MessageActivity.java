@@ -130,12 +130,17 @@ public class MessageActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.rl_hot_message, R.id.rl_tongzhi_message, R.id.rl_shoudaoyaoqing, R.id.rl_pinglun,R.id.rl_private_message})
+    @OnClick({R.id.rl_back, R.id.rl_hot_message, R.id.rl_tongzhi_message, R.id.rl_shoudaoyaoqing, R.id.rl_pinglun,R.id.rl_private_message,R.id.rl_z_and_sc})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
             case R.id.rl_back:
                 finish();
+                break;
+            case R.id.rl_z_and_sc:
+                ivHot.setVisibility(View.GONE);
+                intent.setClass(context, ZAndScActivity.class);
+                startActivity(intent);
                 break;
             case R.id.rl_hot_message:
                 ivHot.setVisibility(View.GONE);

@@ -43,6 +43,13 @@ public class SuperLikeActivity extends BaseActivity {
     private SuperLikeModel model;
     private List<SuperLikeModel.ObjBean> list_data = new ArrayList<>();
     private Context context  = SuperLikeActivity.this;
+    private final int SX_RESULT_CODE = 2;
+    private final int SX_REQUEST_CODE = 1;
+
+    private int sex = 1;
+    private int address = 1;
+    private String ages = "25-30";
+
     private SpImp spImp;
     @BindView(R.id.rv_super_like)
     RecyclerView recyclerView;
@@ -62,7 +69,10 @@ public class SuperLikeActivity extends BaseActivity {
         tv_matching_text.setText("正在为您搜索匹配另一半…");
         ViseHttp.POST(NetConfig.matching_user)
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.matching_user))
-                .addForm("uid",spImp.getUID())
+                .addParam("uid",spImp.getUID())
+                .addParam("sex",sex+"")
+                .addParam("address",address+"")
+                .addParam("age",ages)
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
@@ -84,8 +94,13 @@ public class SuperLikeActivity extends BaseActivity {
                                                 return  false;
                                             }
                                         };
+                                list_data.clear();
                                 list_data.addAll(model.getObj());
-                                tv_matching_text.setText("成功为您匹配 "+list_data.size()+" 名瞳伴！ 还等什么赶快去打招呼吧");
+                                if (list_data.size()>0){
+                                    tv_matching_text.setText("成功为您匹配 "+list_data.size()+" 名瞳伴！ 还等什么赶快去打招呼吧");
+                                }else {
+                                    tv_matching_text.setText("没有找到和您匹配的瞳伴，快去完善资料吧！");
+                                }
                                 recyclerView.setLayoutManager(layoutManager);
                                 superLikeAdapter = new SuperLikeAdapter(list_data);
                                 superLikeAdapter.setSayHelloListener(sayHelloListener);
@@ -111,12 +126,29 @@ public class SuperLikeActivity extends BaseActivity {
                 break;
             case R.id.rl_Sx:
                 intent.setClass(context,SuperLikeSxActivity.class);
-                context.startActivity(intent);
+                startActivityForResult(intent,SX_REQUEST_CODE);
                 break;
             default:
                 break;
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode){
+            case SX_RESULT_CODE:
+//                intent.putExtra("age",ages);
+//                intent.putExtra("sex",sex);
+//                intent.putExtra("address",address);
+                ages = data.getStringExtra("age");
+                sex = data.getIntExtra("sex",1);
+                address = data.getIntExtra("address",1);
+                initData();
+                break;
+        }
+    }
+
     SuperLikeAdapter.SayHelloListener sayHelloListener = new SuperLikeAdapter.SayHelloListener() {
 
         @Override

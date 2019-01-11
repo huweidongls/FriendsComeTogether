@@ -103,7 +103,7 @@
                 android:layout_marginBottom="25px"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:layout_width="105px"
+                android:layout_width="wrap_content"
                 android:layout_height="100px">
                 <TextView
                     android:layout_centerHorizontal="true"
@@ -117,14 +117,12 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:textColor="#FF4081"
-                    android:text="93%"
+                    android:text="100%"
                     android:textSize="48px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </RelativeLayout>
         </RelativeLayout>
-
-
     </RelativeLayout>
     <TextView
         android:id="@+id/tv_say_hello"
