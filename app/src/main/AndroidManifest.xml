@@ -279,7 +279,8 @@
         <activity android:name=".newpage.EditorLabelActivity" />
         <activity android:name=".newpage.EditorLabelListActivity" />
         <activity android:name=".newpage.EditorMyLabelActivity" />
-        <activity android:name=".newpage.PrivateMessageActivity"></activity>
+        <activity android:name=".newpage.PrivateMessageActivity" />
+        <activity android:name=".newpage.ZAndScActivity"></activity>
     </application>
 
 </manifest>
