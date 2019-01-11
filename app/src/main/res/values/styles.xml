@@ -21,7 +21,7 @@
     <style name="rl_top_bar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">88px</item>
-        <item name="android:background">#D84C37</item>
+        <item name="android:background">#FB473F</item>
     </style>
     <!--返回图片样式-->
     <style name="iv_return">

@@ -273,4 +273,6 @@ public class NetConfig {
     public static String agreeOrRefuse = "action/ac_user/Agree_or_refuse";
     //首页标签类别
     public static String indexLabel = "action/ac_user/index_label";
+    //点赞收藏消息
+    public static String zanAndSoucang = "action/ac_user/index_label";
 }
