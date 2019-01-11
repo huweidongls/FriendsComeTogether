@@ -86,7 +86,7 @@ public class SuperLikeActivity extends BaseActivity {
                                 RecyclerView.LayoutManager layoutManager =
                                         new GridLayoutManager(context,
                                                 2, // 每行显示item项数目
-                                                GridLayoutManager.HORIZONTAL, //水平排列
+                                                GridLayoutManager.VERTICAL,
                                                 false
                                         ){
                                             @Override
