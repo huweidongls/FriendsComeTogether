@@ -22,9 +22,11 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -34,6 +36,7 @@ import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.MainActivity;
+import com.yiwo.friendscometogether.MyApplication;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
 import com.yiwo.friendscometogether.model.AllBannerModel;
@@ -44,6 +47,7 @@ import com.yiwo.friendscometogether.network.ActivityConfig;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.HomeDataAdapter;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
+import com.yiwo.friendscometogether.newmodel.IndexLabelModel;
 import com.yiwo.friendscometogether.newpage.EditorLabelActivity;
 import com.yiwo.friendscometogether.newpage.MessageActivity;
 import com.yiwo.friendscometogether.newpage.SuperLikeSxActivity;
@@ -110,7 +114,22 @@ public class HomeFragment1 extends BaseFragment {
     View v3;
     @BindView(R.id.v4)
     View v4;
-
+    @BindView(R.id.iv1)
+    ImageView iv1;
+    @BindView(R.id.iv2)
+    ImageView iv2;
+    @BindView(R.id.iv3)
+    ImageView iv3;
+    @BindView(R.id.iv4)
+    ImageView iv4;
+    @BindView(R.id.tv1)
+    TextView tv1;
+    @BindView(R.id.tv2)
+    TextView tv2;
+    @BindView(R.id.tv3)
+    TextView tv3;
+    @BindView(R.id.tv4)
+    TextView tv4;
 
     private LocationManager locationManager;
     private double latitude = 0.0;
@@ -136,6 +155,8 @@ public class HomeFragment1 extends BaseFragment {
 
     private String cityId = "";
     private String type = "1";
+
+    private IndexLabelModel labelModel;
 
     @Nullable
     @Override
@@ -207,6 +228,36 @@ public class HomeFragment1 extends BaseFragment {
                                         }
                                     }
                                 });
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
+
+        ViseHttp.POST(NetConfig.indexLabel)
+                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.indexLabel))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.getInt("code") == 200){
+                                Gson gson = new Gson();
+                                labelModel = gson.fromJson(data, IndexLabelModel.class);
+                                Glide.with(getContext()).load(labelModel.getObj().get(0).getImg()).into(iv1);
+                                tv1.setText(labelModel.getObj().get(0).getLname());
+                                Glide.with(getContext()).load(labelModel.getObj().get(1).getImg()).into(iv2);
+                                tv2.setText(labelModel.getObj().get(1).getLname());
+                                Glide.with(getContext()).load(labelModel.getObj().get(2).getImg()).into(iv3);
+                                tv3.setText(labelModel.getObj().get(2).getLname());
+                                Glide.with(getContext()).load(labelModel.getObj().get(3).getImg()).into(iv4);
+                                tv4.setText(labelModel.getObj().get(3).getLname());
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -324,6 +375,7 @@ public class HomeFragment1 extends BaseFragment {
         Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.ll_home_youji_all:
+                MyApplication.sign = "";
                 mainActivity.switchFragment(2);
                 mainActivity.startYouji();
                 break;
@@ -336,8 +388,14 @@ public class HomeFragment1 extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.ll_home_youji_tandian:
+                MyApplication.sign = labelModel.getObj().get(2).getLID();
+                mainActivity.switchFragment(2);
+                mainActivity.startYouji();
                 break;
             case R.id.ll_home_youji_gonglue:
+                MyApplication.sign = labelModel.getObj().get(3).getLID();
+                mainActivity.switchFragment(2);
+                mainActivity.startYouji();
                 break;
             case R.id.locationRl:
                 Intent it = new Intent(getActivity(), CityActivity.class);

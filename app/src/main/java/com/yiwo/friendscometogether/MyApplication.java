@@ -42,6 +42,7 @@ import cn.jpush.android.api.JPushInterface;
 
 public class MyApplication extends Application {
     public static String versionCode = "V1.0.1";
+    public static String sign = "";
     // 注册获取验证码倒计时
     public static TimeCount timecount;
     // 修改密码获取验证码倒计时

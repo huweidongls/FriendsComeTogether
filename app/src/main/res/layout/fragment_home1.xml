@@ -124,17 +124,17 @@
                             android:layout_height="wrap_content">
 
                             <ImageView
+                                android:id="@+id/iv1"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@mipmap/lvxing"
                                 android:layout_width="70px"
                                 android:layout_height="63px" />
 
                             <TextView
+                                android:id="@+id/tv1"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="20px"
                                 android:textSize="26px"
                                 android:textColor="@color/black_333333"
-                                android:text="旅行"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
 
@@ -148,17 +148,17 @@
                             android:layout_height="wrap_content">
 
                             <ImageView
+                                android:id="@+id/iv2"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@mipmap/meishi"
                                 android:layout_width="70px"
                                 android:layout_height="63px" />
 
                             <TextView
+                                android:id="@+id/tv2"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="20px"
                                 android:textSize="26px"
                                 android:textColor="@color/black_333333"
-                                android:text="美食"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
 
@@ -172,17 +172,17 @@
                             android:layout_height="wrap_content">
 
                             <ImageView
+                                android:id="@+id/iv3"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@mipmap/tandian"
                                 android:layout_width="70px"
                                 android:layout_height="63px" />
 
                             <TextView
+                                android:id="@+id/tv3"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="20px"
                                 android:textSize="26px"
                                 android:textColor="@color/black_333333"
-                                android:text="探店"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
 
@@ -196,17 +196,17 @@
                             android:layout_height="wrap_content">
 
                             <ImageView
+                                android:id="@+id/iv4"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@mipmap/gonglue"
                                 android:layout_width="70px"
                                 android:layout_height="63px" />
 
                             <TextView
+                                android:id="@+id/tv4"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="20px"
                                 android:textSize="26px"
                                 android:textColor="@color/black_333333"
-                                android:text="攻略"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
 

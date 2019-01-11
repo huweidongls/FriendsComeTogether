@@ -271,4 +271,6 @@ public class NetConfig {
     public static String privateLetterList = "action/ac_user/Privateletterlist";
     //http://47.92.136.19/index.php/action/ac_user/Agree_or_refuse  同意或者拒绝聊天
     public static String agreeOrRefuse = "action/ac_user/Agree_or_refuse";
+    //首页标签类别
+    public static String indexLabel = "action/ac_user/index_label";
 }
