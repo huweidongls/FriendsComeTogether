@@ -242,6 +242,7 @@ public class PersonMainModel {
             private String headportrait;
             private String username;
             private String commentcount;
+            private String fmgood;
             private List<String> pfpic;
             private List<CommentListBean> comment_list;
 
@@ -349,6 +350,14 @@ public class PersonMainModel {
                 this.comment_list = comment_list;
             }
 
+            public String getFmgood() {
+                return fmgood;
+            }
+
+            public void setFmgood(String fmgood) {
+                this.fmgood = fmgood;
+            }
+
             public static class CommentListBean {
                 /**
                  * fcID : 200
@@ -375,7 +384,7 @@ public class PersonMainModel {
                 private Object fcquoteid;
                 private String which_fcID;
                 private String greatcomment;
-
+                private String username;
                 public String getFcID() {
                     return fcID;
                 }
@@ -462,6 +471,14 @@ public class PersonMainModel {
 
                 public void setGreatcomment(String greatcomment) {
                     this.greatcomment = greatcomment;
+                }
+
+                public String getUsername() {
+                    return username;
+                }
+
+                public void setUsername(String username) {
+                    this.username = username;
                 }
             }
         }

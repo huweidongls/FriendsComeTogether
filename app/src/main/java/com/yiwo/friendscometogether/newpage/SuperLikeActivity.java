@@ -128,8 +128,20 @@ public class SuperLikeActivity extends BaseActivity {
                     .request(new ACallback<String>() {
                         @Override
                         public void onSuccess(String data) {
-                            Log.d("22222",data);
-                            toToast(context,"打招呼成功！");
+                            JSONObject jsonObject = null;
+                            try {
+                                jsonObject = new JSONObject(data);
+                                if (jsonObject.getInt("code") == 200){
+                                    Log.d("22222",data);
+                                    toToast(context,"打招呼成功！");
+                                }else {
+                                    toToast(context,"您已经打过招呼了");
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
                         }
 
                         @Override

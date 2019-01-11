@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
+import com.netease.nim.uikit.api.NimUIKit;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -73,6 +74,7 @@ public class PrivateMessageActivity extends BaseActivity {
                                 rv_private_message.setLayoutManager(manager);
                                 list = model.getObj();
                                 adapter = new PrivateMessageAdapter(list);
+                                adapter.setMessageListioner(messageListioner);
                                 rv_private_message.setAdapter(adapter);
                             }
                         } catch (JSONException e) {
@@ -94,5 +96,74 @@ public class PrivateMessageActivity extends BaseActivity {
                 finish();
                 break;
         }
+    }
+    PrivateMessageAdapter.MessageListioner messageListioner = new PrivateMessageAdapter.MessageListioner() {
+
+        @Override
+        public void agreeListion(final int position, String messageId, final String name, final String YX_id) {
+            ViseHttp.POST(NetConfig.agreeOrRefuse)
+                    .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.agreeOrRefuse))
+                    .addParam("id", messageId)
+                    .addForm("type","0")
+                    .request(new ACallback<String>() {
+                        @Override
+                        public void onSuccess(String data) {
+//                        try {
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+                            JSONObject jsonObject = null;
+                            try {
+                                jsonObject = new JSONObject(data);
+                                if (jsonObject.getInt("code") == 200){
+                                    Log.d("2222",data);
+                                    toToast(context,"开始和"+name+"聊天");
+                                    list.get(position).setRadio("1");
+                                    adapter.notifyDataSetChanged();
+                                    liaotian(YX_id);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onFail(int errCode, String errMsg) {
+                            toToast(context,"接受聊天失败");
+                        }
+                    });
+        }
+
+        @Override
+        public void disAgreeListion(final int position, String messageId) {
+            ViseHttp.POST(NetConfig.agreeOrRefuse)
+                    .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.agreeOrRefuse))
+                    .addParam("id", messageId)
+                    .addForm("type","1")
+                    .request(new ACallback<String>() {
+                        @Override
+                        public void onSuccess(String data) {
+                            Log.d("2222",data);
+                            toToast(context,"已拒绝");
+                            list.get(position).setRadio("2");
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onFail(int errCode, String errMsg) {
+
+                        }
+                    });
+        }
+
+        @Override
+        public void liaotianListion(String Yx_id) {
+            liaotian(Yx_id);
+        }
+    };
+    private void liaotian(String liaotianAccount) {
+        NimUIKit.setAccount(spImp.getYXID());
+        NimUIKit.startP2PSession(context, liaotianAccount);
     }
 }

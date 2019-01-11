@@ -12,6 +12,7 @@
         android:layout_height="wrap_content">
         <LinearLayout
             android:orientation="horizontal"
+            android:layout_marginBottom="30px"
             android:layout_marginTop="30px"
             android:layout_marginLeft="32px"
             android:layout_width="match_parent"
@@ -45,8 +46,8 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_say_hello"
             android:orientation="vertical"
-            android:layout_marginTop="22px"
             android:layout_marginLeft="142px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -67,16 +68,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"/>
             <LinearLayout
-                android:layout_marginBottom="30px"
-                android:layout_marginTop="24px"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="90px">
                 <LinearLayout
                     android:id="@+id/ll_agree"
-                    android:layout_marginRight="122px"
+                    android:paddingRight="122px"
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
                     <ImageView
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="10px"
@@ -87,7 +87,7 @@
                         android:textColor="@color/color_black_333333"
                         android:textSize="28px"
                         android:text="接收聊天"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -96,7 +96,7 @@
                     android:id="@+id/ll_disagree"
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
                     <ImageView
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="10px"
@@ -107,7 +107,7 @@
                         android:textColor="@color/color_black_333333"
                         android:textSize="28px"
                         android:text="抱歉，下次吧！"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -115,7 +115,7 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    
+
     <View
         android:background="@color/black_f8f8f8"
         android:layout_width="match_parent"
