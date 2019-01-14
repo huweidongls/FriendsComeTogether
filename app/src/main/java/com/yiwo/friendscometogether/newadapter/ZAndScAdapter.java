@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether.newadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.ZAndScModel;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 
 import java.util.List;
 
@@ -39,7 +41,7 @@ public class ZAndScAdapter extends RecyclerView.Adapter<ZAndScAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         Glide.with(context).load(data.get(position).getUserpic()).into(holder.ivAvatar);
         if(data.get(position).getType().equals("0")){
             String str = "<font color='#0765AA'>"+data.get(position).getUsername()+"</font>点赞了您的文章。";
@@ -48,6 +50,15 @@ public class ZAndScAdapter extends RecyclerView.Adapter<ZAndScAdapter.ViewHolder
             String str = "<font color='#0765AA'>"+data.get(position).getUsername()+"</font>收藏了您的文章。";
             holder.tv.setText(Html.fromHtml(str));
         }
+        holder.ivAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("person_id", data.get(position).getUid());
+                intent.setClass(context, PersonMainActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

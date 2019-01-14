@@ -354,6 +354,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:paddingBottom="12px"
+                android:paddingTop="12px"
                 android:elevation="2px"
                 android:background="@drawable/bg_white_12px"
                 android:layout_marginLeft="26px"
