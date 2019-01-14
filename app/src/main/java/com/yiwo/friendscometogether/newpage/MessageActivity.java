@@ -20,6 +20,7 @@ import com.yiwo.friendscometogether.model.HomeMessageCenterModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.pages.MessageCenterActivity;
 import com.yiwo.friendscometogether.pages.MessageCommentActivity;
+import com.yiwo.friendscometogether.pages.MessageFriendsActivity;
 import com.yiwo.friendscometogether.pages.MessageInvitationActivity;
 import com.yiwo.friendscometogether.pages.MessageViewActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -54,6 +55,13 @@ public class MessageActivity extends BaseActivity {
     @BindView(R.id.iv_hot3)
     ImageView ivPrivateMessage;
 
+    //好友消息
+    @BindView(R.id.tv4_tv)
+    TextView tv_friend_content;
+    @BindView(R.id.tv_friend_time)
+    TextView tv_friend_time;
+    @BindView(R.id.iv_hot4)
+    ImageView iv_friend_new_message;
     private SpImp spImp;
 
     @Override
@@ -104,12 +112,12 @@ public class MessageActivity extends BaseActivity {
 //                                if (model.getObj().getComment().getType().equals("1")) {
 //                                    ivComment.setVisibility(View.VISIBLE);
 //                                }
-
-//                                tvFriendContent.setText(model.getObj().getFriends().getMessage());
-//                                tvFriendTime.setText(model.getObj().getFriends().getTime());
-//                                if (model.getObj().getFriends().getType().equals("1")) {
-//                                    ivFriend.setVisibility(View.VISIBLE);
-//                                }
+                                //好友消息
+                                tv_friend_content.setText(model.getObj().getFriends().getMessage());
+                                tv_friend_time.setText(model.getObj().getFriends().getTime());
+                                if (model.getObj().getFriends().getType().equals("1")) {
+                                    iv_friend_new_message.setVisibility(View.VISIBLE);
+                                }
                                 //私信消息
                                 tvPrivateMessageContent.setText(model.getObj().getPrivate().getMessage());
                                 tvPrivateMessageTime.setText(model.getObj().getPrivate().getTime());
@@ -130,7 +138,8 @@ public class MessageActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.rl_hot_message, R.id.rl_tongzhi_message, R.id.rl_shoudaoyaoqing, R.id.rl_pinglun,R.id.rl_private_message,R.id.rl_z_and_sc})
+    @OnClick({R.id.rl_back, R.id.rl_hot_message, R.id.rl_tongzhi_message, R.id.rl_shoudaoyaoqing, R.id.rl_pinglun,
+            R.id.rl_friend_message,R.id.rl_private_message,R.id.rl_z_and_sc})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -165,6 +174,11 @@ public class MessageActivity extends BaseActivity {
             case R.id.rl_private_message:
                 ivPrivateMessage.setVisibility(View.GONE);
                 intent.setClass(context,PrivateMessageActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.rl_friend_message:
+                iv_friend_new_message.setVisibility(View.GONE);
+                intent.setClass(context,MessageFriendsActivity.class);
                 startActivity(intent);
                 break;
         }

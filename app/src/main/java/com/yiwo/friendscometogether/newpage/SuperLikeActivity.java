@@ -13,12 +13,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.vise.xsnow.cache.SpCache;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.model.SuperLikeModel;
+import com.yiwo.friendscometogether.model.SuperLikeSXMode;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.SuperLikeAdapter;
 import com.yiwo.friendscometogether.newadapter.TaRenZhuYeYouJuAdapter;
@@ -37,18 +39,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.yiwo.friendscometogether.R2.id.sex;
+
 public class SuperLikeActivity extends BaseActivity {
 
     private SuperLikeAdapter superLikeAdapter;
     private SuperLikeModel model;
+    private SuperLikeSXMode sxMode;//筛选设置实体
+    private SpCache spCache;//第三方存储
     private List<SuperLikeModel.ObjBean> list_data = new ArrayList<>();
     private Context context  = SuperLikeActivity.this;
     private final int SX_RESULT_CODE = 2;
     private final int SX_REQUEST_CODE = 1;
-
-    private int sex = 1;
-    private int address = 1;
-    private String ages = "25-30";
 
     private SpImp spImp;
     @BindView(R.id.rv_super_like)
@@ -62,17 +64,25 @@ public class SuperLikeActivity extends BaseActivity {
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(SuperLikeActivity.this);
         spImp = new SpImp(context);
+        spCache = new SpCache(context);
         initData();
     }
 
     private void initData() {
+        sxMode = (SuperLikeSXMode) spCache.get("SuperLikeSXMode");
+        if (sxMode == null){
+            sxMode = new SuperLikeSXMode();
+            sxMode.setSex(1);
+            sxMode.setAges("10-30");
+            sxMode.setAddress(1);
+        }
         tv_matching_text.setText("正在为您搜索匹配另一半…");
         ViseHttp.POST(NetConfig.matching_user)
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.matching_user))
                 .addParam("uid",spImp.getUID())
-                .addParam("sex",sex+"")
-                .addParam("address",address+"")
-                .addParam("age",ages)
+                .addParam("sex",sxMode.getSex()+"")
+                .addParam("address",sxMode.getAddress()+"")
+                .addParam("age",sxMode.getAges())
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
@@ -141,9 +151,6 @@ public class SuperLikeActivity extends BaseActivity {
 //                intent.putExtra("age",ages);
 //                intent.putExtra("sex",sex);
 //                intent.putExtra("address",address);
-                ages = data.getStringExtra("age");
-                sex = data.getIntExtra("sex",1);
-                address = data.getIntExtra("address",1);
                 initData();
                 break;
         }

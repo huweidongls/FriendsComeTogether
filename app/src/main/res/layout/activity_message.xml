@@ -349,5 +349,74 @@
         </LinearLayout>
 
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_friend_message"
+        android:layout_marginTop="20px"
+        android:background="@color/white_ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="141px">
 
+        <ImageView
+            android:id="@+id/iv4"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="26px"
+            android:src="@mipmap/friend"
+            android:layout_width="82px"
+            android:layout_height="82px" />
+
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_alignTop="@+id/iv4"
+            android:layout_marginLeft="20px"
+            android:layout_toRightOf="@+id/iv4"
+            android:textStyle="bold"
+            android:textColor="@color/black_333333"
+            android:textSize="32px"
+            android:text="好友消息"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_toLeftOf="@+id/ll4"
+            android:ellipsize="end"
+            android:lines="1"
+            android:layout_marginTop="8px"
+            android:layout_alignLeft="@+id/tv4"
+            android:layout_below="@+id/tv4"
+            android:textColor="#5C5C5C"
+            android:textSize="28px"
+            android:text="成功与“我是你们的学霸姐”配对啦!"
+            android:id="@+id/tv4_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/ll4"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="40px"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_friend_time"
+                android:textColor="#9A9A9A"
+                android:textSize="24px"
+                android:text="12: 01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:visibility="gone"
+                android:layout_marginTop="30px"
+                android:layout_gravity="right"
+                android:id="@+id/iv_hot4"
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:background="@drawable/bg_red" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 </LinearLayout>

@@ -68,7 +68,7 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
         });
         switch (data.get(position).getRadio()){
             case "0"://未操作打招呼
-                holder.ll.setVisibility(View.VISIBLE);
+                holder.ll_private_message.setVisibility(View.VISIBLE);
                 holder.ll_say_hello.setVisibility(View.VISIBLE);
                 if(data.get(position).getSex().equals("0")){
                     String str = "您收到来自<font color='#0765AA'>"+"@"+data.get(position).getTitleusername()+"</font>帅哥的打招呼。";
@@ -107,10 +107,11 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
                 });
                 break;
             case "1"://已接收聊天
+                holder.ll_private_message.setVisibility(View.VISIBLE);
                 holder.ll_say_hello.setVisibility(View.GONE);
                 String str = "你们现在可以聊天啦";
                 holder.tv_name_info.setText(Html.fromHtml(str));
-                holder.ll.setOnClickListener(new View.OnClickListener() {
+                holder.ll_private_message.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         messageListioner.liaotianListion(data.get(position).getYxuser());
@@ -118,8 +119,7 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
                 });
                 break;
             case "2"://已拒绝聊天
-                holder.ll_say_hello.setVisibility(View.GONE);
-                holder.ll.setVisibility(View.GONE);
+                holder.ll_private_message.setVisibility(View.GONE);
                 break;
         }
     }
@@ -134,14 +134,14 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
         private TextView tv_message_time;
         private TextView tv_name_info;
         private RecyclerView rv_label;
-        private LinearLayout ll,ll_agree,ll_disagree,ll_say_hello;
+        private LinearLayout ll_private_message,ll_agree,ll_disagree,ll_say_hello;
         public ViewHolder(View itemView) {
             super(itemView);
             iv_icon_user = itemView.findViewById(R.id.iv_icon_user);
             tv_message_time = itemView.findViewById(R.id.tv_message_time);
             tv_name_info = itemView.findViewById(R.id.tv_name_info);
             rv_label = itemView.findViewById(R.id.rv_label);
-            ll= itemView.findViewById(R.id.ll);
+            ll_private_message= itemView.findViewById(R.id.ll_private_message);
             ll_agree = itemView.findViewById(R.id.ll_agree);
             ll_disagree = itemView.findViewById(R.id.ll_disagree);
             ll_say_hello = itemView.findViewById(R.id.ll_say_hello);
