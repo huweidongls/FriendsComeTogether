@@ -57,6 +57,16 @@ public class MyFragment1 extends BaseFragment {
     ImageView ivAvatar;
     @BindView(R.id.tv_nickname)
     TextView tvNickname;
+    @BindView(R.id.tv_sign)
+    TextView tvSign;
+    @BindView(R.id.tv_num1)
+    TextView tvNum1;
+    @BindView(R.id.tv_num2)
+    TextView tvNum2;
+    @BindView(R.id.tv_num3)
+    TextView tvNum3;
+    @BindView(R.id.tv_num4)
+    TextView tvNum4;
 
     private SpImp spImp;
     private String uid = "";
@@ -115,6 +125,15 @@ public class MyFragment1 extends BaseFragment {
                                         Picasso.with(getContext()).load(userModel.getObj().getHeadeimg()).into(ivAvatar);
                                     }
                                     tvNickname.setText("昵称: " + userModel.getObj().getUsername());
+                                    if(TextUtils.isEmpty(userModel.getObj().getUserautograph())){
+
+                                    }else {
+                                        tvSign.setText(userModel.getObj().getUserautograph());
+                                    }
+                                    tvNum1.setText(userModel.getObj().getNews()+"");
+                                    tvNum2.setText(userModel.getObj().getFriendnote()+"");
+                                    tvNum3.setText(userModel.getObj().getFocusonnews()+"");
+                                    tvNum4.setText(userModel.getObj().getActivitymessage()+"");
 //                                    if (userModel.getObj().getSex().equals("0")) {
 //                                        Picasso.with(getContext()).load(R.mipmap.nan).into(ivSex);
 //                                    } else {

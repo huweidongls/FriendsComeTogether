@@ -104,10 +104,10 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_num1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="232"
                         android:textColor="@color/black_333333"
                         android:textSize="40px" />
 
@@ -131,10 +131,10 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_num2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="76"
                         android:textColor="@color/black_333333"
                         android:textSize="40px" />
 
@@ -158,10 +158,10 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_num3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="5434"
                         android:textColor="@color/black_333333"
                         android:textSize="40px" />
 
@@ -185,10 +185,10 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_num4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="134"
                         android:textColor="@color/black_333333"
                         android:textSize="40px" />
 

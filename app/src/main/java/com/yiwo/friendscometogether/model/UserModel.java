@@ -9,7 +9,7 @@ public class UserModel {
     /**
      * code : 200
      * message : 获取成功!
-     * obj : {"headeimg":"http://47.92.136.19/uploads/header/2018/06/27/52b94a60085237df2b0ceb1a7599f91b15300847792.jpg","username":"baiducom","sex":"男","useraddress":"黑龙江省-双鸭山-尖山区","userautograph":"dsdsdsa","userbirthday":"1997年-9月-25日","usertime":"2018年-7月-5日","usercodeok":"待审核","usermarry":"是","usergrade":"0","sign":"0"}
+     * obj : {"headeimg":"http://47.92.136.19/uploads/header/2018/10/19/3ccfe6790eeac1bc99dbfcd164dabb89153992760420.jpg","username":"老司机","sex":"0","useraddress":"黑龙江省-哈尔滨市","userautograph":"恶魔","userbirthday":"1993-09-25","usertime":"2018-08-01","usercodeok":"已认证","usermarry":"1","usergrade":"1","sign":"0","vip":"1","news":15,"Friendnote":1,"Focusonnews":9,"Activitymessage":1}
      */
 
     private int code;
@@ -42,20 +42,24 @@ public class UserModel {
 
     public static class ObjBean {
         /**
-         * headeimg : http://47.92.136.19/uploads/header/2018/06/27/52b94a60085237df2b0ceb1a7599f91b15300847792.jpg
-         * username : baiducom
-         * sex : 男
-         * useraddress : 黑龙江省-双鸭山-尖山区
-         * userautograph : dsdsdsa
-         * userbirthday : 1997年-9月-25日
-         * usertime : 2018年-7月-5日
-         * usercodeok : 待审核
-         * usermarry : 是
-         * usergrade : 0
+         * headeimg : http://47.92.136.19/uploads/header/2018/10/19/3ccfe6790eeac1bc99dbfcd164dabb89153992760420.jpg
+         * username : 老司机
+         * sex : 0
+         * useraddress : 黑龙江省-哈尔滨市
+         * userautograph : 恶魔
+         * userbirthday : 1993-09-25
+         * usertime : 2018-08-01
+         * usercodeok : 已认证
+         * usermarry : 1
+         * usergrade : 1
          * sign : 0
+         * vip : 1
+         * news : 15
+         * Friendnote : 1
+         * Focusonnews : 9
+         * Activitymessage : 1
          */
 
-        private String vip;
         private String headeimg;
         private String username;
         private String sex;
@@ -67,14 +71,11 @@ public class UserModel {
         private String usermarry;
         private String usergrade;
         private String sign;
-
-        public String getVip() {
-            return vip;
-        }
-
-        public void setVip(String vip) {
-            this.vip = vip;
-        }
+        private String vip;
+        private int news;
+        private int Friendnote;
+        private int Focusonnews;
+        private int Activitymessage;
 
         public String getHeadeimg() {
             return headeimg;
@@ -162,6 +163,46 @@ public class UserModel {
 
         public void setSign(String sign) {
             this.sign = sign;
+        }
+
+        public String getVip() {
+            return vip;
+        }
+
+        public void setVip(String vip) {
+            this.vip = vip;
+        }
+
+        public int getNews() {
+            return news;
+        }
+
+        public void setNews(int news) {
+            this.news = news;
+        }
+
+        public int getFriendnote() {
+            return Friendnote;
+        }
+
+        public void setFriendnote(int Friendnote) {
+            this.Friendnote = Friendnote;
+        }
+
+        public int getFocusonnews() {
+            return Focusonnews;
+        }
+
+        public void setFocusonnews(int Focusonnews) {
+            this.Focusonnews = Focusonnews;
+        }
+
+        public int getActivitymessage() {
+            return Activitymessage;
+        }
+
+        public void setActivitymessage(int Activitymessage) {
+            this.Activitymessage = Activitymessage;
         }
     }
 }

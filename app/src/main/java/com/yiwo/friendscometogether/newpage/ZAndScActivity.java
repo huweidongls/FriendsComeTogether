@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
+import com.vise.xsnow.cache.SpCache;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
