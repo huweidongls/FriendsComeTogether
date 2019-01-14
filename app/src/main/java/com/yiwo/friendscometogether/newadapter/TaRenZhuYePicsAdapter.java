@@ -15,10 +15,8 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.imagepreview.Consts;
 import com.yiwo.friendscometogether.imagepreview.ImagePreviewActivity;
-import com.yiwo.friendscometogether.model.UserFocusModel;
 import com.yiwo.friendscometogether.newmodel.PersonMainModel;
 import com.yiwo.friendscometogether.pages.MyPicturesActivity;
-import com.yiwo.friendscometogether.pages.OtherInformationActivity;
 import com.yiwo.friendscometogether.pages.OtherPicActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 

@@ -1,9 +1,7 @@
 package com.yiwo.friendscometogether.newadapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,21 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.vise.xsnow.http.ViseHttp;
-import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.UserFocusModel;
-import com.yiwo.friendscometogether.network.NetConfig;
-import com.yiwo.friendscometogether.newmodel.WoGuanZhuDeModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
-import com.yiwo.friendscometogether.pages.MyFocusActivity;
-import com.yiwo.friendscometogether.pages.OtherInformationActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
-import com.yiwo.friendscometogether.utils.TokenUtils;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 
