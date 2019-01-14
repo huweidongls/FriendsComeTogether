@@ -93,8 +93,8 @@ public class AllRememberActivity extends BaseActivity {
                 simplePagerTitleView.setTextSize(18);
                 simplePagerTitleView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
                 simplePagerTitleView.setText(mTitleDataList.get(index));
-                simplePagerTitleView.setNormalColor(Color.BLACK);
-                simplePagerTitleView.setSelectedColor(Color.BLACK);
+                simplePagerTitleView.setNormalColor(Color.WHITE);
+                simplePagerTitleView.setSelectedColor(Color.WHITE);
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -107,7 +107,7 @@ public class AllRememberActivity extends BaseActivity {
             @Override
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator indicator = new LinePagerIndicator(context);
-                indicator.setColors(Color.parseColor("#D84C37"));
+                indicator.setColors(Color.WHITE);
                 return indicator;
             }
         });

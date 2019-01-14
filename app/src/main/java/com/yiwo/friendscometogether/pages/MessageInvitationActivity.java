@@ -47,8 +47,6 @@ public class MessageInvitationActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_invitation);
-
-        StatusBarUtils.setStatusBar(MessageInvitationActivity.this, Color.parseColor("#D84C37"));
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
 
         ButterKnife.bind(MessageInvitationActivity.this);

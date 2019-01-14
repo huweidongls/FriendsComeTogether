@@ -8,19 +8,14 @@
 
     <RelativeLayout
         android:id="@+id/rl_top"
-        android:layout_width="match_parent"
-        android:layout_height="90px">
+        style="@style/rl_top_bar">
 
         <RelativeLayout
             android:id="@+id/rl_back"
-            android:layout_width="100px"
-            android:layout_height="match_parent">
+            style="@style/rl_return">
 
             <ImageView
-                android:layout_centerInParent="true"
-                android:src="@mipmap/back_b"
-                android:layout_width="21px"
-                android:layout_height="36px" />
+                style="@style/iv_return" />
 
         </RelativeLayout>
 
@@ -32,7 +27,7 @@
 
             <TextView
                 android:layout_centerInParent="true"
-                android:textColor="#D84C37"
+                android:textColor="@color/white"
                 android:textSize="30px"
                 android:text="草稿箱"
                 android:layout_width="wrap_content"
@@ -49,6 +44,7 @@
     </RelativeLayout>
 
     <android.support.v4.view.ViewPager
+        android:layout_marginTop="5px"
         android:layout_below="@+id/rl_top"
         android:id="@+id/vp"
         android:layout_width="match_parent"

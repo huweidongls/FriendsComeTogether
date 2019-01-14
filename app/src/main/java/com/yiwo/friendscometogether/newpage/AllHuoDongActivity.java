@@ -89,8 +89,8 @@ public class AllHuoDongActivity extends BaseActivity {
                 //设置字体
                 simplePagerTitleView.setTextSize(18);
                 simplePagerTitleView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                simplePagerTitleView.setNormalColor(Color.BLACK);
-                simplePagerTitleView.setSelectedColor(Color.BLACK);
+                simplePagerTitleView.setNormalColor(Color.WHITE);
+                simplePagerTitleView.setSelectedColor(Color.WHITE);
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -103,7 +103,7 @@ public class AllHuoDongActivity extends BaseActivity {
             @Override
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator indicator = new LinePagerIndicator(context);
-                indicator.setColors(Color.parseColor("#D84C37"));
+                indicator.setColors(Color.WHITE);
                 return indicator;
             }
         });

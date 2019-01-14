@@ -68,8 +68,6 @@ public class MessageActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
-
-        StatusBarUtils.setStatusBar(MessageActivity.this, Color.parseColor("#ffffff"));
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(MessageActivity.this);
         spImp = new SpImp(context);

@@ -7,35 +7,25 @@
     android:background="@color/black_f8f8f8"
     tools:context="com.yiwo.friendscometogether.newpage.GuanZhuActivity">
     <RelativeLayout
-        android:layout_alignParentTop="true"
-        android:background="@color/white_ffffff"
+        style="@style/rl_top_bar"
         android:id="@+id/rl_top"
-        android:layout_width="match_parent"
-        android:layout_height="90px">
+        >
 
         <RelativeLayout
             android:id="@+id/rl_back"
-            android:layout_width="100px"
-            android:layout_height="match_parent">
+            style="@style/rl_return">
 
             <ImageView
                 android:id="@+id/btn_back"
-                android:layout_centerInParent="true"
-                android:src="@mipmap/back_b"
-                android:layout_width="21px"
-                android:layout_height="36px" />
+                style="@style/iv_return" />
 
         </RelativeLayout>
 
 
         <TextView
-            android:textColor="@color/black_333333"
-            android:textSize="36px"
-            android:textStyle="bold"
-            android:layout_centerInParent="true"
+            style="@style/tv_top_title"
             android:text="关注"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+             />
 
     </RelativeLayout>
     <LinearLayout

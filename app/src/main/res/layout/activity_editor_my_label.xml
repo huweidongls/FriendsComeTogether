@@ -9,9 +9,7 @@
     tools:context="com.yiwo.friendscometogether.newpage.EditorMyLabelActivity">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="88px"
-        android:background="#D84C37">
+       style="@style/rl_top_bar">
 
         <RelativeLayout
             android:id="@+id/rl_back"
@@ -29,12 +27,9 @@
         </RelativeLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            style="@style/tv_top_title"
             android:text="我的标签"
-            android:textColor="@color/white_ffffff"
-            android:textSize="36px" />
+             />
 
         <RelativeLayout
             android:id="@+id/rl_save"

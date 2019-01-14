@@ -8,29 +8,21 @@
     tools:context="com.yiwo.friendscometogether.newpage.SuperLikeSxActivity">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="88px">
+        style="@style/rl_top_bar">
 
         <RelativeLayout
             android:id="@+id/rl_back"
-            android:layout_width="100px"
-            android:layout_height="match_parent">
+            style="@style/rl_return">
 
             <ImageView
-                android:layout_centerInParent="true"
-                android:src="@mipmap/back_b"
-                android:layout_width="21px"
-                android:layout_height="36px" />
+                style="@style/iv_return" />
 
         </RelativeLayout>
 
         <TextView
-            android:layout_centerInParent="true"
+            style="@style/tv_top_title"
             android:text="筛选设置"
-            android:textColor="@color/black_333333"
-            android:textSize="36px"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+             />
         <RelativeLayout
             android:id="@+id/rl_sure"
             android:layout_alignParentRight="true"
@@ -41,7 +33,7 @@
                 android:layout_centerInParent="true"
                 android:text="确定"
                 android:textSize="30px"
-                android:textColor="#D84C37"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
