@@ -16,9 +16,7 @@ import com.bumptech.glide.Glide;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.GuanZhuWoDeModel;
-import com.yiwo.friendscometogether.newmodel.WoGuanZhuDeModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
-import com.yiwo.friendscometogether.pages.OtherInformationActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import java.util.List;

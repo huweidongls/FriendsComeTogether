@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.FriendsTogetherDetailsModel;
-import com.yiwo.friendscometogether.pages.OtherInformationActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.utils.StringUtils;
 
 import java.util.List;
@@ -58,8 +58,8 @@ public class ParticipantsItemAdapter extends RecyclerView.Adapter<ParticipantsIt
                     if(data.get(position).getUserID().equals("0")){
                         Toast.makeText(context, "无法查看匿名信息", Toast.LENGTH_SHORT).show();
                     }else {
-                        Intent it = new Intent(context, OtherInformationActivity.class);
-                        it.putExtra("uid",data.get(position).getUserID());
+                        Intent it = new Intent(context, PersonMainActivity.class);
+                        it.putExtra("person_id",data.get(position).getUserID());
                         context.startActivity(it);
                     }
                 }

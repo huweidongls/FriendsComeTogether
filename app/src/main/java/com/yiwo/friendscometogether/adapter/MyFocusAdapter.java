@@ -10,14 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.UserFocusModel;
-import com.yiwo.friendscometogether.pages.InvitationActivity;
-import com.yiwo.friendscometogether.pages.OtherInformationActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 
 import java.util.List;
 
@@ -81,8 +79,8 @@ public class MyFocusAdapter extends RecyclerView.Adapter<MyFocusAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.putExtra("uid", data.get(position).getLikeuserID());
-                intent.setClass(context, OtherInformationActivity.class);
+                intent.putExtra("person_id", data.get(position).getLikeuserID());
+                intent.setClass(context, PersonMainActivity.class);
                 context.startActivity(intent);
             }
         });

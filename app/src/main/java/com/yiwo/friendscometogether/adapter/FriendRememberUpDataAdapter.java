@@ -17,8 +17,8 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.model.FriendsRememberModel;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
-import com.yiwo.friendscometogether.pages.OtherInformationActivity;
 
 import java.util.List;
 
@@ -101,8 +101,8 @@ public class FriendRememberUpDataAdapter extends RecyclerView.Adapter<FriendReme
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.putExtra("uid", data.get(position).getUserID());
-                intent.setClass(context, OtherInformationActivity.class);
+                intent.putExtra("person_id", data.get(position).getUserID());
+                intent.setClass(context, PersonMainActivity.class);
                 context.startActivity(intent);
             }
         });

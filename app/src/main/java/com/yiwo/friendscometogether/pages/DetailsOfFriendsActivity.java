@@ -33,6 +33,7 @@ import com.yiwo.friendscometogether.imagepreview.ImagePreviewActivity;
 import com.yiwo.friendscometogether.model.ActiveShareModel;
 import com.yiwo.friendscometogether.model.DetailsRememberModel;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.ShareUtils;
 
@@ -455,8 +456,8 @@ public class DetailsOfFriendsActivity extends BaseActivity {
                 }
                 break;
             case R.id.activity_details_of_friends_iv_avatar:
-                intent.setClass(DetailsOfFriendsActivity.this, OtherInformationActivity.class);
-                intent.putExtra("uid", model.getObj().getContent().getUid());
+                intent.setClass(DetailsOfFriendsActivity.this, PersonMainActivity.class);
+                intent.putExtra("person_id", model.getObj().getContent().getUid());
                 startActivity(intent);
                 break;
 //            case R.id.activity_details_of_friends_ll_top_focus:

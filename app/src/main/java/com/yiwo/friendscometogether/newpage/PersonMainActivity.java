@@ -91,6 +91,13 @@ public class PersonMainActivity extends BaseActivity {
     @BindView(R.id.iv_image_guanzhu)
     ImageView iv_image_guanzhu;
 
+    @BindView(R.id.rl_pics_text)
+    RelativeLayout rl_pics_text;
+    @BindView(R.id.rl_youji_text)
+    RelativeLayout rl_youji_text;
+    @BindView(R.id.rl_youju_text)
+    RelativeLayout rl_youju_text;
+
 
     private String ta = "他";
     private SpImp spImp;
@@ -155,6 +162,16 @@ public class PersonMainActivity extends BaseActivity {
                                 Gson gson = new Gson();
                                 model = gson.fromJson(data, PersonMainModel.class);
                                 Glide.with(PersonMainActivity.this).load(model.getObj().getInfo().getUserpic()).into(iv_person_icon);
+                                if (model.getObj().getPhoto().size() == 0){
+                                    rl_pics_text.setVisibility(View.GONE);
+                                }
+                                if (model.getObj().getFriend().size() == 0){
+                                    rl_youji_text.setVisibility(View.GONE);
+                                }
+                                if (model.getObj().getActivity().size() == 0){
+                                    rl_youju_text.setVisibility(View.GONE);
+                                }
+
                                 if (model.getObj().getInfo().getSex().equals("0")) {
                                     ta = "他";
                                     if (type_tade_or_wode == 0) {

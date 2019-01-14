@@ -246,6 +246,7 @@
             </LinearLayout>
         </LinearLayout>
             <RelativeLayout
+                android:id="@+id/rl_pics_text"
                 android:layout_marginTop="50px"
                 android:layout_marginBottom="10px"
                 android:layout_width="match_parent"
@@ -290,6 +291,7 @@
                 android:layout_marginBottom="10px">
             </android.support.v7.widget.RecyclerView>
             <RelativeLayout
+                android:id="@+id/rl_youji_text"
                 android:layout_marginTop="50px"
                 android:layout_marginBottom="10px"
                 android:layout_width="match_parent"
@@ -339,6 +341,7 @@
                 </android.support.v7.widget.RecyclerView>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/rl_youju_text"
                 android:layout_marginTop="50px"
                 android:layout_marginBottom="10px"
                 android:layout_width="match_parent"

@@ -20,6 +20,7 @@ import com.yiwo.friendscometogether.adapter.MyFriendAdapter;
 import com.yiwo.friendscometogether.custom.MyFriendDialog;
 import com.yiwo.friendscometogether.model.MyFriendModel;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
 
@@ -169,8 +170,8 @@ public class MyFriendActivity extends AppCompatActivity {
                                                         break;
                                                     case 2:
                                                         Intent intent = new Intent();
-                                                        intent.putExtra("uid", mDatas.get(i).getUid());
-                                                        intent.setClass(MyFriendActivity.this, OtherInformationActivity.class);
+                                                        intent.putExtra("person_id", mDatas.get(i).getUid());
+                                                        intent.setClass(MyFriendActivity.this, PersonMainActivity.class);
                                                         startActivity(intent);
                                                         break;
                                                 }

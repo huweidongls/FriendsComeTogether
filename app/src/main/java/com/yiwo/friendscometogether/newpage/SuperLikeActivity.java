@@ -10,8 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.vise.xsnow.cache.SpCache;
 import com.vise.xsnow.http.ViseHttp;
@@ -34,6 +38,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,6 +63,8 @@ public class SuperLikeActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.tv_matching_text)
     TextView tv_matching_text;
+    @BindView(R.id.iv_loading)
+    ImageView iv_loading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,56 +84,66 @@ public class SuperLikeActivity extends BaseActivity {
             sxMode.setAges("10-30");
             sxMode.setAddress(1);
         }
+        RequestOptions options = new RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+        Glide.with(context).load(R.drawable.gif).apply(options).into(iv_loading);
         tv_matching_text.setText("正在为您搜索匹配另一半…");
-        ViseHttp.POST(NetConfig.matching_user)
-                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.matching_user))
-                .addParam("uid",spImp.getUID())
-                .addParam("sex",sxMode.getSex()+"")
-                .addParam("address",sxMode.getAddress()+"")
-                .addParam("age",sxMode.getAges())
-                .request(new ACallback<String>() {
-                    @Override
-                    public void onSuccess(String data) {
-                        Log.e("222", data);
-                        try {
-                            JSONObject jsonObject = new JSONObject(data);
-                            if (jsonObject.getInt("code") == 200) {
-                                Gson gson = new Gson();
-                                model = gson.fromJson(data, SuperLikeModel.class);
-                                // 2.Grid布局
-                                RecyclerView.LayoutManager layoutManager =
-                                        new GridLayoutManager(context,
-                                                2, // 每行显示item项数目
-                                                GridLayoutManager.VERTICAL,
-                                                false
-                                        ){
-                                            @Override
-                                            public boolean canScrollVertically() {
-                                                return  false;
-                                            }
-                                        };
-                                list_data.clear();
-                                list_data.addAll(model.getObj());
-                                if (list_data.size()>0){
-                                    tv_matching_text.setText("成功为您匹配 "+list_data.size()+" 名瞳伴！ 还等什么赶快去打招呼吧");
-                                }else {
-                                    tv_matching_text.setText("没有找到和您匹配的瞳伴，快去完善资料吧！");
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                ViseHttp.POST(NetConfig.matching_user)
+                        .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.matching_user))
+                        .addParam("uid",spImp.getUID())
+                        .addParam("sex",sxMode.getSex()+"")
+                        .addParam("address",sxMode.getAddress()+"")
+                        .addParam("age",sxMode.getAges())
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                Log.e("222", data);
+                                try {
+                                    JSONObject jsonObject = new JSONObject(data);
+                                    if (jsonObject.getInt("code") == 200) {
+                                        Gson gson = new Gson();
+                                        model = gson.fromJson(data, SuperLikeModel.class);
+                                        // 2.Grid布局
+                                        RecyclerView.LayoutManager layoutManager =
+                                                new GridLayoutManager(context,
+                                                        2, // 每行显示item项数目
+                                                        GridLayoutManager.VERTICAL,
+                                                        false
+                                                ){
+                                                    @Override
+                                                    public boolean canScrollVertically() {
+                                                        return  false;
+                                                    }
+                                                };
+                                        list_data.clear();
+                                        list_data.addAll(model.getObj());
+                                        if (list_data.size()>0){
+                                            tv_matching_text.setText("成功为您匹配 "+list_data.size()+" 名瞳伴！\n 还等什么赶快去打招呼吧！");
+                                        }else {
+                                            tv_matching_text.setText("没有找到和您匹配的瞳伴\n快去完善资料吧！");
+                                        }
+                                        Glide.with(context).asBitmap().load(R.drawable.gif).into(iv_loading);
+                                        recyclerView.setLayoutManager(layoutManager);
+                                        superLikeAdapter = new SuperLikeAdapter(list_data);
+                                        superLikeAdapter.setSayHelloListener(sayHelloListener);
+                                        recyclerView.setAdapter(superLikeAdapter);
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                                recyclerView.setLayoutManager(layoutManager);
-                                superLikeAdapter = new SuperLikeAdapter(list_data);
-                                superLikeAdapter.setSayHelloListener(sayHelloListener);
-                                recyclerView.setAdapter(superLikeAdapter);
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
 
-                    @Override
-                    public void onFail(int errCode, String errMsg) {
-                        Log.d("matching_user:err:::",errCode+"/////"+errMsg);
-                    }
-                });
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+                                Log.d("matching_user:err:::",errCode+"/////"+errMsg);
+                            }
+                        });
+            }
+        },2500);
     }
     @OnClick({R.id.rl_back,R.id.rl_Sx})
     public void onClick(View view) {

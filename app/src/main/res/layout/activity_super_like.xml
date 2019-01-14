@@ -48,17 +48,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:src="@mipmap/my_head"
+                android:scaleType="centerCrop"
+                android:id="@+id/iv_loading"
+                android:src="@drawable/gif"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="324px"
-                android:layout_height="398px"
+                android:layout_height="324px"
                 android:layout_marginTop="110px"/>
             <TextView
                 android:id="@+id/tv_matching_text"
+                android:gravity="center"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="70px"
-                android:text="成功为你匹配两位好友！还等什么快去打招呼吧!"
+                android:text="成功为你匹配两位好友！\n还等什么快去打招呼吧！"
                 android:textSize="36px"
+                android:lineSpacingExtra="20px"
                 android:textColor="@color/black_333333"
                 android:lines="2"
                 android:layout_marginRight="80px"
