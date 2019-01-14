@@ -380,12 +380,14 @@ public class HomeFragment1 extends BaseFragment {
                 mainActivity.startYouji();
                 break;
             case R.id.ll_home_youji_lvxing:
-                intent.setClass(getContext(), SuperLikeSxActivity.class);
-                startActivity(intent);
+                MyApplication.sign = labelModel.getObj().get(0).getLID();
+                mainActivity.switchFragment(2);
+                mainActivity.startYouji();
                 break;
             case R.id.ll_home_youji_meishi:
-                intent.setClass(getContext(), EditorLabelActivity.class);
-                startActivity(intent);
+                MyApplication.sign = labelModel.getObj().get(1).getLID();
+                mainActivity.switchFragment(2);
+                mainActivity.startYouji();
                 break;
             case R.id.ll_home_youji_tandian:
                 MyApplication.sign = labelModel.getObj().get(2).getLID();

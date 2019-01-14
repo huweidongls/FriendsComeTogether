@@ -40,6 +40,7 @@ import com.yiwo.friendscometogether.model.MyPicListModel;
 import com.yiwo.friendscometogether.model.MyUploadPicModel;
 import com.yiwo.friendscometogether.model.UserModel;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newpage.EditorLabelActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.GetJsonDataUtil;
 import com.yiwo.friendscometogether.utils.TokenUtils;
@@ -230,8 +231,9 @@ public class MyInformationActivity extends TakePhotoActivity {
 
     @OnClick({R.id.activity_my_information_rl_back, R.id.activity_my_information_rl_sex, R.id.activity_my_information_rl_location, R.id.activity_my_information_rl_birthday,
             R.id.activity_my_information_rl_register_time, R.id.activity_my_information_rl_is_single, R.id.activity_my_information_rl_real_name, R.id.activity_my_information_rl_save,
-            R.id.activity_my_information_iv_avatar})
+            R.id.activity_my_information_iv_avatar, R.id.activity_my_information_rl_sign})
     public void onClick(View view) {
+        Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.activity_my_information_rl_back:
                 onBackPressed();
@@ -324,7 +326,6 @@ public class MyInformationActivity extends TakePhotoActivity {
                 singleChoiceDialog1.show();
                 break;
             case R.id.activity_my_information_rl_real_name:
-                Intent intent = new Intent();
                 intent.setClass(MyInformationActivity.this, RealNameActivity.class);
                 startActivity(intent);
                 finish();
@@ -364,6 +365,10 @@ public class MyInformationActivity extends TakePhotoActivity {
                 takePhoto.onEnableCompress(config, true);
                 takePhoto.onPickFromDocumentsWithCrop(imageUri, builder.create());
 
+                break;
+            case R.id.activity_my_information_rl_sign:
+                intent.setClass(MyInformationActivity.this, EditorLabelActivity.class);
+                startActivity(intent);
                 break;
         }
     }

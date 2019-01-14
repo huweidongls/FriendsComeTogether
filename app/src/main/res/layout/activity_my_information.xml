@@ -32,7 +32,7 @@
 
             <TextView
                 android:layout_centerInParent="true"
-                android:textColor="@color/black_333333"
+                android:textColor="@color/white_ffffff"
                 android:textSize="28px"
                 android:text="保存"
                 android:layout_width="wrap_content"
@@ -510,6 +510,47 @@
                     android:text="2018-4-5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <View
+                android:background="@color/line"
+                android:layout_width="match_parent"
+                android:layout_height="12px"/>
+
+            <RelativeLayout
+                android:id="@+id/activity_my_information_rl_sign"
+                android:layout_width="match_parent"
+                android:layout_height="88px">
+
+                <ImageView
+                    android:id="@+id/activity_my_information_iv_person_sign"
+                    android:layout_marginLeft="35px"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/label1"
+                    android:layout_width="50px"
+                    android:layout_height="50px" />
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10px"
+                    android:layout_toRightOf="@+id/activity_my_information_iv_person_sign"
+                    android:textSize="28px"
+                    android:textColor="@color/black_333333"
+                    android:text="设置个性标签"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <!--<TextView-->
+                    <!--android:id="@+id/activity_my_information_tv_register_time"-->
+                    <!--android:layout_marginRight="38px"-->
+                    <!--android:textColor="@color/gray_979797"-->
+                    <!--android:textSize="28px"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:text="2018-4-5"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
 
             </RelativeLayout>
 
