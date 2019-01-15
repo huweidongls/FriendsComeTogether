@@ -155,7 +155,7 @@
                         android:layout_marginTop="24px"
                         android:src="@mipmap/label2" />
 
-                    <android.support.v7.widget.RecyclerView
+                    <com.yiwo.friendscometogether.widget.NestedRecyclerView
                         android:id="@+id/rv2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -210,7 +210,7 @@
                         android:layout_marginTop="24px"
                         android:src="@mipmap/label3" />
 
-                    <android.support.v7.widget.RecyclerView
+                    <com.yiwo.friendscometogether.widget.NestedRecyclerView
                         android:id="@+id/rv3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -265,7 +265,7 @@
                         android:layout_marginTop="24px"
                         android:src="@mipmap/label4" />
 
-                    <android.support.v7.widget.RecyclerView
+                    <com.yiwo.friendscometogether.widget.NestedRecyclerView
                         android:id="@+id/rv4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -320,7 +320,7 @@
                         android:layout_marginTop="24px"
                         android:src="@mipmap/label5" />
 
-                    <android.support.v7.widget.RecyclerView
+                    <com.yiwo.friendscometogether.widget.NestedRecyclerView
                         android:id="@+id/rv5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -375,7 +375,7 @@
                         android:layout_marginTop="24px"
                         android:src="@mipmap/label6" />
 
-                    <android.support.v7.widget.RecyclerView
+                    <com.yiwo.friendscometogether.widget.NestedRecyclerView
                         android:id="@+id/rv6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -430,7 +430,7 @@
                         android:layout_marginTop="24px"
                         android:src="@mipmap/label7" />
 
-                    <android.support.v7.widget.RecyclerView
+                    <com.yiwo.friendscometogether.widget.NestedRecyclerView
                         android:id="@+id/rv7"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

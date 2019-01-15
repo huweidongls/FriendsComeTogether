@@ -42,17 +42,17 @@ public class EditorLabelActivity extends BaseActivity {
     @BindView(R.id.rv1)
     NestedRecyclerView rv1;
     @BindView(R.id.rv2)
-    RecyclerView rv2;
+    NestedRecyclerView rv2;
     @BindView(R.id.rv3)
-    RecyclerView rv3;
+    NestedRecyclerView rv3;
     @BindView(R.id.rv4)
-    RecyclerView rv4;
+    NestedRecyclerView rv4;
     @BindView(R.id.rv5)
-    RecyclerView rv5;
+    NestedRecyclerView rv5;
     @BindView(R.id.rv6)
-    RecyclerView rv6;
+    NestedRecyclerView rv6;
     @BindView(R.id.rv7)
-    RecyclerView rv7;
+    NestedRecyclerView rv7;
     @BindView(R.id.tv1)
     TextView tv1;
     @BindView(R.id.tv2)
@@ -110,11 +110,58 @@ public class EditorLabelActivity extends BaseActivity {
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(EditorLabelActivity.this);
         spImp = new SpImp(context);
-
+        FlowLayoutManager manager1 = new FlowLayoutManager(){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rv1.setLayoutManager(manager1);
+        FlowLayoutManager manager2 = new FlowLayoutManager(){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rv2.setLayoutManager(manager2);
+        FlowLayoutManager manager3 = new FlowLayoutManager(){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rv3.setLayoutManager(manager3);
+        FlowLayoutManager manager4 = new FlowLayoutManager(){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rv4.setLayoutManager(manager4);
+        FlowLayoutManager manager5 = new FlowLayoutManager(){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rv5.setLayoutManager(manager5);
+        FlowLayoutManager manager6 = new FlowLayoutManager(){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rv6.setLayoutManager(manager6);
+        FlowLayoutManager manager7 = new FlowLayoutManager(){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rv7.setLayoutManager(manager7);
         initData();
 
     }
-
     private void initData() {
 
         uid = spImp.getUID();
@@ -131,6 +178,8 @@ public class EditorLabelActivity extends BaseActivity {
                                 Gson gson = new Gson();
                                 UserSaveLabelModel model = gson.fromJson(data, UserSaveLabelModel.class);
                                 String[] s1 = model.getObj().getPersonality().split(",");
+                                adapter1 = new EditorLabelSaveAdapter(s1, 1);
+                                rv1.setAdapter(adapter1);
                                 if(!TextUtils.isEmpty(model.getObj().getPersonality())){
                                     tv1.setVisibility(View.GONE);
                                     rv1.setVisibility(View.VISIBLE);
@@ -138,15 +187,7 @@ public class EditorLabelActivity extends BaseActivity {
                                     tv1.setVisibility(View.VISIBLE);
                                     rv1.setVisibility(View.GONE);
                                 }
-                                FlowLayoutManager manager1 = new FlowLayoutManager(){
-                                    @Override
-                                    public boolean canScrollVertically() {
-                                        return false;
-                                    }
-                                };
-                                rv1.setLayoutManager(manager1);
-                                adapter1 = new EditorLabelSaveAdapter(s1, 1);
-                                rv1.setAdapter(adapter1);
+
                                 rv1.setOnTouchListener(new View.OnTouchListener() {
                                     @Override
                                     public boolean onTouch(View v, MotionEvent event) {
@@ -164,8 +205,6 @@ public class EditorLabelActivity extends BaseActivity {
                                     tv2.setVisibility(View.VISIBLE);
                                     rv2.setVisibility(View.GONE);
                                 }
-                                FlowLayoutManager manager2 = new FlowLayoutManager();
-                                rv2.setLayoutManager(manager2);
                                 adapter2 = new EditorLabelSaveAdapter(s2, 2);
                                 rv2.setAdapter(adapter2);
                                 rv2.setOnTouchListener(new View.OnTouchListener() {
@@ -185,8 +224,6 @@ public class EditorLabelActivity extends BaseActivity {
                                     tv3.setVisibility(View.VISIBLE);
                                     rv3.setVisibility(View.GONE);
                                 }
-                                FlowLayoutManager manager3 = new FlowLayoutManager();
-                                rv3.setLayoutManager(manager3);
                                 adapter3 = new EditorLabelSaveAdapter(s3, 3);
                                 rv3.setAdapter(adapter3);
                                 rv3.setOnTouchListener(new View.OnTouchListener() {
@@ -206,8 +243,6 @@ public class EditorLabelActivity extends BaseActivity {
                                     tv4.setVisibility(View.VISIBLE);
                                     rv4.setVisibility(View.GONE);
                                 }
-                                FlowLayoutManager manager4 = new FlowLayoutManager();
-                                rv4.setLayoutManager(manager4);
                                 adapter4 = new EditorLabelSaveAdapter(s4, 4);
                                 rv4.setAdapter(adapter4);
                                 rv4.setOnTouchListener(new View.OnTouchListener() {
@@ -227,8 +262,6 @@ public class EditorLabelActivity extends BaseActivity {
                                     tv5.setVisibility(View.VISIBLE);
                                     rv5.setVisibility(View.GONE);
                                 }
-                                FlowLayoutManager manager5 = new FlowLayoutManager();
-                                rv5.setLayoutManager(manager5);
                                 adapter5 = new EditorLabelSaveAdapter(s5, 5);
                                 rv5.setAdapter(adapter5);
                                 rv5.setOnTouchListener(new View.OnTouchListener() {
@@ -248,8 +281,6 @@ public class EditorLabelActivity extends BaseActivity {
                                     tv6.setVisibility(View.VISIBLE);
                                     rv6.setVisibility(View.GONE);
                                 }
-                                FlowLayoutManager manager6 = new FlowLayoutManager();
-                                rv6.setLayoutManager(manager6);
                                 adapter6 = new EditorLabelSaveAdapter(s6, 6);
                                 rv6.setAdapter(adapter6);
                                 rv6.setOnTouchListener(new View.OnTouchListener() {
@@ -269,8 +300,7 @@ public class EditorLabelActivity extends BaseActivity {
                                     tv7.setVisibility(View.VISIBLE);
                                     rv7.setVisibility(View.GONE);
                                 }
-                                FlowLayoutManager manager7 = new FlowLayoutManager();
-                                rv7.setLayoutManager(manager7);
+
                                 adapter7 = new EditorLabelSaveAdapter(s7, 7);
                                 rv7.setAdapter(adapter7);
                                 rv7.setOnTouchListener(new View.OnTouchListener() {
