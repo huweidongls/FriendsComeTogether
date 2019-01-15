@@ -87,6 +87,7 @@ public class SuperLikeActivity extends BaseActivity {
         RequestOptions options = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
         Glide.with(context).load(R.drawable.gif).apply(options).into(iv_loading);
+        recyclerView.setVisibility(View.GONE);
         tv_matching_text.setText("正在为您搜索匹配另一半…");
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -131,6 +132,7 @@ public class SuperLikeActivity extends BaseActivity {
                                         superLikeAdapter = new SuperLikeAdapter(list_data);
                                         superLikeAdapter.setSayHelloListener(sayHelloListener);
                                         recyclerView.setAdapter(superLikeAdapter);
+                                        recyclerView.setVisibility(View.VISIBLE);
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();

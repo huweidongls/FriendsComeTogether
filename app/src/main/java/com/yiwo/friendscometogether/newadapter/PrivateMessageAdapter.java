@@ -92,7 +92,7 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
                     }
                 };
                 holder.rv_label.setLayoutManager(manager);
-                holder.rv_label.setAdapter(new SuperLikeLabelAdapter(list_biaoqian));
+                holder.rv_label.setAdapter(new PrivateMessageLabelAdapter(list_biaoqian));
                 holder.ll_agree.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

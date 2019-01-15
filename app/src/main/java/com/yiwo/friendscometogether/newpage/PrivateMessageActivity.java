@@ -69,7 +69,12 @@ public class PrivateMessageActivity extends BaseActivity {
                             if(jsonObject.getInt("code") == 200){
                                 Gson gson = new Gson();
                                 PrivateMessageModel model = gson.fromJson(data, PrivateMessageModel.class);
-                                LinearLayoutManager manager = new LinearLayoutManager(PrivateMessageActivity.this);
+                                LinearLayoutManager manager = new LinearLayoutManager(PrivateMessageActivity.this){
+                                    @Override
+                                    public boolean canScrollVertically() {
+                                        return false;
+                                    }
+                                };
                                 manager.setOrientation(LinearLayoutManager.VERTICAL);
                                 rv_private_message.setLayoutManager(manager);
                                 list = model.getObj();
