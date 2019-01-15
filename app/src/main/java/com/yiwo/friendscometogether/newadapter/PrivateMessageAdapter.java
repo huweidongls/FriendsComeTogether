@@ -19,6 +19,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.PrivateMessageModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.widget.FlowLayoutManager;
+import com.yiwo.friendscometogether.widget.NestedRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,7 +134,7 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
         private ImageView iv_icon_user;
         private TextView tv_message_time;
         private TextView tv_name_info;
-        private RecyclerView rv_label;
+        private NestedRecyclerView rv_label;
         private LinearLayout ll_private_message,ll_agree,ll_disagree,ll_say_hello;
         public ViewHolder(View itemView) {
             super(itemView);

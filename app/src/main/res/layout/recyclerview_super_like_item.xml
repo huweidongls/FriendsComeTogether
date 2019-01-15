@@ -90,7 +90,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_width="208px"
                 android:layout_height="135px">
-                <android.support.v7.widget.RecyclerView
+                <com.yiwo.friendscometogether.widget.NestedRecyclerView
                     android:layout_margin="2px"
                     android:paddingLeft="14px"
                     android:paddingBottom="20px"

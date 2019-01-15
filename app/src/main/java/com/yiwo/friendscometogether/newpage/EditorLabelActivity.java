@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -22,6 +24,7 @@ import com.yiwo.friendscometogether.newadapter.EditorLabelSaveAdapter;
 import com.yiwo.friendscometogether.newmodel.UserSaveLabelModel;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.widget.FlowLayoutManager;
+import com.yiwo.friendscometogether.widget.NestedRecyclerView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +40,7 @@ public class EditorLabelActivity extends BaseActivity {
     private Context context = EditorLabelActivity.this;
 
     @BindView(R.id.rv1)
-    RecyclerView rv1;
+    NestedRecyclerView rv1;
     @BindView(R.id.rv2)
     RecyclerView rv2;
     @BindView(R.id.rv3)
@@ -64,6 +67,20 @@ public class EditorLabelActivity extends BaseActivity {
     TextView tv6;
     @BindView(R.id.tv7)
     TextView tv7;
+    @BindView(R.id.rl1)
+    RelativeLayout rl1;
+    @BindView(R.id.rl2)
+    RelativeLayout rl2;
+    @BindView(R.id.rl3)
+    RelativeLayout rl3;
+    @BindView(R.id.rl4)
+    RelativeLayout rl4;
+    @BindView(R.id.rl5)
+    RelativeLayout rl5;
+    @BindView(R.id.rl6)
+    RelativeLayout rl6;
+    @BindView(R.id.rl7)
+    RelativeLayout rl7;
 
     private SpImp spImp;
     private String uid = "";
@@ -121,10 +138,24 @@ public class EditorLabelActivity extends BaseActivity {
                                     tv1.setVisibility(View.VISIBLE);
                                     rv1.setVisibility(View.GONE);
                                 }
-                                FlowLayoutManager manager1 = new FlowLayoutManager();
+                                FlowLayoutManager manager1 = new FlowLayoutManager(){
+                                    @Override
+                                    public boolean canScrollVertically() {
+                                        return false;
+                                    }
+                                };
                                 rv1.setLayoutManager(manager1);
                                 adapter1 = new EditorLabelSaveAdapter(s1, 1);
                                 rv1.setAdapter(adapter1);
+                                rv1.setOnTouchListener(new View.OnTouchListener() {
+                                    @Override
+                                    public boolean onTouch(View v, MotionEvent event) {
+                                        if (event.getAction() == MotionEvent.ACTION_UP) {
+                                            rl1.performClick();  //模拟父控件的点击
+                                        }
+                                        return false;
+                                    }
+                                });
                                 String[] s2 = model.getObj().getMotion().split(",");
                                 if(!TextUtils.isEmpty(model.getObj().getMotion())){
                                     tv2.setVisibility(View.GONE);
@@ -137,6 +168,15 @@ public class EditorLabelActivity extends BaseActivity {
                                 rv2.setLayoutManager(manager2);
                                 adapter2 = new EditorLabelSaveAdapter(s2, 2);
                                 rv2.setAdapter(adapter2);
+                                rv2.setOnTouchListener(new View.OnTouchListener() {
+                                    @Override
+                                    public boolean onTouch(View v, MotionEvent event) {
+                                        if (event.getAction() == MotionEvent.ACTION_UP) {
+                                            rl2.performClick();  //模拟父控件的点击
+                                        }
+                                        return false;
+                                    }
+                                });
                                 String[] s3 = model.getObj().getMusic().split(",");
                                 if(!TextUtils.isEmpty(model.getObj().getMusic())){
                                     tv3.setVisibility(View.GONE);
@@ -149,6 +189,15 @@ public class EditorLabelActivity extends BaseActivity {
                                 rv3.setLayoutManager(manager3);
                                 adapter3 = new EditorLabelSaveAdapter(s3, 3);
                                 rv3.setAdapter(adapter3);
+                                rv3.setOnTouchListener(new View.OnTouchListener() {
+                                    @Override
+                                    public boolean onTouch(View v, MotionEvent event) {
+                                        if (event.getAction() == MotionEvent.ACTION_UP) {
+                                            rl3.performClick();  //模拟父控件的点击
+                                        }
+                                        return false;
+                                    }
+                                });
                                 String[] s4 = model.getObj().getDelicious().split(",");
                                 if(!TextUtils.isEmpty(model.getObj().getDelicious())){
                                     tv4.setVisibility(View.GONE);
@@ -161,6 +210,15 @@ public class EditorLabelActivity extends BaseActivity {
                                 rv4.setLayoutManager(manager4);
                                 adapter4 = new EditorLabelSaveAdapter(s4, 4);
                                 rv4.setAdapter(adapter4);
+                                rv4.setOnTouchListener(new View.OnTouchListener() {
+                                    @Override
+                                    public boolean onTouch(View v, MotionEvent event) {
+                                        if (event.getAction() == MotionEvent.ACTION_UP) {
+                                            rl4.performClick();  //模拟父控件的点击
+                                        }
+                                        return false;
+                                    }
+                                });
                                 String[] s5 = model.getObj().getFilm().split(",");
                                 if(!TextUtils.isEmpty(model.getObj().getFilm())){
                                     tv5.setVisibility(View.GONE);
@@ -173,6 +231,15 @@ public class EditorLabelActivity extends BaseActivity {
                                 rv5.setLayoutManager(manager5);
                                 adapter5 = new EditorLabelSaveAdapter(s5, 5);
                                 rv5.setAdapter(adapter5);
+                                rv5.setOnTouchListener(new View.OnTouchListener() {
+                                    @Override
+                                    public boolean onTouch(View v, MotionEvent event) {
+                                        if (event.getAction() == MotionEvent.ACTION_UP) {
+                                            rl5.performClick();  //模拟父控件的点击
+                                        }
+                                        return false;
+                                    }
+                                });
                                 String[] s6 = model.getObj().getBook().split(",");
                                 if(!TextUtils.isEmpty(model.getObj().getBook())){
                                     tv6.setVisibility(View.GONE);
@@ -185,6 +252,15 @@ public class EditorLabelActivity extends BaseActivity {
                                 rv6.setLayoutManager(manager6);
                                 adapter6 = new EditorLabelSaveAdapter(s6, 6);
                                 rv6.setAdapter(adapter6);
+                                rv6.setOnTouchListener(new View.OnTouchListener() {
+                                    @Override
+                                    public boolean onTouch(View v, MotionEvent event) {
+                                        if (event.getAction() == MotionEvent.ACTION_UP) {
+                                            rl6.performClick();  //模拟父控件的点击
+                                        }
+                                        return false;
+                                    }
+                                });
                                 String[] s7 = model.getObj().getTravel().split(",");
                                 if(!TextUtils.isEmpty(model.getObj().getTravel())){
                                     tv7.setVisibility(View.GONE);
@@ -197,6 +273,15 @@ public class EditorLabelActivity extends BaseActivity {
                                 rv7.setLayoutManager(manager7);
                                 adapter7 = new EditorLabelSaveAdapter(s7, 7);
                                 rv7.setAdapter(adapter7);
+                                rv7.setOnTouchListener(new View.OnTouchListener() {
+                                    @Override
+                                    public boolean onTouch(View v, MotionEvent event) {
+                                        if (event.getAction() == MotionEvent.ACTION_UP) {
+                                            rl7.performClick();  //模拟父控件的点击
+                                        }
+                                        return false;
+                                    }
+                                });
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

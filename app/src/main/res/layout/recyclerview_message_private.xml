@@ -62,7 +62,7 @@
             <RelativeLayout
                 android:layout_width="530px"
                 android:layout_height="match_parent">
-                <android.support.v7.widget.RecyclerView
+                <com.yiwo.friendscometogether.widget.NestedRecyclerView
                     android:layout_marginTop="10px"
                     android:layout_marginRight="10px"
                     android:id="@+id/rv_label"

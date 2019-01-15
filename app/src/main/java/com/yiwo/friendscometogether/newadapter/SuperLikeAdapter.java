@@ -17,6 +17,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.SuperLikeModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.widget.FlowLayoutManager;
+import com.yiwo.friendscometogether.widget.NestedRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +95,7 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        private RecyclerView rv_label;
+        private NestedRecyclerView rv_label;
         private ImageView iv_icon_user;
         private TextView tv_username;
         private TextView tv_age;

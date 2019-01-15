@@ -7,29 +7,79 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Administrator on 2019/1/8.
  */
 
 public class FlowLayoutManager extends RecyclerView.LayoutManager {
-    private int mVerticalOffset;//竖直偏移量 每次换行时，要根据这个offset判断
-    private int mFirstVisiPos;//屏幕可见的第一个View的Position
-    private int mLastVisiPos;//屏幕可见的最后一个View的Position
+    private static final String TAG = FlowLayoutManager.class.getSimpleName();
+    final FlowLayoutManager self = this;
 
-    private SparseArray<Rect> mItemRects;//key 是View的position，保存View的bounds 和 显示标志，
+    protected int width, height;
+    private int left, top, right;
+    //最大容器的宽度
+    private int usedMaxWidth;
+    //竖直方向上的偏移量
+    private int verticalScrollOffset = 0;
 
-/*    private class FlowItem {
-        public Rect bounds;//View的边界
-        public boolean isShow;//View 是否显示
-        public FlowItem(Rect bounds, boolean isShow) {
-            this.bounds = bounds;
-            this.isShow = isShow;
-        }
-    }*/
+    public int getTotalHeight() {
+        return totalHeight;
+    }
+
+    //计算显示的内容的高度
+    protected int totalHeight = 0;
+    private Row row = new Row();
+    private List<Row> lineRows = new ArrayList<>();
+
+    //保存所有的Item的上下左右的偏移量信息
+    private SparseArray<Rect> allItemFrames = new SparseArray<>();
 
     public FlowLayoutManager() {
+        //设置主动测量规则,适应recyclerView高度为wrap_content
         setAutoMeasureEnabled(true);
-        mItemRects = new SparseArray<>();
+    }
+
+    //每个item的定义
+    public class Item {
+        int useHeight;
+        View view;
+
+        public void setRect(Rect rect) {
+            this.rect = rect;
+        }
+
+        Rect rect;
+
+        public Item(int useHeight, View view, Rect rect) {
+            this.useHeight = useHeight;
+            this.view = view;
+            this.rect = rect;
+        }
+    }
+
+    //行信息的定义
+    public class Row {
+        public void setCuTop(float cuTop) {
+            this.cuTop = cuTop;
+        }
+
+        public void setMaxHeight(float maxHeight) {
+            this.maxHeight = maxHeight;
+        }
+
+        //每一行的头部坐标
+        float cuTop;
+        //每一行需要占据的最大高度
+        float maxHeight;
+        //每一行存储的item
+        List<Item> views = new ArrayList<>();
+
+        public void addViews(Item view) {
+            views.add(view);
+        }
     }
 
     @Override
@@ -37,244 +87,205 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
+    //该方法主要用来获取每一个item在屏幕上占据的位置
     @Override
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
-        if (getItemCount() == 0) {//没有Item，界面空着吧
+        Log.d(TAG, "onLayoutChildren");
+        totalHeight = 0;
+        int cuLineTop = top;
+        //当前行使用的宽度
+        int cuLineWidth = 0;
+        int itemLeft;
+        int itemTop;
+        int maxHeightItem = 0;
+        row = new Row();
+        lineRows.clear();
+        allItemFrames.clear();
+        removeAllViews();
+        if (getItemCount() == 0) {
             detachAndScrapAttachedViews(recycler);
+            verticalScrollOffset = 0;
             return;
         }
-        if (getChildCount() == 0 && state.isPreLayout()) {//state.isPreLayout()是支持动画的
+        if (getChildCount() == 0 && state.isPreLayout()) {
             return;
         }
         //onLayoutChildren方法在RecyclerView 初始化时 会执行两遍
         detachAndScrapAttachedViews(recycler);
-
-        //初始化区域
-        mVerticalOffset = 0;
-        mFirstVisiPos = 0;
-        mLastVisiPos = getItemCount();
-
-        //初始化时调用 填充childView
-        fill(recycler, state);
-
-
-    }
-
-    /**
-     * 初始化时调用 填充childView
-     *
-     * @param recycler
-     * @param state
-     */
-    private void fill(RecyclerView.Recycler recycler, RecyclerView.State state) {
-        fill(recycler, state, 0);
-    }
-
-    /**
-     * 填充childView的核心方法,应该先填充，再移动。
-     * 在填充时，预先计算dy的在内，如果View越界，回收掉。
-     * 一般情况是返回dy，如果出现View数量不足，则返回修正后的dy.
-     *
-     * @param recycler
-     * @param state
-     * @param dy       RecyclerView给我们的位移量,+,显示底端， -，显示头部
-     * @return 修正以后真正的dy（可能剩余空间不够移动那么多了 所以return <|dy|）
-     */
-    private int fill(RecyclerView.Recycler recycler, RecyclerView.State state, int dy) {
-
-        int topOffset = getPaddingTop();
-
-        //回收越界子View
-        if (getChildCount() > 0) {//滑动时进来的
-            for (int i = getChildCount() - 1; i >= 0; i--) {
-                View child = getChildAt(i);
-                if (dy > 0) {//需要回收当前屏幕，上越界的View
-                    if (getDecoratedBottom(child) - dy < topOffset) {
-                        removeAndRecycleView(child, recycler);
-                        mFirstVisiPos++;
-                        continue;
-                    }
-                } else if (dy < 0) {//回收当前屏幕，下越界的View
-                    if (getDecoratedTop(child) - dy > getHeight() - getPaddingBottom()) {
-                        removeAndRecycleView(child, recycler);
-                        mLastVisiPos--;
-                        continue;
-                    }
-                }
-            }
-            //detachAndScrapAttachedViews(recycler);
+        if (getChildCount() == 0) {
+            width = getWidth();
+            height = getHeight();
+            left = getPaddingLeft();
+            right = getPaddingRight();
+            top = getPaddingTop();
+            usedMaxWidth = width - left - right;
         }
 
-        int leftOffset = getPaddingLeft();
-        int lineMaxHeight = 0;
-        //布局子View阶段
-        if (dy >= 0) {
-            int minPos = mFirstVisiPos;
-            mLastVisiPos = getItemCount() - 1;
-            if (getChildCount() > 0) {
-                View lastView = getChildAt(getChildCount() - 1);
-                minPos = getPosition(lastView) + 1;//从最后一个View+1开始吧
-                topOffset = getDecoratedTop(lastView);
-                leftOffset = getDecoratedRight(lastView);
-                lineMaxHeight = Math.max(lineMaxHeight, getDecoratedMeasurementVertical(lastView));
+        for (int i = 0; i < getItemCount(); i++) {
+            Log.d(TAG, "index:" + i);
+            View childAt = recycler.getViewForPosition(i);
+            if (View.GONE == childAt.getVisibility()) {
+                continue;
             }
-            //顺序addChildView
-            for (int i = minPos; i <= mLastVisiPos; i++) {
-                //找recycler要一个childItemView,我们不管它是从scrap里取，还是从RecyclerViewPool里取，亦或是onCreateViewHolder里拿。
-                View child = recycler.getViewForPosition(i);
-                addView(child);
-                measureChildWithMargins(child, 0, 0);
-                //计算宽度 包括margin
-                if (leftOffset + getDecoratedMeasurementHorizontal(child) <= getHorizontalSpace()) {//当前行还排列的下
-                    layoutDecoratedWithMargins(child, leftOffset, topOffset, leftOffset + getDecoratedMeasurementHorizontal(child), topOffset + getDecoratedMeasurementVertical(child));
-
-                    //保存Rect供逆序layout用
-                    Rect rect = new Rect(leftOffset, topOffset + mVerticalOffset, leftOffset + getDecoratedMeasurementHorizontal(child), topOffset + getDecoratedMeasurementVertical(child) + mVerticalOffset);
-                    mItemRects.put(i, rect);
-
-                    //改变 left  lineHeight
-                    leftOffset += getDecoratedMeasurementHorizontal(child);
-                    lineMaxHeight = Math.max(lineMaxHeight, getDecoratedMeasurementVertical(child));
-                } else {//当前行排列不下
-                    //改变top  left  lineHeight
-                    leftOffset = getPaddingLeft();
-                    topOffset += lineMaxHeight;
-                    lineMaxHeight = 0;
-
-                    //新起一行的时候要判断一下边界
-                    if (topOffset - dy > getHeight() - getPaddingBottom()) {
-                        //越界了 就回收
-                        removeAndRecycleView(child, recycler);
-                        mLastVisiPos = i - 1;
-                    } else {
-                        layoutDecoratedWithMargins(child, leftOffset, topOffset, leftOffset + getDecoratedMeasurementHorizontal(child), topOffset + getDecoratedMeasurementVertical(child));
-
-                        //保存Rect供逆序layout用
-                        Rect rect = new Rect(leftOffset, topOffset + mVerticalOffset, leftOffset + getDecoratedMeasurementHorizontal(child), topOffset + getDecoratedMeasurementVertical(child) + mVerticalOffset);
-                        mItemRects.put(i, rect);
-
-                        //改变 left  lineHeight
-                        leftOffset += getDecoratedMeasurementHorizontal(child);
-                        lineMaxHeight = Math.max(lineMaxHeight, getDecoratedMeasurementVertical(child));
-                    }
+            measureChildWithMargins(childAt, 0, 0);
+            int childWidth = getDecoratedMeasuredWidth(childAt);
+            int childHeight = getDecoratedMeasuredHeight(childAt);
+            int childUseWidth = childWidth;
+            int childUseHeight = childHeight;
+            //如果加上当前的item还小于最大的宽度的话
+            if (cuLineWidth + childUseWidth <= usedMaxWidth) {
+                itemLeft = left + cuLineWidth;
+                itemTop = cuLineTop;
+                Rect frame = allItemFrames.get(i);
+                if (frame == null) {
+                    frame = new Rect();
                 }
-            }
-            //添加完后，判断是否已经没有更多的ItemView，并且此时屏幕仍有空白，则需要修正dy
-            View lastChild = getChildAt(getChildCount() - 1);
-            if (getPosition(lastChild) == getItemCount() - 1) {
-                int gap = getHeight() - getPaddingBottom() - getDecoratedBottom(lastChild);
-                if (gap > 0) {
-                    dy -= gap;
+                frame.set(itemLeft, itemTop, itemLeft + childWidth, itemTop + childHeight);
+                allItemFrames.put(i, frame);
+                cuLineWidth += childUseWidth;
+                maxHeightItem = Math.max(maxHeightItem, childUseHeight);
+                row.addViews(new Item(childUseHeight, childAt, frame));
+                row.setCuTop(cuLineTop);
+                row.setMaxHeight(maxHeightItem);
+            } else {
+                //换行
+                formatAboveRow();
+                cuLineTop += maxHeightItem;
+                totalHeight += maxHeightItem;
+                itemTop = cuLineTop;
+                itemLeft = left;
+                Rect frame = allItemFrames.get(i);
+                if (frame == null) {
+                    frame = new Rect();
                 }
-
+                frame.set(itemLeft, itemTop, itemLeft + childWidth, itemTop + childHeight);
+                allItemFrames.put(i, frame);
+                cuLineWidth = childUseWidth;
+                maxHeightItem = childUseHeight;
+                row.addViews(new Item(childUseHeight, childAt, frame));
+                row.setCuTop(cuLineTop);
+                row.setMaxHeight(maxHeightItem);
+            }
+            //不要忘了最后一行进行刷新下布局
+            if (i == getItemCount() - 1) {
+                formatAboveRow();
+                totalHeight += maxHeightItem;
             }
 
-        } else {
-            /**
-             * ##  利用Rect保存子View边界
-             正序排列时，保存每个子View的Rect，逆序时，直接拿出来layout。
-             */
-            int maxPos = getItemCount() - 1;
-            mFirstVisiPos = 0;
-            if (getChildCount() > 0) {
-                View firstView = getChildAt(0);
-                maxPos = getPosition(firstView) - 1;
-            }
-            for (int i = maxPos; i >= mFirstVisiPos; i--) {
-                Rect rect = mItemRects.get(i);
+        }
+        totalHeight = Math.max(totalHeight, getVerticalSpace());
+        Log.d(TAG, "onLayoutChildren totalHeight:" + totalHeight);
+        fillLayout(recycler, state);
+    }
 
-                if (rect.bottom - mVerticalOffset - dy < getPaddingTop()) {
-                    mFirstVisiPos = i + 1;
-                    break;
-                } else {
-                    View child = recycler.getViewForPosition(i);
-                    addView(child, 0);//将View添加至RecyclerView中，childIndex为1，但是View的位置还是由layout的位置决定
-                    measureChildWithMargins(child, 0, 0);
+    //对出现在屏幕上的item进行展示，超出屏幕的item回收到缓存中
+    private void fillLayout(RecyclerView.Recycler recycler, RecyclerView.State state) {
+        if (state.isPreLayout()) { // 跳过preLayout，preLayout主要用于支持动画
+            return;
+        }
 
-                    layoutDecoratedWithMargins(child, rect.left, rect.top - mVerticalOffset, rect.right, rect.bottom - mVerticalOffset);
+        // 当前scroll offset状态下的显示区域
+        Rect displayFrame = new Rect(getPaddingLeft(), getPaddingTop() + verticalScrollOffset,
+                getWidth() - getPaddingRight(), verticalScrollOffset + (getHeight() - getPaddingBottom()));
+
+        //对所有的行信息进行遍历
+        for (int j = 0; j < lineRows.size(); j++) {
+            Row row = lineRows.get(j);
+            float lineTop = row.cuTop;
+            float lineBottom = lineTop + row.maxHeight;
+            //如果该行在屏幕中，进行放置item
+            if (lineTop < displayFrame.bottom && displayFrame.top < lineBottom) {
+                List<Item> views = row.views;
+                for (int i = 0; i < views.size(); i++) {
+                    View scrap = views.get(i).view;
+                    measureChildWithMargins(scrap, 0, 0);
+                    addView(scrap);
+                    Rect frame = views.get(i).rect;
+                    //将这个item布局出来
+                    layoutDecoratedWithMargins(scrap,
+                            frame.left,
+                            frame.top - verticalScrollOffset,
+                            frame.right,
+                            frame.bottom - verticalScrollOffset);
+                }
+            } else {
+                //将不在屏幕中的item放到缓存中
+                List<Item> views = row.views;
+                for (int i = 0; i < views.size(); i++) {
+                    View scrap = views.get(i).view;
+                    removeAndRecycleView(scrap, recycler);
                 }
             }
         }
-
-
-        Log.d("TAG", "count= [" + getChildCount() + "]" + ",[recycler.getScrapList().size():" + recycler.getScrapList().size() + ", dy:" + dy + ",  mVerticalOffset" + mVerticalOffset + ", ");
-
-        return dy;
     }
 
+    /**
+     * 计算每一行没有居中的viewgroup，让居中显示
+     */
+    private void formatAboveRow() {
+        List<Item> views = row.views;
+        for (int i = 0; i < views.size(); i++) {
+            Item item = views.get(i);
+            View view = item.view;
+            int position = getPosition(view);
+            //如果该item的位置不在该行中间位置的话，进行重新放置
+            if (allItemFrames.get(position).top < row.cuTop + (row.maxHeight - views.get(i).useHeight) / 2) {
+                Rect frame = allItemFrames.get(position);
+                if (frame == null) {
+                    frame = new Rect();
+                }
+                frame.set(allItemFrames.get(position).left, (int) (row.cuTop + (row.maxHeight - views.get(i).useHeight) / 2),
+                        allItemFrames.get(position).right, (int) (row.cuTop + (row.maxHeight - views.get(i).useHeight) / 2 + getDecoratedMeasuredHeight(view)));
+                allItemFrames.put(position, frame);
+                item.setRect(frame);
+                views.set(i, item);
+            }
+        }
+        row.views = views;
+        lineRows.add(row);
+        row = new Row();
+    }
+
+    /**
+     * 竖直方向需要滑动的条件
+     *
+     * @return
+     */
     @Override
     public boolean canScrollVertically() {
         return true;
     }
 
+    //监听竖直方向滑动的偏移量
     @Override
-    public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler, RecyclerView.State state) {
-        //位移0、没有子View 当然不移动
-        if (dy == 0 || getChildCount() == 0) {
-            return 0;
+    public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler,
+                                  RecyclerView.State state) {
+
+        Log.d("TAG", "totalHeight:" + totalHeight);
+        //实际要滑动的距离
+        int travel = dy;
+
+        //如果滑动到最顶部
+        if (verticalScrollOffset + dy < 0) {//限制滑动到顶部之后，不让继续向上滑动了
+            travel = -verticalScrollOffset;//verticalScrollOffset=0
+        } else if (verticalScrollOffset + dy > totalHeight - getVerticalSpace()) {//如果滑动到最底部
+            travel = totalHeight - getVerticalSpace() - verticalScrollOffset;//verticalScrollOffset=totalHeight - getVerticalSpace()
         }
 
-        int realOffset = dy;//实际滑动的距离， 可能会在边界处被修复
-        //边界修复代码
-        if (mVerticalOffset + realOffset < 0) {//上边界
-            realOffset = -mVerticalOffset;
-        } else if (realOffset > 0) {//下边界
-            //利用最后一个子View比较修正
-            View lastChild = getChildAt(getChildCount() - 1);
-            if (getPosition(lastChild) == getItemCount() - 1) {
-                int gap = getHeight() - getPaddingBottom() - getDecoratedBottom(lastChild);
-                if (gap > 0) {
-                    realOffset = -gap;
-                } else if (gap == 0) {
-                    realOffset = 0;
-                } else {
-                    realOffset = Math.min(realOffset, -gap);
-                }
-            }
-        }
+        //将竖直方向的偏移量+travel
+        verticalScrollOffset += travel;
 
-        realOffset = fill(recycler, state, realOffset);//先填充，再位移。
-
-        mVerticalOffset += realOffset;//累加实际滑动距离
-
-        offsetChildrenVertical(-realOffset);//滑动
-
-        return realOffset;
+        // 平移容器内的item
+        offsetChildrenVertical(-travel);
+        fillLayout(recycler, state);
+        return travel;
     }
 
-    //模仿LLM Horizontal 源码
-
-    /**
-     * 获取某个childView在水平方向所占的空间
-     *
-     * @param view
-     * @return
-     */
-    public int getDecoratedMeasurementHorizontal(View view) {
-        final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams)
-                view.getLayoutParams();
-        return getDecoratedMeasuredWidth(view) + params.leftMargin
-                + params.rightMargin;
-    }
-
-    /**
-     * 获取某个childView在竖直方向所占的空间
-     *
-     * @param view
-     * @return
-     */
-    public int getDecoratedMeasurementVertical(View view) {
-        final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams)
-                view.getLayoutParams();
-        return getDecoratedMeasuredHeight(view) + params.topMargin
-                + params.bottomMargin;
-    }
-
-    public int getVerticalSpace() {
-        return getHeight() - getPaddingTop() - getPaddingBottom();
+    private int getVerticalSpace() {
+        return self.getHeight() - self.getPaddingBottom() - self.getPaddingTop();
     }
 
     public int getHorizontalSpace() {
-        return getWidth() - getPaddingLeft() - getPaddingRight();
+        return self.getWidth() - self.getPaddingLeft() - self.getPaddingRight();
     }
 }
