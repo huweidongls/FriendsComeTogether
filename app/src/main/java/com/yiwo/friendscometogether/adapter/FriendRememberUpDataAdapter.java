@@ -85,11 +85,14 @@ public class FriendRememberUpDataAdapter extends RecyclerView.Adapter<FriendReme
                 }else {
                     LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(context, new LookPasswordDialog.SetPasswordListener() {
                         @Override
-                        public void setActivityText(String s) {
+                        public boolean setActivityText(String s) {
                             if(s.equals(data.get(position).getAccesspassword())){
                                 intent.setClass(context, DetailsOfFriendsActivity.class);
                                 intent.putExtra("fmid", data.get(position).getFmID());
                                 context.startActivity(intent);
+                                return true;
+                            }else {
+                                return true;
                             }
                         }
                     });

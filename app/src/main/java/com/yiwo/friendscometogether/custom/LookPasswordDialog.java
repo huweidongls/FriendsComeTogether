@@ -2,6 +2,8 @@ package com.yiwo.friendscometogether.custom;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -27,7 +29,7 @@ public class LookPasswordDialog extends Dialog {
     private SetPasswordListener listener;
 
     public interface SetPasswordListener{
-        void setActivityText(String s);
+        boolean setActivityText(String s);
     }
     public LookPasswordDialog(@NonNull Context context, SetPasswordListener listener) {
         super(context);
@@ -38,7 +40,7 @@ public class LookPasswordDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         init();
 
     }
@@ -61,8 +63,9 @@ public class LookPasswordDialog extends Dialog {
         submitTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.setActivityText(pwdEt.getText().toString());
-                dismiss();
+                if (listener.setActivityText(pwdEt.getText().toString())){
+                    dismiss();
+                };
             }
         });
     }

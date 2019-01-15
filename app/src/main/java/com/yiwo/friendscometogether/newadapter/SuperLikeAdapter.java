@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether.newadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.SuperLikeModel;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.widget.FlowLayoutManager;
 
 import java.util.ArrayList;
@@ -70,14 +72,20 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
         holder.tv_age.setText(data.get(position).getUserbirthday()+"");
         holder.tv_degree.setText(data.get(position).getMatching_degree());
         Glide.with(context).load(data.get(position).getUserpic()).into(holder.iv_icon_user);
-
+        holder.iv_icon_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PersonMainActivity.class);
+                intent.putExtra("person_id",data.get(position).getUserID());
+                context.startActivity(intent);
+            }
+        });
         holder.tv_say_hello.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sayHelloListener.sayHelloListen(position);
             }
         });
-
     }
 
     @Override

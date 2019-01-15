@@ -31,10 +31,10 @@
         <ImageView
             android:layout_centerInParent="true"
             android:id="@+id/iv_Sx"
-            android:src="@mipmap/youju_shaixuan"
+            android:src="@mipmap/youju_shaixuan_white"
             android:layout_centerVertical="true"
-            android:layout_width="39px"
-            android:layout_height="36px" />
+            android:layout_width="50px"
+            android:layout_height="50px" />
     </RelativeLayout>
 
     </RelativeLayout>

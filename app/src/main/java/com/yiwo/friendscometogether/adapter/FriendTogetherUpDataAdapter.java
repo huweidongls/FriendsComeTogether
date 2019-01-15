@@ -212,11 +212,14 @@ public class FriendTogetherUpDataAdapter extends RecyclerView.Adapter<FriendToge
                 } else {
                     LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(context, new LookPasswordDialog.SetPasswordListener() {
                         @Override
-                        public void setActivityText(String s) {
+                        public boolean setActivityText(String s) {
                             if (s.equals(data.get(position).getPfpwd())) {
                                 intent.setClass(context, DetailsOfFriendTogetherActivity.class);
                                 intent.putExtra("pfID", data.get(position).getPfID());
                                 context.startActivity(intent);
+                                return true;
+                            }else {
+                                return false;
                             }
                         }
                     });

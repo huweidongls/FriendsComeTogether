@@ -29,8 +29,6 @@ public class EditorMyLabelActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor_my_label);
-
-        StatusBarUtils.setStatusBar(EditorMyLabelActivity.this, Color.parseColor("#D84C37"));
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(EditorMyLabelActivity.this);
         edit_lable.addTextChangedListener(textWatcher);
