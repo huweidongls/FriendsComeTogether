@@ -4,17 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.newmodel.YouJiListModel;
+import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
 import com.yiwo.friendscometogether.pages.VideoActivity;
 
@@ -78,10 +82,29 @@ public class YouJiAdapter extends RecyclerView.Adapter<YouJiAdapter.ViewHolder>{
         holder.rv_youji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(context, DetailsOfFriendsActivity.class);
-                intent.putExtra("fmid", data.get(position).getFmID());
-                context.startActivity(intent);
+                if (TextUtils.isEmpty(data.get(position).getAccesspassword())) {
+                    Intent intent = new Intent();
+                    intent.setClass(context, DetailsOfFriendsActivity.class);
+                    intent.putExtra("fmid", data.get(position).getFmID());
+                    context.startActivity(intent);
+                } else {
+                    LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(context, new LookPasswordDialog.SetPasswordListener() {
+                        @Override
+                        public boolean setActivityText(String s) {
+                            if (s.equals(data.get(position).getAccesspassword())) {
+                                Intent intent = new Intent();
+                                intent.setClass(context, DetailsOfFriendsActivity.class);
+                                intent.putExtra("fmid", data.get(position).getFmID());
+                                context.startActivity(intent);
+                                return true;
+                            }else {
+                                Toast.makeText(context,"密码错误",Toast.LENGTH_SHORT).show();
+                                return false;
+                            }
+                        }
+                    });
+                    lookPasswordDialog.show();
+                }
             }
         });
 

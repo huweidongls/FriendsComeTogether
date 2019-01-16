@@ -154,6 +154,7 @@
                 <!--</LinearLayout>-->
 
                 <Button
+                    android:visibility="gone"
                     android:layout_marginRight="30px"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"

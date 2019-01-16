@@ -66,6 +66,7 @@ public class YouJiListModel {
         private String userpic;
         private String type;
         private String vurl;
+        private String accesspassword;
 
         public String getFmID() {
             return fmID;
@@ -145,6 +146,14 @@ public class YouJiListModel {
 
         public void setVurl(String vurl) {
             this.vurl = vurl;
+        }
+
+        public String getAccesspassword() {
+            return accesspassword;
+        }
+
+        public void setAccesspassword(String accesspassword) {
+            this.accesspassword = accesspassword;
         }
     }
 }
