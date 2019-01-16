@@ -19,6 +19,7 @@ import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
@@ -67,10 +68,28 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
             holder.llYouju.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.setClass(context, DetailsOfFriendTogetherActivity.class);
-                    intent.putExtra("pfID",data.get(position).getPfID());
-                    context.startActivity(intent);
+                    final Intent intent = new Intent();
+                    if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
+                        intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                        intent.putExtra("pfID", data.get(position).getPfID());
+                        context.startActivity(intent);
+                    } else {
+                        LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(context, new LookPasswordDialog.SetPasswordListener() {
+                            @Override
+                            public boolean setActivityText(String s) {
+                                if (s.equals(data.get(position).getPfpwd())) {
+                                    intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                                    intent.putExtra("pfID", data.get(position).getPfID());
+                                    context.startActivity(intent);
+                                    return true;
+                                }else {
+                                    Toast.makeText(context,"密码错误",Toast.LENGTH_SHORT).show();
+                                    return false;
+                                }
+                            }
+                        });
+                        lookPasswordDialog.show();
+                    }
                 }
             });
             Glide.with(context).load(data.get(position).getHeadportrait()).into(holder.ivYoujuAvatar);
@@ -149,10 +168,28 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
             holder.llYouji.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.setClass(context, DetailsOfFriendsActivity.class);
-                    intent.putExtra("fmid", data.get(position).getPfID());
-                    context.startActivity(intent);
+                    final Intent intent = new Intent();
+                    if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
+                        intent.setClass(context, DetailsOfFriendsActivity.class);
+                        intent.putExtra("fmid", data.get(position).getPfID());
+                        context.startActivity(intent);
+                    } else {
+                        LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(context, new LookPasswordDialog.SetPasswordListener() {
+                            @Override
+                            public boolean setActivityText(String s) {
+                                if (s.equals(data.get(position).getPfpwd())) {
+                                    intent.setClass(context, DetailsOfFriendsActivity.class);
+                                    intent.putExtra("fmid", data.get(position).getPfID());
+                                    context.startActivity(intent);
+                                    return true;
+                                }else {
+                                    Toast.makeText(context,"密码错误",Toast.LENGTH_SHORT).show();
+                                    return false;
+                                }
+                            }
+                        });
+                        lookPasswordDialog.show();
+                    }
                 }
             });
             Glide.with(context).load(data.get(position).getHeadportrait()).into(holder.ivYoujiAvatar);

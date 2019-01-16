@@ -275,6 +275,7 @@ public class HomeFragment1 extends BaseFragment {
                 .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.newHomeData))
                 .addParam("type", type)
                 .addParam("uid", uid)
+                .addParam("city", cityId)
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
@@ -469,19 +470,19 @@ public class HomeFragment1 extends BaseFragment {
                 refresh("3");
                 break;
             case R.id.rl4:
-                tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-                tvRl2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-                tvRl3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-                tvRl4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                tvRl4.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                v1.setVisibility(View.GONE);
-                v2.setVisibility(View.GONE);
-                v3.setVisibility(View.GONE);
-                v4.setVisibility(View.VISIBLE);
                 if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                    tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                    tvRl2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                    tvRl3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                    tvRl4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                    tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                    tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                    tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                    tvRl4.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                    v1.setVisibility(View.GONE);
+                    v2.setVisibility(View.GONE);
+                    v3.setVisibility(View.GONE);
+                    v4.setVisibility(View.VISIBLE);
                     refresh("4");
                 } else {
                     intent.setClass(getContext(), LoginActivity.class);
@@ -497,9 +498,12 @@ public class HomeFragment1 extends BaseFragment {
                 .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.newHomeData))
                 .addParam("type", type)
                 .addParam("uid", uid)
+                .addParam("city", cityId)
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
+                        Log.e("123123", type+"--------"+uid);
+                        Log.e("123123", data);
                         try {
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.getInt("code") == 200){

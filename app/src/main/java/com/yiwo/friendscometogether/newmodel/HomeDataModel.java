@@ -78,6 +78,15 @@ public class HomeDataModel {
         private List<CommentListBean> comment_list;
         private String userID;
         private String fmgood;
+        private String pfpwd;
+
+        public String getPfpwd() {
+            return pfpwd;
+        }
+
+        public void setPfpwd(String pfpwd) {
+            this.pfpwd = pfpwd;
+        }
 
         public String getFmgood() {
             return fmgood;
