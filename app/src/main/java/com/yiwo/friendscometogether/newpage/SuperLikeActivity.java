@@ -58,6 +58,7 @@ public class SuperLikeActivity extends BaseActivity {
     private final int SX_RESULT_CODE = 2;
     private final int SX_REQUEST_CODE = 1;
 
+    private Timer timer;
     private SpImp spImp;
     @BindView(R.id.rv_super_like)
     RecyclerView recyclerView;
@@ -76,6 +77,13 @@ public class SuperLikeActivity extends BaseActivity {
         initData();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Glide.get(context).clearMemory();
+        timer.cancel();
+    }
+
     private void initData() {
         sxMode = (SuperLikeSXMode) spCache.get("SuperLikeSXMode");
         if (sxMode == null){
@@ -89,7 +97,7 @@ public class SuperLikeActivity extends BaseActivity {
         Glide.with(context).load(R.drawable.gif).apply(options).into(iv_loading);
         recyclerView.setVisibility(View.GONE);
         tv_matching_text.setText("正在为您搜索匹配另一半…");
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
