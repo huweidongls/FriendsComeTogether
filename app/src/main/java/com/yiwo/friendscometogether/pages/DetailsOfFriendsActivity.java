@@ -36,6 +36,8 @@ import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.ShareUtils;
+import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,8 +53,6 @@ public class DetailsOfFriendsActivity extends BaseActivity {
 
     @BindView(R.id.activity_details_of_friends_rl_back)
     RelativeLayout rlBack;
-    @BindView(R.id.activity_details_of_friends_iv_title)
-    ImageView ivTitle;
     @BindView(R.id.activity_details_of_friends_rv)
     RecyclerView recyclerView;
     @BindView(R.id.activity_details_of_friends_ll_intercalation)
@@ -119,6 +119,8 @@ public class DetailsOfFriendsActivity extends BaseActivity {
     LinearLayout llCity;
     @BindView(R.id.rl_info_content)
     RelativeLayout rlInfoContent;
+    @BindView(R.id.banner)
+    Banner banner;
 
     private DetailsOfFriendsIntercalationAdapter adapter;
     private DetailsOfFriendsIntercalation1Adapter adapter1;
@@ -161,7 +163,7 @@ public class DetailsOfFriendsActivity extends BaseActivity {
 
         uid = spImp.getUID();
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         String fmid = intent.getStringExtra("fmid");
 
         ViseHttp.POST(NetConfig.detailsOfFriendsUrl)
@@ -179,7 +181,27 @@ public class DetailsOfFriendsActivity extends BaseActivity {
                                 model = gson.fromJson(data, DetailsRememberModel.class);
                                 fmID = model.getObj().getContent().getFmID();
                                 articleUid = model.getObj().getContent().getUid();
-                                Picasso.with(DetailsOfFriendsActivity.this).load(model.getObj().getContent().getFmpic()).into(ivTitle);
+
+                                final List<String> list = new ArrayList<>();
+                                for (int i = 0; i < model.getObj().getContent().getFmpic().size(); i++) {
+                                    list.add(model.getObj().getContent().getFmpic().get(i).getPic());
+                                }
+                                init(banner, list);
+                                banner.setOnBannerListener(new OnBannerListener() {
+                                    @Override
+                                    public void OnBannerClick(int position) {
+                                        //查看图片
+                                        Intent intent1 = new Intent();
+                                        intent1.setClass(DetailsOfFriendsActivity.this, ImagePreviewActivity.class);
+                                        intent1.putStringArrayListExtra("imageList", (ArrayList<String>) list);
+                                        intent1.putExtra(Consts.START_ITEM_POSITION, position);
+                                        intent1.putExtra(Consts.START_IAMGE_POSITION, position);
+//                ActivityOptions compat = ActivityOptions.makeSceneTransitionAnimation(getActivity(), imageView, imageView.getTransitionName());
+                                        startActivity(intent1);
+//                getActivity().overridePendingTransition(R.anim.photoview_open, 0);
+                                    }
+                                });
+
                                 tvTitle.setText(model.getObj().getContent().getFmtitle());
                                 tvLookNum.setText("浏览: " + model.getObj().getContent().getFmlook());
                                 tvFocusNum.setText("收藏: " + model.getObj().getContent().getFmfavorite());
@@ -296,8 +318,7 @@ public class DetailsOfFriendsActivity extends BaseActivity {
 
     @OnClick({R.id.activity_details_of_friends_rl_back, R.id.activity_details_of_friends_ll_intercalation, R.id.activity_details_of_friends_ll_comment,
             R.id.activity_details_of_friends_ll_share, R.id.activity_details_of_friends_ll_praise, R.id.activity_details_of_friends_ll_star,
-            R.id.activity_details_of_friends_iv_avatar, R.id.activity_details_of_friends_btn_focus, R.id.activity_details_of_friends_rl_activity,
-            R.id.activity_details_of_friends_iv_title})
+            R.id.activity_details_of_friends_iv_avatar, R.id.activity_details_of_friends_btn_focus, R.id.activity_details_of_friends_rl_activity})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -529,18 +550,6 @@ public class DetailsOfFriendsActivity extends BaseActivity {
                 intent.putExtra("pfID", model.getObj().getActivityInfo().getPfID());
                 intent.setClass(DetailsOfFriendsActivity.this, DetailsOfFriendTogetherActivity.class);
                 startActivity(intent);
-                break;
-            case R.id.activity_details_of_friends_iv_title:
-                //查看图片
-                List<String> urlList = new ArrayList<>();
-                urlList.add(model.getObj().getContent().getFmpic());
-                intent.setClass(DetailsOfFriendsActivity.this, ImagePreviewActivity.class);
-                intent.putStringArrayListExtra("imageList", (ArrayList<String>) urlList);
-                intent.putExtra(Consts.START_ITEM_POSITION, 0);
-                intent.putExtra(Consts.START_IAMGE_POSITION, 0);
-//                ActivityOptions compat = ActivityOptions.makeSceneTransitionAnimation(getActivity(), imageView, imageView.getTransitionName());
-                startActivity(intent);
-//                getActivity().overridePendingTransition(R.anim.photoview_open, 0);
                 break;
         }
     }

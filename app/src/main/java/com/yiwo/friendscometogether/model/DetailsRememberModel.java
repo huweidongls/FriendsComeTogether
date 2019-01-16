@@ -109,7 +109,7 @@ public class DetailsRememberModel {
 
             private String fmID;
             private String fmtitle;
-            private String fmpic;
+            private List<FmpicBean> fmpic;
             private String fmlook;
             private String fmfavorite;
             private String fmgotime;
@@ -141,12 +141,28 @@ public class DetailsRememberModel {
                 this.fmtitle = fmtitle;
             }
 
-            public String getFmpic() {
+            public List<FmpicBean> getFmpic() {
                 return fmpic;
             }
 
-            public void setFmpic(String fmpic) {
+            public void setFmpic(List<FmpicBean> fmpic) {
                 this.fmpic = fmpic;
+            }
+
+            public static class FmpicBean {
+                /**
+                 * pic : http://47.92.136.19/uploads/article/20190116/0-b725ef375dc5861d4cd6acd2c751acb05836.jpg
+                 */
+
+                private String pic;
+
+                public String getPic() {
+                    return pic;
+                }
+
+                public void setPic(String pic) {
+                    this.pic = pic;
+                }
             }
 
             public String getFmlook() {

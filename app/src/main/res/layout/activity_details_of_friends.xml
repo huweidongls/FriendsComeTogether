@@ -37,12 +37,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:adjustViewBounds="true"
-                android:id="@+id/activity_details_of_friends_iv_title"
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY" />
+                android:layout_height="400px">
+            </com.youth.banner.Banner>
 
             <TextView
                 android:id="@+id/activity_details_of_friends_tv_title"
