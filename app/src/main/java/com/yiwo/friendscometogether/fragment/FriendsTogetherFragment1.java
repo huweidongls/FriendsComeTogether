@@ -109,7 +109,6 @@ public class FriendsTogetherFragment1 extends BaseFragment {
         String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
         ViseHttp.POST(NetConfig.friendsTogetherUrl)
                 .addParam("app_key", token)
-                .addParam("page", "1")
                 .addParam("userID", spImp.getUID())
                 .request(new ACallback<String>() {
                     @Override

@@ -60,7 +60,7 @@
                     android:layout_below="@+id/iv_avatar"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="12px"
-                    android:text="大ME探"
+                    android:text="未登录"
                     android:textColor="@color/white_ffffff"
                     android:textSize="34px" />
 
@@ -104,6 +104,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:text="0"
                         android:id="@+id/tv_num1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -131,6 +132,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:text="0"
                         android:id="@+id/tv_num2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -158,6 +160,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:text="0"
                         android:id="@+id/tv_num3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -185,6 +188,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:text="0"
                         android:id="@+id/tv_num4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

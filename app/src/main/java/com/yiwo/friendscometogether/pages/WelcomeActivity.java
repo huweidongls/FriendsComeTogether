@@ -15,6 +15,7 @@ import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.yiwo.friendscometogether.MainActivity;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
+import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import java.util.Timer;
@@ -30,6 +31,7 @@ public class WelcomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+        StatusBarUtils.setStatusBarTransparent(WelcomeActivity.this);
         spImp = new SpImp(WelcomeActivity.this);
 
         initData();

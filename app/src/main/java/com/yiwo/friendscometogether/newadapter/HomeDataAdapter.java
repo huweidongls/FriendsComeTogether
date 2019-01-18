@@ -23,6 +23,7 @@ import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.pages.ArticleCommentActivity;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
 import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
@@ -193,6 +194,15 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
                 }
             });
             Glide.with(context).load(data.get(position).getHeadportrait()).into(holder.ivYoujiAvatar);
+            holder.ivYoujiAvatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra("person_id", data.get(position).getUserID());
+                    intent.setClass(context, PersonMainActivity.class);
+                    context.startActivity(intent);
+                }
+            });
             holder.tvYoujiNickname.setText(data.get(position).getUsername());
             holder.tvYoujiTime.setText(data.get(position).getPftime());
             if(data.get(position).getFollow().equals("1")){
