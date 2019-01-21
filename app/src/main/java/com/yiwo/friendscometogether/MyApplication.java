@@ -20,6 +20,8 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
 import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.netease.nimlib.sdk.mixpush.MixPushConfig;
+import com.netease.nimlib.sdk.mixpush.NIMPushClient;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
 import com.netease.nimlib.sdk.uinfo.model.UserInfo;
@@ -64,8 +66,14 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ScreenAdapterTools.init(this);
+//        // 此处 certificate 请传入为开发者配置好的小米证书名称
+        MixPushConfig xm_config = new MixPushConfig();
+        xm_config.xmAppId = "2882303761517874789";
+        xm_config.xmAppKey = "5911787488789";
+        xm_config.xmCertificateName = "tongbanxiaomizhengshu";
+        xm_config.hwCertificateName = "tongbanhuaweizhengshu";
         // 4.6.0 开始，第三方推送配置入口改为 SDKOption#mixPushConfig，旧版配置方式依旧支持
-        NIMClient.init(this, loginInfo(), options());
+        NIMClient.init(this, loginInfo(), options(xm_config));
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
         UMShareAPI.get(this);
@@ -148,8 +156,8 @@ public class MyApplication extends Application {
         }
     }
 
-    // 如果返回值为 null，则全部使用默认参数。
-    private SDKOptions options() {
+    // 如果返回值为 null，则全部使用默认参数。xn_config为小米
+    private SDKOptions options(MixPushConfig xm_config) {
         SDKOptions options = new SDKOptions();
 
         // 如果将新消息通知提醒托管给 SDK 完成，需要添加以下配置。否则无需设置。
@@ -163,7 +171,7 @@ public class MyApplication extends Application {
         // 通知铃声的uri字符串
         config.notificationSound = "android.resource://com.netease.nim.demo/raw/msg";
         options.statusBarNotificationConfig = config;
-
+        options.mixPushConfig = xm_config;
         // 配置保存图片，文件，log 等数据的目录
         // 如果 options 中没有设置这个值，SDK 会使用采用默认路径作为 SDK 的数据目录。
         // 该目录目前包含 log, file, image, audio, video, thumb 这6个目录。
