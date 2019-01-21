@@ -312,7 +312,9 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                                     FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
                                     mList.clear();
                                     mList.addAll(model.getObj());
-                                    bean = mList.get(0);
+                                    if(mList.size()>0){
+                                        bean = mList.get(0);
+                                    }
                                     adapter.notifyDataSetChanged();
                                 }
                             } catch (JSONException e) {
@@ -347,7 +349,9 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                                     FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
                                     mList.clear();
                                     mList.addAll(model.getObj());
-                                    bean = mList.get(0);
+                                    if(mList.size()>0){
+                                        bean = mList.get(0);
+                                    }
                                     adapter.notifyDataSetChanged();
                                 }
                             } catch (JSONException e) {
