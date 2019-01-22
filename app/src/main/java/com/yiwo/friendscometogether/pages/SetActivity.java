@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.netease.nim.uikit.api.NimUIKit;
+import com.vise.xsnow.cache.SpCache;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.MyApplication;
 import com.yiwo.friendscometogether.R;
@@ -21,7 +22,8 @@ import butterknife.OnClick;
  * 设置
  */
 public class SetActivity extends BaseActivity {
-    SpImp spImp;
+    private SpImp spImp;
+    private SpCache spCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class SetActivity extends BaseActivity {
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(this);
         spImp = new SpImp(SetActivity.this);
+        spCache = new SpCache(SetActivity.this);
     }
 
     @OnClick({R.id.activity_set_rl_back, R.id.activity_set_rl_upload, R.id.activity_set_rl_feedback,
@@ -97,6 +100,7 @@ public class SetActivity extends BaseActivity {
                                 spImp.setUID("0");
                                 spImp.setYXID("0");
                                 spImp.setYXTOKEN("0");
+                                spCache.clear();
                                 NimUIKit.logout();
                                 MyApplication.getInstance().exit();
                             }

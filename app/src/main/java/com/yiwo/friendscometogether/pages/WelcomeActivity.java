@@ -12,6 +12,7 @@ import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
+import com.vise.xsnow.cache.SpCache;
 import com.yiwo.friendscometogether.MainActivity;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
@@ -25,6 +26,7 @@ public class WelcomeActivity extends BaseActivity {
 
     private String account;
     private SpImp spImp;
+    private SpCache spCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class WelcomeActivity extends BaseActivity {
 
         StatusBarUtils.setStatusBarTransparent(WelcomeActivity.this);
         spImp = new SpImp(WelcomeActivity.this);
+        spCache = new SpCache(WelcomeActivity.this);
 
         initData();
 
@@ -67,7 +70,7 @@ public class WelcomeActivity extends BaseActivity {
                         @Override
                         public void onSuccess(LoginInfo loginInfo) {
                             NimUIKit.loginSuccess(account);
-                            NimUIKit.setAccount(account);
+                            spCache.put("LoginInfo", loginInfo);
                             toToast(WelcomeActivity.this, "登录成功");
                             NimUIKit.setMsgForwardFilter(new MsgForwardFilter() {
                                 @Override

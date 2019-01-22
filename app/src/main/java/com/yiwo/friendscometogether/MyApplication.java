@@ -29,10 +29,12 @@ import com.netease.nimlib.sdk.util.NIMUtil;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
+import com.vise.xsnow.cache.SpCache;
 import com.vise.xsnow.http.ViseHttp;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.network.UMConfig;
+import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.FTPTimeCount;
 import com.yiwo.friendscometogether.utils.TimeCount;
 
@@ -59,12 +61,17 @@ public class MyApplication extends Application {
     private List<Activity> mList = new LinkedList<Activity>();
     private static MyApplication instance;
 
+    private SpCache spCache;
+    private SpImp spImp;
+
     public MyApplication() {
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        spCache = new SpCache(this);
+        spImp = new SpImp(this);
         ScreenAdapterTools.init(this);
 //        // 此处 certificate 请传入为开发者配置好的小米证书名称
         MixPushConfig xm_config = new MixPushConfig();
@@ -209,7 +216,14 @@ public class MyApplication extends Application {
 
     // 如果已经存在用户登录信息，返回LoginInfo，否则返回null即可
     private LoginInfo loginInfo() {
-        return null;
+//        String account = spImp.getYXID();
+//        NimUIKit.loginSuccess(account);
+        LoginInfo loginInfo = (LoginInfo) spCache.get("LoginInfo");
+        if(loginInfo == null){
+            return null;
+        }else {
+            return loginInfo;
+        }
     }
 
 }

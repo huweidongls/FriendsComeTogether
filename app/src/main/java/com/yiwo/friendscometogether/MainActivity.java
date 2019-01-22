@@ -25,6 +25,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.netease.nim.uikit.api.NimUIKit;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.fragment.ChatFragment;
 import com.yiwo.friendscometogether.fragment.FriendsRememberFragment;
@@ -110,6 +111,7 @@ public class MainActivity extends FragmentActivity {
 
     private SpImp spImp;
     private String uid = "";
+    private String account = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +121,8 @@ public class MainActivity extends FragmentActivity {
         ButterKnife.bind(MainActivity.this);
         MyApplication.getInstance().addActivity(this);
         spImp = new SpImp(context);
+        account = spImp.getYXID();
+        NimUIKit.loginSuccess(account);
         getPermissions();
 //        initView();
 
