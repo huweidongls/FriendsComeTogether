@@ -26,6 +26,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.netease.nim.uikit.api.NimUIKit;
+import com.netease.nim.uikit.business.session.module.MsgForwardFilter;
+import com.netease.nim.uikit.business.session.module.MsgRevokeFilter;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.auth.AuthService;
+import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.fragment.ChatFragment;
 import com.yiwo.friendscometogether.fragment.FriendsRememberFragment;
@@ -37,7 +44,9 @@ import com.yiwo.friendscometogether.fragment.MyFragment;
 import com.yiwo.friendscometogether.fragment.MyFragment1;
 import com.yiwo.friendscometogether.newfragment.YouJiFragment;
 import com.yiwo.friendscometogether.pages.CreateFriendRememberActivity;
+import com.yiwo.friendscometogether.pages.GuideActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
+import com.yiwo.friendscometogether.pages.WelcomeActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import java.util.ArrayList;
@@ -121,15 +130,13 @@ public class MainActivity extends FragmentActivity {
         ButterKnife.bind(MainActivity.this);
         MyApplication.getInstance().addActivity(this);
         spImp = new SpImp(context);
-        account = spImp.getYXID();
-        NimUIKit.loginSuccess(account);
+//        account = spImp.getYXID();
+//        NimUIKit.loginSuccess(account);
         getPermissions();
 //        initView();
-
         init();
 
     }
-
     @Override
     protected void onStart() {
         super.onStart();

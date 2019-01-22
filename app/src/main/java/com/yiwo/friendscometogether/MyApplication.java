@@ -34,6 +34,7 @@ import com.vise.xsnow.http.ViseHttp;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.network.UMConfig;
+import com.yiwo.friendscometogether.pages.WelcomeActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.FTPTimeCount;
 import com.yiwo.friendscometogether.utils.TimeCount;
@@ -78,7 +79,7 @@ public class MyApplication extends Application {
         xm_config.xmAppId = "2882303761517874789";
         xm_config.xmAppKey = "5911787488789";
         xm_config.xmCertificateName = "tongbanxiaomizhengshu";
-        xm_config.hwCertificateName = "tongbanhuaweizhengshu";
+//        xm_config.hwCertificateName = "tongbanhuaweizhengshu";
         // 4.6.0 开始，第三方推送配置入口改为 SDKOption#mixPushConfig，旧版配置方式依旧支持
         NIMClient.init(this, loginInfo(), options(xm_config));
         JPushInterface.setDebugMode(true);
@@ -169,7 +170,7 @@ public class MyApplication extends Application {
 
         // 如果将新消息通知提醒托管给 SDK 完成，需要添加以下配置。否则无需设置。
         StatusBarNotificationConfig config = new StatusBarNotificationConfig();
-        config.notificationEntrance = MainActivity.class; // 点击通知栏跳转到该Activity
+        config.notificationEntrance = WelcomeActivity.class; // 点击通知栏跳转到该Activity
         config.notificationSmallIconId = R.drawable.nim_actionbar_dark_back_icon;
         // 呼吸灯配置
         config.ledARGB = Color.GREEN;
