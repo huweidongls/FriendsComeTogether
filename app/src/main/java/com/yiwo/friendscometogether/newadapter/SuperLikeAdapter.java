@@ -70,7 +70,7 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
         holder.rv_label.setLayoutManager(manager);
         holder.rv_label.setAdapter(new SuperLikeLabelAdapter(list_biaoqian));
         holder.tv_username.setText(data.get(position).getUsername());
-        holder.tv_age.setText(data.get(position).getUserbirthday()+"");
+        holder.tv_age.setText(data.get(position).getUserbirthday()+"岁");
         holder.tv_degree.setText(data.get(position).getMatching_degree());
         Glide.with(context).load(data.get(position).getUserpic()).into(holder.iv_icon_user);
         holder.iv_icon_user.setOnClickListener(new View.OnClickListener() {
