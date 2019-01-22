@@ -344,6 +344,10 @@
         </receiver>
         <!--小米推送集成end-->
         <!--华为推送集成-->
+        <!-- 填入华为推送平台配置的应用appid -->
+        <meta-data
+            android:name="com.huawei.hms.client.appid"
+            android:value="100438717" />
         <!-- 替换为自己的包名 -->
         <provider
             android:name="com.huawei.hms.update.provider.UpdateProvider"
@@ -363,17 +367,14 @@
                 android:value="successRateAnalytics" />
         </receiver>
 
-        <!--&lt;!&ndash; 兼容性广播 &ndash;&gt;-->
-        <!--<receiver android:name="com.huawei.hms.support.api.push.PushEventReceiver">-->
-            <!--<intent-filter>-->
-                <!--&lt;!&ndash; 接收通道发来的通知栏消息，兼容老版本Push &ndash;&gt;-->
-                <!--<action android:name="com.huawei.intent.action.PUSH" />-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
-        <!-- 填入华为推送平台配置的应用appid -->
-        <meta-data
-            android:name="com.huawei.hms.client.appid"
-            android:value="100438717" />
+        <!-- 兼容性广播 -->
+        <receiver android:name="com.huawei.hms.support.api.push.PushReceiver">
+            <intent-filter>
+                <!-- 接收通道发来的通知栏消息，兼容老版本Push -->
+                <action android:name="com.huawei.intent.action.PUSH" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

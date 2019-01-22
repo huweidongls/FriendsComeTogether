@@ -16,6 +16,7 @@ import com.yiwo.friendscometogether.MainActivity;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.adapter.GuidePageAdapter;
 import com.yiwo.friendscometogether.base.BaseActivity;
+import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class GuideActivity extends BaseActivity implements ViewPager.OnPageChang
         super.onCreate(savedInstanceState);
 //        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_guide);
+        StatusBarUtils.setStatusBarTransparent(GuideActivity.this);
         spImp = new SpImp(GuideActivity.this);
         spImp.setYd("1");
 

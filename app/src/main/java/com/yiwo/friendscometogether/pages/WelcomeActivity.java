@@ -67,6 +67,7 @@ public class WelcomeActivity extends BaseActivity {
                         @Override
                         public void onSuccess(LoginInfo loginInfo) {
                             NimUIKit.loginSuccess(account);
+                            NimUIKit.setAccount(account);
                             toToast(WelcomeActivity.this, "登录成功");
                             NimUIKit.setMsgForwardFilter(new MsgForwardFilter() {
                                 @Override
@@ -108,6 +109,15 @@ public class WelcomeActivity extends BaseActivity {
                         @Override
                         public void onException(Throwable throwable) {
                             toToast(WelcomeActivity.this, "登录出错");
+                            Intent intent = new Intent();
+                            if(TextUtils.isEmpty(spImp.getYd())){
+                                intent.setClass(WelcomeActivity.this, GuideActivity.class);
+                                startActivity(intent);
+                            }else {
+                                intent.setClass(WelcomeActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                            finish();
                         }
                         // 可以在此保存LoginInfo到本地，下次启动APP做自动登录用
                     };
