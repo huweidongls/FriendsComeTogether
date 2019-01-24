@@ -116,17 +116,12 @@ public class SuperLikeSxActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_sure:
-//                sxMode.setAges(tvAge.getText().toString());
-//                sxMode.setSex(sex);
-//                sxMode.setType_expand_search(type_expand_search);
-//                sxMode.setAddress(address);
-//                spCache.put("SuperLikeSXMode",sxMode);
-                Intent intent = new Intent();
-                intent.putExtra("age", tvAge.getText().toString());
-                intent.putExtra("sex", sex);
-                intent.putExtra("type_expand_search", type_expand_search);
-                intent.putExtra("address", address);
-                setResult(2, intent);
+                sxMode.setAges(tvAge.getText().toString());
+                sxMode.setSex(sex);
+                sxMode.setType_expand_search(type_expand_search);
+                sxMode.setAddress(address);
+                spCache.put("SuperLikeSXMode",sxMode);
+                setResult(2);
                 finish();
                 break;
             case R.id.tv1:

@@ -69,15 +69,21 @@
                 android:layout_marginLeft="80px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_super_like"
-                android:layout_marginTop="10px"
-                android:layout_marginLeft="11px"
-                android:layout_marginRight="11px"
-                android:layout_marginBottom="10px"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_super_like"
+                    android:layout_marginTop="10px"
+                    android:layout_marginLeft="11px"
+                    android:layout_marginRight="11px"
+                    android:layout_marginBottom="10px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
+
         </LinearLayout>
     </ScrollView>
 

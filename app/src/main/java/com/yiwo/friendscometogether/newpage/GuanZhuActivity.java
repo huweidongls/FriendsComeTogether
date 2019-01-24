@@ -3,6 +3,7 @@ package com.yiwo.friendscometogether.newpage;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
@@ -128,6 +129,12 @@ public class GuanZhuActivity extends BaseActivity {
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(GuanZhuActivity.this);
         initRefresh();
+        initData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initData();
     }
 
@@ -748,5 +755,11 @@ public class GuanZhuActivity extends BaseActivity {
 //                popupWindow.dismiss();
 //            }
 //        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        initData();
     }
 }

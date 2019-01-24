@@ -86,13 +86,13 @@ public class SuperLikeActivity extends BaseActivity {
     }
 
     private void initData() {
-//        sxMode = (SuperLikeSXMode) spCache.get("SuperLikeSXMode");
-//        if (sxMode == null){
-//            sxMode = new SuperLikeSXMode();
-//            sxMode.setSex(1);
-//            sxMode.setAges("10-30");
-//            sxMode.setAddress(1);
-//        }
+        sxMode = (SuperLikeSXMode) spCache.get("SuperLikeSXMode");
+        if (sxMode == null){
+            sxMode = new SuperLikeSXMode();
+            sxMode.setSex(1);
+            sxMode.setAges("10-30");
+            sxMode.setAddress(1);
+        }
         RequestOptions options = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
         Glide.with(context).load(R.drawable.gif).apply(options).into(iv_loading);
@@ -105,6 +105,9 @@ public class SuperLikeActivity extends BaseActivity {
                 ViseHttp.POST(NetConfig.matching_user)
                         .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.matching_user))
                         .addParam("uid", spImp.getUID())
+                        .addParam("sex", sxMode.getSex() + "")
+                        .addParam("address", sxMode.getAddress()+"")
+                        .addParam("age", sxMode.getAges())
                         .request(new ACallback<String>() {
                             @Override
                             public void onSuccess(String data) {
@@ -117,9 +120,7 @@ public class SuperLikeActivity extends BaseActivity {
                                         // 2.Grid布局
                                         RecyclerView.LayoutManager layoutManager =
                                                 new GridLayoutManager(context,
-                                                        2, // 每行显示item项数目
-                                                        GridLayoutManager.VERTICAL,
-                                                        false
+                                                        2// 每行显示item项数目
                                                 ) {
                                                     @Override
                                                     public boolean canScrollVertically() {
@@ -175,61 +176,7 @@ public class SuperLikeActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
             case 2:
-                final String age = data.getStringExtra("age");
-                final int sex = data.getIntExtra("sex", -1);
-                int type_expand_search = data.getIntExtra("type_expand_search", -1);
-                final String address = data.getStringExtra("address");
-                ViseHttp.POST(NetConfig.matching_user)
-                        .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.matching_user))
-                        .addParam("uid", spImp.getUID())
-                        .addParam("sex", sex + "")
-                        .addParam("address", address)
-                        .addParam("age", age)
-                        .request(new ACallback<String>() {
-                            @Override
-                            public void onSuccess(String data) {
-                                Log.e("222", data);
-                                try {
-                                    JSONObject jsonObject = new JSONObject(data);
-                                    if (jsonObject.getInt("code") == 200) {
-                                        Gson gson = new Gson();
-                                        model = gson.fromJson(data, SuperLikeModel.class);
-                                        // 2.Grid布局
-                                        RecyclerView.LayoutManager layoutManager =
-                                                new GridLayoutManager(context,
-                                                        2, // 每行显示item项数目
-                                                        GridLayoutManager.VERTICAL,
-                                                        false
-                                                ) {
-                                                    @Override
-                                                    public boolean canScrollVertically() {
-                                                        return false;
-                                                    }
-                                                };
-                                        list_data.clear();
-                                        list_data.addAll(model.getObj());
-                                        if (list_data.size() > 0) {
-                                            tv_matching_text.setText("成功为您匹配 " + list_data.size() + " 名瞳伴！\n 还等什么赶快去打招呼吧！");
-                                        } else {
-                                            tv_matching_text.setText("没有找到和您匹配的瞳伴\n快去完善资料吧！");
-                                        }
-                                        Glide.with(context).asBitmap().load(R.drawable.gif).into(iv_loading);
-                                        recyclerView.setLayoutManager(layoutManager);
-                                        superLikeAdapter = new SuperLikeAdapter(list_data);
-                                        superLikeAdapter.setSayHelloListener(sayHelloListener);
-                                        recyclerView.setAdapter(superLikeAdapter);
-                                        recyclerView.setVisibility(View.VISIBLE);
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-                            @Override
-                            public void onFail(int errCode, String errMsg) {
-                                Log.d("matching_user:err:::", errCode + "/////" + errMsg);
-                            }
-                        });
+                initData();
                 break;
         }
     }
@@ -258,7 +205,6 @@ public class SuperLikeActivity extends BaseActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
                         }
 
                         @Override

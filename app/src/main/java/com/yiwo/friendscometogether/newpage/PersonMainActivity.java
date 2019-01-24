@@ -107,7 +107,7 @@ public class PersonMainActivity extends BaseActivity {
     private List<PersonMainModel.ObjBean.PhotoBean> list_pics = new ArrayList<>();
     private List<PersonMainModel.ObjBean.FriendBean> list_youji = new ArrayList<>();
     private List<PersonMainModel.ObjBean.ActivityBean> list_youju = new ArrayList<>();
-
+    private int isFollow = -1;//是否关注 0为未关注 1为已关注
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -196,8 +196,10 @@ public class PersonMainActivity extends BaseActivity {
 
                                 }
                                 if (model.getObj().getInfo().getFollow().equals("0")) {
+                                    isFollow = 0 ;
                                     Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_heart).into(iv_image_guanzhu);
                                 } else if (model.getObj().getInfo().getFollow().equals("1")) {
+                                    isFollow = 1 ;
                                     Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_heartwhite).into(iv_image_guanzhu);
                                 }
                                 //--------照片-------------------------
@@ -330,32 +332,60 @@ public class PersonMainActivity extends BaseActivity {
                     intent.setClass(PersonMainActivity.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
-
-                    ViseHttp.POST(NetConfig.userFocusUrl)
-                            .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userFocusUrl))
-                            .addParam("uid", spImp.getUID())
-                            .addParam("likeId", person_id)
-                            .request(new ACallback<String>() {
-                                @Override
-                                public void onSuccess(String data) {
-                                    try {
-                                        JSONObject jsonObject = new JSONObject(data);
-                                        if (jsonObject.getInt("code") == 200) {
-                                            toToast(PersonMainActivity.this, "关注成功");
-                                            Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_heartwhite).into(iv_image_guanzhu);
-                                        } else {
-                                            toToast(PersonMainActivity.this, jsonObject.getString("message"));
+                    if (isFollow == 0){
+                        ViseHttp.POST(NetConfig.userFocusUrl)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userFocusUrl))
+                                .addParam("uid", spImp.getUID())
+                                .addParam("likeId", person_id)
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if (jsonObject.getInt("code") == 200) {
+                                                toToast(PersonMainActivity.this, "关注成功");
+                                                Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_heartwhite).into(iv_image_guanzhu);
+                                                isFollow = 1;
+                                            } else {
+                                                toToast(PersonMainActivity.this, jsonObject.getString("message"));
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
                                         }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
                                     }
-                                }
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
 
-                                @Override
-                                public void onFail(int errCode, String errMsg) {
+                                    }
+                                });
+                    }else if (isFollow == 1){
+                        ViseHttp.POST(NetConfig.removeConcerns)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.removeConcerns))
+                                .addParam("uid", spImp.getUID())
+                                .addParam("bid", person_id)
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if (jsonObject.getInt("code") == 200) {
+                                                toToast(PersonMainActivity.this, "取消关注成功");
+                                                Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_heart).into(iv_image_guanzhu);
+                                                isFollow = 0;
+                                            } else {
+                                                toToast(PersonMainActivity.this, jsonObject.getString("message"));
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
 
-                                }
-                            });
+                                    }
+                                });
+                    }
+
                 }
                 break;
         }

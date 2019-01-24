@@ -275,4 +275,6 @@ public class NetConfig {
     public static String indexLabel = "action/ac_user/index_label";
     //点赞收藏消息
     public static String zanAndSoucang = "action/ac_user/settings";
+    //取消关注(他人主页)   http://47.92.136.19/index.php/action/ac_user/RemoveConcerns
+    public static String removeConcerns = "action/ac_user/RemoveConcerns";
 }
