@@ -166,7 +166,7 @@ public class MessageActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.rl_pinglun:
-                intent.setClass(context, MessageCommentActivity.class);
+                intent.setClass(context, PinglunAtActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rl_private_message:
