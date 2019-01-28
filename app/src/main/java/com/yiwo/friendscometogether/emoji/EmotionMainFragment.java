@@ -46,6 +46,7 @@ public class EmotionMainFragment extends BaseFragment {
 
     //需要绑定的内容view
     private View contentView;
+    private View button;
 
     //不可横向滚动的ViewPager
     private NoHorizontalScrollerViewPager viewPager;
@@ -78,7 +79,7 @@ public class EmotionMainFragment extends BaseFragment {
                 .setEmotionView(rootView.findViewById(R.id.ll_emotion_layout))//绑定表情面板
                 .bindToContent(contentView)//绑定内容view
                 .bindToEditText(!isBindToBarEditText ? ((EditText) contentView) : ((EditText) rootView.findViewById(R.id.bar_edit_text)))//判断绑定那种EditView
-                .bindToEmotionButton(rootView.findViewById(R.id.emotion_button))//绑定表情按钮
+                .bindToEmotionButton(button)//绑定表情按钮
                 .build();
         initListener();
         initDatas();
@@ -102,8 +103,9 @@ public class EmotionMainFragment extends BaseFragment {
      * @param contentView
      * @return
      */
-    public void bindToContentView(View contentView){
+    public void bindToContentView(View contentView, View button){
         this.contentView=contentView;
+        this.button = button;
     }
 
     /**

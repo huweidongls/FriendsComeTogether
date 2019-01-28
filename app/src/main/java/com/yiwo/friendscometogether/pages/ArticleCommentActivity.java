@@ -6,6 +6,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -31,6 +32,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.adapter.ArticleCommentAdapter;
 import com.yiwo.friendscometogether.base.BaseActivity;
+import com.yiwo.friendscometogether.emoji.EmotionMainFragment;
 import com.yiwo.friendscometogether.model.ArticleCommentListModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -78,6 +80,8 @@ public class ArticleCommentActivity extends BaseActivity {
     private String userid = "";
     private String fcid = "";
 
+    private EmotionMainFragment emotionMainFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +111,31 @@ public class ArticleCommentActivity extends BaseActivity {
                 });
 
         initData();
+        initEmotionMainFragment();
 
+    }
+
+    /**
+     * 初始化表情面板
+     */
+    public void initEmotionMainFragment(){
+        //构建传递参数
+        Bundle bundle = new Bundle();
+        //绑定主内容编辑框
+        bundle.putBoolean(EmotionMainFragment.BIND_TO_EDITTEXT,false);
+        //隐藏控件
+        bundle.putBoolean(EmotionMainFragment.HIDE_BAR_EDITTEXT_AND_BTN,true);
+        //替换fragment
+        //创建修改实例
+        emotionMainFragment =EmotionMainFragment.newInstance(EmotionMainFragment.class,bundle);
+        emotionMainFragment.bindToContentView(etComment, tvComment);
+        FragmentTransaction transaction =getSupportFragmentManager().beginTransaction();
+        // Replace whatever is in thefragment_container view with this fragment,
+        // and add the transaction to the backstack
+        transaction.replace(R.id.fl_emotionview_main,emotionMainFragment);
+        transaction.addToBackStack(null);
+        //提交修改
+        transaction.commit();
     }
 
     private void initData() {
@@ -165,11 +193,11 @@ public class ArticleCommentActivity extends BaseActivity {
                 onBackPressed();
                 break;
             case R.id.activity_article_comment_tv_comment:
-                if (TextUtils.isEmpty(etComment.getText().toString())) {
-                    toToast(ArticleCommentActivity.this, "请输入评论内容");
-                } else {
-                    toComment();
-                }
+//                if (TextUtils.isEmpty(etComment.getText().toString())) {
+//                    toToast(ArticleCommentActivity.this, "请输入评论内容");
+//                } else {
+//                    toComment();
+//                }
                 break;
         }
     }

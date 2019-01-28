@@ -20,7 +20,7 @@
             />
     </LinearLayout>
 
-    <com.example.a99zan.emojitest.emotionkeyboardview.EmojiIndicatorView
+    <com.yiwo.friendscometogether.emoji.EmojiIndicatorView
         android:id="@+id/ll_point_group"
         android:layout_width="match_parent"
         android:layout_height="30dp"

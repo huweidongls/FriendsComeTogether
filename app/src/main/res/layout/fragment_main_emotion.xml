@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--<include-->
-        <!--android:id="@+id/include_emotion_view"-->
-        <!--layout="@layout/include_emotion_bar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
+    <include
+        android:id="@+id/include_emotion_view"
+        layout="@layout/include_emotion_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:id="@+id/ll_emotion_layout"
@@ -18,7 +18,7 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <com.example.a99zan.emojitest.emotionkeyboardview.NoHorizontalScrollerViewPager
+        <com.yiwo.friendscometogether.emoji.NoHorizontalScrollerViewPager
             android:id="@+id/vp_emotionview_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
