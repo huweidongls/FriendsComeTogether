@@ -41,9 +41,9 @@ import butterknife.ButterKnife;
 
 public class MyCommentYouJiFragment extends BaseFragment {
 
-    @BindView(R.id.my_comment_rv)
+    @BindView(R.id.rv)
     RecyclerView recyclerView;
-    @BindView(R.id.my_comment_rv)
+    @BindView(R.id.refreshLayout)
     RefreshLayout refreshLayout;
 
     private MyCommentAdapter adapter;

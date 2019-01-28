@@ -34,6 +34,7 @@ import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.AllRememberViewpagerAdapter;
 import com.yiwo.friendscometogether.newfragment.HuoDongApplyFragment;
 import com.yiwo.friendscometogether.newfragment.HuoDongHistoryFragment;
+import com.yiwo.friendscometogether.newfragment.MyCommentHuoDongFragment;
 import com.yiwo.friendscometogether.newfragment.MyCommentYouJiFragment;
 import com.yiwo.friendscometogether.sp.SpImp;
 
@@ -89,7 +90,7 @@ public class MyCommentActivity extends BaseActivity {
 
         fragmentList = new ArrayList<>();
         fragmentList.add(new MyCommentYouJiFragment());
-        fragmentList.add(new HuoDongHistoryFragment());
+        fragmentList.add(new MyCommentHuoDongFragment());
         mViewPagerFragmentAdapter = new AllRememberViewpagerAdapter(mFragmentManager, fragmentList);
         mViewPager.setAdapter(mViewPagerFragmentAdapter);
 
@@ -139,18 +140,17 @@ public class MyCommentActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.activity_my_comment_rl_back})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.activity_my_comment_rl_back:
-                onBackPressed();
-                break;
-        }
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         MyCommentActivity.this.finish();
+    }
+    @OnClick({R.id.rl_back})
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.rl_back:
+                finish();
+                break;
+        }
     }
 }
