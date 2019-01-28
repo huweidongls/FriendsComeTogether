@@ -1,11 +1,18 @@
 package com.yiwo.friendscometogether.pages;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
@@ -24,7 +31,21 @@ import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.model.ArticleCommentListModel;
 import com.yiwo.friendscometogether.model.UserFocusModel;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newadapter.AllRememberViewpagerAdapter;
+import com.yiwo.friendscometogether.newfragment.HuoDongApplyFragment;
+import com.yiwo.friendscometogether.newfragment.HuoDongHistoryFragment;
+import com.yiwo.friendscometogether.newfragment.MyCommentYouJiFragment;
 import com.yiwo.friendscometogether.sp.SpImp;
+
+import net.lucode.hackware.magicindicator.MagicIndicator;
+import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,20 +59,19 @@ import butterknife.OnClick;
 
 public class MyCommentActivity extends BaseActivity {
 
-    @BindView(R.id.activity_my_comment_rl_back)
-    RelativeLayout rlBack;
-    @BindView(R.id.activity_my_comment_rv)
-    RecyclerView recyclerView;
-    @BindView(R.id.activity_my_comment_refreshLayout)
-    RefreshLayout refreshLayout;
+    @BindView(R.id.magic_indicator)
+    MagicIndicator magicIndicator;
+    @BindView(R.id.vp)
+    ViewPager mViewPager;
+    @BindView(R.id.btn_back)
+    ImageView btn_back;
 
-    private MyCommentAdapter adapter;
-    private List<ArticleCommentListModel.ObjBean> mList;
+    private FragmentManager mFragmentManager;
+    private AllRememberViewpagerAdapter mViewPagerFragmentAdapter;
+    private List<Fragment> fragmentList;
 
+    private ArrayList<String> mTitleDataList;
     private SpImp spImp;
-    private String uid = "";
-
-    private int page = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,154 +80,62 @@ public class MyCommentActivity extends BaseActivity {
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
 
         ButterKnife.bind(this);
+        mFragmentManager = getSupportFragmentManager();
         spImp = new SpImp(MyCommentActivity.this);
-
         initData();
-
     }
 
     private void initData() {
 
-        refreshLayout.setRefreshHeader(new ClassicsHeader(MyCommentActivity.this));
-        refreshLayout.setRefreshFooter(new ClassicsFooter(MyCommentActivity.this));
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+        fragmentList = new ArrayList<>();
+        fragmentList.add(new MyCommentYouJiFragment());
+        fragmentList.add(new HuoDongHistoryFragment());
+        mViewPagerFragmentAdapter = new AllRememberViewpagerAdapter(mFragmentManager, fragmentList);
+        mViewPager.setAdapter(mViewPagerFragmentAdapter);
+
+        mTitleDataList = new ArrayList<>();
+        mTitleDataList.add("友记评论");
+        mTitleDataList.add("活动评价");
+
+        CommonNavigator commonNavigator = new CommonNavigator(this);
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
-            public void onRefresh(final RefreshLayout refreshlayout) {
-                ViseHttp.POST(NetConfig.userComment)
-                        .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userComment))
-                        .addParam("userID", uid)
-                        .addParam("page", "1")
-                        .request(new ACallback<String>() {
-                            @Override
-                            public void onSuccess(String data) {
-                                try {
-                                    JSONObject jsonObject = new JSONObject(data);
-                                    if (jsonObject.getInt("code") == 200) {
-                                        Gson gson = new Gson();
-                                        ArticleCommentListModel model = gson.fromJson(data, ArticleCommentListModel.class);
-                                        mList.clear();
-                                        mList.addAll(model.getObj());
-                                        adapter.notifyDataSetChanged();
-                                        page = 2;
-                                        Log.e("222", page + "");
-                                        refreshlayout.finishRefresh();
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-                            @Override
-                            public void onFail(int errCode, String errMsg) {
-                                refreshlayout.finishRefresh();
-                            }
-                        });
+            public int getCount() {
+                return mTitleDataList == null ? 0 : mTitleDataList.size();
             }
-        });
-        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+
             @Override
-            public void onLoadMore(final RefreshLayout refreshlayout) {
-                ViseHttp.POST(NetConfig.userComment)
-                        .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userComment))
-                        .addParam("userID", uid)
-                        .addParam("page", page + "")
-                        .request(new ACallback<String>() {
-                            @Override
-                            public void onSuccess(String data) {
-                                try {
-                                    JSONObject jsonObject = new JSONObject(data);
-                                    if (jsonObject.getInt("code") == 200) {
-                                        Gson gson = new Gson();
-                                        ArticleCommentListModel model = gson.fromJson(data, ArticleCommentListModel.class);
-                                        mList.addAll(model.getObj());
-                                        adapter.notifyDataSetChanged();
-                                        page = page + 1;
-                                        Log.e("222", page + "");
-                                        refreshlayout.finishLoadMore();
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-                            @Override
-                            public void onFail(int errCode, String errMsg) {
-                                refreshlayout.finishLoadMore();
-                            }
-                        });
-            }
-        });
-
-        uid = spImp.getUID();
-        LinearLayoutManager manager = new LinearLayoutManager(MyCommentActivity.this);
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-        ViseHttp.POST(NetConfig.userComment)
-                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userComment))
-                .addParam("userID", uid)
-                .addParam("page", page + "")
-                .request(new ACallback<String>() {
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
+                simplePagerTitleView.setText(mTitleDataList.get(index));
+                //设置字体
+                simplePagerTitleView.setTextSize(18);
+                simplePagerTitleView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                simplePagerTitleView.setNormalColor(Color.WHITE);
+                simplePagerTitleView.setSelectedColor(Color.WHITE);
+                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onSuccess(String data) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(data);
-                            if (jsonObject.getInt("code") == 200) {
-                                Gson gson = new Gson();
-                                ArticleCommentListModel model = gson.fromJson(data, ArticleCommentListModel.class);
-                                mList = model.getObj();
-                                adapter = new MyCommentAdapter(mList);
-                                recyclerView.setAdapter(adapter);
-                                page = page + 1;
-                                Log.e("222", page + "");
-                                adapter.setOnDeleteListener(new MyCommentAdapter.OnDelete() {
-                                    @Override
-                                    public void onDelete(final int position) {
-                                        toDialog(MyCommentActivity.this, "提示", "是否删除评论", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                ViseHttp.POST(NetConfig.deleteCommentUrl)
-                                                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.deleteCommentUrl))
-                                                        .addParam("id", mList.get(position).getFcID())
-                                                        .request(new ACallback<String>() {
-                                                            @Override
-                                                            public void onSuccess(String data) {
-                                                                try {
-                                                                    JSONObject jsonObject1 = new JSONObject(data);
-                                                                    if(jsonObject1.getInt("code") == 200){
-                                                                        toToast(MyCommentActivity.this, "删除成功");
-                                                                        mList.remove(position);
-                                                                        adapter.notifyDataSetChanged();
-                                                                    }
-                                                                } catch (JSONException e) {
-                                                                    e.printStackTrace();
-                                                                }
-                                                            }
-
-                                                            @Override
-                                                            public void onFail(int errCode, String errMsg) {
-
-                                                            }
-                                                        });
-                                            }
-                                        }, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-
-                                            }
-                                        });
-                                    }
-                                });
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFail(int errCode, String errMsg) {
-
+                    public void onClick(View v) {
+                        mViewPager.setCurrentItem(index);
                     }
                 });
+                return simplePagerTitleView;
+            }
+
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                LinePagerIndicator indicator = new LinePagerIndicator(context);
+                indicator.setColors(Color.WHITE);
+                return indicator;
+            }
+        });
+        magicIndicator.setNavigator(commonNavigator);
+//        LinearLayout titleContainer = commonNavigator.getTitleContainer(); // must after setNavigator
+//        titleContainer.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+//        titleContainer.setDividerPadding(UIUtil.dip2px(this, 15));
+//        titleContainer.setDividerDrawable(getResources().getDrawable(R.drawable.simple_splitter));
+        ViewPagerHelper.bind(magicIndicator, mViewPager);
+
 
     }
 

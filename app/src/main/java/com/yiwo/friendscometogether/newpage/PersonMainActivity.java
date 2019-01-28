@@ -90,6 +90,8 @@ public class PersonMainActivity extends BaseActivity {
     ImageView iv_addfriend;
     @BindView(R.id.iv_image_guanzhu)
     ImageView iv_image_guanzhu;
+    @BindView(R.id.iv_heart)
+    ImageView iv_image_heart;
 
     @BindView(R.id.rl_pics_text)
     RelativeLayout rl_pics_text;
@@ -124,6 +126,7 @@ public class PersonMainActivity extends BaseActivity {
         }
         initData();
         if (type_tade_or_wode == 0) {
+            iv_image_heart.setVisibility(View.GONE);
             rl_algin_right_tade.setVisibility(View.VISIBLE);
             rl_algin_right_wode.setVisibility(View.GONE);
         } else if (type_tade_or_wode == 1) {
@@ -131,6 +134,7 @@ public class PersonMainActivity extends BaseActivity {
             tv_pics_wode_or_tade.setText("我的照片");
             tv_youji_wode_or_tade.setText("我的友记");
             tv_youju_wode_or_tade.setText("我的友聚");
+            iv_image_heart.setVisibility(View.VISIBLE);
             rl_algin_right_tade.setVisibility(View.GONE);
             rl_algin_right_wode.setVisibility(View.VISIBLE);
         }
@@ -246,7 +250,7 @@ public class PersonMainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.ll_person_all_pics, R.id.ll_person_all_youji, R.id.ll_person_all_youju, R.id.rl_algin_right_wode, R.id.rl_add_friend, R.id.rl_guanzhu})
+    @OnClick({R.id.rl_back, R.id.ll_person_all_pics, R.id.ll_person_all_youji, R.id.ll_person_all_youju, R.id.rl_algin_right_wode, R.id.rl_add_friend, R.id.rl_guanzhu,R.id.iv_heart})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -388,7 +392,37 @@ public class PersonMainActivity extends BaseActivity {
 
                 }
                 break;
+            case R.id.iv_heart:
+                ViseHttp.POST(NetConfig.sayHello)
+                        .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.sayHello))
+                        .addForm("uid", spImp.getUID())
+                        .addForm("bid", person_id)
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                JSONObject jsonObject = null;
+                                try {
+                                    jsonObject = new JSONObject(data);
+                                    if (jsonObject.getInt("code") == 200) {
+                                        Log.d("22222", data);
+                                        toToast(PersonMainActivity.this, "打招呼成功！");
+                                    } else {
+                                        toToast(PersonMainActivity.this, "您已经打过招呼了");
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+
+                            }
+                        });
+                break;
         }
+
 
     }
 

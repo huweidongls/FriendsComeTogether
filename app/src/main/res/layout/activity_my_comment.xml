@@ -7,35 +7,34 @@
     tools:context="com.yiwo.friendscometogether.pages.MyCommentActivity">
 
     <RelativeLayout
-        android:id="@+id/activity_my_comment_rl_top"
+        android:id="@+id/rl_top"
         style="@style/rl_top_bar">
 
-        <TextView
-            style="@style/tv_top_title"
-            android:text="我的评论" />
-
         <RelativeLayout
-            android:id="@+id/activity_my_comment_rl_back"
+            android:id="@+id/rl_back"
             android:layout_width="100px"
             android:layout_height="match_parent">
 
-            <ImageView style="@style/iv_return" />
+            <ImageView
+                android:id="@+id/btn_back"
+                style="@style/iv_return" />
 
         </RelativeLayout>
 
+
+        <net.lucode.hackware.magicindicator.MagicIndicator
+            android:layout_centerInParent="true"
+            android:id="@+id/magic_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
     </RelativeLayout>
-
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/activity_my_comment_refreshLayout"
+    <android.support.v4.view.ViewPager
+        android:layout_marginTop="5px"
+        android:layout_below="@+id/rl_top"
+        android:id="@+id/vp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/activity_my_comment_rl_top">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/activity_my_comment_rv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
+    </android.support.v4.view.ViewPager>
 </RelativeLayout>
