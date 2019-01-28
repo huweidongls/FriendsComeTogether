@@ -189,6 +189,7 @@ public class ArticleCommentActivity extends BaseActivity {
                         @Override
                         public void onSuccess(String data) {
                             try {
+                                Log.e("222", data);
                                 JSONObject jsonObject = new JSONObject(data);
                                 if (jsonObject.getInt("code") == 200) {
                                     toToast(ArticleCommentActivity.this, "评论成功");
@@ -220,6 +221,7 @@ public class ArticleCommentActivity extends BaseActivity {
                         @Override
                         public void onSuccess(String data) {
                             try {
+                                Log.e("222", data);
                                 JSONObject jsonObject = new JSONObject(data);
                                 if(jsonObject.getInt("code") == 200){
                                     toToast(ArticleCommentActivity.this, "回复成功");
@@ -355,6 +357,7 @@ public class ArticleCommentActivity extends BaseActivity {
                                 @Override
                                 public void onSuccess(String data) {
                                     try {
+                                        Log.e("222", data);
                                         JSONObject jsonObject = new JSONObject(data);
                                         if(jsonObject.getInt("code") == 200){
                                             toToast(ArticleCommentActivity.this, "回复成功");
@@ -390,6 +393,7 @@ public class ArticleCommentActivity extends BaseActivity {
                     @Override
                     public void onSuccess(String data) {
                         try {
+                            Log.e("222", data);
                             JSONObject jsonObject = new JSONObject(data);
                             if (jsonObject.getInt("code") == 200) {
                                 Gson gson = new Gson();
