@@ -214,9 +214,14 @@ public class MainActivity extends FragmentActivity {
                     }
                     break;
                 case R.id.menu_chat:
-                    selectButton(ibChat);
+                    if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                        selectButton(ibChat);
 //                    selectText(tvChat);
-                    switchFragment(3);
+                        switchFragment(3);
+                    } else {
+                        intent.setClass(context, LoginActivity.class);
+                        startActivity(intent);
+                    }
                     break;
                 case R.id.menu_wd:
                     selectButton(ibMy);
@@ -246,9 +251,14 @@ public class MainActivity extends FragmentActivity {
                     }
                     break;
                 case R.id.menu4:
-                    selectButton(ibChat);
+                    if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                        selectButton(ibChat);
 //                    selectText(tvChat);
-                    switchFragment(3);
+                        switchFragment(3);
+                    } else {
+                        intent.setClass(context, LoginActivity.class);
+                        startActivity(intent);
+                    }
                     break;
                 case R.id.menu5:
                     selectButton(ibMy);
