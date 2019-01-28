@@ -43,4 +43,12 @@
   <color name="color4">#666666</color>
   <color name="color5">#57C5E8</color>
 
+  <color name="bg_edittext_color">#00000000</color>
+
+  <color name="bg_horizontal_line_color">#80a3a4a7</color>
+  <color name="bg_horizontal_btn_normal">#eeeeee</color>
+  <color name="bg_horizontal_btn_selected">#70a3a4a7</color>
+
+  <color name="bg_indicator_point_normal">#D8D8D8</color>
+  <color name="bg_indicator_point_selected">#A6A6A6</color>
 </resources>
