@@ -59,6 +59,8 @@ public class ArticleCommentActivity extends BaseActivity {
     EditText etComment;
     @BindView(R.id.activity_article_comment_tv_comment)
     TextView tvComment;
+    @BindView(R.id.iv_biaoqing)
+    ImageView ivBiaoqing;
 
     private ArticleCommentAdapter adapter;
     private List<ArticleCommentListModel.ObjBean> mList;
@@ -128,7 +130,7 @@ public class ArticleCommentActivity extends BaseActivity {
         //替换fragment
         //创建修改实例
         emotionMainFragment =EmotionMainFragment.newInstance(EmotionMainFragment.class,bundle);
-        emotionMainFragment.bindToContentView(etComment, tvComment);
+        emotionMainFragment.bindToContentView(etComment, ivBiaoqing);
         FragmentTransaction transaction =getSupportFragmentManager().beginTransaction();
         // Replace whatever is in thefragment_container view with this fragment,
         // and add the transaction to the backstack
@@ -193,11 +195,11 @@ public class ArticleCommentActivity extends BaseActivity {
                 onBackPressed();
                 break;
             case R.id.activity_article_comment_tv_comment:
-//                if (TextUtils.isEmpty(etComment.getText().toString())) {
-//                    toToast(ArticleCommentActivity.this, "请输入评论内容");
-//                } else {
-//                    toComment();
-//                }
+                if (TextUtils.isEmpty(etComment.getText().toString())) {
+                    toToast(ArticleCommentActivity.this, "请输入评论内容");
+                } else {
+                    toComment();
+                }
                 break;
         }
     }

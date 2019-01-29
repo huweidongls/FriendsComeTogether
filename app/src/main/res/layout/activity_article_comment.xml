@@ -45,19 +45,40 @@
             android:layout_width="match_parent"
             android:layout_height="100px">
 
-            <EditText
-                android:layout_marginRight="10px"
-                android:layout_toLeftOf="@+id/activity_article_comment_tv_comment"
-                android:id="@+id/activity_article_comment_et_comment"
-                android:paddingLeft="30px"
+            <LinearLayout
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20px"
-                android:background="@drawable/bg_article_comment"
-                android:gravity="center_vertical"
-                android:textSize="28px"
-                android:hint="输入评论..."
+                android:layout_marginRight="10px"
+                android:layout_toLeftOf="@+id/ll_xiaolian"
                 android:layout_width="match_parent"
-                android:layout_height="64px" />
+                android:layout_height="64px">
+
+                <EditText
+                    android:id="@+id/activity_article_comment_et_comment"
+                    android:paddingLeft="30px"
+                    android:background="@drawable/bg_article_comment"
+                    android:gravity="center_vertical"
+                    android:textSize="28px"
+                    android:hint="输入评论..."
+                    android:layout_width="match_parent"
+                    android:layout_height="64px" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/ll_xiaolian"
+                android:layout_toLeftOf="@+id/activity_article_comment_tv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_biaoqing"
+                    android:src="@mipmap/jiahao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
             <TextView
                 android:layout_marginRight="10px"
