@@ -520,8 +520,8 @@ public class MyInformationActivity extends TakePhotoActivity {
 
                 }
             };
-            observable.observeOn(Schedulers.newThread())
-                    .subscribeOn(AndroidSchedulers.mainThread())
+            observable.subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer);
         }
     }
