@@ -203,42 +203,7 @@ public class ArticleCommentActivity extends BaseActivity {
                 break;
         }
     }
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            View v = getCurrentFocus();
-            if (isShouldHideKeyboard(v, ev)) {
-                emotionMainFragment.hideEmotionKeyboard();
-            }
-        }
-        return super.dispatchTouchEvent(ev);
-    }
-    /**
-     * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘，因为当用户点击EditText时则不能隐藏
-     *
-     * @param v
-     * @param event
-     * @return
-     */
-    private boolean isShouldHideKeyboard(View v, MotionEvent event) {
-        if (v != null && (v instanceof EditText)) {
-            int[] l = {0, 0};
-            v.getLocationInWindow(l);
-            int left = l[0],
-                    top = l[1],
-                    bottom = top + v.getHeight(),
-                    right = left + v.getWidth();
-            if (event.getX() > left && event.getX() < right
-                    && event.getY() > top && event.getY() < bottom) {
-                // 点击EditText的事件，忽略它。
-                return false;
-            } else {
-                return true;
-            }
-        }
-        // 如果焦点不是EditText则忽略，这个发生在视图刚绘制完，第一个焦点不在EditText上，和用户用轨迹球选择其他的焦点
-        return false;
-    }
+
     /**
      * 提交评论
      */
@@ -258,6 +223,7 @@ public class ArticleCommentActivity extends BaseActivity {
                                 JSONObject jsonObject = new JSONObject(data);
                                 if (jsonObject.getInt("code") == 200) {
                                     toToast(ArticleCommentActivity.this, "评论成功");
+                                    emotionMainFragment.hideEmotionKeyboard();
                                     etComment.setText(null);
                                     reload();
 //                                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -290,6 +256,7 @@ public class ArticleCommentActivity extends BaseActivity {
                                 JSONObject jsonObject = new JSONObject(data);
                                 if(jsonObject.getInt("code") == 200){
                                     toToast(ArticleCommentActivity.this, "回复成功");
+                                    emotionMainFragment.hideEmotionKeyboard();
                                     etComment.setText(null);
                                     reload();
                                 }
@@ -319,6 +286,7 @@ public class ArticleCommentActivity extends BaseActivity {
     public void showKeyboard(EditText editText) {
         //其中editText为dialog中的输入框的 EditText
         if (editText != null) {
+            emotionMainFragment.hideEmotionKeyboard();
             //设置可获得焦点
             editText.setFocusable(true);
             editText.setFocusableInTouchMode(true);

@@ -148,7 +148,7 @@ public class BaseActivity extends AppCompatActivity {
      * 获取InputMethodManager，隐藏软键盘
      * @param token
      */
-    private void hideKeyboard(IBinder token) {
+    public void hideKeyboard(IBinder token) {
         if (token != null) {
             InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             im.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
