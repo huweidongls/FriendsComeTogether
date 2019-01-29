@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <include
+        android:visibility="gone"
         android:id="@+id/include_emotion_view"
         layout="@layout/include_emotion_bar"
         android:layout_width="match_parent"

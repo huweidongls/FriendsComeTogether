@@ -43,7 +43,7 @@ public class EmotionMainFragment extends BaseFragment {
     private ImageView bar_image_add_btn;
     private Button bar_btn_send;
     private LinearLayout rl_editbar_bg;
-
+    private LinearLayout ll_emotion_layout;
     //需要绑定的内容view
     private View contentView;
     private View button;
@@ -60,7 +60,6 @@ public class EmotionMainFragment extends BaseFragment {
 
     List<Fragment> fragments=new ArrayList<>();
 
-
     /**
      * 创建与Fragment对象关联的View视图时调用
      * @param inflater
@@ -75,8 +74,9 @@ public class EmotionMainFragment extends BaseFragment {
         //获取判断绑定对象的参数
         isBindToBarEditText=args.getBoolean(EmotionMainFragment.BIND_TO_EDITTEXT);
         initView(rootView);
+        ll_emotion_layout = rootView.findViewById(R.id.ll_emotion_layout);
         mEmotionKeyboard = EmotionKeyboard.with(getActivity())
-                .setEmotionView(rootView.findViewById(R.id.ll_emotion_layout))//绑定表情面板
+                .setEmotionView(ll_emotion_layout)//绑定表情面板
                 .bindToContent(contentView)//绑定内容view
                 .bindToEditText(!isBindToBarEditText ? ((EditText) contentView) : ((EditText) rootView.findViewById(R.id.bar_edit_text)))//判断绑定那种EditView
                 .bindToEmotionButton(button)//绑定表情按钮
@@ -223,6 +223,11 @@ public class EmotionMainFragment extends BaseFragment {
      */
     public boolean isInterceptBackPress(){
         return mEmotionKeyboard.interceptBackPress();
+    }
+    public void hideEmotionKeyboard(){
+        if (ll_emotion_layout.getVisibility() == View.VISIBLE){
+            mEmotionKeyboard.interceptBackPress();
+        }
     }
 }
 
