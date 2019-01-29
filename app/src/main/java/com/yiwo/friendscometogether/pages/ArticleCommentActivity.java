@@ -143,7 +143,13 @@ public class ArticleCommentActivity extends BaseActivity {
     private void initData() {
 
         uid = spImp.getUID();
-
+        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                emotionMainFragment.hideEmotionKeyboard();
+                return false;
+            }
+        });
         Intent intent = getIntent();
         fmID = intent.getStringExtra("id");
 
