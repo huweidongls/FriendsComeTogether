@@ -334,36 +334,37 @@ public class MyInformationActivity extends TakePhotoActivity {
                 onSave();
                 break;
             case R.id.activity_my_information_iv_avatar:
-//                //限数量的多选(比喻最多9张)
-//                ImageSelector.builder()
-//                        .useCamera(true) // 设置是否使用拍照
-//                        .setSingle(true)  //设置是否单选
-//                        .setMaxSelectCount(9) // 图片的最大选择数量，小于等于0时，不限数量。
-////                        .setSelected(selected) // 把已选的图片传入默认选中。
-//                        .start(MyInformationActivity.this, REQUEST_CODE); // 打开相册
+                //限数量的多选(比喻最多9张)
+                ImageSelector.builder()
+                        .useCamera(true) // 设置是否使用拍照
+                        .setCrop(true)
+                        .setSingle(true)  //设置是否单选
+                        .setMaxSelectCount(9) // 图片的最大选择数量，小于等于0时，不限数量。
+//                        .setSelected(selected) // 把已选的图片传入默认选中。
+                        .start(MyInformationActivity.this, REQUEST_CODE); // 打开相册
 
                 // 初始化TakePhoto选取头像的配置
-                TakePhoto takePhoto = getTakePhoto();
-                CropOptions.Builder builder = new CropOptions.Builder();
-                builder.setAspectX(800).setAspectY(800);
-                builder.setWithOwnCrop(true);
-                File file = new File(Environment.getExternalStorageDirectory(),
-                        "/temp/" + System.currentTimeMillis() + ".jpg");
-                if (!file.getParentFile().exists()) {
-                    boolean mkdirs = file.getParentFile().mkdirs();
-                    if (!mkdirs) {
-//                        ToastUtil.showShort("文件目录创建失败");
-                        Toast.makeText(MyInformationActivity.this, "文件目录创建失败", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                Uri imageUri = Uri.fromFile(file);
-                CompressConfig config = new CompressConfig.Builder()
-                        .setMaxSize(102400)
-                        .setMaxPixel(400)
-                        .enableReserveRaw(true)
-                        .create();
-                takePhoto.onEnableCompress(config, true);
-                takePhoto.onPickFromDocumentsWithCrop(imageUri, builder.create());
+//                TakePhoto takePhoto = getTakePhoto();
+//                CropOptions.Builder builder = new CropOptions.Builder();
+//                builder.setAspectX(800).setAspectY(800);
+//                builder.setWithOwnCrop(true);
+//                File file = new File(Environment.getExternalStorageDirectory(),
+//                        "/temp/" + System.currentTimeMillis() + ".jpg");
+//                if (!file.getParentFile().exists()) {
+//                    boolean mkdirs = file.getParentFile().mkdirs();
+//                    if (!mkdirs) {
+////                        ToastUtil.showShort("文件目录创建失败");
+//                        Toast.makeText(MyInformationActivity.this, "文件目录创建失败", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//                Uri imageUri = Uri.fromFile(file);
+//                CompressConfig config = new CompressConfig.Builder()
+//                        .setMaxSize(102400)
+//                        .setMaxPixel(400)
+//                        .enableReserveRaw(true)
+//                        .create();
+//                takePhoto.onEnableCompress(config, true);
+//                takePhoto.onPickFromDocumentsWithCrop(imageUri, builder.create());
 
                 break;
             case R.id.activity_my_information_rl_sign:

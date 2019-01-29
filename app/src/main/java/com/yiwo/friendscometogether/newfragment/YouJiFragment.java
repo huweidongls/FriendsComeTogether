@@ -256,10 +256,12 @@ public class YouJiFragment extends Fragment {
                             if(jsonObject.getInt("code") == 200){
                                 Gson gson = new Gson();
                                 YouJiListModel model = gson.fromJson(data, YouJiListModel.class);
-                                mList.clear();
-                                mList.addAll(model.getObj());
-                                adapter.notifyDataSetChanged();
-                                page = 2;
+                                if(mList != null){
+                                    mList.clear();
+                                    mList.addAll(model.getObj());
+                                    adapter.notifyDataSetChanged();
+                                    page = 2;
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
