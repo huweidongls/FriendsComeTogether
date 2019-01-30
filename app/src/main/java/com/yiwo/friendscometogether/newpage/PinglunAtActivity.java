@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -62,6 +63,7 @@ public class PinglunAtActivity extends BaseActivity {
                     @Override
                     public void onSuccess(String data) {
                         try {
+                            Log.d("123123",data);
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.getInt("code") == 200){
                                 Gson gson = new Gson();

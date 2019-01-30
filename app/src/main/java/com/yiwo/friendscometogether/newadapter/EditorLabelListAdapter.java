@@ -45,6 +45,8 @@ public class EditorLabelListAdapter extends RecyclerView.Adapter<EditorLabelList
         holder.tv.setText(data.get(position).getT_name());
         if(data.get(position).getDatetype().equals("1")){
             holder.ivSure.setVisibility(View.VISIBLE);
+        }else {
+            holder.ivSure.setVisibility(View.GONE);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
