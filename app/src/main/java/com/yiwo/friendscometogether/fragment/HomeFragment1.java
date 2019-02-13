@@ -561,7 +561,8 @@ public class HomeFragment1 extends BaseFragment {
                     });
         } else if (requestCode == 1 && resultCode == 2) {
             cityId = "";
-            cityTv.setText(latLongString);
+//            cityTv.setText(latLongString);
+            cityTv.setText("选择城市");
             ViseHttp.POST(NetConfig.newHomeData)
                     .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.newHomeData))
                     .addParam("type", "1")

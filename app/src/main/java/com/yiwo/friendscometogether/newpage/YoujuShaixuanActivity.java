@@ -52,8 +52,6 @@ public class YoujuShaixuanActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youju_shaixuan);
-
-        StatusBarUtils.setStatusBar(YoujuShaixuanActivity.this, Color.parseColor("#D84C37"));
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(YoujuShaixuanActivity.this);
 
@@ -162,7 +160,9 @@ public class YoujuShaixuanActivity extends BaseActivity {
                     setResult(5, intent);
                     finish();
                 }else {
-                    toToast(context, "请选择筛选条件");
+//                    toToast(context, "请选择筛选条件");
+                    setResult(7, intent);
+                    finish();
                 }
                 break;
         }

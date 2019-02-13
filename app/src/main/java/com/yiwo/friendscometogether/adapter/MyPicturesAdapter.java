@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,11 @@ import android.widget.RelativeLayout;
 import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.imagepreview.Consts;
+import com.yiwo.friendscometogether.imagepreview.ImagePreviewActivity;
 import com.yiwo.friendscometogether.model.MyPicListModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,6 +59,20 @@ public class MyPicturesAdapter extends RecyclerView.Adapter<MyPicturesAdapter.Vi
             holder.rlAdd.setVisibility(View.GONE);
             holder.rlIv.setVisibility(View.VISIBLE);
             Picasso.with(context).load(data.get(position - 1).getUpicurl()).into(holder.iv);
+            holder.iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    List<String> urlList = new ArrayList<>();
+                    for (int i = 0; i<data.size(); i++){
+                        urlList.add(data.get(i).getUpicurl());
+                    }
+                    Intent intent = new Intent(context, ImagePreviewActivity.class);
+                    intent.putStringArrayListExtra("imageList", (ArrayList<String>) urlList);
+                    intent.putExtra(Consts.START_ITEM_POSITION, position - 1);
+                    intent.putExtra(Consts.START_IAMGE_POSITION, position - 1);
+                    context.startActivity(intent);
+                }
+            });
             holder.ivDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

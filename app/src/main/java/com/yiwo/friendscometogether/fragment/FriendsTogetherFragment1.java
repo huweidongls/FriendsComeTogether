@@ -173,6 +173,10 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                     Intent intent1 = new Intent(getContext(), LoginActivity.class);
                     startActivity(intent1);
                 } else {
+                    if (mList.size()<=0){
+                        toToast(getContext(),"当前无活动");
+                        break;
+                    }
                     ViseHttp.POST(NetConfig.isRealNameUrl)
                             .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.isRealNameUrl))
                             .addParam("userID", spImp.getUID())
@@ -240,6 +244,10 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                 break;
             case R.id.iv_youju_focus:
                 if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                    if (mList.size()<=0){
+                        toToast(getContext(),"当前无活动");
+                        break;
+                    }
                     ViseHttp.POST(NetConfig.focusOnToFriendTogetherUrl)
                             .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.focusOnToFriendTogetherUrl))
                             .addParam("userID", uid)
@@ -292,7 +300,7 @@ public class FriendsTogetherFragment1 extends BaseFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == 2) {
+        if (resultCode == 2) {//筛选条件 有价格、无分类
             String min = data.getStringExtra("min");
             String max = data.getStringExtra("max");
             String price = min + "," + max;
@@ -327,7 +335,7 @@ public class FriendsTogetherFragment1 extends BaseFragment {
 
                         }
                     });
-        } else if (resultCode == 3) {
+        } else if (resultCode == 3) {//筛选条件 有价格、有分类
             String min = data.getStringExtra("min");
             String max = data.getStringExtra("max");
             String label = data.getStringExtra("label");
@@ -364,7 +372,7 @@ public class FriendsTogetherFragment1 extends BaseFragment {
 
                         }
                     });
-        } else if (resultCode == 5) {
+        } else if (resultCode == 5) {//筛选条件 无价格、有分类
             String label = data.getStringExtra("label");
             String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
             ViseHttp.POST(NetConfig.friendsTogetherUrl)
@@ -372,6 +380,36 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                     .addParam("page", "1")
                     .addParam("userID", spImp.getUID())
                     .addParam("sign", label)
+                    .request(new ACallback<String>() {
+                        @Override
+                        public void onSuccess(String data) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(data);
+                                if (jsonObject.getInt("code") == 200) {
+                                    Log.e("222", data);
+                                    FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
+                                    mList.clear();
+                                    mList.addAll(model.getObj());
+                                    if(mList.size()>0){
+                                        bean = mList.get(0);
+                                    }
+                                    adapter.notifyDataSetChanged();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onFail(int errCode, String errMsg) {
+
+                        }
+                    });
+        }else if (resultCode == 7){//没有选择任何条件
+            String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
+            ViseHttp.POST(NetConfig.friendsTogetherUrl)
+                    .addParam("app_key", token)
+                    .addParam("userID", spImp.getUID())
                     .request(new ACallback<String>() {
                         @Override
                         public void onSuccess(String data) {

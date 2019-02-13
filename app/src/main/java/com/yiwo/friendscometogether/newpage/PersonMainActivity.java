@@ -126,7 +126,7 @@ public class PersonMainActivity extends BaseActivity {
         }
         initData();
         if (type_tade_or_wode == 0) {
-            iv_image_heart.setVisibility(View.GONE);
+            iv_image_heart.setVisibility(View.VISIBLE);
             rl_algin_right_tade.setVisibility(View.VISIBLE);
             rl_algin_right_wode.setVisibility(View.GONE);
         } else if (type_tade_or_wode == 1) {
@@ -134,7 +134,7 @@ public class PersonMainActivity extends BaseActivity {
             tv_pics_wode_or_tade.setText("我的照片");
             tv_youji_wode_or_tade.setText("我的友记");
             tv_youju_wode_or_tade.setText("我的友聚");
-            iv_image_heart.setVisibility(View.VISIBLE);
+            iv_image_heart.setVisibility(View.GONE);
             rl_algin_right_tade.setVisibility(View.GONE);
             rl_algin_right_wode.setVisibility(View.VISIBLE);
         }
