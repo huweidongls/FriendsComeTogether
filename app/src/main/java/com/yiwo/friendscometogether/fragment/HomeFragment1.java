@@ -352,6 +352,7 @@ public class HomeFragment1 extends BaseFragment {
                                     BaiduCityModel model = gson.fromJson(data, BaiduCityModel.class);
                                     latLongString = model.getResult().getAddressComponent().getCity();
                                     cityTv.setText(latLongString);
+
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
