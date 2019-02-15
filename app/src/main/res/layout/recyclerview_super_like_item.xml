@@ -96,7 +96,7 @@
                     android:paddingBottom="20px"
                     android:id="@+id/rv_label"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="125px"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_marginRight="14px"
