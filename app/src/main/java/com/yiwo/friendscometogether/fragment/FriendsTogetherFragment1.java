@@ -261,9 +261,11 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                                             FocusOnToFriendTogetherModel model = new Gson().fromJson(result, FocusOnToFriendTogetherModel.class);
                                             if (model.getCode() == 200) {
                                                 if (model.getObj().equals("1")) {
+                                                    bean.setFocusOn("1");
                                                     Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
                                                     Toast.makeText(getContext(), "关注成功", Toast.LENGTH_SHORT).show();
                                                 } else {
+                                                    bean.setFocusOn("0");
                                                     Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
                                                     Toast.makeText(getContext(), "取消关注成功", Toast.LENGTH_SHORT).show();
                                                 }
