@@ -459,8 +459,10 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
 
                 break;
             case R.id.activity_create_friend_remember_rl_complete:
-                if(TextUtils.isEmpty(etTitle.getText().toString())||TextUtils.isEmpty(tvLabel.getText().toString())){
-                    Toast.makeText(CreateFriendRememberActivity.this, "请完善信息", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(etTitle.getText().toString())){
+                    Toast.makeText(CreateFriendRememberActivity.this, "请填写标题", Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(tvLabel.getText().toString())){
+                    Toast.makeText(CreateFriendRememberActivity.this, "请选择标签", Toast.LENGTH_SHORT).show();
                 }else if(mList.size()<4){
                     Toast.makeText(CreateFriendRememberActivity.this, "请至少上传4张照片", Toast.LENGTH_SHORT).show();
                 }else {

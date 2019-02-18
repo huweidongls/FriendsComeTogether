@@ -44,6 +44,9 @@ public class DetailsOfFriendsUpDataAdapter extends RecyclerView.Adapter<DetailsO
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Picasso.with(context).load(data.get(position).getFfpurl()).into(holder.ivTitle);
+        if (data.get(position).getFfptitle().equals("")){
+            holder.tvContent.setVisibility(View.GONE);
+        }
         holder.tvContent.setText(data.get(position).getFfptitle());
         holder.ivTitle.setOnClickListener(new View.OnClickListener() {
             @Override

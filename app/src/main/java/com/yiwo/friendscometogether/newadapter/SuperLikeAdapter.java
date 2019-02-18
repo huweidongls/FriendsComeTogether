@@ -2,13 +2,20 @@ package com.yiwo.friendscometogether.newadapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
@@ -16,6 +23,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.SuperLikeModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.pages.CreateFriendTogetherActivity;
 import com.yiwo.friendscometogether.widget.FlowLayoutManager;
 import com.yiwo.friendscometogether.widget.NestedRecyclerView;
 
@@ -30,7 +38,7 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
 
     private List<SuperLikeModel.ObjBean> data;
     private Context context;
-
+    private PopupWindow popupWindow;
     private SayHelloListener sayHelloListener;
 
     public void setSayHelloListener(SayHelloListener sayHelloListener) {
@@ -81,6 +89,13 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
                 context.startActivity(intent);
             }
         });
+        holder.rl_label.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,"asasas",Toast.LENGTH_SHORT).show();
+                showPopupwindow(v);
+            }
+        });
         holder.tv_say_hello.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +111,7 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
 
     class ViewHolder extends RecyclerView.ViewHolder{
         private NestedRecyclerView rv_label;
+        private RelativeLayout rl_label;
         private ImageView iv_icon_user;
         private TextView tv_username;
         private TextView tv_age;
@@ -109,6 +125,28 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
             tv_age = itemView.findViewById(R.id.tv_age);
             tv_degree = itemView.findViewById(R.id.tv_degree);
             tv_say_hello = itemView.findViewById(R.id.tv_say_hello);
+            rl_label = itemView.findViewById(R.id.rl_label);
         }
+    }
+    private void showPopupwindow(View view_){
+        // 用于PopupWindow的View
+             View contentView=LayoutInflater.from(context).inflate(R.layout.popupwindow_surperlike_label, null, false);
+             // 创建PopupWindow对象，其中：
+             // 第一个参数是用于PopupWindow中的View，第二个参数是PopupWindow的宽度，
+             // 第三个参数是PopupWindow的高度，第四个参数指定PopupWindow能否获得焦点
+             PopupWindow window=new PopupWindow(contentView, 100, 100, true);
+            // 设置PopupWindow的背景
+             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+             // 设置PopupWindow是否能响应外部点击事件
+             window.setOutsideTouchable(true);
+             // 设置PopupWindow是否能响应点击事件
+             window.setTouchable(true);
+             // 显示PopupWindow，其中：
+             // 第一个参数是PopupWindow的锚点，第二和第三个参数分别是PopupWindow相对锚点的x、y偏移
+             window.showAsDropDown(view_, 0, 0);
+             // 或者也可以调用此方法显示PopupWindow，其中：
+             // 第一个参数是PopupWindow的父View，第二个参数是PopupWindow相对父View的位置，
+             // 第三和第四个参数分别是PopupWindow相对父View的x、y偏移
+             // window.showAtLocation(parent, gravity, x, y);
     }
 }

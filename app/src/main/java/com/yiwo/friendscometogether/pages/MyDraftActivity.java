@@ -115,7 +115,7 @@ public class MyDraftActivity extends BaseActivity {
             if (direction == SwipeMenuRecyclerView.RIGHT_DIRECTION) {
 //                Toast.makeText(MyDraftActivity.this, "list第" + adapterPosition + "; 右侧菜单第" + menuPosition, Toast.LENGTH_SHORT).show();
                 switch (menuPosition){
-                    case 0:
+                    case 1:
                         //编辑友记
                         Intent intent = new Intent();
                         intent.setClass(MyDraftActivity.this, EditorFriendRememberActivity.class);
@@ -124,7 +124,7 @@ public class MyDraftActivity extends BaseActivity {
                         startActivity(intent);
                         onBackPressed();
                         break;
-                    case 1:
+                    case 0:
                         ViseHttp.POST(NetConfig.releaseDraftUrl)
                                 .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.releaseDraftUrl))
                                 .addParam("id", mList.get(adapterPosition).getFmID())
@@ -190,8 +190,8 @@ public class MyDraftActivity extends BaseActivity {
             // 3. WRAP_CONTENT，自身高度，不推荐;
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
             SwipeMenuItem editItem = new SwipeMenuItem(MyDraftActivity.this)
-                    .setBackgroundColor(Color.GRAY)
-                    .setText("编辑")
+                    .setBackgroundColor(Color.GREEN)
+                    .setText("发布")
                     .setTextColor(Color.WHITE)
                     .setWidth(width)
                     .setHeight(height);
@@ -199,7 +199,7 @@ public class MyDraftActivity extends BaseActivity {
 
             SwipeMenuItem sendItem = new SwipeMenuItem(MyDraftActivity.this)
                     .setBackgroundColor(Color.parseColor("#ff9d00"))
-                    .setText("发布")
+                    .setText("编辑")
                     .setTextColor(Color.WHITE)
                     .setWidth(width)
                     .setHeight(height);
