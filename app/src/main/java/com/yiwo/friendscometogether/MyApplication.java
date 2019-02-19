@@ -9,19 +9,19 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.multidex.MultiDex;
+import android.util.Log;
 
 import com.netease.nim.uikit.api.NimUIKit;
-import com.netease.nim.uikit.common.util.log.sdk.wrapper.NimLog;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.mixpush.MixPushConfig;
-import com.netease.nimlib.sdk.mixpush.NIMPushClient;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
 import com.netease.nimlib.sdk.uinfo.model.UserInfo;
@@ -32,6 +32,9 @@ import com.umeng.socialize.UMShareAPI;
 import com.vise.xsnow.cache.SpCache;
 import com.vise.xsnow.http.ViseHttp;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
+import com.yiwo.friendscometogether.greendao.gen.DaoMaster;
+import com.yiwo.friendscometogether.greendao.gen.DaoSession;
+import com.yiwo.friendscometogether.greendao.gen.UserGiveModelDao;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.network.UMConfig;
 import com.yiwo.friendscometogether.pages.WelcomeActivity;
@@ -65,12 +68,18 @@ public class MyApplication extends Application {
     private SpCache spCache;
     private SpImp spImp;
 
+//    //数据库
+    private DaoMaster.DevOpenHelper mHelper;
+    private SQLiteDatabase db;
+    private DaoMaster mDaoMaster;
+    private DaoSession mDaoSession;
     public MyApplication() {
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        setDatabase();
         spCache = new SpCache(this);
         spImp = new SpImp(this);
         ScreenAdapterTools.init(this);
@@ -226,5 +235,29 @@ public class MyApplication extends Application {
             return loginInfo;
         }
     }
+    public void setDatabase(){
+//        通过 DaoMaster 的内部类 DevOpenHelper，你可以得到一个便利的 SQLiteOpenHelper 对象。
+//    可能你已经注意到了，你并不需要去编写「CREATE TABLE」这样的 SQL 语句，因为 greenDAO 已经帮你做了。
+//    注意：默认的 DaoMaster.DevOpenHelper 会在数据库升级时，删除所有的表，意味着这将导致数据的丢失。
+//    所以，在正式的项目中，你还应该做一层封装，来实现数据库的安全升级。
+//        此处sport-db表示数据库名称 可以任意填写
+        // 注意：该数据库连接属于 DaoMaster，所以多个 Session 指的是相同的数据库连接。
+        mHelper = new DaoMaster.DevOpenHelper(this, "usergive-db", null);
+        db = mHelper.getWritableDatabase();
+        mDaoMaster = new DaoMaster(db);
+        mDaoSession = mDaoMaster.newSession();
+        Log.d("SessionmDaoSession11",mDaoSession.toString());
+        Log.d("SessionmDaoSession11",mDaoSession.getUserGiveModelDao().toString());
+    }
+    public DaoSession getDaoSession() {
+        return mDaoSession;
+    }
 
+    public SQLiteDatabase getDb() {
+        if (mHelper == null)
+            mHelper = new DaoMaster.DevOpenHelper(this, "usergive-db", null);
+        if (db == null)
+            db = mHelper.getWritableDatabase();
+        return db;
+    }
 }

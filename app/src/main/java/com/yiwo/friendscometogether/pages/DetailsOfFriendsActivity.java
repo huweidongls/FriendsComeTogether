@@ -24,10 +24,13 @@ import com.umeng.socialize.utils.ShareBoardlistener;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
+import com.yiwo.friendscometogether.MyApplication;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.adapter.DetailsOfFriendsIntercalation1Adapter;
 import com.yiwo.friendscometogether.adapter.DetailsOfFriendsIntercalationAdapter;
 import com.yiwo.friendscometogether.base.BaseActivity;
+import com.yiwo.friendscometogether.dbmodel.UserGiveModel;
+import com.yiwo.friendscometogether.greendao.gen.UserGiveModelDao;
 import com.yiwo.friendscometogether.imagepreview.Consts;
 import com.yiwo.friendscometogether.imagepreview.ImagePreviewActivity;
 import com.yiwo.friendscometogether.model.ActiveShareModel;
@@ -140,17 +143,17 @@ public class DetailsOfFriendsActivity extends BaseActivity {
     private boolean price = true;
     private boolean place = true;
 
+    UserGiveModelDao userGiveModelDao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_of_friends);
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
-
         ButterKnife.bind(this);
         spImp = new SpImp(DetailsOfFriendsActivity.this);
-
+        userGiveModelDao =  MyApplication.getInstance().getDaoSession().getUserGiveModelDao();
         initData();
-
     }
 
     @Override
@@ -164,7 +167,7 @@ public class DetailsOfFriendsActivity extends BaseActivity {
         uid = spImp.getUID();
 
         final Intent intent = getIntent();
-        String fmid = intent.getStringExtra("fmid");
+        final String fmid = intent.getStringExtra("fmid");
 
         ViseHttp.POST(NetConfig.detailsOfFriendsUrl)
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.detailsOfFriendsUrl))
@@ -269,7 +272,17 @@ public class DetailsOfFriendsActivity extends BaseActivity {
                                 adapter1 = new DetailsOfFriendsIntercalation1Adapter(model.getObj().getInserList());
                                 recyclerView1.setAdapter(adapter1);
 
-                                if (model.getObj().getContent().getGive() == 0) {
+                                //点赞
+//                                if (model.getObj().getContent().getGive() == 0) {
+//                                    isPraise = false;
+//                                    Picasso.with(DetailsOfFriendsActivity.this).load(R.mipmap.details_praise_b).into(ivPraise);
+//                                    tvPraise.setTextColor(Color.parseColor("#333333"));
+//                                } else {
+//                                    isPraise = true;
+//                                    Picasso.with(DetailsOfFriendsActivity.this).load(R.mipmap.praise_y).into(ivPraise);
+//                                    tvPraise.setTextColor(Color.parseColor("#FF9D00"));
+//                                }
+                                if (userGiveModelDao.queryBuilder().where(UserGiveModelDao.Properties.UserId.eq(uid),UserGiveModelDao.Properties.ArticleId.eq(fmID)).build().list().size()<=0) {
                                     isPraise = false;
                                     Picasso.with(DetailsOfFriendsActivity.this).load(R.mipmap.details_praise_b).into(ivPraise);
                                     tvPraise.setTextColor(Color.parseColor("#333333"));
@@ -278,7 +291,6 @@ public class DetailsOfFriendsActivity extends BaseActivity {
                                     Picasso.with(DetailsOfFriendsActivity.this).load(R.mipmap.praise_y).into(ivPraise);
                                     tvPraise.setTextColor(Color.parseColor("#FF9D00"));
                                 }
-
                                 if (model.getObj().getContent().getCollection() == 0) {
                                     isStar = false;
                                     Picasso.with(DetailsOfFriendsActivity.this).load(R.mipmap.details_star_b).into(ivStar);
@@ -399,6 +411,11 @@ public class DetailsOfFriendsActivity extends BaseActivity {
                                             JSONObject jsonObject = new JSONObject(data);
                                             if (jsonObject.getInt("code") == 200) {
                                                 toToast(DetailsOfFriendsActivity.this, "点赞成功");
+                                                UserGiveModel model = new UserGiveModel();
+                                                model.setUserId(uid);
+                                                model.setArticleId(fmID);
+                                                model.setRemarkState("1");
+                                                userGiveModelDao.insert(model);
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
