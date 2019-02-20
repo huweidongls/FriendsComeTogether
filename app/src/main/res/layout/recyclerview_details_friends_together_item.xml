@@ -7,12 +7,13 @@
     <TextView
         android:id="@+id/details_friend_together_item_title_tv"
         android:layout_width="wrap_content"
-        android:layout_height="42px"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="22px"
         android:layout_marginTop="24px"
         android:text="【第一天】 玉龙雪山 景色美呆了"
         android:textColor="@color/black_333333"
-        android:textSize="36px" />
+        android:textStyle="bold"
+        android:textSize="40px" />
 
     <TextView
         android:id="@+id/details_friend_together_item_content_tv"
@@ -22,8 +23,9 @@
         android:layout_marginLeft="40px"
         android:layout_marginRight="40px"
         android:layout_marginTop="20px"
+        android:textColor="@color/black_333333"
         android:text=" 玉龙雪山为云南省丽江市境内雪山群，地处东经100°4′2″～100°16′30″、北纬27°3′2″～27°18′57″之间，在丽江北面约15千米处，全长75千米，是北半球最近赤道终年积雪的山脉，隔江西与中甸雪山、东与绵绵山相并列，北自三江口，向南延伸到北纬27°，如扇面向古城展开。全山的13座山峰由南向北纵向排列，主峰扇子陡最高处海拔5596米，终年积雪，发育有亚欧大陆距离赤道最近的温带海洋性冰川。 玉龙雪山在纳西语中被称为“欧鲁”，意为银色的山岩。其十三座雪峰连绵不绝，宛若一条“巨龙”腾越飞舞，故称为“玉龙”。又因其岩性主要为石灰岩与玄武岩，黑白分明，所以又称为“黑白雪山”。是纳西人的神山，传说纳西族保护神“三多”的化身。 1984年，云南玉龙雪山省级自然保护区建立。2001年，玉龙雪山被评为4A级旅游景区，2007年5月成为全国首批5A级旅游景区。 "
-        android:textSize="30px" />
+        android:textSize="35px" />
 
     <RelativeLayout
         android:layout_width="match_parent"

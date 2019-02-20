@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether.pages;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,6 +31,8 @@ import com.yiwo.friendscometogether.adapter.DetailsOfFriendsIntercalation1Adapte
 import com.yiwo.friendscometogether.adapter.DetailsOfFriendsIntercalationAdapter;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.dbmodel.UserGiveModel;
+import com.yiwo.friendscometogether.greendao.gen.DaoMaster;
+import com.yiwo.friendscometogether.greendao.gen.DaoSession;
 import com.yiwo.friendscometogether.greendao.gen.UserGiveModelDao;
 import com.yiwo.friendscometogether.imagepreview.Consts;
 import com.yiwo.friendscometogether.imagepreview.ImagePreviewActivity;
@@ -143,6 +146,12 @@ public class DetailsOfFriendsActivity extends BaseActivity {
     private boolean price = true;
     private boolean place = true;
 
+    //    //数据库
+    private DaoMaster.DevOpenHelper mHelper;
+    private SQLiteDatabase db;
+    private DaoMaster mDaoMaster;
+    private DaoSession mDaoSession;
+
     UserGiveModelDao userGiveModelDao;
 
     @Override
@@ -152,7 +161,8 @@ public class DetailsOfFriendsActivity extends BaseActivity {
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(this);
         spImp = new SpImp(DetailsOfFriendsActivity.this);
-        userGiveModelDao =  MyApplication.getInstance().getDaoSession().getUserGiveModelDao();
+        setDatabase();
+        userGiveModelDao =  mDaoSession.getUserGiveModelDao();
         initData();
     }
 
@@ -581,5 +591,19 @@ public class DetailsOfFriendsActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         DetailsOfFriendsActivity.this.finish();
+    }
+    public void setDatabase(){
+//        通过 DaoMaster 的内部类 DevOpenHelper，你可以得到一个便利的 SQLiteOpenHelper 对象。
+//    可能你已经注意到了，你并不需要去编写「CREATE TABLE」这样的 SQL 语句，因为 greenDAO 已经帮你做了。
+//    注意：默认的 DaoMaster.DevOpenHelper 会在数据库升级时，删除所有的表，意味着这将导致数据的丢失。
+//    所以，在正式的项目中，你还应该做一层封装，来实现数据库的安全升级。
+//        此处sport-db表示数据库名称 可以任意填写
+        // 注意：该数据库连接属于 DaoMaster，所以多个 Session 指的是相同的数据库连接。
+        mHelper = new DaoMaster.DevOpenHelper(this, "usergive-db", null);
+        db = mHelper.getWritableDatabase();
+        mDaoMaster = new DaoMaster(db);
+        mDaoSession = mDaoMaster.newSession();
+        Log.d("SessionmDaoSession11",mDaoSession.toString());
+        Log.d("SessionmDaoSession11",mDaoSession.getUserGiveModelDao().toString());
     }
 }

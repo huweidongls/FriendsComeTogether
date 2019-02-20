@@ -235,6 +235,13 @@ public class MyApplication extends Application {
             return loginInfo;
         }
     }
+    public DaoSession getDaoSession() {
+        return this.mDaoSession;
+    }
+
+    public SQLiteDatabase getDb() {
+        return this.db;
+    }
     public void setDatabase(){
 //        通过 DaoMaster 的内部类 DevOpenHelper，你可以得到一个便利的 SQLiteOpenHelper 对象。
 //    可能你已经注意到了，你并不需要去编写「CREATE TABLE」这样的 SQL 语句，因为 greenDAO 已经帮你做了。
@@ -248,16 +255,5 @@ public class MyApplication extends Application {
         mDaoSession = mDaoMaster.newSession();
         Log.d("SessionmDaoSession11",mDaoSession.toString());
         Log.d("SessionmDaoSession11",mDaoSession.getUserGiveModelDao().toString());
-    }
-    public DaoSession getDaoSession() {
-        return mDaoSession;
-    }
-
-    public SQLiteDatabase getDb() {
-        if (mHelper == null)
-            mHelper = new DaoMaster.DevOpenHelper(this, "usergive-db", null);
-        if (db == null)
-            db = mHelper.getWritableDatabase();
-        return db;
     }
 }

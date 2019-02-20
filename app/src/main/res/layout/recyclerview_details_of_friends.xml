@@ -23,7 +23,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="50px"
             android:layout_marginLeft="40px"
-            android:textSize="28px"
+            android:textSize="32px"
             android:textColor="#333333"
             android:text="你想说什么就说啥，畅所欲言。。。。哈哈哈 哈哈哈哈哈哈哈哈"
             android:layout_width="match_parent"

@@ -52,7 +52,7 @@
                 android:layout_marginTop="30px"
                 android:text=""
                 android:textColor="#333333"
-                android:textSize="36px"
+                android:textSize="42px"
                 android:textStyle="bold" />
 
             <LinearLayout

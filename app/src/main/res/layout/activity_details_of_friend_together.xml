@@ -58,7 +58,8 @@
                 android:layout_marginRight="40px"
                 android:text=""
                 android:textColor="@color/black_333333"
-                android:textSize="36px" />
+                android:textSize="42px"
+                android:textStyle="bold"/>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
