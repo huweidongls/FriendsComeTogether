@@ -74,7 +74,7 @@ public class FriendsTogetherFragment1 extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_friends_together1, null);
 
-        StatusBarUtils.setStatusBar(getActivity(), Color.parseColor("#FB473F"));
+        StatusBarUtils.setStatusBar(getActivity(), Color.parseColor("#d84c37"));
         ScreenAdapterTools.getInstance().loadView(view);
         ButterKnife.bind(this, view);
 
@@ -302,6 +302,7 @@ public class FriendsTogetherFragment1 extends BaseFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
         if (resultCode == 2) {//筛选条件 有价格、无分类
             String min = data.getStringExtra("min");
             String max = data.getStringExtra("max");
@@ -324,6 +325,11 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                                     mList.addAll(model.getObj());
                                     if(mList.size()>0){
                                         bean = mList.get(0);
+                                        if (bean.getFocusOn().equals("0")) {
+                                            Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                                        } else {
+                                            Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
+                                        }
                                     }
                                     adapter.notifyDataSetChanged();
                                 }
@@ -361,6 +367,11 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                                     mList.addAll(model.getObj());
                                     if(mList.size()>0){
                                         bean = mList.get(0);
+                                        if (bean.getFocusOn().equals("0")) {
+                                            Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                                        } else {
+                                            Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
+                                        }
                                     }
                                     adapter.notifyDataSetChanged();
                                 }
@@ -394,6 +405,11 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                                     mList.addAll(model.getObj());
                                     if(mList.size()>0){
                                         bean = mList.get(0);
+                                        if (bean.getFocusOn().equals("0")) {
+                                            Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                                        } else {
+                                            Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
+                                        }
                                     }
                                     adapter.notifyDataSetChanged();
                                 }
@@ -424,6 +440,11 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                                     mList.addAll(model.getObj());
                                     if(mList.size()>0){
                                         bean = mList.get(0);
+                                        if (bean.getFocusOn().equals("0")) {
+                                            Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                                        } else {
+                                            Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
+                                        }
                                     }
                                     adapter.notifyDataSetChanged();
                                 }

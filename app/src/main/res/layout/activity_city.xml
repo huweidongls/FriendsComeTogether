@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:background="#FB473F">
+        android:background="@color/red_d84c37">
 
         <RelativeLayout
             android:id="@+id/rl_city_return"

@@ -8,7 +8,7 @@
         android:id="@+id/fragment_youji_rl_top"
         android:layout_width="match_parent"
         android:layout_height="128px"
-        android:background="#FB473F">
+        android:background="@color/red_d84c37">
 
         <RelativeLayout
             android:layout_width="match_parent"
