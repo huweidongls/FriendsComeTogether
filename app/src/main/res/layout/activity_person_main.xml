@@ -185,7 +185,7 @@
                 <TextView
                     android:id="@+id/tv_guanzhu_num"
                     android:layout_marginBottom="4px"
-                    android:textSize="40px"
+                    android:textSize="50px"
                     android:textColor="@color/white_ffffff"
                     android:layout_gravity="center_horizontal"
                     android:text="134"
@@ -208,7 +208,7 @@
                 <TextView
                     android:id="@+id/tv_huozan_num"
                     android:layout_marginBottom="4px"
-                    android:textSize="40px"
+                    android:textSize="50px"
                     android:textColor="@color/white_ffffff"
                     android:layout_gravity="center_horizontal"
                     android:text="200"
@@ -231,7 +231,7 @@
                 <TextView
                     android:id="@+id/tv_fans_num"
                     android:layout_marginBottom="4px"
-                    android:textSize="40px"
+                    android:textSize="50px"
                     android:textColor="@color/white_ffffff"
                     android:layout_gravity="center_horizontal"
                     android:text="5888"

@@ -65,11 +65,18 @@ public class TaRenZhuYeYouJiAdapter extends RecyclerView.Adapter<TaRenZhuYeYouJi
         }
         holder.tv_youji_pinglun_num.setText(data.get(position).getFmcomment());
         holder.tv_youji_see_num.setText(data.get(position).getPflook());
-
-        Glide.with(context).load(data.get(position).getPfpic().get(0)).into(holder.iv_image_view0);
-        Glide.with(context).load(data.get(position).getPfpic().get(1)).into(holder.iv_image_view1);
-        Glide.with(context).load(data.get(position).getPfpic().get(2)).into(holder.iv_image_view2);
-        Glide.with(context).load(data.get(position).getPfpic().get(3)).into(holder.iv_image_view3);
+        if (data.get(position).getPfpic().size()>0){
+            Glide.with(context).load(data.get(position).getPfpic().get(0)).into(holder.iv_image_view0);
+            if (data.get(position).getPfpic().size()>4){
+                Glide.with(context).load(data.get(position).getPfpic().get(1)).into(holder.iv_image_view1);
+                Glide.with(context).load(data.get(position).getPfpic().get(2)).into(holder.iv_image_view2);
+                Glide.with(context).load(data.get(position).getPfpic().get(3)).into(holder.iv_image_view3);
+            }else {
+                holder.iv_image_view1.setVisibility(View.GONE);
+                holder.iv_image_view2.setVisibility(View.GONE);
+                holder.iv_image_view3.setVisibility(View.GONE);
+            }
+        }
         //评论信息
         if(data.get(position).getComment_list().size()>=2){
             holder.tv_youji_pinglun_username_0.setText(data.get(position).getComment_list().get(0).getUsername()+"：");

@@ -452,6 +452,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="20px"
                 android:background="@color/line" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="129px">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_choose_date"
+                    android:layout_marginTop="10px"
+                    android:layout_marginBottom="10px"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <RelativeLayout
+                    android:background="@color/white"
+                    android:elevation="50px"
+                    android:id="@+id/rl_show_more_date"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="142px"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/tv_text_moredate"
+                        android:lineSpacingExtra="8px"
+                        android:layout_centerInParent="true"
+                        android:textColor="#636363"
+                        android:text="更多\n日期"
+                        android:textSize="26px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@mipmap/chevron_left"
+                        android:layout_marginLeft="12px"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_text_moredate"
+                        android:layout_width="15px"
+                        android:layout_height="26px" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20px"
+                android:background="@color/line" />
 
             <TextView
                 android:id="@+id/participantsTv"
@@ -563,13 +604,13 @@
 
                 <ImageView
                     android:layout_width="42px"
-                    android:layout_height="36px"
-                    android:src="@mipmap/consult" />
+                    android:layout_height="42px"
+                    android:src="@mipmap/zixun_red" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="28px"
-                    android:text="咨询"
+                    android:text="咨询队长"
                     android:textColor="@color/black_333333"
                     android:textSize="20px" />
             </LinearLayout>
@@ -585,7 +626,7 @@
                 <ImageView
                     android:layout_width="42px"
                     android:layout_height="42px"
-                    android:src="@mipmap/share_y" />
+                    android:src="@mipmap/fenxiang_red" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -606,8 +647,8 @@
                 <ImageView
                     android:id="@+id/activity_details_of_friends_together_iv_focus_on"
                     android:layout_width="42px"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/focus_on_y" />
+                    android:layout_height="42px"
+                    android:src="@mipmap/heart_red" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -624,7 +665,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/yellow_ff9d00"
+            android:background="@color/red_d84c37"
             android:gravity="center"
             android:text="报名参加"
             android:textColor="@color/white_ffffff"

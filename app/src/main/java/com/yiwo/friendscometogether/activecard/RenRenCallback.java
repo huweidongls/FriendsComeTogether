@@ -3,6 +3,7 @@ package com.yiwo.friendscometogether.activecard;
 import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 
 import com.yiwo.friendscometogether.model.FriendsTogethermodel;
@@ -49,8 +50,18 @@ public class RenRenCallback extends ItemTouchHelper.SimpleCallback {
     }
 
     @Override
+    public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+        return super.getMovementFlags(recyclerView, viewHolder);
+    }
+
+    @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
         return false;
+    }
+
+    @Override
+    public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
+        super.onSelectedChanged(viewHolder, actionState);
     }
 
     @Override
@@ -58,11 +69,31 @@ public class RenRenCallback extends ItemTouchHelper.SimpleCallback {
         //Log.e("swipecard", "onSwiped() called with: viewHolder = [" + viewHolder + "], direction = [" + direction + "]");
         //rollBack(viewHolder);
         //★实现循环的要点
-        FriendsTogethermodel.ObjBean remove = mDatas.remove(viewHolder.getLayoutPosition());
-        mDatas.add(0, remove);
-        mAdapter.notifyDataSetChanged();
+//        FriendsTogethermodel.ObjBean remove = mDatas.remove(viewHolder.getLayoutPosition());
+//        mDatas.add(0, remove);
+//        mAdapter.notifyDataSetChanged();
+
         if (mListener != null) {
-            mListener.onSwiped(viewHolder, mDatas.get(mDatas.size()-1), direction == ItemTouchHelper.LEFT ? 0 : 1);
+            if(direction == ItemTouchHelper.LEFT ||direction == ItemTouchHelper.DOWN){
+                FriendsTogethermodel.ObjBean remove = mDatas.remove(viewHolder.getLayoutPosition());
+                mDatas.add(0, remove);
+                mAdapter.notifyDataSetChanged();
+                Log.d("direction,LEFT",direction+"");
+                mListener.onSwiped(viewHolder, mDatas.get(mDatas.size()-1), direction == ItemTouchHelper.LEFT ? 0 : 1);
+            }else if (direction == ItemTouchHelper.RIGHT||direction == ItemTouchHelper.UP){
+                //1:将下标为0，保存在一个临时的变量中
+                FriendsTogethermodel.ObjBean remove = mDatas.get(0);
+
+                //2:循环向前移位
+                for(int i = 0;i<mDatas.size()-1;i++){
+                    mDatas.set(i,mDatas.get(i+1));
+                }
+                //3 把第一个值放到最后一位
+                mDatas.set(mDatas.size()-1,remove);
+                mAdapter.notifyDataSetChanged();
+                Log.d("direction,RIGHT",direction+"");
+                mListener.onSwiped(viewHolder, mDatas.get(mDatas.size()-1), direction == ItemTouchHelper.LEFT ? 0 : 1);
+            }
         }
 
     }

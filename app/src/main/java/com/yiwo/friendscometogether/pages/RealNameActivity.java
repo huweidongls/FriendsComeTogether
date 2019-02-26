@@ -96,7 +96,7 @@ public class RealNameActivity extends BaseActivity {
     private void initData() {
 
         uid = spImp.getUID();
-
+        rlSign.setVisibility(View.GONE);//20180225 不再输入签证机关
         ViseHttp.POST(NetConfig.userRealNameInfoUrl)
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userRealNameInfoUrl))
                 .addParam("id", uid)
@@ -119,7 +119,6 @@ public class RealNameActivity extends BaseActivity {
                                     Picasso.with(RealNameActivity.this).load(model.getObj().getUsercodeback()).into(ivId2);
                                     ivId1.setVisibility(View.VISIBLE);
                                     ivId2.setVisibility(View.VISIBLE);
-                                    rlSign.setVisibility(View.GONE);
                                 } else {
                                     etName.setText(model.getObj().getUsertruename());
                                     etIdNum.setText(model.getObj().getUsercodenum());
@@ -127,7 +126,6 @@ public class RealNameActivity extends BaseActivity {
                                     Picasso.with(RealNameActivity.this).load(model.getObj().getUsercodeback()).into(ivId2);
                                     ivId1.setVisibility(View.VISIBLE);
                                     ivId2.setVisibility(View.VISIBLE);
-                                    rlSign.setVisibility(View.GONE);
                                 }
                             }
                         } catch (JSONException e) {
@@ -181,7 +179,7 @@ public class RealNameActivity extends BaseActivity {
 
     private void onComplete() {
 
-        if (TextUtils.isEmpty(etName.getText().toString()) || TextUtils.isEmpty(etIdNum.getText().toString()) || TextUtils.isEmpty(etSign.getText().toString()) ||
+        if (TextUtils.isEmpty(etName.getText().toString()) || TextUtils.isEmpty(etIdNum.getText().toString()) ||
                 TextUtils.isEmpty(userImg) || TextUtils.isEmpty(userImgBack)) {
             toToast(RealNameActivity.this, "请完善信息");
         } else {
@@ -238,7 +236,6 @@ public class RealNameActivity extends BaseActivity {
                             .addParam("uid", uid)
                             .addParam("name", etName.getText().toString())
                             .addParam("code", etIdNum.getText().toString())
-                            .addParam("visa", etSign.getText().toString())
                             .addFile("usercode", value.get(0))
                             .addFile("usercodeback", value.get(1))
                             .request(new ACallback<String>() {

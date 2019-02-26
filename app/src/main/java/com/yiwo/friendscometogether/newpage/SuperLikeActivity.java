@@ -1,5 +1,6 @@
 package com.yiwo.friendscometogether.newpage;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
+import com.yiwo.friendscometogether.custom.LoadingDialogOfSearch;
 import com.yiwo.friendscometogether.model.SuperLikeModel;
 import com.yiwo.friendscometogether.model.SuperLikeSXMode;
 import com.yiwo.friendscometogether.network.NetConfig;
@@ -58,6 +60,7 @@ public class SuperLikeActivity extends BaseActivity {
     private final int SX_RESULT_CODE = 2;
     private final int SX_REQUEST_CODE = 1;
 
+    private LoadingDialogOfSearch dialogOfSearch;
     private Timer timer;
     private SpImp spImp;
     @BindView(R.id.rv_super_like)
@@ -97,7 +100,11 @@ public class SuperLikeActivity extends BaseActivity {
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
         Glide.with(context).load(R.drawable.gif).apply(options).into(iv_loading);
         recyclerView.setVisibility(View.GONE);
+        dialogOfSearch = new LoadingDialogOfSearch(context);
+        dialogOfSearch.setCancelable(false);
+        dialogOfSearch.show();
         tv_matching_text.setText("正在为您搜索匹配另一半…");
+
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -129,6 +136,7 @@ public class SuperLikeActivity extends BaseActivity {
                                                 };
                                         list_data.clear();
                                         list_data.addAll(model.getObj());
+                                        dialogOfSearch.dismiss();
                                         if (list_data.size() > 0) {
                                             tv_matching_text.setText("成功为您匹配 " + list_data.size() + " 名瞳伴！\n 还等什么赶快去打招呼吧！");
                                         } else {

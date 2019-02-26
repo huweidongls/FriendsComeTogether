@@ -2,6 +2,7 @@ package com.yiwo.friendscometogether.pages;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.DeadObjectException;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -33,11 +34,13 @@ import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.imagepreview.Consts;
 import com.yiwo.friendscometogether.imagepreview.ImagePreviewActivity;
 import com.yiwo.friendscometogether.model.ActiveShareModel;
+import com.yiwo.friendscometogether.model.ChooseDateModel;
 import com.yiwo.friendscometogether.model.FocusOnLeaderModel;
 import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.model.FriendsTogetherDetailsModel;
 import com.yiwo.friendscometogether.model.IsRealNameModel;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newadapter.ChooseDateAdapter;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.ShareUtils;
@@ -114,9 +117,16 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
     @BindView(R.id.iv_sign)
     ImageView ivSign;
 
+    //活动日期
+    @BindView(R.id.rv_choose_date)
+    RecyclerView rvChooseDate;
+    @BindView(R.id.rl_show_more_date)
+    RelativeLayout rlShowDate;
+
     private Unbinder unbinder;
     private ParticipantsItemAdapter adapter;
     private DetailsOfFriendsTogetherAdapter detailsOfFriendsTogetherAdapter;
+    private ChooseDateAdapter chooseDateAdapter;
     SpImp spImp;
     FriendsTogetherDetailsModel model;
     String pfID;
@@ -228,7 +238,7 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
             }
         }
         Log.i("qwe", model.getAttention());
-        focusOnIv.setImageResource(model.getAttention().equals("0") ? R.mipmap.focus_on_empty_y : R.mipmap.focus_on_y);
+        focusOnIv.setImageResource(model.getAttention().equals("0") ? R.mipmap.heart_red_border : R.mipmap.heart_red);
         time_start_tv.setText("开始时间: " + model.getBegin_time());
         time_end_tv.setText("结束时间: " + model.getEnd_time());
         city_tv.setText("活动地点: " + model.getCity());
@@ -245,6 +255,7 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
         } else {
             tvOtherInfo.setText("其他要求: " + model.getPfexplain());
         }
+        initChooseDate(new ArrayList<ChooseDateModel>());
 //        if(model.getHave_num().equals("0")){
 //            participantsTv.setText("*暂无报名信息");
 //            recyclerViewP.setVisibility(View.GONE);
@@ -277,7 +288,25 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
         recyclerViewP.setAdapter(adapter);
 
     }
-
+    private void initChooseDate(List<ChooseDateModel> list){
+        list.add(new ChooseDateModel());
+        list.add(new ChooseDateModel());
+        list.add(new ChooseDateModel());
+        list.add(new ChooseDateModel());
+        list.add(new ChooseDateModel());
+        list.add(new ChooseDateModel());
+        list.add(new ChooseDateModel());
+        LinearLayoutManager manager = new LinearLayoutManager(DetailsOfFriendTogetherActivity.this){
+            @Override
+            public boolean canScrollHorizontally() {
+                return false;
+            }
+        };
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvChooseDate.setLayoutManager(manager);
+        chooseDateAdapter = new ChooseDateAdapter(list);
+        rvChooseDate.setAdapter(chooseDateAdapter);
+    }
     private void initList(List<FriendsTogetherDetailsModel.ObjBean.InfoListBean> data) {
         LinearLayoutManager manager = new LinearLayoutManager(DetailsOfFriendTogetherActivity.this) {
             @Override
@@ -293,7 +322,7 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
 
     @OnClick({R.id.details_applyTv, R.id.activity_details_of_friends_together_rl_back, R.id.activity_details_of_friends_together_ll_share,
             R.id.activity_details_of_friends_together_ll_focus_on, R.id.activity_details_of_friends_together_btn_top_focus,
-            R.id.headIv, R.id.consult_leaderLl, R.id.comment_more, R.id.activity_details_of_friends_together_iv_title})
+            R.id.headIv, R.id.consult_leaderLl, R.id.comment_more, R.id.activity_details_of_friends_together_iv_title,R.id.rl_show_more_date})
     public void OnClick(View v) {
         switch (v.getId()) {
             case R.id.activity_details_of_friends_together_rl_back:
@@ -400,10 +429,10 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
                                             FocusOnToFriendTogetherModel model = new Gson().fromJson(result, FocusOnToFriendTogetherModel.class);
                                             if (model.getCode() == 200) {
                                                 if (model.getObj().equals("1")) {
-                                                    focusOnIv.setImageResource(R.mipmap.focus_on_y);
+                                                    focusOnIv.setImageResource(R.mipmap.heart_red);
                                                     toToast(DetailsOfFriendTogetherActivity.this, "关注成功");
                                                 } else {
-                                                    focusOnIv.setImageResource(R.mipmap.focus_on_empty_y);
+                                                    focusOnIv.setImageResource(R.mipmap.heart_red_border);
                                                     toToast(DetailsOfFriendTogetherActivity.this, "取消成功");
                                                 }
                                             }
@@ -496,6 +525,17 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
 //                ActivityOptions compat = ActivityOptions.makeSceneTransitionAnimation(getActivity(), imageView, imageView.getTransitionName());
                 startActivity(intent);
 //                getActivity().overridePendingTransition(R.anim.photoview_open, 0);
+                break;
+            case R.id.rl_show_more_date:
+                rlShowDate.setVisibility(View.GONE);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DetailsOfFriendTogetherActivity.this){
+                    @Override
+                    public boolean canScrollHorizontally() {
+                        return true;
+                    }
+                };
+                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                rvChooseDate.setLayoutManager(linearLayoutManager);
                 break;
         }
     }

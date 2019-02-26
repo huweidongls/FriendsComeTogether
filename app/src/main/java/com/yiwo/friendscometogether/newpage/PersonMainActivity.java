@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether.newpage;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -189,7 +190,10 @@ public class PersonMainActivity extends BaseActivity {
                                 tv_person_age.setText(model.getObj().getInfo().getAge());
                                 tv_person_address.setText(model.getObj().getInfo().getAddress());
                                 tv_person_sign_text.setText(model.getObj().getInfo().getAutograph());
-
+                                Typeface typeface = Typeface.createFromAsset(getAssets(), "font/gerenzhuye_num_font.ttf");
+                                tv_guanzhu_num.setTypeface(typeface);
+                                tv_huozan_num.setTypeface(typeface);
+                                tv_fans_num.setTypeface(typeface);
                                 tv_guanzhu_num.setText(model.getObj().getInfo().getUserlike());
                                 tv_huozan_num.setText(model.getObj().getInfo().getGiveCount() + "");
                                 tv_fans_num.setText(model.getObj().getInfo().getFans());
