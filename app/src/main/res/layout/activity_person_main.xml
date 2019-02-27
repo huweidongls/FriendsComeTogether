@@ -115,22 +115,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:lines="1"
+                android:ellipsize="end"
                 android:id="@+id/tv_person_sign_text"
                 android:layout_marginLeft="32px"
                 android:textSize="30px"
                 android:layout_alignParentBottom="true"
                 android:textColor="@color/black_333333"
+                android:maxLength="20"
                 android:text="Hi,填写个性签名更容易获得别人关注哦！"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
+
                 android:id="@+id/iv_heart"
-                android:layout_marginRight="51px"
+                android:layout_marginRight="20px"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:src="@mipmap/tarenzhuye_aixin"
-                android:layout_width="71px"
-                android:layout_height="62px" />
+                android:layout_width="180px"
+                android:layout_height="80px" />
         </RelativeLayout>
         <LinearLayout
             android:layout_marginTop="16px"
@@ -170,12 +173,12 @@
                 android:layout_height="56px" />
         </LinearLayout>
         <LinearLayout
-            android:background="@drawable/bg_yellow_10px"
+            android:background="@drawable/bg_d84c37_10px"
             android:layout_marginTop="20px"
             android:layout_marginRight="28px"
             android:layout_marginLeft="28px"
             android:layout_width="match_parent"
-            android:layout_height="143px">
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:padding="21px"
                 android:orientation="vertical"
@@ -185,7 +188,7 @@
                 <TextView
                     android:id="@+id/tv_guanzhu_num"
                     android:layout_marginBottom="4px"
-                    android:textSize="50px"
+                    android:textSize="60px"
                     android:textColor="@color/white_ffffff"
                     android:layout_gravity="center_horizontal"
                     android:text="134"
@@ -200,6 +203,7 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/ll_huozan"
                 android:padding="21px"
                 android:orientation="vertical"
                 android:layout_weight="1"
@@ -208,7 +212,7 @@
                 <TextView
                     android:id="@+id/tv_huozan_num"
                     android:layout_marginBottom="4px"
-                    android:textSize="50px"
+                    android:textSize="60px"
                     android:textColor="@color/white_ffffff"
                     android:layout_gravity="center_horizontal"
                     android:text="200"
@@ -231,7 +235,7 @@
                 <TextView
                     android:id="@+id/tv_fans_num"
                     android:layout_marginBottom="4px"
-                    android:textSize="50px"
+                    android:textSize="60px"
                     android:textColor="@color/white_ffffff"
                     android:layout_gravity="center_horizontal"
                     android:text="5888"

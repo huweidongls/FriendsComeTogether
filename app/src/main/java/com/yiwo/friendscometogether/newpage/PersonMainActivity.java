@@ -14,6 +14,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.vise.xsnow.http.ViseHttp;
@@ -22,6 +24,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.custom.FriendDescribeDialog;
+import com.yiwo.friendscometogether.custom.HuoZanDialog;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.TaRenZhuYePicsAdapter;
 import com.yiwo.friendscometogether.newadapter.TaRenZhuYeYouJiAdapter;
@@ -128,6 +131,8 @@ public class PersonMainActivity extends BaseActivity {
         initData();
         if (type_tade_or_wode == 0) {
             iv_image_heart.setVisibility(View.VISIBLE);
+            RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+        Glide.with(PersonMainActivity.this).load(R.drawable.sayhi).apply(options).into(iv_image_heart);
             rl_algin_right_tade.setVisibility(View.VISIBLE);
             rl_algin_right_wode.setVisibility(View.GONE);
         } else if (type_tade_or_wode == 1) {
@@ -254,7 +259,8 @@ public class PersonMainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.ll_person_all_pics, R.id.ll_person_all_youji, R.id.ll_person_all_youju, R.id.rl_algin_right_wode, R.id.rl_add_friend, R.id.rl_guanzhu,R.id.iv_heart})
+    @OnClick({R.id.rl_back, R.id.ll_person_all_pics, R.id.ll_person_all_youji, R.id.ll_person_all_youju,
+            R.id.rl_algin_right_wode, R.id.rl_add_friend, R.id.rl_guanzhu,R.id.iv_heart,R.id.ll_huozan})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -424,6 +430,10 @@ public class PersonMainActivity extends BaseActivity {
 
                             }
                         });
+                break;
+            case R.id.ll_huozan:
+                HuoZanDialog dialog = new HuoZanDialog(PersonMainActivity.this,tv_person_name.getText().toString(),tv_huozan_num.getText().toString());
+                dialog.show();
                 break;
         }
 

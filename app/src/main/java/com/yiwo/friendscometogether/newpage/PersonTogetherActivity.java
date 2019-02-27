@@ -16,8 +16,6 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.network.NetConfig;
-import com.yiwo.friendscometogether.newadapter.TaRenZhuYePicsAdapter;
-import com.yiwo.friendscometogether.newadapter.TaRenZhuYeYouJiAdapter;
 import com.yiwo.friendscometogether.newadapter.TaRenZhuYeYouJuAdapter;
 import com.yiwo.friendscometogether.newmodel.PersonMainModel;
 import com.yiwo.friendscometogether.sp.SpImp;

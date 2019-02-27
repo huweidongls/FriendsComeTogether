@@ -26,11 +26,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10px"
-                android:layout_toLeftOf="@+id/tv_focus"
+                android:layout_toLeftOf="@+id/tv_youju_focus"
                 android:layout_toRightOf="@+id/iv_youju_avatar">
 
                 <TextView
                     android:id="@+id/tv_youju_name"
+                    android:lines="1"
+                    android:ellipsize="end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="友聚官方"
@@ -217,6 +219,7 @@
                 android:id="@+id/tv_youji_nickname"
                 android:layout_marginLeft="18px"
                 android:layout_toRightOf="@+id/iv_youji_avatar"
+                android:layout_toLeftOf="@+id/tv_youji_focus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"

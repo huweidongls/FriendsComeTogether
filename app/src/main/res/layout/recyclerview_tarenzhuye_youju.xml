@@ -30,6 +30,8 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:lines="1"
+                    android:ellipsize="end"
                     android:id="@+id/tv_name"
                     android:textStyle="bold"
                     android:textColor="@color/black_333333"

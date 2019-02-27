@@ -31,7 +31,7 @@
             android:text="+10"
             android:textColor="@color/white_ffffff"
             android:textSize="36px"
-            android:background="@drawable/bg_yellow_8px"
+            android:background="@drawable/bg_d84c37_8px"
             android:gravity="center"
             android:layout_gravity="center"
             android:id="@+id/tv_taren_lookmore"

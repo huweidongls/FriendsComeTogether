@@ -47,20 +47,13 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
-                android:scaleType="centerCrop"
-                android:id="@+id/iv_loading"
-                android:src="@drawable/gif"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="324px"
-                android:layout_height="324px"
-                android:layout_marginTop="110px"/>
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_matching_text"
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="70px"
-                android:text="成功为你匹配两位好友！\n还等什么快去打招呼吧！"
+                android:layout_marginTop="250px"
+                android:text="没有找到和您匹配的瞳伴\n快去完善资料吧！"
                 android:textSize="36px"
                 android:lineSpacingExtra="20px"
                 android:textColor="@color/black_333333"
@@ -75,7 +68,7 @@
                 android:descendantFocusability="blocksDescendants">
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_super_like"
-                    android:layout_marginTop="10px"
+                    android:layout_marginTop="30px"
                     android:layout_marginLeft="11px"
                     android:layout_marginRight="11px"
                     android:layout_marginBottom="10px"

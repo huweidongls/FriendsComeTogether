@@ -13,20 +13,20 @@
         android:orientation="vertical">
         <ImageView
             android:layout_centerInParent="true"
-            android:src="@mipmap/search_loading_image1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:src="@mipmap/image_loading_1"
+            android:layout_width="500px"
+            android:layout_height="500px" />
         <ImageView
             android:layout_centerInParent="true"
-            android:src="@mipmap/search_loading_image2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:src="@mipmap/image_loading_2"
+            android:layout_width="500px"
+            android:layout_height="500px" />
         <ImageView
             android:id="@+id/iv_loading"
             android:layout_centerInParent="true"
-            android:src="@mipmap/search_loading_image3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:src="@mipmap/image_loading_3"
+            android:layout_width="500px"
+            android:layout_height="500px" />
     </RelativeLayout>
 
 </LinearLayout>

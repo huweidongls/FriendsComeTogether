@@ -29,16 +29,12 @@ import com.yiwo.friendscometogether.model.SuperLikeModel;
 import com.yiwo.friendscometogether.model.SuperLikeSXMode;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.SuperLikeAdapter;
-import com.yiwo.friendscometogether.newadapter.TaRenZhuYeYouJuAdapter;
-import com.yiwo.friendscometogether.newadapter.YouJiAdapter;
-import com.yiwo.friendscometogether.newmodel.PersonMainModel;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -67,8 +63,7 @@ public class SuperLikeActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.tv_matching_text)
     TextView tv_matching_text;
-    @BindView(R.id.iv_loading)
-    ImageView iv_loading;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,15 +91,12 @@ public class SuperLikeActivity extends BaseActivity {
             sxMode.setAges("10-30");
             sxMode.setAddress(1);
         }
-        RequestOptions options = new RequestOptions()
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
-        Glide.with(context).load(R.drawable.gif).apply(options).into(iv_loading);
+
         recyclerView.setVisibility(View.GONE);
         dialogOfSearch = new LoadingDialogOfSearch(context);
         dialogOfSearch.setCancelable(false);
         dialogOfSearch.show();
-        tv_matching_text.setText("正在为您搜索匹配另一半…");
-
+        tv_matching_text.setVisibility(View.GONE);
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -138,11 +130,11 @@ public class SuperLikeActivity extends BaseActivity {
                                         list_data.addAll(model.getObj());
                                         dialogOfSearch.dismiss();
                                         if (list_data.size() > 0) {
-                                            tv_matching_text.setText("成功为您匹配 " + list_data.size() + " 名瞳伴！\n 还等什么赶快去打招呼吧！");
+                                            tv_matching_text.setVisibility(View.GONE);
                                         } else {
+                                            tv_matching_text.setVisibility(View.VISIBLE);
                                             tv_matching_text.setText("没有找到和您匹配的瞳伴\n快去完善资料吧！");
                                         }
-                                        Glide.with(context).asBitmap().load(R.drawable.gif).into(iv_loading);
                                         recyclerView.setLayoutManager(layoutManager);
                                         superLikeAdapter = new SuperLikeAdapter(list_data);
                                         superLikeAdapter.setSayHelloListener(sayHelloListener);

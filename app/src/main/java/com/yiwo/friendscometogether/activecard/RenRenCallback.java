@@ -24,7 +24,8 @@ public class RenRenCallback extends ItemTouchHelper.SimpleCallback {
     protected List<FriendsTogethermodel.ObjBean> mDatas;
     protected RecyclerView.Adapter mAdapter;
     private OnSwipeListener mListener;
-
+    private int dx_temp;
+    private boolean aBoolean;
     public RenRenCallback(RecyclerView rv, RecyclerView.Adapter adapter, List<FriendsTogethermodel.ObjBean> datas) {
         this(0,
                 ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT,
@@ -72,7 +73,6 @@ public class RenRenCallback extends ItemTouchHelper.SimpleCallback {
 //        FriendsTogethermodel.ObjBean remove = mDatas.remove(viewHolder.getLayoutPosition());
 //        mDatas.add(0, remove);
 //        mAdapter.notifyDataSetChanged();
-
         if (mListener != null) {
             if(direction == ItemTouchHelper.LEFT ||direction == ItemTouchHelper.DOWN){
                 FriendsTogethermodel.ObjBean remove = mDatas.remove(viewHolder.getLayoutPosition());
@@ -97,7 +97,6 @@ public class RenRenCallback extends ItemTouchHelper.SimpleCallback {
         }
 
     }
-
     @Override
     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
@@ -128,5 +127,30 @@ public class RenRenCallback extends ItemTouchHelper.SimpleCallback {
                 }
             }
         }
+//        int i_dx_temp = dx_temp;//
+//        if (dX>0){
+//            dx_temp = 1;
+//        }else{
+//            dx_temp = -1;
+//        }
+//        //当滑动偏移方向 不同时  加载数据；
+//        if (dX>0&&i_dx_temp!=dx_temp){
+//            //1:将下标为0，保存在一个临时的变量中
+//            FriendsTogethermodel.ObjBean remove = mDatas.get(0);
+//
+//            //2:循环向前移位
+//            for(int j = 0;j<mDatas.size()-1;j++){
+//                mDatas.set(j,mDatas.get(j+1));
+//            }
+//            //3 把第一个值放到最后一位
+//            mDatas.set(mDatas.size()-1,remove);
+//            mAdapter.notifyDataSetChanged();
+//            Log.d("direction,RIGHT",dX+"");
+//        }else if (dX<0&&i_dx_temp!=dx_temp){
+//            FriendsTogethermodel.ObjBean remove = mDatas.remove(mDatas.size()-1);
+//            mDatas.add(0, remove);
+//            mAdapter.notifyDataSetChanged();
+//            Log.d("direction,LEFT",dX+"");
+//        }
     }
 }
