@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -67,15 +68,15 @@ public class WoGuanZhuDeAdapter extends RecyclerView.Adapter<WoGuanZhuDeAdapter.
 
             }
         });
-        holder.btn_yiguanzhu.setFocusable(false);
-        holder.btn_yiguanzhu.setOnClickListener(new View.OnClickListener() {
+        holder.rl_guanzhu.setFocusable(false);
+        holder.rl_guanzhu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onCancel(position);
             }
         });
-        holder.btn_yaoqing.setFocusable(false);
-        holder.btn_yaoqing.setOnClickListener(new View.OnClickListener() {
+        holder.rl_yaoqing.setFocusable(false);
+        holder.rl_yaoqing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener_invitation.onInvitation(position);
@@ -92,17 +93,18 @@ public class WoGuanZhuDeAdapter extends RecyclerView.Adapter<WoGuanZhuDeAdapter.
         private ImageView iv_icon_user;
         private TextView tv_user_name;
         private TextView tv_user_fans_num;
-        private TextView btn_yiguanzhu;
-        private TextView btn_yaoqing;
-
+        private RelativeLayout rl_guanzhu;
+        private RelativeLayout rl_yaoqing;
+        private ImageView iv_guanzhu;
         public ViewHolder(View itemView) {
             super(itemView);
             ll = itemView.findViewById(R.id.ll);
             iv_icon_user = itemView.findViewById(R.id.iv_icon_user);
             tv_user_name = itemView.findViewById(R.id.tv_user_name);
             tv_user_fans_num = itemView.findViewById(R.id.tv_user_fans_num);
-            btn_yiguanzhu = itemView.findViewById(R.id.btn_yiguanzhu);
-            btn_yaoqing = itemView.findViewById(R.id.btn_yaoqing);
+            rl_guanzhu = itemView.findViewById(R.id.rl_guanzhu);
+            rl_yaoqing = itemView.findViewById(R.id.rl_yaoqing);
+            iv_guanzhu = itemView.findViewById(R.id.iv_guanzhu);
         }
     }
 

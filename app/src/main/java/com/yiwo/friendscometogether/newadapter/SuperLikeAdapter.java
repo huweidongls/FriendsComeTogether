@@ -92,8 +92,8 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
         holder.rl_label.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"asasas",Toast.LENGTH_SHORT).show();
-                showPopupwindow(v);
+//                Toast.makeText(context,"asasas",Toast.LENGTH_SHORT).show();
+//                showPopupwindow(v);
             }
         });
         holder.tv_say_hello.setOnClickListener(new View.OnClickListener() {

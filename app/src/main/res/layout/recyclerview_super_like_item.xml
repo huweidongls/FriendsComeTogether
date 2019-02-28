@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@mipmap/welcome"
+            android:src="@mipmap/image_yuanfentiankong"
             test:radius1="18px"
             />
         <RelativeLayout

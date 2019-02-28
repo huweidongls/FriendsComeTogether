@@ -29,7 +29,6 @@
             android:layout_below="@+id/tv_user_name"
             android:id="@+id/tv_huozan_num"
             android:lines="1"
-            android:layout_marginTop="8px"
             android:ellipsize="end"
             android:textSize="50px"
             android:textColor="@color/black_333333"

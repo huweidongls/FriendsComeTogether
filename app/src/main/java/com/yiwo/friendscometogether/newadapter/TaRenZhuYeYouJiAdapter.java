@@ -67,7 +67,7 @@ public class TaRenZhuYeYouJiAdapter extends RecyclerView.Adapter<TaRenZhuYeYouJi
         holder.tv_youji_see_num.setText(data.get(position).getPflook());
         if (data.get(position).getPfpic().size()>0){
             Glide.with(context).load(data.get(position).getPfpic().get(0)).into(holder.iv_image_view0);
-            if (data.get(position).getPfpic().size()>4){
+            if (data.get(position).getPfpic().size()>=4){
                 Glide.with(context).load(data.get(position).getPfpic().get(1)).into(holder.iv_image_view1);
                 Glide.with(context).load(data.get(position).getPfpic().get(2)).into(holder.iv_image_view2);
                 Glide.with(context).load(data.get(position).getPfpic().get(3)).into(holder.iv_image_view3);

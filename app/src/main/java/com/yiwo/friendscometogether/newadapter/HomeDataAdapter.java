@@ -257,10 +257,19 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
                     }
                 }
             });
-            Glide.with(context).load(data.get(position).getPfpic().get(0)).into(holder.ivYoujiTitle1);
-            Glide.with(context).load(data.get(position).getPfpic().get(1)).into(holder.ivYoujiTitle2);
-            Glide.with(context).load(data.get(position).getPfpic().get(2)).into(holder.ivYoujiTitle3);
-            Glide.with(context).load(data.get(position).getPfpic().get(3)).into(holder.ivYoujiTitle4);
+
+            if (data.get(position).getPfpic().size()>0){
+                Glide.with(context).load(data.get(position).getPfpic().get(0)).into(holder.ivYoujiTitle1);
+                if (data.get(position).getPfpic().size()>=4){
+                    Glide.with(context).load(data.get(position).getPfpic().get(1)).into(holder.ivYoujiTitle2);
+                    Glide.with(context).load(data.get(position).getPfpic().get(2)).into(holder.ivYoujiTitle3);
+                    Glide.with(context).load(data.get(position).getPfpic().get(3)).into(holder.ivYoujiTitle4);
+                }else {
+                    holder.ivYoujiTitle2.setVisibility(View.GONE);
+                    holder.ivYoujiTitle3.setVisibility(View.GONE);
+                    holder.ivYoujiTitle4.setVisibility(View.GONE);
+                }
+            }
             holder.tvYoujiTitle.setText(data.get(position).getPftitle());
             if(TextUtils.isEmpty(data.get(position).getPfaddress())){
                 holder.llCity.setVisibility(View.GONE);

@@ -22,10 +22,8 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
 import com.yiwo.friendscometogether.network.NetConfig;
-import com.yiwo.friendscometogether.newadapter.MyHuoDongApplyAdapter;
 import com.yiwo.friendscometogether.newadapter.MyHuoDongHistoryAdapter;
 import com.yiwo.friendscometogether.newmodel.HuoDongListModel;
-import com.yiwo.friendscometogether.pages.JoinActiveActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import org.json.JSONException;

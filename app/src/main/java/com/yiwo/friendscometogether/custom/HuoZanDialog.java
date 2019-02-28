@@ -60,7 +60,7 @@ public class HuoZanDialog extends Dialog{
         btn_ok = view.findViewById(R.id.btn_ok);
         SpannableString spannableString = new SpannableString(str_huozan_num);
         ForegroundColorSpan span_color = new ForegroundColorSpan(Color.parseColor("#d84c37"));
-        AbsoluteSizeSpan span_size = new AbsoluteSizeSpan(60,true);
+        AbsoluteSizeSpan span_size = new AbsoluteSizeSpan(35,true);
         spannableString.setSpan(span_color,0,spannableString.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         spannableString.setSpan(span_size,0,spannableString.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         tv_huozan_num.setText("共获得");

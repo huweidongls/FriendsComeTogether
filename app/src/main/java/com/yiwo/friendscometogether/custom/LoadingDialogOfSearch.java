@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
@@ -46,6 +47,10 @@ public class LoadingDialogOfSearch extends Dialog{
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading_of_search, null);
         setContentView(view);
         ScreenAdapterTools.getInstance().loadView(view);
+//        WindowManager.LayoutParams params = getWindow().getAttributes();
+//        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        params.height = WindowManager.LayoutParams.MATCH_PARENT;
+//        getWindow().setAttributes(params);
         ivLoading = view.findViewById(R.id.iv_loading);
         Animation rotateAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.sayhi_rotate);
         LinearInterpolator interpolator = new LinearInterpolator();

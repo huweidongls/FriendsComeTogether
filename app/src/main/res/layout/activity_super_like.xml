@@ -21,7 +21,7 @@
         </RelativeLayout>
         <TextView
             style="@style/tv_top_title"
-            android:text="超级喜欢"
+            android:text="缘分天空"
              />
     <RelativeLayout
         android:id="@+id/rl_Sx"
