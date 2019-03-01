@@ -95,6 +95,8 @@ public class FragmentToCommentAdapter extends RecyclerView.Adapter<FragmentToCom
             holder.tvComment.setVisibility(View.VISIBLE);
             holder.tvDeleteTrip.setVisibility(View.VISIBLE);
         }
+        //不可点击按钮隐藏
+        holder.tvTriping.setVisibility(View.GONE);
         holder.tvDeleteTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

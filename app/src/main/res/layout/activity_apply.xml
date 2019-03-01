@@ -243,11 +243,62 @@
                 </RelativeLayout>
 
             </LinearLayout>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="12px"
                 android:background="@color/line" />
+            <RelativeLayout
+                android:layout_marginTop="5px"
+                android:layout_marginBottom="5px"
+                android:layout_marginLeft="30px"
+                android:layout_gravity="left"
+                android:layout_width="146px"
+                android:layout_height="96px"
+                android:background="@drawable/bg_d84c37_border_6px"
+                >
+                <TextView
+                    android:layout_marginTop="14px"
+                    android:text="周二 02-24"
+                    android:id="@+id/tv_date"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#1F2224"
+                    android:textSize="22px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8px"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="16px"
+                        android:textColor="#1F2224"
+                        android:text="¥"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/tv_price"
+                        android:textSize="26px"
+                        android:textColor="#1F2224"
+                        android:text="888"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_choosed"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/choosed"
+                    android:layout_width="31px"
+                    android:layout_height="31px" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12px"
+                android:background="@color/line" />
+
 
             <LinearLayout
                 android:id="@+id/apply_ll_is_noname"

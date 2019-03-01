@@ -123,6 +123,7 @@
         android:layout_height="86px">
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/fragment_to_trip_rv_tv_payment"
             android:background="@drawable/bg_red_border_27px"
             android:textColor="#D84C37"
@@ -137,6 +138,7 @@
             />
 
         <TextView
+            android:layout_alignParentRight="true"
             android:background="@drawable/bg_gray_border_27px"
             android:textColor="#686868"
             android:textSize="26px"

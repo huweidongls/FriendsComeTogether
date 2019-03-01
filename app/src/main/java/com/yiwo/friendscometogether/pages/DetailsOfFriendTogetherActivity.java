@@ -127,6 +127,7 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
     private ParticipantsItemAdapter adapter;
     private DetailsOfFriendsTogetherAdapter detailsOfFriendsTogetherAdapter;
     private ChooseDateAdapter chooseDateAdapter;
+    private int chooseDateIndex = 0;
     SpImp spImp;
     FriendsTogetherDetailsModel model;
     String pfID;
@@ -239,10 +240,8 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
         }
         Log.i("qwe", model.getAttention());
         focusOnIv.setImageResource(model.getAttention().equals("0") ? R.mipmap.heart_red_border : R.mipmap.heart_red);
-        time_start_tv.setText("开始时间: " + model.getBegin_time());
-        time_end_tv.setText("结束时间: " + model.getEnd_time());
+
         city_tv.setText("活动地点: " + model.getCity());
-        priceTv.setText("参加费用: " + model.getPrice());
         tvIsMarry.setText("要求单身: " + model.getMarry());
         if(model.getAge().equals("无要求")){
             tvAgeInfo.setText("年龄要求: 无要求");
@@ -255,13 +254,13 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
         } else {
             tvOtherInfo.setText("其他要求: " + model.getPfexplain());
         }
-        initChooseDate(new ArrayList<ChooseDateModel>());
+        initChooseDate(model.getPhase());
 //        if(model.getHave_num().equals("0")){
 //            participantsTv.setText("*暂无报名信息");
 //            recyclerViewP.setVisibility(View.GONE);
 //        } else {
-        participantsTv.setText("参加人员（" + model.getHave_num() + "/" + model.getPerson_num() + ")");
-        initPerson(model.getUser_list());
+
+
 //        }
 
         focusOnBtn.setText(model.getAttention_captain().equals("0") ? "+ 关注" : "已关注");
@@ -274,7 +273,7 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
         initList(model.getInfo_list());
     }
 
-    private void initPerson(List<FriendsTogetherDetailsModel.ObjBean.UserListBean> data) {
+    private void initPerson(List<FriendsTogetherDetailsModel.ObjBean.PhaseBean.PhaseListBean> data) {
 
         LinearLayoutManager manager = new LinearLayoutManager(DetailsOfFriendTogetherActivity.this) {
             @Override
@@ -288,23 +287,40 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
         recyclerViewP.setAdapter(adapter);
 
     }
-    private void initChooseDate(List<ChooseDateModel> list){
-        list.add(new ChooseDateModel());
-        list.add(new ChooseDateModel());
-        list.add(new ChooseDateModel());
-        list.add(new ChooseDateModel());
-        list.add(new ChooseDateModel());
-        list.add(new ChooseDateModel());
-        list.add(new ChooseDateModel());
+    private void initChooseDate(final List<FriendsTogetherDetailsModel.ObjBean.PhaseBean> list){
+        chooseDateIndex = 0;
+        time_start_tv.setText("开始时间: " + list.get(0).getPhase_begin_time());
+        time_end_tv.setText("结束时间: " + list.get(0).getPhase_over_time());
+        priceTv.setText("参加费用: " + list.get(0).getPhase_price());
+        participantsTv.setText("参加人员（" + list.get(0).getPhase_list().size() + "/" + model.getObj().getPerson_num() + ")");
+        initPerson(list.get(0).getPhase_list());
         LinearLayoutManager manager = new LinearLayoutManager(DetailsOfFriendTogetherActivity.this){
             @Override
             public boolean canScrollHorizontally() {
-                return false;
+                return true;
             }
         };
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvChooseDate.setLayoutManager(manager);
+        list.get(0).setSelected(true);
         chooseDateAdapter = new ChooseDateAdapter(list);
+        chooseDateAdapter.setChooseDatePostionListen(new ChooseDateAdapter.ChooseDatePostionListener() {
+            @Override
+            public void choosePOstion(int postion) {
+                chooseDateIndex = postion;
+                for (int i =0;i<model.getObj().getPhase().size();i++){
+                    model.getObj().getPhase().get(i).setSelected(false);
+                }
+                list.get(postion).setSelected(true);
+                chooseDateAdapter.notifyDataSetChanged();
+                FriendsTogetherDetailsModel.ObjBean.PhaseBean phaseBean = list.get(postion);
+                time_start_tv.setText("开始时间: " + phaseBean.getPhase_begin_time());
+                time_end_tv.setText("结束时间: " + phaseBean.getPhase_over_time());
+                priceTv.setText("参加费用: " + phaseBean.getPhase_price());
+                participantsTv.setText("参加人员（" + phaseBean.getPhase_list().size() + "/" + model.getObj().getPerson_num() + ")");
+                initPerson(phaseBean.getPhase_list());
+            }
+        });
         rvChooseDate.setAdapter(chooseDateAdapter);
     }
     private void initList(List<FriendsTogetherDetailsModel.ObjBean.InfoListBean> data) {
@@ -322,7 +338,7 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
 
     @OnClick({R.id.details_applyTv, R.id.activity_details_of_friends_together_rl_back, R.id.activity_details_of_friends_together_ll_share,
             R.id.activity_details_of_friends_together_ll_focus_on, R.id.activity_details_of_friends_together_btn_top_focus,
-            R.id.headIv, R.id.consult_leaderLl, R.id.comment_more, R.id.activity_details_of_friends_together_iv_title,R.id.rl_show_more_date})
+            R.id.headIv, R.id.consult_leaderLl, R.id.comment_more, R.id.activity_details_of_friends_together_iv_title})
     public void OnClick(View v) {
         switch (v.getId()) {
             case R.id.activity_details_of_friends_together_rl_back:
@@ -357,6 +373,9 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
                                             it.putExtra("issingle", model.getObj().getMarry());
                                             it.putExtra("city", model.getObj().getCity());
                                             it.putExtra("tel", model.getObj().getUser_tel());
+                                            it.putExtra("choose_date",model.getObj().getPhase().get(chooseDateIndex).getPhase_begin_time());
+                                            it.putExtra("choose_price",model.getObj().getPhase().get(chooseDateIndex).getPhase_price());
+                                            it.putExtra("choose_id",model.getObj().getPhase().get(chooseDateIndex).getPhase_id());
                                             startActivity(it);
                                         } else if (models.getObj().getOk().equals("1")) {
                                             toToast(DetailsOfFriendTogetherActivity.this, "请于身份审核通过后报名");
@@ -525,17 +544,6 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
 //                ActivityOptions compat = ActivityOptions.makeSceneTransitionAnimation(getActivity(), imageView, imageView.getTransitionName());
                 startActivity(intent);
 //                getActivity().overridePendingTransition(R.anim.photoview_open, 0);
-                break;
-            case R.id.rl_show_more_date:
-                rlShowDate.setVisibility(View.GONE);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DetailsOfFriendTogetherActivity.this){
-                    @Override
-                    public boolean canScrollHorizontally() {
-                        return true;
-                    }
-                };
-                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                rvChooseDate.setLayoutManager(linearLayoutManager);
                 break;
         }
     }

@@ -464,6 +464,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <RelativeLayout
+                    android:visibility="gone"
                     android:background="@color/white"
                     android:elevation="50px"
                     android:id="@+id/rl_show_more_date"

@@ -26,9 +26,9 @@ import java.util.List;
 
 public class ParticipantsItemAdapter extends RecyclerView.Adapter<ParticipantsItemAdapter.ViewHolder>{
     private Context context;
-    private List<FriendsTogetherDetailsModel.ObjBean.UserListBean> data;
+    private List<FriendsTogetherDetailsModel.ObjBean.PhaseBean.PhaseListBean> data;
 
-    public ParticipantsItemAdapter(List<FriendsTogetherDetailsModel.ObjBean.UserListBean> data) {
+    public ParticipantsItemAdapter(List<FriendsTogetherDetailsModel.ObjBean.PhaseBean.PhaseListBean> data) {
         this.data = data;
     }
     @Override

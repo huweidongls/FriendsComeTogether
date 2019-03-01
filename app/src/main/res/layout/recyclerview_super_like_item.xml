@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@mipmap/image_yuanfentiankong"
+            android:src="@mipmap/bd_yuanfentiankong"
             test:radius1="18px"
             />
         <RelativeLayout
@@ -128,7 +128,7 @@
     <TextView
         android:id="@+id/tv_say_hello"
         android:elevation="2px"
-        android:background="@drawable/bg_pink_30px"
+        android:background="@drawable/bg_d84c37_30px"
         android:gravity="center"
         android:text="打个招呼"
         android:textSize="28px"

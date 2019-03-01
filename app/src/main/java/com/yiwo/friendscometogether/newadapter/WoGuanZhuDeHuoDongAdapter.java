@@ -57,13 +57,13 @@ public class WoGuanZhuDeHuoDongAdapter extends RecyclerView.Adapter<WoGuanZhuDeH
         switch (data.get(position).getActivities_data()){
             case "0":
                 holder.tv_timeinfo.setText("活动已开始");
-                holder.tv_timeinfo.setTextColor(Color.parseColor("#FFAB26"));
-                holder.iv_icon_huodong_state.setImageResource(R.mipmap.shijian_apply_huodong);
+                holder.tv_timeinfo.setTextColor(Color.parseColor("#d84c37"));
+                holder.iv_icon_huodong_state.setImageResource(R.mipmap.shijian_apply_huodong_red);
                 break;
             case "1":
                 holder.tv_timeinfo.setText("据活动开始还有"+data.get(position).getDay()+"天");
-                holder.tv_timeinfo.setTextColor(Color.parseColor("#FFAB26"));
-                holder.iv_icon_huodong_state.setImageResource(R.mipmap.shijian_apply_huodong);
+                holder.tv_timeinfo.setTextColor(Color.parseColor("#d84c37"));
+                holder.iv_icon_huodong_state.setImageResource(R.mipmap.shijian_apply_huodong_red);
                 break;
             case "2":
                 holder.tv_timeinfo.setText("活动已结束");

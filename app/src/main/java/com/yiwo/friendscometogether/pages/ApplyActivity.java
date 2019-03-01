@@ -96,6 +96,11 @@ public class ApplyActivity extends BaseActivity {
     LinearLayout llIsNoname;
     @BindView(R.id.apply_is_noname)
     TextView tvIsNoname;
+    @BindView(R.id.tv_date)
+    TextView tv_choose_date;
+    @BindView(R.id.tv_price)
+    TextView tv_choose_price;
+
 
     private String yourChoice = "";
     private int payState = 0;
@@ -308,12 +313,15 @@ public class ApplyActivity extends BaseActivity {
         if_pay = getIntent().getStringExtra("if_pay");
         Log.i("789456", if_pay);
         String title = getIntent().getStringExtra("title");
-        String price = getIntent().getStringExtra("price");
+        String price = getIntent().getStringExtra("choose_price");
         money = Double.valueOf(price);
         perMoney = money;
-        String begin_time = getIntent().getStringExtra("begin_time");
+//        String begin_time = getIntent().getStringExtra("begin_time");
+        String begin_time = getIntent().getStringExtra("choose_date");
         String sex = getIntent().getStringExtra("sex");
         String name = getIntent().getStringExtra("name");
+        tv_choose_date.setText("日期："+begin_time.substring(5,10));
+        tv_choose_price.setText(price);
         pfID = getIntent().getStringExtra("pfID");
         tvActiveTitle.setText(title);
         tvPrice.setText("¥" + price + "元/人");
@@ -363,6 +371,7 @@ public class ApplyActivity extends BaseActivity {
                     .addParam("user_id", user_id)
                     .addParam("num", peopleNum)
                     .addParam("pfid", pfID)
+                    .addParam("phase_id", getIntent().getStringExtra("choose_id"))
                     .addParam("phone", etPhoneNum.getText().toString())
                     .addParam("need_paytype", payState + "")
                     .addParam("id", yqid)

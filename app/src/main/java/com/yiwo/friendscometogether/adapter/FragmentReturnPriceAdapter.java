@@ -89,6 +89,7 @@ public class FragmentReturnPriceAdapter extends RecyclerView.Adapter<FragmentRet
         }else if(data.get(position).getOrder_type().equals("4")){
             holder.tvPay.setText("退款中");
         }
+        holder.tvPay.setVisibility(View.GONE);
         holder.tvDeleteTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
