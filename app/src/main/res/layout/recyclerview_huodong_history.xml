@@ -142,5 +142,7 @@
     <LinearLayout
         android:background="@color/white_F8F8F8"
         android:layout_width="match_parent"
-        android:layout_height="10px"></LinearLayout>
+        android:layout_height="10px">
+        
+    </LinearLayout>
 </LinearLayout>
