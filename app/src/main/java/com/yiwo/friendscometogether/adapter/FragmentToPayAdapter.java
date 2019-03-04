@@ -100,9 +100,9 @@ public class FragmentToPayAdapter extends RecyclerView.Adapter<FragmentToPayAdap
             holder.tvCancelTrip.setVisibility(View.GONE);
             holder.tvDeleteTrip.setVisibility(View.VISIBLE);
         }else {
-            holder.tvDeleteTrip.setVisibility(View.GONE);
+            holder.tvDeleteTrip.setVisibility(View.VISIBLE);
             holder.tvPay.setVisibility(View.VISIBLE);
-            holder.tvCancelTrip.setVisibility(View.VISIBLE);
+            holder.tvCancelTrip.setVisibility(View.GONE);
         }
         holder.tvPay.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -23,6 +23,21 @@
                 style="@style/iv_return" />
 
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_alignParentRight="true"
+            android:id="@+id/activity_look_history_clear"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:textSize="30px"
+                android:layout_centerInParent="true"
+                android:text="清空"
+                android:textColor="@color/white_ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

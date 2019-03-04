@@ -364,6 +364,7 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
                                             it.putExtra("if_pay", model.getObj().getIf_pay());
                                             it.putExtra("title", model.getObj().getTitle());
                                             it.putExtra("begin_time", model.getObj().getBegin_time());
+                                            it.putExtra("end_time",model.getObj().getEnd_time());
                                             it.putExtra("price", model.getObj().getPrice());
                                             it.putExtra("pfID", model.getObj().getPfID());
                                             it.putExtra("name", model.getObj().getTruename());
@@ -373,9 +374,7 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
                                             it.putExtra("issingle", model.getObj().getMarry());
                                             it.putExtra("city", model.getObj().getCity());
                                             it.putExtra("tel", model.getObj().getUser_tel());
-                                            it.putExtra("choose_date",model.getObj().getPhase().get(chooseDateIndex).getPhase_begin_time());
-                                            it.putExtra("choose_price",model.getObj().getPhase().get(chooseDateIndex).getPhase_price());
-                                            it.putExtra("choose_id",model.getObj().getPhase().get(chooseDateIndex).getPhase_id());
+                                            it.putExtra("choose_date_intex",chooseDateIndex);
                                             startActivity(it);
                                         } else if (models.getObj().getOk().equals("1")) {
                                             toToast(DetailsOfFriendTogetherActivity.this, "请于身份审核通过后报名");

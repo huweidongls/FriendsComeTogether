@@ -106,7 +106,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
         holder.tvPrice.setText(ssb_money);
         holder.tvPriceDetails.setText(data.get(position).getPrice_type());
         holder.tvStatus.setText(data.get(position).getStatus());
-        if(data.get(position).getOrder_type().equals("7")){
+        if(data.get(position).getOrder_type().equals("7")){//已取消
             holder.tvCancelTrip.setVisibility(View.GONE);
             holder.tvDeleteTrip.setVisibility(View.VISIBLE);
             holder.tvToTrip.setVisibility(View.GONE);
@@ -115,7 +115,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvPay.setVisibility(View.GONE);
             holder.tvOkReturn.setVisibility(View.GONE);
             holder.tvReturning.setVisibility(View.GONE);
-        }else if(data.get(position).getOrder_type().equals("6")){
+        }else if(data.get(position).getOrder_type().equals("6")){//行程中
             holder.tvCancelTrip.setVisibility(View.GONE);
             holder.tvDeleteTrip.setVisibility(View.GONE);
             holder.tvToTrip.setVisibility(View.GONE);
@@ -124,7 +124,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvPay.setVisibility(View.GONE);
             holder.tvOkReturn.setVisibility(View.GONE);
             holder.tvReturning.setVisibility(View.GONE);
-        }else if(data.get(position).getOrder_type().equals("5")){
+        }else if(data.get(position).getOrder_type().equals("5")){//已退款
             holder.tvCancelTrip.setVisibility(View.GONE);
             holder.tvDeleteTrip.setVisibility(View.VISIBLE);
             holder.tvToTrip.setVisibility(View.GONE);
@@ -133,7 +133,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvPay.setVisibility(View.GONE);
             holder.tvOkReturn.setVisibility(View.VISIBLE);
             holder.tvReturning.setVisibility(View.GONE);
-        }else if(data.get(position).getOrder_type().equals("4")){
+        }else if(data.get(position).getOrder_type().equals("4")){//退款中
             holder.tvCancelTrip.setVisibility(View.GONE);
             holder.tvDeleteTrip.setVisibility(View.VISIBLE);
             holder.tvToTrip.setVisibility(View.GONE);
@@ -142,7 +142,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvPay.setVisibility(View.GONE);
             holder.tvOkReturn.setVisibility(View.GONE);
             holder.tvReturning.setVisibility(View.VISIBLE);
-        }else if(data.get(position).getOrder_type().equals("3")){
+        }else if(data.get(position).getOrder_type().equals("3")){//行程结束
             holder.tvCancelTrip.setVisibility(View.GONE);
             holder.tvDeleteTrip.setVisibility(View.VISIBLE);
             holder.tvToTrip.setVisibility(View.GONE);
@@ -151,7 +151,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvPay.setVisibility(View.GONE);
             holder.tvOkReturn.setVisibility(View.GONE);
             holder.tvReturning.setVisibility(View.GONE);
-        }else if(data.get(position).getOrder_type().equals("2")){ //进行中
+        }else if(data.get(position).getOrder_type().equals("2")){ //待行程
             holder.tvCancelTrip.setVisibility(View.VISIBLE);
             holder.tvDeleteTrip.setVisibility(View.GONE);
             holder.tvToTrip.setVisibility(View.VISIBLE);
@@ -160,9 +160,9 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvPay.setVisibility(View.GONE);
             holder.tvOkReturn.setVisibility(View.GONE);
             holder.tvReturning.setVisibility(View.GONE);
-        }else if(data.get(position).getOrder_type().equals("1")){
-            holder.tvCancelTrip.setVisibility(View.VISIBLE);
-            holder.tvDeleteTrip.setVisibility(View.GONE);
+        }else if(data.get(position).getOrder_type().equals("1")){//1待支付
+            holder.tvCancelTrip.setVisibility(View.GONE);
+            holder.tvDeleteTrip.setVisibility(View.VISIBLE);
             holder.tvToTrip.setVisibility(View.GONE);
             holder.tvTriping.setVisibility(View.GONE);
             holder.tvComment.setVisibility(View.GONE);

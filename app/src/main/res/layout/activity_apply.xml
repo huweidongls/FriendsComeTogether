@@ -107,22 +107,15 @@
                 android:background="@color/line" />
 
             <LinearLayout
-                android:layout_marginTop="24px"
+
+                android:layout_marginTop="18px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40px"
                 android:layout_marginRight="40px"
                 android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="活动要求:"
-                    android:textColor="@color/black_333333"
-                    android:textSize="28px" />
-
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24px"
@@ -130,6 +123,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:layout_gravity="center_vertical"
                         android:scaleType="centerCrop"
                         android:id="@+id/iv_title"
                         android:layout_width="246px"
@@ -146,7 +140,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
-                            android:lines="2"
+                            android:maxLines="2"
                             android:textColor="@color/black_333333"
                             android:textSize="30px" />
 
@@ -154,7 +148,14 @@
                             android:id="@+id/apply_time_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="12px"
+                            android:layout_marginTop="8px"
+                            android:textColor="@color/black_333333"
+                            android:textSize="28px" />
+                        <TextView
+                            android:id="@+id/apply_time_tv_end"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2px"
                             android:textColor="@color/black_333333"
                             android:textSize="28px" />
 
@@ -162,7 +163,7 @@
                             android:id="@+id/city"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="12px"
+                            android:layout_marginTop="10px"
                             android:textColor="@color/black_333333"
                             android:textSize="28px" />
 
@@ -251,48 +252,19 @@
                 android:layout_marginTop="5px"
                 android:layout_marginBottom="5px"
                 android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
                 android:layout_gravity="left"
-                android:layout_width="146px"
-                android:layout_height="96px"
-                android:background="@drawable/bg_d84c37_border_6px"
+                android:layout_width="match_parent"
+                android:layout_height="129px"
                 >
-                <TextView
-                    android:layout_marginTop="14px"
-                    android:text="周二 02-24"
-                    android:id="@+id/tv_date"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="#1F2224"
-                    android:textSize="22px"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginTop="8px"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/tv_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textSize="16px"
-                        android:textColor="#1F2224"
-                        android:text="¥"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/tv_price"
-                        android:textSize="26px"
-                        android:textColor="#1F2224"
-                        android:text="888"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <ImageView
-                    android:id="@+id/iv_choosed"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:src="@mipmap/choosed"
-                    android:layout_width="31px"
-                    android:layout_height="31px" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_choose_date"
+                    android:layout_marginTop="10px"
+                    android:layout_marginBottom="10px"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
             </RelativeLayout>
             <View
                 android:layout_width="match_parent"

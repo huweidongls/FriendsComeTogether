@@ -160,7 +160,7 @@ public class FriendsTogetherFragment1 extends BaseFragment {
 
     }
 
-    @OnClick({R.id.iv_shaixuan, R.id.iv_baoming, R.id.iv_youju_focus, R.id.rl_xiaoxi})
+    @OnClick({R.id.iv_shaixuan, R.id.iv_baoming, R.id.iv_youju_focus, R.id.rl_shuaxin})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -288,14 +288,41 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                     startActivity(intent);
                 }
                 break;
-            case R.id.rl_xiaoxi:
-                if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
-                    intent.setClass(getContext(), MessageActivity.class);
-                    startActivity(intent);
-                } else {
-                    intent.setClass(getContext(), LoginActivity.class);
-                    startActivity(intent);
-                }
+            case R.id.rl_shuaxin:
+                String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
+                ViseHttp.POST(NetConfig.friendsTogetherUrl)
+                        .addParam("app_key", token)
+                        .addParam("userID", spImp.getUID())
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(data);
+                                    if (jsonObject.getInt("code") == 200) {
+                                        Log.e("222", data);
+                                        FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
+                                        mList.clear();
+                                        mList.addAll(model.getObj());
+                                        if(mList.size()>0){
+                                            bean = mList.get(0);
+                                            if (bean.getFocusOn().equals("0")) {
+                                                Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                                            } else {
+                                                Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
+                                            }
+                                        }
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+
+                            }
+                        });
                 break;
         }
     }

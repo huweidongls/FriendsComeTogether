@@ -163,11 +163,13 @@ public class LookHistoryActivity extends BaseActivity {
         }
     };
 
-    @OnClick({R.id.activity_look_history_rl_back})
+    @OnClick({R.id.activity_look_history_rl_back,R.id.activity_look_history_clear})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.activity_look_history_rl_back:
                 onBackPressed();
+                break;
+            case R.id.activity_look_history_clear:
                 break;
         }
     }

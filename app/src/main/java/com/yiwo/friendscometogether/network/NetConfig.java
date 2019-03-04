@@ -279,4 +279,6 @@ public class NetConfig {
     public static String removeConcerns = "action/ac_user/RemoveConcerns";
     //友记评论消息
     public static String youjiPinglun = "action/ac_user/ArticleReview";
+    //获取活动期数
+    public static String getPhase = "action/ac_activity/getphase";
 }

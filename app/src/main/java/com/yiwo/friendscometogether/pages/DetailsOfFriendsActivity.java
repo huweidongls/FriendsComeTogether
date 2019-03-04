@@ -298,8 +298,8 @@ public class DetailsOfFriendsActivity extends BaseActivity {
                                     tvPraise.setTextColor(Color.parseColor("#333333"));
                                 } else {
                                     isPraise = true;
-                                    Picasso.with(DetailsOfFriendsActivity.this).load(R.mipmap.praise_y).into(ivPraise);
-                                    tvPraise.setTextColor(Color.parseColor("#FF9D00"));
+                                    Picasso.with(DetailsOfFriendsActivity.this).load(R.mipmap.praise_red).into(ivPraise);
+                                    tvPraise.setTextColor(Color.parseColor("#d84c37"));
                                 }
                                 if (model.getObj().getContent().getCollection() == 0) {
                                     isStar = false;
@@ -307,8 +307,8 @@ public class DetailsOfFriendsActivity extends BaseActivity {
                                     tvStar.setTextColor(Color.parseColor("#333333"));
                                 } else {
                                     isStar = true;
-                                    Picasso.with(DetailsOfFriendsActivity.this).load(R.mipmap.star_y).into(ivStar);
-                                    tvStar.setTextColor(Color.parseColor("#FF9D00"));
+                                    Picasso.with(DetailsOfFriendsActivity.this).load(R.mipmap.star_d84c37).into(ivStar);
+                                    tvStar.setTextColor(Color.parseColor("#d84c37"));
                                 }
 
                                 if (model.getObj().getContent().getFollow() == 0) {
@@ -408,8 +408,8 @@ public class DetailsOfFriendsActivity extends BaseActivity {
                     finish();
                 } else {
                     if (!isPraise) {
-                        Picasso.with(DetailsOfFriendsActivity.this).load(R.mipmap.praise_y).into(ivPraise);
-                        tvPraise.setTextColor(Color.parseColor("#FF9D00"));
+                        Picasso.with(DetailsOfFriendsActivity.this).load(R.mipmap.praise_red).into(ivPraise);
+                        tvPraise.setTextColor(Color.parseColor("#d84c37"));
                         ViseHttp.POST(NetConfig.articlePraiseUrl)
                                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.articlePraiseUrl))
                                 .addParam("id", fmID)
@@ -447,8 +447,8 @@ public class DetailsOfFriendsActivity extends BaseActivity {
                     finish();
                 } else {
                     if (!isStar) {
-                        Picasso.with(DetailsOfFriendsActivity.this).load(R.mipmap.star_y).into(ivStar);
-                        tvStar.setTextColor(Color.parseColor("#FF9D00"));
+                        Picasso.with(DetailsOfFriendsActivity.this).load(R.mipmap.star_d84c37).into(ivStar);
+                        tvStar.setTextColor(Color.parseColor("#d84c37"));
                         isStar = !isStar;
                         ViseHttp.POST(NetConfig.articleCollectionUrl)
                                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.articleCollectionUrl))
