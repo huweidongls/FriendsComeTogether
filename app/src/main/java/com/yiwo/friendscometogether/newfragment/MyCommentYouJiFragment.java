@@ -81,6 +81,7 @@ public class MyCommentYouJiFragment extends BaseFragment {
                         .request(new ACallback<String>() {
                             @Override
                             public void onSuccess(String data) {
+                                Log.d("32131",data);
                                 try {
                                     JSONObject jsonObject = new JSONObject(data);
                                     if (jsonObject.getInt("code") == 200) {

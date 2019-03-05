@@ -28,6 +28,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
+import com.yiwo.friendscometogether.MainActivity;
 import com.yiwo.friendscometogether.MyApplication;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
@@ -47,6 +48,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,6 +76,7 @@ public class YouJiFragment extends Fragment {
     private int page = 1;
     private String nearby = "0";
 
+    private Timer timer;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_youji, null);
@@ -80,7 +84,7 @@ public class YouJiFragment extends Fragment {
         ButterKnife.bind(this, view);
         spImp = new SpImp(getContext());
         uid = spImp.getUID();
-
+        timer = new Timer();
         return view;
     }
 
@@ -90,6 +94,7 @@ public class YouJiFragment extends Fragment {
             Log.e("123123", "hidden");
         }else {
             Log.e("123123", "nohidden");
+            nearby = "0";
             initData();
         }
     }
@@ -128,7 +133,6 @@ public class YouJiFragment extends Fragment {
                                     e.printStackTrace();
                                 }
                             }
-
                             @Override
                             public void onFail(int errCode, String errMsg) {
                                 refreshLayout.finishRefresh(1000);
@@ -208,8 +212,15 @@ public class YouJiFragment extends Fragment {
 
     }
 
-    @OnClick({R.id.searchLl, R.id.rl_nearby})
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
+    }
+
+    @OnClick({R.id.searchLl, R.id.rl_nearby,R.id.tv_back})
     public void onClick(View view) {
+        MainActivity mainActivity = (MainActivity) getActivity();
         Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.searchLl:
@@ -219,60 +230,76 @@ public class YouJiFragment extends Fragment {
                 break;
             case R.id.rl_nearby:
                 if (!TextUtils.isEmpty(spImp.getUID()) && !spImp.getUID().equals("0")) {
-                    if(nearby.equals("0")){
-                        nearby = "1";
-                        Toast.makeText(getContext(), "开启搜索附近", Toast.LENGTH_SHORT).show();
-                        Animation rotateAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.youji_rotate);
-                        LinearInterpolator interpolator = new LinearInterpolator();
-                        rotateAnimation.setInterpolator(interpolator);
-                        ivNearby.startAnimation(rotateAnimation);
-                        nearby();
-                    }else {
-                        nearby = "0";
-                        Toast.makeText(getContext(), "关闭搜索附近", Toast.LENGTH_SHORT).show();
-                        ivNearby.clearAnimation();
-                        nearby();
-                    }
+                    nearby = "1";
+                    Toast.makeText(getContext(), "开启搜索附近", Toast.LENGTH_SHORT).show();
+                    Animation rotateAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.youji_rotate);
+                    LinearInterpolator interpolator = new LinearInterpolator();
+                    rotateAnimation.setInterpolator(interpolator);
+                    ivNearby.startAnimation(rotateAnimation);
+                    nearby();
+//                    if(nearby.equals("0")){
+//                        nearby = "1";
+//                        Toast.makeText(getContext(), "开启搜索附近", Toast.LENGTH_SHORT).show();
+//                        Animation rotateAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.youji_rotate);
+//                        LinearInterpolator interpolator = new LinearInterpolator();
+//                        rotateAnimation.setInterpolator(interpolator);
+//                        ivNearby.startAnimation(rotateAnimation);
+//                        nearby();
+//                    }else {
+//                        nearby = "0";
+//                        Toast.makeText(getContext(), "关闭搜索附近", Toast.LENGTH_SHORT).show();
+//                        ivNearby.clearAnimation();
+//                        nearby();
+//                    }
                 } else {
                     intent.setClass(getContext(), LoginActivity.class);
                     startActivity(intent);
                 }
                 break;
+            case R.id.tv_back:
+                mainActivity.exitYouji();
+                break;
         }
     }
 
     private void nearby(){
-        ViseHttp.POST(NetConfig.newYoujiData)
-                .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl+NetConfig.newYoujiData))
-                .addParam("page", "1")
-                .addParam("sign", MyApplication.sign)
-                .addParam("uid", spImp.getUID())
-                .addParam("nearby", nearby)
-                .request(new ACallback<String>() {
-                    @Override
-                    public void onSuccess(String data) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(data);
-                            if(jsonObject.getInt("code") == 200){
-                                Gson gson = new Gson();
-                                YouJiListModel model = gson.fromJson(data, YouJiListModel.class);
-                                if(mList != null){
-                                    mList.clear();
-                                    mList.addAll(model.getObj());
-                                    adapter.notifyDataSetChanged();
-                                    page = 2;
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                ViseHttp.POST(NetConfig.newYoujiData)
+                        .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl+NetConfig.newYoujiData))
+                        .addParam("page", "1")
+                        .addParam("sign", MyApplication.sign)
+                        .addParam("uid", spImp.getUID())
+                        .addParam("nearby", nearby)
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(data);
+                                    if(jsonObject.getInt("code") == 200){
+                                        Gson gson = new Gson();
+                                        YouJiListModel model = gson.fromJson(data, YouJiListModel.class);
+                                        if(mList != null){
+                                            mList.clear();
+                                            mList.addAll(model.getObj());
+                                            adapter.notifyDataSetChanged();
+                                            page = 2;
+                                        }
+                                    }
+                                    ivNearby.clearAnimation();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
 
-                    @Override
-                    public void onFail(int errCode, String errMsg) {
-
-                    }
-                });
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+                                ivNearby.clearAnimation();
+                            }
+                        });
+            }
+        },1500);
     }
 
 }

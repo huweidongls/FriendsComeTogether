@@ -206,7 +206,7 @@ public class ApplyActivity extends BaseActivity {
                                 }
                                 //初始化选择
                                 ViseHttp.POST(NetConfig.getPhase)
-                                        .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.invitationOkUrl))
+                                        .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.getPhase))
                                         .addParam("pfID",pfID)
                                         .request(new ACallback<String>() {
 
@@ -414,7 +414,7 @@ public class ApplyActivity extends BaseActivity {
         }
         chooseDateIndex = getIntent().getIntExtra("choose_date_intex",0);
         ViseHttp.POST(NetConfig.getPhase)
-                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.invitationOkUrl))
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.getPhase))
                 .addParam("pfID",pfID)
                 .request(new ACallback<String>() {
 

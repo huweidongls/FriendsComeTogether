@@ -85,7 +85,7 @@
                 android:layout_height="match_parent" />
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_margin="2px"
-                android:src="@mipmap/hhh"
+                android:src="@mipmap/my_head"
                 android:layout_centerInParent="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

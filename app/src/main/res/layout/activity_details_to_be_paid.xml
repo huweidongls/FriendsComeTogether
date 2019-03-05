@@ -232,7 +232,7 @@
                 <TextView
                     android:visibility="gone"
                     android:id="@+id/details_to_pay_rv_tv_cancle_trip"
-                    android:text="取消行程"
+                    android:text="取消活动"
                     android:layout_marginRight="20px"
                     android:gravity="center"
                     android:textSize="26px"
@@ -249,7 +249,7 @@
                     android:gravity="center"
                     android:textSize="26px"
                     android:textColor="#686868"
-                    android:text="删除行程"
+                    android:text="删除活动"
                     android:layout_width="150px"
                     android:layout_height="54px" />
 

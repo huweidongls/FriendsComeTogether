@@ -220,18 +220,19 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
         if (!StringUtils.isEmpty(model.getShow_pic())) {
             Glide.with(DetailsOfFriendTogetherActivity.this).load(model.getShow_pic()).into(titleIv);
         }
-        if (model.getIf_sign().equals("1")) {
-            Glide.with(DetailsOfFriendTogetherActivity.this).load(R.mipmap.sign_yellow).into(ivSign);
-        } else {
-            Glide.with(DetailsOfFriendTogetherActivity.this).load(R.mipmap.sign_gray).into(ivSign);
-        }
+        // 20190305 队长认证都为金色皇冠
+//        if (model.getIf_sign().equals("1")) {
+//            Glide.with(DetailsOfFriendTogetherActivity.this).load(R.mipmap.sign_yellow).into(ivSign);
+//        } else {
+//            Glide.with(DetailsOfFriendTogetherActivity.this).load(R.mipmap.sign_gray).into(ivSign);
+//        }
         titleTv.setText(model.getTitle());
         viewsTv.setText("浏览量: " + model.getLook());
         focus_onTv.setText("关注: " + model.getPffavorite());
         tvUsername.setText(model.getCapttain_name());
-
-        levelTv.setText("LV" + model.getLevel());
-
+        if (model.getLevel().equals("0")){
+            levelTv.setText("LV1");
+        }
         if (!model.getCaptain().equals("0")) {
             if (!StringUtils.isEmpty(model.getCapttain_pic())) {
                 Picasso.with(DetailsOfFriendTogetherActivity.this).load(model.getCapttain_pic()).into(headIv);

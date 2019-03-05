@@ -50,7 +50,7 @@
         <TextView
             android:id="@+id/tv_editor"
             android:gravity="center"
-            android:background="@drawable/bg_yellow_26px"
+            android:background="@drawable/bg_red_26px"
             android:textColor="@color/white_ffffff"
             android:textSize="24px"
             android:text="继续编辑"
@@ -72,10 +72,10 @@
             android:layout_alignParentRight="true"
             android:id="@+id/tv_team_chawen"
             android:gravity="center"
-            android:background="@drawable/bg_yellow_border_26px"
-            android:textColor="#FFAB26"
+            android:background="@drawable/bg_red_border_26px"
+            android:textColor="#d84c37"
             android:textSize="24px"
-            android:text="队友插文"
+            android:text="插文管理"
             android:layout_width="190px"
             android:layout_height="52px" />
 

@@ -113,6 +113,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/headIv"
+                    android:src="@mipmap/my_head"
                     android:layout_width="100px"
                     android:layout_height="100px"
                     android:layout_gravity="center_horizontal"
@@ -124,7 +125,7 @@
                     android:textColor="@color/black_333333"
                     android:id="@+id/username"
                     android:layout_toRightOf="@+id/headIv"
-                    android:text="昵称"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -178,6 +179,7 @@
                     android:background="@mipmap/level_bg">
 
                     <TextView
+                        android:text="lv1"
                         android:id="@+id/levelTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

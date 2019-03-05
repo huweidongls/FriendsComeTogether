@@ -3,6 +3,7 @@ package com.yiwo.friendscometogether.pages;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -170,8 +171,38 @@ public class LookHistoryActivity extends BaseActivity {
                 onBackPressed();
                 break;
             case R.id.activity_look_history_clear:
+                clearHistory();
                 break;
         }
+    }
+
+    private void clearHistory() {
+        ViseHttp.POST(NetConfig.clearLookHistory)
+                .addParam("app_key",getToken(NetConfig.BaseUrl+NetConfig.clearLookHistory))
+                .addParam("uid",uid)
+                .request(new ACallback<String>() {
+
+                    @Override
+                    public void onSuccess(String data) {
+                        Log.d("2222222",data);
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                toToast(LookHistoryActivity.this,"已清空");
+                                mList.clear();
+                                adapter.notifyDataSetChanged();
+                            }else {
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
     }
 
     @Override

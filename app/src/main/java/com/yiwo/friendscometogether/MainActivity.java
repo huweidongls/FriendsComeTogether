@@ -291,7 +291,11 @@ public class MainActivity extends FragmentActivity {
     public void startYouji(){
         ibIndex.setSelected(false);
     }
-
+    //退出友记 恢复到首页fragment
+    public void exitYouji(){
+        switchFragment(0);
+        selectButton(ibIndex);
+    }
     public void selectText(View v) {
 //        tvIndex.setSelected(false);
 //        tvFriendTogether.setSelected(false);

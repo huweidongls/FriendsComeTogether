@@ -20,7 +20,7 @@
                 android:id="@+id/iv_youju_avatar"
                 android:layout_width="76px"
                 android:layout_height="76px"
-                android:src="@mipmap/hhh" />
+                android:src="@mipmap/my_head" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

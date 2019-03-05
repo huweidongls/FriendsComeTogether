@@ -11,7 +11,7 @@
         style="@style/rl_top_bar">
 
         <TextView
-            android:text="队友插文"
+            android:text="插文管理"
             style="@style/tv_top_title" />
         
         <RelativeLayout

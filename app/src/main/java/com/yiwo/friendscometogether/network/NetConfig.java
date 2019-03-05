@@ -281,4 +281,6 @@ public class NetConfig {
     public static String youjiPinglun = "action/ac_user/ArticleReview";
     //获取活动期数
     public static String getPhase = "action/ac_activity/getphase";
+    //清除用户浏览历史
+    public static String clearLookHistory = "action/ac_activity/clear_look_history";
 }
