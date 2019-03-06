@@ -97,7 +97,7 @@ public class OrderCommentActivity extends BaseActivity {
                                         Picasso.with(OrderCommentActivity.this).load(model.getObj().getPicture()).into(ivTitle);
                                     }
                                     tvContent.setText(model.getObj().getContent());
-                                    tvTime.setText("活动时间: " + model.getObj().getTime());
+                                    tvTime.setText("时间: " + model.getObj().getTime());
                                     tvPeopleNum.setText("参加人数: " + model.getObj().getGo_num());
                                     tvPriceDetails.setText(model.getObj().getPrice_type());
                                     tvPrice.setText("合计费用: " + model.getObj().getPrice());
@@ -130,7 +130,7 @@ public class OrderCommentActivity extends BaseActivity {
                                         Picasso.with(OrderCommentActivity.this).load(model.getObj().getPicture()).into(ivTitle);
                                     }
                                     tvContent.setText(model.getObj().getContent());
-                                    tvTime.setText("行程时间: " + model.getObj().getTime());
+                                    tvTime.setText("时间: " + model.getObj().getTime());
                                     tvPeopleNum.setText("参加人数: " + model.getObj().getGo_num());
                                     tvPriceDetails.setText(model.getObj().getPrice_type());
                                     tvPrice.setText("合计费用: " + model.getObj().getPrice());

@@ -159,6 +159,7 @@ public class PersonMainActivity extends BaseActivity {
     }
 
     private void initRefresh() {
+        refreshLayout.setEnableLoadMore(false);
         refreshLayout.setRefreshHeader(new ClassicsHeader(PersonMainActivity.this));
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -383,7 +384,7 @@ public class PersonMainActivity extends BaseActivity {
     }
 
     @OnClick({R.id.rl_back, R.id.ll_person_all_pics, R.id.ll_person_all_youji, R.id.ll_person_all_youju,
-            R.id.rl_algin_right_wode, R.id.rl_add_friend, R.id.rl_guanzhu,R.id.iv_heart,R.id.ll_huozan})
+            R.id.rl_algin_right_wode, R.id.rl_add_friend, R.id.rl_guanzhu,R.id.iv_heart,R.id.ll_huozan,R.id.ll_guanzhu})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -557,6 +558,16 @@ public class PersonMainActivity extends BaseActivity {
             case R.id.ll_huozan:
                 HuoZanDialog dialog = new HuoZanDialog(PersonMainActivity.this,tv_person_name.getText().toString(),tv_huozan_num.getText().toString());
                 dialog.show();
+                break;
+            case R.id.ll_guanzhu:
+                intent.setClass(PersonMainActivity.this,PersonGuanZhuActivity.class);
+                intent.putExtra("userID",person_id);
+                if (type_tade_or_wode == 1){
+                    intent.putExtra("userName","我");
+                }else{
+                    intent.putExtra("userName",model.getObj().getInfo().getUsername());
+                }
+                startActivity(intent);
                 break;
         }
 

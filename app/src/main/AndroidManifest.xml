@@ -381,7 +381,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".newpage.PinglunAtActivity"></activity>
+        <activity android:name=".newpage.PinglunAtActivity" />
+        <activity android:name=".newpage.PersonGuanZhuActivity"></activity>
     </application>
 
 </manifest>

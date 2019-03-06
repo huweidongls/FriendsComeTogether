@@ -1,6 +1,8 @@
 package com.yiwo.friendscometogether;
 
 import android.Manifest;
+import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -29,9 +31,12 @@ import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.business.session.module.MsgForwardFilter;
 import com.netease.nim.uikit.business.session.module.MsgRevokeFilter;
 import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.netease.nimlib.sdk.msg.MsgService;
+import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.fragment.ChatFragment;
@@ -115,7 +120,8 @@ public class MainActivity extends FragmentActivity {
 //    TextView tvChat;
 //    @BindView(R.id.tv_my)
 //    TextView tvMy;
-
+    @BindView(R.id.iv_point_new_chat_message)
+    ImageView ivNewChatMessage;
     private long exitTime = 0;
 
     private SpImp spImp;
@@ -137,6 +143,26 @@ public class MainActivity extends FragmentActivity {
         init();
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkHasNewChatmessage();
+    }
+
+    private void checkHasNewChatmessage() {
+        if (!TextUtils.isEmpty(uid) && !uid.equals("0")){
+            if (NIMClient.getService(MsgService.class).getTotalUnreadCount()>0){//获取未读消息数
+                ivNewChatMessage.setVisibility(View.VISIBLE);
+            }else {
+                ivNewChatMessage.setVisibility(View.GONE);
+            }
+        }else {
+            ivNewChatMessage.setVisibility(View.GONE);
+        }
+        newMessageLis();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -394,6 +420,23 @@ public class MainActivity extends FragmentActivity {
             MyApplication.getInstance().exit();
             exitTime = 0;
         }
+    }
+    private void newMessageLis(){//新聊天消息监听
+        Observer<List<IMMessage>> incomingMessageObserver =
+                new Observer<List<IMMessage>>() {
+                    @Override
+                    public void onEvent(List<IMMessage> messages) {
+                        // 处理新收到的消息，为了上传处理方便，SDK 保证参数 messages 全部来自同一个聊天对象。
+                        ivNewChatMessage.setVisibility(View.VISIBLE);
+//                        if (NIMClient.getService(MsgService.class).getTotalUnreadCount()>0){//获取未读消息数
+//                            ivNewChatMessage.setVisibility(View.VISIBLE);
+//                        }else {
+//                            ivNewChatMessage.setVisibility(View.GONE);
+//                        }
+                    }
+                };
+        NIMClient.getService(MsgServiceObserve.class)
+                .observeReceiveMessage(incomingMessageObserver, true);
     }
 
 }

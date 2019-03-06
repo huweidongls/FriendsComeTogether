@@ -55,6 +55,7 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="20px"
             android:layout_marginBottom="40px"
             android:id="@+id/activity_message_view_rv"
             android:layout_width="match_parent"

@@ -132,6 +132,13 @@
                 android:layout_height="43px"
                 android:background="@drawable/select_chat"
                 android:scaleType="centerCrop" />
+            <ImageView
+                android:layout_toRightOf="@+id/menu_chat"
+                android:id="@+id/iv_point_new_chat_message"
+                android:layout_marginTop="16px"
+                android:src="@mipmap/point_red"
+                android:layout_width="18px"
+                android:layout_height="18px" />
 
             <!--<TextView-->
                 <!--android:id="@+id/tv_chat"-->

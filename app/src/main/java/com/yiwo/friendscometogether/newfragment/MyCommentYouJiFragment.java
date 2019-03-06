@@ -155,6 +155,7 @@ public class MyCommentYouJiFragment extends BaseFragment {
                             JSONObject jsonObject = new JSONObject(data);
                             if (jsonObject.getInt("code") == 200) {
                                 Gson gson = new Gson();
+                                Log.d("sadsada",data);
                                 ArticleCommentListModel model = gson.fromJson(data, ArticleCommentListModel.class);
                                 mList = model.getObj();
                                 adapter = new MyCommentAdapter(mList);

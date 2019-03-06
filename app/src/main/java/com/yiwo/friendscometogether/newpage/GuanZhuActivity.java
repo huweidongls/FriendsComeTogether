@@ -97,7 +97,7 @@ public class GuanZhuActivity extends BaseActivity {
     private SpImp spImp;
     private int page_woguanzhude = 1;
     private int page_guanzhuwode = 1;
-    private int page_guanzhuhuodong = 1;
+    private int page_guanzhuhuodong = 1; //  关注活动接口无分页
 
     private PopupWindow popupWindow;
 

@@ -1,8 +1,10 @@
 package com.yiwo.friendscometogether.pages;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -12,7 +14,6 @@ import android.widget.RelativeLayout;
 
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.google.gson.Gson;
-import com.squareup.picasso.Picasso;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -29,10 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -137,6 +135,39 @@ public class MyPicturesActivity extends BaseActivity {
                                                         });
                                                 break;
                                         }
+                                    }
+                                });
+                                adapter.setOnItemLongClickListener(new MyPicturesAdapter.onItemLongClickListener() {
+                                    @Override
+                                    public void onLongClick(final int position) {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(MyPicturesActivity.this);
+                                        builder.setMessage("确定设置为头像？")
+                                                .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        ViseHttp.POST(NetConfig.setupHeaderFromPics)
+                                                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.setupHeaderFromPics))
+                                                                .addParam("listid", mList.get(position-1).getUid())
+                                                                .addParam("uid",uid)
+                                                                .request(new ACallback<String>() {
+                                                                    @Override
+                                                                    public void onSuccess(String data) {
+                                                                        toToast(MyPicturesActivity.this,"修改头像成功！");
+                                                                    }
+
+                                                                    @Override
+                                                                    public void onFail(int errCode, String errMsg) {
+
+                                                                    }
+                                                                });
+                                                    }
+                                                }).setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        }).show();
+
                                     }
                                 });
                             }
