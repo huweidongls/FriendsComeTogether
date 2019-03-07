@@ -30,21 +30,21 @@ public class DefaultTeamSessionCustomization extends SessionCustomization {
 
     public DefaultTeamSessionCustomization() {
 
-//        // ActionBar右侧按钮，跳转至群信息界面
-//        SessionCustomization.OptionsButton infoButton = new SessionCustomization.OptionsButton() {
-//            @Override
-//            public void onClick(Context context, View view, String sessionId) {
-//                Team team = NimUIKit.getTeamProvider().getTeamById(sessionId);
-//                if (team != null && team.isMyTeam()) {
-//                    NimUIKit.startTeamInfo(context, sessionId);
-//                } else {
-//                    Toast.makeText(context, R.string.team_invalid_tip, Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        };
-//        infoButton.iconId = R.drawable.nim_ic_message_actionbar_team;
-//        buttons = new ArrayList<>();
-//        buttons.add(infoButton);
+        // ActionBar右侧按钮，跳转至群信息界面
+        SessionCustomization.OptionsButton infoButton = new SessionCustomization.OptionsButton() {
+            @Override
+            public void onClick(Context context, View view, String sessionId) {
+                Team team = NimUIKit.getTeamProvider().getTeamById(sessionId);
+                if (team != null && team.isMyTeam()) {
+                    NimUIKit.startTeamInfo(context, sessionId);
+                } else {
+                    Toast.makeText(context, R.string.team_invalid_tip, Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        infoButton.iconId = R.drawable.nim_ic_message_actionbar_team;
+        buttons = new ArrayList<>();
+        buttons.add(infoButton);
     }
 
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
