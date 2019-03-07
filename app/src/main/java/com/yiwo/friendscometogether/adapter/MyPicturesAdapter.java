@@ -95,13 +95,18 @@ public class MyPicturesAdapter extends RecyclerView.Adapter<MyPicturesAdapter.Vi
                 @Override
                 public void onClick(View v) {
                     List<String> urlList = new ArrayList<>();
+                    List<String> picListIDList = new ArrayList<>();
                     for (int i = 0; i<data.size(); i++){
                         urlList.add(data.get(i).getUpicurl());
+                        picListIDList.add(data.get(i).getUid());
                     }
                     Intent intent = new Intent(context, ImagePreviewActivity.class);
                     intent.putStringArrayListExtra("imageList", (ArrayList<String>) urlList);
                     intent.putExtra(Consts.START_ITEM_POSITION, position - 1);
                     intent.putExtra(Consts.START_IAMGE_POSITION, position - 1);
+                    //设置为头像功能需要； 传入
+                    intent.putExtra("fromMyPics",true);
+                    intent.putStringArrayListExtra("picListIDList", (ArrayList<String>) picListIDList);
                     context.startActivity(intent);
                 }
             });

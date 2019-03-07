@@ -8,10 +8,11 @@ import java.util.List;
 
 public class UserCollectionModel {
 
+
     /**
      * code : 200
      * message : 获取成功!
-     * obj : [{"fID":"60","ftype":"2","ftableid":"93","ftitle":"五大连池火山","fpic":"http://47.92.136.19/uploads/article/20180810/20180810/7060e0722623c2dab803f9f2f2499d92.png","ftime":"2018-08-10 15:18:46"}]
+     * obj : [{"fID":"245","ftype":"2","ftableid":"358","ftitle":"123","fpic":"http://47.92.136.19/uploads/article/20190225/0-0ff0674cbb57e6d1c4f00e282e3d13813783.jpg","ftime":"2019-03-05 09:07:14","fmlook":"26"}]
      */
 
     private int code;
@@ -44,12 +45,13 @@ public class UserCollectionModel {
 
     public static class ObjBean {
         /**
-         * fID : 60
+         * fID : 245
          * ftype : 2
-         * ftableid : 93
-         * ftitle : 五大连池火山
-         * fpic : http://47.92.136.19/uploads/article/20180810/20180810/7060e0722623c2dab803f9f2f2499d92.png
-         * ftime : 2018-08-10 15:18:46
+         * ftableid : 358
+         * ftitle : 123
+         * fpic : http://47.92.136.19/uploads/article/20190225/0-0ff0674cbb57e6d1c4f00e282e3d13813783.jpg
+         * ftime : 2019-03-05 09:07:14
+         * fmlook : 26
          */
 
         private String fID;
@@ -58,6 +60,7 @@ public class UserCollectionModel {
         private String ftitle;
         private String fpic;
         private String ftime;
+        private String fmlook;
 
         public String getFID() {
             return fID;
@@ -105,6 +108,14 @@ public class UserCollectionModel {
 
         public void setFtime(String ftime) {
             this.ftime = ftime;
+        }
+
+        public String getFmlook() {
+            return fmlook;
+        }
+
+        public void setFmlook(String fmlook) {
+            this.fmlook = fmlook;
         }
     }
 }

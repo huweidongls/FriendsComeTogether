@@ -24,7 +24,6 @@ import com.yiwo.friendscometogether.adapter.MyCollectionAdapter;
 import com.yiwo.friendscometogether.adapter.MyFocusActiveAdapter;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.model.MyFocusActiveModel;
-import com.yiwo.friendscometogether.model.UserCollectionModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.sp.SpImp;
 

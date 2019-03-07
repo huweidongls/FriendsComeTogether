@@ -61,12 +61,6 @@ public class DetailsToBePaidActivity extends BaseActivity {
     TextView tvTitle;
     @BindView(R.id.activity_details_to_pay_iv_title)
     ImageView ivTitle;
-    @BindView(R.id.activity_details_to_pay_tv_content)
-    TextView tvContent;
-    @BindView(R.id.activity_details_to_pay_tv_time)
-    TextView tvTime;
-    @BindView(R.id.activity_details_to_pay_tv_people_num)
-    TextView tvPeopleNum;
     @BindView(R.id.activity_details_to_pay_tv_price_details)
     TextView tvPriceDetails;
     @BindView(R.id.activity_details_to_pay_tv_price)
@@ -99,6 +93,15 @@ public class DetailsToBePaidActivity extends BaseActivity {
     TextView tvReturning;
     @BindView(R.id.tv_order_status)
     TextView tvOrderStatus;
+
+    @BindView(R.id.tv_start_time)
+    TextView tvStartTime;
+    @BindView(R.id.tv_end_time)
+    TextView tvEndTime;
+    @BindView(R.id.tv_people_num)
+    TextView tvPeopleNum;
+    @BindView(R.id.tv_noname)
+    TextView tvNoName;
 
     private SpImp spImp;
     private String uid = "";
@@ -146,9 +149,10 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                 if (!TextUtils.isEmpty(model.getObj().getPicture())) {
                                     Picasso.with(DetailsToBePaidActivity.this).load(model.getObj().getPicture()).into(ivTitle);
                                 }
-                                tvContent.setText(model.getObj().getContent());
-                                tvTime.setText("活动时间: " + model.getObj().getTime());
+                                tvStartTime.setText("开始时间："+model.getObj().getBegin_time());
+                                tvEndTime.setText("结束时间："+model.getObj().getEnd_time());
                                 tvPeopleNum.setText("参加人数: " + model.getObj().getGo_num());
+                                tvNoName.setText("是否匿名："+(model.getObj().getNoname().equals("0")? "否":"是"));
                                 tvPriceDetails.setText(model.getObj().getPrice_type());
                                 //-----设置合计金额字体------------
                                 String str_money = "合计："+model.getObj().getPrice();

@@ -1,14 +1,26 @@
 package com.yiwo.friendscometogether.imagepreview;
 
+import android.content.DialogInterface;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.pages.MyPicturesActivity;
+import com.yiwo.friendscometogether.sp.SpImp;
 
 import java.util.List;
+
+import static com.yiwo.friendscometogether.utils.TokenUtils.getToken;
 
 public class ImagePreviewActivity extends AppCompatActivity {
 
@@ -20,12 +32,17 @@ public class ImagePreviewActivity extends AppCompatActivity {
     private int mStartPosition;
     private int mCurrentPosition;
     private ImagePreviewAdapter adapter;
+    private RelativeLayout rlSetHeadIcon;
+    private SpImp spImp;
 
+    private Boolean isFromMyPics;
+    private List<String> listPicId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_preview);
         StatusBarUtils.setStatusBarTransparent(ImagePreviewActivity.this);
+        spImp = new SpImp(ImagePreviewActivity.this);
 //        initShareElement();
         getIntentData();
         initView();
@@ -65,6 +82,37 @@ public class ImagePreviewActivity extends AppCompatActivity {
 //                page.setScaleY(normalizedposition / 2 + 0.5f);
 //            }
 //        });
+        rlSetHeadIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ImagePreviewActivity.this);
+                builder.setMessage("确定设置为头像？")
+                        .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ViseHttp.POST(NetConfig.setupHeaderFromPics)
+                                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.setupHeaderFromPics))
+                                        .addParam("listid", listPicId.get(mCurrentPosition))
+                                        .addParam("uid",spImp.getUID())
+                                        .request(new ACallback<String>() {
+                                            @Override
+                                            public void onSuccess(String data) {
+                                                Toast.makeText(ImagePreviewActivity.this,"修改头像成功！",Toast.LENGTH_SHORT).show();
+                                            }
+                                            @Override
+                                            public void onFail(int errCode, String errMsg) {
+
+                                            }
+                                        });
+                            }
+                        }).setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).show();
+            }
+        });
     }
 
     private void hideAllIndicator(int position) {
@@ -78,6 +126,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
     private void initView() {
         viewPager = (CustomViewPager) findViewById(R.id.imageBrowseViewPager);
         main_linear = (LinearLayout) findViewById(R.id.main_linear);
+        rlSetHeadIcon = findViewById(R.id.rl_set_head_icon);
     }
 
     private void renderView() {
@@ -90,6 +139,11 @@ public class ImagePreviewActivity extends AppCompatActivity {
         adapter = new ImagePreviewAdapter(this, imageList, itemPosition);
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(mCurrentPosition);
+        if (isFromMyPics){
+            rlSetHeadIcon.setVisibility(View.VISIBLE);
+        }else {
+            rlSetHeadIcon.setVisibility(View.GONE);
+        }
     }
 
     private void getIntentData() {
@@ -98,6 +152,10 @@ public class ImagePreviewActivity extends AppCompatActivity {
             mCurrentPosition = mStartPosition;
             itemPosition = getIntent().getIntExtra(Consts.START_ITEM_POSITION, 0);
             imageList = getIntent().getStringArrayListExtra("imageList");
+            isFromMyPics = getIntent().getBooleanExtra("fromMyPics",false);
+            if (isFromMyPics){
+                listPicId = getIntent().getStringArrayListExtra("picListIDList");
+            }
         }
     }
 

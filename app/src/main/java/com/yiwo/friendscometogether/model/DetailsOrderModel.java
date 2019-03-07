@@ -9,7 +9,7 @@ public class DetailsOrderModel {
     /**
      * code : 200
      * message : 获取成功
-     * obj : {"title":"登峨眉山！","content":"登峨眉山！登峨眉山！登峨眉山！登峨眉山！登峨眉山！登峨眉山！登峨眉山！","picture":"http://47.92.136.19/uploads/activity/20180720/20180720/73cc839014b7516c8d975ec3aa52e382.jpg","time":"2018.07.30-2018.08.01","go_num":"1","price":"1.00","order_sn":"2018080116145072947","paycode":"","create_time":"","pay_time":"2018-08-01 16:14:50","over_time":"","status":"退款中","pay_type":"0","order_type":"4","price_type":"自费"}
+     * obj : {"title":"王洋测试期数","content":"","picture":"http://47.92.136.19/uploads/xingcheng/20190301/8a62c7ff6b6fdc4c090a99620f079b3a.png","time":"2019.03.01-2019.03.03","go_num":"1","price":"0.01","order_sn":"20190301172239894972","paycode":"2019030122001464861023287840","create_time":"","pay_time":"2019-03-01 17:22:39","over_time":"","status":"行程结束","pay_type":"1","order_type":"3","price_type":"自费","begin_time":"2019.03.01","end_time":"2019.03.03","noname":"0"}
      */
 
     private int code;
@@ -42,21 +42,24 @@ public class DetailsOrderModel {
 
     public static class ObjBean {
         /**
-         * title : 登峨眉山！
-         * content : 登峨眉山！登峨眉山！登峨眉山！登峨眉山！登峨眉山！登峨眉山！登峨眉山！
-         * picture : http://47.92.136.19/uploads/activity/20180720/20180720/73cc839014b7516c8d975ec3aa52e382.jpg
-         * time : 2018.07.30-2018.08.01
+         * title : 王洋测试期数
+         * content :
+         * picture : http://47.92.136.19/uploads/xingcheng/20190301/8a62c7ff6b6fdc4c090a99620f079b3a.png
+         * time : 2019.03.01-2019.03.03
          * go_num : 1
-         * price : 1.00
-         * order_sn : 2018080116145072947
-         * paycode :
+         * price : 0.01
+         * order_sn : 20190301172239894972
+         * paycode : 2019030122001464861023287840
          * create_time :
-         * pay_time : 2018-08-01 16:14:50
+         * pay_time : 2019-03-01 17:22:39
          * over_time :
-         * status : 退款中
-         * pay_type : 0
-         * order_type : 4
+         * status : 行程结束
+         * pay_type : 1
+         * order_type : 3
          * price_type : 自费
+         * begin_time : 2019.03.01
+         * end_time : 2019.03.03
+         * noname : 0 0不是匿名 1是匿名
          */
 
         private String title;
@@ -74,6 +77,9 @@ public class DetailsOrderModel {
         private String pay_type;
         private String order_type;
         private String price_type;
+        private String begin_time;
+        private String end_time;
+        private String noname;
 
         public String getTitle() {
             return title;
@@ -193,6 +199,30 @@ public class DetailsOrderModel {
 
         public void setPrice_type(String price_type) {
             this.price_type = price_type;
+        }
+
+        public String getBegin_time() {
+            return begin_time;
+        }
+
+        public void setBegin_time(String begin_time) {
+            this.begin_time = begin_time;
+        }
+
+        public String getEnd_time() {
+            return end_time;
+        }
+
+        public void setEnd_time(String end_time) {
+            this.end_time = end_time;
+        }
+
+        public String getNoname() {
+            return noname;
+        }
+
+        public void setNoname(String noname) {
+            this.noname = noname;
         }
     }
 }

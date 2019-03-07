@@ -40,18 +40,22 @@ public class OrderCommentActivity extends BaseActivity {
     TextView tvTitle;
     @BindView(R.id.activity_order_comment_iv_title)
     ImageView ivTitle;
-    @BindView(R.id.activity_order_comment_tv_content)
-    TextView tvContent;
-    @BindView(R.id.activity_order_comment_tv_time)
-    TextView tvTime;
-    @BindView(R.id.activity_order_comment_tv_people_num)
-    TextView tvPeopleNum;
     @BindView(R.id.activity_order_comment_tv_price_details)
     TextView tvPriceDetails;
     @BindView(R.id.activity_order_comment_tv_price)
     TextView tvPrice;
     @BindView(R.id.activity_order_comment_et_content)
     EditText etContent;
+
+    @BindView(R.id.tv_start_time)
+    TextView tvStartTime;
+    @BindView(R.id.tv_end_time)
+    TextView tvEndTime;
+    @BindView(R.id.tv_people_num)
+    TextView tvPeopleNum;
+    @BindView(R.id.tv_noname)
+    TextView tvNoName;
+
 
     private SpImp spImp;
     private String uid = "";
@@ -79,6 +83,7 @@ public class OrderCommentActivity extends BaseActivity {
         orderId = intent.getStringExtra("orderid");
         uid = spImp.getUID();
         if(type.equals("0")){
+            Log.d("ujIDujID","order_id:::"+orderId+"");
             ViseHttp.POST(NetConfig.detailsOrderUrl)
                     .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.detailsOrderUrl))
                     .addParam("order_id", orderId)
@@ -96,9 +101,10 @@ public class OrderCommentActivity extends BaseActivity {
                                     if(!TextUtils.isEmpty(model.getObj().getPicture())){
                                         Picasso.with(OrderCommentActivity.this).load(model.getObj().getPicture()).into(ivTitle);
                                     }
-                                    tvContent.setText(model.getObj().getContent());
-                                    tvTime.setText("时间: " + model.getObj().getTime());
+                                    tvStartTime.setText("开始时间："+model.getObj().getBegin_time());
+                                    tvEndTime.setText("结束时间："+model.getObj().getEnd_time());
                                     tvPeopleNum.setText("参加人数: " + model.getObj().getGo_num());
+                                    tvNoName.setText("是否匿名："+(model.getObj().getNoname().equals("0")? "否":"是"));
                                     tvPriceDetails.setText(model.getObj().getPrice_type());
                                     tvPrice.setText("合计费用: " + model.getObj().getPrice());
                                 }
@@ -113,6 +119,7 @@ public class OrderCommentActivity extends BaseActivity {
                         }
                     });
         }else if(type.equals("1")){
+            Log.d("ujIDujID",orderId+"");
             ViseHttp.POST(NetConfig.joinGetCommentInfoUrl)
                     .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl+NetConfig.joinGetCommentInfoUrl))
                     .addParam("ujID", orderId)
@@ -129,9 +136,11 @@ public class OrderCommentActivity extends BaseActivity {
                                     if(!TextUtils.isEmpty(model.getObj().getPicture())){
                                         Picasso.with(OrderCommentActivity.this).load(model.getObj().getPicture()).into(ivTitle);
                                     }
-                                    tvContent.setText(model.getObj().getContent());
-                                    tvTime.setText("时间: " + model.getObj().getTime());
+                                    tvStartTime.setText("开始时间："+model.getObj().getBegin_time());
+                                    tvEndTime.setText("结束时间："+model.getObj().getEnd_time());
                                     tvPeopleNum.setText("参加人数: " + model.getObj().getGo_num());
+                                    tvPeopleNum.setText("参加人数: " + model.getObj().getGo_num());
+                                    tvNoName.setText("是否匿名："+(model.getObj().getNoname().equals("0")? "否":"是"));
                                     tvPriceDetails.setText(model.getObj().getPrice_type());
                                     tvPrice.setText("合计费用: " + model.getObj().getPrice());
                                 }

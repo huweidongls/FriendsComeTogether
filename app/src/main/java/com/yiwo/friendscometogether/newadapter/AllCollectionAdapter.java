@@ -49,7 +49,7 @@ public class AllCollectionAdapter extends RecyclerView.Adapter<AllCollectionAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.tvTitle.setText(data.get(position).getFtitle());
-        holder.tvLookNum.setText("12345人阅读了这篇友记");
+        holder.tvLookNum.setText(data.get(position).getFmlook()+"人阅读了这篇友记");
         Glide.with(context).load(data.get(position).getFpic()).into(holder.iv);
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override

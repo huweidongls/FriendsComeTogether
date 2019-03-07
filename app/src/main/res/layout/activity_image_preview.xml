@@ -7,10 +7,37 @@
     android:background="#ff171b19"
     tools:context="com.yiwo.friendscometogether.imagepreview.ImagePreviewActivity">
 
-    <com.yiwo.friendscometogether.imagepreview.CustomViewPager
-        android:id="@+id/imageBrowseViewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <com.yiwo.friendscometogether.imagepreview.CustomViewPager
+            android:id="@+id/imageBrowseViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+            <RelativeLayout
+                android:id="@+id/rl_set_head_icon"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_marginRight="20dp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/white_ffffff"
+                    android:text="设为头像"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
 
     <LinearLayout
         android:id="@+id/main_linear"

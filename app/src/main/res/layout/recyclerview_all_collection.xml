@@ -25,7 +25,7 @@
         android:layout_marginTop="10px"
         android:textColor="#505050"
         android:textSize="24px"
-        android:text="12345阅读了这篇友记"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

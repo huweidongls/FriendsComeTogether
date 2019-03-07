@@ -61,7 +61,7 @@ public class FragmentToTripAdapter extends RecyclerView.Adapter<FragmentToTripAd
                 intent.setClass(context, DetailsToBePaidActivity.class);
                 intent.putExtra("order_id", data.get(position).getOID());
                 context.startActivity(intent);
-                activity.finish();
+//                activity.finish();
             }
         });
         holder.tvTitle.setText(data.get(position).getTitle());

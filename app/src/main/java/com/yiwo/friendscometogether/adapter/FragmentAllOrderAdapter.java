@@ -72,7 +72,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
                 intent.setClass(context, DetailsToBePaidActivity.class);
                 intent.putExtra("order_id", data.get(position).getOID());
                 context.startActivity(intent);
-                activity.finish();
+//                activity.finish();
             }
         });
         holder.tvComment.setOnClickListener(new View.OnClickListener() {

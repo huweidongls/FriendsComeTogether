@@ -75,45 +75,48 @@
                     android:layout_centerVertical="true"
                     android:layout_width="180px"
                     android:layout_height="180px" />
-
-                <TextView
-                    android:id="@+id/activity_details_to_pay_tv_content"
-                    android:lines="2"
-                    android:ellipsize="end"
-                    android:layout_marginRight="98px"
-                    android:layout_marginLeft="25px"
-                    android:layout_marginTop="20px"
+                <LinearLayout
+                    android:layout_alignTop="@+id/activity_details_to_pay_iv_title"
+                    android:layout_marginLeft="20px"
+                    android:orientation="vertical"
                     android:layout_toRightOf="@+id/activity_details_to_pay_iv_title"
-                    android:textSize="24px"
-                    android:textColor="#333333"
-                    android:text="云南旅游活动云南旅游活 动云南旅游活动云南2222222222"
-                    android:layout_width="288px"
-                    android:layout_height="66px" />
-
-                <TextView
-                    android:id="@+id/activity_details_to_pay_tv_time"
-                    android:layout_marginTop="12px"
-                    android:layout_below="@+id/activity_details_to_pay_tv_content"
-                    android:layout_marginLeft="25px"
-                    android:layout_toRightOf="@+id/activity_details_to_pay_iv_title"
-                    android:textColor="#999999"
-                    android:textSize="24px"
-                    android:text="行程时间：2018.1.3-2018.1.5"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="170px">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_start_time"
+                        android:textColor="#333333"
+                        android:textSize="24px"
+                        android:text="开始时间："
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/tv_end_time"
+                        android:textColor="#333333"
+                        android:textSize="24px"
+                        android:text="结束时间："
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-                <TextView
-                    android:layout_marginTop="6px"
-                    android:layout_below="@+id/activity_details_to_pay_tv_time"
-                    android:textColor="#999999"
-                    android:textSize="24px"
-                    android:layout_marginLeft="25px"
-                    android:layout_toRightOf="@+id/activity_details_to_pay_iv_title"
-                    android:id="@+id/activity_details_to_pay_tv_people_num"
-                    android:text="参加人数：122"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
 
+                    <TextView
+                        android:layout_weight="1"
+                        android:textColor="#333333"
+                        android:textSize="24px"
+                        android:id="@+id/tv_people_num"
+                        android:text="参加人数："
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_weight="1"
+                        android:textColor="#333333"
+                        android:textSize="24px"
+                        android:id="@+id/tv_noname"
+                        android:text="是否匿名："
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
             </RelativeLayout>
 
             <RelativeLayout
