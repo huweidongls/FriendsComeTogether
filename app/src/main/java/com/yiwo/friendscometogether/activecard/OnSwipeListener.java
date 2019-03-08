@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether.activecard;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.yiwo.friendscometogether.model.FriendsTogethermodel;
 
@@ -18,7 +19,7 @@ public interface OnSwipeListener<T> {
 //     * @param direction  卡片滑动的方向，CardConfig.SWIPING_LEFT 为向左滑，CardConfig.SWIPING_RIGHT 为向右滑，
 //     *                   CardConfig.SWIPING_NONE 为不偏左也不偏右
 //     */
-//    void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction);
+    void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction);
 
     /**
      * 卡片完全滑出时回调

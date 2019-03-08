@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -60,7 +62,6 @@ public class FriendsTogetherFragment1 extends BaseFragment {
     RecyclerView rv;
     @BindView(R.id.iv_youju_focus)
     ImageView ivFocus;
-
     private CardAdapter adapter;
     private List<FriendsTogethermodel.ObjBean> mList;
 
@@ -79,7 +80,6 @@ public class FriendsTogetherFragment1 extends BaseFragment {
         ButterKnife.bind(this, view);
 
         spImp = new SpImp(getContext());
-
         return view;
     }
 
@@ -135,7 +135,24 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                                 RenRenCallback callback = new RenRenCallback(rv, adapter, mList);
                                 callback.setOnSwipedListener(new OnSwipeListener() {
                                     @Override
+                                    public void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
+                                        Log.d("滑动：",direction+"");
+//                                        CardAdapter.ViewHolder mviewHolder = (CardAdapter.ViewHolder) viewHolder;
+//                                        if (direction == CardConfig.SWIPING_LEFT) {
+//                                            mviewHolder.tv_last_data.setAlpha(0f);
+//                                        } else if (direction == CardConfig.SWIPING_RIGHT) {
+//                                            mviewHolder.view_last_data.setAlpha(Math.abs(ratio));
+//                                            mviewHolder.tv_last_data.setAlpha(Math.abs(ratio));
+//                                        } else {
+//                                            mviewHolder.tv_last_data.setAlpha(0f);
+//                                        }
+                                    }
+
+                                    @Override
                                     public void onSwiped(RecyclerView.ViewHolder viewHolder, FriendsTogethermodel.ObjBean t, int direction) {
+                                        CardAdapter.ViewHolder mviewHolder = (CardAdapter.ViewHolder) viewHolder;
+                                        mviewHolder.view_last_data.setAlpha(0);
+                                        mviewHolder.tv_last_data.setAlpha(0);
                                         bean = t;
                                         if (t.getFocusOn().equals("0")) {
                                             Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);

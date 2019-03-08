@@ -106,6 +106,7 @@ public class RenRenCallback extends ItemTouchHelper.SimpleCallback {
         //先根据滑动的dxdy 算出现在动画的比例系数fraction
         double swipValue = Math.sqrt(dX * dX + dY * dY);
         double fraction = swipValue / getThreshold(viewHolder);
+
         //边界修正 最大为1
         if (fraction > 1) {
             fraction = 1;
@@ -127,6 +128,23 @@ public class RenRenCallback extends ItemTouchHelper.SimpleCallback {
                 }
             }
         }
+        // 得到滑动的阀值
+          float ratio = dX / getThreshold(recyclerView, viewHolder);
+        // ratio 最大为 1 或 -1
+        if (ratio > 1) {
+            ratio = 1;
+        } else if (ratio < -1) {
+            ratio = -1;
+        }
+        // 回调监听器
+        if (mListener != null) {
+            if (ratio != 0) {
+                mListener.onSwiping(viewHolder, ratio, ratio < 0 ? CardConfig.SWIPING_LEFT : CardConfig.SWIPING_RIGHT);
+            } else {
+                mListener.onSwiping(viewHolder, ratio, CardConfig.SWIPING_NONE);
+            }
+        }
+
 //        int i_dx_temp = dx_temp;//
 //        if (dX>0){
 //            dx_temp = 1;
@@ -152,5 +170,8 @@ public class RenRenCallback extends ItemTouchHelper.SimpleCallback {
 //            mAdapter.notifyDataSetChanged();
 //            Log.d("direction,LEFT",dX+"");
 //        }
+    }
+    private float getThreshold(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+        return recyclerView.getWidth() * getSwipeThreshold(viewHolder);
     }
 }

@@ -20,6 +20,8 @@ import com.yiwo.friendscometogether.custom.EditTitleDialog;
 import com.yiwo.friendscometogether.custom.ShieldReasonDialog;
 import com.yiwo.friendscometogether.model.TeamIntercalationModel;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newadapter.ChaWenGuanLiAdapter;
+import com.yiwo.friendscometogether.newmodel.ChaWenGuanLiModel;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import org.json.JSONException;
@@ -39,8 +41,8 @@ public class TeamIntercalationActivity extends BaseActivity {
     @BindView(R.id.activity_team_intercalation_rv)
     RecyclerView recyclerView;
 
-    private TeamIntercalationAdapter adapter;
-    private List<TeamIntercalationModel.ObjBean> mList;
+    private ChaWenGuanLiAdapter adapter;
+    private List<ChaWenGuanLiModel.ObjBean> mList;
 
     private String id = "";
 
@@ -64,7 +66,7 @@ public class TeamIntercalationActivity extends BaseActivity {
 
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-
+        Log.d("ididididid",id);
         uid = spImp.getUID();
 
         LinearLayoutManager manager = new LinearLayoutManager(TeamIntercalationActivity.this);
@@ -80,22 +82,24 @@ public class TeamIntercalationActivity extends BaseActivity {
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.getInt("code") == 200){
                                 Gson gson = new Gson();
-                                TeamIntercalationModel model = gson.fromJson(data, TeamIntercalationModel.class);
+                                ChaWenGuanLiModel model = gson.fromJson(data, ChaWenGuanLiModel.class);
                                 mList = model.getObj();
-                                adapter = new TeamIntercalationAdapter(mList);
+                                adapter = new ChaWenGuanLiAdapter(mList);
                                 recyclerView.setAdapter(adapter);
-                                adapter.setOnItemClickListener(new TeamIntercalationAdapter.OnItemClickListener() {
+                                adapter.setOnItemClickListener(new ChaWenGuanLiAdapter.OnItemClickListener() {
                                     @Override
                                     public void onClick(int type, final int position) {
+                                        Log.d("positionposition",mList.get(position).getFfID()+"");
                                         switch (type){
                                             case 1:
                                                 toDialog(TeamIntercalationActivity.this, "提示", "是否允许展示", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                                        Log.e("222", mList.get(position).getFfpID()+"");
+                                                        Log.e("222", mList.get(position).getFfID()+"");
                                                         ViseHttp.POST(NetConfig.intercalationShowUrl)
                                                                 .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.intercalationShowUrl))
-                                                                .addParam("id", mList.get(position).getFfpID())
+                                                                .addParam("id", mList.get(position).getFfID())
+                                                                .addParam("uid",uid)
                                                                 .addParam("type", "0")
                                                                 .request(new ACallback<String>() {
                                                                     @Override
@@ -105,6 +109,8 @@ public class TeamIntercalationActivity extends BaseActivity {
                                                                             JSONObject jsonObject1 = new JSONObject(data);
                                                                             if(jsonObject1.getInt("code") == 200){
                                                                                 toToast(TeamIntercalationActivity.this, "已展示");
+                                                                                mList.get(position).setRadio("2");
+                                                                                adapter.notifyDataSetChanged();
                                                                             }else {
                                                                                 toToast(TeamIntercalationActivity.this, jsonObject1.getString("message"));
                                                                             }
@@ -127,25 +133,61 @@ public class TeamIntercalationActivity extends BaseActivity {
                                                 });
                                                 break;
                                             case 2:
-                                                final ShieldReasonDialog dialog = new ShieldReasonDialog(TeamIntercalationActivity.this);
-                                                dialog.show();
-                                                dialog.setOnReturnListener(new EditTitleDialog.OnReturnListener() {
+//                                                final ShieldReasonDialog dialog = new ShieldReasonDialog(TeamIntercalationActivity.this);
+//                                                dialog.show();
+//                                                dialog.setOnReturnListener(new EditTitleDialog.OnReturnListener() {
+//                                                    @Override
+//                                                    public void onReturn(String title) {
+//                                                        ViseHttp.POST(NetConfig.sheildIntercalationUrl)
+//                                                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.sheildIntercalationUrl))
+//                                                                .addParam("id", mList.get(position).getFfID())
+//                                                                .addParam("uid", spImp.getUID())
+//                                                                .addParam("content", title)
+//                                                                .request(new ACallback<String>() {
+//                                                                    @Override
+//                                                                    public void onSuccess(String data) {
+//                                                                        Log.e("222", data);
+//                                                                        try {
+//                                                                            JSONObject jsonObject2 = new JSONObject(data);
+//                                                                            if(jsonObject2.getInt("code") == 200){
+//                                                                                toToast(TeamIntercalationActivity.this, "屏蔽成功");
+//                                                                                dialog.dismiss();
+//                                                                                mList.get(position).setRadio("1");
+//                                                                                adapter.notifyDataSetChanged();
+//                                                                            }
+//                                                                        } catch (JSONException e) {
+//                                                                            e.printStackTrace();
+//                                                                        }
+//                                                                    }
+//
+//                                                                    @Override
+//                                                                    public void onFail(int errCode, String errMsg) {
+//                                                                        toToast(TeamIntercalationActivity.this, "请检查网络");
+//                                                                    }
+//                                                                });
+//                                                    }
+//                                                });
+                                                toDialog(TeamIntercalationActivity.this, "提示", "不允许展示", new DialogInterface.OnClickListener() {
                                                     @Override
-                                                    public void onReturn(String title) {
-                                                        ViseHttp.POST(NetConfig.sheildIntercalationUrl)
-                                                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.sheildIntercalationUrl))
-                                                                .addParam("id", mList.get(position).getFfpID())
-                                                                .addParam("content", title)
-                                                                .addParam("uid", uid)
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                        Log.e("222", mList.get(position).getFfID()+"");
+                                                        ViseHttp.POST(NetConfig.intercalationShowUrl)
+                                                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.intercalationShowUrl))
+                                                                .addParam("id", mList.get(position).getFfID())
+                                                                .addParam("uid",uid)
+                                                                .addParam("type", "1")
                                                                 .request(new ACallback<String>() {
                                                                     @Override
                                                                     public void onSuccess(String data) {
                                                                         Log.e("222", data);
                                                                         try {
-                                                                            JSONObject jsonObject2 = new JSONObject(data);
-                                                                            if(jsonObject2.getInt("code") == 200){
-                                                                                toToast(TeamIntercalationActivity.this, "屏蔽成功");
-                                                                                dialog.dismiss();
+                                                                            JSONObject jsonObject1 = new JSONObject(data);
+                                                                            if(jsonObject1.getInt("code") == 200){
+                                                                                toToast(TeamIntercalationActivity.this, "已取消展示");
+                                                                                mList.get(position).setRadio("1");
+                                                                                adapter.notifyDataSetChanged();
+                                                                            }else {
+                                                                                toToast(TeamIntercalationActivity.this, jsonObject1.getString("message"));
                                                                             }
                                                                         } catch (JSONException e) {
                                                                             e.printStackTrace();
@@ -157,6 +199,11 @@ public class TeamIntercalationActivity extends BaseActivity {
                                                                         toToast(TeamIntercalationActivity.this, "请检查网络");
                                                                     }
                                                                 });
+                                                    }
+                                                }, new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+
                                                     }
                                                 });
                                                 break;

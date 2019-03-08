@@ -97,7 +97,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         return data == null ? 0 : data.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView ivAvatar;
         private TextView tvNickname;
@@ -111,7 +111,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         private TextView tvAddress;
         private LinearLayout ll;
         private RelativeLayout rl;
-
+        public View view_last_data;
+        public TextView tv_last_data;
         public ViewHolder(View itemView) {
             super(itemView);
             ivAvatar = itemView.findViewById(R.id.iv_avatar);
@@ -126,6 +127,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             tvAddress = itemView.findViewById(R.id.tv_address);
             ll = itemView.findViewById(R.id.ll);
             rl = itemView.findViewById(R.id.click_layout);
+
+            view_last_data =  itemView.findViewById(R.id.view_last_data);
+            tv_last_data =  itemView.findViewById(R.id.tv_last_data);
+
         }
     }
 

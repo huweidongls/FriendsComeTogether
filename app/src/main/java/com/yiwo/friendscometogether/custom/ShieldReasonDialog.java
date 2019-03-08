@@ -62,6 +62,7 @@ public class ShieldReasonDialog extends Dialog {
             public void onClick(View view) {
                 if(!TextUtils.isEmpty(etTitle.getText().toString())){
                     listener.onReturn(etTitle.getText().toString());
+
                 }else {
                     Toast.makeText(context, "请输入屏蔽原因", Toast.LENGTH_SHORT).show();
                 }

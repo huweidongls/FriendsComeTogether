@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/line"
     tools:context="com.yiwo.friendscometogether.pages.TeamIntercalationActivity">
 
     <RelativeLayout
@@ -29,6 +30,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/activity_team_intercalation_rv"
         android:layout_below="@+id/activity_team_intercalation_rl_top"
+        android:layout_marginBottom="50px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

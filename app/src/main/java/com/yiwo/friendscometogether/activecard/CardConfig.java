@@ -22,7 +22,18 @@ public class CardConfig {
     //每一级Scale相差0.05f，translationY相差7dp左右
     public static float SCALE_GAP;
     public static int TRANS_Y_GAP;
-
+    /**
+     * 卡片滑动时不偏左也不偏右
+     */
+    public static final int SWIPING_NONE = 1;
+    /**
+     * 卡片向左滑动时
+     */
+    public static final int SWIPING_LEFT = 1 << 2;
+    /**
+     * 卡片向右滑动时
+     */
+    public static final int SWIPING_RIGHT = 1 << 3;
     public static void initConfig(Context context) {
         MAX_SHOW_COUNT = 4;
         SCALE_GAP = 0.05f;

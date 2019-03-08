@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:background="@color/white_ffffff"
+        android:orientation="vertical"
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
+        android:paddingTop="10px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginTop="10px"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/my_head"
+                android:id="@+id/iv_avatar"
+                android:layout_width="80px"
+                android:layout_height="80px" />
+            <LinearLayout
+                android:layout_marginLeft="20px"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/tv_name"
+                    android:textSize="28px"
+                    android:textColor="@color/black_333333"
+                    android:text="昵称"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px"
+                    android:text="发布时间：2018-03-30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <TextView
+            android:layout_marginTop="10px"
+            android:id="@+id/tv_title"
+            android:textStyle="bold"
+            android:lines="1"
+            android:ellipsize="end"
+            android:textColor="@color/black_333333"
+            android:textSize="32px"
+            android:text="队友的插文，想说什么就说什么呗！"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_pics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:id="@+id/tv_reason"
+                android:textColor="@color/black_333333"
+                android:text=""
+                android:textSize="32px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:padding="10px"
+                android:layout_marginRight="30px"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                android:id="@+id/ll_alow"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/iv_alow_show"
+                    android:src="@mipmap/show"
+                    android:layout_width="31px"
+                    android:layout_height="23px" />
+
+                <TextView
+                    android:id="@+id/tv_alow_show"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="30px"
+                    android:textColor="@color/black_333333"
+                    android:text="允许展示"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="20px"/>
+</LinearLayout>
