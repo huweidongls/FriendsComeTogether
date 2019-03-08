@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether.newadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.imagepreview.Consts;
+import com.yiwo.friendscometogether.imagepreview.ImagePreviewActivity;
 import com.yiwo.friendscometogether.newmodel.ChaWenGuanLiModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,13 +40,30 @@ public class ChaWenGuanLiPicsAdapter extends RecyclerView.Adapter<ChaWenGuanLiPi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         Glide.with(context).load(data.get(position).getPicurl()).into(holder.iv);
         if (!data.get(position).getPictitle().equals("")){
             holder.tv.setText(data.get(position).getPictitle());
         }else{
             holder.rl.setVisibility(View.GONE);
         }
+        holder.iv.setFocusable(true);
+        holder.iv.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                List<String> urlList = new ArrayList<>();
+                for (int i = 0; i<data.size(); i++){
+                    urlList.add(data.get(i).getPicurl());
+                }
+                Intent intent = new Intent(context, ImagePreviewActivity.class);
+                intent.putStringArrayListExtra("imageList", (ArrayList<String>) urlList);
+                intent.putExtra(Consts.START_ITEM_POSITION, position);
+                intent.putExtra(Consts.START_IAMGE_POSITION, position);
+                context.startActivity(intent);
+                return false;
+            }
+        });
+
     }
 
     @Override
