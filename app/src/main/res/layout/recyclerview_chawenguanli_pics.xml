@@ -9,10 +9,9 @@
         android:layout_height="wrap_content">
         <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
             android:id="@+id/iv_pic"
-            test:radius1="18px"
+            test:radius1="9dp"
             android:layout_width="match_parent"
             android:layout_height="176px"
-            android:layout_marginRight="3.5px"
             android:scaleType="centerCrop"
             android:src="@mipmap/my_head" />
         <RelativeLayout

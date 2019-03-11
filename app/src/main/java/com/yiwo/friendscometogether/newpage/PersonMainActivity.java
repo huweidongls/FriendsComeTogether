@@ -384,7 +384,7 @@ public class PersonMainActivity extends BaseActivity {
     }
 
     @OnClick({R.id.rl_back, R.id.ll_person_all_pics, R.id.ll_person_all_youji, R.id.ll_person_all_youju,
-            R.id.rl_algin_right_wode, R.id.rl_add_friend, R.id.rl_guanzhu,R.id.iv_heart,R.id.ll_huozan,R.id.ll_guanzhu})
+            R.id.rl_algin_right_wode, R.id.rl_add_friend, R.id.rl_guanzhu,R.id.iv_heart,R.id.ll_huozan,R.id.ll_guanzhu,R.id.ll_fans})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -560,14 +560,34 @@ public class PersonMainActivity extends BaseActivity {
                 dialog.show();
                 break;
             case R.id.ll_guanzhu:
-                intent.setClass(PersonMainActivity.this,PersonGuanZhuActivity.class);
-                intent.putExtra("userID",person_id);
-                if (type_tade_or_wode == 1){
-                    intent.putExtra("userName","我");
-                }else{
-                    intent.putExtra("userName",model.getObj().getInfo().getUsername());
+                if (model.getObj().getInfo().getUserlike().equals("0")){
+                    toToast(PersonMainActivity.this,"他还没有关注任何人");
+                }else {
+                    intent.setClass(PersonMainActivity.this,PersonGuanZhuActivity.class);
+                    intent.putExtra("userID",person_id);
+                    intent.putExtra("type",1);
+                    if (type_tade_or_wode == 1){
+                        intent.putExtra("userName","我");
+                    }else{
+                        intent.putExtra("userName",model.getObj().getInfo().getUsername());
+                    }
+                    startActivity(intent);
                 }
-                startActivity(intent);
+                break;
+            case R.id.ll_fans:
+                if (model.getObj().getInfo().getFans().equals("0")){
+                    toToast(PersonMainActivity.this,"他还没有粉丝");
+                }else {
+                    intent.setClass(PersonMainActivity.this,PersonGuanZhuActivity.class);
+                    intent.putExtra("userID",person_id);
+                    intent.putExtra("type",2);
+                    if (type_tade_or_wode == 1){
+                        intent.putExtra("userName","我");
+                    }else{
+                        intent.putExtra("userName",model.getObj().getInfo().getUsername());
+                    }
+                    startActivity(intent);
+                }
                 break;
         }
 

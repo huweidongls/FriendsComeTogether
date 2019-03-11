@@ -285,4 +285,6 @@ public class NetConfig {
     public static String getPhase = "action/ac_activity/getphase";
     //清除用户浏览历史
     public static String clearLookHistory = "action/ac_activity/clear_look_history";
+    //个人主页 关注&粉丝
+    public static String lookUserAttention ="action/ac_user/lookUserAttention";
 }

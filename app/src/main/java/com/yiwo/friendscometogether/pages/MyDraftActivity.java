@@ -190,7 +190,7 @@ public class MyDraftActivity extends BaseActivity {
             // 3. WRAP_CONTENT，自身高度，不推荐;
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
             SwipeMenuItem editItem = new SwipeMenuItem(MyDraftActivity.this)
-                    .setBackgroundColor(Color.GREEN)
+                    .setBackgroundColor(Color.parseColor("#5959D3"))
                     .setText("发布")
                     .setTextColor(Color.WHITE)
                     .setWidth(width)

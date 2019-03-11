@@ -80,19 +80,21 @@ public class EditorFriendRememberActivity extends BaseActivity {
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
 
         ButterKnife.bind(this);
-
-        initData();
-
-    }
-
-    private void initData() {
-
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         draft = intent.getStringExtra("draft");
         if(draft.equals("2")){
             rlComplete.setVisibility(View.VISIBLE);
         }
+        initData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    private void initData() {
         ViseHttp.POST(NetConfig.editorFriendRememberUrl)
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.editorFriendRememberUrl))
                 .addParam("id", id)

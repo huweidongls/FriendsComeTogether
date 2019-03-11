@@ -16,6 +16,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.imagepreview.Consts;
 import com.yiwo.friendscometogether.imagepreview.ImagePreviewActivity;
 import com.yiwo.friendscometogether.newmodel.ChaWenGuanLiModel;
+import com.yiwo.friendscometogether.newmodel.WoDeChaWenModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +25,10 @@ import java.util.List;
  * Created by ljc on 2019/3/8.
  */
 
-public class ChaWenGuanLiPicsAdapter extends RecyclerView.Adapter<ChaWenGuanLiPicsAdapter.ViewHolder> {
-    private List<ChaWenGuanLiModel.ObjBean.PiclistBean> data;
+public class WoDeChaWenPicsAdapter extends RecyclerView.Adapter<WoDeChaWenPicsAdapter.ViewHolder> {
+    private List<WoDeChaWenModel.ObjBean.PiclistBean> data;
     private Context context;
-    public ChaWenGuanLiPicsAdapter(List<ChaWenGuanLiModel.ObjBean.PiclistBean> list){
+    public WoDeChaWenPicsAdapter(List<WoDeChaWenModel.ObjBean.PiclistBean> list){
         this.data = list;
     }
     @Override
@@ -35,7 +36,7 @@ public class ChaWenGuanLiPicsAdapter extends RecyclerView.Adapter<ChaWenGuanLiPi
         this.context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_chawenguanli_pics, parent, false);
         ScreenAdapterTools.getInstance().loadView(view);
-        ChaWenGuanLiPicsAdapter.ViewHolder holder = new ChaWenGuanLiPicsAdapter.ViewHolder(view);
+        WoDeChaWenPicsAdapter.ViewHolder holder = new WoDeChaWenPicsAdapter.ViewHolder(view);
         return holder;
     }
 

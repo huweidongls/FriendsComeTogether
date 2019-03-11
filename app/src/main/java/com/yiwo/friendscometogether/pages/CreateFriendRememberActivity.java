@@ -464,10 +464,10 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                 }else if (TextUtils.isEmpty(tvLabel.getText().toString())){
                     Toast.makeText(CreateFriendRememberActivity.this, "请选择标签", Toast.LENGTH_SHORT).show();
                 }
-                //20190225 不限制友记上传图片数量
-//                else if(mList.size()<4){
-//                    Toast.makeText(CreateFriendRememberActivity.this, "请至少上传4张照片", Toast.LENGTH_SHORT).show();
-//                }
+                //20190225 限制友记上传图片数量 1
+                else if(mList.size()<1){
+                    Toast.makeText(CreateFriendRememberActivity.this, "请至少上传1张照片", Toast.LENGTH_SHORT).show();
+                }
                 else {
                     //判断如果填写开始时间和结束时间   结束时间必须大于开始时间
                     if (!tvTimeStart.getText().toString().equals("")&&!tvTimeEnd.getText().toString().equals("")){

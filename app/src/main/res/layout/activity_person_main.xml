@@ -232,6 +232,7 @@
                             android:layout_height="wrap_content" />
                     </LinearLayout>
                     <LinearLayout
+                        android:id="@+id/ll_fans"
                         android:padding="21px"
                         android:orientation="vertical"
                         android:layout_weight="1"

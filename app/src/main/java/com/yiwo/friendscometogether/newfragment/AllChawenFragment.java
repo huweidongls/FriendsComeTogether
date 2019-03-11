@@ -16,9 +16,9 @@ import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
-import com.yiwo.friendscometogether.model.UserIntercalationListModel;
 import com.yiwo.friendscometogether.network.NetConfig;
-import com.yiwo.friendscometogether.newadapter.MyChawenAdapter;
+import com.yiwo.friendscometogether.newadapter.WoDeChawenAdapter;
+import com.yiwo.friendscometogether.newmodel.WoDeChaWenModel;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import org.json.JSONException;
@@ -39,8 +39,8 @@ public class AllChawenFragment extends BaseFragment {
     @BindView(R.id.rv1)
     RecyclerView rv1;
 
-    private MyChawenAdapter adapter;
-    private List<UserIntercalationListModel.ObjBean> mList;
+    private WoDeChawenAdapter adapter;
+    private List<WoDeChaWenModel.ObjBean> mList;
 
     private SpImp spImp;
     private String uid = "";
@@ -73,13 +73,13 @@ public class AllChawenFragment extends BaseFragment {
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.getInt("code") == 200){
                                 Gson gson = new Gson();
-                                UserIntercalationListModel userIntercalationListModel = gson.fromJson(data, UserIntercalationListModel.class);
-                                mList = userIntercalationListModel.getObj();
-                                adapter = new MyChawenAdapter(mList);
+                                WoDeChaWenModel model = gson.fromJson(data, WoDeChaWenModel.class);
+                                mList = model.getObj();
+                                adapter = new WoDeChawenAdapter(mList);
                                 LinearLayoutManager manager = new LinearLayoutManager(getContext());
                                 rv1.setLayoutManager(manager);
                                 rv1.setAdapter(adapter);
-                                adapter.setListener(new MyChawenAdapter.OnDeleteListener() {
+                                adapter.setListener(new WoDeChawenAdapter.OnDeleteListener() {
                                     @Override
                                     public void onDelete(final int position) {
                                         toDialog(getContext(), "提示", "是否删除插文", new DialogInterface.OnClickListener() {
@@ -87,7 +87,7 @@ public class AllChawenFragment extends BaseFragment {
                                             public void onClick(final DialogInterface dialogInterface, final int i) {
                                                 ViseHttp.POST(NetConfig.userDeleteIntercalationFocusUrl)
                                                         .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.userDeleteIntercalationFocusUrl))
-                                                        .addParam("id", mList.get(position).getFfpID())
+                                                        .addParam("id", mList.get(position).getFfID())
                                                         .request(new ACallback<String>() {
                                                             @Override
                                                             public void onSuccess(String data) {
