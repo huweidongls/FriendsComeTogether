@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether.newpage;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -93,12 +94,47 @@ public class PrivateMessageActivity extends BaseActivity {
                     }
                 });
     }
-
-    @OnClick({R.id.rl_back})
+    @OnClick({R.id.rl_back,R.id.rl_clear})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_back:
                 finish();
+                break;
+            case R.id.rl_clear:
+                toDialog(context, "提示", "确定清空私信消息？", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ViseHttp.POST(NetConfig.delFriendInfo)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.delFriendInfo))
+                                .addParam("uid", spImp.getUID())
+                                .addParam("type","1")
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if (jsonObject.getInt("code") == 200){
+                                                list.clear();
+                                                adapter.notifyDataSetChanged();
+                                                toToast(context,"已清空");
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+
+                                    }
+                                });
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
                 break;
         }
     }

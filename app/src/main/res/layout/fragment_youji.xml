@@ -15,15 +15,20 @@
             android:layout_height="88px"
             android:layout_alignParentBottom="true">
 
-            <TextView
-                android:id="@+id/tv_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="30px"
-                android:text="返回"
-                android:textColor="@color/white_ffffff"
-                android:textSize="36px" />
+
+            <RelativeLayout
+                android:id="@+id/rl_back"
+                android:layout_width="88px"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:src="@mipmap/fanhui"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30px"
+                    android:id="@+id/iv_back"
+                    android:layout_width="50px"
+                    android:layout_height="50px" />
+            </RelativeLayout>
+
 
             <RelativeLayout
                 android:id="@+id/searchLl"

@@ -22,7 +22,19 @@
             style="@style/tv_top_title"
             android:text="私信"
              />
-
+    <RelativeLayout
+        android:id="@+id/rl_clear"
+        android:layout_alignParentRight="true"
+        android:layout_width="100px"
+        android:layout_height="match_parent">
+        <TextView
+            android:textColor="@color/white_ffffff"
+            android:textSize="30px"
+            android:text="清空"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
     </RelativeLayout>
         <ScrollView
             android:layout_width="match_parent"

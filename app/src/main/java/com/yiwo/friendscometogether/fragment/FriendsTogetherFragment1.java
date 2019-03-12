@@ -151,8 +151,6 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                                     @Override
                                     public void onSwiped(RecyclerView.ViewHolder viewHolder, FriendsTogethermodel.ObjBean t, int direction) {
                                         CardAdapter.ViewHolder mviewHolder = (CardAdapter.ViewHolder) viewHolder;
-                                        mviewHolder.view_last_data.setAlpha(0);
-                                        mviewHolder.tv_last_data.setAlpha(0);
                                         bean = t;
                                         if (t.getFocusOn().equals("0")) {
                                             Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);

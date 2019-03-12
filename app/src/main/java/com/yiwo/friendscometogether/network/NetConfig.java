@@ -287,4 +287,6 @@ public class NetConfig {
     public static String clearLookHistory = "action/ac_activity/clear_look_history";
     //个人主页 关注&粉丝
     public static String lookUserAttention ="action/ac_user/lookUserAttention";
+    //私信消息 删除     传uid用户id    type =0删除一条  =1全部清空   id要删除一条的id
+    public static String delFriendInfo =  "action/ac_user/delFriendInfo";
 }

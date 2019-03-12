@@ -43,24 +43,12 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.contentTv.setText(data.get(position).getBacktitle());
-        holder.replyTv.setText(data.get(position).getFtitle()+"【"+data.get(position).getBacktime()
-                +"】");
-//        holder.replyBt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                EditTitleDialog dialog = new EditTitleDialog(context, new EditTitleDialog.OnReturnListener() {
-//                    @Override
-//                    public void onReturn(String title) {
-//                        if(StringUtils.isEmpty(title)){
-//                            Toast.makeText(context,"回复内容为空",Toast.LENGTH_LONG).show();
-//                        } else {
-//
-//                        }
-//                    }
-//                });
-//            }
-//        });
+        if (data.get(position).getBacktitle()==null||data.get(position).getBacktitle().equals("")){
+            holder.tvReplay.setText("(暂未回复)");
+        }else {
+            holder.tvReplay.setText("回复\n"+data.get(position).getBacktitle());
+        }
+        holder.tvFanKui.setText(data.get(position).getFtitle());
     }
 
     @Override
@@ -69,14 +57,12 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView contentTv;
-        Button replyBt;
-        TextView replyTv;
+        TextView tvFanKui;
+        TextView tvReplay;
         public ViewHolder(View itemView) {
             super(itemView);
-            contentTv = (itemView).findViewById(R.id.recyclerview_feedback_content_tv);
-            replyBt = (itemView).findViewById(R.id.recyclerview_feedback_reply_bt);
-            replyTv = (itemView).findViewById(R.id.recyclerview_feedback_reply_tv);
+            tvFanKui = itemView.findViewById(R.id.tv_fankui);
+            tvReplay = itemView.findViewById(R.id.tv_replay);
         }
     }
 }

@@ -27,7 +27,7 @@ import java.util.List;
 public class ParticipantsItemAdapter extends RecyclerView.Adapter<ParticipantsItemAdapter.ViewHolder>{
     private Context context;
     private List<FriendsTogetherDetailsModel.ObjBean.PhaseBean.PhaseListBean> data;
-
+    private int noname_num = 0;
     public ParticipantsItemAdapter(List<FriendsTogetherDetailsModel.ObjBean.PhaseBean.PhaseListBean> data) {
         this.data = data;
     }
@@ -43,19 +43,34 @@ public class ParticipantsItemAdapter extends RecyclerView.Adapter<ParticipantsIt
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         if(data.size()!=0){
-            if(!StringUtils.isEmpty(data.get(position).getUserpic())){
-                Picasso.with(context).load(data.get(position).getUserpic()).into(holder.headIv);
+            if (position == 0){//当从第一位初始化数据时将匿名人数归为0
+                noname_num = 0;
             }
-            holder.nicknameTv.setText(data.get(position).getUsername());
-//            if(data.get(position).getNum().equals("1")){
-//                holder.numTv.setVisibility(View.INVISIBLE);
-//            } else {
-//                holder.numTv.setText(data.get(position).getNum());
-//            }
+            if (data.get(position).getNoname().equals("1")){// 是否匿名 0否 1是
+                noname_num++;
+                holder.rl_has_name.setVisibility(View.GONE);
+            }else {
+                if(!StringUtils.isEmpty(data.get(position).getUserpic())){
+                    Picasso.with(context).load(data.get(position).getUserpic()).into(holder.headIv);
+                }
+                holder.nicknameTv.setText(data.get(position).getUsername());
+            }
+            if (position!=data.size()-1){//不是最后一条数据时，如果为匿名则不显示，计匿名数
+                holder.rl_no_name.setVisibility(View.GONE);//只有最后一条数据显示匿名头像
+
+            }else {
+                if (noname_num>0){
+                    holder.rl_no_name.setVisibility(View.VISIBLE);
+                    holder.numTv.setText("匿名("+noname_num+")");
+                }else {
+                    holder.rl_no_name.setVisibility(View.GONE);
+                }
+            }
+
             holder.personRl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(data.get(position).getUserID().equals("0")){
+                    if(data.get(position).getNoname().equals("1")){
                         Toast.makeText(context, "无法查看匿名信息", Toast.LENGTH_SHORT).show();
                     }else {
                         Intent it = new Intent(context, PersonMainActivity.class);
@@ -73,17 +88,21 @@ public class ParticipantsItemAdapter extends RecyclerView.Adapter<ParticipantsIt
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView numTv;
+
         private ImageView headIv;
         private TextView nicknameTv;
         private RelativeLayout personRl;
-
+        private RelativeLayout rl_has_name;
+        private RelativeLayout rl_no_name;
+        private TextView numTv;
         public ViewHolder(View itemView) {
             super(itemView);
-            numTv = (itemView).findViewById(R.id.item_num);
             headIv = (itemView).findViewById(R.id.item_head);
             nicknameTv = (itemView).findViewById(R.id.item_nickname);
             personRl = (itemView).findViewById(R.id.item_onclick_rl);
+            rl_has_name = itemView.findViewById(R.id.rl_has_name);
+            rl_no_name = itemView.findViewById(R.id.rl_no_name);
+            numTv = (itemView).findViewById(R.id.item_num);
         }
     }
 

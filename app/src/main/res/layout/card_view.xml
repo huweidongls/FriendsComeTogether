@@ -8,10 +8,10 @@
         android:id="@+id/ll"
         android:background="@color/white_ffffff"
         android:elevation="4px"
-        android:layout_marginTop="20px"
-        android:layout_marginLeft="41px"
-        android:layout_marginRight="41px"
-        android:layout_marginBottom="10px"
+        android:layout_marginTop="10px"
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="10px"
+        android:layout_marginBottom="2px"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -157,32 +157,7 @@
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
-
             </RelativeLayout>
-
         </RelativeLayout>
-
     </LinearLayout>
-    <View
-        android:id="@+id/view_last_data"
-        android:background="@drawable/bg_gray_8px"
-        android:layout_alignBottom="@+id/ll"
-        android:layout_marginTop="20px"
-        android:layout_marginLeft="41px"
-        android:layout_marginRight="41px"
-        android:layout_marginBottom="10px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </View>
-    <TextView
-        android:id="@+id/tv_last_data"
-        android:layout_alignTop="@+id/view_last_data"
-        android:layout_alignLeft="@+id/view_last_data"
-        android:text="上一条"
-        android:textSize="40px"
-        android:textColor="@color/black"
-        android:layout_margin="30px"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
 </RelativeLayout>

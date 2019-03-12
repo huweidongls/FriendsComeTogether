@@ -1,7 +1,10 @@
 package com.yiwo.friendscometogether.newadapter;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
@@ -11,28 +14,38 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.netease.nim.uikit.api.NimUIKit;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.PrivateMessageModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.widget.FlowLayoutManager;
 import com.yiwo.friendscometogether.widget.NestedRecyclerView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.yiwo.friendscometogether.utils.TokenUtils.getToken;
 
 /**
  * Created by ljc on 2019/1/10.
  */
 
 public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAdapter.ViewHolder> {
-    private List<PrivateMessageModel.ObjBean> data ;
+    private List<PrivateMessageModel.ObjBean> list_data ;
     private Context context;
     private MessageListioner messageListioner;
-
+    private SpImp spImp;
     public void setMessageListioner(MessageListioner messageListioner) {
         this.messageListioner = messageListioner;
     }
@@ -43,43 +56,44 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
         void liaotianListion(String Yx_id);
     }
     public PrivateMessageAdapter(List<PrivateMessageModel.ObjBean> data){
-        this.data =data;
+        this.list_data =data;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_message_private, parent, false);
         ScreenAdapterTools.getInstance().loadView(view);
+        spImp = new SpImp(context);
         PrivateMessageAdapter.ViewHolder holder = new PrivateMessageAdapter.ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.tv_message_time.setText(data.get(position).getTimes());
-        Glide.with(context).load(data.get(position).getUserpic()).into(holder.iv_icon_user);
+        holder.tv_message_time.setText(list_data.get(position).getTimes());
+        Glide.with(context).load(list_data.get(position).getUserpic()).into(holder.iv_icon_user);
         holder.iv_icon_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(context, PersonMainActivity.class);
-                intent.putExtra("person_id",data.get(position).getUid());
+                intent.putExtra("person_id",list_data.get(position).getUid());
                 context.startActivity(intent);
             }
         });
-        switch (data.get(position).getRadio()){
+        switch (list_data.get(position).getRadio()){
             case "0"://未操作打招呼
                 holder.ll_private_message.setVisibility(View.VISIBLE);
                 holder.ll_say_hello.setVisibility(View.VISIBLE);
-                if(data.get(position).getSex().equals("0")){
-                    String str = "您收到来自<font color='#0765AA'>"+"@"+data.get(position).getTitleusername()+"</font>帅哥的打招呼。";
+                if(list_data.get(position).getSex().equals("0")){
+                    String str = "您收到来自<font color='#0765AA'>"+"@"+list_data.get(position).getTitleusername()+"</font>帅哥的打招呼。";
                     holder.tv_name_info.setText(Html.fromHtml(str));
                 }else {
-                    String str = "您收到来自<font color='#0765AA'>"+"@"+data.get(position).getTitleusername()+"</font>美女的打招呼。";
+                    String str = "您收到来自<font color='#0765AA'>"+"@"+list_data.get(position).getTitleusername()+"</font>美女的打招呼。";
                     holder.tv_name_info.setText(Html.fromHtml(str));
                 }
                 final List<String> list_biaoqian = new ArrayList<>();
-                String[] strs = data.get(position).getLabel().split(",");
+                String[] strs = list_data.get(position).getLabel().split(",");
                 if (strs!=null&&!strs[0].equals("")){
                     for (int i = 0;i<strs.length;i++){
                         list_biaoqian.add(strs[i]);
@@ -97,13 +111,13 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
                 holder.ll_agree.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        messageListioner.agreeListion(position,data.get(position).getId(),data.get(position).getTitleusername(),data.get(position).getYxuser());
+                        messageListioner.agreeListion(position,list_data.get(position).getId(),list_data.get(position).getTitleusername(),list_data.get(position).getYxuser());
                     }
                 });
                 holder.ll_disagree.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        messageListioner.disAgreeListion(position,data.get(position).getId());
+                        messageListioner.disAgreeListion(position,list_data.get(position).getId());
                     }
                 });
                 break;
@@ -115,7 +129,51 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
                 holder.ll_private_message.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        messageListioner.liaotianListion(data.get(position).getYxuser());
+                        messageListioner.liaotianListion(list_data.get(position).getYxuser());
+                    }
+                });
+                holder.ll_private_message.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("提示")
+                                .setMessage("确定删除这条消息？")
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        ViseHttp.POST(NetConfig.delFriendInfo)
+                                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.delFriendInfo))
+                                                .addParam("uid", spImp.getUID())
+                                                .addParam("type","0")
+                                                .addParam("id",list_data.get(position).getId())
+                                                .request(new ACallback<String>() {
+                                                    @Override
+                                                    public void onSuccess(String data) {
+                                                        try {
+                                                            JSONObject jsonObject = new JSONObject(data);
+                                                            if (jsonObject.getInt("code") == 200){
+                                                                list_data.remove(position);
+                                                                notifyDataSetChanged();
+                                                                Toast.makeText(context,"已删除",Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        } catch (JSONException e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                    }
+                                                    @Override
+                                                    public void onFail(int errCode, String errMsg) {
+
+                                                    }
+                                                });
+                                    }
+                                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).show();
+
+                        return false;
                     }
                 });
                 break;
@@ -127,7 +185,7 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
 
     @Override
     public int getItemCount() {
-        return data == null ? 0 : data.size();
+        return list_data == null ? 0 : list_data.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

@@ -218,7 +218,7 @@ public class YouJiFragment extends Fragment {
         timer.cancel();
     }
 
-    @OnClick({R.id.searchLl, R.id.rl_nearby,R.id.tv_back})
+    @OnClick({R.id.searchLl, R.id.rl_nearby,R.id.rl_back})
     public void onClick(View view) {
         MainActivity mainActivity = (MainActivity) getActivity();
         Intent intent = new Intent();
@@ -256,7 +256,7 @@ public class YouJiFragment extends Fragment {
                     startActivity(intent);
                 }
                 break;
-            case R.id.tv_back:
+            case R.id.rl_back:
                 mainActivity.exitYouji();
                 break;
         }

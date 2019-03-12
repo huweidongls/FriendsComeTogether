@@ -37,6 +37,7 @@ public class FeedbackActivity extends BaseActivity {
     @BindView(R.id.activity_feedback_rv)
     RecyclerView feedbackRv;
     FeedBackAdapter adapter;
+    private List<FeedBackModel.ObjBean> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +72,17 @@ public class FeedbackActivity extends BaseActivity {
                         Log.i("101101",data);
                         FeedBackModel model = new Gson().fromJson(data,FeedBackModel.class);
                         if (model.getCode()==200){
-                            initList(model.getObj());
+                            list = model.getObj();
+                            LinearLayoutManager manager = new LinearLayoutManager(FeedbackActivity.this) {
+                                @Override
+                                public boolean canScrollVertically() {
+                                    return false;
+                                }
+                            };
+                            manager.setOrientation(LinearLayoutManager.VERTICAL);
+                            feedbackRv.setLayoutManager(manager);
+                            adapter = new FeedBackAdapter(list);
+                            feedbackRv.setAdapter(adapter);
                         }
                     }
 
@@ -83,16 +94,7 @@ public class FeedbackActivity extends BaseActivity {
     }
 
     public void initList(List<FeedBackModel.ObjBean> data){
-        LinearLayoutManager manager = new LinearLayoutManager(FeedbackActivity.this) {
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        };
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        feedbackRv.setLayoutManager(manager);
-        adapter = new FeedBackAdapter(data);
-        feedbackRv.setAdapter(adapter);
+
     }
 
     public void submit(){
@@ -107,7 +109,29 @@ public class FeedbackActivity extends BaseActivity {
                             Log.i("110011",data);
                             FocusOnToFriendTogetherModel model = new Gson().fromJson(data,FocusOnToFriendTogetherModel.class);
                             if (model.getCode()==200){
+
                                 toToast(FeedbackActivity.this,model.getMessage());
+                                ViseHttp.POST(NetConfig.historicalFeedBackUrl)
+                                        .addParam("app_key",getToken(NetConfig.BaseUrl+NetConfig.historicalFeedBackUrl))
+                                        .addParam("uid",spImp.getUID())
+                                        .request(new ACallback<String>() {
+                                            @Override
+                                            public void onSuccess(String data) {
+                                                Log.i("101101",data);
+                                                FeedBackModel model = new Gson().fromJson(data,FeedBackModel.class);
+                                                if (model.getCode()==200){
+                                                    contentEt.setText("");
+                                                    list.clear();
+                                                    list.addAll(model.getObj());
+                                                    adapter.notifyDataSetChanged();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFail(int errCode, String errMsg) {
+
+                                            }
+                                        });
                             }
                         }
 
