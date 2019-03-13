@@ -228,6 +228,7 @@ public class FriendsTogetherFragment1 extends BaseFragment {
                                                                     it.putExtra("issingle", model.getObj().getMarry());
                                                                     it.putExtra("city", model.getObj().getCity());
                                                                     it.putExtra("tel", model.getObj().getUser_tel());
+                                                                    it.putExtra("Pfexplain",model.getObj().getPfexplain());
                                                                     startActivity(it);
                                                                 }
                                                             } catch (JSONException e) {

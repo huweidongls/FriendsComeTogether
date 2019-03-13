@@ -70,9 +70,12 @@ public class FragmentReturnPriceAdapter extends RecyclerView.Adapter<FragmentRet
         if (!TextUtils.isEmpty(data.get(position).getPf_pic())) {
             Picasso.with(context).load(data.get(position).getPf_pic()).into(holder.iv);
         }
-        holder.tvContent.setText(data.get(position).getInfo());
-        holder.tvTime.setText("活动时间: " + data.get(position).getTime_info());
-        holder.tvPeopleNum.setText("参加人数: " + data.get(position).getJoin_num());
+
+        holder.tvStartTime.setText("开始时间: " + data.get(position).getBegin_time());
+        holder.tvEndTime.setText("结束时间: " + data.get(position).getEnd_time());
+        holder.tvJoinNum.setText("参加人数："+ data.get(position).getJoin_num());
+        holder.tvNoName.setText("是否匿名："+(data.get(position).getNoname().equals("0")? "否":"是"));
+        
         holder.tvPriceDetails.setText(data.get(position).getPrice_type());
         String str_money = "合计："+data.get(position).getOpaymoney();
 //        String str_money = "合计："+"48.90";
@@ -109,13 +112,16 @@ public class FragmentReturnPriceAdapter extends RecyclerView.Adapter<FragmentRet
         private TextView tvTitle;
         private TextView tvStatus;
         private ImageView iv;
-        private TextView tvContent;
-        private TextView tvTime;
-        private TextView tvPeopleNum;
         private TextView tvPriceDetails;
         private TextView tvPrice;
         private TextView tvPay;
         private TextView tvDeleteTrip;
+        //新详情
+        private TextView tvStartTime;
+        private TextView tvEndTime;
+        private TextView tvJoinNum;
+        private TextView tvNoName;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -123,13 +129,15 @@ public class FragmentReturnPriceAdapter extends RecyclerView.Adapter<FragmentRet
             tvTitle = itemView.findViewById(R.id.fragment_return_price_rv_tv_title);
             tvStatus = itemView.findViewById(R.id.fragment_return_price_rv_tv_status);
             iv = itemView.findViewById(R.id.fragment_return_price_rv_iv);
-            tvContent = itemView.findViewById(R.id.fragment_return_price_rv_tv_content);
-            tvTime = itemView.findViewById(R.id.fragment_to_trip_rv_tv_time);
-            tvPeopleNum = itemView.findViewById(R.id.fragment_to_trip_rv_tv_people_num);
             tvPriceDetails = itemView.findViewById(R.id.fragment_return_price_rv_tv_price_details);
             tvPrice = itemView.findViewById(R.id.fragment_return_price_rv_tv_price);
             tvPay = itemView.findViewById(R.id.fragment_return_price_rv_tv_payment);
             tvDeleteTrip = itemView.findViewById(R.id.fragment_return_price_rv_tv_cancle_trip);
+
+            tvStartTime = itemView.findViewById(R.id.tv_start_time);
+            tvEndTime = itemView.findViewById(R.id.tv_end_time);
+            tvJoinNum = itemView.findViewById(R.id.tv_people_num);
+            tvNoName = itemView.findViewById(R.id.tv_noname);
         }
     }
 

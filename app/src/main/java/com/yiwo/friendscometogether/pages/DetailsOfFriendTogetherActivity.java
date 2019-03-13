@@ -376,6 +376,7 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
                                             it.putExtra("city", model.getObj().getCity());
                                             it.putExtra("tel", model.getObj().getUser_tel());
                                             it.putExtra("choose_date_intex",chooseDateIndex);
+                                            it.putExtra("Pfexplain",model.getObj().getPfexplain());
                                             startActivity(it);
                                         } else if (models.getObj().getOk().equals("1")) {
                                             toToast(DetailsOfFriendTogetherActivity.this, "请于身份审核通过后报名");

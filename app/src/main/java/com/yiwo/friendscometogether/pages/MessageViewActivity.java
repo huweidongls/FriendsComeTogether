@@ -1,5 +1,6 @@
 package com.yiwo.friendscometogether.pages;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -185,63 +186,74 @@ public class MessageViewActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_clean:
-                if(type.equals("1")){
-                    ViseHttp.POST(NetConfig.deleteMessageUrl)
-                            .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.deleteMessageUrl))
-                            .addParam("user_id", spImp.getUID())
-                            .addParam("type", "1")
-                            .request(new ACallback<String>() {
-                                @Override
-                                public void onSuccess(String data) {
-                                    Log.e("22222", data);
-                                    try {
-                                        JSONObject jsonObject = new JSONObject(data);
-                                        if(jsonObject.getInt("code") == 200){
-                                            toToast(MessageViewActivity.this, "已清空");
-                                            mList.clear();
-                                            adapter.notifyDataSetChanged();
-                                        }else {
-                                            toToast(MessageViewActivity.this, jsonObject.getString("message"));
+                toDialog(MessageViewActivity.this, "提示", "确定清空消息？", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (type.equals("1")) {
+                            ViseHttp.POST(NetConfig.deleteMessageUrl)
+                                    .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.deleteMessageUrl))
+                                    .addParam("user_id", spImp.getUID())
+                                    .addParam("type", "1")
+                                    .request(new ACallback<String>() {
+                                        @Override
+                                        public void onSuccess(String data) {
+                                            Log.e("22222", data);
+                                            try {
+                                                JSONObject jsonObject = new JSONObject(data);
+                                                if (jsonObject.getInt("code") == 200) {
+                                                    toToast(MessageViewActivity.this, "已清空");
+                                                    mList.clear();
+                                                    adapter.notifyDataSetChanged();
+                                                } else {
+                                                    toToast(MessageViewActivity.this, jsonObject.getString("message"));
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
                                         }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
 
-                                @Override
-                                public void onFail(int errCode, String errMsg) {
+                                        @Override
+                                        public void onFail(int errCode, String errMsg) {
 
-                                }
-                            });
-                }else if(type.equals("0")){
-                    ViseHttp.POST(NetConfig.deleteMessageUrl)
-                            .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.deleteMessageUrl))
-                            .addParam("user_id", spImp.getUID())
-                            .addParam("type", "0")
-                            .request(new ACallback<String>() {
-                                @Override
-                                public void onSuccess(String data) {
-                                    Log.e("22222", data);
-                                    try {
-                                        JSONObject jsonObject = new JSONObject(data);
-                                        if(jsonObject.getInt("code") == 200){
-                                            toToast(MessageViewActivity.this, "已清空");
-                                            mList.clear();
-                                            adapter.notifyDataSetChanged();
-                                        }else {
-                                            toToast(MessageViewActivity.this, jsonObject.getString("message"));
                                         }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
+                                    });
+                        } else if (type.equals("0")) {
+                            ViseHttp.POST(NetConfig.deleteMessageUrl)
+                                    .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.deleteMessageUrl))
+                                    .addParam("user_id", spImp.getUID())
+                                    .addParam("type", "0")
+                                    .request(new ACallback<String>() {
+                                        @Override
+                                        public void onSuccess(String data) {
+                                            Log.e("22222", data);
+                                            try {
+                                                JSONObject jsonObject = new JSONObject(data);
+                                                if (jsonObject.getInt("code") == 200) {
+                                                    toToast(MessageViewActivity.this, "已清空");
+                                                    mList.clear();
+                                                    adapter.notifyDataSetChanged();
+                                                } else {
+                                                    toToast(MessageViewActivity.this, jsonObject.getString("message"));
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
 
-                                @Override
-                                public void onFail(int errCode, String errMsg) {
+                                        @Override
+                                        public void onFail(int errCode, String errMsg) {
 
-                                }
-                            });
-                }
+                                        }
+                                    });
+                        }
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
                 break;
         }
     }

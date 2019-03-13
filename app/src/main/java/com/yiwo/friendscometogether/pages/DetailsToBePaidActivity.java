@@ -176,10 +176,11 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                 tvCreateTime.setText("创建时间: " + model.getObj().getCreate_time());
                                 tvPayTime.setText("付款时间: " + model.getObj().getPay_time());
                                 tvOkTime.setText("成交时间: " + model.getObj().getOver_time());
+                                //
                                 if(model.getObj().getOrder_type().equals("7")){
                                     tvDeleteTrip.setVisibility(View.VISIBLE);
                                 }else if(model.getObj().getOrder_type().equals("6")){
-                                    tvTriping.setVisibility(View.VISIBLE);
+                                    tvTriping.setVisibility(View.GONE);
                                 }else if(model.getObj().getOrder_type().equals("5")){
                                     tvDeleteTrip.setVisibility(View.VISIBLE);
                                     tvOkReturn.setVisibility(View.VISIBLE);

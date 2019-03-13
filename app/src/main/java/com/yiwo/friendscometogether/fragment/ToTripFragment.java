@@ -22,11 +22,8 @@ import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
-import com.yiwo.friendscometogether.adapter.FragmentToPayAdapter;
 import com.yiwo.friendscometogether.adapter.FragmentToTripAdapter;
-import com.yiwo.friendscometogether.base.BaseFragment;
 import com.yiwo.friendscometogether.base.OrderBaseFragment;
-import com.yiwo.friendscometogether.model.PayFragmentModel;
 import com.yiwo.friendscometogether.model.TripFragmentModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -35,7 +32,6 @@ import com.yiwo.friendscometogether.utils.TokenUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;

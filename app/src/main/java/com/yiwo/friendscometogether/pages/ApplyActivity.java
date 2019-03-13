@@ -111,6 +111,11 @@ public class ApplyActivity extends BaseActivity {
     @BindView(R.id.rv_choose_date)
     RecyclerView rv_choose_date;
 
+    @BindView(R.id.ll_qitayaoqiu)
+    LinearLayout llQiTaYaoQiu;
+    @BindView(R.id.tv_qitayaoqiu)
+    TextView tvQiTaYaoQiu;
+
     private String yourChoice = "";
     private int payState = 0;
     private String pfID = "0";
@@ -189,6 +194,7 @@ public class ApplyActivity extends BaseActivity {
                                 String age = model.getObj().getPfagebegin();
                                 tvAge.setText(age + "岁");
                                 String issingle = model.getObj().getPfmarry();
+                                llQiTaYaoQiu.setVisibility(View.GONE);//其他要求暂时隐藏（邀请接口无此字段）
                                 tvIssingle.setText(issingle);
                                 String city = model.getObj().getPfaddress();
                                 tvCity.setText("活动地点: " + city);
@@ -396,6 +402,12 @@ public class ApplyActivity extends BaseActivity {
         }
         String age = getIntent().getStringExtra("age");
         tvAge.setText(age + "岁");
+        if (getIntent().getStringExtra("Pfexplain") == null ||getIntent().getStringExtra("Pfexplain").equals("") ){
+            llQiTaYaoQiu.setVisibility(View.GONE);
+        }else {
+            llQiTaYaoQiu.setVisibility(View.VISIBLE);
+            tvQiTaYaoQiu.setText(getIntent().getStringExtra("Pfexplain"));
+        }
         String issingle = getIntent().getStringExtra("issingle");
         tvIssingle.setText(issingle);
         String city = getIntent().getStringExtra("city");

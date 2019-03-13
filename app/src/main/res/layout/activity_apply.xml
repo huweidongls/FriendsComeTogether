@@ -223,7 +223,6 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24px"
                     android:layout_marginTop="24px">
 
                     <TextView
@@ -243,30 +242,60 @@
 
                 </RelativeLayout>
                 <LinearLayout
-                    android:id="@+id/apply_ll_is_noname"
+                    android:id="@+id/ll_qitayaoqiu"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="88px"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24px"
+                    android:layout_marginTop="24px">
 
                     <TextView
-                        android:layout_width="140px"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="是否匿名:"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="其他要求:"
                         android:textColor="@color/black_333333"
                         android:textSize="28px" />
 
                     <TextView
-                        android:id="@+id/apply_is_noname"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="20px"
-                        android:gravity="center_vertical|end"
-                        android:maxLength="30"
-                        android:text="否"
+                        android:layout_marginLeft="10px"
+                        android:id="@+id/tv_qitayaoqiu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/black_333333"
                         android:textSize="28px" />
+
                 </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12px"
+                android:background="@color/line" />
+            <LinearLayout
+                android:layout_marginLeft="40px"
+                android:layout_marginRight="40px"
+                android:id="@+id/apply_ll_is_noname"
+                android:layout_width="match_parent"
+                android:layout_height="70px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="140px"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="是否匿名:"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+                <TextView
+                    android:id="@+id/apply_is_noname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20px"
+                    android:gravity="center_vertical|end"
+                    android:maxLength="30"
+                    android:text="否"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"

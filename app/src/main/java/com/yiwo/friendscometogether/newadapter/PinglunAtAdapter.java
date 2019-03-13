@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -75,11 +76,12 @@ public class PinglunAtAdapter extends RecyclerView.Adapter<PinglunAtAdapter.View
 
         private ImageView ivAvatar;
         private TextView tv;
-
+        private RelativeLayout rl;
         public ViewHolder(View itemView) {
             super(itemView);
             ivAvatar = itemView.findViewById(R.id.iv_avatar);
             tv = itemView.findViewById(R.id.tv);
+            rl = itemView.findViewById(R.id.rl);
         }
     }
 

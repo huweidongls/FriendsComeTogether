@@ -1,5 +1,6 @@
 package com.yiwo.friendscometogether.pages;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -136,33 +137,44 @@ public class MessageInvitationActivity extends BaseActivity {
                 MessageInvitationActivity.this.finish();
                 break;
             case R.id.rl_clean:
-                ViseHttp.POST(NetConfig.deleteMessageUrl)
-                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.deleteMessageUrl))
-                        .addParam("user_id", spImp.getUID())
-                        .addParam("type", "4")
-                        .request(new ACallback<String>() {
-                            @Override
-                            public void onSuccess(String data) {
-                                Log.e("22222", data);
-                                try {
-                                    JSONObject jsonObject = new JSONObject(data);
-                                    if(jsonObject.getInt("code") == 200){
-                                        toToast(MessageInvitationActivity.this, "已清空");
-                                        mList.clear();
-                                        adapter.notifyDataSetChanged();
-                                    }else {
-                                        toToast(MessageInvitationActivity.this, jsonObject.getString("message"));
+                toDialog(MessageInvitationActivity.this, "提示", "确定清空消息？", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ViseHttp.POST(NetConfig.deleteMessageUrl)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.deleteMessageUrl))
+                                .addParam("user_id", spImp.getUID())
+                                .addParam("type", "4")
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        Log.e("22222", data);
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if(jsonObject.getInt("code") == 200){
+                                                toToast(MessageInvitationActivity.this, "已清空");
+                                                mList.clear();
+                                                adapter.notifyDataSetChanged();
+                                            }else {
+                                                toToast(MessageInvitationActivity.this, jsonObject.getString("message"));
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
 
-                            @Override
-                            public void onFail(int errCode, String errMsg) {
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
 
-                            }
-                        });
+                                    }
+                                });
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
                 break;
         }
     }

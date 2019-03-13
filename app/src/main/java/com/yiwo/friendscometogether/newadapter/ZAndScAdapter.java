@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -15,6 +16,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.ZAndScModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
 
 import java.util.List;
 
@@ -59,6 +61,15 @@ public class ZAndScAdapter extends RecyclerView.Adapter<ZAndScAdapter.ViewHolder
                 context.startActivity(intent);
             }
         });
+        holder.rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(context, DetailsOfFriendsActivity.class);
+                intent.putExtra("fmid", data.get(position).getFid());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -70,11 +81,12 @@ public class ZAndScAdapter extends RecyclerView.Adapter<ZAndScAdapter.ViewHolder
 
         private ImageView ivAvatar;
         private TextView tv;
-
+        private RelativeLayout rl;
         public ViewHolder(View itemView) {
             super(itemView);
             ivAvatar = itemView.findViewById(R.id.iv_avatar);
             tv = itemView.findViewById(R.id.tv);
+            rl = itemView.findViewById(R.id.rl);
         }
     }
 

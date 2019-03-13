@@ -11,7 +11,7 @@ public class ReturnPriceFragmentModel {
     /**
      * code : 200
      * message : 获取成功
-     * obj : [{"oID":"51","title":"登峨眉山！","info":"登峨眉山！登峨眉山！登峨眉山！登峨眉山！登峨眉山！登峨眉山！登峨眉山！","join_num":"1","pf_pic":"http://47.92.136.19/uploads/activity/20180720/20180720/73cc839014b7516c8d975ec3aa52e382.jpg","opaymoney":"1.00","opaytype":"2","opayout":"2","price_type":"自费","time_info":"2018.07.30-2018.08.01","status":"已退款","order_type":"5"},{"oID":"50","title":"登峨眉山！","info":"登峨眉山！登峨眉山！登峨眉山！登峨眉山！登峨眉山！登峨眉山！登峨眉山！","join_num":"1","pf_pic":"http://47.92.136.19/uploads/activity/20180720/20180720/73cc839014b7516c8d975ec3aa52e382.jpg","opaymoney":"1.00","opaytype":"2","opayout":"1","price_type":"自费","time_info":"2018.07.30-2018.08.01","status":"退款中","order_type":"4"}]
+     * obj : [{"opayuserid":"72","oID":"239","title":"带你游览东北雪乡","info":"没啥可说的，走就完了","join_num":"6","pf_pic":"http://47.92.136.19/uploads/xingcheng/20190227/ddec87da3e2a62b6dc2867bc15156b53.jpg","opaymoney":"768.00","opaytype":"1","opayout":"0","allow_refund":"0","noname":"0","price_type":"自费","time_info":"2019.04.01-2019.04.10","begin_time":"2019.04.01","end_time":"2019.04.10","status":"待支付","order_type":"1"},{"opayuserid":"72","oID":"238","title":"带你游览东北雪乡","info":"没啥可说的，走就完了","join_num":"6","pf_pic":"http://47.92.136.19/uploads/xingcheng/20190227/ddec87da3e2a62b6dc2867bc15156b53.jpg","opaymoney":"768.00","opaytype":"1","opayout":"0","allow_refund":"0","noname":"0","price_type":"自费","time_info":"2019.04.01-2019.04.10","begin_time":"2019.04.01","end_time":"2019.04.10","status":"待支付","order_type":"1"},{"opayuserid":"72","oID":"235","title":"带你游览东北雪乡","info":"没啥可说的，走就完了","join_num":"7","pf_pic":"http://47.92.136.19/uploads/xingcheng/20190227/ddec87da3e2a62b6dc2867bc15156b53.jpg","opaymoney":"896.00","opaytype":"1","opayout":"0","allow_refund":"0","noname":"0","price_type":"自费","time_info":"2019.03.12-2019.03.30","begin_time":"2019.03.12","end_time":"2019.03.30","status":"待支付","order_type":"1"},{"opayuserid":"72","oID":"234","title":"带你游览东北雪乡","info":"没啥可说的，走就完了","join_num":"15","pf_pic":"http://47.92.136.19/uploads/xingcheng/20190227/ddec87da3e2a62b6dc2867bc15156b53.jpg","opaymoney":"1920.00","opaytype":"1","opayout":"0","allow_refund":"0","noname":"0","price_type":"自费","time_info":"2019.03.12-2019.03.30","begin_time":"2019.03.12","end_time":"2019.03.30","status":"待支付","order_type":"1"},{"opayuserid":"72","oID":"229","title":"少女时代演唱会","info":"","join_num":"1","pf_pic":"http://47.92.136.19/uploads/xingcheng/20190228/b5985305073fb0d42a32d2e02fbb289a.png","opaymoney":"0.01","opaytype":"1","opayout":"0","allow_refund":"0","noname":"0","price_type":"自费","time_info":"2019.03.12-2019.03.31","begin_time":"2019.03.12","end_time":"2019.03.31","status":"待支付","order_type":"1"},{"opayuserid":"72","oID":"224","title":"王洋测试期数","info":"","join_num":"1","pf_pic":"http://47.92.136.19/uploads/xingcheng/20190301/8a62c7ff6b6fdc4c090a99620f079b3a.png","opaymoney":"0.01","opaytype":"1","opayout":"1","allow_refund":"0","noname":"0","price_type":"自费","time_info":"2019.03.01-2019.03.03","begin_time":"2019.03.01","end_time":"2019.03.03","status":"退款中","order_type":"4"}]
      */
 
     private int code;
@@ -44,20 +44,26 @@ public class ReturnPriceFragmentModel {
 
     public static class ObjBean {
         /**
-         * oID : 51
-         * title : 登峨眉山！
-         * info : 登峨眉山！登峨眉山！登峨眉山！登峨眉山！登峨眉山！登峨眉山！登峨眉山！
-         * join_num : 1
-         * pf_pic : http://47.92.136.19/uploads/activity/20180720/20180720/73cc839014b7516c8d975ec3aa52e382.jpg
-         * opaymoney : 1.00
-         * opaytype : 2
-         * opayout : 2
+         * opayuserid : 72
+         * oID : 239
+         * title : 带你游览东北雪乡
+         * info : 没啥可说的，走就完了
+         * join_num : 6
+         * pf_pic : http://47.92.136.19/uploads/xingcheng/20190227/ddec87da3e2a62b6dc2867bc15156b53.jpg
+         * opaymoney : 768.00
+         * opaytype : 1
+         * opayout : 0
+         * allow_refund : 0
+         * noname : 0
          * price_type : 自费
-         * time_info : 2018.07.30-2018.08.01
-         * status : 已退款
-         * order_type : 5
+         * time_info : 2019.04.01-2019.04.10
+         * begin_time : 2019.04.01
+         * end_time : 2019.04.10
+         * status : 待支付
+         * order_type : 1
          */
 
+        private String opayuserid;
         private String oID;
         private String title;
         private String info;
@@ -66,10 +72,22 @@ public class ReturnPriceFragmentModel {
         private String opaymoney;
         private String opaytype;
         private String opayout;
+        private String allow_refund;
+        private String noname;
         private String price_type;
         private String time_info;
+        private String begin_time;
+        private String end_time;
         private String status;
         private String order_type;
+
+        public String getOpayuserid() {
+            return opayuserid;
+        }
+
+        public void setOpayuserid(String opayuserid) {
+            this.opayuserid = opayuserid;
+        }
 
         public String getOID() {
             return oID;
@@ -135,6 +153,22 @@ public class ReturnPriceFragmentModel {
             this.opayout = opayout;
         }
 
+        public String getAllow_refund() {
+            return allow_refund;
+        }
+
+        public void setAllow_refund(String allow_refund) {
+            this.allow_refund = allow_refund;
+        }
+
+        public String getNoname() {
+            return noname;
+        }
+
+        public void setNoname(String noname) {
+            this.noname = noname;
+        }
+
         public String getPrice_type() {
             return price_type;
         }
@@ -149,6 +183,22 @@ public class ReturnPriceFragmentModel {
 
         public void setTime_info(String time_info) {
             this.time_info = time_info;
+        }
+
+        public String getBegin_time() {
+            return begin_time;
+        }
+
+        public void setBegin_time(String begin_time) {
+            this.begin_time = begin_time;
+        }
+
+        public String getEnd_time() {
+            return end_time;
+        }
+
+        public void setEnd_time(String end_time) {
+            this.end_time = end_time;
         }
 
         public String getStatus() {
