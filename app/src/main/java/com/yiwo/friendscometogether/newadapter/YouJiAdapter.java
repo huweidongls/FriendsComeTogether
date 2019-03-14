@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.custom.LookPasswordDialog;
@@ -52,9 +53,9 @@ public class YouJiAdapter extends RecyclerView.Adapter<YouJiAdapter.ViewHolder>{
 //            holder.rv_youji.setLayoutParams(layoutParams);//应用高度到布局中
             holder.rv_youji.setVisibility(View.VISIBLE);
             holder.rv_video.setVisibility(View.GONE);
-            Glide.with(context).load(data.get(position).getFmpic()).into(holder.iv_youji);
+            Glide.with(context).load(data.get(position).getFmpic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_youji);
             holder.tvYoujiTitle.setText(data.get(position).getFmtitle());
-            Glide.with(context).load(data.get(position).getUserpic()).into(holder.ivAvatar);
+            Glide.with(context).load(data.get(position).getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.ivAvatar);
             holder.tvUsername.setText(data.get(position).getUsername());
             holder.tvTime.setText(data.get(position).getFmtime());
             holder.tvGoodNum.setText(data.get(position).getFmgood());

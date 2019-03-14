@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
@@ -80,7 +81,7 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
         holder.tv_username.setText(data.get(position).getUsername());
         holder.tv_age.setText(data.get(position).getUserbirthday()+"岁");
         holder.tv_degree.setText(data.get(position).getMatching_degree());
-        Glide.with(context).load(data.get(position).getUserpic()).into(holder.iv_icon_user);
+        Glide.with(context).load(data.get(position).getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.iv_icon_user);
         holder.iv_icon_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

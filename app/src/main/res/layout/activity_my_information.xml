@@ -71,10 +71,11 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/activity_my_information_iv_avatar"
-                    android:layout_marginTop="20px"
-                    android:layout_marginLeft="20px"
                     android:layout_width="200px"
-                    android:layout_height="200px" />
+                    android:layout_height="200px"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true" />
 
                 <RelativeLayout
                     android:layout_marginRight="50px"

@@ -1,5 +1,6 @@
 package com.yiwo.friendscometogether.newfragment;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -32,11 +33,13 @@ import com.yiwo.friendscometogether.MainActivity;
 import com.yiwo.friendscometogether.MyApplication;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
+import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.YouJiAdapter;
 import com.yiwo.friendscometogether.newmodel.YouJiListModel;
 import com.yiwo.friendscometogether.newpage.MessageActivity;
+import com.yiwo.friendscometogether.pages.CreateIntercalationActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.SearchActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -77,6 +80,7 @@ public class YouJiFragment extends Fragment {
     private String nearby = "0";
 
     private Timer timer;
+    private Dialog dialog;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_youji, null);
@@ -100,7 +104,7 @@ public class YouJiFragment extends Fragment {
     }
 
     private void initData() {
-
+        dialog = WeiboDialogUtils.createLoadingDialog(getContext(), "正在加载...");
         uid = spImp.getUID();
         refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
         refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
@@ -198,6 +202,7 @@ public class YouJiFragment extends Fragment {
                                 adapter = new YouJiAdapter(mList);
                                 rv_youji.setAdapter(adapter);
                                 page = 2;
+                                WeiboDialogUtils.closeDialog(dialog);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

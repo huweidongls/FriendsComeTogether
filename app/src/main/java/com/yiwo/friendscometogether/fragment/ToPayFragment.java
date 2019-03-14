@@ -411,6 +411,8 @@ public class ToPayFragment extends OrderBaseFragment {
                                         OrderToPayModel model1 = gson1.fromJson(data, OrderToPayModel.class);
                                         wxPay(model1.getObj());
                                         getActivity().finish();
+                                    }else {
+                                        Toast.makeText(getContext(),pay.getString("message"),Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -441,6 +443,8 @@ public class ToPayFragment extends OrderBaseFragment {
                                     JSONObject pay = new JSONObject(data);
                                     if (pay.getInt("code") == 300) {
                                         aliPay(pay.optString("obj"));
+                                    }else {
+                                        Toast.makeText(getContext(),pay.getString("message"),Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();

@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether.fragment;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -12,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.vise.xsnow.http.ViseHttp;
@@ -119,11 +122,14 @@ public class MyFragment1 extends BaseFragment {
                                 if (jsonObject.getInt("code") == 200) {
                                     Gson gson = new Gson();
                                     UserModel userModel = gson.fromJson(data, UserModel.class);
-                                    if (TextUtils.isEmpty(userModel.getObj().getHeadeimg())) {
-                                        Picasso.with(getContext()).load(R.mipmap.my_head).into(ivAvatar);
-                                    } else {
-                                        Picasso.with(getContext()).load(userModel.getObj().getHeadeimg()).into(ivAvatar);
-                                    }
+                                    Glide.with(getContext()).load(userModel.getObj().getHeadeimg()).apply(new RequestOptions()
+                                                                                                            .placeholder(R.mipmap.my_head)
+                                                                                                            .error(R.mipmap.my_head)).into(ivAvatar);
+//                                    if (TextUtils.isEmpty(userModel.getObj().getHeadeimg())) {
+//                                        Picasso.with(getContext()).load(R.mipmap.my_head).into(ivAvatar);
+//                                    } else {
+//                                        Picasso.with(getContext()).load(userModel.getObj().getHeadeimg()).into(ivAvatar);
+//                                    }
                                     tvNickname.setText("昵称: " + userModel.getObj().getUsername());
                                     if(TextUtils.isEmpty(userModel.getObj().getUserautograph())){
 

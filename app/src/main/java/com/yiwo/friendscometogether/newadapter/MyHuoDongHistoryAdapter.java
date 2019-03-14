@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -140,7 +141,7 @@ public class MyHuoDongHistoryAdapter extends RecyclerView.Adapter<MyHuoDongHisto
             }
         });
         holder.tv_title.setText(bean.getPftitle());
-        Glide.with(context).load(bean.getPfpic()).into(holder.iv_image_huodong);
+        Glide.with(context).load(bean.getPfpic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_image_huodong);
         holder.tv_name_owner.setText(bean.getUsername());
         holder.tv_name_owner.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,7 +153,7 @@ public class MyHuoDongHistoryAdapter extends RecyclerView.Adapter<MyHuoDongHisto
             }
         });
 
-        Glide.with(context).load(data.get(position).getUserpic()).into(holder.iv_icon_owner);
+        Glide.with(context).load(data.get(position).getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.iv_icon_owner);
         holder.iv_icon_owner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

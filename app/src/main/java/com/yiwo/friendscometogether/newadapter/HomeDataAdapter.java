@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -93,7 +94,7 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
                     }
                 }
             });
-            Glide.with(context).load(data.get(position).getHeadportrait()).into(holder.ivYoujuAvatar);
+            Glide.with(context).load(data.get(position).getHeadportrait()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.ivYoujuAvatar);
             holder.tvYoujuName.setText(data.get(position).getUsername());
             holder.tvYoujuTime.setText(data.get(position).getPftime());
             if(data.get(position).getFollow().equals("1")){
@@ -158,7 +159,7 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
                     }
                 }
             });
-            Glide.with(context).load(data.get(position).getPfpic().get(0)).into(holder.ivYoujuTitle);
+            Glide.with(context).load(data.get(position).getPfpic().get(0)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.ivYoujuTitle);
             holder.tvYoujuTitle.setText(data.get(position).getPftitle());
             holder.tvYoujuContent.setText(data.get(position).getPfcontent());
             holder.tvYoujuAddress.setText(data.get(position).getPfaddress());
@@ -193,7 +194,7 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
                     }
                 }
             });
-            Glide.with(context).load(data.get(position).getHeadportrait()).into(holder.ivYoujiAvatar);
+            Glide.with(context).load(data.get(position).getHeadportrait()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.ivYoujiAvatar);
             holder.ivYoujiAvatar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -259,11 +260,11 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
             });
 
             if (data.get(position).getPfpic().size()>0){
-                Glide.with(context).load(data.get(position).getPfpic().get(0)).into(holder.ivYoujiTitle1);
+                Glide.with(context).load(data.get(position).getPfpic().get(0)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.ivYoujiTitle1);
                 if (data.get(position).getPfpic().size()>=4){
-                    Glide.with(context).load(data.get(position).getPfpic().get(1)).into(holder.ivYoujiTitle2);
-                    Glide.with(context).load(data.get(position).getPfpic().get(2)).into(holder.ivYoujiTitle3);
-                    Glide.with(context).load(data.get(position).getPfpic().get(3)).into(holder.ivYoujiTitle4);
+                    Glide.with(context).load(data.get(position).getPfpic().get(1)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.ivYoujiTitle2);
+                    Glide.with(context).load(data.get(position).getPfpic().get(2)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.ivYoujiTitle3);
+                    Glide.with(context).load(data.get(position).getPfpic().get(3)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.ivYoujiTitle4);
                 }else {
                     holder.ivYoujiTitle2.setVisibility(View.GONE);
                     holder.ivYoujiTitle3.setVisibility(View.GONE);

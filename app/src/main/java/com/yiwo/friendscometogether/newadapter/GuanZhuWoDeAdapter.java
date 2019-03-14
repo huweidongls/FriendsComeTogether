@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.GuanZhuWoDeModel;
@@ -70,7 +71,7 @@ public class GuanZhuWoDeAdapter extends RecyclerView.Adapter<GuanZhuWoDeAdapter.
                 context.startActivity(it);
             }
         });
-        Glide.with(context).load(bean.getUpicurl()).into(holder.iv_icon_user);
+        Glide.with(context).load(bean.getUpicurl()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.iv_icon_user);
         holder.tv_user_name.setText(bean.getUsername());
         holder.tv_user_fans_num.setText("粉丝数："+bean.getLike_num());
         holder.rl_yaoqing.setFocusable(false);

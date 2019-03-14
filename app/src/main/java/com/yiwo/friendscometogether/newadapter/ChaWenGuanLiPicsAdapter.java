@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.imagepreview.Consts;
@@ -41,7 +42,8 @@ public class ChaWenGuanLiPicsAdapter extends RecyclerView.Adapter<ChaWenGuanLiPi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Glide.with(context).load(data.get(position).getPicurl()).into(holder.iv);
+        Glide.with(context).load(data.get(position).getPicurl()).apply(new RequestOptions().placeholder(R.mipmap
+        .zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv);
         if (!data.get(position).getPictitle().equals("")){
             holder.tv.setText(data.get(position).getPictitle());
         }else{

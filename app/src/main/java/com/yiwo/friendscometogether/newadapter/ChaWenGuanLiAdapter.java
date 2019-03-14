@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.ChaWenGuanLiModel;
@@ -48,7 +49,7 @@ public class ChaWenGuanLiAdapter extends RecyclerView.Adapter<ChaWenGuanLiAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         ChaWenGuanLiModel.ObjBean model = data.get(position);
-        Glide.with(context).load(model.getUserpic()).into(holder.ivHead);
+        Glide.with(context).load(model.getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.ivHead);
         holder.tvName.setText(model.getUsername());
         holder.tvTime.setText(model.getFfptime());
         holder.tvTitle.setText(model.getFftitle());

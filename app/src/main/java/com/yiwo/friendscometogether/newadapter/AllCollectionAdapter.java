@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.UserCollectionModel;
@@ -50,7 +51,7 @@ public class AllCollectionAdapter extends RecyclerView.Adapter<AllCollectionAdap
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.tvTitle.setText(data.get(position).getFtitle());
         holder.tvLookNum.setText(data.get(position).getFmlook()+"人阅读了这篇友记");
-        Glide.with(context).load(data.get(position).getFpic()).into(holder.iv);
+        Glide.with(context).load(data.get(position).getFpic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv);
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -22,6 +22,7 @@ import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.google.gson.Gson;
 import com.jph.takephoto.app.TakePhoto;
@@ -185,11 +186,14 @@ public class MyInformationActivity extends TakePhotoActivity {
                             if (jsonObject.getInt("code") == 200) {
                                 Gson gson = new Gson();
                                 UserModel userModel = gson.fromJson(data, UserModel.class);
-                                if (TextUtils.isEmpty(userModel.getObj().getHeadeimg())) {
-                                    Picasso.with(MyInformationActivity.this).load(R.mipmap.my_head).into(ivAvatar);
-                                } else {
-                                    Picasso.with(MyInformationActivity.this).load(userModel.getObj().getHeadeimg()).into(ivAvatar);
-                                }
+                                Glide.with(MyInformationActivity.this).load(userModel.getObj().getHeadeimg()).apply(new RequestOptions()
+                                        .placeholder(R.mipmap.my_head)
+                                        .error(R.mipmap.my_head)).into(ivAvatar);
+//                                if (TextUtils.isEmpty(userModel.getObj().getHeadeimg())) {
+//                                    Picasso.with(MyInformationActivity.this).load(R.mipmap.my_head).into(ivAvatar);
+//                                } else {
+//                                    Picasso.with(MyInformationActivity.this).load(userModel.getObj().getHeadeimg()).into(ivAvatar);
+//                                }
                                 tvNickname.setText("昵称: " + userModel.getObj().getUsername());
                                 if (userModel.getObj().getSex().equals("0")) {
                                     Picasso.with(MyInformationActivity.this).load(R.mipmap.nan).into(ivSex);
