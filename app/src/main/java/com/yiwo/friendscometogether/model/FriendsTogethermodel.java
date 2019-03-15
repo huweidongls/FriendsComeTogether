@@ -50,6 +50,7 @@ public class FriendsTogethermodel {
          * pfspend : 0.01
          * pfaddress : 太阳岛
          * pfgotime : 2019-01-01 10:11
+         * pfendtime //结束时间
          * wy_accid : yy13945060491
          * sign : 1
          * usergrade : 1
@@ -92,6 +93,8 @@ public class FriendsTogethermodel {
         private String Surplus;
         private String focusOn;
         private List<String> all_u_pic;
+
+        private String pfendtime;
 
         public String getPftime() {
             return pftime;
@@ -275,6 +278,14 @@ public class FriendsTogethermodel {
 
         public void setAll_u_pic(List<String> all_u_pic) {
             this.all_u_pic = all_u_pic;
+        }
+
+        public String getPfendtime() {
+            return pfendtime;
+        }
+
+        public void setPfendtime(String pfendtime) {
+            this.pfendtime = pfendtime;
         }
     }
 }

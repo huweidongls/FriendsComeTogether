@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.squareup.picasso.Picasso;
@@ -116,7 +117,10 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
     TextView tvUsername;
     @BindView(R.id.iv_sign)
     ImageView ivSign;
-
+    @BindView(R.id.tv_allow_refund)
+    TextView tvAllowRefund;
+    @BindView(R.id.rl_refund)
+    RelativeLayout rlRefund;
     //活动日期
     @BindView(R.id.rv_choose_date)
     RecyclerView rvChooseDate;
@@ -217,9 +221,10 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
     public void initView(FriendsTogetherDetailsModel.ObjBean model) {
         if (!StringUtils.isEmpty(model.getCaptain()))
             leaderID = model.getCaptain();
-        if (!StringUtils.isEmpty(model.getShow_pic())) {
-            Glide.with(DetailsOfFriendTogetherActivity.this).load(model.getShow_pic()).into(titleIv);
-        }
+        Glide.with(DetailsOfFriendTogetherActivity.this).load(model.getShow_pic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian)).into(titleIv);
+//        if (!StringUtils.isEmpty(model.getShow_pic())) {
+//            Glide.with(DetailsOfFriendTogetherActivity.this).load(model.getShow_pic()).into(titleIv);
+//        }
         // 20190305 队长认证都为金色皇冠
 //        if (model.getIf_sign().equals("1")) {
 //            Glide.with(DetailsOfFriendTogetherActivity.this).load(R.mipmap.sign_yellow).into(ivSign);
@@ -235,7 +240,8 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
         }
         if (!model.getCaptain().equals("0")) {
             if (!StringUtils.isEmpty(model.getCapttain_pic())) {
-                Picasso.with(DetailsOfFriendTogetherActivity.this).load(model.getCapttain_pic()).into(headIv);
+                Glide.with(DetailsOfFriendTogetherActivity.this).load(model.getCapttain_pic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(headIv);
+//                Picasso.with(DetailsOfFriendTogetherActivity.this).load(model.getCapttain_pic()).into(headIv);
 //                levelTv.setText(model.getIf_sign().equals("1") ? "签约领队" : "普通领队");
             }
         }
@@ -254,6 +260,11 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
             tvOtherInfo.setText("其他要求: 无");
         } else {
             tvOtherInfo.setText("其他要求: " + model.getPfexplain());
+        }
+        if (model.getAllow_refund().equals("0")){
+            rlRefund.setVisibility(View.GONE);
+        }else {
+            tvAllowRefund.setText("不能退款");
         }
         initChooseDate(model.getPhase());
 //        if(model.getHave_num().equals("0")){

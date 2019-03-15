@@ -53,7 +53,7 @@ public class AllOrderFragmentModel {
          * opaymoney : 768.00
          * opaytype : 1
          * opayout : 0
-         * allow_refund : 0
+         * allow_refund : 0  0允许退款   1 不允许退款
          * noname : 0
          * price_type : 自费
          * time_info : 2019.04.01-2019.04.10

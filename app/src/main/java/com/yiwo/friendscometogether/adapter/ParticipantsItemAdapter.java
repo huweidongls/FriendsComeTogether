@@ -11,6 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
@@ -50,9 +52,7 @@ public class ParticipantsItemAdapter extends RecyclerView.Adapter<ParticipantsIt
                 noname_num++;
                 holder.rl_has_name.setVisibility(View.GONE);
             }else {
-                if(!StringUtils.isEmpty(data.get(position).getUserpic())){
-                    Picasso.with(context).load(data.get(position).getUserpic()).into(holder.headIv);
-                }
+                Glide.with(context).load(data.get(position).getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.headIv);
                 holder.nicknameTv.setText(data.get(position).getUsername());
             }
             if (position!=data.size()-1){//不是最后一条数据时，如果为匿名则不显示，计匿名数

@@ -426,6 +426,7 @@ public class DetailsOfFriendsActivity extends BaseActivity {
                                                 model.setArticleId(fmID);
                                                 model.setRemarkState("1");
                                                 userGiveModelDao.insert(model);
+                                                isPraise = true;
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();

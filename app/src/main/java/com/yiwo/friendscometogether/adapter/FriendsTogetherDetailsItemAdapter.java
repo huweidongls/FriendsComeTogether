@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
@@ -42,9 +44,7 @@ public class FriendsTogetherDetailsItemAdapter extends RecyclerView.Adapter<Frie
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        if(!StringUtils.isEmpty(data.get(position).getPic())){
-            Picasso.with(context).load(data.get(position).getPic()).into(holder.item_picIv);
-        }
+        Glide.with(context).load(data.get(position).getPic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.item_picIv);
         if (data.get(position).getText_info().equals("")){
             holder.item_titleTv.setVisibility(View.GONE);
         }

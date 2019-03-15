@@ -9,6 +9,8 @@ import android.widget.Toast;
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.model.session.SessionCustomization;
+import com.netease.nim.uikit.business.team.activity.AdvancedTeamInfoActivity;
+import com.netease.nim.uikit.business.team.activity.AdvancedTeamMemberActivity;
 import com.netease.nim.uikit.business.team.model.TeamExtras;
 import com.netease.nim.uikit.business.team.model.TeamRequestCode;
 import com.netease.nimlib.sdk.team.model.Team;
@@ -36,7 +38,9 @@ public class DefaultTeamSessionCustomization extends SessionCustomization {
             public void onClick(Context context, View view, String sessionId) {
                 Team team = NimUIKit.getTeamProvider().getTeamById(sessionId);
                 if (team != null && team.isMyTeam()) {
-                    NimUIKit.startTeamInfo(context, sessionId);
+//                    NimUIKit.startTeamInfo(context, sessionId);
+                    AdvancedTeamMemberActivity.startActivityForResult((Activity) context, team.getId(), AdvancedTeamInfoActivity.REQUEST_CODE_MEMBER_LIST);
+
                 } else {
                     Toast.makeText(context, R.string.team_invalid_tip, Toast.LENGTH_SHORT).show();
                 }

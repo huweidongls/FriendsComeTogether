@@ -71,7 +71,7 @@ public class AdvancedTeamInfoActivity extends UI implements
         TAdapterDelegate, TeamMemberAdapter.AddMemberCallback, TeamMemberHolder.TeamMemberHolderEventListener {
 
     private static final int REQUEST_CODE_TRANSFER = 101;
-    private static final int REQUEST_CODE_MEMBER_LIST = 102;
+    public static final int REQUEST_CODE_MEMBER_LIST = 102;
     private static final int REQUEST_CODE_CONTACT_SELECT = 103;
     private static final int REQUEST_PICK_ICON = 104;
 

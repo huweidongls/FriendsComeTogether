@@ -43,6 +43,7 @@ public class FriendsTogetherDetailsModel {
 
     public static class ObjBean {
         /**
+         * allow_refund :"" 0允许退款 1 不允许退款
          * phase : [{"phase_num":"1","phase_sign_up_time":"2019-03-10 14:01:01","phase_begin_time":"2019-03-12 14:01:09","phase_over_time":"2019-03-30 14:01:14","phase_price":"0.01","phase_list":[{"userID":"71","ujall":"1","join_name":"爱摄影","noname":"0","username":"女侠爱摄影","userpic":"http://localhost/html/uploads/header/2019/01/14/54c391deef1d2febac2ac8b4558ad5dd154745770214.jpg"}]},{"phase_num":"2","phase_sign_up_time":"2019-03-20 14:08:28","phase_begin_time":"2019-04-01 14:08:38","phase_over_time":"2019-04-10 14:08:43","phase_price":"0.02","phase_list":[]}]
          * real_name : 1
          * user_tel : 15244615473
@@ -115,6 +116,8 @@ public class FriendsTogetherDetailsModel {
         private List<InfoListBean> info_list;
         private List<UserListBean> user_list;
         private List<CommentListBean> comment_list;
+
+        private String allow_refund;
 
         public String getReal_name() {
             return real_name;
@@ -394,6 +397,14 @@ public class FriendsTogetherDetailsModel {
 
         public void setComment_list(List<CommentListBean> comment_list) {
             this.comment_list = comment_list;
+        }
+
+        public String getAllow_refund() {
+            return allow_refund;
+        }
+
+        public void setAllow_refund(String allow_refund) {
+            this.allow_refund = allow_refund;
         }
 
         public static class PhaseBean {

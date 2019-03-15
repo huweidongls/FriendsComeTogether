@@ -112,7 +112,7 @@ public class DetailsToBePaidActivity extends BaseActivity {
     private PopupWindow popupWindow;
 
     private static final int SDK_PAY_FLAG = 1;
-
+    private DetailsOrderModel model;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,7 +142,7 @@ public class DetailsToBePaidActivity extends BaseActivity {
                             JSONObject jsonObject = new JSONObject(data);
                             if (jsonObject.getInt("code") == 200) {
                                 Gson gson = new Gson();
-                                DetailsOrderModel model = gson.fromJson(data, DetailsOrderModel.class);
+                                model = gson.fromJson(data, DetailsOrderModel.class);
 //                                tvStatus.setText(model.getObj().getStatus());
                                 tvOrderStatus.setText(model.getObj().getStatus());
                                 tvTitle.setText(model.getObj().getTitle());
@@ -176,23 +176,23 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                 tvCreateTime.setText("创建时间: " + model.getObj().getCreate_time());
                                 tvPayTime.setText("付款时间: " + model.getObj().getPay_time());
                                 tvOkTime.setText("成交时间: " + model.getObj().getOver_time());
-                                //
+                                //不可点击按钮全部隐藏
                                 if(model.getObj().getOrder_type().equals("7")){
                                     tvDeleteTrip.setVisibility(View.VISIBLE);
                                 }else if(model.getObj().getOrder_type().equals("6")){
                                     tvTriping.setVisibility(View.GONE);
                                 }else if(model.getObj().getOrder_type().equals("5")){
                                     tvDeleteTrip.setVisibility(View.VISIBLE);
-                                    tvOkReturn.setVisibility(View.VISIBLE);
+                                    tvOkReturn.setVisibility(View.GONE);
                                 }else if(model.getObj().getOrder_type().equals("4")){
                                     tvDeleteTrip.setVisibility(View.VISIBLE);
-                                    tvReturning.setVisibility(View.VISIBLE);
+                                    tvReturning.setVisibility(View.GONE);
                                 }else if(model.getObj().getOrder_type().equals("3")){
                                     tvDeleteTrip.setVisibility(View.VISIBLE);
                                     tvComment.setVisibility(View.VISIBLE);
                                 }else if(model.getObj().getOrder_type().equals("2")){
                                     tvCancelTrip.setVisibility(View.VISIBLE);
-                                    tvToTrip.setVisibility(View.VISIBLE);
+                                    tvToTrip.setVisibility(View.GONE);
                                 }else if(model.getObj().getOrder_type().equals("1")){
                                     tvCancelTrip.setVisibility(View.VISIBLE);
                                     tvPay.setVisibility(View.VISIBLE);
@@ -220,45 +220,101 @@ public class DetailsToBePaidActivity extends BaseActivity {
                 onBackPressed();
                 break;
             case R.id.details_to_pay_rv_tv_cancle_trip:
-                AlertDialog.Builder normalDialog = new AlertDialog.Builder(DetailsToBePaidActivity.this);
-                normalDialog.setIcon(R.mipmap.ic_launcher);
-                normalDialog.setTitle("提示");
-                normalDialog.setMessage("是否取消活动");
-                normalDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        ViseHttp.POST(NetConfig.cancelOrderTripUrl)
-                                .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl+NetConfig.cancelOrderTripUrl))
-                                .addParam("order_id", orderId)
-                                .request(new ACallback<String>() {
-                                    @Override
-                                    public void onSuccess(String data) {
-                                        try {
-                                            JSONObject jsonObject1 = new JSONObject(data);
-                                            if(jsonObject1.getInt("code") == 200){
-                                                Toast.makeText(DetailsToBePaidActivity.this, "取消活动成功", Toast.LENGTH_SHORT).show();
-                                                finish();
-                                            }
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
+                if (model.getObj().getAllow_refund().equals("1")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DetailsToBePaidActivity.this);
+                    builder.setMessage("此订单不可退款，是否继续取消活动？")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    AlertDialog.Builder normalDialog = new AlertDialog.Builder(DetailsToBePaidActivity.this);
+                                    normalDialog.setIcon(R.mipmap.ic_launcher);
+                                    normalDialog.setTitle("提示");
+                                    normalDialog.setMessage("是否取消活动");
+                                    normalDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            ViseHttp.POST(NetConfig.cancelOrderTripUrl)
+                                                    .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl+NetConfig.cancelOrderTripUrl))
+                                                    .addParam("order_id", orderId)
+                                                    .request(new ACallback<String>() {
+                                                        @Override
+                                                        public void onSuccess(String data) {
+                                                            try {
+                                                                JSONObject jsonObject1 = new JSONObject(data);
+                                                                if(jsonObject1.getInt("code") == 200){
+                                                                    Toast.makeText(DetailsToBePaidActivity.this, "取消活动成功", Toast.LENGTH_SHORT).show();
+                                                                    finish();
+                                                                }
+                                                            } catch (JSONException e) {
+                                                                e.printStackTrace();
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        public void onFail(int errCode, String errMsg) {
+
+                                                        }
+                                                    });
                                         }
-                                    }
+                                    });
+                                    normalDialog.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.dismiss();
+                                        }
+                                    });
+                                    // 显示
+                                    normalDialog.show();
+                                }
+                            })
+                            .setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-                                    @Override
-                                    public void onFail(int errCode, String errMsg) {
+                                }
+                            }).show();
+                }else {
+                    AlertDialog.Builder normalDialog = new AlertDialog.Builder(DetailsToBePaidActivity.this);
+                    normalDialog.setIcon(R.mipmap.ic_launcher);
+                    normalDialog.setTitle("提示");
+                    normalDialog.setMessage("是否取消活动");
+                    normalDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            ViseHttp.POST(NetConfig.cancelOrderTripUrl)
+                                    .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl+NetConfig.cancelOrderTripUrl))
+                                    .addParam("order_id", orderId)
+                                    .request(new ACallback<String>() {
+                                        @Override
+                                        public void onSuccess(String data) {
+                                            try {
+                                                JSONObject jsonObject1 = new JSONObject(data);
+                                                if(jsonObject1.getInt("code") == 200){
+                                                    Toast.makeText(DetailsToBePaidActivity.this, "取消活动成功", Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
 
-                                    }
-                                });
-                    }
-                });
-                normalDialog.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                // 显示
-                normalDialog.show();
+                                        @Override
+                                        public void onFail(int errCode, String errMsg) {
+
+                                        }
+                                    });
+                        }
+                    });
+                    normalDialog.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    // 显示
+                    normalDialog.show();
+                }
+
                 break;
             case R.id.details_to_pay_rv_tv_delete_trip:
                 AlertDialog.Builder normalDialog1 = new AlertDialog.Builder(DetailsToBePaidActivity.this);

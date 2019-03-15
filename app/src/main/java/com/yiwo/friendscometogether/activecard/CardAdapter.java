@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.custom.LookPasswordDialog;
@@ -52,10 +53,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         currentPositon = position;
-        Glide.with(context).load(data.get(position).getUpicurl()).into(holder.ivAvatar);
+        Glide.with(context).load(data.get(position).getUpicurl()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.ivAvatar);
         holder.tvNickname.setText(data.get(position).getUsername());
         holder.tvTitle.setText(data.get(position).getPftitle());
-        Glide.with(context).load(data.get(position).getPfpic()).into(holder.ivTitle);
+        Glide.with(context).load(data.get(position).getPfpic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.ivTitle);
         holder.tvFabuTime.setText(data.get(position).getPftime());
         holder.tvStartTime.setText("开始时间: "+data.get(position).getPfgotime());
         holder.tvRenjun.setText("人均消费: RMB"+data.get(position).getPfspend()+"/人");

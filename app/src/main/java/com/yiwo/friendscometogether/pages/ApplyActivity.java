@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -188,9 +189,7 @@ public class ApplyActivity extends BaseActivity {
                                 tvName.setText(name);
                                 tvSex.setText(sex);
                                 String pic = model.getObj().getPic();
-                                if (!TextUtils.isEmpty(pic)) {
-                                    Glide.with(ApplyActivity.this).load(pic).into(ivTitle);
-                                }
+                                Glide.with(ApplyActivity.this).load(pic).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(ivTitle);
                                 String age = model.getObj().getPfagebegin();
                                 tvAge.setText(age + "岁");
                                 String issingle = model.getObj().getPfmarry();
@@ -202,13 +201,14 @@ public class ApplyActivity extends BaseActivity {
 //                                if (sex.equals("无限制")) {
 //                                    apply_num_ll.setVisibility(View.VISIBLE);
 //                                }
-
                                 if (if_pay.equals("2")) {
                                     setApplyPaymentView(1);
                                 } else if (if_pay.equals("0")) {
                                     tvPayDecs.setText("现场支付");
                                 } else if (if_pay.equals("1")) {
-                                    tvPayDecs.setText("他人请客");
+                                    tvPayDecs.setText("邀请人支付");
+                                }else if (if_pay.equals("3")){
+                                    tvPayDecs.setText("免费参加");
                                 }
                                 //初始化选择
                                 ViseHttp.POST(NetConfig.getPhase)
@@ -397,9 +397,7 @@ public class ApplyActivity extends BaseActivity {
         tvName.setText(name);
         tvSex.setText(sex);
         String pic = getIntent().getStringExtra("pic");
-        if (!TextUtils.isEmpty(pic)) {
-            Glide.with(ApplyActivity.this).load(pic).into(ivTitle);
-        }
+        Glide.with(ApplyActivity.this).load(pic).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(ivTitle);
         String age = getIntent().getStringExtra("age");
         tvAge.setText(age + "岁");
         if (getIntent().getStringExtra("Pfexplain") == null ||getIntent().getStringExtra("Pfexplain").equals("") ){
@@ -422,7 +420,9 @@ public class ApplyActivity extends BaseActivity {
         } else if (if_pay.equals("0")) {
             tvPayDecs.setText("现场支付");
         } else if (if_pay.equals("1")) {
-            tvPayDecs.setText("他人请客");
+            tvPayDecs.setText("邀请人支付");
+        }else if (if_pay.equals("3")){
+            tvPayDecs.setText("免费参加");
         }
         chooseDateIndex = getIntent().getIntExtra("choose_date_intex",0);
         ViseHttp.POST(NetConfig.getPhase)

@@ -409,7 +409,31 @@
                         </LinearLayout>
 
                     </LinearLayout>
+                    <RelativeLayout
+                        android:id="@+id/rl_refund"
+                        android:layout_width="match_parent"
+                        android:layout_height="40px"
+                        android:layout_marginLeft="20px"
+                        android:layout_marginTop="24px">
 
+                        <ImageView
+                            android:id="@+id/iv_allow_refund"
+                            android:layout_width="40px"
+                            android:layout_height="40px"
+                            android:src="@mipmap/refund" />
+
+                        <TextView
+                            android:id="@+id/tv_allow_refund"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5px"
+                            android:layout_toRightOf="@id/iv_allow_refund"
+                            android:gravity="center_vertical"
+                            android:text=""
+                            android:textColor="@color/black_333333"
+                            android:textSize="28px" />
+
+                    </RelativeLayout>
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40px"

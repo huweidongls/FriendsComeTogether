@@ -171,46 +171,102 @@ public class ToTripFragment extends OrderBaseFragment {
                                 adapter.setOnCancelListener(new FragmentToTripAdapter.OnCancelListener() {
                                     @Override
                                     public void onCancel(final int position) {
-                                        AlertDialog.Builder normalDialog = new AlertDialog.Builder(getContext());
-                                        normalDialog.setIcon(R.mipmap.ic_launcher);
-                                        normalDialog.setTitle("提示");
-                                        normalDialog.setMessage("是否取消活动");
-                                        normalDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                ViseHttp.POST(NetConfig.cancelOrderTripUrl)
-                                                        .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.cancelOrderTripUrl))
-                                                        .addParam("order_id", mList.get(position).getOID())
-                                                        .request(new ACallback<String>() {
-                                                            @Override
-                                                            public void onSuccess(String data) {
-                                                                try {
-                                                                    JSONObject jsonObject1 = new JSONObject(data);
-                                                                    if (jsonObject1.getInt("code") == 200) {
-                                                                        Toast.makeText(getContext(), "取消活动成功", Toast.LENGTH_SHORT).show();
-                                                                        mList.remove(position);
-                                                                        adapter.notifyDataSetChanged();
-                                                                    }
-                                                                } catch (JSONException e) {
-                                                                    e.printStackTrace();
+                                        if (mList.get(position).getAllow_refund().equals("1")){
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                            builder.setMessage("此订单不可退款，是否继续取消活动？")
+                                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            AlertDialog.Builder normalDialog = new AlertDialog.Builder(getContext());
+                                                            normalDialog.setIcon(R.mipmap.ic_launcher);
+                                                            normalDialog.setTitle("提示");
+                                                            normalDialog.setMessage("是否取消活动");
+                                                            normalDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                                    ViseHttp.POST(NetConfig.cancelOrderTripUrl)
+                                                                            .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.cancelOrderTripUrl))
+                                                                            .addParam("order_id", mList.get(position).getOID())
+                                                                            .request(new ACallback<String>() {
+                                                                                @Override
+                                                                                public void onSuccess(String data) {
+                                                                                    try {
+                                                                                        JSONObject jsonObject1 = new JSONObject(data);
+                                                                                        if (jsonObject1.getInt("code") == 200) {
+                                                                                            Toast.makeText(getContext(), "取消活动成功", Toast.LENGTH_SHORT).show();
+                                                                                            mList.remove(position);
+                                                                                            adapter.notifyDataSetChanged();
+                                                                                        }
+                                                                                    } catch (JSONException e) {
+                                                                                        e.printStackTrace();
+                                                                                    }
+                                                                                }
+
+                                                                                @Override
+                                                                                public void onFail(int errCode, String errMsg) {
+
+                                                                                }
+                                                                            });
                                                                 }
-                                                            }
+                                                            });
+                                                            normalDialog.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                                    dialogInterface.dismiss();
+                                                                }
+                                                            });
+                                                            // 显示
+                                                            normalDialog.show();
+                                                        }
+                                                    })
+                                                    .setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
 
-                                                            @Override
-                                                            public void onFail(int errCode, String errMsg) {
+                                                        }
+                                                    }).show();
+                                        }else {
+                                            AlertDialog.Builder normalDialog = new AlertDialog.Builder(getContext());
+                                            normalDialog.setIcon(R.mipmap.ic_launcher);
+                                            normalDialog.setTitle("提示");
+                                            normalDialog.setMessage("是否取消活动");
+                                            normalDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    ViseHttp.POST(NetConfig.cancelOrderTripUrl)
+                                                            .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.cancelOrderTripUrl))
+                                                            .addParam("order_id", mList.get(position).getOID())
+                                                            .request(new ACallback<String>() {
+                                                                @Override
+                                                                public void onSuccess(String data) {
+                                                                    try {
+                                                                        JSONObject jsonObject1 = new JSONObject(data);
+                                                                        if (jsonObject1.getInt("code") == 200) {
+                                                                            Toast.makeText(getContext(), "取消活动成功", Toast.LENGTH_SHORT).show();
+                                                                            mList.remove(position);
+                                                                            adapter.notifyDataSetChanged();
+                                                                        }
+                                                                    } catch (JSONException e) {
+                                                                        e.printStackTrace();
+                                                                    }
+                                                                }
 
-                                                            }
-                                                        });
-                                            }
-                                        });
-                                        normalDialog.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                dialogInterface.dismiss();
-                                            }
-                                        });
-                                        // 显示
-                                        normalDialog.show();
+                                                                @Override
+                                                                public void onFail(int errCode, String errMsg) {
+
+                                                                }
+                                                            });
+                                                }
+                                            });
+                                            normalDialog.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    dialogInterface.dismiss();
+                                                }
+                                            });
+                                            // 显示
+                                            normalDialog.show();
+                                        }
                                     }
                                 });
                             }
