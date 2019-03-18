@@ -1,9 +1,11 @@
 package com.yiwo.friendscometogether.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.netease.nim.uikit.api.NimUIKit;
+import com.netease.nim.uikit.api.model.session.SessionEventListener;
 import com.netease.nim.uikit.business.session.module.MsgForwardFilter;
 import com.netease.nim.uikit.business.session.module.MsgRevokeFilter;
 import com.netease.nimlib.sdk.NIMClient;
@@ -30,6 +33,7 @@ import com.netease.nimlib.sdk.msg.model.SystemMessage;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.MyFriendActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -62,7 +66,6 @@ public class ChatFragment extends BaseFragment{
 
         ButterKnife.bind(this, rootView);
         spImp = new SpImp(getContext());
-
         return rootView;
     }
 

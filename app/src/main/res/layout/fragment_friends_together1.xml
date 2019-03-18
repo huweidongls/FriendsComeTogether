@@ -79,7 +79,7 @@
         <ImageView
             android:id="@+id/iv_baoming"
             android:layout_centerInParent="true"
-            android:src="@mipmap/woyaobaoming"
+            android:src="@mipmap/woyaobaoming2"
             android:layout_width="160px"
             android:layout_height="160px" />
         

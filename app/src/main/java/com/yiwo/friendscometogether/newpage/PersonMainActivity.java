@@ -114,6 +114,7 @@ public class PersonMainActivity extends BaseActivity {
     private SpImp spImp;
     private int type_tade_or_wode = 0;//0 为他的 1 为我的
     private String person_id;
+    private String  status; //status   =0时传 用户ID    =1时传网易ID
     private PersonMainModel model;
     private List<PersonMainModel.ObjBean.PhotoBean> list_pics = new ArrayList<>();
     private List<PersonMainModel.ObjBean.FriendBean> list_youji = new ArrayList<>();
@@ -131,6 +132,11 @@ public class PersonMainActivity extends BaseActivity {
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(PersonMainActivity.this);
         person_id = getIntent().getStringExtra("person_id");
+        if (getIntent().getStringExtra("status") == null||getIntent().getStringExtra("status").equals("")){
+            status = "0";
+        }else {
+            status = getIntent().getStringExtra("status");
+        }
         Log.d("person_id", person_id);
         spImp = new SpImp(PersonMainActivity.this);
         if (spImp.getUID().equals(person_id)) {
@@ -168,6 +174,7 @@ public class PersonMainActivity extends BaseActivity {
                         .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.personMain))
                         .addParam("uid", spImp.getUID())
                         .addParam("tid", person_id)
+                        .addParam("status",status)
                         .addParam("type", "0")//0 为5条  1为全部
                         .request(new ACallback<String>() {
                             @Override
@@ -276,6 +283,7 @@ public class PersonMainActivity extends BaseActivity {
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.personMain))
                 .addParam("uid", spImp.getUID())
                 .addParam("tid", person_id)
+                .addParam("status",status)
                 .addParam("type", "0")//0 为5条  1为全部
                 .request(new ACallback<String>() {
                     @Override

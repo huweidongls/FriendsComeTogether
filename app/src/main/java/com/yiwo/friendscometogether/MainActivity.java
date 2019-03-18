@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.netease.nim.uikit.api.NimUIKit;
+import com.netease.nim.uikit.api.model.session.SessionEventListener;
 import com.netease.nim.uikit.business.session.module.MsgForwardFilter;
 import com.netease.nim.uikit.business.session.module.MsgRevokeFilter;
 import com.netease.nimlib.sdk.NIMClient;
@@ -35,6 +37,7 @@ import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.netease.nimlib.sdk.chatroom.model.ChatRoomMessage;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
@@ -48,6 +51,7 @@ import com.yiwo.friendscometogether.fragment.HomeFragment1;
 import com.yiwo.friendscometogether.fragment.MyFragment;
 import com.yiwo.friendscometogether.fragment.MyFragment1;
 import com.yiwo.friendscometogether.newfragment.YouJiFragment;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.pages.CreateFriendRememberActivity;
 import com.yiwo.friendscometogether.pages.GuideActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
@@ -141,6 +145,7 @@ public class MainActivity extends FragmentActivity {
         getPermissions();
 //        initView();
         init();
+        initSessionListener();
 
     }
 
@@ -437,6 +442,29 @@ public class MainActivity extends FragmentActivity {
                 };
         NIMClient.getService(MsgServiceObserve.class)
                 .observeReceiveMessage(incomingMessageObserver, true);
+    }
+    private void initSessionListener() {
+        NimUIKit.setSessionListener(new SessionEventListener() {
+            @Override
+            public void onAvatarClicked(Context context, IMMessage message) {//设置头像点击监听
+                Intent intent = new Intent();
+                intent.putExtra("person_id",message.getFromAccount());
+                intent.putExtra("status","1");
+                intent.setClass(context, PersonMainActivity.class);
+                context.startActivity(intent);
+
+            }
+
+            @Override
+            public void onAvatarLongClicked(Context context, IMMessage message) {
+
+            }
+
+            @Override
+            public void onAckMsgClicked(Context context, IMMessage message) {
+
+            }
+        });
     }
 
 }

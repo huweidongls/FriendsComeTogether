@@ -195,7 +195,7 @@
                     android:layout_marginLeft="20px"
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@+id/item_levelBg"
-                    android:src="@mipmap/sign_yellow"
+                    android:src="@mipmap/duizhang"
                     android:layout_width="42px"
                     android:layout_height="42px" />
 
