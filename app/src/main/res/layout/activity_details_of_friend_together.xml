@@ -192,7 +192,6 @@
 
                 <ImageView
                     android:id="@+id/iv_sign"
-                    android:layout_marginLeft="20px"
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@+id/item_levelBg"
                     android:src="@mipmap/duizhang"

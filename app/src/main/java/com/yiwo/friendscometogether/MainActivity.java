@@ -46,6 +46,7 @@ import com.yiwo.friendscometogether.fragment.ChatFragment;
 import com.yiwo.friendscometogether.fragment.FriendsRememberFragment;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment1;
+import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment2;
 import com.yiwo.friendscometogether.fragment.HomeFragment;
 import com.yiwo.friendscometogether.fragment.HomeFragment1;
 import com.yiwo.friendscometogether.fragment.MyFragment;
@@ -191,7 +192,8 @@ public class MainActivity extends FragmentActivity {
         rl4.setOnClickListener(listener);
         rl5.setOnClickListener(listener);
         Fragment fragmentHome = new HomeFragment1();
-        Fragment fragmentFriendTogether = new FriendsTogetherFragment1();
+//        Fragment fragmentFriendTogether = new FriendsTogetherFragment1();
+        Fragment fragmentFriendTogether = new FriendsTogetherFragment2();
         Fragment fragmentFriendRemember = new YouJiFragment();
         Fragment fragmentChat = new ChatFragment();
         Fragment fragmentMy = new MyFragment1();

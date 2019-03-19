@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:background="@color/red_d84c37"
+        android:layout_width="match_parent"
+        android:layout_height="128px">
+        <RelativeLayout
+            android:visibility="visible"
+            android:id="@+id/rl_fanhui"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="88px">
+
+
+            <TextView
+                android:layout_marginRight="20px"
+                android:layout_marginLeft="20px"
+                android:layout_centerInParent="true"
+                android:text="上一条"
+                android:textColor="@color/white_ffffff"
+                android:textSize="30px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        <TextView
+            android:layout_marginBottom="19px"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white_ffffff"
+            android:textSize="36px"
+            android:text="友聚"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/rl_shuaxin"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="100px"
+            android:layout_height="88px">
+
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:src="@mipmap/shuaxin"
+                android:layout_width="45px"
+                android:layout_height="45px" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <com.yiwo.friendscometogether.swipecard.SwipeFlingView
+        android:id="@+id/swipe_view"
+        android:paddingTop="20px"
+        android:paddingLeft="41px"
+        android:paddingRight="41px"
+        android:layout_above="@+id/rl_bottom"
+        android:layout_below="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="180px">
+
+        <ImageView
+            android:id="@+id/iv_youju_focus"
+            android:layout_marginLeft="110px"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/youju_heart_kong"
+            android:layout_width="64px"
+            android:layout_height="61px" />
+
+        <ImageView
+            android:id="@+id/iv_baoming"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/woyaobaoming2"
+            android:layout_width="160px"
+            android:layout_height="160px" />
+        
+        <ImageView
+            android:id="@+id/iv_shaixuan"
+            android:layout_marginRight="110px"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/youju_shaixuan"
+            android:layout_width="60px"
+            android:layout_height="55px" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

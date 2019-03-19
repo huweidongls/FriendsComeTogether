@@ -30,4 +30,13 @@
         <attr name="emojiconTextLength" format="integer" />
         <attr name="emojiconUseSystemDefault" format="boolean" />
     </declare-styleable>
+
+
+    <!--新的滑动控件-->
+    <declare-styleable name="SwipeFlingView">
+        <attr name="rotation_degrees" format="float"/>
+        <attr name="min_adapter_stack" format="integer"/>
+        <attr name="max_visible" format="integer"/>
+    </declare-styleable>
+
 </resources>

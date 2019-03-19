@@ -2,6 +2,7 @@ package com.yiwo.friendscometogether.fragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -39,6 +40,7 @@ import com.yiwo.friendscometogether.MainActivity;
 import com.yiwo.friendscometogether.MyApplication;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
+import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.model.AllBannerModel;
 import com.yiwo.friendscometogether.model.BaiduCityModel;
 import com.yiwo.friendscometogether.model.CityModel;
@@ -139,6 +141,7 @@ public class HomeFragment1 extends BaseFragment {
     private SpImp spImp;
     private String uid = "";
 
+    private Dialog dialog_loading;
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -155,7 +158,7 @@ public class HomeFragment1 extends BaseFragment {
 
     private String cityId = "";
     private String type = "1";
-
+    private String cityName = "";
     private IndexLabelModel labelModel;
 
     @Nullable
@@ -188,7 +191,6 @@ public class HomeFragment1 extends BaseFragment {
     }
 
     private void initData() {
-
         refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
         refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -275,7 +277,7 @@ public class HomeFragment1 extends BaseFragment {
                 .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.newHomeData))
                 .addParam("type", type)
                 .addParam("uid", uid)
-                .addParam("city", cityId)
+                .addParam("city", cityName)
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
@@ -302,7 +304,6 @@ public class HomeFragment1 extends BaseFragment {
 
                     @Override
                     public void onFail(int errCode, String errMsg) {
-
                     }
                 });
 
@@ -352,7 +353,7 @@ public class HomeFragment1 extends BaseFragment {
                                     BaiduCityModel model = gson.fromJson(data, BaiduCityModel.class);
                                     latLongString = model.getResult().getAddressComponent().getCity();
                                     cityTv.setText(latLongString);
-
+                                    cityName = latLongString;
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -495,11 +496,12 @@ public class HomeFragment1 extends BaseFragment {
 
     private void refresh(String type1){
         type = type1;
+        dialog_loading = WeiboDialogUtils.createLoadingDialog(getContext(),"加载中...");
         ViseHttp.POST(NetConfig.newHomeData)
                 .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.newHomeData))
                 .addParam("type", type)
                 .addParam("uid", uid)
-                .addParam("city", cityId)
+                .addParam("city", cityName)
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
@@ -514,6 +516,7 @@ public class HomeFragment1 extends BaseFragment {
                                 mList.addAll(model.getObj());
                                 adapter.notifyDataSetChanged();
                             }
+                            WeiboDialogUtils.closeDialog(dialog_loading);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -521,7 +524,8 @@ public class HomeFragment1 extends BaseFragment {
 
                     @Override
                     public void onFail(int errCode, String errMsg) {
-
+                        toToast(context,"加载失败");
+                        WeiboDialogUtils.closeDialog(dialog_loading);
                     }
                 });
     }
@@ -532,12 +536,14 @@ public class HomeFragment1 extends BaseFragment {
         if (requestCode == 1 && data != null && resultCode == 1) {
             CityModel model = (CityModel) data.getSerializableExtra(ActivityConfig.CITY);
             cityTv.setText(model.getName());
+            cityName = model.getName();
             cityId = model.getId();
+            dialog_loading = WeiboDialogUtils.createLoadingDialog(getContext(), "正在加载...");
             ViseHttp.POST(NetConfig.newHomeData)
                     .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.newHomeData))
                     .addParam("type", "1")
                     .addParam("uid", uid)
-                    .addParam("city", cityId)
+                    .addParam("city", cityName)
                     .request(new ACallback<String>() {
                         @Override
                         public void onSuccess(String data) {
@@ -550,6 +556,7 @@ public class HomeFragment1 extends BaseFragment {
                                     mList.addAll(model.getObj());
                                     adapter.notifyDataSetChanged();
                                 }
+                                WeiboDialogUtils.closeDialog(dialog_loading);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -557,18 +564,21 @@ public class HomeFragment1 extends BaseFragment {
 
                         @Override
                         public void onFail(int errCode, String errMsg) {
-
+                            toToast(context,"加载失败");
+                            WeiboDialogUtils.closeDialog(dialog_loading);
                         }
                     });
         } else if (requestCode == 1 && resultCode == 2) {
             cityId = "";
+            cityName = "";
 //            cityTv.setText(latLongString);
             cityTv.setText("选择城市");
+            dialog_loading = WeiboDialogUtils.createLoadingDialog(getContext(),"正在加载...");
             ViseHttp.POST(NetConfig.newHomeData)
                     .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.newHomeData))
                     .addParam("type", "1")
                     .addParam("uid", uid)
-                    .addParam("city", cityId)
+                    .addParam("city", cityName)
                     .request(new ACallback<String>() {
                         @Override
                         public void onSuccess(String data) {
@@ -581,6 +591,7 @@ public class HomeFragment1 extends BaseFragment {
                                     mList.addAll(model.getObj());
                                     adapter.notifyDataSetChanged();
                                 }
+                                WeiboDialogUtils.closeDialog(dialog_loading);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -588,18 +599,21 @@ public class HomeFragment1 extends BaseFragment {
 
                         @Override
                         public void onFail(int errCode, String errMsg) {
-
+                            toToast(context,"加载失败");
+                            WeiboDialogUtils.closeDialog(dialog_loading);
                         }
                     });
         } else if (requestCode == 1 && resultCode == 3) {
             String city = data.getStringExtra("city");
             cityId = data.getStringExtra("cityid");
+            cityName = city;
             cityTv.setText(city);
+            dialog_loading = WeiboDialogUtils.createLoadingDialog(getContext(),"正在加载...");
             ViseHttp.POST(NetConfig.newHomeData)
                     .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.newHomeData))
                     .addParam("type", "1")
                     .addParam("uid", uid)
-                    .addParam("city", cityId)
+                    .addParam("city", cityName)
                     .request(new ACallback<String>() {
                         @Override
                         public void onSuccess(String data) {
@@ -612,6 +626,7 @@ public class HomeFragment1 extends BaseFragment {
                                     mList.addAll(model.getObj());
                                     adapter.notifyDataSetChanged();
                                 }
+                                WeiboDialogUtils.closeDialog(dialog_loading);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -619,7 +634,8 @@ public class HomeFragment1 extends BaseFragment {
 
                         @Override
                         public void onFail(int errCode, String errMsg) {
-
+                            toToast(context,"加载失败...");
+                            WeiboDialogUtils.closeDialog(dialog_loading);
                         }
                     });
         }
