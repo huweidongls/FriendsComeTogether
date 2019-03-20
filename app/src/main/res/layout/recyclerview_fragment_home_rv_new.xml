@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/ll_youju"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,6 +52,7 @@
             </RelativeLayout>
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_youju_focus"
                 android:layout_width="130px"
                 android:layout_height="48px"
@@ -93,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20px"
             android:ellipsize="end"
-            android:lines="3"
+            android:maxLines="3"
             android:text="从全国各地赶来北京参加【未知饭局】局长会议的各位局长，我们一起度过的不仅仅是一个周末！我们不仅对饭局的点滴进行…"
             android:textColor="@color/black_333333"
             android:textSize="36px" />
@@ -197,7 +198,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/ll_youji"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -161,6 +161,9 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
             });
             Glide.with(context).load(data.get(position).getPfpic().get(0)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.ivYoujuTitle);
             holder.tvYoujuTitle.setText(data.get(position).getPftitle());
+            if (data.get(position).getPfcontent().equals("")){
+                holder.tvYoujuContent.setVisibility(View.GONE);
+            }
             holder.tvYoujuContent.setText(data.get(position).getPfcontent());
             holder.tvYoujuAddress.setText(data.get(position).getPfaddress());
             holder.tvYoujuLookNum.setText(data.get(position).getPflook());

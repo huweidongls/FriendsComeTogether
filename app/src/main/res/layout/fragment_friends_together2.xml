@@ -13,19 +13,15 @@
             android:id="@+id/rl_fanhui"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_width="wrap_content"
-            android:layout_height="88px">
+            android:layout_width="100px"
+            android:layout_height="80px">
 
 
-            <TextView
-                android:layout_marginRight="20px"
-                android:layout_marginLeft="20px"
+            <ImageView
+                android:src="@mipmap/shangyitiao"
                 android:layout_centerInParent="true"
-                android:text="上一条"
-                android:textColor="@color/white_ffffff"
-                android:textSize="30px"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="45px"
+                android:layout_height="45px" />
 
         </RelativeLayout>
         <TextView
@@ -43,7 +39,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_width="100px"
-            android:layout_height="88px">
+            android:layout_height="80px">
 
 
             <ImageView

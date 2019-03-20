@@ -94,7 +94,11 @@ public class SwipeFlingView extends AdapterView {
     public SwipeFlingView(Context context) {
         this(context, null);
     }
-
+    public void refresh_view(){
+        resetData();
+        removeAllViewsInLayout();
+        requestLayout();
+    }
     public SwipeFlingView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }

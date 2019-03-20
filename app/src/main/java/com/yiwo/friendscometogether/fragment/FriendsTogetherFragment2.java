@@ -1,5 +1,6 @@
 package com.yiwo.friendscometogether.fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.yiwo.friendscometogether.activecard.OnSwipeListener;
 import com.yiwo.friendscometogether.activecard.OverLayCardLayoutManager;
 import com.yiwo.friendscometogether.activecard.RenRenCallback;
 import com.yiwo.friendscometogether.base.BaseFragment;
+import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
 import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.model.FriendsTogetherDetailsModel;
@@ -62,14 +64,14 @@ public class FriendsTogetherFragment2 extends BaseFragment {
     SwipeFlingView sfv;
     @BindView(R.id.iv_youju_focus)
     ImageView ivFocus;
-    private List<FriendsTogethermodel.ObjBean> mList = new ArrayList<>();
-    private SwipeFIingViewAdapter adapter = new SwipeFIingViewAdapter(mList);
+    private List<FriendsTogethermodel.ObjBean> mList = new ArrayList<>() ;
+    private SwipeFIingViewAdapter adapter;
 
     private SpImp spImp;
     private String uid = "";
 
     private FriendsTogethermodel.ObjBean bean;
-
+    private Dialog dialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -81,13 +83,13 @@ public class FriendsTogetherFragment2 extends BaseFragment {
 
         spImp = new SpImp(getContext());
         initSwipe();
-//        initData();
+        initData();
         return view;
     }
-
     private void initSwipe() {
-//        sfv.setAdapter(adapter);
-        sfv.setAdapter(new SwipeFIingViewAdapter(mList));
+        adapter = new SwipeFIingViewAdapter(getContext(),mList);
+        sfv.setAdapter(adapter);
+        sfv.refresh_view();
         sfv.setOnSwipeFlingListener(new SwipeFlingView.OnSwipeFlingListener() {
             @Override
             public void onStartDragCard() {
@@ -113,6 +115,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
             public void onLeftCardExit(View view, Object dataObject, boolean triggerByTouchMove) {
                 int i =(int)dataObject;
                 Log.d("mlist的Size",mList.size()+"");
+
                 if (i>=0&&i<mList.size())
                 bean = mList.get(i);
                 if (bean.getFocusOn().equals("0")) {
@@ -120,13 +123,12 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                 } else {
                     Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
                 }
-                toToast(getContext(),bean.getPftitle());
             }
 
             @Override
             public void onRightCardExit(View view, Object dataObject, boolean triggerByTouchMove) {
                 int i =(int)dataObject;
-                Log.d("mlist的Size",mList.size()+"");
+                Log.d("mlist的Size",mList.size()+"//"+i);
                 if (i>=0&&i<mList.size())
                 bean = mList.get(i);
                 if (bean.getFocusOn().equals("0")) {
@@ -134,7 +136,6 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                 } else {
                     Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
                 }
-                toToast(getContext(),bean.getPftitle());
             }
 
             @Override
@@ -149,12 +150,16 @@ public class FriendsTogetherFragment2 extends BaseFragment {
 
             @Override
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
-
+//                List<FriendsTogethermodel.ObjBean> tList = new ArrayList<>();
+//                tList.addAll(mList);
+//                mList.clear();
+//                mList.addAll(tList);
+//                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onAdapterEmpty() {
-                updateListView(mList);
+              initData();
             }
 
             @Override
@@ -191,7 +196,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
     }
 
     private void initData() {
-
+        dialog = WeiboDialogUtils.createLoadingDialog(getContext(),"加载中...");
         String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
         ViseHttp.POST(NetConfig.friendsTogetherUrl)
                 .addParam("app_key", token)
@@ -214,16 +219,18 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                         Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
                                     }
                                 }
-                                updateListView(mList);
+                                updateListView();
+                                WeiboDialogUtils.closeDialog(dialog);
                             }
                         } catch (JSONException e) {
+                            WeiboDialogUtils.closeDialog(dialog);
                             e.printStackTrace();
                         }
                     }
 
                     @Override
                     public void onFail(int errCode, String errMsg) {
-
+                        WeiboDialogUtils.closeDialog(dialog);
                     }
                 });
 
@@ -235,6 +242,16 @@ public class FriendsTogetherFragment2 extends BaseFragment {
         switch (view.getId()) {
             case R.id.rl_fanhui:
                 sfv.selectComeBackCard(true);
+                Log.d("sadasdsadsa",sfv.getCurPositon()+"");
+                if (sfv.getCurPositon()>=0&&sfv.getCurPositon()<mList.size()){
+                    bean = mList.get(sfv.getCurPositon());
+                    if (bean.getFocusOn().equals("0")) {
+                        Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                    } else {
+                        Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
+                    }
+                }
+
                 break;
             case R.id.iv_shaixuan:
                 intent.setClass(getContext(), YoujuShaixuanActivity.class);
@@ -432,7 +449,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                             Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
                                         }
                                     }
-                                    updateListView(mList);
+                                    updateListView();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -474,7 +491,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                             Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
                                         }
                                     }
-                                    updateListView(mList);
+                                    updateListView();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -512,7 +529,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                             Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
                                         }
                                     }
-                                    updateListView(mList);
+                                    updateListView();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -547,7 +564,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                             Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
                                         }
                                     }
-                                    updateListView(mList);
+                                    updateListView();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -561,13 +578,10 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                     });
         }
     }
-    private void updateListView(List<FriendsTogethermodel.ObjBean> list) {
-        if (list == null || list.size() == 0) {
-            return;
-        }
-        mList.addAll(list);
-        adapter.data = mList;
+    private void updateListView() {
+//        adapter.data = mList;
+        sfv.refresh_view();//必须使用此方法  更新view
         adapter.notifyDataSetChanged();
-        initSwipe();
+//        initSwipe();
     }
 }

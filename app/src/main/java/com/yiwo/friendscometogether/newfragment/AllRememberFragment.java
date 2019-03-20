@@ -231,6 +231,7 @@ public class AllRememberFragment extends BaseFragment {
                 tv2.setTextColor(Color.parseColor("#D84C37"));
                 rv1.setVisibility(View.GONE);
                 rv2.setVisibility(View.VISIBLE);
+                initData();
                 break;
         }
     }

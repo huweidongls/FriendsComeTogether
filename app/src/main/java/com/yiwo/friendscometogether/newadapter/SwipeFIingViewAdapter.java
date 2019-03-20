@@ -34,7 +34,8 @@ public class SwipeFIingViewAdapter extends BaseAdapter{
     private Context context;
     public List<FriendsTogethermodel.ObjBean> data;
     private int currentPositon = 0;
-    public SwipeFIingViewAdapter(List<FriendsTogethermodel.ObjBean> data) {
+    public SwipeFIingViewAdapter(Context context,List<FriendsTogethermodel.ObjBean> data) {
+        this.context = context;
         this.data = data;
     }
     @Override
@@ -54,7 +55,6 @@ public class SwipeFIingViewAdapter extends BaseAdapter{
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        this.context = parent.getContext();
         if (convertView == null){
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view, parent, false);
             ViewHolder holder = new ViewHolder(convertView);
@@ -73,33 +73,33 @@ public class SwipeFIingViewAdapter extends BaseAdapter{
         holder.tvBaoming.setText("报名人数: "+data.get(position).getHave_num()+"人");
         holder.tvShengyu.setText("剩余名额: "+data.get(position).getSurplus()+"人");
         holder.tvAddress.setText(data.get(position).getPfaddress());
-        holder.rl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent intent = new Intent();
-                if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
-                    intent.setClass(context, DetailsOfFriendTogetherActivity.class);
-                    intent.putExtra("pfID", data.get(position).getPfID());
-                    context.startActivity(intent);
-                } else {
-                    LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(context, new LookPasswordDialog.SetPasswordListener() {
-                        @Override
-                        public boolean setActivityText(String s) {
-                            if (s.equals(data.get(position).getPfpwd())) {
-                                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
-                                intent.putExtra("pfID", data.get(position).getPfID());
-                                context.startActivity(intent);
-                                return true;
-                            }else {
-                                Toast.makeText(context,"密码错误",Toast.LENGTH_SHORT).show();
-                                return false;
-                            }
-                        }
-                    });
-                    lookPasswordDialog.show();
-                }
-            }
-        });
+//        holder.rl.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final Intent intent = new Intent();
+//                if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
+//                    intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+//                    intent.putExtra("pfID", data.get(position).getPfID());
+//                    context.startActivity(intent);
+//                } else {
+//                    LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(context, new LookPasswordDialog.SetPasswordListener() {
+//                        @Override
+//                        public boolean setActivityText(String s) {
+//                            if (s.equals(data.get(position).getPfpwd())) {
+//                                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+//                                intent.putExtra("pfID", data.get(position).getPfID());
+//                                context.startActivity(intent);
+//                                return true;
+//                            }else {
+//                                Toast.makeText(context,"密码错误",Toast.LENGTH_SHORT).show();
+//                                return false;
+//                            }
+//                        }
+//                    });
+//                    lookPasswordDialog.show();
+//                }
+//            }
+//        });
         return convertView;
     }
     public class ViewHolder{
