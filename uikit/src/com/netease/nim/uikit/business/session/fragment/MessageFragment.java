@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.netease.nim.uikit.R;
+import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.UIKitOptions;
 import com.netease.nim.uikit.api.model.main.CustomPushContentProvider;
 import com.netease.nim.uikit.api.model.session.SessionCustomization;
@@ -28,6 +32,7 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.ResponseCode;
+import com.netease.nimlib.sdk.friend.FriendService;
 import com.netease.nimlib.sdk.msg.MessageBuilder;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
@@ -55,6 +60,8 @@ public class MessageFragment extends TFragment implements ModuleProxy {
 
     private View rootView;
 
+    private LinearLayout ll_bottom;
+    private RelativeLayout rl_bottom_notfriend;
     private SessionCustomization customization;
 
     protected static final String TAG = "MessageActivity";
@@ -79,6 +86,9 @@ public class MessageFragment extends TFragment implements ModuleProxy {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.nim_message_fragment, container, false);
+        ll_bottom = rootView.findViewById(R.id.messageActivityBottomLayout);
+        rl_bottom_notfriend =rootView.findViewById(R.id.messageActivityBottomNotFriendLayout);
+
         return rootView;
     }
 
@@ -139,6 +149,16 @@ public class MessageFragment extends TFragment implements ModuleProxy {
 
         customization = (SessionCustomization) getArguments().getSerializable(Extras.EXTRA_CUSTOMIZATION);
         Container container = new Container(getActivity(), sessionId, sessionType, this);
+
+        if ((sessionType==SessionTypeEnum.P2P)&&!(NIMClient.getService(FriendService.class).isMyFriend(sessionId))){
+            Log.d("nothaoyou","不是好友呀");
+            ll_bottom.setVisibility(View.GONE);
+            rl_bottom_notfriend.setVisibility(View.VISIBLE);
+        }else {
+            Log.d("nothaoyou","是好友呀");
+            ll_bottom.setVisibility(View.VISIBLE);
+            rl_bottom_notfriend.setVisibility(View.GONE);
+        }
 
         if (messageListPanel == null) {
             messageListPanel = new MessageListPanelEx(container, rootView, anchor, false, false);

@@ -4,47 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
     android:orientation="vertical"
-    tools:context="com.yiwo.friendscometogether.newpage.EditorLabelActivity">
-
+    tools:context="com.yiwo.friendscometogether.newpage.PersonLabelActivity">
     <RelativeLayout style="@style/rl_top_bar">
 
         <RelativeLayout
             android:id="@+id/rl_back"
-            android:layout_width="100px"
-            android:layout_height="match_parent">
+            style="@style/rl_return">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="取消"
-                android:textColor="@color/white_ffffff"
-                android:textSize="32px" />
+            <ImageView
+                android:id="@+id/btn_back"
+                style="@style/iv_return"/>
 
         </RelativeLayout>
-
         <TextView
+            android:id="@+id/tv_title"
             style="@style/tv_top_title"
             android:layout_centerInParent="true"
-            android:text="编辑个人标签" />
+            android:text="TA的标签" />
 
-        <RelativeLayout
-            android:id="@+id/rl_save"
-            android:layout_width="100px"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="保存"
-                android:textColor="@color/white_ffffff"
-                android:textSize="32px" />
-
-        </RelativeLayout>
 
     </RelativeLayout>
 
@@ -58,13 +36,69 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="vertical">
-
             <TextView
+                android:id="@+id/tv_gongtong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="33px"
                 android:layout_marginTop="16px"
-                android:text="我的标签"
+                android:text="我们的共同点"
+                android:textColor="#9B9B9B"
+                android:textSize="32px" />
+
+            <RelativeLayout
+                android:id="@+id/rl0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16px"
+                android:background="@drawable/selector_fragment_my_bg">
+
+                <ImageView
+                    android:id="@+id/iv0"
+                    android:layout_width="38px"
+                    android:layout_height="38px"
+                    android:layout_marginBottom="22px"
+                    android:layout_marginLeft="27px"
+                    android:layout_marginTop="22px"
+                    android:src="@mipmap/shu_3" />
+
+                <RelativeLayout
+                    android:layout_marginBottom="12px"
+                    android:layout_marginLeft="33px"
+                    android:layout_marginRight="33px"
+                    android:layout_marginTop="12px"
+                    android:layout_toLeftOf="@+id/iv_right1"
+                    android:layout_toRightOf="@+id/iv0"
+                    android:descendantFocusability="blocksDescendants"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.yiwo.friendscometogether.widget.NestedRecyclerView
+                        android:id="@+id/rv0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="33px"
+                    android:layout_marginTop="20px"
+                    android:layout_toRightOf="@+id/iv0"
+                    android:text="暂无共同点"
+                    android:textColor="@color/black_333333"
+                    android:textSize="30px"
+                    android:visibility="visible" />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_text_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="33px"
+                android:layout_marginTop="16px"
+                android:text="TA的标签"
                 android:textColor="#9B9B9B"
                 android:textSize="32px" />
 
@@ -109,28 +143,20 @@
                     android:layout_marginLeft="33px"
                     android:layout_marginTop="20px"
                     android:layout_toRightOf="@+id/iv1"
-                    android:text="我的个性标签"
+                    android:text="TA还没有填写个性标签"
                     android:textColor="@color/black_333333"
                     android:textSize="30px"
-                    android:visibility="gone" />
-
-                <ImageView
-                    android:id="@+id/iv_right1"
-                    android:layout_width="15px"
-                    android:layout_height="25px"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="30px"
-                    android:src="@mipmap/label_right" />
+                    android:visibility="visible" />
 
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/tv_text_hobby"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="33px"
-                android:layout_marginTop="30px"
-                android:text="我的兴趣"
+                android:layout_marginTop="16px"
+                android:text="TA的兴趣"
                 android:textColor="#9B9B9B"
                 android:textSize="32px" />
 
@@ -173,18 +199,9 @@
                         android:layout_marginLeft="33px"
                         android:layout_marginTop="20px"
                         android:layout_toRightOf="@+id/iv2"
-                        android:text="我喜欢的运动"
+                        android:text="TA喜欢的运动"
                         android:textColor="@color/black_333333"
                         android:textSize="30px" />
-
-                    <ImageView
-                        android:id="@+id/iv_right2"
-                        android:layout_width="15px"
-                        android:layout_height="25px"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="30px"
-                        android:src="@mipmap/label_right" />
 
                 </RelativeLayout>
 
@@ -228,18 +245,10 @@
                         android:layout_marginLeft="33px"
                         android:layout_marginTop="20px"
                         android:layout_toRightOf="@+id/iv3"
-                        android:text="我喜欢的音乐"
+                        android:text="TA喜欢的音乐"
                         android:textColor="@color/black_333333"
                         android:textSize="30px" />
 
-                    <ImageView
-                        android:id="@+id/iv_right3"
-                        android:layout_width="15px"
-                        android:layout_height="25px"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="30px"
-                        android:src="@mipmap/label_right" />
 
                 </RelativeLayout>
 
@@ -283,18 +292,10 @@
                         android:layout_marginLeft="33px"
                         android:layout_marginTop="20px"
                         android:layout_toRightOf="@+id/iv4"
-                        android:text="我喜欢的食物"
+                        android:text="TA喜欢的食物"
                         android:textColor="@color/black_333333"
                         android:textSize="30px" />
 
-                    <ImageView
-                        android:id="@+id/iv_right4"
-                        android:layout_width="15px"
-                        android:layout_height="25px"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="30px"
-                        android:src="@mipmap/label_right" />
 
                 </RelativeLayout>
 
@@ -338,18 +339,10 @@
                         android:layout_marginLeft="33px"
                         android:layout_marginTop="20px"
                         android:layout_toRightOf="@+id/iv5"
-                        android:text="我喜欢的电影"
+                        android:text="TA喜欢的电影"
                         android:textColor="@color/black_333333"
                         android:textSize="30px" />
 
-                    <ImageView
-                        android:id="@+id/iv_right5"
-                        android:layout_width="15px"
-                        android:layout_height="25px"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="30px"
-                        android:src="@mipmap/label_right" />
 
                 </RelativeLayout>
 
@@ -393,18 +386,10 @@
                         android:layout_marginLeft="33px"
                         android:layout_marginTop="20px"
                         android:layout_toRightOf="@+id/iv6"
-                        android:text="我喜欢的书和动漫"
+                        android:text="TA喜欢的书和动漫"
                         android:textColor="@color/black_333333"
                         android:textSize="30px" />
 
-                    <ImageView
-                        android:id="@+id/iv_right6"
-                        android:layout_width="15px"
-                        android:layout_height="25px"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="30px"
-                        android:src="@mipmap/label_right" />
 
                 </RelativeLayout>
 
@@ -448,19 +433,9 @@
                         android:layout_marginLeft="33px"
                         android:layout_marginTop="20px"
                         android:layout_toRightOf="@+id/iv7"
-                        android:text="我的旅行足迹"
+                        android:text="TA的旅行足迹"
                         android:textColor="@color/black_333333"
                         android:textSize="30px" />
-
-                    <ImageView
-                        android:id="@+id/iv_right7"
-                        android:layout_width="15px"
-                        android:layout_height="25px"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="30px"
-                        android:src="@mipmap/label_right" />
-
                 </RelativeLayout>
 
             </LinearLayout>
@@ -468,5 +443,4 @@
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
-
 </LinearLayout>

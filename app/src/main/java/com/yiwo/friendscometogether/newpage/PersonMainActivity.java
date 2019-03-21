@@ -36,6 +36,7 @@ import com.yiwo.friendscometogether.newadapter.TaRenZhuYeYouJuAdapter;
 import com.yiwo.friendscometogether.newmodel.PersonMainModel;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.MyFriendActivity;
+import com.yiwo.friendscometogether.pages.MyInformationActivity;
 import com.yiwo.friendscometogether.pages.MyPicturesActivity;
 import com.yiwo.friendscometogether.pages.OtherPicActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -62,6 +63,8 @@ public class PersonMainActivity extends BaseActivity {
     RelativeLayout rl_back;
 
     // 他人主页 或 我的主页 有区别的控件；
+    @BindView(R.id.tv_label_wode_or_tade)
+    TextView tv_label_wode_or_tade;
     @BindView(R.id.tv_title_wode_or_tade)
     TextView tv_title_wode_or_tade;
     @BindView(R.id.tv_pics_wode_or_tade)
@@ -147,17 +150,18 @@ public class PersonMainActivity extends BaseActivity {
 
         initData();
         if (type_tade_or_wode == 0) {
-            iv_image_heart.setVisibility(View.VISIBLE);
+//            iv_image_heart.setVisibility(View.VISIBLE);
             RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE);
         Glide.with(PersonMainActivity.this).load(R.drawable.sayhi).apply(options).into(iv_image_heart);
             rl_algin_right_tade.setVisibility(View.VISIBLE);
             rl_algin_right_wode.setVisibility(View.GONE);
         } else if (type_tade_or_wode == 1) {
+            tv_label_wode_or_tade.setText("我的标签");
             tv_title_wode_or_tade.setText("我的主页");
             tv_pics_wode_or_tade.setText("我的照片");
             tv_youji_wode_or_tade.setText("我的友记");
             tv_youju_wode_or_tade.setText("我的友聚");
-            iv_image_heart.setVisibility(View.GONE);
+//            iv_image_heart.setVisibility(View.GONE);
             rl_algin_right_tade.setVisibility(View.GONE);
             rl_algin_right_wode.setVisibility(View.VISIBLE);
         }
@@ -391,13 +395,25 @@ public class PersonMainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.ll_person_all_pics, R.id.ll_person_all_youji, R.id.ll_person_all_youju,
+    @OnClick({R.id.rl_back,R.id.rl_label_text, R.id.ll_person_all_pics, R.id.ll_person_all_youji, R.id.ll_person_all_youju,
             R.id.rl_algin_right_wode, R.id.rl_add_friend, R.id.rl_guanzhu,R.id.iv_heart,R.id.ll_huozan,R.id.ll_guanzhu,R.id.ll_fans})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.rl_back:
                 finish();
+                break;
+            case R.id.rl_label_text:
+                if (type_tade_or_wode == 0){
+                    intent.setClass(PersonMainActivity.this,PersonLabelActivity.class);
+                    intent.putExtra("userName",model.getObj().getInfo().getUsername());
+                    intent.putExtra("userSex",ta);
+                    intent.putExtra("labelData",model.getObj().getUsertag());
+                    startActivity(intent);
+                }else {
+                    intent.setClass(PersonMainActivity.this, EditorLabelActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.ll_person_all_pics:
                 if (type_tade_or_wode == 1) {

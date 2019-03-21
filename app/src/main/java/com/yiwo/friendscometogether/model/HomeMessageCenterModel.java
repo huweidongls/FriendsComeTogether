@@ -10,7 +10,7 @@ public class HomeMessageCenterModel {
     /**
      * code : 200
      * message : 获取成功!
-     * obj : {"comment":{"type":"0","message":"暂无评论消息","time":""},"hot":{"type":"0","message":"暂无热门消息","time":""},"system":{"type":"0","message":"暂无系统新消息","time":""},"yq":{"type":"0","message":"暂无邀请消息","time":""},"friends":{"type":"0","message":"暂无好友消息","time":""},"Private":{"type":"1","message":"一样一样跟你打了个招呼!","time":"2019-01-10"}}
+     * obj : {"comment":{"type":"0","message":"暂无评论消息","time":""},"hot":{"type":"0","message":"暂无热门消息","time":""},"system":{"type":"0","message":"暂无系统新消息","time":""},"yq":{"type":"0","message":"暂无邀请消息","time":""},"friends":{"type":"0","message":"暂无好友消息","time":""},"Private":{"type":"1","message":"小糊涂神跟你打了个招呼!","time":"2019-03-14"},"collect":{"type":"0","message":"","time":""}}
      */
 
     private int code;
@@ -48,7 +48,8 @@ public class HomeMessageCenterModel {
          * system : {"type":"0","message":"暂无系统新消息","time":""}
          * yq : {"type":"0","message":"暂无邀请消息","time":""}
          * friends : {"type":"0","message":"暂无好友消息","time":""}
-         * Private : {"type":"1","message":"一样一样跟你打了个招呼!","time":"2019-01-10"}
+         * Private : {"type":"1","message":"小糊涂神跟你打了个招呼!","time":"2019-03-14"}
+         * collect : {"type":"0","message":"","time":""}
          */
 
         private CommentBean comment;
@@ -57,6 +58,7 @@ public class HomeMessageCenterModel {
         private YqBean yq;
         private FriendsBean friends;
         private PrivateBean Private;
+        private CollectBean collect;
 
         public CommentBean getComment() {
             return comment;
@@ -104,6 +106,14 @@ public class HomeMessageCenterModel {
 
         public void setPrivate(PrivateBean Private) {
             this.Private = Private;
+        }
+
+        public CollectBean getCollect() {
+            return collect;
+        }
+
+        public void setCollect(CollectBean collect) {
+            this.collect = collect;
         }
 
         public static class CommentBean {
@@ -289,8 +299,44 @@ public class HomeMessageCenterModel {
         public static class PrivateBean {
             /**
              * type : 1
-             * message : 一样一样跟你打了个招呼!
-             * time : 2019-01-10
+             * message : 小糊涂神跟你打了个招呼!
+             * time : 2019-03-14
+             */
+
+            private String type;
+            private String message;
+            private String time;
+
+            public String getType() {
+                return type;
+            }
+
+            public void setType(String type) {
+                this.type = type;
+            }
+
+            public String getMessage() {
+                return message;
+            }
+
+            public void setMessage(String message) {
+                this.message = message;
+            }
+
+            public String getTime() {
+                return time;
+            }
+
+            public void setTime(String time) {
+                this.time = time;
+            }
+        }
+
+        public static class CollectBean {
+            /**
+             * type : 0
+             * message :
+             * time :
              */
 
             private String type;

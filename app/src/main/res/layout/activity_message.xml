@@ -38,8 +38,16 @@
             android:layout_weight="1"
             android:layout_width="0px"
             android:layout_height="match_parent">
-
+            <ImageView
+                android:layout_alignTop="@+id/ll_zc"
+                android:layout_alignRight="@+id/ll_zc"
+                android:id="@+id/iv_point_zc"
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:background="@drawable/bg_red"
+                android:visibility="gone" />
             <LinearLayout
+                android:id="@+id/ll_zc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -47,7 +55,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="63px"
+                    android:layout_width="34dp"
                     android:layout_height="62px"
                     android:layout_gravity="center_horizontal"
                     android:src="@mipmap/zan_and_shoucang" />
@@ -70,8 +78,16 @@
             android:layout_weight="1"
             android:layout_width="0px"
             android:layout_height="match_parent">
-
+            <ImageView
+                android:layout_alignTop="@+id/ll_yq"
+                android:layout_alignRight="@+id/ll_yq"
+                android:visibility="gone"
+                android:id="@+id/iv_point_yq"
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:background="@drawable/bg_red" />
             <LinearLayout
+                android:id="@+id/ll_yq"
                 android:layout_centerInParent="true"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
@@ -94,6 +110,8 @@
 
             </LinearLayout>
 
+
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -101,8 +119,16 @@
             android:layout_weight="1"
             android:layout_width="0px"
             android:layout_height="match_parent">
-
+            <ImageView
+                android:layout_alignTop="@+id/ll_pa"
+                android:layout_alignRight="@+id/ll_pa"
+                android:visibility="gone"
+                android:id="@+id/iv_point_pa"
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:background="@drawable/bg_red" />
             <LinearLayout
+                android:id="@+id/ll_pa"
                 android:layout_centerInParent="true"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"

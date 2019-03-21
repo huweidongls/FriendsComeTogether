@@ -19,7 +19,7 @@ public class EditorLabelSaveAdapter extends RecyclerView.Adapter<EditorLabelSave
 
     private Context context;
     private String[] data;
-    private int a;
+    private int a;// 不同标签不同颜色
 
     public EditorLabelSaveAdapter(String[] data, int a) {
         this.data = data;
@@ -58,6 +58,9 @@ public class EditorLabelSaveAdapter extends RecyclerView.Adapter<EditorLabelSave
         }else if(a == 7){
             holder.tv.setBackgroundResource(R.drawable.bg_d3dde3_10px);
             holder.tv.setTextColor(Color.parseColor("#307299"));
+        }else if (a == 0){
+            holder.tv.setBackgroundResource(R.drawable.bg_74abca_10px);
+            holder.tv.setTextColor(Color.WHITE);
         }
         holder.tv.setText(data[position]);
     }

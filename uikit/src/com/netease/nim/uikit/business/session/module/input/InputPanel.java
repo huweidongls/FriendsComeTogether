@@ -47,6 +47,7 @@ import com.netease.nimlib.sdk.msg.MessageBuilder;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
+import com.netease.nimlib.sdk.msg.model.CustomMessageConfig;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.netease.nimlib.sdk.msg.model.CustomNotificationConfig;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
@@ -357,7 +358,14 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
     private void onTextMessageSendButtonPressed() {
         String text = messageEditText.getText().toString();
         IMMessage textMessage = createTextMessage(text);
-
+            textMessage.setPushContent("您有新的消息");
+            CustomMessageConfig config = textMessage.getConfig();
+            if (config == null){
+                config = new CustomMessageConfig();
+            }
+            config.enablePushNick = false;
+            textMessage.setConfig(config);
+            textMessage.getFromNick();
         if (container.proxy.sendMessage(textMessage)) {
             restoreText(true);
         }

@@ -257,8 +257,46 @@
                     </LinearLayout>
                 </LinearLayout>
                 <RelativeLayout
-                    android:id="@+id/rl_pics_text"
+                    android:layout_marginBottom="10px"
+                    android:id="@+id/rl_label_text"
                     android:layout_marginTop="50px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_label_wode_or_tade"
+                        android:layout_marginLeft="32px"
+                        android:layout_alignParentLeft="true"
+                        android:text="他的标签"
+                        android:textStyle="bold"
+                        android:textSize="36px"
+                        android:textColor="@color/black_333333"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:id="@+id/ll_person_all_label"
+                        android:layout_marginRight="30px"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:src="@mipmap/tarenzhuye_right"
+                            android:layout_width="13px"
+                            android:layout_height="19px" />
+                    </LinearLayout>
+                </RelativeLayout>
+                <View
+                    android:layout_marginRight="35px"
+                    android:layout_marginLeft="35px"
+                    android:layout_marginTop="10px"
+                    android:background="#979797"
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"></View>
+                <RelativeLayout
+                    android:id="@+id/rl_pics_text"
+                    android:layout_marginTop="30px"
                     android:layout_marginBottom="10px"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">

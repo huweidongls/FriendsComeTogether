@@ -64,6 +64,12 @@ public class MessageActivity extends BaseActivity {
     ImageView iv_friend_new_message;
     private SpImp spImp;
 
+    @BindView(R.id.iv_point_zc)
+    ImageView ivPointZC;
+    @BindView(R.id.iv_point_yq)
+    ImageView ivPointYQ;
+    @BindView(R.id.iv_point_pa)
+    ImageView ivPointPA;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +96,17 @@ public class MessageActivity extends BaseActivity {
                             if (jsonObject.getInt("code") == 200) {
                                 Gson gson = new Gson();
                                 HomeMessageCenterModel model = gson.fromJson(data, HomeMessageCenterModel.class);
+
+                                if (model.getObj().getCollect().getType().equals("1")){
+                                    ivPointZC.setVisibility(View.VISIBLE);
+                                }
+                                if (model.getObj().getComment().getType().equals("1")){
+                                    ivPointPA.setVisibility(View.VISIBLE);
+                                }
+                                if (model.getObj().getYq().getType().equals("1")){
+                                    ivPointYQ.setVisibility(View.VISIBLE);
+                                }
+
                                 tvHotContent.setText(model.getObj().getHot().getMessage());
                                 tvHotTime.setText(model.getObj().getHot().getTime());
                                 if (model.getObj().getHot().getType().equals("1")) {
@@ -145,7 +162,7 @@ public class MessageActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_z_and_sc:
-                ivHot.setVisibility(View.GONE);
+                ivPointZC.setVisibility(View.GONE);
                 intent.setClass(context, ZAndScActivity.class);
                 startActivity(intent);
                 break;
@@ -162,10 +179,12 @@ public class MessageActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.rl_shoudaoyaoqing:
+                ivPointYQ.setVisibility(View.GONE);
                 intent.setClass(context, MessageInvitationActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rl_pinglun:
+                ivPointPA.setVisibility(View.GONE);
                 intent.setClass(context, PinglunAtActivity.class);
                 startActivity(intent);
                 break;

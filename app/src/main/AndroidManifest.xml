@@ -382,7 +382,8 @@
         </receiver>
 
         <activity android:name=".newpage.PinglunAtActivity" />
-        <activity android:name=".newpage.PersonGuanZhuActivity"></activity>
+        <activity android:name=".newpage.PersonGuanZhuActivity" />
+        <activity android:name=".newpage.PersonLabelActivity"></activity>
     </application>
 
 </manifest>
