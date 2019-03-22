@@ -292,8 +292,23 @@ public class AdvancedTeamMemberActivity extends UI implements TAdapterDelegate,
     }
 
     @Override
-    public void onHeadImageViewClick(String account) {
-        AdvancedTeamMemberInfoActivity.startActivityForResult(AdvancedTeamMemberActivity.this, account, teamId);
+    public void onHeadImageViewClick(String account) { //群成员头像点击监听
+        if (creator.equals(NimUIKit.getAccount())){//  群主时
+            AdvancedTeamMemberInfoActivity.startActivityForResult(AdvancedTeamMemberActivity.this, account, teamId);
+        }else {
+            for (String memberAccount:managerList){
+                if (memberAccount.equals(account)){//是管理员
+                    AdvancedTeamMemberInfoActivity.startActivityForResult(AdvancedTeamMemberActivity.this, account, teamId);
+                    return;
+                }
+            }
+            //发送打开个人主页的广播
+            Intent intent = new Intent();
+            intent.putExtra("person_id",account);
+            intent.putExtra("status","1");
+            intent.setAction("com.yiwo.friendscometogether.broadcastreceiver.MyGoPersonMainBroadcastReceiver");
+            sendBroadcast(intent);
+        }
     }
 
     @Override

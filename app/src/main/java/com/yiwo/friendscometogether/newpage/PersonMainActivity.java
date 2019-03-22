@@ -29,7 +29,9 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.custom.FriendDescribeDialog;
 import com.yiwo.friendscometogether.custom.HuoZanDialog;
+import com.yiwo.friendscometogether.model.KVMode;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newadapter.PersonSameLabelAdapter;
 import com.yiwo.friendscometogether.newadapter.TaRenZhuYePicsAdapter;
 import com.yiwo.friendscometogether.newadapter.TaRenZhuYeYouJiAdapter;
 import com.yiwo.friendscometogether.newadapter.TaRenZhuYeYouJuAdapter;
@@ -40,11 +42,14 @@ import com.yiwo.friendscometogether.pages.MyInformationActivity;
 import com.yiwo.friendscometogether.pages.MyPicturesActivity;
 import com.yiwo.friendscometogether.pages.OtherPicActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.widget.FlowLayoutManager;
+import com.yiwo.friendscometogether.widget.NestedRecyclerView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -53,6 +58,8 @@ import butterknife.OnClick;
 
 public class PersonMainActivity extends BaseActivity {
 
+    @BindView(R.id.recycler_view_labels)
+    NestedRecyclerView recycler_view_labels;
     @BindView(R.id.recycler_view_pics)
     RecyclerView recyclerView_pics;
     @BindView(R.id.recycler_view_youji)
@@ -104,6 +111,8 @@ public class PersonMainActivity extends BaseActivity {
     @BindView(R.id.iv_heart)
     ImageView iv_image_heart;
 
+    @BindView(R.id.rl_label_text)
+    RelativeLayout rl_label_text;
     @BindView(R.id.rl_pics_text)
     RelativeLayout rl_pics_text;
     @BindView(R.id.rl_youji_text)
@@ -122,12 +131,14 @@ public class PersonMainActivity extends BaseActivity {
     private List<PersonMainModel.ObjBean.PhotoBean> list_pics = new ArrayList<>();
     private List<PersonMainModel.ObjBean.FriendBean> list_youji = new ArrayList<>();
     private List<PersonMainModel.ObjBean.ActivityBean> list_youju = new ArrayList<>();
+
+    private List<KVMode> list_label = new ArrayList<>();
     private int isFollow = -1;//是否关注 0为未关注 1为已关注
 
     private TaRenZhuYePicsAdapter taRenZhuYePicsAdapter;
     private TaRenZhuYeYouJiAdapter taRenZhuYeYouJiAdapter;
     private TaRenZhuYeYouJuAdapter  taRenZhuYeYouJuAdapter;
-
+    private PersonSameLabelAdapter personSameLabelAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,12 +153,25 @@ public class PersonMainActivity extends BaseActivity {
         }
         Log.d("person_id", person_id);
         spImp = new SpImp(PersonMainActivity.this);
-        if (spImp.getUID().equals(person_id)) {
+        if (spImp.getUID().equals(person_id)||spImp.getYXID().equals(person_id)) {
             type_tade_or_wode = 1;
+            recycler_view_labels.setVisibility(View.GONE);
+            rl_label_text.setVisibility(View.GONE);
         } else {
             type_tade_or_wode = 0;
+            recycler_view_labels.setVisibility(View.VISIBLE);
+            rl_label_text.setVisibility(View.VISIBLE);
         }
-
+        //---------------先设置label 的 manager-------------
+        FlowLayoutManager managerFlow = new FlowLayoutManager(){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        recycler_view_labels.setLayoutManager(managerFlow);
+//        ----------------------------------------------------
+        Log.d("personIDIDID",person_id);
         initData();
         if (type_tade_or_wode == 0) {
 //            iv_image_heart.setVisibility(View.VISIBLE);
@@ -239,6 +263,24 @@ public class PersonMainActivity extends BaseActivity {
                                             isFollow = 1 ;
                                             Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_heartwhite).into(iv_image_guanzhu);
                                         }
+                                        //--------共同标签----------------------
+                                        PersonMainModel.ObjBean.UsertagBean.SameBean sameBean = model.getObj().getUsertag().getSame();
+                                        list_label.clear();
+                                        String[] strings1 = sameBean.getPersonality().split(",");
+                                        String[] strings2 = sameBean.getMotion().split(",");
+                                        String[] strings3 = sameBean.getMusic().split(",");
+                                        String[] strings4 = sameBean.getDelicious().split(",");
+                                        String[] strings5 = sameBean.getFilm().split(",");
+                                        String[] strings6 = sameBean.getBook().split(",");
+                                        String[] strings7 = sameBean.getTravel().split(",");
+                                        list_label.addAll(addLabelToList(1,strings1));
+                                        list_label.addAll(addLabelToList(2,strings2));
+                                        list_label.addAll(addLabelToList(3,strings3));
+                                        list_label.addAll(addLabelToList(4,strings4));
+                                        list_label.addAll(addLabelToList(5,strings5));
+                                        list_label.addAll(addLabelToList(6,strings6));
+                                        list_label.addAll(addLabelToList(7,strings7));
+                                        personSameLabelAdapter.notifyDataSetChanged();
                                         //--------照片-------------------------
                                         list_pics.clear();
                                         list_pics.addAll(model.getObj().getPhoto());
@@ -348,6 +390,25 @@ public class PersonMainActivity extends BaseActivity {
                                     isFollow = 1 ;
                                     Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_heartwhite).into(iv_image_guanzhu);
                                 }
+                                //---------共同标签-----------------------------
+                                PersonMainModel.ObjBean.UsertagBean.SameBean sameBean = model.getObj().getUsertag().getSame();
+
+                                String[] strings1 = sameBean.getPersonality().split(",");
+                                String[] strings2 = sameBean.getMotion().split(",");
+                                String[] strings3 = sameBean.getMusic().split(",");
+                                String[] strings4 = sameBean.getDelicious().split(",");
+                                String[] strings5 = sameBean.getFilm().split(",");
+                                String[] strings6 = sameBean.getBook().split(",");
+                                String[] strings7 = sameBean.getTravel().split(",");
+                                list_label.addAll(addLabelToList(1,strings1));
+                                list_label.addAll(addLabelToList(2,strings2));
+                                list_label.addAll(addLabelToList(3,strings3));
+                                list_label.addAll(addLabelToList(4,strings4));
+                                list_label.addAll(addLabelToList(5,strings5));
+                                list_label.addAll(addLabelToList(6,strings6));
+                                list_label.addAll(addLabelToList(7,strings7));
+                                personSameLabelAdapter =new PersonSameLabelAdapter(list_label);
+                                recycler_view_labels.setAdapter(personSameLabelAdapter);
                                 //--------照片-------------------------
                                 list_pics.addAll(model.getObj().getPhoto());
                                 GridLayoutManager manager = new GridLayoutManager(PersonMainActivity.this, 3) {
@@ -393,6 +454,18 @@ public class PersonMainActivity extends BaseActivity {
                     }
                 });
 
+    }
+
+    private List<KVMode> addLabelToList(int i ,String[] strings) {
+        List<KVMode> list  =new ArrayList<>();
+        for (int j = 0 ;j<strings.length;j++){
+            if (TextUtils.isEmpty(strings[j])) continue;
+            KVMode kvMode = new KVMode();
+            kvMode.setI(i);
+            kvMode.setString(strings[j]);
+            list.add(kvMode);
+        }
+        return list;
     }
 
     @OnClick({R.id.rl_back,R.id.rl_label_text, R.id.ll_person_all_pics, R.id.ll_person_all_youji, R.id.ll_person_all_youju,

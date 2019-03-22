@@ -5,6 +5,7 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -42,6 +43,7 @@ import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
+import com.yiwo.friendscometogether.broadcastreceiver.MyGoPersonMainBroadcastReceiver;
 import com.yiwo.friendscometogether.fragment.ChatFragment;
 import com.yiwo.friendscometogether.fragment.FriendsRememberFragment;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment;
@@ -127,6 +129,8 @@ public class MainActivity extends FragmentActivity {
 //    TextView tvMy;
     @BindView(R.id.iv_point_new_chat_message)
     ImageView ivNewChatMessage;
+
+    private MyGoPersonMainBroadcastReceiver myGoPersonMainBroadcastReceiver;
     private long exitTime = 0;
 
     private SpImp spImp;
@@ -147,13 +151,27 @@ public class MainActivity extends FragmentActivity {
 //        initView();
         init();
         initSessionListener();
+        registReceiver();
 
+    }
+
+    private void registReceiver() {
+        myGoPersonMainBroadcastReceiver = new MyGoPersonMainBroadcastReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.yiwo.friendscometogether.broadcastreceiver.MyGoPersonMainBroadcastReceiver");
+        registerReceiver(myGoPersonMainBroadcastReceiver, intentFilter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         checkHasNewChatmessage();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(myGoPersonMainBroadcastReceiver);
     }
 
     private void checkHasNewChatmessage() {

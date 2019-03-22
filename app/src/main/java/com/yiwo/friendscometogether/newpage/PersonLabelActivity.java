@@ -85,7 +85,7 @@ public class PersonLabelActivity extends BaseActivity {
     TextView tv_text_label;
     @BindView(R.id.tv_text_hobby)
     TextView tv_text_hobby;
-    private EditorLabelSaveAdapter adapter0;
+//    private EditorLabelSaveAdapter adapter0;
     private EditorLabelSaveAdapter adapter1;
     private EditorLabelSaveAdapter adapter2;
     private EditorLabelSaveAdapter adapter3;
@@ -185,16 +185,15 @@ public class PersonLabelActivity extends BaseActivity {
         tv_text_hobby.setText(userSex+"的兴趣");
         tv_text_label.setText(userSex+"的标签");
 
-        String[] s0 = model.getSame().split(",");
-        adapter0 = new EditorLabelSaveAdapter(s0, 0);
-        rv0.setAdapter(adapter0);
-        if(!TextUtils.isEmpty(model.getPersonality())){
-            tv0.setVisibility(View.GONE);
-            rv0.setVisibility(View.VISIBLE);
-        }else {
-            tv0.setVisibility(View.VISIBLE);
-            rv0.setVisibility(View.GONE);
-        }
+//        adapter0 = new EditorLabelSaveAdapter(s0, 0);
+//        rv0.setAdapter(adapter0);
+//        if(!TextUtils.isEmpty(model.getPersonality())){
+//            tv0.setVisibility(View.GONE);
+//            rv0.setVisibility(View.VISIBLE);
+//        }else {
+//            tv0.setVisibility(View.VISIBLE);
+//            rv0.setVisibility(View.GONE);
+//        }
 
         String[] s1 = model.getPersonality().split(",");
         adapter1 = new EditorLabelSaveAdapter(s1, 1);

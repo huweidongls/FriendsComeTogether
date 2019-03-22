@@ -262,12 +262,16 @@
                     android:layout_marginTop="50px"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
+                    </LinearLayout>
                     <TextView
                         android:id="@+id/tv_label_wode_or_tade"
                         android:layout_marginLeft="32px"
                         android:layout_alignParentLeft="true"
-                        android:text="他的标签"
+                        android:text="我们的共同点"
                         android:textStyle="bold"
                         android:textSize="36px"
                         android:textColor="@color/black_333333"
@@ -281,22 +285,37 @@
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent">
+                        <TextView
+                            android:layout_marginRight="7px"
+                            android:textSize="26px"
+                            android:textColor="@color/black_333333"
+                            android:text="查看ta的更多标签"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
                         <ImageView
                             android:src="@mipmap/tarenzhuye_right"
                             android:layout_width="13px"
                             android:layout_height="19px" />
                     </LinearLayout>
+
                 </RelativeLayout>
-                <View
-                    android:layout_marginRight="35px"
-                    android:layout_marginLeft="35px"
-                    android:layout_marginTop="10px"
-                    android:background="#979797"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="2px"></View>
+                    android:layout_height="wrap_content">
+                    <com.yiwo.friendscometogether.widget.NestedRecyclerView
+                        android:id="@+id/recycler_view_labels"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="28px"
+                        android:layout_marginLeft="28px"
+                        >
+                    </com.yiwo.friendscometogether.widget.NestedRecyclerView>
+                </RelativeLayout>
+
+
                 <RelativeLayout
                     android:id="@+id/rl_pics_text"
-                    android:layout_marginTop="30px"
+                    android:layout_marginTop="50px"
                     android:layout_marginBottom="10px"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">

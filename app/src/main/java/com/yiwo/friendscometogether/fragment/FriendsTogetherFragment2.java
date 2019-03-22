@@ -123,6 +123,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                 } else {
                     Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
                 }
+//                if (i>0) mList.remove(i-1);//划出的数据删除掉
             }
 
             @Override
@@ -136,6 +137,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                 } else {
                     Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
                 }
+//                if (i>0) mList.remove(i-1);//划出的数据删除掉
             }
 
             @Override

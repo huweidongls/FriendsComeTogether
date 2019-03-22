@@ -46,7 +46,7 @@ public class DefaultTeamSessionCustomization extends SessionCustomization {
                 }
             }
         };
-        infoButton.iconId = R.drawable.nim_ic_message_actionbar_team;
+        infoButton.iconId = R.drawable.nim_ic_message_actionbar_team_w;
         buttons = new ArrayList<>();
         buttons.add(infoButton);
     }
