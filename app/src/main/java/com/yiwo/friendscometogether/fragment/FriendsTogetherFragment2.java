@@ -69,9 +69,16 @@ public class FriendsTogetherFragment2 extends BaseFragment {
 
     private SpImp spImp;
     private String uid = "";
+    // 筛选价格区间、标签、商家名称
+    private String min = "";
+    private String max = "";
+    private String price = "";
+    private String label = "";
 
     private FriendsTogethermodel.ObjBean bean;
     private Dialog dialog;
+
+    private List<FriendsTogethermodel.ObjBean> tList = new ArrayList<>();// 临时list
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -123,7 +130,12 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                 } else {
                     Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
                 }
-//                if (i>0) mList.remove(i-1);//划出的数据删除掉
+//                if (i>0) {
+//                    FriendsTogethermodel.ObjBean model = mList.remove(i-1);//划出的数据删除掉
+//                    mList.add(mList.size()-1,model);
+//                    adapter.notifyDataSetChanged();
+//                }
+
             }
 
             @Override
@@ -137,7 +149,11 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                 } else {
                     Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
                 }
-//                if (i>0) mList.remove(i-1);//划出的数据删除掉
+//              if (i>0) {
+//                FriendsTogethermodel.ObjBean model = mList.remove(i-1);//划出的数据删除掉
+//                mList.add(mList.size()-1,model);
+//                adapter.notifyDataSetChanged();
+//                }
             }
 
             @Override
@@ -156,12 +172,24 @@ public class FriendsTogetherFragment2 extends BaseFragment {
 //                tList.addAll(mList);
 //                mList.clear();
 //                mList.addAll(tList);
-//                adapter.notifyDataSetChanged();
+//                if (mList.size()<20){
+//                    mList.addAll(tList);
+//                    adapter.notifyDataSetChanged();
+//                }else {
+//                    initData();
+//                }
+                try {
+                    mList.addAll(tList);
+                    adapter.notifyDataSetChanged();
+                }catch (Exception e){
+                    initData();
+                }
+
             }
 
             @Override
             public void onAdapterEmpty() {
-              initData();
+
             }
 
             @Override
@@ -198,6 +226,9 @@ public class FriendsTogetherFragment2 extends BaseFragment {
     }
 
     private void initData() {
+         min = "";
+         max = "";
+         label = "";
         dialog = WeiboDialogUtils.createLoadingDialog(getContext(),"加载中...");
         String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
         ViseHttp.POST(NetConfig.friendsTogetherUrl)
@@ -213,6 +244,8 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                 final FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
                                 mList.clear();
                                 mList.addAll(model.getObj());
+                                tList.clear();
+                                tList.addAll(model.getObj());
                                 if (mList.size() > 0) {
                                     bean = mList.get(0);
                                     if (bean.getFocusOn().equals("0")) {
@@ -424,9 +457,9 @@ public class FriendsTogetherFragment2 extends BaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
         if (resultCode == 2) {//筛选条件 有价格、无分类
-            String min = data.getStringExtra("min");
-            String max = data.getStringExtra("max");
-            String price = min + "," + max;
+            min = data.getStringExtra("min");
+            max = data.getStringExtra("max");
+            price = min + "," + max;
             String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
             ViseHttp.POST(NetConfig.friendsTogetherUrl)
                     .addParam("app_key", token)
@@ -443,6 +476,8 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                     FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
                                     mList.clear();
                                     mList.addAll(model.getObj());
+                                    tList.clear();
+                                    tList.addAll(model.getObj());
                                     if(mList.size()>0){
                                         bean = mList.get(0);
                                         if (bean.getFocusOn().equals("0")) {
@@ -464,10 +499,10 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                         }
                     });
         } else if (resultCode == 3) {//筛选条件 有价格、有分类
-            String min = data.getStringExtra("min");
-            String max = data.getStringExtra("max");
-            String label = data.getStringExtra("label");
-            String price = min + "," + max;
+            min = data.getStringExtra("min");
+            max = data.getStringExtra("max");
+            label = data.getStringExtra("label");
+            price = min + "," + max;
             String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
             ViseHttp.POST(NetConfig.friendsTogetherUrl)
                     .addParam("app_key", token)
@@ -485,6 +520,8 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                     FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
                                     mList.clear();
                                     mList.addAll(model.getObj());
+                                    tList.clear();
+                                    tList.addAll(model.getObj());
                                     if(mList.size()>0){
                                         bean = mList.get(0);
                                         if (bean.getFocusOn().equals("0")) {
@@ -506,7 +543,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                         }
                     });
         } else if (resultCode == 5) {//筛选条件 无价格、有分类
-            String label = data.getStringExtra("label");
+            label = data.getStringExtra("label");
             String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
             ViseHttp.POST(NetConfig.friendsTogetherUrl)
                     .addParam("app_key", token)
@@ -523,6 +560,8 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                     FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
                                     mList.clear();
                                     mList.addAll(model.getObj());
+                                    tList.clear();
+                                    tList.addAll(model.getObj());
                                     if(mList.size()>0){
                                         bean = mList.get(0);
                                         if (bean.getFocusOn().equals("0")) {
@@ -544,40 +583,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                         }
                     });
         }else if (resultCode == 7){//没有选择任何条件
-            String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
-            ViseHttp.POST(NetConfig.friendsTogetherUrl)
-                    .addParam("app_key", token)
-                    .addParam("userID", spImp.getUID())
-                    .request(new ACallback<String>() {
-                        @Override
-                        public void onSuccess(String data) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(data);
-                                if (jsonObject.getInt("code") == 200) {
-                                    Log.e("222", data);
-                                    FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
-                                    mList.clear();
-                                    mList.addAll(model.getObj());
-                                    if(mList.size()>0){
-                                        bean = mList.get(0);
-                                        if (bean.getFocusOn().equals("0")) {
-                                            Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
-                                        } else {
-                                            Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
-                                        }
-                                    }
-                                    updateListView();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        @Override
-                        public void onFail(int errCode, String errMsg) {
-
-                        }
-                    });
+            initData();
         }
     }
     private void updateListView() {

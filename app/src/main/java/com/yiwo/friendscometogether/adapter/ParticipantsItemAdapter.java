@@ -49,9 +49,16 @@ public class ParticipantsItemAdapter extends RecyclerView.Adapter<ParticipantsIt
                 noname_num = 0;
             }
             if (data.get(position).getNoname().equals("1")){// 是否匿名 0否 1是
-                noname_num++;
+                noname_num= noname_num+Integer.parseInt(data.get(position).getUjall());
                 holder.rl_has_name.setVisibility(View.GONE);
             }else {
+                holder.rl_has_name.setVisibility(View.VISIBLE);
+                if (Integer.parseInt(data.get(position).getUjall())>1){
+                    holder.tvBaoMingNum.setText(data.get(position).getUjall());
+//                    holder.tvBaoMingNum.setText("99");
+                }else {
+                    holder.rlBaoMingNum.setVisibility(View.GONE);
+                }
                 Glide.with(context).load(data.get(position).getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.headIv);
                 holder.nicknameTv.setText(data.get(position).getUsername());
             }
@@ -59,10 +66,12 @@ public class ParticipantsItemAdapter extends RecyclerView.Adapter<ParticipantsIt
                 holder.rl_no_name.setVisibility(View.GONE);//只有最后一条数据显示匿名头像
 
             }else {
-                if (noname_num>0){
+                if (noname_num>0){//匿名人数大于0时
+                    holder.rlBaoMingNumNM.setVisibility(View.VISIBLE);
                     holder.rl_no_name.setVisibility(View.VISIBLE);
-                    holder.numTv.setText("匿名("+noname_num+")");
+                    holder.tvBaoMingNumNM.setText(""+noname_num);
                 }else {
+                    holder.rlBaoMingNumNM.setVisibility(View.GONE);
                     holder.rl_no_name.setVisibility(View.GONE);
                 }
             }
@@ -94,7 +103,10 @@ public class ParticipantsItemAdapter extends RecyclerView.Adapter<ParticipantsIt
         private RelativeLayout personRl;
         private RelativeLayout rl_has_name;
         private RelativeLayout rl_no_name;
-        private TextView numTv;
+        private RelativeLayout rlBaoMingNum;
+        private TextView tvBaoMingNum;
+        private RelativeLayout rlBaoMingNumNM;
+        private TextView tvBaoMingNumNM;
         public ViewHolder(View itemView) {
             super(itemView);
             headIv = (itemView).findViewById(R.id.item_head);
@@ -102,7 +114,10 @@ public class ParticipantsItemAdapter extends RecyclerView.Adapter<ParticipantsIt
             personRl = (itemView).findViewById(R.id.item_onclick_rl);
             rl_has_name = itemView.findViewById(R.id.rl_has_name);
             rl_no_name = itemView.findViewById(R.id.rl_no_name);
-            numTv = (itemView).findViewById(R.id.item_num);
+            rlBaoMingNum = itemView.findViewById(R.id.rl_num);
+            tvBaoMingNum = itemView.findViewById(R.id.tv_num);
+            rlBaoMingNumNM = itemView.findViewById(R.id.rl_num_nm);
+            tvBaoMingNumNM = itemView.findViewById(R.id.tv_num_nm);
         }
     }
 

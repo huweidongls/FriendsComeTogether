@@ -176,7 +176,6 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
         //不可点击按钮全部隐藏！！！20190301
         holder.tvToTrip.setVisibility(View.GONE);
         holder.tvTriping.setVisibility(View.GONE);
-        holder.tvComment.setVisibility(View.GONE);
         holder.tvOkReturn.setVisibility(View.GONE);
         holder.tvReturning.setVisibility(View.GONE);
         holder.tvPay.setOnClickListener(new View.OnClickListener() {

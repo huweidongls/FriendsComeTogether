@@ -27,6 +27,23 @@
             android:text="嘿das哈"
             android:textColor="@color/black_333333"
             android:textSize="28px" />
+        <RelativeLayout
+            android:layout_marginTop="8px"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:id="@+id/rl_num"
+            android:background="@mipmap/circle"
+            android:layout_width="35px"
+            android:layout_height="35px">
+            <TextView
+                android:id="@+id/tv_num"
+                android:textColor="@color/white_ffffff"
+                android:text="99"
+                android:textSize="20px"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -35,6 +52,7 @@
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_naname"
             android:src="@mipmap/noname"
@@ -56,5 +74,22 @@
             android:text="匿名"
             android:textColor="@color/black_333333"
             android:textSize="28px" />
+        <RelativeLayout
+            android:layout_marginTop="8px"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:id="@+id/rl_num_nm"
+            android:background="@mipmap/circle"
+            android:layout_width="35px"
+            android:layout_height="35px">
+            <TextView
+                android:id="@+id/tv_num_nm"
+                android:textColor="@color/white_ffffff"
+                android:text="99"
+                android:textSize="20px"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

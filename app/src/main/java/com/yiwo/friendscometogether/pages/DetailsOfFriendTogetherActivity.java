@@ -264,7 +264,7 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
         if (model.getAllow_refund().equals("0")){
             rlRefund.setVisibility(View.GONE);
         }else {
-            tvAllowRefund.setText("不能退款");
+            tvAllowRefund.setText("不能取消、退款");
         }
         initChooseDate(model.getPhase());
 //        if(model.getHave_num().equals("0")){
@@ -304,7 +304,7 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
         time_start_tv.setText("开始时间: " + list.get(0).getPhase_begin_time());
         time_end_tv.setText("结束时间: " + list.get(0).getPhase_over_time());
         priceTv.setText("参加费用: " + list.get(0).getPhase_price());
-        participantsTv.setText("参加人员（" + list.get(0).getPhase_list().size() + "/" + model.getObj().getPerson_num() + ")");
+        participantsTv.setText("参加人员（" + list.get(0).getHave_num() + "/" + model.getObj().getPerson_num() + ")");
         initPerson(list.get(0).getPhase_list());
         LinearLayoutManager manager = new LinearLayoutManager(DetailsOfFriendTogetherActivity.this){
             @Override
@@ -329,7 +329,7 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
                 time_start_tv.setText("开始时间: " + phaseBean.getPhase_begin_time());
                 time_end_tv.setText("结束时间: " + phaseBean.getPhase_over_time());
                 priceTv.setText("参加费用: " + phaseBean.getPhase_price());
-                participantsTv.setText("参加人员（" + phaseBean.getPhase_list().size() + "/" + model.getObj().getPerson_num() + ")");
+                participantsTv.setText("参加人员（" + phaseBean.getHave_num() + "/" + model.getObj().getPerson_num() + ")");
                 initPerson(phaseBean.getPhase_list());
             }
         });

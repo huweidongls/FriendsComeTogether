@@ -51,6 +51,8 @@ public class LoginActivity extends BaseActivity {
     TextView login_registerTv;
     @BindView(R.id.login_forgetPwTv)
     TextView login_forgetPwTv;
+    @BindView(R.id.tv_XY_TK)
+    TextView tv_XY_TK;
 //    @BindView(R.id.login_wechatIv)
 //    ImageView login_wechatIv;
     Context c;
@@ -70,7 +72,7 @@ public class LoginActivity extends BaseActivity {
         api = UMShareAPI.get(this);
     }
 
-    @OnClick({R.id.rl_set_return, R.id.login_btn, R.id.login_registerTv, R.id.login_forgetPwTv})
+    @OnClick({R.id.rl_set_return, R.id.login_btn, R.id.login_registerTv, R.id.login_forgetPwTv,R.id.tv_XY_TK})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_set_return:
@@ -87,6 +89,12 @@ public class LoginActivity extends BaseActivity {
             case R.id.login_forgetPwTv:
                 Intent itf = new Intent(c, ForgetPwActivity.class);
                 startActivity(itf);
+                break;
+            case R.id.tv_XY_TK:
+                Intent itA = new Intent(c, UserAgreementActivity.class);
+                itA.putExtra("title", "用户协议");
+                itA.putExtra("url", NetConfig.userAgreementUrl);
+                startActivity(itA);
                 break;
 //            case R.id.login_wechatIv:
 //                toToast(LoginActivity.this,"调起微信登录失败");

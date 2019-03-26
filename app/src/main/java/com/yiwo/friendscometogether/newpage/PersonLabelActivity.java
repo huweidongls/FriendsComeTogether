@@ -205,69 +205,75 @@ public class PersonLabelActivity extends BaseActivity {
             tv1.setVisibility(View.VISIBLE);
             rv1.setVisibility(View.GONE);
         }
+        tv2.setVisibility(View.VISIBLE);
+        rv2.setVisibility(View.VISIBLE);
+        tv3.setVisibility(View.VISIBLE);
+        rv3.setVisibility(View.VISIBLE);
+        tv4.setVisibility(View.VISIBLE);
+        rv4.setVisibility(View.VISIBLE);
+        tv5.setVisibility(View.VISIBLE);
+        rv5.setVisibility(View.VISIBLE);
+        tv6.setVisibility(View.VISIBLE);
+        rv6.setVisibility(View.VISIBLE);
+        tv7.setVisibility(View.VISIBLE);
+        rv7.setVisibility(View.VISIBLE);
 
         String[] s2 = model.getMotion().split(",");
-        if(!TextUtils.isEmpty(model.getMotion())){
-            tv2.setVisibility(View.GONE);
-            rv2.setVisibility(View.VISIBLE);
-        }else {
-            tv2.setVisibility(View.VISIBLE);
+        if(TextUtils.isEmpty(model.getMotion())){
+            tv2.setText(userSex+"未填写喜欢的运动");
             rv2.setVisibility(View.GONE);
+        }else {
+            tv2.setText(userSex+"喜欢的运动");
         }
         adapter2 = new EditorLabelSaveAdapter(s2, 2);
         rv2.setAdapter(adapter2);
 
         String[] s3 = model.getMusic().split(",");
-        if(!TextUtils.isEmpty(model.getMusic())){
-            tv3.setVisibility(View.GONE);
-            rv3.setVisibility(View.VISIBLE);
-        }else {
-            tv3.setVisibility(View.VISIBLE);
+        if(TextUtils.isEmpty(model.getMusic())){
+            tv3.setText(userSex+"未填写喜欢的音乐");
             rv3.setVisibility(View.GONE);
+        }else {
+            tv3.setText(userSex+"喜欢的音乐");
         }
         adapter3 = new EditorLabelSaveAdapter(s3, 3);
         rv3.setAdapter(adapter3);
 
         String[] s4 = model.getDelicious().split(",");
-        if(!TextUtils.isEmpty(model.getDelicious())){
-            tv4.setVisibility(View.GONE);
-            rv4.setVisibility(View.VISIBLE);
-        }else {
-            tv4.setVisibility(View.VISIBLE);
+        if(TextUtils.isEmpty(model.getDelicious())){
+            tv4.setText(userSex+"未填写喜欢的食物");
             rv4.setVisibility(View.GONE);
+        }else {
+            tv4.setText(userSex+"喜欢的食物");
         }
         adapter4 = new EditorLabelSaveAdapter(s4, 4);
         rv4.setAdapter(adapter4);
 
         String[] s5 = model.getFilm().split(",");
-        if(!TextUtils.isEmpty(model.getFilm())){
-            tv5.setVisibility(View.GONE);
-            rv5.setVisibility(View.VISIBLE);
-        }else {
-            tv5.setVisibility(View.VISIBLE);
+        if(TextUtils.isEmpty(model.getFilm())){
+            tv5.setText(userSex+"未填写喜欢的电影");
             rv5.setVisibility(View.GONE);
+        }else {
+            tv5.setText(userSex+"喜欢的电影");
         }
         adapter5 = new EditorLabelSaveAdapter(s5, 5);
         rv5.setAdapter(adapter5);
 
         String[] s6 = model.getBook().split(",");
-        if(!TextUtils.isEmpty(model.getBook())){
-            tv6.setVisibility(View.GONE);
-            rv6.setVisibility(View.VISIBLE);
-        }else {
-            tv6.setVisibility(View.VISIBLE);
+        if(TextUtils.isEmpty(model.getBook())){
+            tv6.setText(userSex+"未填写喜欢的书和动漫");
             rv6.setVisibility(View.GONE);
+        }else {
+            tv6.setText(userSex+"喜欢的书和动漫");
         }
         adapter6 = new EditorLabelSaveAdapter(s6, 6);
         rv6.setAdapter(adapter6);
 
         String[] s7 = model.getTravel().split(",");
-        if(!TextUtils.isEmpty(model.getTravel())){
-            tv7.setVisibility(View.GONE);
-            rv7.setVisibility(View.VISIBLE);
-        }else {
-            tv7.setVisibility(View.VISIBLE);
+        if(TextUtils.isEmpty(model.getTravel())){
+            tv7.setText(userSex+"未填写旅行足迹");
             rv7.setVisibility(View.GONE);
+        }else {
+            tv7.setText(userSex+"的旅行足迹");
         }
 
         adapter7 = new EditorLabelSaveAdapter(s7, 7);

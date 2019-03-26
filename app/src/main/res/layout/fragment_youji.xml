@@ -21,7 +21,7 @@
                 android:layout_width="88px"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:src="@mipmap/fanhui"
+                    android:src="@mipmap/back_w"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="30px"
                     android:id="@+id/iv_back"

@@ -8,9 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
@@ -48,23 +51,36 @@ public class MessageFriendsAdapter extends RecyclerView.Adapter<MessageFriendsAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.titleTv.setText(data.get(position).getTitle());
-        if(!TextUtils.isEmpty(data.get(position).getPic())){
-            Picasso.with(context).load(data.get(position).getPic()).into(holder.picIv);
+        holder.tvUserName.setText(data.get(position).getUsername());
+        Glide.with(context).load(data.get(position).getPic()).apply(new RequestOptions().error(R.mipmap.my_head)).into(holder.picIv);
+        switch (data.get(position).getType()){
+            case "0"://好友申请
+                holder.titleTv.setText("请求加为好友");
+                holder.tvContent.setText("留言："+data.get(position).getDescribe());
+                holder.tvNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listener.onFriend(1, position);
+                    }
+                });
+                holder.tvOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listener.onFriend(2, position);
+                    }
+                });
+                break;
+            case "1"://接受了好友
+                holder.titleTv.setText("同意了你的好友申请");
+                holder.tvContent.setVisibility(View.GONE);
+                holder.ll.setVisibility(View.GONE);
+                break;
+            case "2"://拒绝了好友
+                holder.titleTv.setText("拒绝了你的好友申请");
+                holder.tvContent.setVisibility(View.GONE);
+                holder.ll.setVisibility(View.GONE);
+                break;
         }
-        holder.tvContent.setText(data.get(position).getDescribe());
-        holder.tvNo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onFriend(1, position);
-            }
-        });
-        holder.tvOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onFriend(2, position);
-            }
-        });
 //        holder.picIv.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -91,21 +107,25 @@ public class MessageFriendsAdapter extends RecyclerView.Adapter<MessageFriendsAd
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView tvUserName;
         private TextView titleTv;
         private ImageView picIv;
         private TextView tvNo;
         private TextView tvOk;
         private TextView tvContent;
         private RelativeLayout rl;
+        private LinearLayout ll;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            tvUserName = itemView.findViewById(R.id.message_view_username_tv);
             titleTv = (itemView).findViewById(R.id.message_view_title_tv);
             picIv = (itemView).findViewById(R.id.message_view_pic_iv);
             tvNo = itemView.findViewById(R.id.tv_no);
             tvOk = itemView.findViewById(R.id.tv_ok);
             tvContent = itemView.findViewById(R.id.message_view_content_tv);
             rl = itemView.findViewById(R.id.rl);
+            ll = itemView.findViewById(R.id.ll);
         }
     }
 

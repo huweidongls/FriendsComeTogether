@@ -9,7 +9,7 @@ public class DetailsOrderModel {
     /**
      * code : 200
      * message : 获取成功
-     * obj : {"title":"活动测试2允许退款","content":"","picture":"http://39.104.102.152/uploads/xingcheng/20190306/40386171b001e18d93d1bde7ee77cdac.jpg","time":"2019.03.21-2019.03.23","go_num":"1","price":"0.10","order_sn":"20190306200617828480","paycode":"","create_time":"","pay_time":"2019-03-06 20:06:17","over_time":"","status":"待支付","pay_type":"0","order_type":"1","price_type":"自费","begin_time":"2019.03.21","end_time":"2019.03.23","noname":"0","allow_refund":"0"}
+     * obj : {"title":"活动不可退款，只限男性 且单身","content":"","picture":"http://39.104.102.152/uploads/xingcheng/20190321/917bbe3500b9249b14184868591d6d92.jpg","time":"2019.03.28-2019.03.31","go_num":"1","price":"0.01","order_sn":"20190325151424887572","paycode":"","create_time":"","pay_time":"2019-03-25 15:14:24","over_time":"","status":"待支付","pay_type":"1","order_type":"1","price_type":"自费","begin_time":"2019.03.28","end_time":"2019.03.31","noname":"0","allow_refund":"1","phase":"1"}
      */
 
     private int code;
@@ -42,25 +42,26 @@ public class DetailsOrderModel {
 
     public static class ObjBean {
         /**
-         * title : 活动测试2允许退款
+         * title : 活动不可退款，只限男性 且单身
          * content :
-         * picture : http://39.104.102.152/uploads/xingcheng/20190306/40386171b001e18d93d1bde7ee77cdac.jpg
-         * time : 2019.03.21-2019.03.23
+         * picture : http://39.104.102.152/uploads/xingcheng/20190321/917bbe3500b9249b14184868591d6d92.jpg
+         * time : 2019.03.28-2019.03.31
          * go_num : 1
-         * price : 0.10
-         * order_sn : 20190306200617828480
+         * price : 0.01
+         * order_sn : 20190325151424887572
          * paycode :
          * create_time :
-         * pay_time : 2019-03-06 20:06:17
+         * pay_time : 2019-03-25 15:14:24
          * over_time :
          * status : 待支付
-         * pay_type : 0
+         * pay_type : 1
          * order_type : 1
          * price_type : 自费
-         * begin_time : 2019.03.21
-         * end_time : 2019.03.23
+         * begin_time : 2019.03.28
+         * end_time : 2019.03.31
          * noname : 0
-         * allow_refund : 0
+         * allow_refund : 1
+         * phase : 1
          */
 
         private String title;
@@ -82,6 +83,7 @@ public class DetailsOrderModel {
         private String end_time;
         private String noname;
         private String allow_refund;
+        private String phase;
 
         public String getTitle() {
             return title;
@@ -233,6 +235,14 @@ public class DetailsOrderModel {
 
         public void setAllow_refund(String allow_refund) {
             this.allow_refund = allow_refund;
+        }
+
+        public String getPhase() {
+            return phase;
+        }
+
+        public void setPhase(String phase) {
+            this.phase = phase;
         }
     }
 }

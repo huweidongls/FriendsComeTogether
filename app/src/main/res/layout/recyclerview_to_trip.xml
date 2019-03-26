@@ -113,7 +113,7 @@
 
             android:layout_alignParentRight="true"
             android:layout_marginRight="24px"
-            android:textColor="#333333"
+            android:textColor="@color/yellow_ff9d00"
             android:textSize="24px"
             android:id="@+id/fragment_to_trip_rv_tv_price"
             android:layout_centerVertical="true"

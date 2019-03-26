@@ -85,6 +85,7 @@
         </RelativeLayout>
 
         <View
+            android:layout_marginBottom="10px"
             android:layout_width="match_parent"
             android:layout_height="12px"
             android:background="@color/line" />
@@ -120,11 +121,17 @@
             android:visibility="gone"
             android:id="@+id/cb"
             android:textSize="28px"
-            android:text="我请客"
+            android:text="我付费"
             android:layout_marginLeft="20px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
+        <CheckBox
+            android:id="@+id/cb_niming"
+            android:textSize="28px"
+            android:text="匿名"
+            android:layout_marginLeft="20px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/et"
             android:layout_width="match_parent"
@@ -142,7 +149,7 @@
             android:id="@+id/tv_ok"
             android:textSize="32px"
             android:layout_alignParentBottom="true"
-            android:background="@color/yellow_ff9d00"
+            android:background="@color/red_d84c37"
             android:gravity="center"
             android:textColor="@color/white_ffffff"
             android:text="确定"

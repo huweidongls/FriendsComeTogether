@@ -44,7 +44,7 @@ public class SwipeFlingView extends AdapterView {
     private int mResetChildAnimDuration = 300;
 
     private int MAX_VISIBLE = 4;//最多可显示的卡片数
-    private int MIN_ADAPTER_STACK = 3;
+    private int MIN_ADAPTER_STACK = 1;//剩余卡片多少数量后加载
     private int mMinFlingVelocity;
     private int mMinTouchSlop;
     private int mCardDeviation;//卡片最大偏移误差值

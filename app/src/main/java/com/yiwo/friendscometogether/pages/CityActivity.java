@@ -74,6 +74,9 @@ public class CityActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city);
         ButterKnife.bind(CityActivity.this);
+        if (getIntent().getStringExtra(ActivityConfig.ACTIVITY).equals("createYouJi")){//创建友记进入选择城市 隐藏重置按钮
+            rlReset.setVisibility(View.GONE);
+        }
         initData();
         setListener();
         loadHot();
@@ -199,7 +202,9 @@ public class CityActivity extends BaseActivity {
                     Intent it = new Intent();
                     if (ac.equals("youju")) {
                         it.setClass(CityActivity.this, CreateFriendTogetherActivity.class);
-                    } else {
+                    } else if (ac.equals("createYouJi")){
+                        it.setClass(CityActivity.this, CreateFriendRememberActivity.class);
+                    }else {
                         it.setClass(CityActivity.this, MainActivity.class);
                     }
                     it.putExtra(ActivityConfig.CITY, list.get(position));

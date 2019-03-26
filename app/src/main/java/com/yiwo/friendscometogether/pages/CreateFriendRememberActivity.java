@@ -47,16 +47,20 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.adapter.IntercalationAdapter;
 import com.yiwo.friendscometogether.custom.SetPasswordDialog;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
+import com.yiwo.friendscometogether.model.CityModel;
 import com.yiwo.friendscometogether.model.GetFriendActiveListModel;
 import com.yiwo.friendscometogether.model.JsonBean;
 import com.yiwo.friendscometogether.model.UserIntercalationPicModel;
 import com.yiwo.friendscometogether.model.UserLabelModel;
 import com.yiwo.friendscometogether.model.UserReleaseModel;
+import com.yiwo.friendscometogether.network.ActivityConfig;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newmodel.HomeDataModel;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.GetJsonDataUtil;
 import com.yiwo.friendscometogether.utils.StringUtils;
 import com.yiwo.friendscometogether.utils.TokenUtils;
+import com.yiwo.friendscometogether.utils.UserUtils;
 import com.yiwo.friendscometogether.widget.CustomDatePicker;
 
 import org.json.JSONArray;
@@ -106,7 +110,7 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
     @BindView(R.id.activity_create_friend_remember_rl_activity_city)
     RelativeLayout rlSelectCity;
     @BindView(R.id.activity_create_friend_remember_tv_activity_city)
-    EditText tvCity;
+    TextView tvCity;
     @BindView(R.id.activity_create_friend_remember_rl_price)
     RelativeLayout rlPrice;
     @BindView(R.id.activity_create_friend_remember_rl_complete)
@@ -167,7 +171,7 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
 
     private static final int REQUEST_CODE = 0x00000011;
     private static final int REQUEST_CODE1 = 0x00000012;
-
+    private static final int REQUEST_CODE_GET_CITY = 1;
     private List<File> files = new ArrayList<>();
 
     /**
@@ -454,6 +458,9 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
 //        pvOptions.setPicker(options1Items, options2Items);//二级选择器*/
 //                pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
 //                pvOptions.show();
+                Intent it = new Intent(CreateFriendRememberActivity.this, CityActivity.class);
+                it.putExtra(ActivityConfig.ACTIVITY, "createYouJi");
+                startActivityForResult(it, 1);
                 break;
             case R.id.activity_create_friend_remember_rl_price:
 
@@ -467,6 +474,8 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                 //20190225 限制友记上传图片数量 1
                 else if(mList.size()<1){
                     Toast.makeText(CreateFriendRememberActivity.this, "请至少上传1张照片", Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(tvCity.getText().toString())){
+                    Toast.makeText(CreateFriendRememberActivity.this, "请选择城市", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     //判断如果填写开始时间和结束时间   结束时间必须大于开始时间
@@ -684,6 +693,16 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                 mList.add(new UserIntercalationPicModel(pic.get(i), ""));
             }
             adapter.notifyDataSetChanged();
+        }
+        if (requestCode == REQUEST_CODE_GET_CITY && data != null && resultCode == 1) {//选择城市
+            CityModel model = (CityModel) data.getSerializableExtra(ActivityConfig.CITY);
+            tvCity.setText(model.getName());
+        } else if (requestCode == REQUEST_CODE_GET_CITY && resultCode == 2) {//重置
+            tvCity.setText("");
+            tvCity.setHint("请选择活动地点");
+        } else if (requestCode == REQUEST_CODE_GET_CITY && resultCode == 3) {//国际城市
+            String city = data.getStringExtra("city");
+            tvCity.setText(city);
         }
     }
 

@@ -83,7 +83,7 @@
             android:layout_marginLeft="56px"
             android:background="@null"
             android:text="获取验证码"
-            android:textColor="@color/yellow_ff9d00"
+            android:textColor="@color/red_d84c37"
             android:textSize="32px" />
     </LinearLayout>
 

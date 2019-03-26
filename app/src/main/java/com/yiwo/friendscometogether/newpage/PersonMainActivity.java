@@ -80,6 +80,9 @@ public class PersonMainActivity extends BaseActivity {
     TextView tv_youji_wode_or_tade;
     @BindView(R.id.tv_youju_wode_or_tade)
     TextView tv_youju_wode_or_tade;
+
+    @BindView(R.id.tv_more_label)
+    TextView tv_more_label;
     //头像右侧控件
     @BindView(R.id.rl_algin_right_tade)
     RelativeLayout rl_algin_right_tade;
@@ -231,6 +234,7 @@ public class PersonMainActivity extends BaseActivity {
                                                 tv_pics_wode_or_tade.setText(ta + "的照片");
                                                 tv_youji_wode_or_tade.setText(ta + "的友记");
                                                 tv_youju_wode_or_tade.setText(ta + "的友聚");
+                                                tv_more_label.setText(ta+"的更多标签");
                                             }
                                             Glide.with(PersonMainActivity.this).load(R.mipmap.tarenhzuye_icon_boy).into(iv_person_sex);
                                         } else if (model.getObj().getInfo().getSex().equals("1")) {
@@ -241,6 +245,7 @@ public class PersonMainActivity extends BaseActivity {
                                                 tv_pics_wode_or_tade.setText(ta + "的照片");
                                                 tv_youji_wode_or_tade.setText(ta + "的友记");
                                                 tv_youju_wode_or_tade.setText(ta + "的友聚");
+                                                tv_more_label.setText(ta+"的更多标签");
                                             }
                                         }
                                         tv_person_name.setText(model.getObj().getInfo().getUsername());
@@ -358,6 +363,7 @@ public class PersonMainActivity extends BaseActivity {
                                         tv_pics_wode_or_tade.setText(ta + "的照片");
                                         tv_youji_wode_or_tade.setText(ta + "的友记");
                                         tv_youju_wode_or_tade.setText(ta + "的友聚");
+                                        tv_more_label.setText(ta+"的更多标签");
                                     }
                                     Glide.with(PersonMainActivity.this).load(R.mipmap.tarenhzuye_icon_boy).into(iv_person_sex);
                                 } else if (model.getObj().getInfo().getSex().equals("1")) {
@@ -368,6 +374,7 @@ public class PersonMainActivity extends BaseActivity {
                                         tv_pics_wode_or_tade.setText(ta + "的照片");
                                         tv_youji_wode_or_tade.setText(ta + "的友记");
                                         tv_youju_wode_or_tade.setText(ta + "的友聚");
+                                        tv_more_label.setText(ta+"的更多标签");
                                     }
                                 }
                                 tv_person_name.setText(model.getObj().getInfo().getUsername());

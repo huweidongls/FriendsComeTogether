@@ -107,8 +107,8 @@ public class GuanZhuActivity extends BaseActivity {
     private String yourChoiceActiveId = "";
     private String yourChoiceActiveName = "";
     private List<UserActiveListModel.ObjBean> activeList;
-    private int type = 3;
-
+    private int type = 3; //0 我付费，1 我不付费，3 免费
+    private int typeNoName = 0;
     private int type_showLayout = 0;//0为我关注的，1为关注我的，2 为关注活动
     private List<UserFocusModel.ObjBean> mWoGuanZhuDeList ;
     private WoGuanZhuDeAdapter woGuanZhuDeAdapter;
@@ -580,7 +580,6 @@ public class GuanZhuActivity extends BaseActivity {
         TextView tvOk = view.findViewById(R.id.tv_ok);
         final EditText et = view.findViewById(R.id.et);
         final CheckBox checkBox = view.findViewById(R.id.cb);
-
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -590,6 +589,17 @@ public class GuanZhuActivity extends BaseActivity {
                 }else {
                     type = 1;
 //                    toToast(MyFocusActivity.this, type+"");
+                }
+            }
+        });
+        final CheckBox checkBox_no_name = view.findViewById(R.id.cb_niming);
+        checkBox_no_name.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    typeNoName = 0;
+                }else {
+                    typeNoName = 1;
                 }
             }
         });

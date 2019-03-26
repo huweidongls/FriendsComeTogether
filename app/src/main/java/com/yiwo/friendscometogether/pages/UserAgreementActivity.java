@@ -1,5 +1,6 @@
 package com.yiwo.friendscometogether.pages;
 
+import android.app.Dialog;
 import android.net.http.SslError;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.network.NetConfig;
 
 import butterknife.BindView;
@@ -24,6 +26,7 @@ public class UserAgreementActivity extends AppCompatActivity {
     WebView webView;
     @BindView(R.id.ctivity_user_agreement_tv_title)
     TextView titleTv;
+    private Dialog dialogLoading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,12 @@ public class UserAgreementActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient() {
 
             @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                WeiboDialogUtils.closeDialog(dialogLoading);
+            }
+
+            @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return super.shouldOverrideUrlLoading(view, url);
             }
@@ -56,6 +65,7 @@ public class UserAgreementActivity extends AppCompatActivity {
 
         }
         webView.loadUrl(getIntent().getStringExtra("url"));
+        dialogLoading = WeiboDialogUtils.createLoadingDialog(UserAgreementActivity.this,"加载中...");
     }
 
     @OnClick({R.id.activity_user_agreement_rl_back})

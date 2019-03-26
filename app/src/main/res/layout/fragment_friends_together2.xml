@@ -66,14 +66,28 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="180px">
-
-        <ImageView
-            android:id="@+id/iv_youju_focus"
-            android:layout_marginLeft="110px"
+        <LinearLayout
             android:layout_centerVertical="true"
-            android:src="@mipmap/youju_heart_kong"
-            android:layout_width="64px"
-            android:layout_height="61px" />
+            android:layout_marginLeft="110px"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/iv_youju_focus"
+                android:src="@mipmap/youju_heart_kong"
+                android:layout_width="64px"
+                android:layout_height="61px" />
+            <TextView
+                android:textSize="30px"
+                android:textColor="@color/black_333333"
+                android:layout_marginTop="3px"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/iv_youju_focus"
+                android:text="关注"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/iv_baoming"
@@ -81,15 +95,30 @@
             android:src="@mipmap/woyaobaoming2"
             android:layout_width="160px"
             android:layout_height="160px" />
-        
-        <ImageView
-            android:id="@+id/iv_shaixuan"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_marginRight="110px"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:src="@mipmap/youju_shaixuan"
-            android:layout_width="60px"
-            android:layout_height="55px" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/iv_shaixuan"
+                android:src="@mipmap/youju_shaixuan"
+                android:layout_width="60px"
+                android:layout_height="55px" />
+            <TextView
+                android:textColor="@color/black_333333"
+                android:textSize="30px"
+                android:layout_marginTop="3px"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/iv_youju_focus"
+                android:text="筛选"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
 
     </RelativeLayout>
 

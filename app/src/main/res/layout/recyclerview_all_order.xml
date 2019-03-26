@@ -115,9 +115,9 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="24px"
-            android:textColor="#333333"
+            android:textColor="@color/yellow_ff9d00"
             android:textSize="24px"
-            android:text="合计：¥8888"
+            android:text="合计费用：¥8888"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -152,7 +152,7 @@
                 android:gravity="center"
                 android:textSize="26px"
                 android:textColor="#686868"
-                android:text="删除活动"
+                android:text="删除"
                 android:layout_width="150px"
                 android:layout_height="54px" />
 

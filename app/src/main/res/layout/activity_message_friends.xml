@@ -43,9 +43,10 @@
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_marginBottom="40px"
+        android:paddingTop="10px"
+        android:paddingBottom="40px"
         android:id="@+id/activity_message_friends_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

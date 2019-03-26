@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="33px"
                 android:layout_marginTop="16px"
-                android:text="TA的标签"
+                android:text="个性标签"
                 android:textColor="#9B9B9B"
                 android:textSize="32px" />
 
@@ -120,8 +120,19 @@
                     android:layout_marginLeft="27px"
                     android:layout_marginTop="22px"
                     android:src="@mipmap/label1" />
-
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="33px"
+                    android:layout_marginTop="20px"
+                    android:layout_toRightOf="@+id/iv1"
+                    android:text="TA还没有填写个性标签"
+                    android:textColor="@color/black_333333"
+                    android:textSize="30px"
+                    android:visibility="visible" />
                 <RelativeLayout
+                    android:layout_below="@+id/tv1"
                     android:layout_marginBottom="12px"
                     android:layout_marginLeft="33px"
                     android:layout_marginRight="33px"
@@ -139,17 +150,7 @@
 
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/tv1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="33px"
-                    android:layout_marginTop="20px"
-                    android:layout_toRightOf="@+id/iv1"
-                    android:text="TA还没有填写个性标签"
-                    android:textColor="@color/black_333333"
-                    android:textSize="30px"
-                    android:visibility="visible" />
+
 
             </RelativeLayout>
 
@@ -159,7 +160,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="33px"
                 android:layout_marginTop="16px"
-                android:text="TA的兴趣"
+                android:text="兴趣爱好"
                 android:textColor="#9B9B9B"
                 android:textSize="32px" />
 
@@ -193,6 +194,7 @@
                         android:layout_marginRight="33px"
                         android:layout_marginTop="12px"
                         android:layout_toLeftOf="@+id/iv_right2"
+                        android:layout_below="@+id/tv2"
                         android:layout_toRightOf="@+id/iv2" />
 
                     <TextView
@@ -231,6 +233,7 @@
                         android:src="@mipmap/label3" />
 
                     <com.yiwo.friendscometogether.widget.NestedRecyclerView
+                        android:layout_below="@+id/tv3"
                         android:id="@+id/rv3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -278,6 +281,7 @@
                         android:src="@mipmap/label4" />
 
                     <com.yiwo.friendscometogether.widget.NestedRecyclerView
+                        android:layout_below="@+id/tv4"
                         android:id="@+id/rv4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -325,6 +329,7 @@
                         android:src="@mipmap/label5" />
 
                     <com.yiwo.friendscometogether.widget.NestedRecyclerView
+                        android:layout_below="@id/tv5"
                         android:id="@+id/rv5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -372,6 +377,7 @@
                         android:src="@mipmap/label6" />
 
                     <com.yiwo.friendscometogether.widget.NestedRecyclerView
+                        android:layout_below="@+id/tv6"
                         android:id="@+id/rv6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -420,6 +426,7 @@
 
                     <com.yiwo.friendscometogether.widget.NestedRecyclerView
                         android:id="@+id/rv7"
+                        android:layout_below="@id/tv7"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12px"

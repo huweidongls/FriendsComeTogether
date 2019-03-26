@@ -1,133 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.yiwo.friendscometogether.pages.LoginActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout style="@style/rl_top_bar">
 
-    <RelativeLayout style="@style/rl_top_bar">
+            <RelativeLayout
+                android:id="@+id/rl_set_return"
+                style="@style/rl_return"
+                android:layout_width="100px">
 
-        <RelativeLayout
-            android:id="@+id/rl_set_return"
-            style="@style/rl_return"
-            android:layout_width="100px">
+                <ImageView style="@style/iv_return" />
 
-            <ImageView style="@style/iv_return" />
+            </RelativeLayout>
+
+            <TextView
+                style="@style/tv_top_title"
+                android:text="登录" />
 
         </RelativeLayout>
 
-        <TextView
-            style="@style/tv_top_title"
-            android:text="登录" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/headIv"
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:layout_gravity="center"
+            android:layout_marginTop="69px"
+            android:src="@mipmap/my_head" />
 
-    </RelativeLayout>
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/headIv"
-        android:layout_width="200px"
-        android:layout_height="200px"
-        android:layout_gravity="center"
-        android:layout_marginTop="69px"
-        android:src="@mipmap/my_head" />
-
-    <EditText
-        android:id="@+id/login_phoneEt"
-        android:layout_width="match_parent"
-        android:layout_height="52px"
-        android:layout_marginLeft="50px"
-        android:layout_marginRight="50px"
-        android:layout_marginTop="67px"
-        android:background="@null"
-        android:ems="11"
-        android:gravity="center_vertical"
-        android:hint="  请输入手机号"
-        android:inputType="phone"
-        android:maxLength="11"
-        android:textSize="32px" />
-
-    <EditText
-        android:id="@+id/login_pwEt"
-        android:layout_width="match_parent"
-        android:layout_height="52px"
-        android:layout_gravity="center"
-        android:layout_marginLeft="50px"
-        android:layout_marginRight="50px"
-        android:layout_marginTop="42px"
-        android:background="@null"
-        android:ems="16"
-        android:gravity="center_vertical"
-        android:hint="  请输入密码"
-        android:inputType="textPassword"
-        android:maxLength="16"
-        android:textSize="32px" />
-
-    <Button
-        android:id="@+id/login_btn"
-        android:layout_width="match_parent"
-        android:layout_height="80px"
-        android:layout_gravity="center"
-        android:layout_marginLeft="50px"
-        android:layout_marginRight="50px"
-        android:layout_marginTop="62px"
-        android:background="@drawable/login_btn"
-        android:text="登录"
-        android:textColor="@color/white_ffffff" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="45px"
-        android:layout_marginTop="21px"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/login_registerTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="56px"
-            android:layout_toLeftOf="@+id/login_divider"
-            android:text="注册"
-            android:textColor="@color/yellow_F5A623"
+        <EditText
+            android:id="@+id/login_phoneEt"
+            android:layout_width="match_parent"
+            android:layout_height="52px"
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            android:layout_marginTop="67px"
+            android:background="@null"
+            android:ems="11"
+            android:gravity="center_vertical"
+            android:hint="  请输入手机号"
+            android:inputType="phone"
+            android:maxLength="11"
             android:textSize="32px" />
 
+        <EditText
+            android:id="@+id/login_pwEt"
+            android:layout_width="match_parent"
+            android:layout_height="52px"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            android:layout_marginTop="42px"
+            android:background="@null"
+            android:ems="16"
+            android:gravity="center_vertical"
+            android:hint="  请输入密码"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:textSize="32px" />
+
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            android:layout_marginTop="62px"
+            android:background="@drawable/login_btn"
+            android:text="登录"
+            android:textColor="@color/white_ffffff" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45px"
+            android:layout_marginTop="21px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/login_registerTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="56px"
+                android:layout_toLeftOf="@+id/login_divider"
+                android:text="注册"
+                android:textColor="@color/red_d84c37"
+                android:textSize="32px" />
+
+            <TextView
+                android:id="@+id/login_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="|"
+                android:textColor="@color/gray_979797" />
+
+            <TextView
+                android:id="@+id/login_forgetPwTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="55px"
+                android:layout_toRightOf="@+id/login_divider"
+                android:text="忘记密码"
+                android:textColor="@color/black_626262"
+                android:textSize="28px" />
+        </RelativeLayout>
+
+        <!--<TextView-->
+        <!--android:textColor="@color/gray_cacaca"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginTop="100px"-->
+        <!--android:gravity="center"-->
+        <!--android:text="第三方登录"-->
+        <!--android:textSize="28px" />-->
+
+        <!--<ImageView-->
+        <!--android:layout_marginTop="43px"-->
+        <!--android:id="@+id/login_wechatIv"-->
+        <!--android:layout_width="60px"-->
+        <!--android:layout_height="60px"-->
+        <!--android:layout_gravity="center"-->
+        <!--app:srcCompat="@mipmap/wechat" />-->
+    </LinearLayout>
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30px"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/login_divider"
+            android:textSize="30px"
+            android:textColor="@color/black_333333"
+            android:text="登录注册表示同意 "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="|"
-            android:textColor="@color/gray_979797" />
-
+            android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/login_forgetPwTv"
+            android:textSize="30px"
+            android:id="@+id/tv_XY_TK"
+            android:textColor="@color/red_d84c37"
+            android:text="用户协议，隐私条款"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="55px"
-            android:layout_toRightOf="@+id/login_divider"
-            android:text="忘记密码"
-            android:textColor="@color/black_626262"
-            android:textSize="28px" />
-    </RelativeLayout>
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
-    <!--<TextView-->
-    <!--android:textColor="@color/gray_cacaca"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:layout_marginTop="100px"-->
-    <!--android:gravity="center"-->
-    <!--android:text="第三方登录"-->
-    <!--android:textSize="28px" />-->
-
-    <!--<ImageView-->
-    <!--android:layout_marginTop="43px"-->
-    <!--android:id="@+id/login_wechatIv"-->
-    <!--android:layout_width="60px"-->
-    <!--android:layout_height="60px"-->
-    <!--android:layout_gravity="center"-->
-    <!--app:srcCompat="@mipmap/wechat" />-->
-</LinearLayout>
+</RelativeLayout>
