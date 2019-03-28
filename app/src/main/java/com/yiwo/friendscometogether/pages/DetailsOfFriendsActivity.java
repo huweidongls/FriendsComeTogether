@@ -42,6 +42,7 @@ import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.ShareUtils;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
@@ -347,12 +348,12 @@ public class DetailsOfFriendsActivity extends BaseActivity {
             case R.id.activity_details_of_friends_rl_back:
                 onBackPressed();
                 break;
-            case R.id.activity_details_of_friends_ll_intercalation:
+            case R.id.activity_details_of_friends_ll_intercalation://插文
                 intent.setClass(DetailsOfFriendsActivity.this, InsertIntercalationActivity.class);
                 intent.putExtra("id", fmID);
                 startActivity(intent);
                 break;
-            case R.id.activity_details_of_friends_ll_comment:
+            case R.id.activity_details_of_friends_ll_comment://评论
                 if (TextUtils.isEmpty(uid) || uid.equals("0")) {
                     intent.setClass(DetailsOfFriendsActivity.this, LoginActivity.class);
                     startActivity(intent);
@@ -362,7 +363,7 @@ public class DetailsOfFriendsActivity extends BaseActivity {
                     startActivity(intent);
                 }
                 break;
-            case R.id.activity_details_of_friends_ll_share:
+            case R.id.activity_details_of_friends_ll_share://分享
                 if (TextUtils.isEmpty(uid) || uid.equals("0")) {
                     intent.setClass(DetailsOfFriendsActivity.this, LoginActivity.class);
                     startActivity(intent);
@@ -401,7 +402,7 @@ public class DetailsOfFriendsActivity extends BaseActivity {
                             });
                 }
                 break;
-            case R.id.activity_details_of_friends_ll_praise:
+            case R.id.activity_details_of_friends_ll_praise://点赞
                 if (TextUtils.isEmpty(uid) || uid.equals("0")) {
                     intent.setClass(DetailsOfFriendsActivity.this, LoginActivity.class);
                     startActivity(intent);
@@ -441,7 +442,7 @@ public class DetailsOfFriendsActivity extends BaseActivity {
                     }
                 }
                 break;
-            case R.id.activity_details_of_friends_ll_star:
+            case R.id.activity_details_of_friends_ll_star://收藏
                 if (TextUtils.isEmpty(uid) || uid.equals("0")) {
                     intent.setClass(DetailsOfFriendsActivity.this, LoginActivity.class);
                     startActivity(intent);
@@ -576,7 +577,7 @@ public class DetailsOfFriendsActivity extends BaseActivity {
             case R.id.activity_details_of_friends_rl_activity:
                 //相关活动跳转
                 intent.putExtra("pfID", model.getObj().getActivityInfo().getPfID());
-                intent.setClass(DetailsOfFriendsActivity.this, DetailsOfFriendTogetherActivity.class);
+                intent.setClass(DetailsOfFriendsActivity.this, DetailsOfFriendTogetherWebActivity.class);
                 startActivity(intent);
                 break;
         }

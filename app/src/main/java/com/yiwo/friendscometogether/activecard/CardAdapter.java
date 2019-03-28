@@ -19,7 +19,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.model.FriendsTogethermodel;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 
 import java.util.List;
 
@@ -69,7 +69,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             public void onClick(View v) {
                 final Intent intent = new Intent();
                 if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
-                    intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                    intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                     intent.putExtra("pfID", data.get(position).getPfID());
                     context.startActivity(intent);
                 } else {
@@ -77,7 +77,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
                         @Override
                         public boolean setActivityText(String s) {
                             if (s.equals(data.get(position).getPfpwd())) {
-                                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                                intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                                 intent.putExtra("pfID", data.get(position).getPfID());
                                 context.startActivity(intent);
                                 return true;

@@ -17,7 +17,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.ActiveCommentModel;
 import com.yiwo.friendscometogether.model.ArticleCommentListModel;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.utils.StringUtils;
 
 import java.util.List;
@@ -87,7 +87,7 @@ public class MyActiveCommentAdapter extends RecyclerView.Adapter<MyActiveComment
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.putExtra("pfID", data.get(position).getPfID());
-                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                 context.startActivity(intent);
             }
         });

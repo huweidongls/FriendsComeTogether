@@ -290,4 +290,8 @@ public class NetConfig {
     public static String lookUserAttention ="action/ac_user/lookUserAttention";
     //私信消息 删除     传uid用户id    type =0删除一条  =1全部清空   id要删除一条的id
     public static String delFriendInfo =  "action/ac_user/delFriendInfo";
+    //友记详情web页面获取数据
+    public static String getInfo = "action/ac_public/getInfo";
+    //友聚详情web页面数据
+    public static String getActivityInfo = "action/ac_activity/getActivityInfo";
 }

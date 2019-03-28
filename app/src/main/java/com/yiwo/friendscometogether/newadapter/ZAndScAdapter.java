@@ -16,7 +16,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.ZAndScModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
 
 import java.util.List;
 
@@ -65,7 +65,7 @@ public class ZAndScAdapter extends RecyclerView.Adapter<ZAndScAdapter.ViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(context, DetailsOfFriendsActivity.class);
+                intent.setClass(context, DetailsOfFriendsWebActivity.class);
                 intent.putExtra("fmid", data.get(position).getFid());
                 context.startActivity(intent);
             }

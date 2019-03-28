@@ -11,7 +11,7 @@ public class HuoDongListModel {
     /**
      * code : 200
      * message : 操作成功!
-     * obj : [{"roomid":"1417471792","pfID":"102","pfpic":"http://127.0.0.1/uploads/xingcheng/20180930/f5ab478ba5edee62102e9b8b499b8d86.jpg","pftitle":"减肥减肥家","pfgotime":"1545287033","pfendtime":"1545719033","username":"老司机","userpic":"http://127.0.0.1/uploads/header/2018/10/19/3ccfe6790eeac1bc99dbfcd164dabb89153992760420.jpg","activities_data":"距离活动开始还有0天22小时"}]
+     * obj : [{"phase":"1","ujID":"451","kefu":"70","add_type":"2","add_user":"1","roomid":"1636979713","pfID":"157","pfpic":"http://39.104.102.152/uploads/xingcheng/20190321/917bbe3500b9249b14184868591d6d92.jpg","pftitle":"活动不可退款，只限男性 且单身","pfgotime":"1553758320","pfendtime":"1554017528","username":"哈尔滨友来友约文化旅游传媒有限公司","wy_accid":"yy13936681816","userpic":"http://39.104.102.152/uploads/header/2019/03/20/2eadd6d7716c463f4b992a6715dcb13d15530571036.jpg","activities_data":"距离活动开始还有1天"},{"phase":"1","ujID":"446","kefu":"85","add_type":"2","add_user":"1","roomid":"1634293997","pfID":"156","pfpic":"http://39.104.102.152/uploads/xingcheng/20190319/5db6902c84c751ec8dd12e2982cd8b13.jpg","pftitle":"齐齐哈尔烤肉免费吃了","pfgotime":"1554097606","pfendtime":"1554529608","username":"哈尔滨友来友约文化旅游传媒有限公司","wy_accid":"yykakaluote","userpic":"http://39.104.102.152/uploads/header/2019/03/20/2eadd6d7716c463f4b992a6715dcb13d15530571036.jpg","activities_data":"距离活动开始还有5天"}]
      */
 
     private int code;
@@ -44,17 +44,28 @@ public class HuoDongListModel {
 
     public static class ObjBean {
         /**
-         * roomid : 1417471792
-         * pfID : 102
-         * pfpic : http://127.0.0.1/uploads/xingcheng/20180930/f5ab478ba5edee62102e9b8b499b8d86.jpg
-         * pftitle : 减肥减肥家
-         * pfgotime : 1545287033
-         * pfendtime : 1545719033
-         * username : 老司机
-         * userpic : http://127.0.0.1/uploads/header/2018/10/19/3ccfe6790eeac1bc99dbfcd164dabb89153992760420.jpg
-         * activities_data : 距离活动开始还有0天22小时
+         * phase : 1
+         * ujID : 451
+         * kefu : 70
+         * add_type : 2
+         * add_user : 1
+         * roomid : 1636979713
+         * pfID : 157
+         * pfpic : http://39.104.102.152/uploads/xingcheng/20190321/917bbe3500b9249b14184868591d6d92.jpg
+         * pftitle : 活动不可退款，只限男性 且单身
+         * pfgotime : 1553758320
+         * pfendtime : 1554017528
+         * username : 哈尔滨友来友约文化旅游传媒有限公司
+         * wy_accid : yy13936681816
+         * userpic : http://39.104.102.152/uploads/header/2019/03/20/2eadd6d7716c463f4b992a6715dcb13d15530571036.jpg
+         * activities_data : 距离活动开始还有1天
          */
 
+        private String phase;
+        private String ujID;
+        private String kefu;
+        private String add_type;
+        private String add_user;
         private String roomid;
         private String pfID;
         private String pfpic;
@@ -62,10 +73,49 @@ public class HuoDongListModel {
         private String pfgotime;
         private String pfendtime;
         private String username;
+        private String wy_accid;
         private String userpic;
         private String activities_data;
-        private String ujID;
-        private String wy_accid;
+
+        public String getPhase() {
+            return phase;
+        }
+
+        public void setPhase(String phase) {
+            this.phase = phase;
+        }
+
+        public String getUjID() {
+            return ujID;
+        }
+
+        public void setUjID(String ujID) {
+            this.ujID = ujID;
+        }
+
+        public String getKefu() {
+            return kefu;
+        }
+
+        public void setKefu(String kefu) {
+            this.kefu = kefu;
+        }
+
+        public String getAdd_type() {
+            return add_type;
+        }
+
+        public void setAdd_type(String add_type) {
+            this.add_type = add_type;
+        }
+
+        public String getAdd_user() {
+            return add_user;
+        }
+
+        public void setAdd_user(String add_user) {
+            this.add_user = add_user;
+        }
 
         public String getRoomid() {
             return roomid;
@@ -123,6 +173,14 @@ public class HuoDongListModel {
             this.username = username;
         }
 
+        public String getWy_accid() {
+            return wy_accid;
+        }
+
+        public void setWy_accid(String wy_accid) {
+            this.wy_accid = wy_accid;
+        }
+
         public String getUserpic() {
             return userpic;
         }
@@ -137,22 +195,6 @@ public class HuoDongListModel {
 
         public void setActivities_data(String activities_data) {
             this.activities_data = activities_data;
-        }
-
-        public String getUjID() {
-            return ujID;
-        }
-
-        public void setUjID(String ujID) {
-            this.ujID = ujID;
-        }
-
-        public String getWy_accid() {
-            return wy_accid;
-        }
-
-        public void setWy_accid(String wy_accid) {
-            this.wy_accid = wy_accid;
         }
     }
 }

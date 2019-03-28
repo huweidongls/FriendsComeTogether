@@ -21,7 +21,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.activecard.CardAdapter;
 import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.model.FriendsTogethermodel;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 
 import java.util.List;
 
@@ -78,7 +78,7 @@ public class SwipeFIingViewAdapter extends BaseAdapter{
             public void onClick(View v) {
                 final Intent intent = new Intent();
                 if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
-                    intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                    intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                     intent.putExtra("pfID", data.get(position).getPfID());
                     context.startActivity(intent);
                 } else {
@@ -86,7 +86,7 @@ public class SwipeFIingViewAdapter extends BaseAdapter{
                         @Override
                         public boolean setActivityText(String s) {
                             if (s.equals(data.get(position).getPfpwd())) {
-                                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                                intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                                 intent.putExtra("pfID", data.get(position).getPfID());
                                 context.startActivity(intent);
                                 return true;

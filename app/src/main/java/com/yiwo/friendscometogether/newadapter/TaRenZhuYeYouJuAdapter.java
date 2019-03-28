@@ -23,7 +23,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.PersonMainModel;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
@@ -64,7 +64,7 @@ public class TaRenZhuYeYouJuAdapter extends RecyclerView.Adapter<TaRenZhuYeYouJu
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                 intent.putExtra("pfID",data.get(position).getPfID());
                 context.startActivity(intent);
             }

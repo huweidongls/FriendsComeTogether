@@ -24,7 +24,7 @@ import com.yiwo.friendscometogether.custom.EditContentDialog;
 import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.HuoDongListModel;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.StringUtils;
 import com.yiwo.friendscometogether.utils.TokenUtils;
@@ -84,6 +84,7 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
                                     .addParam("user_id", spImp.getUID())
                                     .addParam("pfID", bean.getPfID())
                                     .addParam("info", content)
+                                    .addParam("phase",bean.getPhase())
                                     .request(new ACallback<String>() {
                                         @Override
                                         public void onSuccess(String obj) {
@@ -124,7 +125,7 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                 intent.putExtra("pfID",bean.getPfID());
                 context.startActivity(intent);
             }

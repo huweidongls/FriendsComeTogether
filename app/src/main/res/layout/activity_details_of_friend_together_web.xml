@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity">
+    <RelativeLayout
+        android:id="@+id/activity_details_of_friends_together_rl_top"
+        style="@style/rl_top_bar">
+
+        <TextView
+            android:id="@+id/activity_details_of_friends_together_tv_top_title"
+            style="@style/tv_top_title"
+            android:text="友聚详情" />
+
+        <RelativeLayout
+            android:id="@+id/activity_details_of_friends_together_rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView style="@style/iv_return" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_mulu"
+            android:layout_alignParentRight="true"
+            android:layout_width="140px"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:src="@mipmap/mulu128"
+                android:layout_width="64px"
+                android:layout_height="64px" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <WebView
+        android:id="@+id/wv"
+        android:layout_below="@+id/activity_details_of_friends_together_rl_top"
+        android:layout_above="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></WebView>
+    <LinearLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="98px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black_f8f8f8"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/consult_leaderLl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="42px"
+                    android:layout_height="42px"
+                    android:src="@mipmap/zixun_red" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="28px"
+                    android:text="咨询"
+                    android:textColor="@color/black_333333"
+                    android:textSize="20px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/activity_details_of_friends_together_ll_share"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="42px"
+                    android:layout_height="42px"
+                    android:src="@mipmap/fenxiang_red" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="28px"
+                    android:text="分享"
+                    android:textColor="@color/black_333333"
+                    android:textSize="20px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/activity_details_of_friends_together_ll_focus_on"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/activity_details_of_friends_together_iv_focus_on"
+                    android:layout_width="42px"
+                    android:layout_height="42px"
+                    android:src="@mipmap/heart_red" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="28px"
+                    android:text="关注"
+                    android:textColor="@color/black_333333"
+                    android:textSize="20px" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/details_applyTv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/red_d84c37"
+            android:gravity="center"
+            android:text="报名参加"
+            android:textColor="@color/white_ffffff"
+            android:textSize="28px" />
+
+    </LinearLayout>
+</RelativeLayout>

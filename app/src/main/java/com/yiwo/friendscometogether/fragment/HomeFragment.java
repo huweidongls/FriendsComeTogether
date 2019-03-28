@@ -48,8 +48,8 @@ import com.yiwo.friendscometogether.model.HomeTogetherModel;
 import com.yiwo.friendscometogether.network.ActivityConfig;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.pages.CityActivity;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.MessageCenterActivity;
 import com.yiwo.friendscometogether.pages.SearchActivity;
@@ -199,11 +199,11 @@ public class HomeFragment extends BaseFragment {
                                     @Override
                                     public void OnBannerClick(int position) {
                                         if (bannerModel.getObj().get(position).getFirst_type().equals("0")) {
-                                            Intent intent = new Intent(getContext(), DetailsOfFriendTogetherActivity.class);
+                                            Intent intent = new Intent(getContext(), DetailsOfFriendTogetherWebActivity.class);
                                             intent.putExtra("pfID", bannerModel.getObj().get(position).getLeftid());
                                             startActivity(intent);
                                         } else if (bannerModel.getObj().get(position).getFirst_type().equals("1")) {
-                                            Intent intent = new Intent(getContext(), DetailsOfFriendsActivity.class);
+                                            Intent intent = new Intent(getContext(), DetailsOfFriendsWebActivity.class);
                                             intent.putExtra("fmid", bannerModel.getObj().get(position).getLeftid());
                                             startActivity(intent);
                                         }

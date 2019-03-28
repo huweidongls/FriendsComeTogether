@@ -33,9 +33,6 @@ import com.yiwo.friendscometogether.model.FriendsRememberModel;
 import com.yiwo.friendscometogether.model.FriendsTogethermodel;
 import com.yiwo.friendscometogether.model.UserLabelModel;
 import com.yiwo.friendscometogether.network.NetConfig;
-import com.yiwo.friendscometogether.pages.CityActivity;
-import com.yiwo.friendscometogether.pages.CreateIntercalationActivity;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.SearchActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -219,7 +216,7 @@ public class FriendsRememberFragment extends BaseFragment {
 //                                banner.setOnBannerListener(new OnBannerListener() {
 //                                    @Override
 //                                    public void OnBannerClick(int position) {
-//                                        Intent intent = new Intent(getContext(), DetailsOfFriendsActivity.class);
+//                                        Intent intent = new Intent(getContext(), DetailsOfFriendsWebActivity.class);
 //                                        intent.putExtra("fmid", bannerModel.getObj().get(position).getLeftid());
 //                                        startActivity(intent);
 //                                    }

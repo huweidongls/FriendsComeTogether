@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.yiwo.friendscometogether.broadcastreceiver.NetBroadcastReceiver;
 import com.yiwo.friendscometogether.custom.GlideImageLoader;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
 import com.yiwo.friendscometogether.utils.NetUtil;
 import com.yiwo.friendscometogether.utils.StringUtils;
 import com.youth.banner.Banner;

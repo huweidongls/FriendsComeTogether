@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.VideoActiveModel;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class ActivityVideoAdapter extends RecyclerView.Adapter<ActivityVideoAdap
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.putExtra("pfID", data.get(position).getPfID());
-                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                 context.startActivity(intent);
             }
         });

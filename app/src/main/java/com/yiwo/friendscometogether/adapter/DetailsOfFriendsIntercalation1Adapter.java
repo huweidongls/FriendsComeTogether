@@ -20,7 +20,6 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.DetailsRememberModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;

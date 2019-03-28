@@ -126,9 +126,9 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                 if (i>=0&&i<mList.size())
                 bean = mList.get(i);
                 if (bean.getFocusOn().equals("0")) {
-                    Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                    Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
                 } else {
-                    Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
+                    Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
                 }
 //                if (i>0) {
 //                    FriendsTogethermodel.ObjBean model = mList.remove(i-1);//划出的数据删除掉
@@ -145,9 +145,9 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                 if (i>=0&&i<mList.size())
                 bean = mList.get(i);
                 if (bean.getFocusOn().equals("0")) {
-                    Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                    Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
                 } else {
-                    Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
+                    Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
                 }
 //              if (i>0) {
 //                FriendsTogethermodel.ObjBean model = mList.remove(i-1);//划出的数据删除掉
@@ -249,9 +249,9 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                 if (mList.size() > 0) {
                                     bean = mList.get(0);
                                     if (bean.getFocusOn().equals("0")) {
-                                        Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                                        Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
                                     } else {
-                                        Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
+                                        Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
                                     }
                                 }
                                 updateListView();
@@ -281,9 +281,9 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                 if (sfv.getCurPositon()>=0&&sfv.getCurPositon()<mList.size()){
                     bean = mList.get(sfv.getCurPositon());
                     if (bean.getFocusOn().equals("0")) {
-                        Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                        Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
                     } else {
-                        Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
+                        Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
                     }
                 }
 
@@ -387,11 +387,11 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                             if (model.getCode() == 200) {
                                                 if (model.getObj().equals("1")) {
                                                     bean.setFocusOn("1");
-                                                    Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
+                                                    Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
                                                     Toast.makeText(getContext(), "关注成功", Toast.LENGTH_SHORT).show();
                                                 } else {
                                                     bean.setFocusOn("0");
-                                                    Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                                                    Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
                                                     Toast.makeText(getContext(), "取消关注成功", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
@@ -455,7 +455,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+        Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
         if (resultCode == 2) {//筛选条件 有价格、无分类
             min = data.getStringExtra("min");
             max = data.getStringExtra("max");
@@ -481,9 +481,9 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                     if(mList.size()>0){
                                         bean = mList.get(0);
                                         if (bean.getFocusOn().equals("0")) {
-                                            Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
                                         } else {
-                                            Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
+                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
                                         }
                                     }
                                     updateListView();
@@ -525,9 +525,9 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                     if(mList.size()>0){
                                         bean = mList.get(0);
                                         if (bean.getFocusOn().equals("0")) {
-                                            Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
                                         } else {
-                                            Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
+                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
                                         }
                                     }
                                     updateListView();
@@ -565,9 +565,9 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                     if(mList.size()>0){
                                         bean = mList.get(0);
                                         if (bean.getFocusOn().equals("0")) {
-                                            Glide.with(getContext()).load(R.mipmap.youju_heart_kong).into(ivFocus);
+                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
                                         } else {
-                                            Glide.with(getContext()).load(R.mipmap.my_focus).into(ivFocus);
+                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
                                         }
                                     }
                                     updateListView();

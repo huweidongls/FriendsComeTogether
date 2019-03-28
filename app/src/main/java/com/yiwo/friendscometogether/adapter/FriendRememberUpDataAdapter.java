@@ -18,7 +18,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.model.FriendsRememberModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
 
 import java.util.List;
 
@@ -79,7 +79,7 @@ public class FriendRememberUpDataAdapter extends RecyclerView.Adapter<FriendReme
             public void onClick(View view) {
                 final Intent intent = new Intent();
                 if(TextUtils.isEmpty(data.get(position).getAccesspassword())){
-                    intent.setClass(context, DetailsOfFriendsActivity.class);
+                    intent.setClass(context, DetailsOfFriendsWebActivity.class);
                     intent.putExtra("fmid", data.get(position).getFmID());
                     context.startActivity(intent);
                 }else {
@@ -87,7 +87,7 @@ public class FriendRememberUpDataAdapter extends RecyclerView.Adapter<FriendReme
                         @Override
                         public boolean setActivityText(String s) {
                             if(s.equals(data.get(position).getAccesspassword())){
-                                intent.setClass(context, DetailsOfFriendsActivity.class);
+                                intent.setClass(context, DetailsOfFriendsWebActivity.class);
                                 intent.putExtra("fmid", data.get(position).getFmID());
                                 context.startActivity(intent);
                                 return true;

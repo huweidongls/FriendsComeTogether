@@ -13,8 +13,8 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.GetEditorFriendTogetherModel;
 import com.yiwo.friendscometogether.model.SearchListModel;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
 import com.yiwo.friendscometogether.pages.EditorFriendTogetherSubTitleContentActivity;
 import com.yiwo.friendscometogether.pages.SearchListActivity;
 
@@ -51,10 +51,10 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
             public void onClick(View v) {
                 Intent it = new Intent();
                 if(data.get(position).getType().equals("1")){
-                    it.setClass(context, DetailsOfFriendTogetherActivity.class);
+                    it.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                     it.putExtra("pfID",data.get(position).getId());
                 } else {
-                    it.setClass(context, DetailsOfFriendsActivity.class);
+                    it.setClass(context, DetailsOfFriendsWebActivity.class);
                     it.putExtra("fmid",data.get(position).getId());
                 }
                 context.startActivity(it);

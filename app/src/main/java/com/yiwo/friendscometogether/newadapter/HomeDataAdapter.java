@@ -26,8 +26,8 @@ import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.pages.ArticleCommentActivity;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
@@ -72,7 +72,7 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
                 public void onClick(View v) {
                     final Intent intent = new Intent();
                     if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
-                        intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                        intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                         intent.putExtra("pfID", data.get(position).getPfID());
                         context.startActivity(intent);
                     } else {
@@ -80,7 +80,7 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
                             @Override
                             public boolean setActivityText(String s) {
                                 if (s.equals(data.get(position).getPfpwd())) {
-                                    intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                                    intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                                     intent.putExtra("pfID", data.get(position).getPfID());
                                     context.startActivity(intent);
                                     return true;
@@ -175,7 +175,7 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
                 public void onClick(View v) {
                     final Intent intent = new Intent();
                     if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
-                        intent.setClass(context, DetailsOfFriendsActivity.class);
+                        intent.setClass(context, DetailsOfFriendsWebActivity.class);
                         intent.putExtra("fmid", data.get(position).getPfID());
                         context.startActivity(intent);
                     } else {
@@ -183,7 +183,7 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
                             @Override
                             public boolean setActivityText(String s) {
                                 if (s.equals(data.get(position).getPfpwd())) {
-                                    intent.setClass(context, DetailsOfFriendsActivity.class);
+                                    intent.setClass(context, DetailsOfFriendsWebActivity.class);
                                     intent.putExtra("fmid", data.get(position).getPfID());
                                     context.startActivity(intent);
                                     return true;

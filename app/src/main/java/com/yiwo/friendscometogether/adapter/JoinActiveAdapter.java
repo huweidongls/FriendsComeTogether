@@ -26,7 +26,7 @@ import com.yiwo.friendscometogether.custom.EditContentDialog;
 import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.model.JoinActivemodel;
 import com.yiwo.friendscometogether.network.NetConfig;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.pages.OrderCommentActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.StringUtils;
@@ -87,7 +87,7 @@ public class JoinActiveAdapter extends RecyclerView.Adapter<JoinActiveAdapter.Vi
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.putExtra("pfID", data.get(position).getPfID());
-                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                 context.startActivity(intent);
             }
         });

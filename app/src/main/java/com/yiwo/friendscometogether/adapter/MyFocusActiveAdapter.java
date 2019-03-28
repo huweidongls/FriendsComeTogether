@@ -16,7 +16,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.model.MyFocusActiveModel;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class MyFocusActiveAdapter extends RecyclerView.Adapter<MyFocusActiveAdap
             public void onClick(View view) {
                 final Intent intent = new Intent();
                 if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
-                    intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                    intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                     intent.putExtra("pfID", data.get(position).getPfID());
                     context.startActivity(intent);
                 } else {
@@ -62,7 +62,7 @@ public class MyFocusActiveAdapter extends RecyclerView.Adapter<MyFocusActiveAdap
                         @Override
                         public boolean setActivityText(String s) {
                             if (s.equals(data.get(position).getPfpwd())) {
-                                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                                intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                                 intent.putExtra("pfID", data.get(position).getPfID());
                                 context.startActivity(intent);
                                 return true;

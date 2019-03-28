@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.UserRememberModel;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
 import com.yiwo.friendscometogether.pages.EditorFriendRememberActivity;
 import com.yiwo.friendscometogether.pages.TeamIntercalationActivity;
 
@@ -103,7 +103,7 @@ public class MyFriendRememberAdapter extends RecyclerView.Adapter<MyFriendRememb
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setClass(context, DetailsOfFriendsActivity.class);
+                intent.setClass(context, DetailsOfFriendsWebActivity.class);
                 intent.putExtra("fmid", data.get(position).getFmID());
                 context.startActivity(intent);
             }

@@ -22,7 +22,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.HuoDongListModel;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.pages.OrderCommentActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
@@ -135,7 +135,7 @@ public class MyHuoDongHistoryAdapter extends RecyclerView.Adapter<MyHuoDongHisto
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                 intent.putExtra("pfID",bean.getPfID());
                 context.startActivity(intent);
             }

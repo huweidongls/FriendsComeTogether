@@ -157,6 +157,7 @@
 
                     <com.yiwo.friendscometogether.widget.NestedRecyclerView
                         android:id="@+id/rv2"
+                        android:layout_below="@+id/tv2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12px"
@@ -212,6 +213,7 @@
 
                     <com.yiwo.friendscometogether.widget.NestedRecyclerView
                         android:id="@+id/rv3"
+                        android:layout_below="@+id/tv3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12px"
@@ -265,17 +267,6 @@
                         android:layout_marginTop="24px"
                         android:src="@mipmap/label4" />
 
-                    <com.yiwo.friendscometogether.widget.NestedRecyclerView
-                        android:id="@+id/rv4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="12px"
-                        android:layout_marginLeft="33px"
-                        android:layout_marginRight="33px"
-                        android:layout_marginTop="12px"
-                        android:layout_toLeftOf="@+id/iv_right4"
-                        android:layout_toRightOf="@+id/iv4" />
-
                     <TextView
                         android:id="@+id/tv4"
                         android:layout_width="wrap_content"
@@ -322,6 +313,7 @@
 
                     <com.yiwo.friendscometogether.widget.NestedRecyclerView
                         android:id="@+id/rv5"
+                        android:layout_below="@+id/tv5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12px"
@@ -351,6 +343,14 @@
                         android:layout_marginRight="30px"
                         android:src="@mipmap/label_right" />
 
+                    <com.yiwo.friendscometogether.widget.NestedRecyclerView
+                        android:id="@+id/rv4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/rv5"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignStart="@+id/rv5" />
+
                 </RelativeLayout>
 
                 <View
@@ -377,6 +377,7 @@
 
                     <com.yiwo.friendscometogether.widget.NestedRecyclerView
                         android:id="@+id/rv6"
+                        android:layout_below="@+id/tv6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12px"
@@ -432,6 +433,7 @@
 
                     <com.yiwo.friendscometogether.widget.NestedRecyclerView
                         android:id="@+id/rv7"
+                        android:layout_below="@+id/tv7"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12px"

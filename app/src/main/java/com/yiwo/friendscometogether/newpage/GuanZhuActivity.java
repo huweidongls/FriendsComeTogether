@@ -35,22 +35,15 @@ import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
-import com.yiwo.friendscometogether.adapter.MyFocusActiveAdapter;
 import com.yiwo.friendscometogether.base.BaseActivity;
-import com.yiwo.friendscometogether.model.MyFocusActiveModel;
 import com.yiwo.friendscometogether.model.UserActiveListModel;
 import com.yiwo.friendscometogether.model.UserFocusModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.GuanZhuWoDeAdapter;
-import com.yiwo.friendscometogether.newadapter.MyHuoDongApplyAdapter;
 import com.yiwo.friendscometogether.newadapter.WoGuanZhuDeAdapter;
 import com.yiwo.friendscometogether.newadapter.WoGuanZhuDeHuoDongAdapter;
 import com.yiwo.friendscometogether.newmodel.GuanZhuHuoDongModel;
 import com.yiwo.friendscometogether.newmodel.GuanZhuWoDeModel;
-import com.yiwo.friendscometogether.newmodel.HuoDongListModel;
-import com.yiwo.friendscometogether.newmodel.WoGuanZhuDeModel;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
-import com.yiwo.friendscometogether.pages.MyFocusActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import org.json.JSONException;
@@ -133,9 +126,15 @@ public class GuanZhuActivity extends BaseActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+//        initData();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
-        initData();
+//        initData();
     }
 
     private void initRefresh() {

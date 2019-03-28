@@ -28,7 +28,7 @@ import com.yiwo.friendscometogether.model.FriendsTogethermodel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.pages.ActiveEvaluationActivity;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.StringUtils;
@@ -206,7 +206,7 @@ public class FriendTogetherUpDataAdapter extends RecyclerView.Adapter<FriendToge
             public void onClick(View view) {
                 final Intent intent = new Intent();
                 if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
-                    intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                    intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                     intent.putExtra("pfID", data.get(position).getPfID());
                     context.startActivity(intent);
                 } else {
@@ -214,7 +214,7 @@ public class FriendTogetherUpDataAdapter extends RecyclerView.Adapter<FriendToge
                         @Override
                         public boolean setActivityText(String s) {
                             if (s.equals(data.get(position).getPfpwd())) {
-                                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                                intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                                 intent.putExtra("pfID", data.get(position).getPfID());
                                 context.startActivity(intent);
                                 return true;

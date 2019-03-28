@@ -18,8 +18,8 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.MyFocusActiveModel;
 import com.yiwo.friendscometogether.newmodel.GuanZhuHuoDongModel;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class WoGuanZhuDeHuoDongAdapter extends RecyclerView.Adapter<WoGuanZhuDeH
         holder.tv_name_owner.setText(data.get(position).getUsername());
         switch (data.get(position).getActivities_data()){
             case "0":
-                holder.tv_timeinfo.setText("活动已开始");
+                holder.tv_timeinfo.setText("活动进行中");
                 holder.tv_timeinfo.setTextColor(Color.parseColor("#d84c37"));
                 holder.iv_icon_huodong_state.setImageResource(R.mipmap.shijian_apply_huodong_red);
                 break;
@@ -76,7 +76,7 @@ public class WoGuanZhuDeHuoDongAdapter extends RecyclerView.Adapter<WoGuanZhuDeH
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(context, DetailsOfFriendTogetherActivity.class);
+                intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                 intent.putExtra("pfID",data.get(position).getPfID());
                 context.startActivity(intent);
             }

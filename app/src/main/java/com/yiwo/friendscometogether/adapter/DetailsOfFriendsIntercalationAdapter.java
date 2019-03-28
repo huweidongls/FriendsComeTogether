@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.DetailsRememberModel;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
 
 import java.util.ArrayList;
 import java.util.List;

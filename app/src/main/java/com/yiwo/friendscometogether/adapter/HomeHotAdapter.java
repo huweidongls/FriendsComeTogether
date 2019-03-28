@@ -19,8 +19,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.model.HomeHotFriendsRememberModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendTogetherActivity;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 
@@ -81,7 +80,7 @@ public class HomeHotAdapter extends RecyclerView.Adapter<HomeHotAdapter.ViewHold
             public void onClick(View v) {
                 final Intent intent = new Intent();
                 if(TextUtils.isEmpty(data.get(position).getAccesspassword())){
-                    intent.setClass(context, DetailsOfFriendsActivity.class);
+                    intent.setClass(context, DetailsOfFriendsWebActivity.class);
                     intent.putExtra("fmid", data.get(position).getFmID());
                     context.startActivity(intent);
                 }else {
@@ -89,7 +88,7 @@ public class HomeHotAdapter extends RecyclerView.Adapter<HomeHotAdapter.ViewHold
                         @Override
                         public boolean setActivityText(String s) {
                             if(s.equals(data.get(position).getAccesspassword())){
-                                intent.setClass(context, DetailsOfFriendsActivity.class);
+                                intent.setClass(context, DetailsOfFriendsWebActivity.class);
                                 intent.putExtra("fmid", data.get(position).getFmID());
                                 context.startActivity(intent);
                                 return true;

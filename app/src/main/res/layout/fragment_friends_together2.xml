@@ -75,9 +75,9 @@
             <ImageView
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/iv_youju_focus"
-                android:src="@mipmap/youju_heart_kong"
+                android:src="@mipmap/guanzhu128_g"
                 android:layout_width="64px"
-                android:layout_height="61px" />
+                android:layout_height="64px" />
             <TextView
                 android:textSize="30px"
                 android:textColor="@color/black_333333"
@@ -105,9 +105,9 @@
             <ImageView
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/iv_shaixuan"
-                android:src="@mipmap/youju_shaixuan"
-                android:layout_width="60px"
-                android:layout_height="55px" />
+                android:src="@mipmap/shaixuan128"
+                android:layout_width="64px"
+                android:layout_height="64px" />
             <TextView
                 android:textColor="@color/black_333333"
                 android:textSize="30px"

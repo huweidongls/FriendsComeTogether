@@ -17,7 +17,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.PersonMainModel;
 import com.yiwo.friendscometogether.pages.ArticleCommentActivity;
-import com.yiwo.friendscometogether.pages.DetailsOfFriendsActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 
 import java.util.List;
@@ -49,7 +49,7 @@ public class TaRenZhuYeYouJiAdapter extends RecyclerView.Adapter<TaRenZhuYeYouJi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(context, DetailsOfFriendsActivity.class);
+                intent.setClass(context, DetailsOfFriendsWebActivity.class);
                 intent.putExtra("fmid", data.get(position).getPfID());
                 context.startActivity(intent);
             }
