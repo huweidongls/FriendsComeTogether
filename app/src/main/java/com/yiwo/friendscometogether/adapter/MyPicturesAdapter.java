@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.squareup.picasso.Picasso;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -90,7 +91,7 @@ public class MyPicturesAdapter extends RecyclerView.Adapter<MyPicturesAdapter.Vi
         } else {
             holder.rlAdd.setVisibility(View.GONE);
             holder.rlIv.setVisibility(View.VISIBLE);
-            Picasso.with(context).load(data.get(position - 1).getUpicurl()).into(holder.iv);
+            Glide.with(context).load(data.get(position - 1).getUpicurl()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian)).into(holder.iv);
             holder.iv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

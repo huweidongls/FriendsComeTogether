@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
@@ -48,8 +50,7 @@ public class MessageCommentAdapter extends RecyclerView.Adapter<MessageCommentAd
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.titleTv.setText(data.get(position).getMes_title());
-        if(!StringUtils.isEmpty(data.get(position).getMes_pic()))
-            Picasso.with(context).load(data.get(position).getMes_pic()).into(holder.picIv);
+        Glide.with(context).load(data.get(position).getMes_pic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.picIv);
         holder.contentTv.setText(data.get(position).getMes_message());
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override

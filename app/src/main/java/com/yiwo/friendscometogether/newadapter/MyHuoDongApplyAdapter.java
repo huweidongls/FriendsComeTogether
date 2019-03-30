@@ -131,6 +131,7 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
             }
         });
         holder.tv_title.setText(bean.getPftitle());
+        holder.tv_phase.setText("第"+data.get(position).getPhase()+"期："+data.get(position).getPfgotime()+" - "+data.get(position).getPfendtime());
         Glide.with(context).load(bean.getPfpic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_image_huodong);
         holder.tv_name_owner.setText(bean.getUsername());
         holder.tv_name_owner.setOnClickListener(new View.OnClickListener() {
@@ -173,6 +174,7 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
         private ImageView iv_icon_owner;
         private TextView tv_name_owner;
         private TextView tv_timeinfo;
+        private TextView tv_phase;
         private ImageView iv_image_huodong;
         private LinearLayout ll_huodong_apply;
         public ViewHolder(View itemView) {
@@ -186,6 +188,7 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
             tv_timeinfo = itemView.findViewById(R.id.tv_timeinfo);
             iv_image_huodong = itemView.findViewById(R.id.iv_image_huodong);
             ll_huodong_apply = itemView.findViewById(R.id.ll_huodong_apply);
+            tv_phase = itemView.findViewById(R.id.tv_huodong_phase);
         }
     }
 

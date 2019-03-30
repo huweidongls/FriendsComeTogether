@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -90,6 +91,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
                         .setNegativeButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                Log.d("listPicId_",listPicId.get(mCurrentPosition));
                                 ViseHttp.POST(NetConfig.setupHeaderFromPics)
                                         .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.setupHeaderFromPics))
                                         .addParam("listid", listPicId.get(mCurrentPosition))

@@ -51,45 +51,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:id="@+id/activity_create_friend_remember_rl_edit_title"
-                android:layout_width="match_parent"
-                android:layout_height="88px">
 
-                <EditText
-                    android:maxLength="30"
-                    android:gravity="start"
-                    android:background="@null"
-                    android:id="@+id/activity_create_friend_remember_tv_title"
-                    android:layout_width="490px"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="40px"
-                    android:ellipsize="end"
-                    android:lines="1"
-                    android:hint="请输入友记标题"
-                    android:textColor="@color/black_333333"
-                    android:textSize="28px" />
-
-                <TextView
-                    android:id="@+id/activity_create_friend_remember_tv_title_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="40px"
-                    android:text="0/30"
-                    android:textColor="@color/black_333333"
-                    android:textSize="28px" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="12px"
-                android:background="@color/line" />
 
             <RelativeLayout
                 android:visibility="gone"
@@ -139,6 +101,7 @@
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
+                android:layout_marginTop="30px"
                 android:layout_marginBottom="18px"
                 android:id="@+id/activity_create_intercalation_rv"
                 android:layout_marginRight="40px"
@@ -199,7 +162,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="12px"
                 android:background="@color/line" />
+            <RelativeLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:id="@+id/activity_create_friend_remember_rl_edit_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <EditText
+                    android:layout_marginTop="20px"
+                    android:layout_marginBottom="20px"
+                    android:maxLength="300"
+                    android:gravity="start"
+                    android:background="@null"
+                    android:id="@+id/activity_create_friend_remember_tv_title"
+                    android:layout_width="490px"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40px"
+                    android:ellipsize="end"
+                    android:lines="9"
+                    android:hint="请输入内容"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+                <TextView
+                    android:layout_alignTop="@+id/activity_create_friend_remember_tv_title"
+                    android:id="@+id/activity_create_friend_remember_tv_title_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="40px"
+                    android:text="0/300"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12px"
+                android:background="@color/line" />
             <RelativeLayout
                 android:id="@+id/activity_create_friend_remember_rl_label"
                 android:layout_width="match_parent"
@@ -269,7 +272,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12px"
                     android:layout_toRightOf="@+id/activity_create_friend_remember_iv_activity_city"
-                    android:text="活动地点"
+                    android:text="地点"
                     android:textColor="@color/black_333333"
                     android:textSize="28px" />
 
@@ -282,25 +285,34 @@
                 <!--android:layout_marginRight="40px"-->
                 <!--android:src="@mipmap/right" />-->
 
-                <TextView
-                    android:layout_toLeftOf="@+id/activity_create_friend_remember_iv_city_right"
+                <EditText
+                    android:layout_toLeftOf="@+id/rl_choose_address"
+                    android:layout_alignParentRight="true"
+                    android:hint="请输入或选择地点"
+                    android:gravity="end"
+                    android:background="@null"
                     android:id="@+id/activity_create_friend_remember_tv_activity_city"
-                    android:layout_width="wrap_content"
+                    android:layout_width="260px"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10px"
-                    android:gravity="end"
-                    android:hint="请选择活动地点"
+                    android:layout_marginRight="64px"
                     android:textColor="@color/black_333333"
                     android:textSize="28px" />
-                <ImageView
-                    android:id="@+id/activity_create_friend_remember_iv_city_right"
-                    android:layout_width="14px"
-                    android:layout_height="24px"
+                <RelativeLayout
+                    android:id="@+id/rl_choose_address"
+                    android:paddingRight="40px"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="40px"
-                    android:src="@mipmap/right" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/activity_create_friend_remember_iv_city_right"
+                        android:layout_width="14px"
+                        android:layout_height="24px"
+                        android:src="@mipmap/right" />
+                </RelativeLayout>
+
             </RelativeLayout>
 
             <View

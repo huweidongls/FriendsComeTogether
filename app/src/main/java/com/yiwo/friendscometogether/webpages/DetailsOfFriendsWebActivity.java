@@ -107,9 +107,11 @@ public class DetailsOfFriendsWebActivity extends BaseWebActivity {
         ButterKnife.bind(this);
         fmID= getIntent().getStringExtra("fmid");
         spImp = new SpImp(DetailsOfFriendsWebActivity.this);
+        uid = spImp.getUID();
         setDatabase();
         userGiveModelDao =  mDaoSession.getUserGiveModelDao();
         url = NetConfig.BaseUrl+"action/ac_article/youJiWeb?id="+fmID+"&uid="+uid;
+        Log.d("aaaa",url);
 //        url = NetConfig.BaseUrl+"action/ac_article/youJiWeb?id="+fmID;
         initWebView(webView,url);
         webView.addJavascriptInterface(new AndroidInterface(),"android");//交互

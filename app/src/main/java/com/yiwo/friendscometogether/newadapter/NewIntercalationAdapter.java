@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.custom.PicDescribeDialog;
@@ -87,7 +88,7 @@ public class NewIntercalationAdapter extends RecyclerView.Adapter<NewIntercalati
             holder.rlAdd.setVisibility(View.GONE);
             holder.rlImg.setVisibility(View.VISIBLE);
             holder.ivDelete.setVisibility(View.VISIBLE);
-            Glide.with(context).load(data.get(position).getPic()).into(holder.iv);
+            Glide.with(context).load(data.get(position).getPic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv);
         }
         holder.rlAdd.setOnClickListener(new View.OnClickListener() {
             @Override

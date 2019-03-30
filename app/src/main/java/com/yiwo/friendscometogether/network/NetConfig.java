@@ -294,4 +294,10 @@ public class NetConfig {
     public static String getInfo = "action/ac_public/getInfo";
     //友聚详情web页面数据
     public static String getActivityInfo = "action/ac_activity/getActivityInfo";
+    //申请进群
+    public static String inGroupInfo = "action/ac_public/inGroupInfo";
+    //拒接进群
+    public static String noInGroup = "action/ac_public/noInGroup";
+    //同意进群
+    public static String agreeIngroup = "action/ac_public/agreeInGroup";
 }

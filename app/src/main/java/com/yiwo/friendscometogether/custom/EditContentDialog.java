@@ -15,9 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.pages.CreateFriendRememberActivity;
 
 /**
  * Created by Administrator on 2018/7/20.
@@ -58,7 +60,7 @@ public class EditContentDialog extends Dialog {
         etContent = view.findViewById(R.id.dialog_edit_content_et_content);
         btnOk = view.findViewById(R.id.dialog_edit_content_btn_ok);
         lengthTv = view.findViewById(R.id.dialog_edit_title_tv_text_num);
-        setEditTextInputSpace(etContent);
+//        setEditTextInputSpace(etContent);
         etContent.addTextChangedListener(new TextWatcher() {
             //            CharSequence cs;
             @Override
@@ -73,7 +75,10 @@ public class EditContentDialog extends Dialog {
 
             @Override
             public void afterTextChanged(Editable s) {
-                lengthTv.setText(s.length()+"/200");
+                lengthTv.setText(ss.length()+"/200");
+                if(ss.length()>=200){
+                    Toast.makeText(context, "您输入的字数已经超过了限制", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         btnOk.setOnClickListener(new View.OnClickListener() {

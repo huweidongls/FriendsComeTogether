@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.imagepreview.Consts;
@@ -66,7 +67,7 @@ public class TaRenZhuYePicsAdapter extends RecyclerView.Adapter<TaRenZhuYePicsAd
             holder.tv_morePicNum.setText("+"+(data.size()-5));
         }else {
             holder.ll_lookmore.setVisibility(View.GONE);
-            Glide.with(context).load(data.get(position).getUpicurl()).into(holder.imageView);
+            Glide.with(context).load(data.get(position).getUpicurl()).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(holder.imageView);
         }
         final int list_image_size ;
         if (data.size()>=5){

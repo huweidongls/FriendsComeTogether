@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
@@ -56,7 +57,7 @@ public class MessageInvitationAdapter extends RecyclerView.Adapter<MessageInvita
             Glide.with(context).load(R.mipmap.yaoqing_nv).into(holder.ivSex);
         }
         if(!TextUtils.isEmpty(data.get(position).getPfpic())){
-            Glide.with(context).load(data.get(position).getPfpic()).into(holder.picIv);
+            Glide.with(context).load(data.get(position).getPfpic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian)).into(holder.picIv);
         }
         holder.tvTime.setText(data.get(position).getYqtime());
         holder.titleTv.setText(data.get(position).getPftitle());

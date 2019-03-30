@@ -55,7 +55,7 @@ public class WoGuanZhuDeAdapter extends RecyclerView.Adapter<WoGuanZhuDeAdapter.
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-//        Glide.with(context).load(data.get(position).getFmpic()).into(holder.iv);
+//        Glide.with(context).load(data.get(position).getFmpic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv);
         final UserFocusModel.ObjBean bean = data.get(position);
         Glide.with(context).load(bean.getUpicurl()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.iv_icon_user);
         holder.tv_user_name.setText(bean.getUsername());

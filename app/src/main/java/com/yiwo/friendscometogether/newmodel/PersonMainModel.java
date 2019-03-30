@@ -136,7 +136,7 @@ public class PersonMainModel {
             private String friends;
             private String follow;
             private String fans;
-
+            private String otherUserId;
             public String getWy_accid() {
                 return wy_accid;
             }
@@ -231,6 +231,14 @@ public class PersonMainModel {
 
             public void setFans(String fans) {
                 this.fans = fans;
+            }
+
+            public String getOtherUserId() {
+                return otherUserId;
+            }
+
+            public void setOtherUserId(String otherUserId) {
+                this.otherUserId = otherUserId;
             }
         }
 

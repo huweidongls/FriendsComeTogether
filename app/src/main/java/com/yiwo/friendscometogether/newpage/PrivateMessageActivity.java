@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.netease.nim.uikit.api.NimUIKit;
@@ -141,61 +142,104 @@ public class PrivateMessageActivity extends BaseActivity {
     PrivateMessageAdapter.MessageListioner messageListioner = new PrivateMessageAdapter.MessageListioner() {
 
         @Override
-        public void agreeListion(final int position, String messageId, final String name, final String YX_id) {
-            ViseHttp.POST(NetConfig.agreeOrRefuse)
-                    .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.agreeOrRefuse))
-                    .addParam("id", messageId)
-                    .addForm("type","0")
-                    .request(new ACallback<String>() {
-                        @Override
-                        public void onSuccess(String data) {
+        public void agreeListion(final int position, final String messageId, final String name, final String YX_id) {
+            if (list.get(position).getType().equals("0")){
+                ViseHttp.POST(NetConfig.agreeOrRefuse)
+                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.agreeOrRefuse))
+                        .addParam("id", messageId)
+                        .addForm("type","0")
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
 //                        try {
 //
 //                        } catch (JSONException e) {
 //                            e.printStackTrace();
 //                        }
-                            JSONObject jsonObject = null;
-                            try {
-                                jsonObject = new JSONObject(data);
-                                if (jsonObject.getInt("code") == 200){
-                                    Log.d("2222",data);
-                                    toToast(context,"开始和"+name+"聊天");
-                                    list.get(position).setRadio("1");
-                                    adapter.notifyDataSetChanged();
-                                    liaotian(YX_id);
+                                JSONObject jsonObject = null;
+                                try {
+                                    jsonObject = new JSONObject(data);
+                                    if (jsonObject.getInt("code") == 200){
+                                        Log.d("2222",data);
+                                        toToast(context,"开始和"+name+"聊天");
+                                        list.get(position).setRadio("1");
+                                        adapter.notifyDataSetChanged();
+                                        liaotian(YX_id);
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
-                        }
 
-                        @Override
-                        public void onFail(int errCode, String errMsg) {
-                            toToast(context,"接受聊天失败");
-                        }
-                    });
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+                                toToast(context,"接受聊天失败");
+                            }
+                        });
+            }else if(list.get(position).getType().equals("1")){
+                ViseHttp.POST(NetConfig.agreeIngroup)
+                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.agreeIngroup))
+                        .addParam("id", messageId)
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+
+                                Log.d("2222",data+"///"+messageId);
+                                toToast(context,"已同意");
+                                list.remove(position);
+                                adapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+
+                            }
+                        });
+            }
+
         }
 
         @Override
         public void disAgreeListion(final int position, String messageId) {
-            ViseHttp.POST(NetConfig.agreeOrRefuse)
-                    .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.agreeOrRefuse))
-                    .addParam("id", messageId)
-                    .addForm("type","1")
-                    .request(new ACallback<String>() {
-                        @Override
-                        public void onSuccess(String data) {
-                            Log.d("2222",data);
-                            toToast(context,"已拒绝");
-                            list.get(position).setRadio("2");
-                            adapter.notifyDataSetChanged();
-                        }
+            if (list.get(position).getType().equals("0")){
+                ViseHttp.POST(NetConfig.agreeOrRefuse)
+                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.agreeOrRefuse))
+                        .addParam("id", messageId)
+                        .addForm("type","1")
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                Log.d("2222",data);
+                                toToast(context,"已拒绝");
+                                list.get(position).setRadio("2");
+                                adapter.notifyDataSetChanged();
+                            }
 
-                        @Override
-                        public void onFail(int errCode, String errMsg) {
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
 
-                        }
-                    });
+                            }
+                        });
+            }else if (list.get(position).getType().equals("1")){
+                ViseHttp.POST(NetConfig.noInGroup)
+                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.noInGroup))
+                        .addParam("id", messageId)
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                Log.d("2222",data);
+                                toToast(context,"已拒绝");
+                                list.remove(position);
+                                adapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+
+                            }
+                        });
+            }
+
         }
 
         @Override

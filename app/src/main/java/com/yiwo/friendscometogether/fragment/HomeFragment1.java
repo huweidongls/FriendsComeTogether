@@ -28,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -252,13 +253,13 @@ public class HomeFragment1 extends BaseFragment {
                             if(jsonObject.getInt("code") == 200){
                                 Gson gson = new Gson();
                                 labelModel = gson.fromJson(data, IndexLabelModel.class);
-                                Glide.with(getContext()).load(labelModel.getObj().get(0).getImg()).into(iv1);
+                                Glide.with(getContext()).load(labelModel.getObj().get(0).getImg()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(iv1);
                                 tv1.setText(labelModel.getObj().get(0).getLname());
-                                Glide.with(getContext()).load(labelModel.getObj().get(1).getImg()).into(iv2);
+                                Glide.with(getContext()).load(labelModel.getObj().get(1).getImg()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv2);
                                 tv2.setText(labelModel.getObj().get(1).getLname());
-                                Glide.with(getContext()).load(labelModel.getObj().get(2).getImg()).into(iv3);
+                                Glide.with(getContext()).load(labelModel.getObj().get(2).getImg()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv3);
                                 tv3.setText(labelModel.getObj().get(2).getLname());
-                                Glide.with(getContext()).load(labelModel.getObj().get(3).getImg()).into(iv4);
+                                Glide.with(getContext()).load(labelModel.getObj().get(3).getImg()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv4);
                                 tv4.setText(labelModel.getObj().get(3).getLname());
                             }
                         } catch (JSONException e) {

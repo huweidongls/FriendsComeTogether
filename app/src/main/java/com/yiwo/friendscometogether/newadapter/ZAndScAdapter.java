@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.ZAndScModel;
@@ -44,7 +45,7 @@ public class ZAndScAdapter extends RecyclerView.Adapter<ZAndScAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Glide.with(context).load(data.get(position).getUserpic()).into(holder.ivAvatar);
+        Glide.with(context).load(data.get(position).getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).placeholder(R.mipmap.my_head)).into(holder.ivAvatar);
         if(data.get(position).getType().equals("0")){
             String str = "<font color='#0765AA'>"+data.get(position).getUsername()+"</font>点赞了您的文章。";
             holder.tv.setText(Html.fromHtml(str));

@@ -13,6 +13,7 @@ import com.netease.nim.uikit.business.team.activity.AdvancedTeamInfoActivity;
 import com.netease.nim.uikit.business.team.activity.AdvancedTeamMemberActivity;
 import com.netease.nim.uikit.business.team.model.TeamExtras;
 import com.netease.nim.uikit.business.team.model.TeamRequestCode;
+import com.netease.nim.uikit.tongban.EditContentDialog_L;
 import com.netease.nimlib.sdk.team.model.Team;
 
 import java.util.ArrayList;
@@ -34,15 +35,17 @@ public class DefaultTeamSessionCustomization extends SessionCustomization {
 
         // ActionBar右侧按钮，跳转至群信息界面
         SessionCustomization.OptionsButton infoButton = new SessionCustomization.OptionsButton() {
+
             @Override
-            public void onClick(Context context, View view, String sessionId) {
+            public void onClick(final Context context, View view, String sessionId) {
                 Team team = NimUIKit.getTeamProvider().getTeamById(sessionId);
                 if (team != null && team.isMyTeam()) {
 //                    NimUIKit.startTeamInfo(context, sessionId);
                     AdvancedTeamMemberActivity.startActivityForResult((Activity) context, team.getId(), AdvancedTeamInfoActivity.REQUEST_CODE_MEMBER_LIST);
 
                 } else {
-                    Toast.makeText(context, R.string.team_invalid_tip, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"已退出该群",Toast.LENGTH_SHORT).show();
+
                 }
             }
         };

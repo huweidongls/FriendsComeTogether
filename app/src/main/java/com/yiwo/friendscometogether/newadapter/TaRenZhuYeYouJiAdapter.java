@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.PersonMainModel;
@@ -66,11 +67,11 @@ public class TaRenZhuYeYouJiAdapter extends RecyclerView.Adapter<TaRenZhuYeYouJi
         holder.tv_youji_pinglun_num.setText(data.get(position).getFmcomment());
         holder.tv_youji_see_num.setText(data.get(position).getPflook());
         if (data.get(position).getPfpic().size()>0){
-            Glide.with(context).load(data.get(position).getPfpic().get(0)).into(holder.iv_image_view0);
+            Glide.with(context).load(data.get(position).getPfpic().get(0)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_image_view0);
             if (data.get(position).getPfpic().size()>=4){
-                Glide.with(context).load(data.get(position).getPfpic().get(1)).into(holder.iv_image_view1);
-                Glide.with(context).load(data.get(position).getPfpic().get(2)).into(holder.iv_image_view2);
-                Glide.with(context).load(data.get(position).getPfpic().get(3)).into(holder.iv_image_view3);
+                Glide.with(context).load(data.get(position).getPfpic().get(1)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_image_view1);
+                Glide.with(context).load(data.get(position).getPfpic().get(2)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_image_view2);
+                Glide.with(context).load(data.get(position).getPfpic().get(3)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_image_view3);
             }else {
                 holder.iv_image_view1.setVisibility(View.GONE);
                 holder.iv_image_view2.setVisibility(View.GONE);

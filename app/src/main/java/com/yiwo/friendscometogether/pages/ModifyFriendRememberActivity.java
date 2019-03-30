@@ -43,11 +43,13 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.adapter.IntercalationAdapter;
 import com.yiwo.friendscometogether.custom.SetPasswordDialog;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
+import com.yiwo.friendscometogether.model.CityModel;
 import com.yiwo.friendscometogether.model.JsonBean;
 import com.yiwo.friendscometogether.model.ModifyFriendRememberModel;
 import com.yiwo.friendscometogether.model.UserActiveListModel;
 import com.yiwo.friendscometogether.model.UserIntercalationPicModel;
 import com.yiwo.friendscometogether.model.UserLabelModel;
+import com.yiwo.friendscometogether.network.ActivityConfig;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.NewIntercalationAdapter;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -196,6 +198,7 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
     private List<ModifyFriendRememberModel.ObjBean.FmpicBean> mList;
     private List<ModifyFriendRememberModel.ObjBean.FmpicBean> mOldList;
     private static final int REQUEST_CODE1 = 0x00000012;
+    private static final int REQUEST_CODE_GET_CITY = 1;
 
     private String deleteid = "";
     private List<File> files = new ArrayList<>();
@@ -414,8 +417,8 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            tvTitleNum.setText(temp.length()+"/30");
-            if(temp.length()>=30){
+            tvTitleNum.setText(temp.length()+"/300");
+            if(temp.length()>=300){
                 Toast.makeText(ModifyFriendRememberActivity.this, "您输入的字数已经超过了限制", Toast.LENGTH_SHORT).show();
             }
         }
@@ -501,6 +504,16 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
             }
             adapter.notifyDataSetChanged();
         }
+        if (requestCode == REQUEST_CODE_GET_CITY && data != null && resultCode == 1) {//选择城市
+            CityModel model = (CityModel) data.getSerializableExtra(ActivityConfig.CITY);
+            tvCity.setText(model.getName());
+        } else if (requestCode == REQUEST_CODE_GET_CITY && resultCode == 2) {//重置
+            tvCity.setText("");
+            tvCity.setHint("请选择或输入活动地点");
+        } else if (requestCode == REQUEST_CODE_GET_CITY && resultCode == 3) {//国际城市
+            String city = data.getStringExtra("city");
+            tvCity.setText(city);
+        }
     }
 
     private String yourChoice = "";
@@ -508,7 +521,7 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
             R.id.activity_create_friend_remember_rl_time_start, R.id.activity_create_friend_remember_rl_time_end, R.id.activity_create_friend_remember_rl_activity_city,
             R.id.activity_create_friend_remember_rl_price, R.id.activity_create_friend_remember_rl_complete, R.id.activity_create_friend_remember_rl_set_password,
             R.id.activity_create_friend_remember_iv_add, R.id.activity_create_friend_remember_iv_delete, R.id.activity_create_friend_remember_rl_label,
-            R.id.activity_create_friend_remember_rl_active_title, R.id.activity_create_friend_remember_rl_is_intercalation})
+            R.id.activity_create_friend_remember_rl_active_title, R.id.activity_create_friend_remember_rl_is_intercalation,R.id.rl_choose_address})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_create_friend_remember_rl_back:
@@ -731,6 +744,11 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
                             }
                         });
                 singleChoiceDialog1.show();
+                break;
+                case R.id.rl_choose_address:
+                    Intent it = new Intent(ModifyFriendRememberActivity.this, CityActivity.class);
+                    it.putExtra(ActivityConfig.ACTIVITY, "createYouJi");
+                    startActivityForResult(it, 1);
                 break;
         }
     }

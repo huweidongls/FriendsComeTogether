@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
@@ -46,11 +48,7 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        if (TextUtils.isEmpty(data.get(position).getUserpic())) {
-            Picasso.with(context).load(R.mipmap.my_head).into(holder.ivAvatar);
-        } else {
-            Picasso.with(context).load(data.get(position).getUserpic()).into(holder.ivAvatar);
-        }
+        Glide.with(context).load(data.get(position).getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.ivAvatar);
         holder.tvNickname.setText(data.get(position).getUsername());
         holder.tvTitle.setText(data.get(position).getNewsTile());
         holder.tvContent.setText(data.get(position).getFctitle());

@@ -52,6 +52,7 @@ import com.netease.nim.uikit.impl.customization.DefaultContactEventListener;
 import com.netease.nim.uikit.impl.customization.DefaultP2PSessionCustomization;
 import com.netease.nim.uikit.impl.customization.DefaultRecentCustomization;
 import com.netease.nim.uikit.impl.customization.DefaultTeamSessionCustomization;
+import com.netease.nim.uikit.impl.customization.MyTeamSessionCustomization;
 import com.netease.nim.uikit.impl.provider.DefaultChatRoomProvider;
 import com.netease.nim.uikit.impl.provider.DefaultContactProvider;
 import com.netease.nim.uikit.impl.provider.DefaultRobotProvider;
@@ -339,7 +340,8 @@ public final class NimUIKitImpl {
     }
 
     public static void startTeamSession(Context context, String tid, IMMessage anchor) {
-        NimUIKitImpl.startChatting(context, tid, SessionTypeEnum.Team, commonTeamSessionCustomization, anchor);
+//        NimUIKitImpl.startChatting(context, tid, SessionTypeEnum.Team, commonTeamSessionCustomization, anchor);
+        NimUIKitImpl.startChatting(context, tid, SessionTypeEnum.Team, new MyTeamSessionCustomization(tid), anchor);//替换commonTeamSessionCustomization 为自己的样式  传入群id
     }
 
     public static void startTeamSession(Context context, String tid, SessionCustomization sessionCustomization, IMMessage anchor) {

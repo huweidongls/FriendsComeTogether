@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -55,7 +56,7 @@ public class DetailsOfFriendsIntercalation1Adapter extends RecyclerView.Adapter<
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         spImp = new SpImp(context);
-        Glide.with(context).load(data.get(position).getUserpic()).into(holder.ivAvatar);
+        Glide.with(context).load(data.get(position).getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(holder.ivAvatar);
         holder.tvNickname.setText(data.get(position).getUsername());
         holder.tvTime.setText(data.get(position).getFftime());
         if(data.get(position).getFollow().equals("0")){

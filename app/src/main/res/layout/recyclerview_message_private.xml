@@ -46,6 +46,16 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_shenqing_content"
+            android:textColor="@color/black_333333"
+            android:text="我要进群！！"
+            android:textSize="28px"
+            android:layout_marginLeft="142px"
+            android:layout_marginRight="50px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <LinearLayout
             android:id="@+id/ll_say_hello"
             android:orientation="vertical"
@@ -53,27 +63,34 @@
             android:layout_marginRight="50px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:textColor="@color/black_333333"
-                android:text="通过以下标签配对成功："
-                android:textSize="28px"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <RelativeLayout
-                android:layout_width="530px"
-                android:layout_height="match_parent">
-                <com.yiwo.friendscometogether.widget.NestedRecyclerView
-                    android:layout_marginTop="10px"
-                    android:layout_marginRight="10px"
-                    android:id="@+id/rv_label"
+            <LinearLayout
+                android:id="@+id/ll_biaoqian"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/black_333333"
+                    android:text="通过以下标签配对成功："
+                    android:textSize="28px"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </RelativeLayout>
-            <View
-                android:layout_marginTop="12.5px"
-                android:background="@color/line"
-                android:layout_width="match_parent"
-                android:layout_height="1px"/>
+                    android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:layout_width="530px"
+                    android:layout_height="match_parent">
+                    <com.yiwo.friendscometogether.widget.NestedRecyclerView
+                        android:layout_marginTop="10px"
+                        android:layout_marginRight="10px"
+                        android:id="@+id/rv_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+                <View
+                    android:layout_marginTop="12.5px"
+                    android:background="@color/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"/>
+            </LinearLayout>
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
@@ -91,6 +108,7 @@
                         android:layout_width="40px"
                         android:layout_height="40px" />
                     <TextView
+                        android:id="@+id/tv_agree"
                         android:textColor="@color/color_black_333333"
                         android:textSize="28px"
                         android:text="接收聊天"
@@ -111,6 +129,7 @@
                         android:layout_width="40px"
                         android:layout_height="40px" />
                     <TextView
+                        android:id="@+id/tv_noway"
                         android:textColor="@color/color_black_333333"
                         android:textSize="28px"
                         android:text="抱歉，下次吧！"

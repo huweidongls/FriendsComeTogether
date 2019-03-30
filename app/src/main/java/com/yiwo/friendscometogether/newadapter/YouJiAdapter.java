@@ -64,7 +64,7 @@ public class YouJiAdapter extends RecyclerView.Adapter<YouJiAdapter.ViewHolder>{
 //            holder.rv_video.setLayoutParams(layoutParams);//应用高度到布局中
             holder.rv_video.setVisibility(View.VISIBLE);
             holder.rv_youji.setVisibility(View.GONE);
-            Glide.with(context).load(data.get(position).getFmpic()).into(holder.iv_video);
+            Glide.with(context).load(data.get(position).getFmpic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_video);
         }
 
         holder.rv_video.setOnClickListener(new View.OnClickListener() {

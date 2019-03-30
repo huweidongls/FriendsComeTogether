@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.BlackUserModel;
 
@@ -58,7 +59,7 @@ public class BlackUserAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        Glide.with(context).load(data.get(i).getUserpic()).into(holder.iv);
+        Glide.with(context).load(data.get(i).getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.iv);
         holder.tv.setText(data.get(i).getUsername());
 
         return view;

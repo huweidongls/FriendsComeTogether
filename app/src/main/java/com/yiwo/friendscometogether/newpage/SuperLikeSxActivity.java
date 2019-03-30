@@ -110,7 +110,6 @@ public class SuperLikeSxActivity extends BaseActivity {
 
     @OnClick({R.id.rl_back,R.id.rl_sure,R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4,R.id.iv_expand_search})
     public void onClick(View view){
-
         switch (view.getId()){
             case R.id.rl_back:
                 finish();

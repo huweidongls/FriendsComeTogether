@@ -44,6 +44,7 @@ import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.broadcastreceiver.MyGoPersonMainBroadcastReceiver;
+import com.yiwo.friendscometogether.broadcastreceiver.MyShenQingJinQunBroadcastReceiver;
 import com.yiwo.friendscometogether.fragment.ChatFragment;
 import com.yiwo.friendscometogether.fragment.FriendsRememberFragment;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment;
@@ -131,6 +132,7 @@ public class MainActivity extends FragmentActivity {
     ImageView ivNewChatMessage;
 
     private MyGoPersonMainBroadcastReceiver myGoPersonMainBroadcastReceiver;
+    private MyShenQingJinQunBroadcastReceiver myShenQingJinQunBroadcastReceiver;
     private long exitTime = 0;
 
     private SpImp spImp;
@@ -160,6 +162,11 @@ public class MainActivity extends FragmentActivity {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.yiwo.friendscometogether.broadcastreceiver.MyGoPersonMainBroadcastReceiver");
         registerReceiver(myGoPersonMainBroadcastReceiver, intentFilter);
+
+        myShenQingJinQunBroadcastReceiver = new MyShenQingJinQunBroadcastReceiver();
+        IntentFilter intentFilter1 = new IntentFilter();
+        intentFilter1.addAction("com.yiwo.friendscometogether.broadcastreceiver.MyShenQingJinQunBroadcastReceiver");
+        registerReceiver(myShenQingJinQunBroadcastReceiver, intentFilter1);
     }
 
     @Override

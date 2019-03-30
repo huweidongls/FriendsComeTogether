@@ -128,7 +128,8 @@ public class PersonMainActivity extends BaseActivity {
     private String ta = "他";
     private SpImp spImp;
     private int type_tade_or_wode = 0;//0 为他的 1 为我的
-    private String person_id;
+    private String person_id;// 进入activity传入的id 可能为云信ID
+    private String otherUserId;//储存 接口返回的UID
     private String  status; //status   =0时传 用户ID    =1时传网易ID
     private PersonMainModel model;
     private List<PersonMainModel.ObjBean.PhotoBean> list_pics = new ArrayList<>();
@@ -216,7 +217,8 @@ public class PersonMainActivity extends BaseActivity {
                                     if (jsonObject.getInt("code") == 200) {
                                         Gson gson = new Gson();
                                         model = gson.fromJson(data, PersonMainModel.class);
-                                        Glide.with(PersonMainActivity.this).load(model.getObj().getInfo().getUserpic()).into(iv_person_icon);
+                                        otherUserId = model.getObj().getInfo().getOtherUserId();//
+                                        Glide.with(PersonMainActivity.this).load(model.getObj().getInfo().getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(iv_person_icon);
                                         if (model.getObj().getPhoto().size() == 0){
                                             rl_pics_text.setVisibility(View.GONE);
                                         }
@@ -345,6 +347,7 @@ public class PersonMainActivity extends BaseActivity {
                             if (jsonObject.getInt("code") == 200) {
                                 Gson gson = new Gson();
                                 model = gson.fromJson(data, PersonMainModel.class);
+                                otherUserId = model.getObj().getInfo().getOtherUserId();//
                                 Glide.with(PersonMainActivity.this).load(model.getObj().getInfo().getUserpic()).into(iv_person_icon);
                                 if (model.getObj().getPhoto().size() == 0){
                                     rl_pics_text.setVisibility(View.GONE);
@@ -425,7 +428,7 @@ public class PersonMainActivity extends BaseActivity {
                                     }
                                 };
                                 recyclerView_pics.setLayoutManager(manager);
-                                taRenZhuYePicsAdapter = new TaRenZhuYePicsAdapter(list_pics, person_id);
+                                taRenZhuYePicsAdapter = new TaRenZhuYePicsAdapter(list_pics, otherUserId);
                                 recyclerView_pics.setAdapter(taRenZhuYePicsAdapter);
                                 //----------友记---------------
                                 LinearLayoutManager manager1 = new LinearLayoutManager(PersonMainActivity.this) {
@@ -499,7 +502,7 @@ public class PersonMainActivity extends BaseActivity {
                 if (type_tade_or_wode == 1) {
                     intent.setClass(PersonMainActivity.this, MyPicturesActivity.class);
                 } else if (type_tade_or_wode == 0) {
-                    intent.putExtra("otheruid", person_id);
+                    intent.putExtra("otheruid", otherUserId);
                     intent.setClass(PersonMainActivity.this, OtherPicActivity.class);
                 }
                 startActivity(intent);
@@ -507,7 +510,7 @@ public class PersonMainActivity extends BaseActivity {
             case R.id.ll_person_all_youji:
                 if (model.getObj().getFriend().size() > 0) {
                     intent.setClass(PersonMainActivity.this, PersonRememberActivity.class);
-                    intent.putExtra("person_id", person_id);
+                    intent.putExtra("person_id", otherUserId);
                     startActivity(intent);
                 } else {
                     toToast(PersonMainActivity.this, "他还没有发过友记");
@@ -516,7 +519,7 @@ public class PersonMainActivity extends BaseActivity {
             case R.id.ll_person_all_youju:
                 if (model.getObj().getActivity().size() > 0) {
                     intent.setClass(PersonMainActivity.this, PersonTogetherActivity.class);
-                    intent.putExtra("person_id", person_id);
+                    intent.putExtra("person_id", otherUserId);
                     startActivity(intent);
                 } else {
                     toToast(PersonMainActivity.this, "他还没有参加过友聚");
@@ -542,7 +545,7 @@ public class PersonMainActivity extends BaseActivity {
                                 ViseHttp.POST(NetConfig.addFriendsUrl)
                                         .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.addFriendsUrl))
                                         .addParam("uid", spImp.getUID())
-                                        .addParam("friendId", person_id)
+                                        .addParam("friendId", otherUserId)
                                         .addParam("describe", title)
                                         .request(new ACallback<String>() {
                                             @Override
@@ -578,7 +581,7 @@ public class PersonMainActivity extends BaseActivity {
                         ViseHttp.POST(NetConfig.userFocusUrl)
                                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userFocusUrl))
                                 .addParam("uid", spImp.getUID())
-                                .addParam("likeId", person_id)
+                                .addParam("likeId", otherUserId)
                                 .request(new ACallback<String>() {
                                     @Override
                                     public void onSuccess(String data) {
@@ -604,7 +607,7 @@ public class PersonMainActivity extends BaseActivity {
                         ViseHttp.POST(NetConfig.removeConcerns)
                                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.removeConcerns))
                                 .addParam("uid", spImp.getUID())
-                                .addParam("bid", person_id)
+                                .addParam("bid", otherUserId)
                                 .request(new ACallback<String>() {
                                     @Override
                                     public void onSuccess(String data) {
@@ -634,7 +637,7 @@ public class PersonMainActivity extends BaseActivity {
                 ViseHttp.POST(NetConfig.sayHello)
                         .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.sayHello))
                         .addForm("uid", spImp.getUID())
-                        .addForm("bid", person_id)
+                        .addForm("bid", otherUserId)
                         .request(new ACallback<String>() {
                             @Override
                             public void onSuccess(String data) {
@@ -668,7 +671,7 @@ public class PersonMainActivity extends BaseActivity {
                     toToast(PersonMainActivity.this,"他还没有关注任何人");
                 }else {
                     intent.setClass(PersonMainActivity.this,PersonGuanZhuActivity.class);
-                    intent.putExtra("userID",person_id);
+                    intent.putExtra("userID",otherUserId);
                     intent.putExtra("type",1);
                     if (type_tade_or_wode == 1){
                         intent.putExtra("userName","我");
@@ -683,7 +686,7 @@ public class PersonMainActivity extends BaseActivity {
                     toToast(PersonMainActivity.this,"他还没有粉丝");
                 }else {
                     intent.setClass(PersonMainActivity.this,PersonGuanZhuActivity.class);
-                    intent.putExtra("userID",person_id);
+                    intent.putExtra("userID",otherUserId);
                     intent.putExtra("type",2);
                     if (type_tade_or_wode == 1){
                         intent.putExtra("userName","我");

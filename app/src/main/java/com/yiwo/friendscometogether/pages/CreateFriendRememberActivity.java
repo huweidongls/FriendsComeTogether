@@ -110,7 +110,7 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
     @BindView(R.id.activity_create_friend_remember_rl_activity_city)
     RelativeLayout rlSelectCity;
     @BindView(R.id.activity_create_friend_remember_tv_activity_city)
-    TextView tvCity;
+    EditText tvCity;
     @BindView(R.id.activity_create_friend_remember_rl_price)
     RelativeLayout rlPrice;
     @BindView(R.id.activity_create_friend_remember_rl_complete)
@@ -361,8 +361,8 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            tvTitleNum.setText(temp.length()+"/30");
-            if(temp.length()>=30){
+            tvTitleNum.setText(temp.length()+"/300");
+            if(temp.length()>=300){
                 Toast.makeText(CreateFriendRememberActivity.this, "您输入的字数已经超过了限制", Toast.LENGTH_SHORT).show();
             }
         }
@@ -419,7 +419,7 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
             R.id.activity_create_friend_remember_rl_time_start, R.id.activity_create_friend_remember_rl_time_end, R.id.activity_create_friend_remember_rl_activity_city,
             R.id.activity_create_friend_remember_rl_price, R.id.activity_create_friend_remember_rl_complete, R.id.activity_create_friend_remember_rl_set_password,
             R.id.activity_create_friend_remember_iv_add, R.id.activity_create_friend_remember_iv_delete, R.id.activity_create_friend_remember_rl_label,
-            R.id.activity_create_friend_remember_rl_active_title, R.id.activity_create_friend_remember_rl_is_intercalation, R.id.rl_more})
+            R.id.activity_create_friend_remember_rl_active_title, R.id.activity_create_friend_remember_rl_is_intercalation, R.id.rl_more,R.id.rl_choose_address})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_create_friend_remember_rl_back:
@@ -437,7 +437,7 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
 //                new DatePickerDialog(CreateFriendRememberActivity.this, onDateSetListenerEnd, mYear, mMonth, mDay).show();
                 customDatePicker2.show(now);
                 break;
-            case R.id.activity_create_friend_remember_rl_activity_city:
+            case R.id.rl_choose_address:
 //                OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
 //                    @Override
 //                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
@@ -475,7 +475,7 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                 else if(mList.size()<1){
                     Toast.makeText(CreateFriendRememberActivity.this, "请至少上传1张照片", Toast.LENGTH_SHORT).show();
                 }else if (TextUtils.isEmpty(tvCity.getText().toString())){
-                    Toast.makeText(CreateFriendRememberActivity.this, "请选择城市", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateFriendRememberActivity.this, "请填写地点", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     //判断如果填写开始时间和结束时间   结束时间必须大于开始时间
@@ -699,7 +699,7 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
             tvCity.setText(model.getName());
         } else if (requestCode == REQUEST_CODE_GET_CITY && resultCode == 2) {//重置
             tvCity.setText("");
-            tvCity.setHint("请选择活动地点");
+            tvCity.setHint("请选择或输入活动地点");
         } else if (requestCode == REQUEST_CODE_GET_CITY && resultCode == 3) {//国际城市
             String city = data.getStringExtra("city");
             tvCity.setText(city);

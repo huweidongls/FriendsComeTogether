@@ -24,6 +24,7 @@ import com.yiwo.friendscometogether.model.CityModel;
 import com.yiwo.friendscometogether.model.OtherCityModel;
 import com.yiwo.friendscometogether.network.ActivityConfig;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newpage.YoujuShaixuanActivity;
 import com.yiwo.friendscometogether.utils.UserUtils;
 
 import org.json.JSONArray;
@@ -75,6 +76,9 @@ public class CityActivity extends BaseActivity {
         setContentView(R.layout.activity_city);
         ButterKnife.bind(CityActivity.this);
         if (getIntent().getStringExtra(ActivityConfig.ACTIVITY).equals("createYouJi")){//创建友记进入选择城市 隐藏重置按钮
+            rlReset.setVisibility(View.GONE);
+        }
+        if (getIntent().getStringExtra(ActivityConfig.ACTIVITY).equals("youJuShaiXuan")){//筛选活动进入选择城市 隐藏重置按钮
             rlReset.setVisibility(View.GONE);
         }
         initData();
@@ -204,7 +208,9 @@ public class CityActivity extends BaseActivity {
                         it.setClass(CityActivity.this, CreateFriendTogetherActivity.class);
                     } else if (ac.equals("createYouJi")){
                         it.setClass(CityActivity.this, CreateFriendRememberActivity.class);
-                    }else {
+                    } else if (ac.equals("youJuShaiXuan")){
+                        it.setClass(CityActivity.this, YoujuShaixuanActivity.class);
+                    } else {
                         it.setClass(CityActivity.this, MainActivity.class);
                     }
                     it.putExtra(ActivityConfig.CITY, list.get(position));

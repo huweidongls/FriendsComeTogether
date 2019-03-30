@@ -8,14 +8,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
-        android:id="@+id/tv_huodong_title"
-        android:layout_marginTop="30px"
+    android:id="@+id/tv_huodong_title"
+    android:lines="1"
+    android:ellipsize="end"
+    android:layout_marginTop="30px"
+    android:layout_marginLeft="32px"
+    android:layout_marginRight="32px"
+    android:textSize="32px"
+    android:textColor="#333333"
+    android:text="【美食趴】双十二！跟着我们一起去探趴！"
+    android:textStyle="bold"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_huodong_phase"
+        android:lines="1"
+        android:ellipsize="end"
+        android:layout_marginTop="5px"
         android:layout_marginLeft="32px"
         android:layout_marginRight="32px"
-        android:textSize="32px"
-        android:textColor="#333333"
-        android:text="【美食趴】双十二！跟着我们一起去探趴！"
-        android:textStyle="bold"
+        android:textSize="28px"
+        android:textColor="#9a9a9a"
+        android:text="第1期：2019-02-18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView

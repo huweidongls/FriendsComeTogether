@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.HomeHotFriendsRememberModel;
@@ -42,7 +43,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
     public void onBindViewHolder(VideoAdapter.ViewHolder holder, final int position) {
 //        Picasso.with(context).load(data.get(position).getImg()).into(holder.videoIv);
 //        holder.videoTv.setText(data.get(position).getVname());
-        Glide.with(context).load(data.get(position).getImg()).into(holder.iv);
+        Glide.with(context).load(data.get(position).getImg()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(holder.iv);
         holder.videoRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

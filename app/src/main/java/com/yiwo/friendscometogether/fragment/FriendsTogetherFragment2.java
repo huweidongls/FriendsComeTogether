@@ -35,6 +35,7 @@ import com.yiwo.friendscometogether.model.FriendsTogethermodel;
 import com.yiwo.friendscometogether.model.IsRealNameModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.SwipeFIingViewAdapter;
+import com.yiwo.friendscometogether.newmodel.HuoDongShaiXuanMode;
 import com.yiwo.friendscometogether.newpage.YoujuShaixuanActivity;
 import com.yiwo.friendscometogether.pages.ApplyActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
@@ -105,12 +106,12 @@ public class FriendsTogetherFragment2 extends BaseFragment {
 
             @Override
             public boolean canLeftCardExit() {
-                return true;
+                return mList.size()>1?true:false;
             }
 
             @Override
             public boolean canRightCardExit() {
-                return true;
+                return mList.size()>1?true:false;
             }
 
             @Override
@@ -455,17 +456,20 @@ public class FriendsTogetherFragment2 extends BaseFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
-        if (resultCode == 2) {//筛选条件 有价格、无分类
-            min = data.getStringExtra("min");
-            max = data.getStringExtra("max");
-            price = min + "," + max;
+        if (resultCode == 1) {
+            HuoDongShaiXuanMode mode = (HuoDongShaiXuanMode) data.getSerializableExtra("shaiXuanMode");
+            if (mode == null) return;
+            dialog = WeiboDialogUtils.createLoadingDialog(getContext(),"加载中...");
             String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
             ViseHttp.POST(NetConfig.friendsTogetherUrl)
                     .addParam("app_key", token)
                     .addParam("page", "1")
                     .addParam("userID", spImp.getUID())
-                    .addParam("price", price)
+                    .addParam("price", mode.getJiaGe())
+                    .addParam("sign", mode.getBiaoQian())
+                    .addParam("shop_name", mode.getShangJiaName())
+                    .addParam("shop_recommend",mode.getShangJiaTuiJian())
+                    .addParam("city",mode.getCity())
                     .request(new ACallback<String>() {
                         @Override
                         public void onSuccess(String data) {
@@ -478,113 +482,164 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                     mList.addAll(model.getObj());
                                     tList.clear();
                                     tList.addAll(model.getObj());
-                                    if(mList.size()>0){
+                                    if (mList.size() > 0) {
                                         bean = mList.get(0);
                                         if (bean.getFocusOn().equals("0")) {
                                             Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
                                         } else {
                                             Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
                                         }
+                                    } else {
+                                        Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
                                     }
                                     updateListView();
+                                    WeiboDialogUtils.closeDialog(dialog);
                                 }
                             } catch (JSONException e) {
+                                WeiboDialogUtils.closeDialog(dialog);
                                 e.printStackTrace();
                             }
                         }
 
                         @Override
                         public void onFail(int errCode, String errMsg) {
-
+                            WeiboDialogUtils.closeDialog(dialog);
                         }
                     });
-        } else if (resultCode == 3) {//筛选条件 有价格、有分类
-            min = data.getStringExtra("min");
-            max = data.getStringExtra("max");
-            label = data.getStringExtra("label");
-            price = min + "," + max;
-            String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
-            ViseHttp.POST(NetConfig.friendsTogetherUrl)
-                    .addParam("app_key", token)
-                    .addParam("page", "1")
-                    .addParam("userID", spImp.getUID())
-                    .addParam("price", price)
-                    .addParam("sign", label)
-                    .request(new ACallback<String>() {
-                        @Override
-                        public void onSuccess(String data) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(data);
-                                if (jsonObject.getInt("code") == 200) {
-                                    Log.e("222", data);
-                                    FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
-                                    mList.clear();
-                                    mList.addAll(model.getObj());
-                                    tList.clear();
-                                    tList.addAll(model.getObj());
-                                    if(mList.size()>0){
-                                        bean = mList.get(0);
-                                        if (bean.getFocusOn().equals("0")) {
-                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
-                                        } else {
-                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
-                                        }
-                                    }
-                                    updateListView();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        @Override
-                        public void onFail(int errCode, String errMsg) {
-
-                        }
-                    });
-        } else if (resultCode == 5) {//筛选条件 无价格、有分类
-            label = data.getStringExtra("label");
-            String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
-            ViseHttp.POST(NetConfig.friendsTogetherUrl)
-                    .addParam("app_key", token)
-                    .addParam("page", "1")
-                    .addParam("userID", spImp.getUID())
-                    .addParam("sign", label)
-                    .request(new ACallback<String>() {
-                        @Override
-                        public void onSuccess(String data) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(data);
-                                if (jsonObject.getInt("code") == 200) {
-                                    Log.e("222", data);
-                                    FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
-                                    mList.clear();
-                                    mList.addAll(model.getObj());
-                                    tList.clear();
-                                    tList.addAll(model.getObj());
-                                    if(mList.size()>0){
-                                        bean = mList.get(0);
-                                        if (bean.getFocusOn().equals("0")) {
-                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
-                                        } else {
-                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
-                                        }
-                                    }
-                                    updateListView();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        @Override
-                        public void onFail(int errCode, String errMsg) {
-
-                        }
-                    });
-        }else if (resultCode == 7){//没有选择任何条件
-            initData();
         }
+//        min = data.getStringExtra("min");
+//        max = data.getStringExtra("max");
+//        label = data.getStringExtra("label");
+//        price = min + "," + max;
+//        if (resultCode == 2) {//筛选条件 有价格、无分类
+//            min = data.getStringExtra("min");
+//            max = data.getStringExtra("max");
+//            price = min + "," + max;
+//            String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
+//            ViseHttp.POST(NetConfig.friendsTogetherUrl)
+//                    .addParam("app_key", token)
+//                    .addParam("page", "1")
+//                    .addParam("userID", spImp.getUID())
+//                    .addParam("price", price)
+//                    .request(new ACallback<String>() {
+//                        @Override
+//                        public void onSuccess(String data) {
+//                            try {
+//                                JSONObject jsonObject = new JSONObject(data);
+//                                if (jsonObject.getInt("code") == 200) {
+//                                    Log.e("222", data);
+//                                    FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
+//                                    mList.clear();
+//                                    mList.addAll(model.getObj());
+//                                    tList.clear();
+//                                    tList.addAll(model.getObj());
+//                                    if(mList.size()>0){
+//                                        bean = mList.get(0);
+//                                        if (bean.getFocusOn().equals("0")) {
+//                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
+//                                        } else {
+//                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
+//                                        }
+//                                    }
+//                                    updateListView();
+//                                }
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFail(int errCode, String errMsg) {
+//
+//                        }
+//                    });
+//        } else if (resultCode == 3) {//筛选条件 有价格、有分类
+//            min = data.getStringExtra("min");
+//            max = data.getStringExtra("max");
+//            label = data.getStringExtra("label");
+//            price = min + "," + max;
+//            String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
+//            ViseHttp.POST(NetConfig.friendsTogetherUrl)
+//                    .addParam("app_key", token)
+//                    .addParam("page", "1")
+//                    .addParam("userID", spImp.getUID())
+//                    .addParam("price", price)
+//                    .addParam("sign", label)
+//                    .request(new ACallback<String>() {
+//                        @Override
+//                        public void onSuccess(String data) {
+//                            try {
+//                                JSONObject jsonObject = new JSONObject(data);
+//                                if (jsonObject.getInt("code") == 200) {
+//                                    Log.e("222", data);
+//                                    FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
+//                                    mList.clear();
+//                                    mList.addAll(model.getObj());
+//                                    tList.clear();
+//                                    tList.addAll(model.getObj());
+//                                    if(mList.size()>0){
+//                                        bean = mList.get(0);
+//                                        if (bean.getFocusOn().equals("0")) {
+//                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
+//                                        } else {
+//                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
+//                                        }
+//                                    }
+//                                    updateListView();
+//                                }
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFail(int errCode, String errMsg) {
+//
+//                        }
+//                    });
+//        } else if (resultCode == 5) {//筛选条件 无价格、有分类
+//            label = data.getStringExtra("label");
+//            String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
+//            ViseHttp.POST(NetConfig.friendsTogetherUrl)
+//                    .addParam("app_key", token)
+//                    .addParam("page", "1")
+//                    .addParam("userID", spImp.getUID())
+//                    .addParam("sign", label)
+//                    .request(new ACallback<String>() {
+//                        @Override
+//                        public void onSuccess(String data) {
+//                            try {
+//                                JSONObject jsonObject = new JSONObject(data);
+//                                if (jsonObject.getInt("code") == 200) {
+//                                    Log.e("222", data);
+//                                    FriendsTogethermodel model = new Gson().fromJson(data, FriendsTogethermodel.class);
+//                                    mList.clear();
+//                                    mList.addAll(model.getObj());
+//                                    tList.clear();
+//                                    tList.addAll(model.getObj());
+//                                    if(mList.size()>0){
+//                                        bean = mList.get(0);
+//                                        if (bean.getFocusOn().equals("0")) {
+//                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
+//                                        } else {
+//                                            Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
+//                                        }
+//                                    }
+//                                    updateListView();
+//                                }
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFail(int errCode, String errMsg) {
+//
+//                        }
+//                    });
+//        }else if (resultCode == 7){//没有选择任何条件
+//            initData();
+//        }
     }
     private void updateListView() {
 //        adapter.data = mList;

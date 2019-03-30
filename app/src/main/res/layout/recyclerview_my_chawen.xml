@@ -7,6 +7,8 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:lines="1"
+        android:ellipsize="end"
         android:id="@+id/tv_title"
         android:layout_marginTop="30px"
         android:layout_marginLeft="32px"
