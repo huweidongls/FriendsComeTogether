@@ -242,6 +242,7 @@ public class DetailsOfFriendsWebActivity extends BaseWebActivity {
                             .request(new ACallback<String>() {
                                 @Override
                                 public void onSuccess(String data) {
+                                    Log.d("asdasd",data);
                                     try {
                                         JSONObject jsonObject = new JSONObject(data);
                                         if (jsonObject.getInt("code") == 200) {

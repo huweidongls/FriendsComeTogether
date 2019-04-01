@@ -9,7 +9,7 @@ public class DetailsOrderModel {
     /**
      * code : 200
      * message : 获取成功
-     * obj : {"title":"活动不可退款，只限男性 且单身","content":"","picture":"http://39.104.102.152/uploads/xingcheng/20190321/917bbe3500b9249b14184868591d6d92.jpg","time":"2019.03.28-2019.03.31","go_num":"1","price":"0.01","order_sn":"20190325151424887572","paycode":"","create_time":"","pay_time":"2019-03-25 15:14:24","over_time":"","status":"待支付","pay_type":"1","order_type":"1","price_type":"自费","begin_time":"2019.03.28","end_time":"2019.03.31","noname":"0","allow_refund":"1","phase":"1"}
+     * obj : {"title":"活动不可退款，只限男性 且单身","content":"","picture":"http://39.104.102.152/uploads/xingcheng/20190321/917bbe3500b9249b14184868591d6d92.jpg","time":"2019.03.28-2019.03.31","go_num":"1","price":"0.01","order_sn":"20190325151424550072","paycode":"2019032522001464860551910963","create_time":"","pay_time":"2019-03-25 15:14:24","over_time":"","status":"活动结束","pay_type":"1","order_type":"3","price_type":"自费","begin_time":"2019.03.28","end_time":"2019.03.31","noname":"0","allow_refund":"1","phase":"1","comment":"啊啊啊啊啊啊啊啊啊啊啊啊啊啊","if_comment":true}
      */
 
     private int code;
@@ -48,20 +48,22 @@ public class DetailsOrderModel {
          * time : 2019.03.28-2019.03.31
          * go_num : 1
          * price : 0.01
-         * order_sn : 20190325151424887572
-         * paycode :
+         * order_sn : 20190325151424550072
+         * paycode : 2019032522001464860551910963
          * create_time :
          * pay_time : 2019-03-25 15:14:24
          * over_time :
-         * status : 待支付
+         * status : 活动结束
          * pay_type : 1
-         * order_type : 1
+         * order_type : 3
          * price_type : 自费
          * begin_time : 2019.03.28
          * end_time : 2019.03.31
          * noname : 0
          * allow_refund : 1
          * phase : 1
+         * comment : 啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+         * if_comment : true
          */
 
         private String title;
@@ -84,6 +86,8 @@ public class DetailsOrderModel {
         private String noname;
         private String allow_refund;
         private String phase;
+        private String comment;
+        private boolean if_comment;
 
         public String getTitle() {
             return title;
@@ -243,6 +247,22 @@ public class DetailsOrderModel {
 
         public void setPhase(String phase) {
             this.phase = phase;
+        }
+
+        public String getComment() {
+            return comment;
+        }
+
+        public void setComment(String comment) {
+            this.comment = comment;
+        }
+
+        public boolean isIf_comment() {
+            return if_comment;
+        }
+
+        public void setIf_comment(boolean if_comment) {
+            this.if_comment = if_comment;
         }
     }
 }

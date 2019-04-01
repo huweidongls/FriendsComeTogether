@@ -71,7 +71,7 @@ public class SwipeFIingViewAdapter extends BaseAdapter{
         holder.tvStartTime.setText("开始时间: "+data.get(position).getPfgotime());
         holder.tvRenjun.setText("人均消费: RMB"+data.get(position).getPfspend()+"/人");
         holder.tvBaoming.setText("活动地点: "+data.get(position).getPfaddress());
-        holder.tvShengyu.setText("剩余名额: "+data.get(position).getSurplus()+"人");
+        holder.tvShengyu.setText("报名人数: "+data.get(position).getAdd_user()+"/"+data.get(position).getSurplus()+"人");
         holder.tvAddress.setText(data.get(position).getPfaddress());
         holder.rl.setOnClickListener(new View.OnClickListener() {
             @Override

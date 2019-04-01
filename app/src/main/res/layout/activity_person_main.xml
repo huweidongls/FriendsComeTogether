@@ -109,16 +109,30 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="139px">
-                    <TextView
-                        android:id="@+id/tv_person_name"
-                        android:layout_marginLeft="32px"
-                        android:layout_marginTop="20px"
-                        android:textStyle="bold"
-                        android:text=""
-                        android:textColor="@color/black_333333"
-                        android:textSize="48px"
+                    <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:id="@+id/tv_person_name"
+                            android:layout_marginLeft="32px"
+                            android:layout_marginTop="20px"
+                            android:textStyle="bold"
+                            android:text=""
+                            android:textColor="@color/black_333333"
+                            android:textSize="48px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <ImageView
+                            android:layout_centerVertical="true"
+                            android:id="@+id/iv_kefu"
+                            android:src="@mipmap/kefu"
+                            android:layout_marginLeft="10px"
+                            android:layout_toRightOf="@+id/tv_person_name"
+                            android:layout_marginTop="20px"
+                            android:layout_width="40px"
+                            android:layout_height="40px" />
+                    </RelativeLayout>
                     <TextView
                         android:lines="1"
                         android:ellipsize="end"

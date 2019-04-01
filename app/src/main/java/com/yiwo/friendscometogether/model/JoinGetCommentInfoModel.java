@@ -9,7 +9,7 @@ public class JoinGetCommentInfoModel {
     /**
      * code : 200
      * message : 获取成功
-     * obj : {"noname":"0","pfID":"131","title":"少女时代演唱会","content":"","picture":"http://47.92.136.19/uploads/xingcheng/20190228/b5985305073fb0d42a32d2e02fbb289a.png","time":"1970.01.01-1970.01.01","begin_time":"1970.01.01","end_time":"1970.01.01","go_num":"1","price":"0.01","price_type":"自费"}
+     * obj : {"comment":"","noname":"0","pfID":"146","title":"有其他要求的活动","content":"","picture":"http://39.104.102.152/uploads/xingcheng/20190313/5546d4892ca39f381539b77fd4b6202f.jpg","time":"2019.04.01-2019.04.05","begin_time":"2019.04.01","end_time":"2019.04.05","go_num":"1","price":"0.01","price_type":"自费"}
      */
 
     private int code;
@@ -42,19 +42,21 @@ public class JoinGetCommentInfoModel {
 
     public static class ObjBean {
         /**
-         * noname : 0   0不是匿名 1是匿名
-         * pfID : 131
-         * title : 少女时代演唱会
+         * comment :
+         * noname : 0
+         * pfID : 146
+         * title : 有其他要求的活动
          * content :
-         * picture : http://47.92.136.19/uploads/xingcheng/20190228/b5985305073fb0d42a32d2e02fbb289a.png
-         * time : 1970.01.01-1970.01.01
-         * begin_time : 1970.01.01
-         * end_time : 1970.01.01
+         * picture : http://39.104.102.152/uploads/xingcheng/20190313/5546d4892ca39f381539b77fd4b6202f.jpg
+         * time : 2019.04.01-2019.04.05
+         * begin_time : 2019.04.01
+         * end_time : 2019.04.05
          * go_num : 1
          * price : 0.01
          * price_type : 自费
          */
 
+        private String comment;
         private String noname;
         private String pfID;
         private String title;
@@ -66,6 +68,14 @@ public class JoinGetCommentInfoModel {
         private String go_num;
         private String price;
         private String price_type;
+
+        public String getComment() {
+            return comment;
+        }
+
+        public void setComment(String comment) {
+            this.comment = comment;
+        }
 
         public String getNoname() {
             return noname;

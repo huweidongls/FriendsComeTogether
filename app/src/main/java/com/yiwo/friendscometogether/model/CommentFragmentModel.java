@@ -11,7 +11,7 @@ public class CommentFragmentModel {
     /**
      * code : 200
      * message : 获取成功
-     * obj : [{"opayuserid":"72","oID":"239","title":"带你游览东北雪乡","info":"没啥可说的，走就完了","join_num":"6","pf_pic":"http://47.92.136.19/uploads/xingcheng/20190227/ddec87da3e2a62b6dc2867bc15156b53.jpg","opaymoney":"768.00","opaytype":"1","opayout":"0","allow_refund":"0","noname":"0","price_type":"自费","time_info":"2019.04.01-2019.04.10","begin_time":"2019.04.01","end_time":"2019.04.10","status":"待支付","order_type":"1"},{"opayuserid":"72","oID":"238","title":"带你游览东北雪乡","info":"没啥可说的，走就完了","join_num":"6","pf_pic":"http://47.92.136.19/uploads/xingcheng/20190227/ddec87da3e2a62b6dc2867bc15156b53.jpg","opaymoney":"768.00","opaytype":"1","opayout":"0","allow_refund":"0","noname":"0","price_type":"自费","time_info":"2019.04.01-2019.04.10","begin_time":"2019.04.01","end_time":"2019.04.10","status":"待支付","order_type":"1"},{"opayuserid":"72","oID":"235","title":"带你游览东北雪乡","info":"没啥可说的，走就完了","join_num":"7","pf_pic":"http://47.92.136.19/uploads/xingcheng/20190227/ddec87da3e2a62b6dc2867bc15156b53.jpg","opaymoney":"896.00","opaytype":"1","opayout":"0","allow_refund":"0","noname":"0","price_type":"自费","time_info":"2019.03.12-2019.03.30","begin_time":"2019.03.12","end_time":"2019.03.30","status":"待支付","order_type":"1"},{"opayuserid":"72","oID":"234","title":"带你游览东北雪乡","info":"没啥可说的，走就完了","join_num":"15","pf_pic":"http://47.92.136.19/uploads/xingcheng/20190227/ddec87da3e2a62b6dc2867bc15156b53.jpg","opaymoney":"1920.00","opaytype":"1","opayout":"0","allow_refund":"0","noname":"0","price_type":"自费","time_info":"2019.03.12-2019.03.30","begin_time":"2019.03.12","end_time":"2019.03.30","status":"待支付","order_type":"1"},{"opayuserid":"72","oID":"229","title":"少女时代演唱会","info":"","join_num":"1","pf_pic":"http://47.92.136.19/uploads/xingcheng/20190228/b5985305073fb0d42a32d2e02fbb289a.png","opaymoney":"0.01","opaytype":"1","opayout":"0","allow_refund":"0","noname":"0","price_type":"自费","time_info":"2019.03.12-2019.03.31","begin_time":"2019.03.12","end_time":"2019.03.31","status":"待支付","order_type":"1"},{"opayuserid":"72","oID":"224","title":"王洋测试期数","info":"","join_num":"1","pf_pic":"http://47.92.136.19/uploads/xingcheng/20190301/8a62c7ff6b6fdc4c090a99620f079b3a.png","opaymoney":"0.01","opaytype":"1","opayout":"1","allow_refund":"0","noname":"0","price_type":"自费","time_info":"2019.03.01-2019.03.03","begin_time":"2019.03.01","end_time":"2019.03.03","status":"退款中","order_type":"4"}]
+     * obj : [{"userID":"72","pfid":"157","opayuserid":"72","oID":"352","title":"活动不可退款，只限男性 且单身","info":"","join_num":"1","pf_pic":"http://39.104.102.152/uploads/xingcheng/20190321/917bbe3500b9249b14184868591d6d92.jpg","opaymoney":"0.01","opaytype":"2","opayout":"0","allow_refund":"1","noname":"0","phase":"1","if_comment":true,"price_type":"自费","time_info":"2019.03.28-2019.03.31","begin_time":"2019.03.28","end_time":"2019.03.31","status":"已结束","order_type":"3"},{"userID":"72","pfid":"144","opayuserid":"72","oID":"271","title":"评价测试","info":"","join_num":"1","pf_pic":"http://39.104.102.152/uploads/xingcheng/20190307/3b492e6c9ad0cbca779731193d549cfb.png","opaymoney":"0.01","opaytype":"2","opayout":"0","allow_refund":"0","noname":"1","phase":"1","if_comment":false,"price_type":"自费","time_info":"2019.03.15-2019.03.30","begin_time":"2019.03.15","end_time":"2019.03.30","status":"已结束","order_type":"3"},{"userID":"72","pfid":"143","opayuserid":"72","oID":"266","title":"不可退款","info":"考拉","join_num":"1","pf_pic":"http://39.104.102.152/uploads/xingcheng/20190306/8b39edb13b417d6aeaab85484d77ff76.jpg","opaymoney":"0.01","opaytype":"2","opayout":"0","allow_refund":"1","noname":"0","phase":"1","if_comment":true,"price_type":"自费","time_info":"2019.03.08-2019.03.09","begin_time":"2019.03.08","end_time":"2019.03.09","status":"已结束","order_type":"3"},{"userID":"72","pfid":"144","opayuserid":"72","oID":"263","title":"评价测试","info":"","join_num":"1","pf_pic":"http://39.104.102.152/uploads/xingcheng/20190307/3b492e6c9ad0cbca779731193d549cfb.png","opaymoney":"0.01","opaytype":"2","opayout":"0","allow_refund":"0","noname":"0","phase":"2","if_comment":false,"price_type":"自费","time_info":"2019.03.07-2019.03.07","begin_time":"2019.03.07","end_time":"2019.03.07","status":"已结束","order_type":"3"},{"userID":"72","pfid":"133","opayuserid":"72","oID":"261","title":"王洋测试期数","info":"","join_num":"1","pf_pic":"http://39.104.102.152/uploads/xingcheng/20190301/8a62c7ff6b6fdc4c090a99620f079b3a.png","opaymoney":"0.01","opaytype":"2","opayout":"0","allow_refund":"0","noname":"0","phase":"3","if_comment":false,"price_type":"自费","time_info":"2019.03.09-2019.03.10","begin_time":"2019.03.09","end_time":"2019.03.10","status":"已结束","order_type":"3"},{"userID":"72","pfid":"129","opayuserid":"72","oID":"246","title":"带你游览东北雪乡","info":"没啥可说的，走就完了","join_num":"1","pf_pic":"http://39.104.102.152/uploads/xingcheng/20190227/ddec87da3e2a62b6dc2867bc15156b53.jpg","opaymoney":"128.00","opaytype":"2","opayout":"0","allow_refund":"0","noname":"0","phase":"1","if_comment":false,"price_type":"自费","time_info":"2019.03.12-2019.03.30","begin_time":"2019.03.12","end_time":"2019.03.30","status":"已结束","order_type":"3"},{"userID":"72","pfid":"129","opayuserid":"72","oID":"244","title":"带你游览东北雪乡","info":"没啥可说的，走就完了","join_num":"1","pf_pic":"http://39.104.102.152/uploads/xingcheng/20190227/ddec87da3e2a62b6dc2867bc15156b53.jpg","opaymoney":"128.00","opaytype":"2","opayout":"0","allow_refund":"0","noname":"0","phase":"1","if_comment":false,"price_type":"自费","time_info":"2019.03.12-2019.03.30","begin_time":"2019.03.12","end_time":"2019.03.30","status":"已结束","order_type":"3"},{"userID":"72","pfid":"129","opayuserid":"72","oID":"233","title":"带你游览东北雪乡","info":"没啥可说的，走就完了","join_num":"1","pf_pic":"http://39.104.102.152/uploads/xingcheng/20190227/ddec87da3e2a62b6dc2867bc15156b53.jpg","opaymoney":"128.00","opaytype":"2","opayout":"0","allow_refund":"0","noname":"0","phase":"1","if_comment":false,"price_type":"自费","time_info":"2019.03.12-2019.03.30","begin_time":"2019.03.12","end_time":"2019.03.30","status":"已结束","order_type":"3"},{"userID":"72","pfid":"129","opayuserid":"72","oID":"230","title":"带你游览东北雪乡","info":"没啥可说的，走就完了","join_num":"1","pf_pic":"http://39.104.102.152/uploads/xingcheng/20190227/ddec87da3e2a62b6dc2867bc15156b53.jpg","opaymoney":"128.00","opaytype":"2","opayout":"0","allow_refund":"0","noname":"0","phase":"1","if_comment":false,"price_type":"自费","time_info":"2019.03.12-2019.03.30","begin_time":"2019.03.12","end_time":"2019.03.30","status":"已结束","order_type":"3"},{"userID":"72","pfid":"133","opayuserid":"72","oID":"225","title":"王洋测试期数","info":"","join_num":"1","pf_pic":"http://39.104.102.152/uploads/xingcheng/20190301/8a62c7ff6b6fdc4c090a99620f079b3a.png","opaymoney":"0.01","opaytype":"2","opayout":"0","allow_refund":"0","noname":"0","phase":"1","if_comment":false,"price_type":"自费","time_info":"2019.03.01-2019.03.03","begin_time":"2019.03.01","end_time":"2019.03.03","status":"已结束","order_type":"3"}]
      */
 
     private int code;
@@ -44,25 +44,31 @@ public class CommentFragmentModel {
 
     public static class ObjBean {
         /**
+         * userID : 72
+         * pfid : 157
          * opayuserid : 72
-         * oID : 239
-         * title : 带你游览东北雪乡
-         * info : 没啥可说的，走就完了
-         * join_num : 6
-         * pf_pic : http://47.92.136.19/uploads/xingcheng/20190227/ddec87da3e2a62b6dc2867bc15156b53.jpg
-         * opaymoney : 768.00
-         * opaytype : 1
+         * oID : 352
+         * title : 活动不可退款，只限男性 且单身
+         * info :
+         * join_num : 1
+         * pf_pic : http://39.104.102.152/uploads/xingcheng/20190321/917bbe3500b9249b14184868591d6d92.jpg
+         * opaymoney : 0.01
+         * opaytype : 2
          * opayout : 0
-         * allow_refund : 0
+         * allow_refund : 1
          * noname : 0
+         * phase : 1
+         * if_comment : true
          * price_type : 自费
-         * time_info : 2019.04.01-2019.04.10
-         * begin_time : 2019.04.01
-         * end_time : 2019.04.10
-         * status : 待支付
-         * order_type : 1
+         * time_info : 2019.03.28-2019.03.31
+         * begin_time : 2019.03.28
+         * end_time : 2019.03.31
+         * status : 已结束
+         * order_type : 3
          */
 
+        private String userID;
+        private String pfid;
         private String opayuserid;
         private String oID;
         private String title;
@@ -74,12 +80,30 @@ public class CommentFragmentModel {
         private String opayout;
         private String allow_refund;
         private String noname;
+        private String phase;
+        private boolean if_comment;
         private String price_type;
         private String time_info;
         private String begin_time;
         private String end_time;
         private String status;
         private String order_type;
+
+        public String getUserID() {
+            return userID;
+        }
+
+        public void setUserID(String userID) {
+            this.userID = userID;
+        }
+
+        public String getPfid() {
+            return pfid;
+        }
+
+        public void setPfid(String pfid) {
+            this.pfid = pfid;
+        }
 
         public String getOpayuserid() {
             return opayuserid;
@@ -167,6 +191,22 @@ public class CommentFragmentModel {
 
         public void setNoname(String noname) {
             this.noname = noname;
+        }
+
+        public String getPhase() {
+            return phase;
+        }
+
+        public void setPhase(String phase) {
+            this.phase = phase;
+        }
+
+        public boolean isIf_comment() {
+            return if_comment;
+        }
+
+        public void setIf_comment(boolean if_comment) {
+            this.if_comment = if_comment;
         }
 
         public String getPrice_type() {

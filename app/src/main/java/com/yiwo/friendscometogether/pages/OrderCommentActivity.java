@@ -107,6 +107,7 @@ public class OrderCommentActivity extends BaseActivity {
                                     tvNoName.setText("是否匿名："+(model.getObj().getNoname().equals("0")? "否":"是"));
                                     tvPriceDetails.setText(model.getObj().getPrice_type());
                                     tvPrice.setText("合计费用: " + model.getObj().getPrice());
+                                    etContent.setText(model.getObj().getComment());
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -143,6 +144,7 @@ public class OrderCommentActivity extends BaseActivity {
                                     tvNoName.setText("是否匿名："+(model.getObj().getNoname().equals("0")? "否":"是"));
                                     tvPriceDetails.setText(model.getObj().getPrice_type());
                                     tvPrice.setText("合计费用: " + model.getObj().getPrice());
+                                    etContent.setText(model.getObj().getComment());
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

@@ -94,7 +94,11 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
         holder.tvEndTime.setText("结束时间: " + data.get(position).getEnd_time());
         holder.tvJoinNum.setText("参加人数："+ data.get(position).getJoin_num());
         holder.tvNoName.setText("是否匿名："+(data.get(position).getNoname().equals("0")? "否":"是"));
-
+        if (data.get(position).isIf_comment()){
+            holder.tvComment.setText("已评价");
+        }else {
+            holder.tvComment.setText("评价");
+        }
         String str_money = "合计："+data.get(position).getOpaymoney();
 //        String str_money = "合计："+"48.90";
         SpannableStringBuilder ssb_money = new SpannableStringBuilder(str_money);

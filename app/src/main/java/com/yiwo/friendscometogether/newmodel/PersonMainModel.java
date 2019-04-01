@@ -137,6 +137,7 @@ public class PersonMainModel {
             private String follow;
             private String fans;
             private String otherUserId;
+            private String if_kefu;
             public String getWy_accid() {
                 return wy_accid;
             }
@@ -239,6 +240,14 @@ public class PersonMainModel {
 
             public void setOtherUserId(String otherUserId) {
                 this.otherUserId = otherUserId;
+            }
+
+            public String getIf_kefu() {
+                return if_kefu;
+            }
+
+            public void setIf_kefu(String if_kefu) {
+                this.if_kefu = if_kefu;
             }
         }
 

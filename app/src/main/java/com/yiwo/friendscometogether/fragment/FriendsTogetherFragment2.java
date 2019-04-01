@@ -247,6 +247,9 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                 mList.addAll(model.getObj());
                                 tList.clear();
                                 tList.addAll(model.getObj());
+                                if (mList.size()<=2){
+                                    mList.addAll(tList);
+                                }
                                 if (mList.size() > 0) {
                                     bean = mList.get(0);
                                     if (bean.getFocusOn().equals("0")) {
@@ -482,6 +485,9 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                     mList.addAll(model.getObj());
                                     tList.clear();
                                     tList.addAll(model.getObj());
+                                    if (mList.size()<=2){
+                                        mList.addAll(tList);
+                                    }
                                     if (mList.size() > 0) {
                                         bean = mList.get(0);
                                         if (bean.getFocusOn().equals("0")) {

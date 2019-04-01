@@ -113,7 +113,8 @@ public class PersonMainActivity extends BaseActivity {
     ImageView iv_image_guanzhu;
     @BindView(R.id.iv_heart)
     ImageView iv_image_heart;
-
+    @BindView(R.id.iv_kefu)
+    ImageView iv_kefu;
     @BindView(R.id.rl_label_text)
     RelativeLayout rl_label_text;
     @BindView(R.id.rl_pics_text)
@@ -269,6 +270,11 @@ public class PersonMainActivity extends BaseActivity {
                                         } else if (model.getObj().getInfo().getFollow().equals("1")) {
                                             isFollow = 1 ;
                                             Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_heartwhite).into(iv_image_guanzhu);
+                                        }
+                                        if (model.getObj().getInfo().getIf_kefu().equals("0")){
+                                            iv_kefu.setVisibility(View.GONE);
+                                        }else if(model.getObj().getInfo().getIf_kefu().equals("1")){
+                                            iv_kefu.setVisibility(View.VISIBLE);
                                         }
                                         //--------共同标签----------------------
                                         PersonMainModel.ObjBean.UsertagBean.SameBean sameBean = model.getObj().getUsertag().getSame();
