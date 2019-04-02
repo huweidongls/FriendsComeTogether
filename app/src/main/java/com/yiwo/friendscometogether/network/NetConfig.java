@@ -300,4 +300,6 @@ public class NetConfig {
     public static String noInGroup = "action/ac_public/noInGroup";
     //同意进群
     public static String agreeIngroup = "action/ac_public/agreeInGroup";
+    //删除活动评价
+    public static String delComments = "action/ac_public/delComments";
 }

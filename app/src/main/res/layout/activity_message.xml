@@ -104,7 +104,7 @@
                     android:layout_marginTop="25px"
                     android:textSize="28px"
                     android:textColor="@color/black_333333"
-                    android:text="收到邀请"
+                    android:text="邀请消息"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

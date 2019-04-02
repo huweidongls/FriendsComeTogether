@@ -159,5 +159,21 @@
         android:background="@null"
         android:layout_width="match_parent"
         android:layout_height="300px" />
-
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_btn_delete"
+        android:layout_marginTop="10px"
+        android:paddingLeft="10px"
+        android:paddingRight="10px"
+        android:paddingTop="3px"
+        android:paddingBottom="3px"
+        android:textColor="@color/white_ffffff"
+        android:text="删除"
+        android:background="@drawable/bg_red_10px"
+        android:textSize="28px"
+        android:layout_gravity="right"
+        android:layout_marginRight="80px"
+        android:layout_width="100px"
+        android:gravity="center"
+        android:layout_height="50px" />
 </LinearLayout>

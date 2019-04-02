@@ -72,7 +72,17 @@ public class SwipeFIingViewAdapter extends BaseAdapter{
         holder.tvRenjun.setText("人均消费: RMB"+data.get(position).getPfspend()+"/人");
         holder.tvBaoming.setText("活动地点: "+data.get(position).getPfaddress());
         holder.tvShengyu.setText("报名人数: "+data.get(position).getAdd_user()+"/"+data.get(position).getSurplus()+"人");
-        holder.tvAddress.setText(data.get(position).getPfaddress());
+        if (!TextUtils.isEmpty(data.get(position).getGo_address())){
+            holder.ll_go_address.setVisibility(View.VISIBLE);
+        }else {
+            holder.ll_go_address.setVisibility(View.GONE);
+        }
+        if (data.get(position).getShop_recommend().equals("0")){
+            holder.iv_tuijian.setVisibility(View.GONE);
+        }else if (data.get(position).getShop_recommend().equals("1")){
+            holder.iv_tuijian.setVisibility(View.VISIBLE);
+        }
+        holder.tvAddress.setText(data.get(position).getGo_address());
         holder.rl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +126,8 @@ public class SwipeFIingViewAdapter extends BaseAdapter{
         private TextView tvAddress;
         private LinearLayout ll;
         private RelativeLayout rl;
+        private LinearLayout ll_go_address;
+        private ImageView iv_tuijian;
         public ViewHolder(View itemView) {
             ivAvatar = itemView.findViewById(R.id.iv_avatar);
             tvNickname = itemView.findViewById(R.id.tv_nickname);
@@ -129,6 +141,8 @@ public class SwipeFIingViewAdapter extends BaseAdapter{
             tvAddress = itemView.findViewById(R.id.tv_address);
             ll = itemView.findViewById(R.id.ll);
             rl = itemView.findViewById(R.id.click_layout);
+            ll_go_address = itemView.findViewById(R.id.ll_go_address);
+            iv_tuijian = itemView.findViewById(R.id.iv_tuijian);
         }
     }
 }

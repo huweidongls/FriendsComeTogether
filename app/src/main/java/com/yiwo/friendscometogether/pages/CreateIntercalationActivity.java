@@ -328,6 +328,7 @@ public class CreateIntercalationActivity extends BaseActivity {
                             @Override
                             public void onError(Throwable e) {
                                 // TODO 当压缩过程出现问题时调用
+                                WeiboDialogUtils.closeDialog(dialog);
                             }
                         }).launch();
             }
@@ -370,24 +371,25 @@ public class CreateIntercalationActivity extends BaseActivity {
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
+                                    WeiboDialogUtils.closeDialog(dialog);
                                 }
                             }
 
                             @Override
                             public void onFail(int errCode, String errMsg) {
-
+                                WeiboDialogUtils.closeDialog(dialog);
                             }
                         });
             }
 
             @Override
             public void onError(Throwable e) {
-
+                WeiboDialogUtils.closeDialog(dialog);
             }
 
             @Override
             public void onComplete() {
-
+                WeiboDialogUtils.closeDialog(dialog);
             }
         };
         observable.subscribeOn(Schedulers.newThread())

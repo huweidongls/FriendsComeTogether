@@ -12,11 +12,11 @@
         android:id="@+id/action_bar_right_clickable_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/nim_message_button_bottom_send_selector"
+        android:background="@drawable/nim_message_button_bottom_send_selector_white"
         android:gravity="center"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
-        android:textColor="@color/color_green_text_view_selector"
+        android:textColor="@color/color_red_d84c37"
         android:textSize="14sp" />
 
 </LinearLayout>

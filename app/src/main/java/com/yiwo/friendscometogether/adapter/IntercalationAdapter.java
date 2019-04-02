@@ -119,6 +119,19 @@ public class IntercalationAdapter extends RecyclerView.Adapter<IntercalationAdap
                 });
             }
         });
+        holder.rlImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PicDescribeDialog dialog = new PicDescribeDialog(context);
+                dialog.show();
+                dialog.setOnReturnListener(new PicDescribeDialog.OnReturnListener() {
+                    @Override
+                    public void onReturn(String title) {
+                        describeListener.onAddDescribe(position, title);
+                    }
+                });
+            }
+        });
     }
 
     @Override

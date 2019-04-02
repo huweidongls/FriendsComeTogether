@@ -87,6 +87,7 @@ public class DetailsOrderModel {
         private String allow_refund;
         private String phase;
         private String comment;
+        private String comment_ID;
         private boolean if_comment;
 
         public String getTitle() {
@@ -263,6 +264,14 @@ public class DetailsOrderModel {
 
         public void setIf_comment(boolean if_comment) {
             this.if_comment = if_comment;
+        }
+
+        public String getComment_ID() {
+            return comment_ID;
+        }
+
+        public void setComment_ID(String comment_ID) {
+            this.comment_ID = comment_ID;
         }
     }
 }

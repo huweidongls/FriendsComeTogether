@@ -56,12 +56,15 @@ public class OrderCommentActivity extends BaseActivity {
     @BindView(R.id.tv_noname)
     TextView tvNoName;
 
+    @BindView(R.id.tv_btn_delete)
+    TextView btnDelete;
+
 
     private SpImp spImp;
     private String uid = "";
     private String orderId = "";
     private String type = "";
-
+    private String comment_ID = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +111,12 @@ public class OrderCommentActivity extends BaseActivity {
                                     tvPriceDetails.setText(model.getObj().getPrice_type());
                                     tvPrice.setText("合计费用: " + model.getObj().getPrice());
                                     etContent.setText(model.getObj().getComment());
+                                    comment_ID = model.getObj().getComment_ID();
+                                    if (TextUtils.isEmpty(comment_ID)){
+                                        btnDelete.setVisibility(View.GONE);
+                                    }else {
+                                        btnDelete.setVisibility(View.VISIBLE);
+                                    }
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -145,6 +154,12 @@ public class OrderCommentActivity extends BaseActivity {
                                     tvPriceDetails.setText(model.getObj().getPrice_type());
                                     tvPrice.setText("合计费用: " + model.getObj().getPrice());
                                     etContent.setText(model.getObj().getComment());
+                                    comment_ID = model.getObj().getComment_ID();
+                                    if (TextUtils.isEmpty(comment_ID)){
+                                        btnDelete.setVisibility(View.GONE);
+                                    }else {
+                                        btnDelete.setVisibility(View.VISIBLE);
+                                    }
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -160,7 +175,7 @@ public class OrderCommentActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.activity_order_comment_rl_back, R.id.activity_order_comment_rl_complete})
+    @OnClick({R.id.activity_order_comment_rl_back, R.id.activity_order_comment_rl_complete,R.id.tv_btn_delete})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.activity_order_comment_rl_back:
@@ -169,7 +184,42 @@ public class OrderCommentActivity extends BaseActivity {
             case R.id.activity_order_comment_rl_complete:
                 onComplete(type);
                 break;
+            case R.id.tv_btn_delete:
+                deleteComment(comment_ID);
+                break;
         }
+    }
+
+    private void deleteComment(String comment_ID) {
+        if (TextUtils.isEmpty(comment_ID)){
+            return;
+        }
+        ViseHttp.POST(NetConfig.delComments)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.delComments))
+                .addParam("comment_ID",comment_ID)
+                .request(new ACallback<String>() {
+
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                toToast(OrderCommentActivity.this,"删除成功！");
+                                setResult(1);
+                                finish();
+                            }else {
+                                toToast(OrderCommentActivity.this,"删除失败！");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+                        toToast(OrderCommentActivity.this,"删除失败！");
+                    }
+                });
     }
 
     /**
@@ -195,6 +245,7 @@ public class OrderCommentActivity extends BaseActivity {
                                     JSONObject jsonObject = new JSONObject(data);
                                     if(jsonObject.getInt("code") == 200){
                                         toToast(OrderCommentActivity.this, "评价成功");
+                                        setResult(0);//评价成功
                                         finish();
                                     }
                                 } catch (JSONException e) {
@@ -222,6 +273,7 @@ public class OrderCommentActivity extends BaseActivity {
                                     JSONObject jsonObject = new JSONObject(data);
                                     if(jsonObject.getInt("code") == 200){
                                         toToast(OrderCommentActivity.this, "评价成功");
+                                        setResult(0);//评价成功
                                         finish();
                                     }
                                 } catch (JSONException e) {

@@ -68,6 +68,8 @@ public class FriendsTogethermodel {
          * captain_focusOn : 1
          * Surplus : 30
          * focusOn : 0
+         * "go_address": "",
+         * 是否是商家推荐  0否 1是
          */
 
         private String pftime;
@@ -96,6 +98,8 @@ public class FriendsTogethermodel {
 
         private String pfendtime;
 
+        private String go_address;
+        private String shop_recommend;
         public String getPftime() {
             return pftime;
         }
@@ -286,6 +290,22 @@ public class FriendsTogethermodel {
 
         public void setPfendtime(String pfendtime) {
             this.pfendtime = pfendtime;
+        }
+
+        public String getGo_address() {
+            return go_address;
+        }
+
+        public void setGo_address(String go_address) {
+            this.go_address = go_address;
+        }
+
+        public String getShop_recommend() {
+            return shop_recommend;
+        }
+
+        public void setShop_recommend(String shop_recommend) {
+            this.shop_recommend = shop_recommend;
         }
     }
 }

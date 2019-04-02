@@ -33,7 +33,7 @@
     <color name="contact_search_hit">#02d3a9</color>
     <color name="color_black_333333_90_transparent">#e5333333</color>
     <color name="color_black_000000_88_transparent">#e0000000</color>
-
+    <color name="color_red_d84c37">#d84c37</color>
     <!-- main bg color -->
     <color name="main_bg_color">#FFFFFF</color>
 

@@ -34,7 +34,11 @@ public class FragmentToCommentAdapter extends RecyclerView.Adapter<FragmentToCom
     private List<CommentFragmentModel.ObjBean> data;
     private Activity activity;
     private OnDeleteListener listener;
+    private OnPingjiaListener listenerPingJia;
 
+    public void setOnPingJIaListener(OnPingjiaListener listenerPingJia){
+        this.listenerPingJia = listenerPingJia;
+    }
     public void setOnDeleteListener(OnDeleteListener listener){
         this.listener = listener;
     }
@@ -111,11 +115,7 @@ public class FragmentToCommentAdapter extends RecyclerView.Adapter<FragmentToCom
         holder.tvComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(context, OrderCommentActivity.class);
-                intent.putExtra("type", "0");
-                intent.putExtra("orderid", data.get(position).getOID());
-                context.startActivity(intent);
+                listenerPingJia.onPingJia(position);
             }
         });
     }
@@ -165,6 +165,9 @@ public class FragmentToCommentAdapter extends RecyclerView.Adapter<FragmentToCom
 
     public interface OnDeleteListener{
         void onDelete(int position);
+    }
+    public interface OnPingjiaListener{
+        void onPingJia(int position);
     }
 
 }

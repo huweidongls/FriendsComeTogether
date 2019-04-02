@@ -2,6 +2,7 @@ package com.yiwo.friendscometogether.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import com.yiwo.friendscometogether.base.OrderBaseFragment;
 import com.yiwo.friendscometogether.model.CommentFragmentModel;
 import com.yiwo.friendscometogether.model.PayFragmentModel;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.pages.OrderCommentActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
 
@@ -165,6 +167,16 @@ public class ToCommentFragment extends OrderBaseFragment {
                                 adapter = new FragmentToCommentAdapter(mList, getActivity());
                                 recyclerView.setAdapter(adapter);
                                 page = 2;
+                                adapter.setOnPingJIaListener(new FragmentToCommentAdapter.OnPingjiaListener() {
+                                    @Override
+                                    public void onPingJia(int position) {
+                                        Intent intent = new Intent();
+                                        intent.setClass(getContext(), OrderCommentActivity.class);
+                                        intent.putExtra("type", "0");
+                                        intent.putExtra("orderid", mList.get(position).getOID());
+                                        startActivityForResult(intent,0);
+                                    }
+                                });
                                 adapter.setOnDeleteListener(new FragmentToCommentAdapter.OnDeleteListener() {
                                     @Override
                                     public void onDelete(final int position) {
@@ -222,5 +234,47 @@ public class ToCommentFragment extends OrderBaseFragment {
                     }
                 });
 
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 0://评价界面
+                ViseHttp.POST(NetConfig.myOrderListUrl)
+                        .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.myOrderListUrl))
+                        .addParam("page", "1")
+                        .addParam("userID", uid)
+                        .addParam("type", "3")
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(data);
+                                    if (jsonObject.getInt("code") == 200) {
+                                        Gson gson = new Gson();
+                                        CommentFragmentModel model = gson.fromJson(data, CommentFragmentModel.class);
+                                        mList.clear();
+                                        mList.addAll(model.getObj());
+                                        adapter.notifyDataSetChanged();
+                                        page = 2;
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+
+                            }
+                        });
+                switch (resultCode){
+                    case 0://评价返回
+                        break;
+                    case 1://删除返回
+                        break;
+                }
+                break;
+        }
     }
 }

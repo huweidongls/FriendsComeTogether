@@ -68,7 +68,7 @@ public class JoinGetCommentInfoModel {
         private String go_num;
         private String price;
         private String price_type;
-
+        private String comment_ID;
         public String getComment() {
             return comment;
         }
@@ -163,6 +163,14 @@ public class JoinGetCommentInfoModel {
 
         public void setPrice_type(String price_type) {
             this.price_type = price_type;
+        }
+
+        public String getComment_ID() {
+            return comment_ID;
+        }
+
+        public void setComment_ID(String comment_ID) {
+            this.comment_ID = comment_ID;
         }
     }
 }

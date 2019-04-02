@@ -75,7 +75,7 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
             public void onClick(View v) {
                 EditContentDialog dialog = new EditContentDialog(context, new EditContentDialog.OnReturnListener() {
                     @Override
-                    public void onReturn(String content) {
+                    public void onReturn(final String content) {
                         if (StringUtils.isEmpty(content)) {
                             Toast.makeText(context, "取消原因不能为空", Toast.LENGTH_SHORT).show();
                         } else {
@@ -97,6 +97,8 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
                                                     notifyItemRemoved(position);
                                                     notifyDataSetChanged();
                                                     Toast.makeText(context, "活动取消成功", Toast.LENGTH_SHORT).show();
+                                                }else {
+                                                    Toast.makeText(context, jsonObject.getString("messages"), Toast.LENGTH_SHORT).show();
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();

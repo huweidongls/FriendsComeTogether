@@ -149,16 +149,26 @@ public class MessageFragment extends TFragment implements ModuleProxy {
 
         customization = (SessionCustomization) getArguments().getSerializable(Extras.EXTRA_CUSTOMIZATION);
         Container container = new Container(getActivity(), sessionId, sessionType, this);
-
-        if ((sessionType==SessionTypeEnum.P2P)&&!(NIMClient.getService(FriendService.class).isMyFriend(sessionId))){
-            Log.d("nothaoyou","不是好友呀");
-            ll_bottom.setVisibility(View.GONE);
-            rl_bottom_notfriend.setVisibility(View.VISIBLE);
+        Log.d("kefuzhunaghao",sessionId+"//zijizhanghao:"+NimUIKit.getAccount());
+        if ((sessionType==SessionTypeEnum.P2P)){
+            if (oneIsKeFu(sessionId,NimUIKit.getAccount())){
+                ll_bottom.setVisibility(View.VISIBLE);
+                rl_bottom_notfriend.setVisibility(View.GONE);
+            }else {
+                if (!(NIMClient.getService(FriendService.class).isMyFriend(sessionId))){
+                    ll_bottom.setVisibility(View.GONE);
+                    rl_bottom_notfriend.setVisibility(View.VISIBLE);
+                }else {
+                    ll_bottom.setVisibility(View.VISIBLE);
+                    rl_bottom_notfriend.setVisibility(View.GONE);
+                }
+            }
         }else {
-            Log.d("nothaoyou","是好友呀");
             ll_bottom.setVisibility(View.VISIBLE);
             rl_bottom_notfriend.setVisibility(View.GONE);
         }
+
+
 
         if (messageListPanel == null) {
             messageListPanel = new MessageListPanelEx(container, rootView, anchor, false, false);
@@ -423,5 +433,13 @@ public class MessageFragment extends TFragment implements ModuleProxy {
      */
     public void receiveReceipt() {
         messageListPanel.receiveReceipt();
+    }
+
+    private boolean oneIsKeFu(String accID0,String accID1){
+        if (accID0.indexOf("kf")!= -1||accID1.indexOf("kf")!= -1){
+            return true;
+        }else {
+            return false;
+        }
     }
 }

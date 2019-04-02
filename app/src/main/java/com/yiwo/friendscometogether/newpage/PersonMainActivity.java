@@ -406,6 +406,11 @@ public class PersonMainActivity extends BaseActivity {
                                     isFollow = 1 ;
                                     Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_heartwhite).into(iv_image_guanzhu);
                                 }
+                                if (model.getObj().getInfo().getIf_kefu().equals("0")){
+                                    iv_kefu.setVisibility(View.GONE);
+                                }else if(model.getObj().getInfo().getIf_kefu().equals("1")){
+                                    iv_kefu.setVisibility(View.VISIBLE);
+                                }
                                 //---------共同标签-----------------------------
                                 PersonMainModel.ObjBean.UsertagBean.SameBean sameBean = model.getObj().getUsertag().getSame();
 

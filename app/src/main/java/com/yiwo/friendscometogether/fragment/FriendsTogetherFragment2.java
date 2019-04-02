@@ -247,7 +247,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                 mList.addAll(model.getObj());
                                 tList.clear();
                                 tList.addAll(model.getObj());
-                                if (mList.size()<=2){
+                                while (mList.size()<=4){
                                     mList.addAll(tList);
                                 }
                                 if (mList.size() > 0) {
@@ -485,7 +485,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                     mList.addAll(model.getObj());
                                     tList.clear();
                                     tList.addAll(model.getObj());
-                                    if (mList.size()<=2){
+                                    while (mList.size()<=4){
                                         mList.addAll(tList);
                                     }
                                     if (mList.size() > 0) {
@@ -651,6 +651,6 @@ public class FriendsTogetherFragment2 extends BaseFragment {
 //        adapter.data = mList;
         sfv.refresh_view();//必须使用此方法  更新view
         adapter.notifyDataSetChanged();
-//        initSwipe();
+        initSwipe();
     }
 }

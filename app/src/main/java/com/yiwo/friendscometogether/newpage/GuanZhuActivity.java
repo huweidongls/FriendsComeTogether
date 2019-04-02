@@ -101,7 +101,7 @@ public class GuanZhuActivity extends BaseActivity {
     private String yourChoiceActiveName = "";
     private List<UserActiveListModel.ObjBean> activeList;
     private int type = 3; //0 我付费，1 我不付费，3 免费
-    private int typeNoName = 0;
+    private int typeNoName = 1; // 0不是匿名要请  1匿名要请
     private int type_showLayout = 0;//0为我关注的，1为关注我的，2 为关注活动
     private List<UserFocusModel.ObjBean> mWoGuanZhuDeList ;
     private WoGuanZhuDeAdapter woGuanZhuDeAdapter;
@@ -596,9 +596,9 @@ public class GuanZhuActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    typeNoName = 0;
-                }else {
                     typeNoName = 1;
+                }else {
+                    typeNoName = 0;
                 }
             }
         });
@@ -622,6 +622,13 @@ public class GuanZhuActivity extends BaseActivity {
                                     activeId[i] = model.getObj().get(i).getPfID();
                                     activeName[i] = model.getObj().get(i).getPftitle();
                                     block[i] = model.getObj().get(i).getBlock();
+                                }
+                                if(block[0].equals("0")){
+                                    checkBox.setVisibility(View.GONE);
+                                    type = 3;
+                                }else {
+                                    checkBox.setVisibility(View.VISIBLE);
+                                    type = 1;
                                 }
                             }
                         } catch (JSONException e) {
@@ -736,6 +743,7 @@ public class GuanZhuActivity extends BaseActivity {
                         .addParam("tid", yourChoiceActiveId)
                         .addParam("type", type + "")
                         .addParam("text", et.getText().toString())
+                        .addParam("no_name",typeNoName+"")
                         .request(new ACallback<String>() {
                             @Override
                             public void onSuccess(String data) {
