@@ -282,15 +282,19 @@ public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
             int position = Integer.parseInt(index);
             Log.d("交互解码了","json::"+strJson+"////\r\nindex::"+index);
             List<String> listPics = new ArrayList<>();
+            List<String> listContent = new ArrayList<>();
             try {
                 JSONArray jsonArray = new JSONArray(strJson);
                 for (int i = 0;i<jsonArray.length();i++){
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     listPics.add(jsonObject.getString("imgurl"));
+                    listContent.add(jsonObject.getString("desc"));
                 }
                 Intent intent1 = new Intent();
                 intent1.setClass(DetailsOfFriendTogetherWebActivity.this, ImagePreviewActivity.class);
                 intent1.putStringArrayListExtra("imageList", (ArrayList<String>) listPics);
+                intent1.putExtra("hasImageContent",true);
+                intent1.putStringArrayListExtra("imageContenList", (ArrayList<String>) listContent);
                 intent1.putExtra(Consts.START_ITEM_POSITION, position);
                 intent1.putExtra(Consts.START_IAMGE_POSITION, position);
                 startActivity(intent1);

@@ -9,6 +9,9 @@ public class NetConfig {
     public static String BaseUrl = "http://39.104.102.152/index.php/";
 //    public static String BaseUrl = "http://www.youlaiyouyue.com/";
 //    public static String BaseUrl = "http://47.92.136.19/index.php/";
+
+    //检测版本号 返回 an_version 安卓版本号  an_download下载地址
+    public static String checkVersion = "action/ac_public/check_version";
     //登录
     public static String loginUrl = "action/ac_login/login";
     //获取验证码

@@ -27,8 +27,11 @@ public class ImagePreviewActivity extends AppCompatActivity {
 
     private int itemPosition;
     private List<String> imageList;
+    private List<String> contentList;
     private CustomViewPager viewPager;
     private LinearLayout main_linear;
+    private RelativeLayout rlContent;
+    private TextView tvContent;
     private boolean mIsReturning;
     private int mStartPosition;
     private int mCurrentPosition;
@@ -38,6 +41,8 @@ public class ImagePreviewActivity extends AppCompatActivity {
 
     private Boolean isFromMyPics;
     private List<String> listPicId;
+
+    private Boolean isHasImageContent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +73,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
                 hideAllIndicator(position);
                 main_linear.getChildAt(position).setEnabled(true);
                 mCurrentPosition = position;
+                setContent();
             }
 
             @Override
@@ -124,11 +130,25 @@ public class ImagePreviewActivity extends AppCompatActivity {
             }
         }
     }
-
+    private void setContent(){
+        if (isHasImageContent){
+            rlContent.setVisibility(View.VISIBLE);
+            if (contentList.get(mCurrentPosition).equals("")){
+                rlContent.setVisibility(View.GONE);
+            }else {
+                tvContent.setText(contentList.get(mCurrentPosition));
+                rlContent.setVisibility(View.VISIBLE);
+            }
+        }else {
+            rlContent.setVisibility(View.GONE);
+        }
+    }
     private void initView() {
         viewPager = (CustomViewPager) findViewById(R.id.imageBrowseViewPager);
         main_linear = (LinearLayout) findViewById(R.id.main_linear);
         rlSetHeadIcon = findViewById(R.id.rl_set_head_icon);
+        rlContent = findViewById(R.id.rl_content);
+        tvContent = findViewById(R.id.tv_content);
     }
 
     private void renderView() {
@@ -146,6 +166,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
         }else {
             rlSetHeadIcon.setVisibility(View.GONE);
         }
+        setContent();
     }
 
     private void getIntentData() {
@@ -157,6 +178,10 @@ public class ImagePreviewActivity extends AppCompatActivity {
             isFromMyPics = getIntent().getBooleanExtra("fromMyPics",false);
             if (isFromMyPics){
                 listPicId = getIntent().getStringArrayListExtra("picListIDList");
+            }
+            isHasImageContent = getIntent().getBooleanExtra("hasImageContent",false);
+            if (isHasImageContent){
+                contentList = getIntent().getStringArrayListExtra("imageContenList");
             }
         }
     }

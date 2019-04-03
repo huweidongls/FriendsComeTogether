@@ -8,6 +8,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
+import com.yiwo.friendscometogether.model.VersonModel;
+import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.services.UpdateService;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import static com.yiwo.friendscometogether.utils.TokenUtils.getToken;
 
 /**
  * Created by Administrator on 2018/1/11.
@@ -17,67 +30,75 @@ public class AppUpdateUtil {
     static ProgressDialog mProDialog = null;
     public static void checkUpdate(final Context context, final boolean auto) {
 
-//        AppAction.getInstance().postUpdateApp(context, new HttpResponseHandler() {
-//
-//            @Override
-//            public void onResponeseStart() {
-//                super.onResponeseStart();
-//                if(!auto) {
-//                    mProDialog = ProgressDialog.show(context, null,"正在检查版本，请稍后...", false, true);
-//                }
-//            }
-//
-//            @Override
-//            public void onResponeseSucess(int code, BaseJsonEntity baseJson) {
-//
-//                final AppVersionEntity versionEntity = FastJsonUtils.parseObject(baseJson.getObj(), AppVersionEntity.class);
-//                if(parseCode(versionEntity.getAndroid_version(), String.valueOf(getVersionCode(context)))) {
-//                    Dialog alertDialog = new AlertDialog.Builder(context).
-//                            setTitle("提示").setMessage("检测到有新版本")
-//                            .setPositiveButton("下载", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    String app_name = "yiwo-person";
-//                                    Intent down = new Intent(context, UpdateService.class);
-//                                    down.putExtra("down_url", versionEntity.getAndroid_download());
-//                                    down.putExtra("app_name", app_name);
-//                                    context.startService(down);
-//                                }
-//                            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    dialog.dismiss();
-//                                }
-//                            }).create();
-//                    alertDialog.show();
-//                } else {
-//                    if(!auto) {
-//                        new AlertDialog.Builder(context).
-//                                setTitle("提示").setMessage("当前已经是最新版本")
-//                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        dialog.dismiss();
-//                                    }
-//                                }).show();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onResponesefinish() {
-//                super.onResponesefinish();
-//                if(!auto) {
-//                    mProDialog.dismiss();
-//                }
-//            }
-//
-//            @Override
-//            public void onResponeseFail(BaseJsonEntity baseJson) {
-//                super.onResponeseFail(baseJson);
-//            }
-//        });
+        if(!auto) {
+            mProDialog = ProgressDialog.show(context, null,"正在检查版本，请稍后...", false, true);
+        }
+        ViseHttp.POST(NetConfig.checkVersion)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.checkVersion))
+                .request(new ACallback<String>() {
+
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                Gson gson = new Gson();
+                                final VersonModel versonModel = gson.fromJson(data,VersonModel.class);
+                                if(parseCode(versonModel.getObj().getAn_version(), String.valueOf(getVersionCode(context)))) {
+                                    Dialog alertDialog = new AlertDialog.Builder(context).
+                                            setTitle("提示").setMessage("检测到有新版本")
+                                            .setPositiveButton("下载", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+//                                                    //下载路径，如果路径无效了，可换成你的下载路径
+//                                                    String url = versonModel.getObj().getAn_download();
+//                                                    //创建下载任务,downloadUrl就是下载链接
+//                                                    DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+//                                                    //指定下载路径和下载文件名
+//                                                    request.setDestinationInExternalPublicDir("", url.substring(url.lastIndexOf("/") + 1));
+//                                                    //获取下载管理器
+//                                                    DownloadManager downloadManager= (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+//                                                    //将下载任务加入下载队列，否则不会进行下载
+//                                                    downloadManager.enqueue(request);
+                                                    String app_name = "tongban2.0";
+                                                    Intent down = new Intent(context, UpdateService.class);
+                                                    down.putExtra("down_url", versonModel.getObj().getAn_download());
+                                                    down.putExtra("app_name", app_name);
+                                                    context.startService(down);
+                                                }
+                                            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+                                                }
+                                            }).create();
+                                    alertDialog.show();
+                                } else {
+                                    if(!auto) {
+                                        new AlertDialog.Builder(context).
+                                                setTitle("提示").setMessage("当前已经是最新版本")
+                                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        dialog.dismiss();
+                                                    }
+                                                }).show();
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        mProDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+                        mProDialog.dismiss();
+                        Toast.makeText(context,errMsg,Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     //服务端版本号和本地版本号做比较

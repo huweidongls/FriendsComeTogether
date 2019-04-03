@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -62,8 +64,6 @@ public class ImagePreviewAdapter extends PagerAdapter {
         image.setMinimumScale(0.8F);
 
         Glide.with(context).load(imageList.get(position)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian)).into(image);
-
-
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

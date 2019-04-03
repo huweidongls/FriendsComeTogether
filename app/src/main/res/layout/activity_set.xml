@@ -166,7 +166,33 @@
                 android:layout_marginRight="30px"
                 android:src="@mipmap/right" />
         </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px" />
 
+        <RelativeLayout
+            android:background="@color/white_ffffff"
+            android:id="@+id/activity_set_rl_check_verson"
+            android:layout_width="match_parent"
+            android:layout_height="94px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30px"
+                android:text="检查版本"
+                android:textColor="#5A5A5A"
+                android:textSize="30px" />
+
+            <ImageView
+                android:layout_width="12px"
+                android:layout_height="24px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30px"
+                android:src="@mipmap/right" />
+        </RelativeLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="30px"

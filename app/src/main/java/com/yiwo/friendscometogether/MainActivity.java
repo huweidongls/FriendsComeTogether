@@ -154,7 +154,6 @@ public class MainActivity extends FragmentActivity {
         init();
         initSessionListener();
         registReceiver();
-
     }
 
     private void registReceiver() {

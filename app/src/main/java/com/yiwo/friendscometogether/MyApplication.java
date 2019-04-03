@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Environment;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
@@ -68,6 +69,7 @@ public class MyApplication extends Application {
     private SpCache spCache;
     private SpImp spImp;
 
+    public static String genPath;
 //    //数据库
     private DaoMaster.DevOpenHelper mHelper;
     private SQLiteDatabase db;
@@ -83,6 +85,12 @@ public class MyApplication extends Application {
         spCache = new SpCache(this);
         spImp = new SpImp(this);
         ScreenAdapterTools.init(this);
+
+        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {//SD卡已挂载
+            genPath = getExternalCacheDir().getAbsolutePath().toString() + "/";
+        } else {
+            genPath = getCacheDir().getAbsolutePath() + "/";
+        }
 //        // 此处 certificate 请传入为开发者配置好的小米证书名称
         MixPushConfig xm_config = new MixPushConfig();
         xm_config.xmAppId = "2882303761517874789";

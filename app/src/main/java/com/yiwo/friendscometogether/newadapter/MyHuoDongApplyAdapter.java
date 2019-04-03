@@ -98,7 +98,8 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
                                                     notifyDataSetChanged();
                                                     Toast.makeText(context, "活动取消成功", Toast.LENGTH_SHORT).show();
                                                 }else {
-                                                    Toast.makeText(context, jsonObject.getString("messages"), Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(context, "取消失败", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(context, jsonObject.get("messages")+"", Toast.LENGTH_SHORT).show();
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();

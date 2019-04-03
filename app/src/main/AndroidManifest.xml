@@ -19,7 +19,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
+    <!--自动安装权限！！-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
     <!-- SDK 权限申明, 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
     <!-- 和下面的 uses-permission 一起加入到你的 AndroidManifest 文件中。 -->
     <permission
@@ -64,6 +65,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 更新服务 -->
+        <service android:name=".services.UpdateService" />
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.yiwo.friendscometogether.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
         <activity
             android:name=".pages.LoginActivity"
             android:screenOrientation="portrait" />
@@ -102,7 +114,6 @@
         <meta-data
             android:name="unit"
             android:value="px" />
-
         <activity
             android:name=".pages.MyOrderActivity"
             android:screenOrientation="portrait" />

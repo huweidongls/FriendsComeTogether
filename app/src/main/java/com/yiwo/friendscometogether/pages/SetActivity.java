@@ -14,6 +14,7 @@ import com.yiwo.friendscometogether.custom.PopDialog;
 import com.yiwo.friendscometogether.custom.PopDialog1;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.utils.AppUpdateUtil;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -36,7 +37,7 @@ public class SetActivity extends BaseActivity {
     }
 
     @OnClick({R.id.activity_set_rl_back, R.id.activity_set_rl_upload, R.id.activity_set_rl_feedback,
-            R.id.activity_set_rl_clear_cache, R.id.activity_set_rl_user_agreement, R.id.activity_set_exit_login_bt})
+            R.id.activity_set_rl_clear_cache, R.id.activity_set_rl_user_agreement, R.id.activity_set_exit_login_bt,R.id.activity_set_rl_check_verson})
     public void OnClick(View v) {
         switch (v.getId()) {
             case R.id.activity_set_rl_back:
@@ -124,6 +125,9 @@ public class SetActivity extends BaseActivity {
 //                            }
 //                        }).create().show();
 
+                break;
+                case R.id.activity_set_rl_check_verson:
+                    AppUpdateUtil.checkUpdate(SetActivity.this,false);
                 break;
         }
     }
