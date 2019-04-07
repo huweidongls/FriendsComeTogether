@@ -38,6 +38,7 @@ import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.MuLuItemYouJiAdapter;
 import com.yiwo.friendscometogether.newadapter.MuLuItemYouJuAdapter;
 import com.yiwo.friendscometogether.newmodel.YouJuWebModel;
+import com.yiwo.friendscometogether.newpage.MoreCommentHuodongActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.pages.ApplyActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
@@ -312,6 +313,22 @@ public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
         @JavascriptInterface
         public void clickphase(String index){
             chooseDateIndex = Integer.parseInt(index);
+        }
+        @JavascriptInterface
+        public void moreinfo(String pfID){//web点击更多评论
+            Log.d("sadas",pfID);
+            Intent intent = new Intent();
+            intent.setClass(DetailsOfFriendTogetherWebActivity.this, MoreCommentHuodongActivity.class);
+            intent.putExtra("pfID",pfID);
+            startActivity(intent);
+        }
+        @JavascriptInterface
+        public void inshop(String url){//商家详情
+            Log.d("asdasd",url);
+            Intent intent = new Intent();
+            intent.setClass(DetailsOfFriendTogetherWebActivity.this,ShopInfoWebActivity.class);
+            intent.putExtra("url",url);
+            startActivity(intent);
         }
     }
     private void showMuLuPopupwindow(View p_view) {

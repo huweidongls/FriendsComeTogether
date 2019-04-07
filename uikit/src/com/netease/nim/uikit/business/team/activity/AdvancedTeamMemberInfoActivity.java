@@ -139,6 +139,7 @@ public class AdvancedTeamMemberInfoActivity extends UI implements View.OnClickLi
         nickContainer.setOnClickListener(this);
         identityContainer.setOnClickListener(this);
         removeBtn.setOnClickListener(this);
+        headImageView.setOnClickListener(this);
     }
 
     private void updateToggleView() {
@@ -388,6 +389,13 @@ public class AdvancedTeamMemberInfoActivity extends UI implements View.OnClickLi
         } else if (i == R.id.team_remove_member) {
             showConfirmButton();
 
+        }else if(i == R.id.team_member_head_view){
+            //发送打开个人主页的广播
+            Intent intent = new Intent();
+            intent.putExtra("person_id",account);
+            intent.putExtra("status","1");
+            intent.setAction("com.yiwo.friendscometogether.broadcastreceiver.MyGoPersonMainBroadcastReceiver");
+            sendBroadcast(intent);
         } else {
         }
     }

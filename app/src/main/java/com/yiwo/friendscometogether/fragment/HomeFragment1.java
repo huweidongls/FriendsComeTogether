@@ -221,15 +221,15 @@ public class HomeFragment1 extends BaseFragment {
                                 banner.setOnBannerListener(new OnBannerListener() {
                                     @Override
                                     public void OnBannerClick(int position) {
-                                        if (bannerModel.getObj().get(position).getFirst_type().equals("0")) {
-                                            Intent intent = new Intent(getContext(), DetailsOfFriendTogetherWebActivity.class);
-                                            intent.putExtra("pfID", bannerModel.getObj().get(position).getLeftid());
-                                            startActivity(intent);
-                                        } else if (bannerModel.getObj().get(position).getFirst_type().equals("1")) {
-                                            Intent intent = new Intent(getContext(), DetailsOfFriendsWebActivity.class);
-                                            intent.putExtra("fmid", bannerModel.getObj().get(position).getLeftid());
-                                            startActivity(intent);
-                                        }
+//                                        if (bannerModel.getObj().get(position).getFirst_type().equals("0")) {
+//                                            Intent intent = new Intent(getContext(), DetailsOfFriendTogetherWebActivity.class);
+//                                            intent.putExtra("pfID", bannerModel.getObj().get(position).getLeftid());
+//                                            startActivity(intent);
+//                                        } else if (bannerModel.getObj().get(position).getFirst_type().equals("1")) {
+//                                            Intent intent = new Intent(getContext(), DetailsOfFriendsWebActivity.class);
+//                                            intent.putExtra("fmid", bannerModel.getObj().get(position).getLeftid());
+//                                            startActivity(intent);
+//                                        }
                                     }
                                 });
                             }

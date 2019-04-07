@@ -297,7 +297,7 @@ public class AdvancedTeamMemberActivity extends UI implements TAdapterDelegate,
             AdvancedTeamMemberInfoActivity.startActivityForResult(AdvancedTeamMemberActivity.this, account, teamId);
         }else {
             for (String memberAccount:managerList){
-                if (memberAccount.equals(account)){//是管理员
+                if (memberAccount.equals(NimUIKit.getAccount())){//是管理员
                     AdvancedTeamMemberInfoActivity.startActivityForResult(AdvancedTeamMemberActivity.this, account, teamId);
                     return;
                 }

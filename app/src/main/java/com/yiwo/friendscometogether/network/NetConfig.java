@@ -305,4 +305,7 @@ public class NetConfig {
     public static String agreeIngroup = "action/ac_public/agreeInGroup";
     //删除活动评价
     public static String delComments = "action/ac_public/delComments";
+    //更多活动评价接口
+    public static String  commentListAll = "action/ac_activity/commentListAll";//action/ac_activity/commentListAll  传 pfID  活动的ID    全部评论接口   返回 fctime时间  userpic用户头像   username用户名  userID用户ID   pctitle评论内容
+
 }

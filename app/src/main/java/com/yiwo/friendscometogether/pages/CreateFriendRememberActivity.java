@@ -776,8 +776,37 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        CreateFriendRememberActivity.this.finish();
+//        super.onBackPressed();
+        AlertDialog.Builder builder = new AlertDialog.Builder(CreateFriendRememberActivity.this);
+        builder.setMessage("是否保存至草稿")
+                .setNegativeButton("保存", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //判断如果填写开始时间和结束时间   结束时间必须大于开始时间
+                        if (!tvTimeStart.getText().toString().equals("")&&!tvTimeEnd.getText().toString().equals("")){
+                            if (StringUtils.getTimeCompareSize(tvTimeStart.getText().toString(),tvTimeEnd.getText().toString())!=3){
+                                Toast.makeText(CreateFriendRememberActivity.this, "活动开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
+                        next_tocaogao();
+                    }
+                }).setPositiveButton("放弃", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                CreateFriendRememberActivity.this.finish();
+            }
+        });
+        if(TextUtils.isEmpty(etTitle.getText().toString())){
+            CreateFriendRememberActivity.this.finish();
+        }
+        //20190225 限制友记上传图片数量 1
+        else if(mList.size()<1){
+            CreateFriendRememberActivity.this.finish();
+        }else {
+            builder.show();
+        }
+
     }
 
     private void initJsonData() {//解析数据
@@ -1132,10 +1161,16 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
         tvNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog = WeiboDialogUtils.createLoadingDialog(CreateFriendRememberActivity.this, "请等待...");
-                Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
-                    @Override
-                    public void subscribe(final ObservableEmitter<Map<String, File>> e) throws Exception {
+                next();
+            }
+        });
+
+    }
+    private void next(){//保存草稿并跳转续写
+        dialog = WeiboDialogUtils.createLoadingDialog(CreateFriendRememberActivity.this, "请等待...");
+        Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
+            @Override
+            public void subscribe(final ObservableEmitter<Map<String, File>> e) throws Exception {
 //                        File file = new File(images);
 //                        Luban.with(CreateFriendRememberActivity.this)
 //                                .load(images)
@@ -1164,123 +1199,259 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
 //                                    }
 //                                }).launch();
 
-                        final Map<String, File> map = new LinkedHashMap<>();
-                        final List<String> list = new ArrayList<>();
-                        for (int i = 0; i < mList.size(); i++) {
-                            list.add(mList.get(i).getPic());
-                        }
-                        Luban.with(CreateFriendRememberActivity.this)
-                                .load(list)
-                                .ignoreBy(100)
-                                .filter(new CompressionPredicate() {
-                                    @Override
-                                    public boolean apply(String path) {
-                                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                final Map<String, File> map = new LinkedHashMap<>();
+                final List<String> list = new ArrayList<>();
+                for (int i = 0; i < mList.size(); i++) {
+                    list.add(mList.get(i).getPic());
+                }
+                Luban.with(CreateFriendRememberActivity.this)
+                        .load(list)
+                        .ignoreBy(100)
+                        .filter(new CompressionPredicate() {
+                            @Override
+                            public boolean apply(String path) {
+                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                            }
+                        })
+                        .setCompressListener(new OnCompressListener() {
+                            @Override
+                            public void onStart() {
+                                // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                            }
+
+                            @Override
+                            public void onSuccess(File file) {
+                                // TODO 压缩成功后调用，返回压缩后的图片文件
+                                files.add(file);
+                                Log.e("222", list.size() + "..." + files.size());
+                                if (files.size() == list.size()) {
+                                    for (int i = 0; i < files.size(); i++) {
+                                        map.put("fmpic[" + i + "]", files.get(i));
                                     }
-                                })
-                                .setCompressListener(new OnCompressListener() {
-                                    @Override
-                                    public void onStart() {
-                                        // TODO 压缩开始前调用，可以在方法内启动 loading UI
-                                    }
+                                    Log.e("222", map.size() + "");
+                                    e.onNext(map);
+                                }
+                            }
 
-                                    @Override
-                                    public void onSuccess(File file) {
-                                        // TODO 压缩成功后调用，返回压缩后的图片文件
-                                        files.add(file);
-                                        Log.e("222", list.size() + "..." + files.size());
-                                        if (files.size() == list.size()) {
-                                            for (int i = 0; i < files.size(); i++) {
-                                                map.put("fmpic[" + i + "]", files.get(i));
-                                            }
-                                            Log.e("222", map.size() + "");
-                                            e.onNext(map);
-                                        }
-                                    }
+                            @Override
+                            public void onError(Throwable e) {
+                                // TODO 当压缩过程出现问题时调用
+                                WeiboDialogUtils.closeDialog(dialog);
+                            }
+                        }).launch();
 
-                                    @Override
-                                    public void onError(Throwable e) {
-                                        // TODO 当压缩过程出现问题时调用
-                                        WeiboDialogUtils.closeDialog(dialog);
-                                    }
-                                }).launch();
-
-                    }
-                });
-                Observer<Map<String, File>> observer = new Observer<Map<String, File>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(Map<String, File> value) {
-                        ViseHttp.UPLOAD(NetConfig.userRelease)
-                                .addHeader("Content-Type","multipart/form-data")
-                                .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userRelease))
-                                .addParam("fmtitle", etTitle.getText().toString())
-                                .addParam("fmcontent", etContent.getText().toString())
-                                .addParam("fmaddress", tvCity.getText().toString())
-                                .addParam("uid", uid)
-                                .addParam("fmlable", yourChoiceId)
-                                .addParam("fmgotime", tvTimeStart.getText().toString())
-                                .addParam("fmendtime", tvTimeEnd.getText().toString())
-                                .addParam("percapitacost", etPrice.getText().toString())
-                                .addParam("activity_id", TextUtils.isEmpty(tvActiveTitle.getText().toString())?"0":yourChoiceActiveId)
-                                .addParam("insertatext", tvIsIntercalation.getText().toString().equals("是")?"0":"1")
-                                .addParam("accesspassword", password)
-                                .addParam("type", "1")
-                                .addFiles(value)
-                                .request(new ACallback<String>() {
-                                    @Override
-                                    public void onSuccess(String data) {
-                                        try {
-                                            Log.e("222", data);
-                                            JSONObject jsonObject = new JSONObject(data);
-                                            if (jsonObject.getInt("code") == 200) {
-                                                Gson gson = new Gson();
-                                                UserReleaseModel userReleaseModel = gson.fromJson(data, UserReleaseModel.class);
-                                                Intent intent = new Intent();
-                                                intent.putExtra("id", userReleaseModel.getObj().getId()+"");
-                                                intent.putExtra("type", "0");
-                                                intent.setClass(CreateFriendRememberActivity.this, CreateIntercalationActivity.class);
-                                                WeiboDialogUtils.closeDialog(dialog);
-                                                startActivity(intent);
-                                                CreateFriendRememberActivity.this.finish();
-                                            }else {
-                                                WeiboDialogUtils.closeDialog(dialog);
-                                                Toast.makeText(CreateFriendRememberActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-                                            }
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFail(int errCode, String errMsg) {
-                                        WeiboDialogUtils.closeDialog(dialog);
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        WeiboDialogUtils.closeDialog(dialog);
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        WeiboDialogUtils.closeDialog(dialog);
-                    }
-                };
-                observable.subscribeOn(Schedulers.newThread())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(observer);
             }
         });
+        Observer<Map<String, File>> observer = new Observer<Map<String, File>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
+            }
+
+            @Override
+            public void onNext(Map<String, File> value) {
+                ViseHttp.UPLOAD(NetConfig.userRelease)
+                        .addHeader("Content-Type","multipart/form-data")
+                        .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userRelease))
+                        .addParam("fmtitle", etTitle.getText().toString())
+                        .addParam("fmcontent", etContent.getText().toString())
+                        .addParam("fmaddress", tvCity.getText().toString())
+                        .addParam("uid", uid)
+                        .addParam("fmlable", yourChoiceId)
+                        .addParam("fmgotime", tvTimeStart.getText().toString())
+                        .addParam("fmendtime", tvTimeEnd.getText().toString())
+                        .addParam("percapitacost", etPrice.getText().toString())
+                        .addParam("activity_id", TextUtils.isEmpty(tvActiveTitle.getText().toString())?"0":yourChoiceActiveId)
+                        .addParam("insertatext", tvIsIntercalation.getText().toString().equals("是")?"0":"1")
+                        .addParam("accesspassword", password)
+                        .addParam("type", "1")
+                        .addFiles(value)
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                try {
+                                    Log.e("222", data);
+                                    JSONObject jsonObject = new JSONObject(data);
+                                    if (jsonObject.getInt("code") == 200) {
+                                        Gson gson = new Gson();
+                                        UserReleaseModel userReleaseModel = gson.fromJson(data, UserReleaseModel.class);
+                                        Intent intent = new Intent();
+                                        intent.putExtra("id", userReleaseModel.getObj().getId()+"");
+                                        intent.putExtra("type", "0");
+                                        intent.setClass(CreateFriendRememberActivity.this, CreateIntercalationActivity.class);
+                                        WeiboDialogUtils.closeDialog(dialog);
+                                        startActivity(intent);
+                                        CreateFriendRememberActivity.this.finish();
+                                    }else {
+                                        WeiboDialogUtils.closeDialog(dialog);
+                                        Toast.makeText(CreateFriendRememberActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+                                WeiboDialogUtils.closeDialog(dialog);
+                            }
+                        });
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                WeiboDialogUtils.closeDialog(dialog);
+            }
+
+            @Override
+            public void onComplete() {
+                WeiboDialogUtils.closeDialog(dialog);
+            }
+        };
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
     }
+    private void next_tocaogao(){//仅保存至草稿
+        dialog = WeiboDialogUtils.createLoadingDialog(CreateFriendRememberActivity.this, "请等待...");
+        Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
+            @Override
+            public void subscribe(final ObservableEmitter<Map<String, File>> e) throws Exception {
+//                        File file = new File(images);
+//                        Luban.with(CreateFriendRememberActivity.this)
+//                                .load(images)
+//                                .ignoreBy(100)
+//                                .filter(new CompressionPredicate() {
+//                                    @Override
+//                                    public boolean apply(String path) {
+//                                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+//                                    }
+//                                })
+//                                .setCompressListener(new OnCompressListener() {
+//                                    @Override
+//                                    public void onStart() {
+//                                        // TODO 压缩开始前调用，可以在方法内启动 loading UI
+//                                    }
+//
+//                                    @Override
+//                                    public void onSuccess(File file) {
+//                                        // TODO 压缩成功后调用，返回压缩后的图片文件
+//                                        e.onNext(file);
+//                                    }
+//
+//                                    @Override
+//                                    public void onError(Throwable e) {
+//                                        // TODO 当压缩过程出现问题时调用
+//                                    }
+//                                }).launch();
 
+                final Map<String, File> map = new LinkedHashMap<>();
+                final List<String> list = new ArrayList<>();
+                for (int i = 0; i < mList.size(); i++) {
+                    list.add(mList.get(i).getPic());
+                }
+                Luban.with(CreateFriendRememberActivity.this)
+                        .load(list)
+                        .ignoreBy(100)
+                        .filter(new CompressionPredicate() {
+                            @Override
+                            public boolean apply(String path) {
+                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                            }
+                        })
+                        .setCompressListener(new OnCompressListener() {
+                            @Override
+                            public void onStart() {
+                                // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                            }
+
+                            @Override
+                            public void onSuccess(File file) {
+                                // TODO 压缩成功后调用，返回压缩后的图片文件
+                                files.add(file);
+                                Log.e("222", list.size() + "..." + files.size());
+                                if (files.size() == list.size()) {
+                                    for (int i = 0; i < files.size(); i++) {
+                                        map.put("fmpic[" + i + "]", files.get(i));
+                                    }
+                                    Log.e("222", map.size() + "");
+                                    e.onNext(map);
+                                }
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                // TODO 当压缩过程出现问题时调用
+                                WeiboDialogUtils.closeDialog(dialog);
+                            }
+                        }).launch();
+
+            }
+        });
+        Observer<Map<String, File>> observer = new Observer<Map<String, File>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Map<String, File> value) {
+                ViseHttp.UPLOAD(NetConfig.userRelease)
+                        .addHeader("Content-Type","multipart/form-data")
+                        .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userRelease))
+                        .addParam("fmtitle", etTitle.getText().toString())
+                        .addParam("fmcontent", etContent.getText().toString())
+                        .addParam("fmaddress", tvCity.getText().toString())
+                        .addParam("uid", uid)
+                        .addParam("fmlable", yourChoiceId)
+                        .addParam("fmgotime", tvTimeStart.getText().toString())
+                        .addParam("fmendtime", tvTimeEnd.getText().toString())
+                        .addParam("percapitacost", etPrice.getText().toString())
+                        .addParam("activity_id", TextUtils.isEmpty(tvActiveTitle.getText().toString())?"0":yourChoiceActiveId)
+                        .addParam("insertatext", tvIsIntercalation.getText().toString().equals("是")?"0":"1")
+                        .addParam("accesspassword", password)
+                        .addParam("type", "1")
+                        .addFiles(value)
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                try {
+                                    Log.e("222", data);
+                                    JSONObject jsonObject = new JSONObject(data);
+                                    if (jsonObject.getInt("code") == 200) {
+                                        WeiboDialogUtils.closeDialog(dialog);
+                                        CreateFriendRememberActivity.this.finish();
+                                        Toast.makeText(CreateFriendRememberActivity.this,"已保存至草稿箱",Toast.LENGTH_SHORT).show();
+                                    }else {
+                                        WeiboDialogUtils.closeDialog(dialog);
+                                        Toast.makeText(CreateFriendRememberActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+                                WeiboDialogUtils.closeDialog(dialog);
+                            }
+                        });
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                WeiboDialogUtils.closeDialog(dialog);
+            }
+
+            @Override
+            public void onComplete() {
+                WeiboDialogUtils.closeDialog(dialog);
+            }
+        };
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
     @Override
     protected void onPause() {
         // TODO Auto-generated method stub

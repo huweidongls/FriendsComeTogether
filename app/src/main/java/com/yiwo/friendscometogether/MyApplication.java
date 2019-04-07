@@ -85,7 +85,6 @@ public class MyApplication extends Application {
         spCache = new SpCache(this);
         spImp = new SpImp(this);
         ScreenAdapterTools.init(this);
-
         if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {//SD卡已挂载
             genPath = getExternalCacheDir().getAbsolutePath().toString() + "/";
         } else {
@@ -96,7 +95,8 @@ public class MyApplication extends Application {
         xm_config.xmAppId = "2882303761517874789";
         xm_config.xmAppKey = "5911787488789";
         xm_config.xmCertificateName = "tongbanxiaomizhengshu";
-//        xm_config.hwCertificateName = "tongbanhuaweizhengshu";
+
+        xm_config.hwCertificateName = "tongbanhuaweizhengshu";
         // 4.6.0 开始，第三方推送配置入口改为 SDKOption#mixPushConfig，旧版配置方式依旧支持
         NIMClient.init(this, loginInfo(), options(xm_config));
         JPushInterface.setDebugMode(true);

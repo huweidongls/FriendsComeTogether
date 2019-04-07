@@ -47,7 +47,7 @@
         android:id="@+id/rl_content"
         android:background="@drawable/bg_black_18px_transparent"
         android:layout_width="match_parent"
-        android:layout_height="220dp">
+        android:layout_height="180dp">
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -55,9 +55,7 @@
                 android:id="@+id/tv_content"
                 android:textColor="@color/white_ffffff"
                 android:textSize="15sp"
-                android:text="上面通过下载啰嗦了一堆。此时我们要想一个问题：当我们下载完成后，并没有安装。当用户再次进入App时该如何操作？
-有朋友会说，那就再去下载一次，然后继续执行更新安装呀！哈哈，这种方式是没有错误的，但是如果用户恶意行为，每次下载完成都不安装，那我们岂不是每次都要去下载100次，1000次。。（然后手机boom!!!）这种方式肯定是不能采用的。那么我们该如何解决呢？
-很简单，当我们在下载之前，先去指定的文件夹下查看有木有已经下载好的Apk，并且该Apk的版本是高于本App的版本，此时我们就去执行安装操作。如果上面条件不成立，此时再去执行下载操作。"
+                android:text="上且该Apk的版本是高于本App的版本，此时我们就去执行安装操作。如果上面条件不成立，此时再去执行下载操作。"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </ScrollView>

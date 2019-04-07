@@ -1,5 +1,6 @@
 package com.yiwo.friendscometogether.webpages;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -21,6 +22,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.umeng.socialize.ShareAction;
@@ -32,6 +34,7 @@ import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseWebActivity;
+import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.dbmodel.UserGiveModel;
 import com.yiwo.friendscometogether.greendao.gen.DaoMaster;
 import com.yiwo.friendscometogether.greendao.gen.DaoSession;
@@ -92,13 +95,14 @@ public class DetailsOfFriendsWebActivity extends BaseWebActivity {
     private DaoSession mDaoSession;
 
     UserGiveModelDao userGiveModelDao;
-
     private YouJiWebModel model;
     private YouJiWebModel.ObjBean.TitleBean[] arrMulu;
     private List<YouJiWebModel.ObjBean.TitleBean> listMuLu = new ArrayList<>();
     private String[] arrMuLuTitle;
     private PopupWindow popupWindow;
     private MuLuItemYouJiAdapter muLuItemAdapter;
+
+    private Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,21 +158,21 @@ public class DetailsOfFriendsWebActivity extends BaseWebActivity {
                                 //点赞
                                 if (userGiveModelDao.queryBuilder().where(UserGiveModelDao.Properties.UserId.eq(uid),UserGiveModelDao.Properties.ArticleId.eq(fmID)).build().list().size()<=0) {
                                     isPraise = false;
-                                    Picasso.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.details_praise_b).into(ivPraise);
+                                    Glide.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.details_praise_b).into(ivPraise);
                                     tvPraise.setTextColor(Color.parseColor("#333333"));
                                 } else {
                                     isPraise = true;
-                                    Picasso.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.praise_red).into(ivPraise);
+                                    Glide.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.praise_red).into(ivPraise);
                                     tvPraise.setTextColor(Color.parseColor("#d84c37"));
                                 }
                                 //收藏
                                 if (model.getObj().getCollect().equals("0")) {
                                     isStar = false;
-                                    Picasso.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.details_star_b).into(ivStar);
+                                    Glide.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.details_star_b).into(ivStar);
                                     tvStar.setTextColor(Color.parseColor("#333333"));
                                 } else {
                                     isStar = true;
-                                    Picasso.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.star_d84c37).into(ivStar);
+                                    Glide.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.star_d84c37).into(ivStar);
                                     tvStar.setTextColor(Color.parseColor("#d84c37"));
                                 }
                                 //插文
@@ -276,8 +280,7 @@ public class DetailsOfFriendsWebActivity extends BaseWebActivity {
                     finish();
                 } else {
                     if (!isPraise) {
-                        Picasso.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.praise_red).into(ivPraise);
-                        tvPraise.setTextColor(Color.parseColor("#d84c37"));
+                        dialog = WeiboDialogUtils.createLoadingDialog(DetailsOfFriendsWebActivity.this,"");
                         ViseHttp.POST(NetConfig.articlePraiseUrl)
                                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.articlePraiseUrl))
                                 .addParam("id", fmID)
@@ -288,22 +291,62 @@ public class DetailsOfFriendsWebActivity extends BaseWebActivity {
                                         try {
                                             JSONObject jsonObject = new JSONObject(data);
                                             if (jsonObject.getInt("code") == 200) {
-                                                toToast(DetailsOfFriendsWebActivity.this, "点赞成功");
+                                                Glide.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.praise_red).into(ivPraise);
+                                                tvPraise.setTextColor(Color.parseColor("#d84c37"));
                                                 UserGiveModel model = new UserGiveModel();
                                                 model.setUserId(uid);
                                                 model.setArticleId(fmID);
                                                 model.setRemarkState("1");
                                                 userGiveModelDao.insert(model);
                                                 isPraise = true;
+                                                toToast(DetailsOfFriendsWebActivity.this, "点赞成功");
+                                                WeiboDialogUtils.closeDialog(dialog);
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
+                                            toToast(DetailsOfFriendsWebActivity.this, "点赞失败");
+                                            WeiboDialogUtils.closeDialog(dialog);
                                         }
                                     }
 
                                     @Override
                                     public void onFail(int errCode, String errMsg) {
+                                        toToast(DetailsOfFriendsWebActivity.this, "点赞失败");
+                                        WeiboDialogUtils.closeDialog(dialog);
+                                    }
+                                });
+                    }else {
+                        dialog = WeiboDialogUtils.createLoadingDialog(DetailsOfFriendsWebActivity.this,"");
+                        ViseHttp.POST(NetConfig.articlePraiseUrl)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.articlePraiseUrl))
+                                .addParam("id", fmID)
+                                .addParam("uid", uid)
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if (jsonObject.getInt("code") == 200) {
+                                                Glide.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.details_praise_b).into(ivPraise);
+                                                tvPraise.setTextColor(Color.parseColor("#333333"));
+                                                if (userGiveModelDao.queryBuilder().where(UserGiveModelDao.Properties.UserId.eq(uid),UserGiveModelDao.Properties.ArticleId.eq(fmID)).build().list().size()>0){
+                                                    UserGiveModel model = userGiveModelDao.queryBuilder().where(UserGiveModelDao.Properties.UserId.eq(uid),UserGiveModelDao.Properties.ArticleId.eq(fmID)).build().list().get(0);
+                                                    userGiveModelDao.deleteByKey(model.getId());
+                                                    Log.d("asdsadas","进来了");
+                                                }
+                                                isPraise = false;
+                                                toToast(DetailsOfFriendsWebActivity.this, "已取消");
+                                                WeiboDialogUtils.closeDialog(dialog);
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                            WeiboDialogUtils.closeDialog(dialog);
+                                        }
+                                    }
 
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+                                        WeiboDialogUtils.closeDialog(dialog);
                                     }
                                 });
                     }
@@ -316,7 +359,7 @@ public class DetailsOfFriendsWebActivity extends BaseWebActivity {
                     finish();
                 } else {
                     if (!isStar) {
-                        Picasso.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.star_d84c37).into(ivStar);
+                        Glide.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.star_d84c37).into(ivStar);
                         tvStar.setTextColor(Color.parseColor("#d84c37"));
                         isStar = !isStar;
                         ViseHttp.POST(NetConfig.articleCollectionUrl)
@@ -343,7 +386,7 @@ public class DetailsOfFriendsWebActivity extends BaseWebActivity {
                                     }
                                 });
                     } else {
-                        Picasso.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.details_star_b).into(ivStar);
+                        Glide.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.details_star_b).into(ivStar);
                         tvStar.setTextColor(Color.parseColor("#333333"));
                         isStar = !isStar;
                         ViseHttp.POST(NetConfig.articleCollectionUrl)

@@ -19,8 +19,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!--自动安装权限！！-->
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <!-- 自动安装权限！！ -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <!-- SDK 权限申明, 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
     <!-- 和下面的 uses-permission 一起加入到你的 AndroidManifest 文件中。 -->
     <permission
@@ -37,6 +37,32 @@
     <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
     <uses-permission android:name="android.permission.GET_TASKS" />
     <!-- <uses-permission android:name="android.permission.VIBRATE"/> -->
+    <!-- 华为推送权限 -->
+
+
+    <!-- HMS-SDK引导升级HMS功能，访问OTA服务器需要网络权限 -->
+    <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
+    <!-- HMS-SDK引导升级HMS功能，保存下载的升级包需要SD卡写权限 -->
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+    <!-- 检测网络状态 -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/> -->
+    <!-- 检测wifi状态 -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/> -->
+    <!-- 为了获取用户手机的IMEI，用来唯一的标识用户。 -->
+    <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE"/> -->
+
+
+    <!-- 如果是安卓8.0，应用编译配置的targetSdkVersion>=26，请务必添加以下权限 -->
+    <!-- <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> -->
+
+
+    <!-- 接收PUSH TOKEN的广播以及PUSH消息需要定义该权限 ${PACKAGE_NAME} 要替换上您应用的包名 -->
+    <permission
+        android:name="com.yiwo.friendscometogether.permission.PROCESS_PUSH_MSG"
+        android:protectionLevel="signatureOrSystem" />
+
+    <!-- 接收PUSH TOKEN的广播以及PUSH消息需要定义该权限 ${PACKAGE_NAME} 要替换上您应用的包名 -->
+    <uses-permission android:name="com.yiwo.friendscometogether.permission.PROCESS_PUSH_MSG" />
     <!-- 以下两处 {你的包名} 改开发者App的包名 -->
     <permission
         android:name="com.yiwo.friendscometogether.permission.MIPUSH_RECEIVE"
@@ -67,6 +93,7 @@
         </activity>
         <!-- 更新服务 -->
         <service android:name=".services.UpdateService" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.yiwo.friendscometogether.fileprovider"
@@ -76,6 +103,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
         <activity
             android:name=".pages.LoginActivity"
             android:screenOrientation="portrait" />
@@ -114,6 +142,7 @@
         <meta-data
             android:name="unit"
             android:value="px" />
+
         <activity
             android:name=".pages.MyOrderActivity"
             android:screenOrientation="portrait" />
@@ -253,6 +282,15 @@
             android:exported="false"
             android:process=":core" />
 
+        <receiver android:name=".broadcastreceiver.HWPushMessageReceiver">
+            <intent-filter>
+                <action android:name="com.huawei.android.push.intent.REGISTRATION" />
+                <action android:name="com.huawei.android.push.intent.RECEIVE" />
+                <action android:name="com.huawei.android.push.intent.CLICK" />
+                <action android:name="com.huawei.intent.action.PUSH_STATE" />
+            </intent-filter>
+        </receiver>
+
         <activity android:name=".pages.MyFriendActivity" />
         <activity android:name=".pages.EditorMainFriendTogetherActivity" />
         <activity android:name=".pages.SearchListActivity" />
@@ -358,17 +396,54 @@
             </intent-filter>
         </receiver>
         <!-- 小米推送集成end -->
-        <!-- 华为推送集成 -->
+        <!-- ****************** 华为推送集成 ********************************************************************************************** -->
         <!-- 填入华为推送平台配置的应用appid -->
         <meta-data
             android:name="com.huawei.hms.client.appid"
             android:value="100438717" />
-        <!-- 替换为自己的包名 -->
+        <!-- BridgeActivity定义了HMS SDK中一些跳转所需要的透明页面 -->
+        <activity
+            android:name="com.huawei.hms.activity.BridgeActivity"
+            android:configChanges="orientation|locale|screenSize|layoutDirection|fontScale"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent">
+            <meta-data
+                android:name="hwc-theme"
+                android:value="androidhwext:style/Theme.Emui.Translucent" />
+        </activity>
+        <!-- AppUpdateActivity和PackageInstallActivity是应用自升级接口所需要使用的页面 -->
+        <activity
+            android:name="com.huawei.updatesdk.service.otaupdate.AppUpdateActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:theme="@style/upsdkDlDialog">
+            <meta-data
+                android:name="hwc-theme"
+                android:value="androidhwext:style/Theme.Emui.Translucent.NoTitleBar" />
+        </activity>
+        <activity
+            android:name="com.huawei.updatesdk.support.pm.PackageInstallerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:theme="@style/upsdkDlDialog">
+            <meta-data
+                android:name="hwc-theme"
+                android:value="androidhwext:style/Theme.Emui.Translucent" />
+        </activity>
+        <!-- 用于HMS SDK引导升级HMS APK，提供给系统安装器读取升级文件 -->
+        <!-- “xxx.xxx.xxx”用实际的应用包名替换 -->
         <provider
             android:name="com.huawei.hms.update.provider.UpdateProvider"
             android:authorities="com.yiwo.friendscometogether.hms.update.provider"
             android:exported="false"
             android:grantUriPermissions="true" />
+
+        <service
+            android:name="com.huawei.updatesdk.service.deamon.download.DownloadService"
+            android:exported="false" />
+        <!-- ****************************************华为推送配置结束************************************************************** -->
         <!-- 云信华为推送消息广播 -->
         <receiver android:name="com.netease.nimlib.mixpush.hw.HWPushReceiver">
             <intent-filter android:priority="0x7fffffff">
@@ -397,7 +472,9 @@
         <activity android:name=".newpage.PersonLabelActivity" />
         <activity android:name=".base.BaseWebActivity" />
         <activity android:name=".webpages.DetailsOfFriendsWebActivity" />
-        <activity android:name=".webpages.DetailsOfFriendTogetherWebActivity"></activity>
+        <activity android:name=".webpages.DetailsOfFriendTogetherWebActivity" />
+        <activity android:name=".newpage.MoreCommentHuodongActivity" />
+        <activity android:name=".webpages.ShopInfoWebActivity"></activity>
     </application>
 
 </manifest>
