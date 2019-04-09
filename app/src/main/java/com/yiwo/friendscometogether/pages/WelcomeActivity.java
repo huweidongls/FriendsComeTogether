@@ -42,11 +42,9 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     private void initData() {
-        Log.d("ljcljc","001");
         account = spImp.getYXID();
         String token = spImp.getYXTOKEN();
         if(TextUtils.isEmpty(account)||account.equals("0")){
-            Log.d("ljcljc","002");
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
@@ -65,7 +63,6 @@ public class WelcomeActivity extends BaseActivity {
             }, 2000);
 
         }else {
-            Log.d("ljcljc","003");
             LoginInfo info = new LoginInfo(account, token);
 //            LoginInfo info = new LoginInfo(account, "1112");
             RequestCallback<LoginInfo> callback =
@@ -73,21 +70,18 @@ public class WelcomeActivity extends BaseActivity {
 
                         @Override
                         public void onSuccess(LoginInfo loginInfo) {
-                            Log.d("ljcljc","004");
                             NimUIKit.loginSuccess(account);
                             NimUIKit.setAccount(account);
                             toToast(WelcomeActivity.this, "登录成功");
                             NimUIKit.setMsgForwardFilter(new MsgForwardFilter() {
                                 @Override
                                 public boolean shouldIgnore(IMMessage message) {
-                                    Log.d("sdasd001",message.getContent());
                                     return false;
                                 }
                             });
                             NimUIKit.setMsgRevokeFilter(new MsgRevokeFilter() {
                                 @Override
                                 public boolean shouldIgnore(IMMessage message) {
-                                    Log.d("sdasd002",message.getContent());
                                     return false;
                                 }
                             });
@@ -96,7 +90,6 @@ public class WelcomeActivity extends BaseActivity {
                                 intent.setClass(WelcomeActivity.this, GuideActivity.class);
                                 startActivity(intent);
                             }else {
-                                Log.d("ljcljc","005");
                                 intent.setClass(WelcomeActivity.this, MainActivity.class);
                                 startActivity(intent);
                             }
@@ -105,7 +98,6 @@ public class WelcomeActivity extends BaseActivity {
 
                         @Override
                         public void onFailed(int i) {
-                            Log.d("ljcljc","006");
                             Log.d("dsadsda","登录失败："+i);
                             toToast(WelcomeActivity.this, "登录失败");
                             Intent intent = new Intent();

@@ -97,6 +97,13 @@ public class PersonMainActivity extends BaseActivity {
     TextView tv_person_name;
     @BindView(R.id.tv_person_age)
     TextView tv_person_age;
+    @BindView(R.id.tv_person_code_ok)
+    TextView tv_person_code_ok;
+    @BindView(R.id.tv_person_marry)
+    TextView tv_person_marry;
+    @BindView(R.id.tv_level)
+    TextView tv_level;
+
     @BindView(R.id.tv_person_address)
     TextView tv_person_address;
     @BindView(R.id.tv_person_sign_text)
@@ -239,9 +246,9 @@ public class PersonMainActivity extends BaseActivity {
                                                 tv_youju_wode_or_tade.setText(ta + "的友聚");
                                                 tv_more_label.setText(ta+"的更多标签");
                                             }
-                                            Glide.with(PersonMainActivity.this).load(R.mipmap.tarenhzuye_icon_boy).into(iv_person_sex);
+                                            Glide.with(PersonMainActivity.this).load(R.mipmap.nan).into(iv_person_sex);
                                         } else if (model.getObj().getInfo().getSex().equals("1")) {
-                                            Glide.with(PersonMainActivity.this).load(R.mipmap.tarenhzuye_icon_girl).into(iv_person_sex);
+                                            Glide.with(PersonMainActivity.this).load(R.mipmap.nv).into(iv_person_sex);
                                             ta = "她";
                                             if (type_tade_or_wode == 0) {
                                                 tv_title_wode_or_tade.setText(ta + "的主页");
@@ -252,6 +259,18 @@ public class PersonMainActivity extends BaseActivity {
                                             }
                                         }
                                         tv_person_name.setText(model.getObj().getInfo().getUsername());
+
+                                        tv_level.setText(model.getObj().getInfo().getUsergrade());
+                                        if (model.getObj().getInfo().getUsermarry().equals("1")){
+                                            tv_person_marry.setText("单身");
+                                        }else if (model.getObj().getInfo().getUsermarry().equals("2")){
+                                            tv_person_marry.setText("非单身");
+                                        }
+                                        if (model.getObj().getInfo().getUsercodeok().equals("0")){
+                                            tv_person_code_ok.setText("未认证");
+                                        }else if (model.getObj().getInfo().getUsermarry().equals("1")){
+                                            tv_person_code_ok.setText("已认证");
+                                        }
                                         tv_person_age.setText(model.getObj().getInfo().getAge());
                                         tv_person_address.setText(model.getObj().getInfo().getAddress());
                                         tv_person_sign_text.setText(model.getObj().getInfo().getAutograph());
@@ -374,9 +393,9 @@ public class PersonMainActivity extends BaseActivity {
                                         tv_youju_wode_or_tade.setText(ta + "的友聚");
                                         tv_more_label.setText(ta+"的更多标签");
                                     }
-                                    Glide.with(PersonMainActivity.this).load(R.mipmap.tarenhzuye_icon_boy).into(iv_person_sex);
+                                    Glide.with(PersonMainActivity.this).load(R.mipmap.nan).into(iv_person_sex);
                                 } else if (model.getObj().getInfo().getSex().equals("1")) {
-                                    Glide.with(PersonMainActivity.this).load(R.mipmap.tarenhzuye_icon_girl).into(iv_person_sex);
+                                    Glide.with(PersonMainActivity.this).load(R.mipmap.nv).into(iv_person_sex);
                                     ta = "她";
                                     if (type_tade_or_wode == 0) {
                                         tv_title_wode_or_tade.setText(ta + "的主页");
@@ -390,6 +409,19 @@ public class PersonMainActivity extends BaseActivity {
                                 tv_person_age.setText(model.getObj().getInfo().getAge());
                                 tv_person_address.setText(model.getObj().getInfo().getAddress());
                                 tv_person_sign_text.setText(model.getObj().getInfo().getAutograph());
+
+                                tv_level.setText(model.getObj().getInfo().getUsergrade());
+                                if (model.getObj().getInfo().getUsermarry().equals("1")){
+                                    tv_person_marry.setText("单身");
+                                }else if (model.getObj().getInfo().getUsermarry().equals("2")){
+                                    tv_person_marry.setText("非单身");
+                                }
+                                if (model.getObj().getInfo().getUsercodeok().equals("0")){
+                                    tv_person_code_ok.setText("未认证");
+                                }else if (model.getObj().getInfo().getUsermarry().equals("1")){
+                                    tv_person_code_ok.setText("已认证");
+                                }
+
                                 tv_guanzhu_num.setText(model.getObj().getInfo().getUserlike());
                                 tv_huozan_num.setText(model.getObj().getInfo().getGiveCount() + "");
                                 tv_fans_num.setText(model.getObj().getInfo().getFans());

@@ -109,31 +109,56 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="139px">
-                    <RelativeLayout
+                    <LinearLayout
+                        android:layout_marginLeft="32px"
+                        android:layout_marginTop="20px"
+                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                         <TextView
-                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
                             android:id="@+id/tv_person_name"
-                            android:layout_marginLeft="32px"
-                            android:layout_marginTop="20px"
+                            android:maxLength="12"
+                            android:ellipsize="end"
                             android:textStyle="bold"
                             android:text=""
                             android:textColor="@color/black_333333"
                             android:textSize="48px"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
+                        <RelativeLayout
+
+                            android:layout_marginLeft="10px"
+                            android:layout_gravity="bottom"
+                            android:layout_marginBottom="3px"
+                            android:background="@mipmap/level_bg"
+                            android:layout_width="92px"
+                            android:layout_height="30px">
+
+                            <TextView
+                                android:id="@+id/tv_level"
+                                android:text="1"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="22px"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerHorizontal="true"
+                                android:textColor="@color/white_ffffff"
+                                android:textSize="20px"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                        </RelativeLayout>
                         <ImageView
                             android:visibility="gone"
-                            android:layout_centerVertical="true"
+                            android:layout_gravity="bottom"
+                            android:layout_marginBottom="3px"
                             android:id="@+id/iv_kefu"
                             android:src="@mipmap/kefu"
                             android:layout_marginLeft="10px"
                             android:layout_toRightOf="@+id/tv_person_name"
-                            android:layout_marginTop="20px"
                             android:layout_width="40px"
                             android:layout_height="40px" />
-                    </RelativeLayout>
+                    </LinearLayout>
                     <TextView
                         android:lines="1"
                         android:ellipsize="end"
@@ -177,20 +202,42 @@
                         android:layout_width="110px"
                         android:layout_height="56px" />
                     <TextView
-                        android:paddingLeft="15px"
-                        android:paddingRight="15px"
-                        android:id="@+id/tv_person_address"
+                        android:id="@+id/tv_person_code_ok"
+                        android:layout_marginRight="20px"
                         android:layout_gravity="center_vertical"
                         android:gravity="center"
                         android:textSize="26px"
                         android:text=""
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:maxLength="10"
                         android:background="@drawable/bg_gray_d8d8d8_8px"
-                        android:layout_width="wrap_content"
+                        android:layout_width="110px"
+                        android:layout_height="56px" />
+                    <TextView
+                        android:id="@+id/tv_person_marry"
+                        android:layout_marginRight="20px"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:textSize="26px"
+                        android:text=""
+                        android:background="@drawable/bg_gray_d8d8d8_8px"
+                        android:layout_width="110px"
                         android:layout_height="56px" />
                 </LinearLayout>
+                <TextView
+                    android:layout_marginTop="5px"
+                    android:layout_marginLeft="39px"
+                    android:paddingLeft="15px"
+                    android:paddingRight="15px"
+                    android:id="@+id/tv_person_address"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:textSize="26px"
+                    android:text=""
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:maxLength="10"
+                    android:background="@drawable/bg_gray_d8d8d8_8px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56px" />
                 <LinearLayout
                     android:background="@drawable/bg_d84c37_10px"
                     android:layout_marginTop="20px"

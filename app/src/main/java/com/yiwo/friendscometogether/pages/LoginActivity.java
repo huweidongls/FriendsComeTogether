@@ -16,9 +16,12 @@ import com.netease.nim.uikit.business.session.module.MsgForwardFilter;
 import com.netease.nim.uikit.business.session.module.MsgRevokeFilter;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.RequestCallbackWrapper;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
+import com.netease.nimlib.sdk.msg.model.RecentContact;
 import com.umeng.socialize.UMShareAPI;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -31,6 +34,8 @@ import com.yiwo.friendscometogether.utils.StringUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -152,13 +157,24 @@ public class LoginActivity extends BaseActivity {
                                                 @Override
                                                 public void onSuccess(LoginInfo loginInfo) {
                                                     NimUIKit.loginSuccess(account);
+//                                                    NIMClient.getService(MsgService.class).();
                                                     toToast(LoginActivity.this, "登录成功");
+
+//                                                    NIMClient.getService(MsgService.class).queryRecentContacts().setCallback(new RequestCallbackWrapper<List<RecentContact>>() {
+//                                                        @Override
+//                                                        public void onResult(int i, List<RecentContact> recentContacts, Throwable throwable) {
+//                                                            for (int i1 = 0;i<recentContacts.size();i++){
+//                                                                NIMClient.getService(MsgService.class).updateRecent(recentContacts.get(i1));
+//                                                            }
+//                                                        }
+//                                                    });
                                                     NimUIKit.setMsgForwardFilter(new MsgForwardFilter() {
                                                         @Override
                                                         public boolean shouldIgnore(IMMessage message) {
                                                             return false;
                                                         }
                                                     });
+
                                                     NimUIKit.setMsgRevokeFilter(new MsgRevokeFilter() {
                                                         @Override
                                                         public boolean shouldIgnore(IMMessage message) {

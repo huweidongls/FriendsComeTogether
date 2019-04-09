@@ -39,7 +39,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
-            android:background="@drawable/nim_message_button_bottom_send_selector"
+            android:background="@drawable/nim_message_button_bottom_send_selector_red"
             android:gravity="center"
             android:text="@string/send"
             android:textColor="@color/white"

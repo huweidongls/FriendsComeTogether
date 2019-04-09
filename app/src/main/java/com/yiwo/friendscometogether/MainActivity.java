@@ -139,6 +139,7 @@ public class MainActivity extends FragmentActivity {
     private String uid = "";
     private String account = "";
 
+    private ChatFragment fragmentChat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -197,6 +198,7 @@ public class MainActivity extends FragmentActivity {
     protected void onStart() {
         super.onStart();
         uid = spImp.getUID();
+        fragmentChat.refreshRecentContactsFragment();
     }
 
     /**
@@ -219,9 +221,8 @@ public class MainActivity extends FragmentActivity {
 //        Fragment fragmentFriendTogether = new FriendsTogetherFragment1();
         Fragment fragmentFriendTogether = new FriendsTogetherFragment2();
         Fragment fragmentFriendRemember = new YouJiFragment();
-        Fragment fragmentChat = new ChatFragment();
+        fragmentChat = new ChatFragment();
         Fragment fragmentMy = new MyFragment1();
-
         fragmentList.add(fragmentHome);
         fragmentList.add(fragmentFriendTogether);
         fragmentList.add(fragmentFriendRemember);
@@ -438,6 +439,11 @@ public class MainActivity extends FragmentActivity {
     public void onBackPressed() {
         // TODO 自动生成的方法存根
         backtrack();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     /**

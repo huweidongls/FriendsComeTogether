@@ -53,6 +53,7 @@ public class ZAndScAdapter extends RecyclerView.Adapter<ZAndScAdapter.ViewHolder
             String str = "<font color='#0765AA'>"+data.get(position).getUsername()+"</font>收藏了您的文章。";
             holder.tv.setText(Html.fromHtml(str));
         }
+        holder.tvTime.setText(data.get(position).getCreate_time());
         holder.ivAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,11 +84,13 @@ public class ZAndScAdapter extends RecyclerView.Adapter<ZAndScAdapter.ViewHolder
         private ImageView ivAvatar;
         private TextView tv;
         private RelativeLayout rl;
+        private TextView tvTime;
         public ViewHolder(View itemView) {
             super(itemView);
             ivAvatar = itemView.findViewById(R.id.iv_avatar);
             tv = itemView.findViewById(R.id.tv);
             rl = itemView.findViewById(R.id.rl);
+            tvTime = itemView.findViewById(R.id.tv_time);
         }
     }
 

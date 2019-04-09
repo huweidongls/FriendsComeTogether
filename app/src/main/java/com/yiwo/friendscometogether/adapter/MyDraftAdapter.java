@@ -1,17 +1,20 @@
 package com.yiwo.friendscometogether.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.UserRememberModel;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
 
 import java.util.List;
 
@@ -38,10 +41,19 @@ public class MyDraftAdapter extends RecyclerView.Adapter<MyDraftAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         Picasso.with(context).load(data.get(position).getFmpic()).into(holder.iv);
         holder.tvTitle.setText(data.get(position).getFmtitle());
         holder.tvCreateTime.setText("创建时间: " + data.get(position).getFmtime());
+        holder.rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(context, DetailsOfFriendsWebActivity.class);
+                intent.putExtra("fmid", data.get(position).getFmID());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -54,12 +66,13 @@ public class MyDraftAdapter extends RecyclerView.Adapter<MyDraftAdapter.ViewHold
         private ImageView iv;
         private TextView tvTitle;
         private TextView tvCreateTime;
-
+        private RelativeLayout rl;
         public ViewHolder(View itemView) {
             super(itemView);
             iv = itemView.findViewById(R.id.activity_my_draft_rv_iv);
             tvTitle = itemView.findViewById(R.id.activity_my_draft_rv_tv_title);
             tvCreateTime = itemView.findViewById(R.id.activity_my_draft_rv_tv_c_time);
+            rl = itemView.findViewById(R.id.rl);
         }
     }
 

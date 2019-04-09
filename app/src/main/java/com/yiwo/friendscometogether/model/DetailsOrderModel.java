@@ -64,6 +64,9 @@ public class DetailsOrderModel {
          * phase : 1
          * comment : 啊啊啊啊啊啊啊啊啊啊啊啊啊啊
          * if_comment : true
+         * 订单详情 refundInfo 退款说明
+         * refundWhy 退款原因
+         *  refund_money 退款金额
          */
 
         private String title;
@@ -89,6 +92,9 @@ public class DetailsOrderModel {
         private String comment;
         private String comment_ID;
         private boolean if_comment;
+        private String refundInfo;
+        private String refundWhy;
+        private String refund_money;
 
         public String getTitle() {
             return title;
@@ -272,6 +278,30 @@ public class DetailsOrderModel {
 
         public void setComment_ID(String comment_ID) {
             this.comment_ID = comment_ID;
+        }
+
+        public String getRefundInfo() {
+            return refundInfo;
+        }
+
+        public void setRefundInfo(String refundInfo) {
+            this.refundInfo = refundInfo;
+        }
+
+        public String getRefundWhy() {
+            return refundWhy;
+        }
+
+        public void setRefundWhy(String refundWhy) {
+            this.refundWhy = refundWhy;
+        }
+
+        public String getRefund_money() {
+            return refund_money;
+        }
+
+        public void setRefund_money(String refund_money) {
+            this.refund_money = refund_money;
         }
     }
 }

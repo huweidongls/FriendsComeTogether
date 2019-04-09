@@ -122,6 +122,10 @@ public class PersonMainModel {
              * friends : 0
              * follow : 0
              * fans : 5
+             * usermarry 1单身 2已婚
+             * usergrade 用户等级
+             * usercodeok 0未认证 1已认证
+             *
              */
 
             private String wy_accid;
@@ -138,6 +142,9 @@ public class PersonMainModel {
             private String fans;
             private String otherUserId;
             private String if_kefu;
+            private String usermarry;
+            private String usergrade;
+            private String usercodeok;
             public String getWy_accid() {
                 return wy_accid;
             }
@@ -248,6 +255,30 @@ public class PersonMainModel {
 
             public void setIf_kefu(String if_kefu) {
                 this.if_kefu = if_kefu;
+            }
+
+            public String getUsermarry() {
+                return usermarry;
+            }
+
+            public void setUsermarry(String usermarry) {
+                this.usermarry = usermarry;
+            }
+
+            public String getUsergrade() {
+                return usergrade;
+            }
+
+            public void setUsergrade(String usergrade) {
+                this.usergrade = usergrade;
+            }
+
+            public String getUsercodeok() {
+                return usercodeok;
+            }
+
+            public void setUsercodeok(String usercodeok) {
+                this.usercodeok = usercodeok;
             }
         }
 

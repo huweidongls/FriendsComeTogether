@@ -162,7 +162,9 @@ public class YouJiFragment extends Fragment {
                                     if(jsonObject.getInt("code") == 200){
                                         Gson gson = new Gson();
                                         YouJiListModel model = gson.fromJson(data, YouJiListModel.class);
-                                        mList.addAll(model.getObj());
+                                        List<YouJiListModel.ObjBean> listTemp = model.getObj();
+                                        Collections.shuffle(listTemp);
+                                        mList.addAll(listTemp);
                                         adapter.notifyDataSetChanged();
                                         page = page + 1;
                                     }

@@ -53,7 +53,7 @@ public class WoDeChawenAdapter extends RecyclerView.Adapter<WoDeChawenAdapter.Vi
             holder.tvStaus.setTextColor(Color.parseColor("#d84c37"));
             holder.tvStaus.setText("作者未展示");
         }else if(data.get(position).getRadio().equals("2")){
-            holder.tvStaus.setText("作者已展示");
+            holder.tvStaus.setText("作者已通过");
         }
         adapter = new WoDeChaWenPicsAdapter(data.get(position).getPiclist());
         RecyclerView.LayoutManager layoutManager =

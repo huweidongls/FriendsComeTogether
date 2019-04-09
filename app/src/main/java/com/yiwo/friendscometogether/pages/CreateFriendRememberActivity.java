@@ -776,7 +776,7 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
+        super.onBackPressed();
         AlertDialog.Builder builder = new AlertDialog.Builder(CreateFriendRememberActivity.this);
         builder.setMessage("是否保存至草稿")
                 .setNegativeButton("保存", new DialogInterface.OnClickListener() {
@@ -1026,7 +1026,7 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                                             if (jsonObject.getInt("code") == 200) {
                                                 Toast.makeText(CreateFriendRememberActivity.this, jsonObject.getString("message") + "", Toast.LENGTH_SHORT).show();
                                                 WeiboDialogUtils.closeDialog(dialog);
-                                                onBackPressed();
+                                                finish();
                                             }else {
                                                 WeiboDialogUtils.closeDialog(dialog);
                                                 Toast.makeText(CreateFriendRememberActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();

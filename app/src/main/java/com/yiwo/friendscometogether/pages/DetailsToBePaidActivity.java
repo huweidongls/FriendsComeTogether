@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -102,6 +103,16 @@ public class DetailsToBePaidActivity extends BaseActivity {
     TextView tvPeopleNum;
     @BindView(R.id.tv_noname)
     TextView tvNoName;
+    @BindView(R.id.tv_return_know)
+    TextView tvReturnKnows;
+
+
+    @BindView(R.id.tv_return_money)
+    TextView tvReturnMoney;
+    @BindView(R.id.tv_return_why)
+    TextView tvReturnWhy;
+    @BindView(R.id.ll_return_why)
+    LinearLayout llReturnWhy;
 
     private SpImp spImp;
     private String uid = "";
@@ -131,7 +142,7 @@ public class DetailsToBePaidActivity extends BaseActivity {
         uid = spImp.getUID();
         Intent intent = getIntent();
         orderId = intent.getStringExtra("order_id");
-
+        Log.d("asdsada",orderId);
         ViseHttp.POST(NetConfig.detailsOrderUrl)
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.detailsOrderUrl))
                 .addParam("order_id", orderId)
@@ -154,6 +165,9 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                 tvPeopleNum.setText("参加人数: " + model.getObj().getGo_num());
                                 tvNoName.setText("是否匿名："+(model.getObj().getNoname().equals("0")? "否":"是"));
                                 tvPriceDetails.setText(model.getObj().getPrice_type());
+                                tvReturnKnows.setText(model.getObj().getRefundInfo());
+                                tvReturnMoney.setText("退款金额："+model.getObj().getRefund_money());
+                                tvReturnWhy.setText(model.getObj().getRefundWhy());
                                 //-----设置合计金额字体------------
                                 String str_money = "合计："+model.getObj().getPrice();
                                 //        String str_money = "合计："+"48.90";
@@ -176,15 +190,31 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                 tvCreateTime.setText("创建时间: " + model.getObj().getCreate_time());
                                 tvPayTime.setText("付款时间: " + model.getObj().getPay_time());
                                 tvOkTime.setText("成交时间: " + model.getObj().getOver_time());
+
+                                tvOkTime.setVisibility(View.GONE);//隐藏成交时间
+                                tvCreateTime.setVisibility(View.GONE);//隐藏创建时间
+
                                 //不可点击按钮全部隐藏
                                 if(model.getObj().getOrder_type().equals("7")){
                                     tvDeleteTrip.setVisibility(View.VISIBLE);
                                 }else if(model.getObj().getOrder_type().equals("6")){
                                     tvTriping.setVisibility(View.GONE);
-                                }else if(model.getObj().getOrder_type().equals("5")){
+                                }else if(model.getObj().getOrder_type().equals("5")){//显示退款原因及金额
+                                    if (TextUtils.isEmpty(model.getObj().getRefundWhy())){
+                                        llReturnWhy.setVisibility(View.GONE);
+                                    }else {
+                                        llReturnWhy.setVisibility(View.VISIBLE);
+                                    }
+                                    tvReturnMoney.setVisibility(View.VISIBLE);
                                     tvDeleteTrip.setVisibility(View.VISIBLE);
                                     tvOkReturn.setVisibility(View.GONE);
-                                }else if(model.getObj().getOrder_type().equals("4")){
+                                }else if(model.getObj().getOrder_type().equals("4")){//显示退款原因及金额
+                                    if (TextUtils.isEmpty(model.getObj().getRefundWhy())){
+                                        llReturnWhy.setVisibility(View.GONE);
+                                    }else {
+                                        llReturnWhy.setVisibility(View.VISIBLE);
+                                    }
+                                    tvReturnMoney.setVisibility(View.VISIBLE);
                                     tvDeleteTrip.setVisibility(View.VISIBLE);
                                     tvReturning.setVisibility(View.GONE);
                                 }else if(model.getObj().getOrder_type().equals("3")){

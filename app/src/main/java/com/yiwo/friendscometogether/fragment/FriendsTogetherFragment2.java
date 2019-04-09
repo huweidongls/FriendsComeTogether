@@ -247,7 +247,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                 mList.addAll(model.getObj());
                                 tList.clear();
                                 tList.addAll(model.getObj());
-                                while (mList.size()<=4){
+                                while (mList.size()>0 &&mList.size()<=4){//如果活动列表长度大于0，并且小于4时添加至四张以上
                                     mList.addAll(tList);
                                 }
                                 if (mList.size() > 0) {
@@ -485,7 +485,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                                     mList.addAll(model.getObj());
                                     tList.clear();
                                     tList.addAll(model.getObj());
-                                    while (mList.size()<=4){
+                                    while (mList.size()>0 && mList.size()<=4){
                                         mList.addAll(tList);
                                     }
                                     if (mList.size() > 0) {

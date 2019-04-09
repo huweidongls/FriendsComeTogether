@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.netease.nim.uikit.api.NimUIKit;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.auth.AuthService;
+import com.netease.nimlib.sdk.msg.MsgService;
 import com.vise.xsnow.cache.SpCache;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.MyApplication;
@@ -104,6 +107,8 @@ public class SetActivity extends BaseActivity {
                                 spCache.clear();
                                 NimUIKit.logout();
                                 MyApplication.getInstance().exit();
+                                NIMClient.getService(AuthService.class).logout();
+
                             }
                         });
                 dialog1.show();

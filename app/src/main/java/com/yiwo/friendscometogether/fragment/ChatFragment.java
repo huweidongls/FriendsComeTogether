@@ -3,7 +3,10 @@ package com.yiwo.friendscometogether.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +18,7 @@ import android.widget.RelativeLayout;
 
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.model.session.SessionEventListener;
+import com.netease.nim.uikit.business.recent.RecentContactsFragment;
 import com.netease.nim.uikit.business.session.module.MsgForwardFilter;
 import com.netease.nim.uikit.business.session.module.MsgRevokeFilter;
 import com.netease.nimlib.sdk.NIMClient;
@@ -30,6 +34,9 @@ import com.netease.nimlib.sdk.msg.SystemMessageObserver;
 import com.netease.nimlib.sdk.msg.constant.SystemMessageType;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.SystemMessage;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
@@ -51,7 +58,8 @@ public class ChatFragment extends BaseFragment{
 
     @BindView(R.id.rl_my_friend)
     RelativeLayout rlMyFriend;
-
+    @BindView(R.id.refresh_layout)
+    RefreshLayout refreshLayout;
     private String account;
     private String token;
 
@@ -66,7 +74,29 @@ public class ChatFragment extends BaseFragment{
 
         ButterKnife.bind(this, rootView);
         spImp = new SpImp(getContext());
+        refreshRecentContactsFragment();
+        initRefresh();
         return rootView;
+    }
+
+    private void initRefresh() {
+        refreshLayout.setEnableLoadMore(false);
+        refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                refreshRecentContactsFragment();
+                refreshLayout.finishRefresh(1000);
+            }
+        });
+    }
+
+    public void refreshRecentContactsFragment() {
+        RecentContactsFragment fragment = new RecentContactsFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager. beginTransaction();
+        transaction.replace(R.id.fragment_contacts, fragment);
+        transaction.commit();
     }
 
     @Override
@@ -74,7 +104,6 @@ public class ChatFragment extends BaseFragment{
         super.onStart();
         uid = spImp.getUID();
     }
-
     @OnClick({R.id.rl_my_friend})
     public void onClick(View view){
         Intent intent = new Intent();
@@ -91,17 +120,4 @@ public class ChatFragment extends BaseFragment{
                 break;
         }
     }
-
-    private void liaotian() {
-        String liaotianAccount = "ylyy13945060492";
-        NimUIKit.setAccount(account);
-        NimUIKit.startP2PSession(getContext(), liaotianAccount);
-    }
-
-    private void team() {
-        String liaotianAccount = "ylyy13945060492";
-        NimUIKit.setAccount(account);
-        NimUIKit.startTeamSession(getContext(), liaotianAccount);
-    }
-
 }
