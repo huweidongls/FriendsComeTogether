@@ -325,7 +325,7 @@
                         android:layout_gravity="center_horizontal"
                         android:textSize="26px"
                         android:textColor="@color/black_333333"
-                        android:text="待评论"
+                        android:text="待评价"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 

@@ -90,13 +90,13 @@ public class MyCommentActivity extends BaseActivity {
 
         fragmentList = new ArrayList<>();
         fragmentList.add(new MyCommentYouJiFragment());
-        fragmentList.add(new MyCommentHuoDongFragment());
+//        fragmentList.add(new MyCommentHuoDongFragment());
         mViewPagerFragmentAdapter = new AllRememberViewpagerAdapter(mFragmentManager, fragmentList);
         mViewPager.setAdapter(mViewPagerFragmentAdapter);
 
         mTitleDataList = new ArrayList<>();
         mTitleDataList.add("友记评论");
-        mTitleDataList.add("活动评价");
+//        mTitleDataList.add("活动评价");
 
         CommonNavigator commonNavigator = new CommonNavigator(this);
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
@@ -126,7 +126,7 @@ public class MyCommentActivity extends BaseActivity {
             @Override
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator indicator = new LinePagerIndicator(context);
-                indicator.setColors(Color.WHITE);
+                indicator.setColors(Color.parseColor("#d84c37"));
                 return indicator;
             }
         });

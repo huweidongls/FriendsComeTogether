@@ -42,6 +42,7 @@ import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.GuanZhuWoDeAdapter;
 import com.yiwo.friendscometogether.newadapter.WoGuanZhuDeAdapter;
 import com.yiwo.friendscometogether.newadapter.WoGuanZhuDeHuoDongAdapter;
+import com.yiwo.friendscometogether.newmodel.AttentionNumModel;
 import com.yiwo.friendscometogether.newmodel.GuanZhuHuoDongModel;
 import com.yiwo.friendscometogether.newmodel.GuanZhuWoDeModel;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -308,6 +309,34 @@ public class GuanZhuActivity extends BaseActivity {
     }
 
     private void initData() {
+
+
+        //---------------数量---------------------------
+        ViseHttp.POST(NetConfig.getAttentionNum)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.getAttentionNum))
+                .addParam("uid",spImp.getUID())
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                Gson gson = new Gson();
+                                AttentionNumModel attentionNumModel = gson.fromJson(data, AttentionNumModel.class);
+                                tv_woguanzhude.setText("我关注的("+attentionNumModel.getObj().getAttentionNum()+")");
+                                tv_guanzhuwode.setText("关注我的("+attentionNumModel.getObj().getAttentionMe()+")");
+                                tv_guanzhuhuodong.setText("关注活动("+attentionNumModel.getObj().getAttentionActivity()+")");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
 
 
         //----------------我关注的---------------------

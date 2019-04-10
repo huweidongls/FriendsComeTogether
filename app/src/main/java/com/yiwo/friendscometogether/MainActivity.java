@@ -198,7 +198,6 @@ public class MainActivity extends FragmentActivity {
     protected void onStart() {
         super.onStart();
         uid = spImp.getUID();
-        fragmentChat.refreshRecentContactsFragment();
     }
 
     /**

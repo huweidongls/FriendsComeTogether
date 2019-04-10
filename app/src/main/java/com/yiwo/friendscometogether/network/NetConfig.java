@@ -307,5 +307,6 @@ public class NetConfig {
     public static String delComments = "action/ac_public/delComments";
     //更多活动评价接口
     public static String  commentListAll = "action/ac_activity/commentListAll";//action/ac_activity/commentListAll  传 pfID  活动的ID    全部评论接口   返回 fctime时间  userpic用户头像   username用户名  userID用户ID   pctitle评论内容
-
+    //获取关注数量
+    public static String getAttentionNum = "action/ac_public/getAttentionNum";//attentionNum我关注的数量   attentionMe关注我的数量   attentionActivity关注的活动 的数量
 }

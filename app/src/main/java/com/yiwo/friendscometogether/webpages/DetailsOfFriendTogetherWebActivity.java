@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether.webpages;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -29,6 +30,11 @@ import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseWebActivity;
+import com.yiwo.friendscometogether.dbmodel.LookHistoryDbModel;
+import com.yiwo.friendscometogether.greendao.gen.DaoMaster;
+import com.yiwo.friendscometogether.greendao.gen.DaoSession;
+import com.yiwo.friendscometogether.greendao.gen.LookHistoryDbModelDao;
+import com.yiwo.friendscometogether.greendao.gen.UserGiveModelDao;
 import com.yiwo.friendscometogether.imagepreview.Consts;
 import com.yiwo.friendscometogether.imagepreview.ImagePreviewActivity;
 import com.yiwo.friendscometogether.model.ActiveShareModel;
@@ -51,6 +57,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -76,6 +83,16 @@ public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
     private List<YouJuWebModel.ObjBean.TitleBean> listMuLu = new ArrayList<>();
     private PopupWindow popupWindow;
     private MuLuItemYouJuAdapter muLuItemAdapter;
+
+    //    //数据库
+    private DaoMaster.DevOpenHelper mHelper;
+    private SQLiteDatabase db;
+    private DaoMaster mDaoMaster;
+    private DaoSession mDaoSession;
+
+    LookHistoryDbModelDao lookHistoryDbModelDao;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,10 +102,19 @@ public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
         spImp = new SpImp(DetailsOfFriendTogetherWebActivity.this);
         uid = spImp.getUID();
         pfID = getIntent().getStringExtra("pfID");
+        setDatabase();
+        lookHistoryDbModelDao = mDaoSession.getLookHistoryDbModelDao();
         url = NetConfig.BaseUrl+"action/ac_activity/youJuWeb?pfID="+pfID+"&uid="+uid;
         initWebView(webView,url);
         webView.addJavascriptInterface(new DetailsOfFriendTogetherWebActivity.AndroidInterface(),"android");//交互
         initData();
+    }
+
+    private void setDatabase() {
+        mHelper = new DaoMaster.DevOpenHelper(this, "usergive-db", null);
+        db = mHelper.getWritableDatabase();
+        mDaoMaster = new DaoMaster(db);
+        mDaoSession = mDaoMaster.newSession();
     }
 
     private void initData() {
@@ -104,6 +130,28 @@ public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
                             if (jsonObject.getInt("code")==200){
                                 Gson gson = new Gson();
                                 model = gson.fromJson(data,YouJuWebModel.class);
+                                if (lookHistoryDbModelDao.queryBuilder()
+                                        .where(LookHistoryDbModelDao.Properties.Type.eq("0"),
+                                                LookHistoryDbModelDao.Properties.Look_id.eq(pfID),
+                                                LookHistoryDbModelDao.Properties.User_id.eq(spImp.getUID())).build()
+                                        .list().size()>0){
+                                    LookHistoryDbModel model = lookHistoryDbModelDao.queryBuilder()
+                                            .where(LookHistoryDbModelDao.Properties.Type.eq("0"),
+                                                    LookHistoryDbModelDao.Properties.Look_id.eq(pfID),
+                                                    LookHistoryDbModelDao.Properties.User_id.eq(spImp.getUID())).build()
+                                            .list().get(0);
+                                    model.setLook_time(new Date().toLocaleString());
+                                    lookHistoryDbModelDao.update(model);
+                                }else {
+                                    LookHistoryDbModel historyModel = new LookHistoryDbModel();
+                                    historyModel.setLook_time(new Date().toLocaleString());
+                                    historyModel.setUser_id(spImp.getUID());
+                                    historyModel.setType("0");
+                                    historyModel.setLook_id(pfID);
+                                    historyModel.setTitle(model.getObj().getShare_info());
+                                    historyModel.setPic_url(model.getObj().getShare_pic());
+                                    lookHistoryDbModelDao.insert(historyModel);
+                                }
                                 listMuLu.clear();
                                 listMuLu.addAll(model.getObj().getTitle());
 

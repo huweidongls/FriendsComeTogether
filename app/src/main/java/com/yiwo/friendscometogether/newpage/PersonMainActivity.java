@@ -260,7 +260,7 @@ public class PersonMainActivity extends BaseActivity {
                                         }
                                         tv_person_name.setText(model.getObj().getInfo().getUsername());
 
-                                        tv_level.setText(model.getObj().getInfo().getUsergrade());
+                                        tv_level.setText("LV"+model.getObj().getInfo().getUsergrade());
                                         if (model.getObj().getInfo().getUsermarry().equals("1")){
                                             tv_person_marry.setText("单身");
                                         }else if (model.getObj().getInfo().getUsermarry().equals("2")){
@@ -410,7 +410,7 @@ public class PersonMainActivity extends BaseActivity {
                                 tv_person_address.setText(model.getObj().getInfo().getAddress());
                                 tv_person_sign_text.setText(model.getObj().getInfo().getAutograph());
 
-                                tv_level.setText(model.getObj().getInfo().getUsergrade());
+                                tv_level.setText("LV"+model.getObj().getInfo().getUsergrade());
                                 if (model.getObj().getInfo().getUsermarry().equals("1")){
                                     tv_person_marry.setText("单身");
                                 }else if (model.getObj().getInfo().getUsermarry().equals("2")){
@@ -429,7 +429,9 @@ public class PersonMainActivity extends BaseActivity {
                                     Glide.with(PersonMainActivity.this).load(R.mipmap.other_send_msg).into(iv_addfriend);
                                 } else if (model.getObj().getInfo().getFriends().equals("0")) {
                                     Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_tianjiahaoyou).into(iv_addfriend);
-
+                                }
+                                if(model.getObj().getInfo().getIf_kefu().equals("1")){
+                                    Glide.with(PersonMainActivity.this).load(R.mipmap.other_send_msg).into(iv_addfriend);
                                 }
                                 if (model.getObj().getInfo().getFollow().equals("0")) {
                                     isFollow = 0 ;
@@ -577,9 +579,9 @@ public class PersonMainActivity extends BaseActivity {
                     intent.setClass(PersonMainActivity.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
-                    if (model.getObj().getInfo().getFriends().equals("1")) {
+                    if (model.getObj().getInfo().getFriends().equals("1")||model.getObj().getInfo().getIf_kefu().equals("1")) {
                         liaotian(model.getObj().getInfo().getWy_accid());
-                    } else if (model.getObj().getInfo().getFriends().equals("0")) {
+                    } else{
                         FriendDescribeDialog dialog = new FriendDescribeDialog(PersonMainActivity.this);
                         dialog.show();
                         dialog.setOnReturnListener(new FriendDescribeDialog.OnReturnListener() {

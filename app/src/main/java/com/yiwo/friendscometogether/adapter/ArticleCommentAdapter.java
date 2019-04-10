@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -10,10 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.ArticleCommentListModel;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 
 import java.util.List;
 
@@ -46,11 +50,15 @@ public class ArticleCommentAdapter extends RecyclerView.Adapter<ArticleCommentAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        if (TextUtils.isEmpty(data.get(position).getUserpic())) {
-            Picasso.with(context).load(R.mipmap.my_head).into(holder.ivAvatar);
-        } else {
-            Picasso.with(context).load(data.get(position).getUserpic()).into(holder.ivAvatar);
-        }
+        Glide.with(context).load(data.get(position).getUserpic()).apply(new RequestOptions().error(R.mipmap.my_head)).into(holder.ivAvatar);
+        holder.ivAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(context, PersonMainActivity.class);
+                it.putExtra("person_id", data.get(position).getUserID());
+                context.startActivity(it);
+            }
+        });
         holder.tvNickname.setText(data.get(position).getUsername());
         holder.tvTitle.setText(data.get(position).getNewsTile());
         holder.tvContent.setText(data.get(position).getFctitle());

@@ -132,8 +132,8 @@
                             android:layout_gravity="bottom"
                             android:layout_marginBottom="3px"
                             android:background="@mipmap/level_bg"
-                            android:layout_width="92px"
-                            android:layout_height="30px">
+                            android:layout_width="124px"
+                            android:layout_height="40px">
 
                             <TextView
                                 android:id="@+id/tv_level"
@@ -224,7 +224,7 @@
                 </LinearLayout>
                 <TextView
                     android:layout_marginTop="5px"
-                    android:layout_marginLeft="39px"
+                    android:layout_marginLeft="97px"
                     android:paddingLeft="15px"
                     android:paddingRight="15px"
                     android:id="@+id/tv_person_address"

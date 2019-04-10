@@ -35,7 +35,6 @@ import com.vise.xsnow.http.ViseHttp;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.greendao.gen.DaoMaster;
 import com.yiwo.friendscometogether.greendao.gen.DaoSession;
-import com.yiwo.friendscometogether.greendao.gen.UserGiveModelDao;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.network.UMConfig;
 import com.yiwo.friendscometogether.pages.WelcomeActivity;

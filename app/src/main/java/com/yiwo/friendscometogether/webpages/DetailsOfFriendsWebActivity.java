@@ -24,7 +24,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.squareup.picasso.Picasso;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.shareboard.SnsPlatform;
@@ -35,9 +34,11 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseWebActivity;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
+import com.yiwo.friendscometogether.dbmodel.LookHistoryDbModel;
 import com.yiwo.friendscometogether.dbmodel.UserGiveModel;
 import com.yiwo.friendscometogether.greendao.gen.DaoMaster;
 import com.yiwo.friendscometogether.greendao.gen.DaoSession;
+import com.yiwo.friendscometogether.greendao.gen.LookHistoryDbModelDao;
 import com.yiwo.friendscometogether.greendao.gen.UserGiveModelDao;
 import com.yiwo.friendscometogether.imagepreview.Consts;
 import com.yiwo.friendscometogether.imagepreview.ImagePreviewActivity;
@@ -47,7 +48,6 @@ import com.yiwo.friendscometogether.newadapter.MuLuItemYouJiAdapter;
 import com.yiwo.friendscometogether.newmodel.YouJiWebModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.pages.ArticleCommentActivity;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.pages.InsertIntercalationActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -58,7 +58,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -95,6 +98,8 @@ public class DetailsOfFriendsWebActivity extends BaseWebActivity {
     private DaoSession mDaoSession;
 
     UserGiveModelDao userGiveModelDao;
+    LookHistoryDbModelDao lookHistoryDbModelDao;
+
     private YouJiWebModel model;
     private YouJiWebModel.ObjBean.TitleBean[] arrMulu;
     private List<YouJiWebModel.ObjBean.TitleBean> listMuLu = new ArrayList<>();
@@ -114,6 +119,7 @@ public class DetailsOfFriendsWebActivity extends BaseWebActivity {
         uid = spImp.getUID();
         setDatabase();
         userGiveModelDao =  mDaoSession.getUserGiveModelDao();
+        lookHistoryDbModelDao = mDaoSession.getLookHistoryDbModelDao();
         url = NetConfig.BaseUrl+"action/ac_article/youJiWeb?id="+fmID+"&uid="+uid;
         Log.d("aaaa",url);
 //        url = NetConfig.BaseUrl+"action/ac_article/youJiWeb?id="+fmID;
@@ -141,6 +147,38 @@ public class DetailsOfFriendsWebActivity extends BaseWebActivity {
                             if (jsonObject.getInt("code")==200){
                                 Gson gson = new Gson();
                                 model = gson.fromJson(data,YouJiWebModel.class);
+//                                // 查询处理数据库（浏览历史）------------------------------------
+//                                LookHistoryDbModel historyModel = new LookHistoryDbModel();
+//                                historyModel.setLook_time(new Date().toLocaleString());
+//                                historyModel.setUser_id(spImp.getUID());
+//                                historyModel.setType("1");
+//                                historyModel.setLook_id(fmID);
+//                                historyModel.setTitle(model.getObj().getShare_info());
+//                                historyModel.setPic_url(model.getObj().getShare_pic());
+//                                lookHistoryDbModelDao.insertOrReplace(historyModel);
+                                if (lookHistoryDbModelDao.queryBuilder()
+                                        .where(LookHistoryDbModelDao.Properties.Type.eq("1"),
+                                                LookHistoryDbModelDao.Properties.Look_id.eq(fmID),
+                                                LookHistoryDbModelDao.Properties.User_id.eq(spImp.getUID())).build()
+                                        .list().size()>0){
+                                    LookHistoryDbModel model = lookHistoryDbModelDao.queryBuilder()
+                                            .where(LookHistoryDbModelDao.Properties.Type.eq("1"),
+                                                    LookHistoryDbModelDao.Properties.Look_id.eq(fmID),
+                                                    LookHistoryDbModelDao.Properties.User_id.eq(spImp.getUID())).build()
+                                            .list().get(0);
+                                    model.setLook_time(new Date().toLocaleString());
+                                    lookHistoryDbModelDao.update(model);
+                                }else {
+                                    LookHistoryDbModel historyModel = new LookHistoryDbModel();
+                                    historyModel.setLook_time(new Date().toLocaleString());
+                                    historyModel.setUser_id(spImp.getUID());
+                                    historyModel.setType("1");
+                                    historyModel.setLook_id(fmID);
+                                    historyModel.setTitle(model.getObj().getShare_info());
+                                    historyModel.setPic_url(model.getObj().getShare_pic());
+                                    lookHistoryDbModelDao.insert(historyModel);
+                                }
+//                              ---------------------------------------------------------------
                                 listMuLu.clear();
                                 listMuLu.addAll(model.getObj().getTitle());
                                 arrMulu = new YouJiWebModel.ObjBean.TitleBean[model.getObj().getTitle().size()];
@@ -156,7 +194,10 @@ public class DetailsOfFriendsWebActivity extends BaseWebActivity {
                                 }
                                 //底部按钮
                                 //点赞
-                                if (userGiveModelDao.queryBuilder().where(UserGiveModelDao.Properties.UserId.eq(uid),UserGiveModelDao.Properties.ArticleId.eq(fmID)).build().list().size()<=0) {
+                                if (userGiveModelDao.queryBuilder()
+                                        .where(UserGiveModelDao.Properties.UserId.eq(uid),
+                                              UserGiveModelDao.Properties.ArticleId.eq(fmID))
+                                        .build().list().size()<=0) {
                                     isPraise = false;
                                     Glide.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.details_praise_b).into(ivPraise);
                                     tvPraise.setTextColor(Color.parseColor("#333333"));
@@ -329,7 +370,10 @@ public class DetailsOfFriendsWebActivity extends BaseWebActivity {
                                             if (jsonObject.getInt("code") == 200) {
                                                 Glide.with(DetailsOfFriendsWebActivity.this).load(R.mipmap.details_praise_b).into(ivPraise);
                                                 tvPraise.setTextColor(Color.parseColor("#333333"));
-                                                if (userGiveModelDao.queryBuilder().where(UserGiveModelDao.Properties.UserId.eq(uid),UserGiveModelDao.Properties.ArticleId.eq(fmID)).build().list().size()>0){
+                                                if (userGiveModelDao.queryBuilder()
+                                                        .where(UserGiveModelDao.Properties.UserId.eq(uid),
+                                                                UserGiveModelDao.Properties.ArticleId.eq(fmID))
+                                                        .build().list().size()>0){
                                                     UserGiveModel model = userGiveModelDao.queryBuilder().where(UserGiveModelDao.Properties.UserId.eq(uid),UserGiveModelDao.Properties.ArticleId.eq(fmID)).build().list().get(0);
                                                     userGiveModelDao.deleteByKey(model.getId());
                                                     Log.d("asdsadas","进来了");

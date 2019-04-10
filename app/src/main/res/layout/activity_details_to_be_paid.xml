@@ -219,27 +219,25 @@
                     android:text="成交时间：2018-04-02 12：12：31"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-                <LinearLayout
+                <TextView
                     android:layout_marginLeft="38px"
                     android:layout_marginRight="38px"
                     android:layout_marginTop="18px"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textSize="26px"
-                        android:text="退款说明："
-                        android:textColor="@color/color_black_ff666666"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/tv_return_know"
-                        android:textSize="26px"
-                        android:text=""
-                        android:textColor="@color/color_black_ff666666"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                    android:textSize="26px"
+                    android:text="退款说明："
+                    android:textColor="@color/color_black_ff666666"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="5px"
+                    android:layout_marginLeft="100px"
+                    android:layout_marginRight="38px"
+                    android:id="@+id/tv_return_know"
+                    android:textSize="26px"
+                    android:text=""
+                    android:textColor="@color/color_black_ff666666"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
                 <TextView
                     android:visibility="gone"
                     android:textSize="26px"

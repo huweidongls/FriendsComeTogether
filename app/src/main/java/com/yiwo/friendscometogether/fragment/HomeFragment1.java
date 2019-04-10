@@ -33,6 +33,7 @@ import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -142,7 +143,7 @@ public class HomeFragment1 extends BaseFragment {
 
     private SpImp spImp;
     private String uid = "";
-
+    private int page = 1;
     private Dialog dialog_loading;
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -200,6 +201,48 @@ public class HomeFragment1 extends BaseFragment {
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 refresh(type);
                 refreshLayout.finishRefresh(1000);
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull final RefreshLayout refreshLayout) {
+                ViseHttp.POST(NetConfig.newHomeData)
+                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.newHomeData))
+                        .addParam("type", type)
+                        .addParam("uid", uid)
+                        .addParam("city", cityName)
+                        .addParam("page",page+"")
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                Log.e("123123", type+"--------"+uid);
+                                Log.e("123123", data);
+                                try {
+                                    JSONObject jsonObject = new JSONObject(data);
+                                    if(jsonObject.getInt("code") == 200){
+                                        Gson gson = new Gson();
+                                        HomeDataModel model = gson.fromJson(data, HomeDataModel.class);
+//                                        mList.clear();
+                                        if (model.getObj().size()>0){
+                                            mList.addAll(model.getObj());
+                                            adapter.notifyDataSetChanged();
+                                            page++;
+                                        }
+                                        refreshLayout.finishRefresh(1000);
+                                    }
+
+                                } catch (JSONException e) {
+                                    refreshLayout.finishRefresh(1000);
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+                                refreshLayout.finishRefresh(1000);
+                                toToast(context,"加载失败");
+                            }
+                        });
             }
         });
         ViseHttp.POST(NetConfig.allBannerUrl)
@@ -288,6 +331,7 @@ public class HomeFragment1 extends BaseFragment {
                             if(jsonObject.getInt("code") == 200){
                                 Gson gson = new Gson();
                                 HomeDataModel model = gson.fromJson(data, HomeDataModel.class);
+                                page = 2;
                                 mList = model.getObj();
                                 adapter = new HomeDataAdapter(mList);
                                 LinearLayoutManager manager = new LinearLayoutManager(getContext()){
@@ -517,6 +561,7 @@ public class HomeFragment1 extends BaseFragment {
                                 mList.clear();
                                 mList.addAll(model.getObj());
                                 adapter.notifyDataSetChanged();
+                                page = 2;
                             }
                             WeiboDialogUtils.closeDialog(dialog_loading);
                         } catch (JSONException e) {

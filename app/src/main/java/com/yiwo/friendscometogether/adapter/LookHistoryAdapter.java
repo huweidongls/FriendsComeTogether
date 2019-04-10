@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.dbmodel.LookHistoryDbModel;
 import com.yiwo.friendscometogether.model.LookHistoryModel;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
@@ -26,9 +27,9 @@ import java.util.List;
 public class LookHistoryAdapter extends RecyclerView.Adapter<LookHistoryAdapter.ViewHolder> {
 
     private Context context;
-    private List<LookHistoryModel.ObjBean> data;
+    private List<LookHistoryDbModel> data;
 
-    public LookHistoryAdapter(List<LookHistoryModel.ObjBean> data) {
+    public LookHistoryAdapter(List<LookHistoryDbModel> data) {
         this.data = data;
     }
 

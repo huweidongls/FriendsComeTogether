@@ -25,7 +25,6 @@ import com.umeng.socialize.utils.ShareBoardlistener;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
-import com.yiwo.friendscometogether.MyApplication;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.adapter.DetailsOfFriendsIntercalation1Adapter;
 import com.yiwo.friendscometogether.adapter.DetailsOfFriendsIntercalationAdapter;

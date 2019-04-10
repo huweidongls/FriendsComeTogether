@@ -47,12 +47,17 @@ public class YouJiWebModel {
          * add : 1
          * collect : 1
          * title : [{"ffID":"299","fftitle":"1231231"}]
+         * "share_pic": "http://39.104.102.152/uploads/article/20190410/0-0be57cc6a725b202da556d340c902ac93770.jpeg",
+         "share_url": "http://39.104.102.152/index.php/action/ac_article/youJiWebShare?id=476",
+         "share_info": "自摸LOL了😐😠😟😟\n金融我上晚自习你莫😎😎😎😎\nOP你们医院"
          */
 
         private String add;
         private String collect;
         private List<TitleBean> title;
-
+        private String share_pic;
+        private String share_url;
+        private String share_info;
         public String getAdd() {
             return add;
         }
@@ -75,6 +80,30 @@ public class YouJiWebModel {
 
         public void setTitle(List<TitleBean> title) {
             this.title = title;
+        }
+
+        public String getShare_pic() {
+            return share_pic;
+        }
+
+        public void setShare_pic(String share_pic) {
+            this.share_pic = share_pic;
+        }
+
+        public String getShare_url() {
+            return share_url;
+        }
+
+        public void setShare_url(String share_url) {
+            this.share_url = share_url;
+        }
+
+        public String getShare_info() {
+            return share_info;
+        }
+
+        public void setShare_info(String share_info) {
+            this.share_info = share_info;
         }
 
         public static class TitleBean {
