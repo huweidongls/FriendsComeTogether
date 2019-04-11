@@ -144,6 +144,7 @@ public class GuanZhuActivity extends BaseActivity {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
+                initNum();
                 switch (type_showLayout){
                     case 0:
                         ViseHttp.POST(NetConfig.userFocus)
@@ -312,33 +313,7 @@ public class GuanZhuActivity extends BaseActivity {
 
 
         //---------------数量---------------------------
-        ViseHttp.POST(NetConfig.getAttentionNum)
-                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.getAttentionNum))
-                .addParam("uid",spImp.getUID())
-                .request(new ACallback<String>() {
-                    @Override
-                    public void onSuccess(String data) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(data);
-                            if (jsonObject.getInt("code") == 200){
-                                Gson gson = new Gson();
-                                AttentionNumModel attentionNumModel = gson.fromJson(data, AttentionNumModel.class);
-                                tv_woguanzhude.setText("我关注的("+attentionNumModel.getObj().getAttentionNum()+")");
-                                tv_guanzhuwode.setText("关注我的("+attentionNumModel.getObj().getAttentionMe()+")");
-                                tv_guanzhuhuodong.setText("关注活动("+attentionNumModel.getObj().getAttentionActivity()+")");
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFail(int errCode, String errMsg) {
-
-                    }
-                });
-
-
+        initNum();
         //----------------我关注的---------------------
         ViseHttp.POST(NetConfig.userFocus)
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userFocus))
@@ -376,6 +351,7 @@ public class GuanZhuActivity extends BaseActivity {
                                                                     JSONObject jsonObject1 = new JSONObject(data);
                                                                     if (jsonObject1.getInt("code") == 200) {
                                                                         toToast(context, "取消关注成功");
+                                                                        initNum();
                                                                         mWoGuanZhuDeList.remove(i);
                                                                         woGuanZhuDeAdapter.notifyDataSetChanged();
                                                                     }
@@ -446,7 +422,7 @@ public class GuanZhuActivity extends BaseActivity {
                                                                 toToast(GuanZhuActivity.this, "关注成功");
                                                                 mGuanZhuWoDeList.get(posion).setIs_follow("1");
                                                                 guanZhuWoDeAdapter.notifyDataSetChanged();
-
+                                                                initNum();
                                                             }else {
                                                                 toToast(GuanZhuActivity.this, jsonObject.getString("message"));
                                                             }
@@ -522,6 +498,7 @@ public class GuanZhuActivity extends BaseActivity {
                                                                     JSONObject jsonObject = new JSONObject(data);
                                                                     if(jsonObject.getInt("code") == 200){
                                                                         toToast(context,"取消关注成功");
+                                                                        initNum();
                                                                         mGuanZhuHuoDongList.remove(posion);
                                                                         guanZhuDeHuoDongAdapter.notifyDataSetChanged();
                                                                     }
@@ -557,6 +534,34 @@ public class GuanZhuActivity extends BaseActivity {
                     }
                 });
 
+    }
+
+    private void initNum() {
+        ViseHttp.POST(NetConfig.getAttentionNum)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.getAttentionNum))
+                .addParam("uid",spImp.getUID())
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                Gson gson = new Gson();
+                                AttentionNumModel attentionNumModel = gson.fromJson(data, AttentionNumModel.class);
+                                tv_woguanzhude.setText("我关注的\n("+attentionNumModel.getObj().getAttentionNum()+")");
+                                tv_guanzhuwode.setText("关注我的\n("+attentionNumModel.getObj().getAttentionMe()+")");
+                                tv_guanzhuhuodong.setText("关注活动\n("+attentionNumModel.getObj().getAttentionActivity()+")");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
     }
 
     @OnClick({R.id.rl_woguanhude,R.id.rl_guanzhuwode,R.id.rl_guanzhuhuodong,R.id.rl_back})

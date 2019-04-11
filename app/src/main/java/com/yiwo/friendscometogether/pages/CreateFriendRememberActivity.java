@@ -776,7 +776,7 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
         AlertDialog.Builder builder = new AlertDialog.Builder(CreateFriendRememberActivity.this);
         builder.setMessage("是否保存至草稿")
                 .setNegativeButton("保存", new DialogInterface.OnClickListener() {
@@ -1032,6 +1032,8 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                                                 Toast.makeText(CreateFriendRememberActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                                             }
                                         } catch (JSONException e) {
+                                            WeiboDialogUtils.closeDialog(dialog);
+                                            Toast.makeText(CreateFriendRememberActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
                                             e.printStackTrace();
                                         }
                                     }
@@ -1288,6 +1290,8 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
+                                    WeiboDialogUtils.closeDialog(dialog);
+                                    Toast.makeText(CreateFriendRememberActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
@@ -1428,6 +1432,8 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
+                                    WeiboDialogUtils.closeDialog(dialog);
+                                    Toast.makeText(CreateFriendRememberActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
                                 }
                             }
 

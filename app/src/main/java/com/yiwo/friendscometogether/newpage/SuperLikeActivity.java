@@ -150,6 +150,10 @@ public class SuperLikeActivity extends BaseActivity {
                             @Override
                             public void onFail(int errCode, String errMsg) {
                                 Log.d("matching_user:err:::", errCode + "/////" + errMsg);
+                                dialogOfSearch.dismiss();
+                                toToast(context,"网络错误");
+                                tv_matching_text.setVisibility(View.VISIBLE);
+                                tv_matching_text.setText("没有找到和您匹配的瞳伴\n快去完善资料吧！");
                             }
                         });
             }

@@ -126,6 +126,7 @@
                     </RelativeLayout>
 
                     <ImageView
+                        android:visibility="gone"
                         android:id="@+id/iv_is_sign"
                         android:layout_marginLeft="10px"
                         android:layout_toRightOf="@+id/activity_my_information_rl_sign_team"

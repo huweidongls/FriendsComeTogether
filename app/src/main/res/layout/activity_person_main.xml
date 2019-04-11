@@ -202,7 +202,7 @@
                         android:layout_width="110px"
                         android:layout_height="56px" />
                     <TextView
-                        android:id="@+id/tv_person_code_ok"
+                        android:id="@+id/tv_person_marry"
                         android:layout_marginRight="20px"
                         android:layout_gravity="center_vertical"
                         android:gravity="center"
@@ -212,7 +212,8 @@
                         android:layout_width="110px"
                         android:layout_height="56px" />
                     <TextView
-                        android:id="@+id/tv_person_marry"
+                        android:visibility="gone"
+                        android:id="@+id/tv_person_code_ok"
                         android:layout_marginRight="20px"
                         android:layout_gravity="center_vertical"
                         android:gravity="center"

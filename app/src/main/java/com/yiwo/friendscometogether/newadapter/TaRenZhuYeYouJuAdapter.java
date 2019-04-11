@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -69,8 +70,8 @@ public class TaRenZhuYeYouJuAdapter extends RecyclerView.Adapter<TaRenZhuYeYouJu
                 context.startActivity(intent);
             }
         });
-        Glide.with(context).load(data.get(position).getHeadportrait()).into(holder.iv_avatar);
-        Glide.with(context).load(data.get(position).getPfpic()).into(holder.iv_image);
+        Glide.with(context).load(data.get(position).getHeadportrait()).apply(new RequestOptions().error(R.mipmap.my_head).placeholder(R.mipmap.my_head)).into(holder.iv_avatar);
+        Glide.with(context).load(data.get(position).getPfpic()).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(holder.iv_image);
         if(data.get(position).getFollow().equals("1")){
             holder.tv_focus.setBackgroundResource(R.drawable.bg_red_24px);
             holder.tv_focus.setTextColor(Color.parseColor("#ffffff"));

@@ -15,6 +15,7 @@
         android:layout_height="wrap_content" />
     
     <ImageView
+        android:id="@+id/iv_jian"
         android:layout_marginRight="40px"
         android:layout_marginTop="32px"
         android:layout_alignParentRight="true"

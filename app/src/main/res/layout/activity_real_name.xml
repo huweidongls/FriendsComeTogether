@@ -270,7 +270,7 @@
 
     <RelativeLayout
         android:id="@+id/activity_real_name_rl_complete"
-        android:background="#FF9D00"
+        android:background="@color/red_d84c37"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="98px">

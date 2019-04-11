@@ -42,7 +42,7 @@
 
     </RelativeLayout>
     <RelativeLayout
-        android:paddingBottom="20dp"
+        android:paddingBottom="30dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"

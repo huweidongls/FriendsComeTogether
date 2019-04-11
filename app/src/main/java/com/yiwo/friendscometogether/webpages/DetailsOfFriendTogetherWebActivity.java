@@ -128,6 +128,7 @@ public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(data);
                             if (jsonObject.getInt("code")==200){
+                                Log.d("asdsadasd",data);
                                 Gson gson = new Gson();
                                 model = gson.fromJson(data,YouJuWebModel.class);
                                 if (lookHistoryDbModelDao.queryBuilder()

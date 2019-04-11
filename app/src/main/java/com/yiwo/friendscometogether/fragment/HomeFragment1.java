@@ -228,18 +228,18 @@ public class HomeFragment1 extends BaseFragment {
                                             adapter.notifyDataSetChanged();
                                             page++;
                                         }
-                                        refreshLayout.finishRefresh(1000);
+                                        refreshLayout.finishLoadMore(1000);
                                     }
 
                                 } catch (JSONException e) {
-                                    refreshLayout.finishRefresh(1000);
+                                    refreshLayout.finishLoadMore(1000);
                                     e.printStackTrace();
                                 }
                             }
 
                             @Override
                             public void onFail(int errCode, String errMsg) {
-                                refreshLayout.finishRefresh(1000);
+                                refreshLayout.finishLoadMore(1000);
                                 toToast(context,"加载失败");
                             }
                         });

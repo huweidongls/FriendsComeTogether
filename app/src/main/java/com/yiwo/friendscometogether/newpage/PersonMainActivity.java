@@ -267,9 +267,10 @@ public class PersonMainActivity extends BaseActivity {
                                             tv_person_marry.setText("非单身");
                                         }
                                         if (model.getObj().getInfo().getUsercodeok().equals("0")){
-                                            tv_person_code_ok.setText("未认证");
+                                            tv_person_code_ok.setVisibility(View.GONE);
                                         }else if (model.getObj().getInfo().getUsermarry().equals("1")){
-                                            tv_person_code_ok.setText("已认证");
+                                            tv_person_code_ok.setVisibility(View.VISIBLE);
+                                            tv_person_code_ok.setText("已实名");
                                         }
                                         tv_person_age.setText(model.getObj().getInfo().getAge());
                                         tv_person_address.setText(model.getObj().getInfo().getAddress());
@@ -282,6 +283,9 @@ public class PersonMainActivity extends BaseActivity {
                                         } else if (model.getObj().getInfo().getFriends().equals("0")) {
                                             Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_tianjiahaoyou).into(iv_addfriend);
 
+                                        }
+                                        if(model.getObj().getInfo().getIf_kefu().equals("1")){//如果是客服 直接可以聊天
+                                            Glide.with(PersonMainActivity.this).load(R.mipmap.other_send_msg).into(iv_addfriend);
                                         }
                                         if (model.getObj().getInfo().getFollow().equals("0")) {
                                             isFollow = 0 ;
@@ -417,9 +421,10 @@ public class PersonMainActivity extends BaseActivity {
                                     tv_person_marry.setText("非单身");
                                 }
                                 if (model.getObj().getInfo().getUsercodeok().equals("0")){
-                                    tv_person_code_ok.setText("未认证");
+                                    tv_person_code_ok.setVisibility(View.GONE);
                                 }else if (model.getObj().getInfo().getUsermarry().equals("1")){
-                                    tv_person_code_ok.setText("已认证");
+                                    tv_person_code_ok.setVisibility(View.VISIBLE);
+                                    tv_person_code_ok.setText("已实名");
                                 }
 
                                 tv_guanzhu_num.setText(model.getObj().getInfo().getUserlike());
@@ -430,7 +435,7 @@ public class PersonMainActivity extends BaseActivity {
                                 } else if (model.getObj().getInfo().getFriends().equals("0")) {
                                     Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_tianjiahaoyou).into(iv_addfriend);
                                 }
-                                if(model.getObj().getInfo().getIf_kefu().equals("1")){
+                                if(model.getObj().getInfo().getIf_kefu().equals("1")){//如果是客服 直接可以聊天
                                     Glide.with(PersonMainActivity.this).load(R.mipmap.other_send_msg).into(iv_addfriend);
                                 }
                                 if (model.getObj().getInfo().getFollow().equals("0")) {
@@ -579,7 +584,7 @@ public class PersonMainActivity extends BaseActivity {
                     intent.setClass(PersonMainActivity.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
-                    if (model.getObj().getInfo().getFriends().equals("1")||model.getObj().getInfo().getIf_kefu().equals("1")) {
+                    if (model.getObj().getInfo().getFriends().equals("1")||model.getObj().getInfo().getIf_kefu().equals("1")) {//如果是客服 直接可以聊天
                         liaotian(model.getObj().getInfo().getWy_accid());
                     } else{
                         FriendDescribeDialog dialog = new FriendDescribeDialog(PersonMainActivity.this);

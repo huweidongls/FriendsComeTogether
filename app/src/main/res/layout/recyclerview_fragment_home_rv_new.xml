@@ -73,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="426px"
             android:layout_marginTop="25px"
-            android:src="@drawable/bg_blue"
+            android:src="@mipmap/zanwutupian"
             test:radius1="12px" />
 
         <TextView
@@ -212,7 +212,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_youji_avatar"
-                android:src="@mipmap/welcome"
+                android:src="@mipmap/zanwutupian"
                 android:layout_width="76px"
                 android:layout_height="76px" />
 
@@ -262,7 +262,7 @@
             android:layout_height="354px"
             android:layout_marginTop="20px"
             android:scaleType="centerCrop"
-            android:src="@mipmap/welcome" />
+            android:src="@mipmap/zanwutupian" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -277,7 +277,7 @@
                 android:layout_marginRight="3.5px"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/welcome" />
+                android:src="@mipmap/zanwutupian" />
 
             <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
                 android:id="@+id/iv_youji_title3"
@@ -288,7 +288,7 @@
                 android:layout_marginRight="3.5px"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/welcome" />
+                android:src="@mipmap/zanwutupian" />
 
             <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
                 android:id="@+id/iv_youji_title4"
@@ -298,7 +298,7 @@
                 android:layout_marginLeft="3.5px"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/welcome" />
+                android:src="@mipmap/zanwutupian" />
         </LinearLayout>
 
         <TextView

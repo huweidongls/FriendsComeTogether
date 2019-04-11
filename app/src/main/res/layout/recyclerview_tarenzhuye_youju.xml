@@ -71,7 +71,7 @@
             test:radius1="12px"
             android:scaleType="centerCrop"
             android:layout_marginTop="25px"
-            android:src="@mipmap/welcome"
+            android:src="@mipmap/zanwutupian"
             android:layout_width="match_parent"
             android:layout_height="426px" />
 
