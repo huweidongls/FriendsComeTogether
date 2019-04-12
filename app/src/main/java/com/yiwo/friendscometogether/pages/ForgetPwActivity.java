@@ -3,6 +3,7 @@ package com.yiwo.friendscometogether.pages;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -50,10 +51,12 @@ public class ForgetPwActivity extends BaseActivity {
     EditText forgetPw_codeEt;
     @BindView(R.id.forgetPw_btn)
     Button forgetPw_btn;
+    @BindView(R.id.iv_show_pwd)
+    ImageView iv_show_pwd;
     private Unbinder unbinder;
     String codeID = "";
     Context c;
-
+    private boolean isShowPwd = false;
     public Button getCode_btn() {
         return getCode_btn;
     }
@@ -72,7 +75,7 @@ public class ForgetPwActivity extends BaseActivity {
         spImp = new SpImp(c);
     }
 
-    @OnClick({R.id.getCode_btn, R.id.forgetPw_btn, R.id.rl_set_return})
+    @OnClick({R.id.getCode_btn, R.id.forgetPw_btn, R.id.rl_set_return ,R.id.iv_show_pwd})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_set_return:
@@ -84,6 +87,21 @@ public class ForgetPwActivity extends BaseActivity {
             case R.id.forgetPw_btn:
                 forgetPw(forgetPw_phoneEt.getText().toString(), forgetPw_pwEt.getText().toString(),
                         forgetPw_confirmPwEt.getText().toString(), forgetPw_codeEt.getText().toString());
+                break;
+            case R.id.iv_show_pwd:
+                if (isShowPwd){
+                    isShowPwd = false;
+                    iv_show_pwd.setImageResource(R.mipmap.pwd_show_no);
+                    forgetPw_pwEt.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD|InputType.TYPE_CLASS_TEXT);
+                    forgetPw_confirmPwEt.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD|InputType.TYPE_CLASS_TEXT);
+                    forgetPw_confirmPwEt.setSelection(forgetPw_confirmPwEt.getText().length());
+                }else {
+                    isShowPwd = true;
+                    iv_show_pwd.setImageResource(R.mipmap.pwd_show_yes);
+                    forgetPw_pwEt.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    forgetPw_confirmPwEt.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    forgetPw_confirmPwEt.setSelection(forgetPw_confirmPwEt.getText().length());
+                }
                 break;
         }
     }
@@ -162,7 +180,7 @@ public class ForgetPwActivity extends BaseActivity {
 
                         @Override
                         public void onFail(int errCode, String errMsg) {
-
+                            toToast(c, errMsg);
                         }
                     });
         }

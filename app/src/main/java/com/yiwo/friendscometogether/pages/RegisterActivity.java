@@ -3,6 +3,7 @@ package com.yiwo.friendscometogether.pages;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -58,6 +59,9 @@ public class RegisterActivity extends BaseActivity {
     EditText register_codeEt;
     @BindView(R.id.register_btn)
     Button register_btn;
+    @BindView(R.id.iv_show_pwd)
+    ImageView iv_show_pwd;
+
     private Unbinder unbinder;
     String codeID = "";
     Context c;
@@ -68,7 +72,7 @@ public class RegisterActivity extends BaseActivity {
     boolean state = true;
 
     private String account;
-
+    private boolean isShowPwd = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +84,7 @@ public class RegisterActivity extends BaseActivity {
                 .setActivity(RegisterActivity.this);
         spImp = new SpImp(c);
     }
-    @OnClick({R.id.getCode_btn,R.id.register_btn,R.id.rl_set_return})
+    @OnClick({R.id.getCode_btn,R.id.register_btn,R.id.rl_set_return,R.id.iv_show_pwd})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.rl_set_return:
@@ -93,6 +97,21 @@ public class RegisterActivity extends BaseActivity {
             case R.id.register_btn:
                 register(register_phoneEt.getText().toString(),register_pwEt.getText().toString(),
                         register_confirmPwEt.getText().toString(),register_codeEt.getText().toString());
+                break;
+            case R.id.iv_show_pwd:
+                if (isShowPwd){
+                    isShowPwd = false;
+                    iv_show_pwd.setImageResource(R.mipmap.pwd_show_no);
+                    register_pwEt.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD|InputType.TYPE_CLASS_TEXT);
+                    register_confirmPwEt.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD|InputType.TYPE_CLASS_TEXT);
+                    register_confirmPwEt.setSelection(register_confirmPwEt.getText().length());
+                }else {
+                    isShowPwd = true;
+                    iv_show_pwd.setImageResource(R.mipmap.pwd_show_yes);
+                    register_pwEt.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    register_confirmPwEt.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    register_confirmPwEt.setSelection(register_confirmPwEt.getText().length());
+                }
                 break;
         }
     }

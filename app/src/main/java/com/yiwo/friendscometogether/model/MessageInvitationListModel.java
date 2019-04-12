@@ -54,6 +54,7 @@ public class MessageInvitationListModel {
          * username : 一样一样
          * pfpic : http://47.92.136.19/uploads/xingcheng/20180930/f5ab478ba5edee62102e9b8b499b8d86.jpg
          * sex : 1
+         * kind ：
          * "uid": "79"//邀请人  ID
          * "no_name": "0", //是否  0不是匿名要请  1匿名要请
          */
@@ -70,6 +71,7 @@ public class MessageInvitationListModel {
         private String sex;
         private String uid;
         private String no_name;
+        private String kind;
         public String getId() {
             return id;
         }
@@ -164,6 +166,14 @@ public class MessageInvitationListModel {
 
         public void setNo_name(String no_name) {
             this.no_name = no_name;
+        }
+
+        public String getKind() {
+            return kind;
+        }
+
+        public void setKind(String kind) {
+            this.kind = kind;
         }
     }
 }

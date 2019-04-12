@@ -3,6 +3,7 @@ package com.yiwo.friendscometogether.pages;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -58,12 +59,14 @@ public class LoginActivity extends BaseActivity {
     TextView login_forgetPwTv;
     @BindView(R.id.tv_XY_TK)
     TextView tv_XY_TK;
+    @BindView(R.id.iv_show_pwd)
+    ImageView iv_show_pwd;
 //    @BindView(R.id.login_wechatIv)
 //    ImageView login_wechatIv;
     Context c;
     public SpImp spImp;
     UMShareAPI api;
-
+    private boolean isShowPwd = false;
     private String account;
 
     @Override
@@ -77,7 +80,7 @@ public class LoginActivity extends BaseActivity {
         api = UMShareAPI.get(this);
     }
 
-    @OnClick({R.id.rl_set_return, R.id.login_btn, R.id.login_registerTv, R.id.login_forgetPwTv,R.id.tv_XY_TK})
+    @OnClick({R.id.rl_set_return, R.id.login_btn, R.id.login_registerTv, R.id.login_forgetPwTv,R.id.tv_XY_TK,R.id.iv_show_pwd})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_set_return:
@@ -100,6 +103,19 @@ public class LoginActivity extends BaseActivity {
                 itA.putExtra("title", "用户协议");
                 itA.putExtra("url", NetConfig.userAgreementUrl);
                 startActivity(itA);
+                break;
+            case R.id.iv_show_pwd:
+                    if (isShowPwd){
+                        isShowPwd = false;
+                        iv_show_pwd.setImageResource(R.mipmap.pwd_show_no);
+                        login_pwEt.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD|InputType.TYPE_CLASS_TEXT);
+                        login_pwEt.setSelection(login_pwEt.getText().length());
+                    }else {
+                        isShowPwd = true;
+                        iv_show_pwd.setImageResource(R.mipmap.pwd_show_yes);
+                        login_pwEt.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                        login_pwEt.setSelection(login_pwEt.getText().length());
+                    }
                 break;
 //            case R.id.login_wechatIv:
 //                toToast(LoginActivity.this,"调起微信登录失败");
