@@ -13,9 +13,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +45,7 @@ import com.yiwo.friendscometogether.newadapter.ChooseDateAdapter;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.BigDecimalUtils;
 import com.yiwo.friendscometogether.utils.StringUtils;
+import com.yiwo.friendscometogether.webpages.ApplyActivityAgreementWebActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -117,6 +120,12 @@ public class ApplyActivity extends BaseActivity {
     @BindView(R.id.tv_qitayaoqiu)
     TextView tvQiTaYaoQiu;
 
+    @BindView(R.id.cb_allow)
+    CheckBox cb_allow;
+    @BindView(R.id.tv_allow_agreement)
+    TextView tvAllowAgreement;
+    @BindView(R.id.ll_allow_agreement)
+    LinearLayout llAllowAgreement;
     private String yourChoice = "";
     private int payState = 0;
     private String pfID = "0";
@@ -141,6 +150,7 @@ public class ApplyActivity extends BaseActivity {
 
     private int chooseDateIndex =0; // 选择日期index
     private String chooseDateID;
+    private boolean isAlowAgreement = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -157,6 +167,7 @@ public class ApplyActivity extends BaseActivity {
         } else {
             getShowView();
         }
+
     }
 
     private void getShowViewTwo(String id, String tid) {
@@ -291,7 +302,7 @@ public class ApplyActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.activity_apply_rl_back, R.id.apply_btn, R.id.iv_jian, R.id.iv_jia, R.id.online_pay, R.id.apply_ll_is_noname})
+    @OnClick({R.id.activity_apply_rl_back, R.id.apply_btn, R.id.iv_jian, R.id.iv_jia, R.id.online_pay, R.id.apply_ll_is_noname,R.id.ll_allow_agreement})
 //,R.id.apply_sex_tv
     public void OnClick(View v) {
         switch (v.getId()) {
@@ -347,8 +358,24 @@ public class ApplyActivity extends BaseActivity {
                         });
                 singleChoiceDialog1.show();
                 break;
+            case R.id.ll_allow_agreement:
+                Intent intent = new Intent();
+                intent.setClass(ApplyActivity.this, ApplyActivityAgreementWebActivity.class);
+                startActivityForResult(intent,1);
+                break;
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == 1){//同意协议
+            cb_allow.setChecked(true);
+            isAlowAgreement = true;
+            tvOnlinePay.setBackgroundResource(R.color.red_d84c37);
+            apply_btn.setBackgroundResource(R.color.red_d84c37);
+        }
     }
 
     public void setApplyPaymentView(int state) {
@@ -494,6 +521,10 @@ public class ApplyActivity extends BaseActivity {
     }
 
     public void apply() {
+        if (!isAlowAgreement){
+            toToast(ApplyActivity.this,"请阅读旅游合同等内容");
+            return;
+        }
         String user_id = spImp.getUID();
         if (user_id.equals("0")) {
             startActivity(new Intent(ApplyActivity.this, LoginActivity.class));

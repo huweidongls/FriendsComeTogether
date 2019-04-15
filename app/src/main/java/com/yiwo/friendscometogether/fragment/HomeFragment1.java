@@ -56,7 +56,6 @@ import com.yiwo.friendscometogether.newpage.EditorLabelActivity;
 import com.yiwo.friendscometogether.newpage.MessageActivity;
 import com.yiwo.friendscometogether.newpage.SuperLikeSxActivity;
 import com.yiwo.friendscometogether.pages.CityActivity;
-import com.yiwo.friendscometogether.utils.AppUpdateUtil;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;

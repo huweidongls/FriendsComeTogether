@@ -27,6 +27,7 @@ import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
 import com.netease.nimlib.sdk.uinfo.model.UserInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -49,7 +50,7 @@ import cn.jpush.android.api.JPushInterface;
 
 
 public class MyApplication extends Application {
-    public static String versionCode = "V1.0.1";
+    public static String versionCode = "V2.1.0";
     public static String sign = "";
     // 注册获取验证码倒计时
     public static TimeCount timecount;
@@ -115,7 +116,7 @@ public class MyApplication extends Application {
         //oncreate方法中写
         timecount = new TimeCount(60000, 1000);
         ftptimecount = new FTPTimeCount(60000, 1000);
-
+        CrashReport.initCrashReport(getApplicationContext(), "20d02c310e", false);
 
         if (NIMUtil.isMainProcess(this)) {
             // 注意：以下操作必须在主进程中进行

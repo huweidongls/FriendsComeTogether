@@ -70,6 +70,11 @@ public class PersonMainGuanZhu_FansAdapter extends RecyclerView.Adapter<PersonMa
 
             }
         });
+        if (bean.getUserID().equals(spImp.getUID())){
+            holder.tv_guanzhu.setVisibility(View.GONE);
+        }else {
+            holder.tv_guanzhu.setVisibility(View.VISIBLE);
+        }
         if(bean.getStatus().equals("1")){
             holder.tv_guanzhu.setBackgroundResource(R.drawable.bg_red_24px);
             holder.tv_guanzhu.setTextColor(Color.parseColor("#ffffff"));

@@ -69,6 +69,7 @@ public class WoGuanZhuDeAdapter extends RecyclerView.Adapter<WoGuanZhuDeAdapter.
 
             }
         });
+
         holder.rl_guanzhu.setFocusable(false);
         holder.rl_guanzhu.setOnClickListener(new View.OnClickListener() {
             @Override

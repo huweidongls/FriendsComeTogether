@@ -61,6 +61,7 @@ import com.yiwo.friendscometogether.pages.GuideActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.WelcomeActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.utils.AppUpdateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -155,6 +156,7 @@ public class MainActivity extends FragmentActivity {
         init();
         initSessionListener();
         registReceiver();
+        AppUpdateUtil.checkUpdate(context,true);
     }
 
     private void registReceiver() {

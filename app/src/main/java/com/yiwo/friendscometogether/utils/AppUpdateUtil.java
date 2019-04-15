@@ -60,7 +60,7 @@ public class AppUpdateUtil {
 //                                                    DownloadManager downloadManager= (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
 //                                                    //将下载任务加入下载队列，否则不会进行下载
 //                                                    downloadManager.enqueue(request);
-                                                    String app_name = "tongban2.0";
+                                                    String app_name = "tongban_app";
                                                     Intent down = new Intent(context, UpdateService.class);
                                                     down.putExtra("down_url", versonModel.getObj().getAn_download());
                                                     down.putExtra("app_name", app_name);
@@ -90,11 +90,13 @@ public class AppUpdateUtil {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        if(!auto)
                         mProDialog.dismiss();
                     }
 
                     @Override
                     public void onFail(int errCode, String errMsg) {
+                        if(!auto)
                         mProDialog.dismiss();
                         Toast.makeText(context,errMsg,Toast.LENGTH_SHORT).show();
                     }

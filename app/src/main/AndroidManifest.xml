@@ -28,7 +28,8 @@
         android:protectionLevel="signature" />
     <!-- 接收 SDK 消息广播权限， 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
     <uses-permission android:name="com.yiwo.friendscometogether.permission.RECEIVE_MSG" />
-
+    <!-- bugly -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
     <!-- 小米推送 权限 -->
     <!-- 配置权限，已经配置过的条目则无须添加 -->
     <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
@@ -474,7 +475,8 @@
         <activity android:name=".webpages.DetailsOfFriendsWebActivity" />
         <activity android:name=".webpages.DetailsOfFriendTogetherWebActivity" />
         <activity android:name=".newpage.MoreCommentHuodongActivity" />
-        <activity android:name=".webpages.ShopInfoWebActivity"></activity>
+        <activity android:name=".webpages.ShopInfoWebActivity" />
+        <activity android:name=".webpages.ApplyActivityAgreementWebActivity"></activity>
     </application>
 
 </manifest>
