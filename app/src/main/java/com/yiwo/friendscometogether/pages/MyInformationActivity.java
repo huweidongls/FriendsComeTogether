@@ -296,7 +296,7 @@ public class MyInformationActivity extends TakePhotoActivity {
                 break;
             case R.id.activity_my_information_rl_birthday:
                 //用户生日
-//                new DatePickerDialog(MyInformationActivity.this, onDateSetListener, mYear, mMonth, mDay).show();
+                new DatePickerDialog(MyInformationActivity.this, onDateSetListener, mYear, mMonth, mDay).show();
                 break;
             case R.id.activity_my_information_rl_register_time:
 //                new DatePickerDialog(MyInformationActivity.this, onRegisterDateSetListener, mYear, mMonth, mDay).show();
@@ -542,7 +542,7 @@ public class MyInformationActivity extends TakePhotoActivity {
                 .addParam("usersex", tvSex.getText().toString().equals("男") ? "0" : "1")
                 .addParam("useraddress", tvLocation.getText().toString())
                 .addParam("userautograph", TextUtils.isEmpty(etSign.getText().toString()) ? etSign.getHint().toString() : etSign.getText().toString())
-//                .addParam("userbirthday", tvBirthday.getText().toString())
+                .addParam("userbirthday", tvBirthday.getText().toString())
 //                .addParam("usertime", tvRegister.getText().toString())
                 .addParam("usermarry", tvSingle.getText().toString().equals("是") ? "1" : "2")
                 .request(new ACallback<String>() {

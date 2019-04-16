@@ -4,12 +4,16 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -167,7 +171,15 @@ public class ApplyActivity extends BaseActivity {
         } else {
             getShowView();
         }
+        Spannable string = new SpannableString("我已阅读并同意");
+        // 前景色
+        string.setSpan(new ForegroundColorSpan(Color.parseColor("#d84c37")), 0, string.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
 
+        Spannable string1 = new SpannableString("预定须知、旅游合同、特别预定提示、安全提示");
+        // 前景色
+        string1.setSpan(new ForegroundColorSpan(Color.parseColor("#008B00")), 0, string1.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        tvAllowAgreement.setText(string);
+        tvAllowAgreement.append(string1);
     }
 
     private void getShowViewTwo(String id, String tid) {

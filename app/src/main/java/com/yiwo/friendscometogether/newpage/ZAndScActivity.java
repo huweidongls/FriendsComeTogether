@@ -87,13 +87,44 @@ public class ZAndScActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back})
+    @OnClick({R.id.rl_back,R.id.rl_clear})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.rl_back:
                 finish();
                 break;
+
+            case R.id.rl_clear:
+                clearDatas();
+                break;
         }
+    }
+
+    private void clearDatas() {
+        ViseHttp.POST(NetConfig.clearAdmire)
+                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.clearAdmire))
+                .addParam("userID", uid)
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                toToast(context,"已清空");
+                                mList.clear();
+                                adapter.notifyDataSetChanged();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
     }
 
 }

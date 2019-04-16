@@ -472,26 +472,16 @@
                         android:button="@drawable/check_box_red"
                         android:clickable="false"
                         android:id="@+id/cb_allow"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
-                        android:textSize="28px"
-                        android:textColor="@color/black_333333"
-                        android:layout_gravity="center_vertical"
-                        android:text="我已阅读并接受"
-                        android:layout_marginLeft="20px"
-                        android:lines="1"
-                        android:ellipsize="end"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
+                        android:layout_marginTop="3px"
+                        android:layout_marginBottom="3px"
                         android:id="@+id/tv_allow_agreement"
                         android:textSize="28px"
-                        android:textColor="@color/red_d84c37"
                         android:layout_gravity="center_vertical"
-                        android:text="旅游合同等内容"
-                        android:lines="1"
+                        android:layout_marginLeft="20px"
+                        android:text="我已阅读并同意预定须知、旅游合同、特别预定提示、安全提示"
                         android:ellipsize="end"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />

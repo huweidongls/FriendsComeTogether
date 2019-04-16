@@ -23,7 +23,21 @@
                 style="@style/iv_return" />
 
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_clear"
+            android:layout_width="100px"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="清空"
+                android:textColor="@color/white_ffffff"
+                android:textSize="28px" />
+
+        </RelativeLayout>
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
