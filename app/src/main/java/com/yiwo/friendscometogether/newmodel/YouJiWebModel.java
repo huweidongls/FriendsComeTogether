@@ -58,6 +58,7 @@ public class YouJiWebModel {
         private String share_pic;
         private String share_url;
         private String share_info;
+        private String who;
         public String getAdd() {
             return add;
         }
@@ -104,6 +105,14 @@ public class YouJiWebModel {
 
         public void setShare_info(String share_info) {
             this.share_info = share_info;
+        }
+
+        public String getWho() {
+            return who;
+        }
+
+        public void setWho(String who) {
+            this.who = who;
         }
 
         public static class TitleBean {

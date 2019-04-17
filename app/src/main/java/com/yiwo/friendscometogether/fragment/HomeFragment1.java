@@ -81,7 +81,6 @@ import butterknife.OnClick;
 
 public class HomeFragment1 extends BaseFragment {
 
-    private Context context = getContext();
     View rootView;
 
     @BindView(R.id.home_refreshlayout)
@@ -172,6 +171,7 @@ public class HomeFragment1 extends BaseFragment {
         ScreenAdapterTools.getInstance().loadView(rootView);
         spImp = new SpImp(getContext());
 //        AppUpdateUtil.checkUpdate(getActivity(),true);
+        initData();
         return rootView;
     }
 
@@ -202,6 +202,10 @@ public class HomeFragment1 extends BaseFragment {
                 refreshLayout.finishRefresh(1000);
             }
         });
+        if (!isNetConnect()){
+            toToast(getContext(),"当前无网络！");
+            return;
+        }
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull final RefreshLayout refreshLayout) {
@@ -239,7 +243,7 @@ public class HomeFragment1 extends BaseFragment {
                             @Override
                             public void onFail(int errCode, String errMsg) {
                                 refreshLayout.finishLoadMore(1000);
-                                toToast(context,"加载失败");
+                                toToast(getContext(),"加载失败");
                             }
                         });
             }
@@ -540,6 +544,10 @@ public class HomeFragment1 extends BaseFragment {
     }
 
     private void refresh(String type1){
+        if (!isNetConnect()){
+            toToast(getContext(),"当前无网络！");
+            return;
+        }
         type = type1;
         dialog_loading = WeiboDialogUtils.createLoadingDialog(getContext(),"加载中...");
         ViseHttp.POST(NetConfig.newHomeData)
@@ -570,7 +578,7 @@ public class HomeFragment1 extends BaseFragment {
 
                     @Override
                     public void onFail(int errCode, String errMsg) {
-                        toToast(context,"加载失败");
+                        toToast(getContext(),"加载失败");
                         WeiboDialogUtils.closeDialog(dialog_loading);
                     }
                 });
@@ -610,7 +618,7 @@ public class HomeFragment1 extends BaseFragment {
 
                         @Override
                         public void onFail(int errCode, String errMsg) {
-                            toToast(context,"加载失败");
+                            toToast(getContext(),"加载失败");
                             WeiboDialogUtils.closeDialog(dialog_loading);
                         }
                     });
@@ -645,7 +653,7 @@ public class HomeFragment1 extends BaseFragment {
 
                         @Override
                         public void onFail(int errCode, String errMsg) {
-                            toToast(context,"加载失败");
+                            toToast(getContext(),"加载失败");
                             WeiboDialogUtils.closeDialog(dialog_loading);
                         }
                     });
@@ -680,7 +688,7 @@ public class HomeFragment1 extends BaseFragment {
 
                         @Override
                         public void onFail(int errCode, String errMsg) {
-                            toToast(context,"加载失败...");
+                            toToast(getContext(),"加载失败...");
                             WeiboDialogUtils.closeDialog(dialog_loading);
                         }
                     });

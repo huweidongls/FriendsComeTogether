@@ -133,6 +133,7 @@
                 android:background="@drawable/select_chat"
                 android:scaleType="centerCrop" />
             <ImageView
+                android:visibility="gone"
                 android:layout_toRightOf="@+id/menu_chat"
                 android:id="@+id/iv_point_new_chat_message"
                 android:layout_marginTop="16px"

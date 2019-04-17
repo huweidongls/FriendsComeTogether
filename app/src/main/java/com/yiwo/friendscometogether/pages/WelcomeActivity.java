@@ -63,6 +63,10 @@ public class WelcomeActivity extends BaseActivity {
             }, 2000);
 
         }else {
+            if(!isNetworkAvailable(WelcomeActivity.this)){
+                toToast(WelcomeActivity.this,"当前无网络");
+                return;
+            }
             LoginInfo info = new LoginInfo(account, token);
 //            LoginInfo info = new LoginInfo(account, "1112");
             RequestCallback<LoginInfo> callback =

@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -181,9 +183,20 @@ public class MainActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(myGoPersonMainBroadcastReceiver);
+        unregisterReceiver(myShenQingJinQunBroadcastReceiver);
+        Log.d("destory++destory","Maindestory");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("destory++destory","Mainstop");
     }
 
     private void checkHasNewChatmessage() {
+        if (!isNetworkConnected(context)){
+            return;
+        }
         if (!TextUtils.isEmpty(uid) && !uid.equals("0")){
             if (NIMClient.getService(MsgService.class).getTotalUnreadCount()>0){//获取未读消息数
                 ivNewChatMessage.setVisibility(View.VISIBLE);
@@ -498,6 +511,17 @@ public class MainActivity extends FragmentActivity {
 
             }
         });
+    }
+    public boolean isNetworkConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+            if (mNetworkInfo != null) {
+                return mNetworkInfo.isAvailable();
+            }
+        }
+        return false;
     }
 
 }

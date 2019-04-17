@@ -198,13 +198,13 @@ public class EditorLabelActivity extends BaseActivity {
                                     }
                                 });
                                 String[] s2 = model.getObj().getMotion().split(",");
-//                                if(!TextUtils.isEmpty(model.getObj().getMotion())){
+                                if(!TextUtils.isEmpty(model.getObj().getMotion())){
 //                                    tv2.setVisibility(View.GONE);
-//                                    rv2.setVisibility(View.VISIBLE);
-//                                }else {
+                                    rv2.setVisibility(View.VISIBLE);
+                                }else {
 //                                    tv2.setVisibility(View.VISIBLE);
-//                                    rv2.setVisibility(View.GONE);
-//                                }
+                                    rv2.setVisibility(View.GONE);
+                                }
                                 adapter2 = new EditorLabelSaveAdapter(s2, 2);
                                 rv2.setAdapter(adapter2);
                                 rv2.setOnTouchListener(new View.OnTouchListener() {
@@ -217,13 +217,13 @@ public class EditorLabelActivity extends BaseActivity {
                                     }
                                 });
                                 String[] s3 = model.getObj().getMusic().split(",");
-//                                if(!TextUtils.isEmpty(model.getObj().getMusic())){
+                                if(!TextUtils.isEmpty(model.getObj().getMusic())){
 //                                    tv3.setVisibility(View.GONE);
-//                                    rv3.setVisibility(View.VISIBLE);
-//                                }else {
+                                    rv3.setVisibility(View.VISIBLE);
+                                }else {
 //                                    tv3.setVisibility(View.VISIBLE);
-//                                    rv3.setVisibility(View.GONE);
-//                                }
+                                    rv3.setVisibility(View.GONE);
+                                }
                                 adapter3 = new EditorLabelSaveAdapter(s3, 3);
                                 rv3.setAdapter(adapter3);
                                 rv3.setOnTouchListener(new View.OnTouchListener() {
@@ -236,13 +236,13 @@ public class EditorLabelActivity extends BaseActivity {
                                     }
                                 });
                                 String[] s4 = model.getObj().getDelicious().split(",");
-//                                if(!TextUtils.isEmpty(model.getObj().getDelicious())){
+                                if(!TextUtils.isEmpty(model.getObj().getDelicious())){
 //                                    tv4.setVisibility(View.GONE);
-//                                    rv4.setVisibility(View.VISIBLE);
-//                                }else {
+                                    rv4.setVisibility(View.VISIBLE);
+                                }else {
 //                                    tv4.setVisibility(View.VISIBLE);
-//                                    rv4.setVisibility(View.GONE);
-//                                }
+                                    rv4.setVisibility(View.GONE);
+                                }
                                 adapter4 = new EditorLabelSaveAdapter(s4, 4);
                                 rv4.setAdapter(adapter4);
                                 rv4.setOnTouchListener(new View.OnTouchListener() {
@@ -255,13 +255,13 @@ public class EditorLabelActivity extends BaseActivity {
                                     }
                                 });
                                 String[] s5 = model.getObj().getFilm().split(",");
-//                                if(!TextUtils.isEmpty(model.getObj().getFilm())){
+                                if(!TextUtils.isEmpty(model.getObj().getFilm())){
 //                                    tv5.setVisibility(View.GONE);
-//                                    rv5.setVisibility(View.VISIBLE);
-//                                }else {
+                                    rv5.setVisibility(View.VISIBLE);
+                                }else {
 //                                    tv5.setVisibility(View.VISIBLE);
-//                                    rv5.setVisibility(View.GONE);
-//                                }
+                                    rv5.setVisibility(View.GONE);
+                                }
                                 adapter5 = new EditorLabelSaveAdapter(s5, 5);
                                 rv5.setAdapter(adapter5);
                                 rv5.setOnTouchListener(new View.OnTouchListener() {
@@ -274,13 +274,13 @@ public class EditorLabelActivity extends BaseActivity {
                                     }
                                 });
                                 String[] s6 = model.getObj().getBook().split(",");
-//                                if(!TextUtils.isEmpty(model.getObj().getBook())){
+                                if(!TextUtils.isEmpty(model.getObj().getBook())){
 //                                    tv6.setVisibility(View.GONE);
-//                                    rv6.setVisibility(View.VISIBLE);
-//                                }else {
+                                    rv6.setVisibility(View.VISIBLE);
+                                }else {
 //                                    tv6.setVisibility(View.VISIBLE);
-//                                    rv6.setVisibility(View.GONE);
-//                                }
+                                    rv6.setVisibility(View.GONE);
+                                }
                                 adapter6 = new EditorLabelSaveAdapter(s6, 6);
                                 rv6.setAdapter(adapter6);
                                 rv6.setOnTouchListener(new View.OnTouchListener() {
@@ -293,13 +293,13 @@ public class EditorLabelActivity extends BaseActivity {
                                     }
                                 });
                                 String[] s7 = model.getObj().getTravel().split(",");
-//                                if(!TextUtils.isEmpty(model.getObj().getTravel())){
+                                if(!TextUtils.isEmpty(model.getObj().getTravel())){
 //                                    tv7.setVisibility(View.GONE);
-//                                    rv7.setVisibility(View.VISIBLE);
-//                                }else {
+                                    rv7.setVisibility(View.VISIBLE);
+                                }else {
 //                                    tv7.setVisibility(View.VISIBLE);
-//                                    rv7.setVisibility(View.GONE);
-//                                }
+                                    rv7.setVisibility(View.GONE);
+                                }
 
                                 adapter7 = new EditorLabelSaveAdapter(s7, 7);
                                 rv7.setAdapter(adapter7);

@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -28,8 +30,22 @@ import static com.yiwo.friendscometogether.utils.TokenUtils.getToken;
 
 public class AppUpdateUtil {
     static ProgressDialog mProDialog = null;
+    public static boolean isNetworkConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+            if (mNetworkInfo != null) {
+                return mNetworkInfo.isAvailable();
+            }
+        }
+        return false;
+    }
     public static void checkUpdate(final Context context, final boolean auto) {
-
+        if (!isNetworkConnected(context))
+        {
+            return;
+        }
         if(!auto) {
             mProDialog = ProgressDialog.show(context, null,"正在检查版本，请稍后...", false, true);
         }

@@ -297,7 +297,7 @@ public class DetailsOfFriendsWebActivity extends BaseWebActivity {
                                                     .setShareboardclickCallback(new ShareBoardlistener() {
                                                         @Override
                                                         public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
-                                                            ShareUtils.shareWeb(DetailsOfFriendsWebActivity.this, shareModel.getObj().getUrl(), "友记",
+                                                            ShareUtils.shareWeb(DetailsOfFriendsWebActivity.this, shareModel.getObj().getUrl(), model.getObj().getWho()+"的友记",
                                                                     shareModel.getObj().getTitle(), shareModel.getObj().getImages(), share_media);
                                                         }
                                                     }).open();
