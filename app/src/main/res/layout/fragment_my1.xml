@@ -52,6 +52,26 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="13px"
                     android:src="@mipmap/my_head" />
+                <RelativeLayout
+                    android:alpha="0.5"
+                    android:background="@mipmap/aaa"
+                    android:layout_width="144px"
+                    android:layout_height="144px"
+                    android:layout_below="@+id/ll_person_page"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="13px">
+                    <TextView
+
+                        android:text="设置"
+                        android:textColor="@color/white_ffffff"
+                        android:layout_marginBottom="5px"
+                        android:textSize="23px"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
 
                 <TextView
                     android:id="@+id/tv_nickname"

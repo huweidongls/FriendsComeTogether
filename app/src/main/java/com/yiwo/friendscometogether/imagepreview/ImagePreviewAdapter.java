@@ -60,7 +60,7 @@ public class ImagePreviewAdapter extends PagerAdapter {
         final PhotoView image = new PhotoView(context);
         image.setEnabled(true);
         image.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        image.setMaximumScale(2.0F);
+        image.setMaximumScale(5.0F);
         image.setMinimumScale(0.8F);
 
         Glide.with(context).load(imageList.get(position)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian)).into(image);

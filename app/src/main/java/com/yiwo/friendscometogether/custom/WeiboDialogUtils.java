@@ -41,7 +41,7 @@ public class WeiboDialogUtils {
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setGravity(Gravity.CENTER);
         window.setAttributes(lp);
-        window.setWindowAnimations(R.style.PopWindowAnimStyle);
+//        window.setWindowAnimations(R.style.PopWindowAnimStyle);
         loadingDialog.show();
 
         return loadingDialog;
