@@ -42,23 +42,23 @@
 
             <ImageButton
                 android:layout_marginTop="15px"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:id="@+id/menu_index"
                 android:layout_width="43px"
                 android:layout_height="43px"
                 android:background="@drawable/select_index"
                 android:scaleType="centerCrop" />
 
-            <!--<TextView-->
-                <!--android:id="@+id/tv_index"-->
-                <!--android:layout_marginTop="6px"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_below="@+id/menu_index"-->
-                <!--android:textColor="@drawable/select_color"-->
-                <!--android:textSize="20px"-->
-                <!--android:text="首页"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content" />-->
+            <TextView
+                android:id="@+id/tv_index"
+                android:layout_marginTop="6px"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/menu_index"
+                android:textColor="@drawable/select_color"
+                android:textSize="20px"
+                android:text="首页"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </RelativeLayout>
 
@@ -70,23 +70,23 @@
 
             <ImageButton
                 android:layout_marginTop="15px"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:id="@+id/menu_friend_together"
                 android:layout_width="43px"
                 android:layout_height="43px"
                 android:background="@drawable/select_friends_together"
                 android:scaleType="centerCrop" />
 
-            <!--<TextView-->
-                <!--android:id="@+id/tv_friend_together"-->
-                <!--android:layout_marginTop="6px"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_below="@+id/menu_friend_together"-->
-                <!--android:textColor="@drawable/select_color"-->
-                <!--android:textSize="20px"-->
-                <!--android:text="友聚"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content" />-->
+            <TextView
+                android:id="@+id/tv_friend_together"
+                android:layout_marginTop="6px"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/menu_friend_together"
+                android:textColor="@drawable/select_color"
+                android:textSize="20px"
+                android:text="友聚"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </RelativeLayout>
 
@@ -126,7 +126,7 @@
 
             <ImageButton
                 android:layout_marginTop="15px"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:id="@+id/menu_chat"
                 android:layout_width="43px"
                 android:layout_height="43px"
@@ -141,16 +141,16 @@
                 android:layout_width="18px"
                 android:layout_height="18px" />
 
-            <!--<TextView-->
-                <!--android:id="@+id/tv_chat"-->
-                <!--android:layout_marginTop="6px"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_below="@+id/menu_chat"-->
-                <!--android:textColor="@drawable/select_color"-->
-                <!--android:textSize="20px"-->
-                <!--android:text="聊天"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content" />-->
+            <TextView
+                android:id="@+id/tv_chat"
+                android:layout_marginTop="6px"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/menu_chat"
+                android:textColor="@drawable/select_color"
+                android:textSize="20px"
+                android:text="聊天"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </RelativeLayout>
 
@@ -162,23 +162,23 @@
 
             <ImageButton
                 android:layout_marginTop="15px"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:id="@+id/menu_wd"
                 android:layout_width="43px"
                 android:layout_height="43px"
                 android:background="@drawable/select_my"
                 android:scaleType="centerCrop" />
 
-            <!--<TextView-->
-                <!--android:id="@+id/tv_my"-->
-                <!--android:layout_marginTop="6px"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_below="@+id/menu_wd"-->
-                <!--android:textColor="@drawable/select_color"-->
-                <!--android:textSize="20px"-->
-                <!--android:text="我的"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content" />-->
+            <TextView
+                android:id="@+id/tv_my"
+                android:layout_marginTop="6px"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/menu_wd"
+                android:textColor="@drawable/select_color"
+                android:textSize="20px"
+                android:text="我的"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </RelativeLayout>
 

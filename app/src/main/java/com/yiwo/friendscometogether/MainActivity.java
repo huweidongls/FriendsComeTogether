@@ -121,16 +121,14 @@ public class MainActivity extends FragmentActivity {
     RelativeLayout rl4;
     @BindView(R.id.menu5)
     RelativeLayout rl5;
-//    @BindView(R.id.tv_index)
-//    TextView tvIndex;
-//    @BindView(R.id.tv_friend_together)
-//    TextView tvFriendTogether;
-//    @BindView(R.id.tv_friend_remember)
-//    TextView tvFriendRemember;
-//    @BindView(R.id.tv_chat)
-//    TextView tvChat;
-//    @BindView(R.id.tv_my)
-//    TextView tvMy;
+    @BindView(R.id.tv_index)
+    TextView tvIndex;
+    @BindView(R.id.tv_friend_together)
+    TextView tvFriendTogether;
+    @BindView(R.id.tv_chat)
+    TextView tvChat;
+    @BindView(R.id.tv_my)
+    TextView tvMy;
     @BindView(R.id.iv_point_new_chat_message)
     ImageView ivNewChatMessage;
 
@@ -253,7 +251,7 @@ public class MainActivity extends FragmentActivity {
         fragmentTransaction.commit();
 
         selectButton(ibIndex);
-//        selectText(tvIndex);
+        selectText(tvIndex);
 
     }
 
@@ -265,12 +263,12 @@ public class MainActivity extends FragmentActivity {
             switch (v.getId()) {
                 case R.id.menu_index:
                     selectButton(ibIndex);
-//                    selectText(tvIndex);
+                    selectText(tvIndex);
                     switchFragment(0);
                     break;
                 case R.id.menu_friend_together:
                     selectButton(ibFriendTogether);
-//                    selectText(tvFriendTogether);
+                    selectText(tvFriendTogether);
                     switchFragment(1);
                     break;
                 case R.id.menu_friend_remember:
@@ -288,7 +286,7 @@ public class MainActivity extends FragmentActivity {
                 case R.id.menu_chat:
                     if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
                         selectButton(ibChat);
-//                    selectText(tvChat);
+                    selectText(tvChat);
                         switchFragment(3);
                     } else {
                         intent.setClass(context, LoginActivity.class);
@@ -297,17 +295,17 @@ public class MainActivity extends FragmentActivity {
                     break;
                 case R.id.menu_wd:
                     selectButton(ibMy);
-//                    selectText(tvMy);
+                    selectText(tvMy);
                     switchFragment(4);
                     break;
                 case R.id.menu1:
                     selectButton(ibIndex);
-//                    selectText(tvIndex);
+                    selectText(tvIndex);
                     switchFragment(0);
                     break;
                 case R.id.menu2:
                     selectButton(ibFriendTogether);
-//                    selectText(tvFriendTogether);
+                    selectText(tvFriendTogether);
                     switchFragment(1);
                     break;
                 case R.id.menu3:
@@ -325,7 +323,7 @@ public class MainActivity extends FragmentActivity {
                 case R.id.menu4:
                     if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
                         selectButton(ibChat);
-//                    selectText(tvChat);
+                    selectText(tvChat);
                         switchFragment(3);
                     } else {
                         intent.setClass(context, LoginActivity.class);
@@ -334,7 +332,7 @@ public class MainActivity extends FragmentActivity {
                     break;
                 case R.id.menu5:
                     selectButton(ibMy);
-//                    selectText(tvMy);
+                    selectText(tvMy);
                     switchFragment(4);
                     break;
             }
@@ -362,18 +360,20 @@ public class MainActivity extends FragmentActivity {
 
     public void startYouji(){
         ibIndex.setSelected(false);
+        tvIndex.setSelected(false);
     }
     //退出友记 恢复到首页fragment
     public void exitYouji(){
         switchFragment(0);
         selectButton(ibIndex);
+        selectText(tvIndex);
     }
     public void selectText(View v) {
-//        tvIndex.setSelected(false);
-//        tvFriendTogether.setSelected(false);
+        tvIndex.setSelected(false);
+        tvFriendTogether.setSelected(false);
 //        tvFriendRemember.setSelected(false);
-//        tvChat.setSelected(false);
-//        tvMy.setSelected(false);
+        tvChat.setSelected(false);
+        tvMy.setSelected(false);
         v.setSelected(true);
     }
 

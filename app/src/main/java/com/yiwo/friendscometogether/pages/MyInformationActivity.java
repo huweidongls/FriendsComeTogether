@@ -2,18 +2,20 @@ package com.yiwo.friendscometogether.pages;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,20 +27,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.google.gson.Gson;
-import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoActivity;
-import com.jph.takephoto.compress.CompressConfig;
-import com.jph.takephoto.model.CropOptions;
 import com.jph.takephoto.model.TResult;
 import com.squareup.picasso.Picasso;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
-import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.model.JsonBean;
-import com.yiwo.friendscometogether.model.MyPicListModel;
-import com.yiwo.friendscometogether.model.MyUploadPicModel;
 import com.yiwo.friendscometogether.model.UserModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newpage.EditorLabelActivity;
@@ -71,6 +67,8 @@ import top.zibin.luban.OnCompressListener;
 
 public class MyInformationActivity extends TakePhotoActivity {
 
+    @BindView(R.id.ll)
+    LinearLayout ll;
     @BindView(R.id.activity_my_information_rl_back)
     RelativeLayout rlBack;
     @BindView(R.id.activity_my_information_rl_sex)
@@ -145,7 +143,18 @@ public class MyInformationActivity extends TakePhotoActivity {
         mDay = ca.get(Calendar.DAY_OF_MONTH);
 
         spImp = new SpImp(MyInformationActivity.this);
+        ll.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                View view = getWindow().peekDecorView();
+                if (null != view) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
 
+                return false;
+            }
+        });
         initData();
 
     }
@@ -641,6 +650,27 @@ public class MyInformationActivity extends TakePhotoActivity {
         MyInformationActivity.this.finish();
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (isShouldHideInput(v, ev)) {
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+            return super.dispatchTouchEvent(ev);
+        }
+        // 必不可少，否则所有的组件都不会有TouchEvent了
+        if (getWindow().superDispatchTouchEvent(ev)) {
+            return true;
+        }
+
+        return super.dispatchTouchEvent(ev);
+    }
+
     private void initJsonData() {//解析数据
 
         /**
@@ -706,5 +736,23 @@ public class MyInformationActivity extends TakePhotoActivity {
         }
         return detail;
     }
-
+    public  boolean isShouldHideInput(View v, MotionEvent event) {
+        if (v != null && (v instanceof EditText)) {
+            int[] leftTop = { 0, 0 };
+            //获取输入框当前的location位置
+            v.getLocationInWindow(leftTop);
+            int left = leftTop[0];
+            int top = leftTop[1];
+            int bottom = top + v.getHeight();
+            int right = left + v.getWidth();
+            if (event.getX() > left && event.getX() < right
+                    && event.getY() > top && event.getY() < bottom) {
+                // 点击的是输入框区域，保留点击EditText的事件
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
 }

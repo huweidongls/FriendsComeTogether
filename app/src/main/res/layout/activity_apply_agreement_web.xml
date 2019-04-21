@@ -12,7 +12,7 @@
 
         <TextView
             style="@style/tv_top_title"
-            android:text="协议" />
+            android:text="信息" />
 
         <RelativeLayout
             android:id="@+id/activity_apply_agreement__back"

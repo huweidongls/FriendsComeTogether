@@ -473,6 +473,7 @@
         <activity android:name=".newpage.PersonLabelActivity" />
         <activity android:name=".base.BaseWebActivity" />
         <activity android:name=".webpages.DetailsOfFriendsWebActivity" />
+        <activity android:name=".webpages.DetailsOfFriendsWebActivity1" />
         <activity android:name=".webpages.DetailsOfFriendTogetherWebActivity" />
         <activity android:name=".newpage.MoreCommentHuodongActivity" />
         <activity android:name=".webpages.ShopInfoWebActivity" />

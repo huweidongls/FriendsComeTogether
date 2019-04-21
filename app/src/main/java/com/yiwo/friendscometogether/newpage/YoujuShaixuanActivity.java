@@ -61,6 +61,8 @@ public class YoujuShaixuanActivity extends BaseActivity {
     ImageView ivTuiJian;
     @BindView(R.id.tv_choose_city)
     TextView tvChooseCity;
+    @BindView(R.id.et_key_word)
+    EditText etKeyWord;
     private Boolean bTuiJian = false;
     private LabelAdapter adapter;
     private List<UserLabelModel.ObjBean> mList;
@@ -143,6 +145,7 @@ public class YoujuShaixuanActivity extends BaseActivity {
                 etMin.setText(null);
                 etMax.setText(null);
                 etShangJia.setText(null);
+                etKeyWord.setText(null);
                 etCity.setText(null);
                 bTuiJian = false;
                 ivTuiJian.setImageResource(R.mipmap.switch_off);
@@ -174,6 +177,7 @@ public class YoujuShaixuanActivity extends BaseActivity {
                 String max = etMax.getText().toString();
                 String shangJiaNAme = etShangJia.getText().toString();
                 String city = etCity.getText().toString();
+                String keyWord = etKeyWord.getText().toString();
                 String label = "";
                  for (int i = 0; i<labelList.size(); i++){
                      if(i == labelList.size()-1){
@@ -207,6 +211,7 @@ public class YoujuShaixuanActivity extends BaseActivity {
                     }
                 }
                 mode.setShangJiaName(shangJiaNAme);
+                mode.setKeyWord(keyWord);
                 if (bTuiJian){
                     mode.setShangJiaTuiJian("1");
                 }else {

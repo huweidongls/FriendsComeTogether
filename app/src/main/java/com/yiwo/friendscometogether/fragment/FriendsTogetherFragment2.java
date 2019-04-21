@@ -473,6 +473,7 @@ public class FriendsTogetherFragment2 extends BaseFragment {
                     .addParam("shop_name", mode.getShangJiaName())
                     .addParam("shop_recommend",mode.getShangJiaTuiJian())
                     .addParam("city",mode.getCity())
+                    .addParam("activity_name",mode.getKeyWord())//关键字
                     .request(new ACallback<String>() {
                         @Override
                         public void onSuccess(String data) {

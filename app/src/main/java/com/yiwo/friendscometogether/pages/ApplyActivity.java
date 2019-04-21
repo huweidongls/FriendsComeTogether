@@ -175,7 +175,8 @@ public class ApplyActivity extends BaseActivity {
         // 前景色
         string.setSpan(new ForegroundColorSpan(Color.parseColor("#d84c37")), 0, string.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
 
-        Spannable string1 = new SpannableString("预定须知、旅游合同、特别预定提示、安全提示");
+//        Spannable string1 = new SpannableString("预定须知、旅游合同、特别预定提示、安全提示");
+        Spannable string1 = new SpannableString("预定须知、旅游合同等");
         // 前景色
         string1.setSpan(new ForegroundColorSpan(Color.parseColor("#008B00")), 0, string1.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         tvAllowAgreement.setText(string);

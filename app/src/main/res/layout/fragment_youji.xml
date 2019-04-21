@@ -57,7 +57,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/rl_nearby"
                 android:layout_width="100px"
                 android:layout_height="match_parent"

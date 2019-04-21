@@ -40,6 +40,43 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <RelativeLayout
+                android:id="@+id/rl_key_word"
+                android:layout_below="@+id/rl_top"
+                android:layout_width="match_parent"
+                android:layout_height="180px">
+                <TextView
+                    android:id="@+id/tv_key_word"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="46px"
+                    android:layout_marginTop="32px"
+                    android:textSize="28px"
+                    android:textColor="@color/black_333333"
+                    android:text="关键字"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:paddingLeft="20px"
+                    android:layout_marginLeft="46px"
+                    android:layout_marginRight="46px"
+                    android:layout_marginTop="5px"
+                    android:layout_marginBottom="20px"
+                    android:layout_below="@+id/tv_key_word"
+                    android:id="@+id/et_key_word"
+                    android:textColor="@color/black_333333"
+                    android:textColorHint="#BFBFC4"
+                    android:textSize="26px"
+                    android:hint="请输入搜索关键字"
+                    android:background="#F5F5F5"
+                    android:layout_height="75px"
+                    android:layout_width="match_parent"/>
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"/>
+
+            </RelativeLayout>
+            <RelativeLayout
                 android:id="@+id/rl_shang_jia"
                 android:layout_below="@+id/rl_top"
                 android:layout_width="match_parent"

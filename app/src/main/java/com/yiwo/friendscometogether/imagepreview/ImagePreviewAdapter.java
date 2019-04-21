@@ -5,9 +5,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.View;
@@ -18,9 +21,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.squareup.picasso.Picasso;
 import com.vise.utils.file.FileUtil;
@@ -60,10 +66,16 @@ public class ImagePreviewAdapter extends PagerAdapter {
         final PhotoView image = new PhotoView(context);
         image.setEnabled(true);
         image.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        image.setMaximumScale(5.0F);
+        image.setMaximumScale(10.0F);
         image.setMinimumScale(0.8F);
 
-        Glide.with(context).load(imageList.get(position)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian)).into(image);
+        Glide.with(context).load(imageList.get(position)).apply(new RequestOptions().format(DecodeFormat.PREFER_ARGB_8888)//设置图片解码格式
+                .placeholder(R.mipmap.zanwutupian)).into(new SimpleTarget<Drawable>() {
+            @Override
+            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                image.setImageDrawable(resource);
+            }
+        });
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
