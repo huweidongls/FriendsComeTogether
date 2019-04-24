@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -88,6 +89,12 @@ public class GuanZhuActivity extends BaseActivity {
     @BindView(R.id.guanzhu_refreshlayout)
     RefreshLayout refreshLayout;
 
+    @BindView(R.id.ll_search)
+    LinearLayout ll_search;
+    @BindView(R.id.edt_search)
+    EditText edt_search;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
     private SpImp spImp;
     private int page_woguanzhude = 1;
     private int page_guanzhuwode = 1;
@@ -151,6 +158,7 @@ public class GuanZhuActivity extends BaseActivity {
                                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userFocus))
                                 .addParam("page", "1")
                                 .addParam("userID", spImp.getUID())
+                                .addParam("userName",edt_search.getText().toString())
                                 .request(new ACallback<String>() {
                                     @Override
                                     public void onSuccess(String data) {
@@ -181,6 +189,7 @@ public class GuanZhuActivity extends BaseActivity {
                                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.guanZhuWoDe))
                                 .addParam("page", "1")
                                 .addParam("userID", spImp.getUID())
+                                .addParam("userName",edt_search.getText().toString())
                                 .request(new ACallback<String>() {
                                     @Override
                                     public void onSuccess(String data) {
@@ -247,6 +256,7 @@ public class GuanZhuActivity extends BaseActivity {
                                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userFocus))
                                 .addParam("page", page_woguanzhude+"")
                                 .addParam("userID", spImp.getUID())
+                                .addParam("userName",edt_search.getText().toString())
                                 .request(new ACallback<String>() {
                                     @Override
                                     public void onSuccess(String data) {
@@ -276,6 +286,7 @@ public class GuanZhuActivity extends BaseActivity {
                                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.guanZhuWoDe))
                                 .addParam("page", page_guanzhuwode+"")
                                 .addParam("userID", spImp.getUID())
+                                .addParam("userName",edt_search.getText().toString())
                                 .request(new ACallback<String>() {
                                     @Override
                                     public void onSuccess(String data) {
@@ -319,6 +330,7 @@ public class GuanZhuActivity extends BaseActivity {
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userFocus))
                 .addParam("page", "1")
                 .addParam("userID", spImp.getUID())
+                .addParam("userName",edt_search.getText().toString())
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
@@ -396,6 +408,7 @@ public class GuanZhuActivity extends BaseActivity {
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.guanZhuWoDe))
                 .addParam("page", "1")
                 .addParam("userID", spImp.getUID())
+                .addParam("userName",edt_search.getText().toString())
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
@@ -564,7 +577,7 @@ public class GuanZhuActivity extends BaseActivity {
                 });
     }
 
-    @OnClick({R.id.rl_woguanhude,R.id.rl_guanzhuwode,R.id.rl_guanzhuhuodong,R.id.rl_back})
+    @OnClick({R.id.rl_woguanhude,R.id.rl_guanzhuwode,R.id.rl_guanzhuhuodong,R.id.rl_back,R.id.tv_search})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.rl_woguanhude:
@@ -575,6 +588,10 @@ public class GuanZhuActivity extends BaseActivity {
                 rv_woguanzhude.setVisibility(View.VISIBLE);
                 rv_guanzhuwode.setVisibility(View.GONE);
                 rv_guanzhuhuodong.setVisibility(View.GONE);
+                ll_search.setVisibility(View.VISIBLE);
+                tv_title.setVisibility(View.GONE);
+                edt_search.setText("");
+                edt_search.clearFocus();
                 initData();
                 break;
             case R.id.rl_guanzhuwode:
@@ -585,6 +602,10 @@ public class GuanZhuActivity extends BaseActivity {
                 rv_guanzhuwode.setVisibility(View.VISIBLE);
                 rv_guanzhuhuodong.setVisibility(View.GONE);
                 rv_woguanzhude.setVisibility(View.GONE);
+                ll_search.setVisibility(View.VISIBLE);
+                tv_title.setVisibility(View.GONE);
+                edt_search.setText("");
+                edt_search.clearFocus();
                 initData();
                 break;
             case R.id.rl_guanzhuhuodong:
@@ -595,10 +616,75 @@ public class GuanZhuActivity extends BaseActivity {
                 rv_guanzhuhuodong.setVisibility(View.VISIBLE);
                 rv_woguanzhude.setVisibility(View.GONE);
                 rv_guanzhuwode.setVisibility(View.GONE);
+                ll_search.setVisibility(View.GONE);
+                tv_title.setVisibility(View.VISIBLE);
                 initData();
                 break;
             case R.id.rl_back:
                finish();
+                break;
+            case R.id.tv_search:
+                switch (type_showLayout){
+                    case 0:
+                        ViseHttp.POST(NetConfig.userFocus)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userFocus))
+                                .addParam("page", "1")
+                                .addParam("userID", spImp.getUID())
+                                .addParam("userName",edt_search.getText().toString())
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if (jsonObject.getInt("code") == 200) {
+                                                Gson gson = new Gson();
+                                                UserFocusModel userFocusModel = gson.fromJson(data, UserFocusModel.class);
+                                                mWoGuanZhuDeList.clear();
+                                                mWoGuanZhuDeList.addAll(userFocusModel.getObj());
+                                                woGuanZhuDeAdapter.notifyDataSetChanged();
+                                                page_woguanzhude = 2;
+                                                Log.e("222page_woguanzhude", page_woguanzhude+"");
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+                                    }
+                                });
+                        break;
+                    case 1:
+                        ViseHttp.POST(NetConfig.guanZhuWoDe)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.guanZhuWoDe))
+                                .addParam("page", "1")
+                                .addParam("userName",edt_search.getText().toString())
+                                .addParam("userID", spImp.getUID())
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if (jsonObject.getInt("code") == 200) {
+                                                Gson gson = new Gson();
+                                                GuanZhuWoDeModel guanZhuWoDeModel = gson.fromJson(data, GuanZhuWoDeModel.class);
+                                                mGuanZhuWoDeList.clear();
+                                                mGuanZhuWoDeList.addAll(guanZhuWoDeModel.getObj());
+                                                guanZhuWoDeAdapter.notifyDataSetChanged();
+                                                page_guanzhuwode = 2 ;
+                                                Log.e("222page_guanzhuwode", page_guanzhuwode+"");
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+                                    }
+                                });
+                        break;
+                }
                 break;
         }
     }

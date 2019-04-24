@@ -94,7 +94,7 @@ public class SuperLikeActivity extends BaseActivity {
 
         recyclerView.setVisibility(View.GONE);
         dialogOfSearch = new LoadingDialogOfSearch(context);
-        dialogOfSearch.setCancelable(false);
+        dialogOfSearch.setCancelable(true);
         dialogOfSearch.getWindow().setDimAmount(0f);
         dialogOfSearch.show();
         tv_matching_text.setVisibility(View.GONE);

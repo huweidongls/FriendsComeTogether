@@ -47,6 +47,7 @@ import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.broadcastreceiver.MyGoPersonMainBroadcastReceiver;
 import com.yiwo.friendscometogether.broadcastreceiver.MyShenQingJinQunBroadcastReceiver;
+import com.yiwo.friendscometogether.custom.OnDoubleClickListener;
 import com.yiwo.friendscometogether.fragment.ChatFragment;
 import com.yiwo.friendscometogether.fragment.FriendsRememberFragment;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment;
@@ -141,6 +142,7 @@ public class MainActivity extends FragmentActivity {
     private String account = "";
 
     private ChatFragment fragmentChat;
+    private HomeFragment1 fragmentHome;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -229,7 +231,7 @@ public class MainActivity extends FragmentActivity {
         rl3.setOnClickListener(listener);
         rl4.setOnClickListener(listener);
         rl5.setOnClickListener(listener);
-        Fragment fragmentHome = new HomeFragment1();
+        fragmentHome = new HomeFragment1();
 //        Fragment fragmentFriendTogether = new FriendsTogetherFragment1();
         Fragment fragmentFriendTogether = new FriendsTogetherFragment2();
         Fragment fragmentFriendRemember = new YouJiFragment();
@@ -250,6 +252,18 @@ public class MainActivity extends FragmentActivity {
         fragmentTransaction.show(fragmentHome).hide(fragmentFriendTogether).hide(fragmentFriendRemember).hide(fragmentChat).hide(fragmentMy);
         fragmentTransaction.commit();
 
+        rl1.setOnTouchListener(new OnDoubleClickListener(new OnDoubleClickListener.DoubleClickCallback() {
+            @Override
+            public void onDoubleClick() {
+                fragmentHome.scroll2top();
+            }
+        }));
+        ibIndex.setOnTouchListener(new OnDoubleClickListener(new OnDoubleClickListener.DoubleClickCallback() {
+            @Override
+            public void onDoubleClick() {
+                fragmentHome.scroll2top();
+            }
+        }));
         selectButton(ibIndex);
         selectText(tvIndex);
 

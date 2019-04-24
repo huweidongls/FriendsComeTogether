@@ -27,7 +27,7 @@ import com.yiwo.friendscometogether.newmodel.HomeDataModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.pages.ArticleCommentActivity;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
@@ -175,7 +175,7 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
                 public void onClick(View v) {
                     final Intent intent = new Intent();
                     if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
-                        intent.setClass(context, DetailsOfFriendsWebActivity.class);
+                        intent.setClass(context, DetailsOfFriendsWebActivity1.class);
                         intent.putExtra("fmid", data.get(position).getPfID());
                         context.startActivity(intent);
                     } else {
@@ -183,7 +183,7 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
                             @Override
                             public boolean setActivityText(String s) {
                                 if (s.equals(data.get(position).getPfpwd())) {
-                                    intent.setClass(context, DetailsOfFriendsWebActivity.class);
+                                    intent.setClass(context, DetailsOfFriendsWebActivity1.class);
                                     intent.putExtra("fmid", data.get(position).getPfID());
                                     context.startActivity(intent);
                                     return true;

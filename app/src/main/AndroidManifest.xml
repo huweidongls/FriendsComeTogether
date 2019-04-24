@@ -477,7 +477,9 @@
         <activity android:name=".webpages.DetailsOfFriendTogetherWebActivity" />
         <activity android:name=".newpage.MoreCommentHuodongActivity" />
         <activity android:name=".webpages.ShopInfoWebActivity" />
-        <activity android:name=".webpages.ApplyActivityAgreementWebActivity"></activity>
+        <activity android:name=".webpages.ApplyActivityAgreementWebActivity" />
+        <activity android:name=".newpage.PersonImpressionActivity" />
+        <activity android:name=".newpage.FindFriendByTelActivity"></activity>
     </application>
 
 </manifest>

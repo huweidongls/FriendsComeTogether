@@ -315,4 +315,9 @@ public class NetConfig {
     public static String clearAdmire = "action/ac_user/clearAdmire";
 //    action/ac_user/clearComment 清空评论接口  传userID
     public static String clearComment = "action/ac_user/clearComment";
+    // 搜索好友
+    public static String searchUser = "action/ac_user/searchUser";//    action/ac_user /     searchUser   搜索用户接口     传 userLogin用户账号 userID 我的ID  返回  userID 用户id  username 用户名   userpic 头像 status  0 不是好友  1是好友
+    //获取所有个人评论标签接口
+    public static String commentLabel = "action/ac_user/commentLabel"; //action/ac_user/commentLabel  评论标签接口   传 userID  被评论人的ID    返回 id 标签的ID   label_name标签名
+
 }

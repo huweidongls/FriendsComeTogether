@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="120px">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_avatar"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32px"
+            android:layout_width="100px"
+            android:layout_height="100px" />
+        <RelativeLayout
+            android:layout_toLeftOf="@+id/tv_add_friend"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="40px"
+            android:layout_marginLeft="20px"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@+id/iv_avatar"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_centerVertical="true"
+                android:lines="1"
+                android:ellipsize="end"
+                android:id="@+id/tv_name"
+                android:textSize="32px"
+                android:textColor="@color/black_333333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <TextView
+            android:textSize="28px"
+            android:layout_marginRight="30px"
+            android:paddingTop="5px"
+            android:paddingBottom="5px"
+            android:paddingRight="15px"
+            android:paddingLeft="15px"
+            android:id="@+id/tv_add_friend"
+            android:text="+好友"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_d84c37_30px"
+            android:textColor="@color/white_ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+    <View
+        android:layout_below="@+id/rl"
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="2px"/>
+</RelativeLayout>

@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yiwo.friendscometogether.newpage.PersonImpressionActivity">
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        style="@style/rl_top_bar">
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            style="@style/rl_return">
+
+            <ImageView
+                android:id="@+id/btn_back"
+                style="@style/iv_return"/>
+
+        </RelativeLayout>
+        <TextView
+            android:text="个人印象"
+            style="@style/tv_top_title" />
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/rl_show_impresson"
+                android:layout_width="match_parent"
+                android:layout_height="650px">
+
+                <ImageView
+                    android:id="@+id/iv_head_bg"
+                    android:layout_width="320px"
+                    android:layout_height="320px"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/impresson_head_bg" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="205px"
+                    android:layout_height="205px"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/guide1" />
+                <LinearLayout
+                    android:id="@+id/lay0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="220px"
+                    android:layout_marginLeft="70px"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="5px"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="33px"
+                            android:layout_height="33px"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/impresson_round_big" />
+
+                        <TextView
+                            android:id="@+id/tv0"
+                            android:maxLength="8"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8px"
+                            android:text="诚恳(20)"
+                            android:textColor="@color/black_333333"
+                            android:textSize="25px" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="178px"
+                        android:layout_height="65px"
+                        android:layout_marginBottom="5px"
+                        android:src="@mipmap/impresson_right_1" />
+                </LinearLayout>
+                <!--5-->
+                <LinearLayout
+                    android:id="@+id/lay4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="60px"
+                    android:layout_marginLeft="275px"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5px"
+                        android:layout_marginLeft="30px"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="33px"
+                            android:layout_height="33px"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/impresson_round_big" />
+
+                        <TextView
+                            android:id="@+id/tv4"
+                            android:maxLength="8"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8px"
+                            android:text="渣男(15)"
+                            android:textColor="@color/black_333333"
+                            android:textSize="25px" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="171px"
+                        android:layout_height="57px"
+                        android:layout_marginBottom="5px"
+                        android:src="@mipmap/impresson_right_2" />
+                </LinearLayout>
+
+                <!--2-->
+                <LinearLayout
+                    android:id="@+id/lay1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="165px"
+                    android:layout_marginRight="225px"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5px"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="33px"
+                            android:layout_height="33px"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/impresson_round_big" />
+
+                        <TextView
+                            android:id="@+id/tv1"
+                            android:maxLength="8"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8px"
+                            android:text="暖男(35)"
+                            android:textColor="@color/black_333333"
+                            android:textSize="25px" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="191px"
+                        android:layout_height="61px"
+                        android:layout_marginBottom="5px"
+                        android:layout_marginLeft="30px"
+                        android:src="@mipmap/impresson_left_1" />
+                </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/lay3"
+                    android:layout_marginTop="100px"
+                    android:layout_marginRight="250px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:layout_width="191px"
+                        android:layout_height="49px"
+                        android:layout_marginLeft="30px"
+                        android:src="@mipmap/impresson_left_2" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="33px"
+                            android:layout_height="33px"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/impresson_round_big" />
+
+                        <TextView
+                            android:id="@+id/tv3"
+                            android:maxLength="8"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8px"
+                            android:text="上进上(100)"
+                            android:textColor="@color/black_333333"
+                            android:textSize="25px" />
+                    </LinearLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/lay2"
+                    android:layout_marginTop="190px"
+                    android:layout_marginLeft="230px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:layout_width="164px"
+                        android:layout_height="93px"
+                        android:src="@mipmap/impresson_right_3" />
+                    <LinearLayout
+                        android:layout_marginTop="40px"
+                        android:layout_marginLeft="50px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="33px"
+                            android:layout_height="33px"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/impresson_round_big" />
+
+                        <TextView
+                            android:id="@+id/tv2"
+                            android:maxLength="8"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="暖男(35)"
+                            android:textColor="@color/black_333333"
+                            android:textSize="25px" />
+                    </LinearLayout>
+                </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/lay7"
+                    android:layout_marginLeft="160px"
+                    android:layout_marginBottom="150px"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="30px"
+                        android:layout_height="30px"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/impresson_round_small" />
+
+                    <TextView
+                        android:id="@+id/tv7"
+                        android:maxLength="8"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="上进(10)"
+                        android:textColor="@color/black_333333"
+                        android:textSize="20px" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lay5"
+                    android:layout_marginBottom="60px"
+                    android:layout_marginRight="220px"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="30px"
+                        android:layout_height="30px"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/impresson_round_small" />
+
+                    <TextView
+                        android:id="@+id/tv5"
+                        android:maxLength="8"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="诚恳(10)"
+                        android:textColor="@color/black_333333"
+                        android:textSize="20px" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lay6"
+                    android:layout_marginTop="180px"
+                    android:layout_marginRight="80px"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="30px"
+                        android:layout_height="30px"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/impresson_round_small" />
+
+                    <TextView
+                        android:id="@+id/tv6"
+                        android:maxLength="8"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="上进(10)"
+                        android:textColor="@color/black_333333"
+                        android:textSize="20px" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lay8"
+                    android:layout_marginTop="85px"
+                    android:layout_marginLeft="220px"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="30px"
+                        android:layout_height="30px"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/impresson_round_small" />
+
+                    <TextView
+                        android:id="@+id/tv8"
+                        android:maxLength="8"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="渣男(15)"
+                        android:textColor="@color/black_333333"
+                        android:textSize="20px" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lay9"
+                    android:layout_marginRight="280px"
+                    android:layout_marginTop="220px"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="33px"
+                        android:layout_height="33px"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/impresson_round_big" />
+
+                    <TextView
+                        android:id="@+id/tv9"
+                        android:maxLength="8"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="上进(10)"
+                        android:textColor="@color/black_333333"
+                        android:textSize="25px" />
+                </LinearLayout>
+            </FrameLayout>
+            <com.yiwo.friendscometogether.widget.NestedRecyclerView
+                android:id="@+id/rl_impresson"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

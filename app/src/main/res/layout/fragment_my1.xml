@@ -95,13 +95,13 @@
                     android:textColor="@color/white_ffffff"
                     android:textSize="28px" />
                 <ImageView
-                    android:layout_marginBottom="30px"
+                    android:layout_marginBottom="40px"
                     android:id="@+id/iv_find_super_like"
-                    android:src="@mipmap/aixin"
-                    android:layout_marginLeft="34px"
+                    android:src="@mipmap/leida"
+                    android:layout_marginLeft="50px"
                     android:layout_alignBottom="@+id/tv_sign"
-                    android:layout_width="70px"
-                    android:layout_height="62px" />
+                    android:layout_width="75px"
+                    android:layout_height="75px" />
             </RelativeLayout>
 
             <LinearLayout

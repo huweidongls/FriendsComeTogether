@@ -1,25 +1,34 @@
 package com.yiwo.friendscometogether.pages;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.netease.nim.uikit.api.NimUIKit;
+import com.netease.nimlib.sdk.NIMClient;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
+import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.adapter.MyFriendAdapter;
 import com.yiwo.friendscometogether.custom.MyFriendDialog;
 import com.yiwo.friendscometogether.model.MyFriendModel;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newpage.FindFriendByTelActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
@@ -39,9 +48,6 @@ public class MyFriendActivity extends AppCompatActivity {
 
     @BindView(R.id.activity_my_friend_rl_back)
     RelativeLayout rlBack;
-    @BindView(R.id.activity_my_friend_rl_black)
-    RelativeLayout rlBlack;
-
     private ListView listView;
     private ZzLetterSideBar sideBar;
     private TextView dialog;
@@ -214,16 +220,69 @@ public class MyFriendActivity extends AppCompatActivity {
         NimUIKit.startP2PSession(MyFriendActivity.this, liaotianAccount);
     }
 
-    @OnClick({R.id.activity_my_friend_rl_back, R.id.activity_my_friend_rl_black})
+    private void showMore(View view_p) {
+
+        View view = LayoutInflater.from(MyFriendActivity.this).inflate(R.layout.popupwindow_myfriendactivity_show_more, null);
+        ScreenAdapterTools.getInstance().loadView(view);
+        final PopupWindow popupWindow;
+        LinearLayout ll_add_friend = view.findViewById(R.id.ll_add_friend);
+        popupWindow = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+        ll_add_friend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MyFriendActivity.this, FindFriendByTelActivity.class);
+                startActivity(intent);
+                popupWindow.dismiss();
+            }
+        });
+        LinearLayout ll_hei_ming_dan = view.findViewById(R.id.ll_heimingdan);
+        ll_hei_ming_dan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                Intent intent = new Intent();
+                intent.setClass(MyFriendActivity.this, BlackUserActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        popupWindow.setTouchable(true);
+        popupWindow.setFocusable(true);
+        // 设置点击窗口外边窗口消失
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popupWindow.setOutsideTouchable(true);
+//        popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
+        popupWindow.showAsDropDown(view_p,0,0);
+        // 设置popWindow的显示和消失动画
+//        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
+//        WindowManager.LayoutParams params = getWindow().getAttributes();
+//        params.alpha = 0.5f;
+//        getWindow().setAttributes(params);
+        popupWindow.update();
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            // 在dismiss中恢复透明度
+            public void onDismiss() {
+//                WindowManager.LayoutParams params = getWindow().getAttributes();
+//                params.alpha = 1f;
+//                getWindow().setAttributes(params);
+            }
+        });
+
+
+    }
+
+    @OnClick({R.id.activity_my_friend_rl_back, R.id.activity_my_friend_show_more})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
             case R.id.activity_my_friend_rl_back:
                 onBackPressed();
                 break;
-            case R.id.activity_my_friend_rl_black:
-                intent.setClass(MyFriendActivity.this, BlackUserActivity.class);
-                startActivity(intent);
+            case R.id.activity_my_friend_show_more:
+                showMore(view);
                 break;
         }
     }

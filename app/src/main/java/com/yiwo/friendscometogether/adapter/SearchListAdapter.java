@@ -14,7 +14,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.GetEditorFriendTogetherModel;
 import com.yiwo.friendscometogether.model.SearchListModel;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
 import com.yiwo.friendscometogether.pages.EditorFriendTogetherSubTitleContentActivity;
 import com.yiwo.friendscometogether.pages.SearchListActivity;
 
@@ -54,7 +54,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                     it.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                     it.putExtra("pfID",data.get(position).getId());
                 } else {
-                    it.setClass(context, DetailsOfFriendsWebActivity.class);
+                    it.setClass(context, DetailsOfFriendsWebActivity1.class);
                     it.putExtra("fmid",data.get(position).getId());
                 }
                 context.startActivity(it);

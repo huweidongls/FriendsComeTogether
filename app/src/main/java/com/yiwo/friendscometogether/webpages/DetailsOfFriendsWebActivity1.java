@@ -284,21 +284,21 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
                                               UserGiveModelDao.Properties.ArticleId.eq(fmID))
                                         .build().list().size()<=0) {
                                     isPraise = false;
-                                    Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.details_praise_b).into(ivPraise);
+                                    Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.friend_web_zan_gray).into(ivPraise);
 //                                    tvPraise.setTextColor(Color.parseColor("#333333"));
                                 } else {
                                     isPraise = true;
-                                    Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.praise_red).into(ivPraise);
+                                    Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.friend_web_zan_red).into(ivPraise);
 //                                    tvPraise.setTextColor(Color.parseColor("#d84c37"));
                                 }
                                 //收藏
                                 if (model.getObj().getCollect().equals("0")) {
                                     isStar = false;
-                                    Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.details_star_b).into(ivStar);
+                                    Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.friend_web_star_gray).into(ivStar);
 //                                    tvStar.setTextColor(Color.parseColor("#333333"));
                                 } else {
                                     isStar = true;
-                                    Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.star_d84c37).into(ivStar);
+                                    Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.friend_web_star_red).into(ivStar);
 //                                    tvStar.setTextColor(Color.parseColor("#d84c37"));
                                 }
                                 //插文
@@ -470,7 +470,7 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
                                         try {
                                             JSONObject jsonObject = new JSONObject(data);
                                             if (jsonObject.getInt("code") == 200) {
-                                                Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.praise_red).into(ivPraise);
+                                                Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.friend_web_zan_red).into(ivPraise);
 //                                                tvPraise.setTextColor(Color.parseColor("#d84c37"));
                                                 UserGiveModel model = new UserGiveModel();
                                                 model.setUserId(uid);
@@ -506,7 +506,7 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
                                         try {
                                             JSONObject jsonObject = new JSONObject(data);
                                             if (jsonObject.getInt("code") == 200) {
-                                                Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.details_praise_b).into(ivPraise);
+                                                Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.friend_web_zan_gray).into(ivPraise);
 //                                                tvPraise.setTextColor(Color.parseColor("#333333"));
                                                 if (userGiveModelDao.queryBuilder()
                                                         .where(UserGiveModelDao.Properties.UserId.eq(uid),
@@ -541,7 +541,7 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
                     finish();
                 } else {
                     if (!isStar) {
-                        Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.star_d84c37).into(ivStar);
+                        Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.friend_web_star_red).into(ivStar);
 //                        tvStar.setTextColor(Color.parseColor("#d84c37"));
                         isStar = !isStar;
                         ViseHttp.POST(NetConfig.articleCollectionUrl)
@@ -568,7 +568,7 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
                                     }
                                 });
                     } else {
-                        Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.details_star_b).into(ivStar);
+                        Glide.with(DetailsOfFriendsWebActivity1.this).load(R.mipmap.friend_web_star_gray).into(ivStar);
 //                        tvStar.setTextColor(Color.parseColor("#333333"));
                         isStar = !isStar;
                         ViseHttp.POST(NetConfig.articleCollectionUrl)

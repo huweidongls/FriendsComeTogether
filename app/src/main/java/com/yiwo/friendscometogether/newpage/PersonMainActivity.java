@@ -529,7 +529,7 @@ public class PersonMainActivity extends BaseActivity {
     }
 
     @OnClick({R.id.rl_back,R.id.rl_label_text, R.id.ll_person_all_pics, R.id.ll_person_all_youji, R.id.ll_person_all_youju,
-            R.id.rl_algin_right_wode, R.id.rl_add_friend, R.id.rl_guanzhu,R.id.iv_heart,R.id.ll_huozan,R.id.ll_guanzhu,R.id.ll_fans})
+            R.id.rl_algin_right_wode, R.id.rl_add_friend, R.id.rl_guanzhu,R.id.iv_heart,R.id.ll_huozan,R.id.ll_guanzhu,R.id.ll_fans,R.id.iv_person_icon})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -745,6 +745,11 @@ public class PersonMainActivity extends BaseActivity {
                     }
                     startActivity(intent);
                 }
+                break;
+            case R.id.iv_person_icon:
+                    intent.setClass(PersonMainActivity.this,PersonImpressionActivity.class);
+                    intent.putExtra("person_id",person_id);
+                    startActivity(intent);
                 break;
         }
 

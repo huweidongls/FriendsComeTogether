@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -57,7 +58,7 @@ import com.yiwo.friendscometogether.newpage.MessageActivity;
 import com.yiwo.friendscometogether.newpage.SuperLikeSxActivity;
 import com.yiwo.friendscometogether.pages.CityActivity;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.SearchActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -134,6 +135,8 @@ public class HomeFragment1 extends BaseFragment {
     @BindView(R.id.tv4)
     TextView tv4;
 
+    @BindView(R.id.scroll_view)
+    ScrollView scrollView;
     private LocationManager locationManager;
     private double latitude = 0.0;
     private double longitude = 0.0;
@@ -272,7 +275,7 @@ public class HomeFragment1 extends BaseFragment {
 //                                            intent.putExtra("pfID", bannerModel.getObj().get(position).getLeftid());
 //                                            startActivity(intent);
 //                                        } else if (bannerModel.getObj().get(position).getFirst_type().equals("1")) {
-//                                            Intent intent = new Intent(getContext(), DetailsOfFriendsWebActivity.class);
+//                                            Intent intent = new Intent(getContext(), DetailsOfFriendsWebActivity1.class);
 //                                            intent.putExtra("fmid", bannerModel.getObj().get(position).getLeftid());
 //                                            startActivity(intent);
 //                                        }
@@ -694,5 +697,7 @@ public class HomeFragment1 extends BaseFragment {
                     });
         }
     }
-
+    public void scroll2top(){
+        scrollView.fullScroll(View.FOCUS_UP);
+    }
 }

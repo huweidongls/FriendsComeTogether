@@ -70,7 +70,8 @@ public class MyFragment1 extends BaseFragment {
     TextView tvNum3;
     @BindView(R.id.tv_num4)
     TextView tvNum4;
-
+    @BindView(R.id.iv_find_super_like)
+    ImageView iv_find_super_like;
     private SpImp spImp;
     private String uid = "";
 
@@ -83,7 +84,7 @@ public class MyFragment1 extends BaseFragment {
 
         ButterKnife.bind(this, rootView);
         spImp = new SpImp(getContext());
-
+        Glide.with(getContext()).load(R.drawable.leidagif).into(iv_find_super_like);
         return rootView;
     }
 

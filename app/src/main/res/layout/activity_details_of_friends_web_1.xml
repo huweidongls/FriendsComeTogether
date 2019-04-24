@@ -91,9 +91,9 @@
             android:hint="写评论..."
             android:layout_marginLeft="20px"
             android:layout_centerVertical="true"
-            android:background="@drawable/bg_article_comment"
+            android:background="@drawable/bg_friend_web_comment"
             android:id="@+id/btn_pinglun"
-            android:layout_width="350px"
+            android:layout_width="450px"
             android:layout_height="wrap_content" />
         <LinearLayout
             android:layout_toRightOf="@+id/btn_pinglun"
@@ -116,7 +116,7 @@
                     android:layout_width="36px"
                     android:layout_height="36px"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/details_intercalation" />
+                    android:src="@mipmap/friend_web_chawen" />
 
                 <!--<TextView-->
                     <!--android:layout_width="wrap_content"-->
@@ -141,7 +141,7 @@
                     android:layout_width="36px"
                     android:layout_height="36px"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/details_comments" />
+                    android:src="@mipmap/friend_web_comment" />
 
                 <!--<TextView-->
                     <!--android:layout_width="wrap_content"-->
@@ -193,7 +193,7 @@
                     android:layout_width="36px"
                     android:layout_height="36px"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/details_praise_b" />
+                    android:src="@mipmap/friend_web_zan_gray" />
 
                 <!--<TextView-->
                     <!--android:id="@+id/activity_details_of_friends_tv_praise"-->
@@ -220,7 +220,7 @@
                     android:layout_width="36px"
                     android:layout_height="36px"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/details_star_b" />
+                    android:src="@mipmap/friend_web_star_gray" />
 
                 <!--<TextView-->
                     <!--android:id="@+id/activity_details_of_friends_tv_star"-->
@@ -237,7 +237,7 @@
         </LinearLayout>
         <View
             android:layout_alignParentTop="true"
-            android:background="@color/gray_909090"
+            android:background="#f8f8f8f8"
             android:layout_width="match_parent"
             android:layout_height="1px"/>
     </RelativeLayout>
