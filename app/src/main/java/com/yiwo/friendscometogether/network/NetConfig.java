@@ -318,6 +318,10 @@ public class NetConfig {
     // 搜索好友
     public static String searchUser = "action/ac_user/searchUser";//    action/ac_user /     searchUser   搜索用户接口     传 userLogin用户账号 userID 我的ID  返回  userID 用户id  username 用户名   userpic 头像 status  0 不是好友  1是好友
     //获取所有个人评论标签接口
-    public static String commentLabel = "action/ac_user/commentLabel"; //action/ac_user/commentLabel  评论标签接口   传 userID  被评论人的ID    返回 id 标签的ID   label_name标签名
+    public static String commentLabel = "action/ac_user/commentLabel"; //action/ac_user/commentLabel  评论标签接口   传 userID  被评论人的ID   uid登录用户的ID   返回 id 标签的ID   label_name标签名 status 0未评价过  1评价过
+    //论标签接口
+    public static String userCommentLabel = "action/ac_user/userCommentLabel";//action/ac_user/userCommentLabel  评论标签接口  传userID登录用户的ID   buserID 被评论用户的ID    labelID 标签ID
+    //获取个人评论标签接口
+    public static String userCommentLabelList = "action/ac_user/userCommentLabelList";//action/ac_user/userCommentLabelList  我的评论标签接口   传 userID 登录用户的ID   type=0返回 10个     1返回全部 返回  label_name 标签名   num评论数量
 
 }

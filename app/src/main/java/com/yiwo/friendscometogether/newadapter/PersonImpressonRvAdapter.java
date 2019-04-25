@@ -22,8 +22,12 @@ import java.util.List;
 public class PersonImpressonRvAdapter extends RecyclerView.Adapter<PersonImpressonRvAdapter.ViewHolder> {
     private List<PersonImpressonModel.ObjBean> data;
     private Context context ;
+    private OnCommentListenner listenner;
     public PersonImpressonRvAdapter(List<PersonImpressonModel.ObjBean> data){
         this.data = data;
+    }
+    public void setListenner(OnCommentListenner listenner){
+        this.listenner = listenner;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -35,19 +39,19 @@ public class PersonImpressonRvAdapter extends RecyclerView.Adapter<PersonImpress
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.tv.setText(data.get(position).getLabel_name());
-        if (position % 3 == 0){
-            holder.tv.setBackgroundResource(R.drawable.bg_d84c37_30px);
-            holder.tv.setTextColor(Color.WHITE);
-        }else {
+        if (data.get(position).getStatus().equals("0")){//此标签未做过评价
             holder.tv.setBackgroundResource(R.drawable.bg_f2cac6_30px);
             holder.tv.setTextColor(Color.parseColor("#d84c37"));
+        }else {//此标签已经做过评价
+            holder.tv.setBackgroundResource(R.drawable.bg_d84c37_30px);
+            holder.tv.setTextColor(Color.WHITE);
         }
         holder.tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                listenner.conmmentListen(position,data.get(position).getId());
             }
         });
     }
@@ -64,5 +68,8 @@ public class PersonImpressonRvAdapter extends RecyclerView.Adapter<PersonImpress
             super(itemView);
             tv = itemView.findViewById(R.id.tv);
         }
+    }
+    public interface OnCommentListenner{
+        void conmmentListen(int posion,String labelID);
     }
 }

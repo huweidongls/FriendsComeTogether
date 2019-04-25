@@ -3,15 +3,15 @@ package com.yiwo.friendscometogether.newmodel;
 import java.util.List;
 
 /**
- * Created by ljc on 2019/4/24.
+ * Created by ljc on 2019/4/25.
  */
 
-public class PersonImpressonModel {
+public class UserPersonImpressionModel {
 
     /**
      * code : 200
      * message : 获取成功!
-     * obj : [{"id":"1","label_name":"帅呆了","status":"1"},{"id":"2","label_name":"有责任感","status":"0"},{"id":"3","label_name":"渣男","status":"0"},{"id":"4","label_name":"暖男","status":"0"},{"id":"5","label_name":"勤劳","status":"0"},{"id":"12","label_name":"诚实","status":"0"},{"id":"13","label_name":"自私自利","status":"0"}]
+     * obj : [{"label_name":"帅呆了","num":"2"}]
      */
 
     private int code;
@@ -44,22 +44,12 @@ public class PersonImpressonModel {
 
     public static class ObjBean {
         /**
-         * id : 1
          * label_name : 帅呆了
-         * status : 1
+         * num : 2
          */
 
-        private String id;
         private String label_name;
-        private String status;
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
+        private String num;
 
         public String getLabel_name() {
             return label_name;
@@ -69,12 +59,12 @@ public class PersonImpressonModel {
             this.label_name = label_name;
         }
 
-        public String getStatus() {
-            return status;
+        public String getNum() {
+            return num;
         }
 
-        public void setStatus(String status) {
-            this.status = status;
+        public void setNum(String num) {
+            this.num = num;
         }
     }
 }

@@ -50,6 +50,7 @@
                     android:layout_gravity="center"
                     android:src="@mipmap/guide1" />
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/lay0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,7 +81,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8px"
-                            android:text="诚恳(20)"
                             android:textColor="@color/black_333333"
                             android:textSize="25px" />
                     </LinearLayout>
@@ -93,6 +93,7 @@
                 </LinearLayout>
                 <!--5-->
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/lay4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -123,7 +124,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8px"
-                            android:text="渣男(15)"
                             android:textColor="@color/black_333333"
                             android:textSize="25px" />
                     </LinearLayout>
@@ -137,6 +137,7 @@
 
                 <!--2-->
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/lay1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -166,7 +167,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8px"
-                            android:text="暖男(35)"
                             android:textColor="@color/black_333333"
                             android:textSize="25px" />
                     </LinearLayout>
@@ -179,6 +179,7 @@
                         android:src="@mipmap/impresson_left_1" />
                 </LinearLayout>
                 <RelativeLayout
+                    android:visibility="gone"
                     android:id="@+id/lay3"
                     android:layout_marginTop="100px"
                     android:layout_marginRight="250px"
@@ -209,12 +210,12 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8px"
-                            android:text="上进上(100)"
                             android:textColor="@color/black_333333"
                             android:textSize="25px" />
                     </LinearLayout>
                 </RelativeLayout>
                 <RelativeLayout
+                    android:visibility="gone"
                     android:id="@+id/lay2"
                     android:layout_marginTop="190px"
                     android:layout_marginLeft="230px"
@@ -245,12 +246,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:text="暖男(35)"
                             android:textColor="@color/black_333333"
                             android:textSize="25px" />
                     </LinearLayout>
                 </RelativeLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/lay7"
                     android:layout_marginLeft="160px"
                     android:layout_marginBottom="150px"
@@ -271,11 +272,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="上进(10)"
                         android:textColor="@color/black_333333"
                         android:textSize="20px" />
                 </LinearLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/lay5"
                     android:layout_marginBottom="60px"
                     android:layout_marginRight="220px"
@@ -296,11 +297,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="诚恳(10)"
                         android:textColor="@color/black_333333"
                         android:textSize="20px" />
                 </LinearLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/lay6"
                     android:layout_marginTop="180px"
                     android:layout_marginRight="80px"
@@ -321,11 +322,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="上进(10)"
                         android:textColor="@color/black_333333"
                         android:textSize="20px" />
                 </LinearLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/lay8"
                     android:layout_marginTop="85px"
                     android:layout_marginLeft="220px"
@@ -346,11 +347,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="渣男(15)"
                         android:textColor="@color/black_333333"
                         android:textSize="20px" />
                 </LinearLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/lay9"
                     android:layout_marginRight="280px"
                     android:layout_marginTop="220px"
@@ -371,15 +372,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="上进(10)"
                         android:textColor="@color/black_333333"
                         android:textSize="25px" />
                 </LinearLayout>
             </FrameLayout>
             <com.yiwo.friendscometogether.widget.NestedRecyclerView
                 android:id="@+id/rl_impresson"
-                android:layout_marginLeft="30px"
-                android:layout_marginRight="30px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
