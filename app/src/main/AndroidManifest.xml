@@ -479,7 +479,8 @@
         <activity android:name=".webpages.ShopInfoWebActivity" />
         <activity android:name=".webpages.ApplyActivityAgreementWebActivity" />
         <activity android:name=".newpage.PersonImpressionActivity" />
-        <activity android:name=".newpage.FindFriendByTelActivity"></activity>
+        <activity android:name=".newpage.FindFriendByTelActivity" />
+        <activity android:name=".newpage.PersonsOfTheLabelActivity"></activity>
     </application>
 
 </manifest>

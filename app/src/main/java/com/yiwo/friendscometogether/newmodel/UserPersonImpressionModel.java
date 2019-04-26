@@ -46,10 +46,12 @@ public class UserPersonImpressionModel {
         /**
          * label_name : 帅呆了
          * num : 2
+         * labelID
          */
 
         private String label_name;
         private String num;
+        private String labelID;
 
         public String getLabel_name() {
             return label_name;
@@ -65,6 +67,14 @@ public class UserPersonImpressionModel {
 
         public void setNum(String num) {
             this.num = num;
+        }
+
+        public String getLabelID() {
+            return labelID;
+        }
+
+        public void setLabelID(String labelID) {
+            this.labelID = labelID;
         }
     }
 }

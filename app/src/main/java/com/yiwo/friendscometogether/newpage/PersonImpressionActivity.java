@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -39,6 +42,8 @@ public class PersonImpressionActivity extends BaseActivity {
 
     @BindView(R.id.rl_impresson)
     NestedRecyclerView rl_impresson;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
     @BindView(R.id.tv0)
     TextView tv0;
     @BindView(R.id.tv1)
@@ -79,7 +84,8 @@ public class PersonImpressionActivity extends BaseActivity {
     LinearLayout lay8;
     @BindView(R.id.lay9)
     LinearLayout lay9;
-
+    @BindView(R.id.iv_head)
+    ImageView iv_head;
     private SpImp spImp;
     private String person_id;
     private List<PersonImpressonModel.ObjBean> listAllLabel = new ArrayList<>();
@@ -91,8 +97,15 @@ public class PersonImpressionActivity extends BaseActivity {
         setContentView(R.layout.activity_person_impression);
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(PersonImpressionActivity.this);
-        person_id = getIntent().getStringExtra("person_id");
         spImp = new SpImp(PersonImpressionActivity.this);
+        person_id = getIntent().getStringExtra("person_id");
+        if (person_id.equals(spImp.getUID())){
+            tv_title.setText("我的印象");
+        }else {
+            tv_title.setText("Ta的印象");
+        }
+        Glide.with(PersonImpressionActivity.this).load(getIntent().getStringExtra("user_icon"))
+                .apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(iv_head);
         initRv();
         initData();
     }
@@ -275,12 +288,85 @@ public class PersonImpressionActivity extends BaseActivity {
 //        }
 //    }
 
-    @OnClick({R.id.rl_back})
+    @OnClick({R.id.rl_back,R.id.lay0,R.id.lay1,R.id.lay2,R.id.lay3,R.id.lay4,R.id.lay5,R.id.lay6,R.id.lay7,R.id.lay8,R.id.lay9})
     public void onClick(View view){
+        Intent intent = new Intent();
         switch (view.getId()){
+
             case R.id.rl_back:
                 finish();
                 break;
+            case R.id.lay0:
+                intent.setClass(PersonImpressionActivity.this,PersonsOfTheLabelActivity.class);
+                intent.putExtra("label_id",listUserLabel.get(0).getLabelID());
+                intent.putExtra("person_id",person_id);
+                intent.putExtra("title",tv0.getText().toString());
+                startActivity(intent);
+                break;
+            case R.id.lay1:
+                intent.setClass(PersonImpressionActivity.this,PersonsOfTheLabelActivity.class);
+                intent.putExtra("label_id",listUserLabel.get(1).getLabelID());
+                intent.putExtra("title",tv1.getText().toString());
+                intent.putExtra("person_id",person_id);
+                startActivity(intent);
+                break;
+            case R.id.lay2:
+                intent.setClass(PersonImpressionActivity.this,PersonsOfTheLabelActivity.class);
+                intent.putExtra("label_id",listUserLabel.get(2).getLabelID());
+                intent.putExtra("title",tv2.getText().toString());
+                intent.putExtra("person_id",person_id);
+                startActivity(intent);
+                break;
+            case R.id.lay3:
+                intent.setClass(PersonImpressionActivity.this,PersonsOfTheLabelActivity.class);
+                intent.putExtra("label_id",listUserLabel.get(3).getLabelID());
+                intent.putExtra("title",tv3.getText().toString());
+                intent.putExtra("person_id",person_id);
+                startActivity(intent);
+                break;
+            case R.id.lay4:
+                intent.setClass(PersonImpressionActivity.this,PersonsOfTheLabelActivity.class);
+                intent.putExtra("label_id",listUserLabel.get(4).getLabelID());
+                intent.putExtra("title",tv4.getText().toString());
+                intent.putExtra("person_id",person_id);
+                startActivity(intent);
+                break;
+            case R.id.lay5:
+                intent.setClass(PersonImpressionActivity.this,PersonsOfTheLabelActivity.class);
+                intent.putExtra("label_id",listUserLabel.get(5).getLabelID());
+                intent.putExtra("title",tv5.getText().toString());
+                intent.putExtra("person_id",person_id);
+                startActivity(intent);
+                break;
+            case R.id.lay6:
+                intent.setClass(PersonImpressionActivity.this,PersonsOfTheLabelActivity.class);
+                intent.putExtra("label_id",listUserLabel.get(6).getLabelID());
+                intent.putExtra("title",tv6.getText().toString());
+                intent.putExtra("person_id",person_id);
+                startActivity(intent);
+                break;
+            case R.id.lay7:
+                intent.setClass(PersonImpressionActivity.this,PersonsOfTheLabelActivity.class);
+                intent.putExtra("label_id",listUserLabel.get(7).getLabelID());
+                intent.putExtra("title",tv7.getText().toString());
+                intent.putExtra("person_id",person_id);
+                startActivity(intent);
+                break;
+            case R.id.lay8:
+                intent.setClass(PersonImpressionActivity.this,PersonsOfTheLabelActivity.class);
+                intent.putExtra("label_id",listUserLabel.get(8).getLabelID());
+                intent.putExtra("title",tv8.getText().toString());
+                intent.putExtra("person_id",person_id);
+                startActivity(intent);
+                break;
+            case R.id.lay9:
+                intent.setClass(PersonImpressionActivity.this,PersonsOfTheLabelActivity.class);
+                intent.putExtra("label_id",listUserLabel.get(9).getLabelID());
+                intent.putExtra("title",tv9.getText().toString());
+                intent.putExtra("person_id",person_id);
+                startActivity(intent);
+                break;
+
         }
     }
 }

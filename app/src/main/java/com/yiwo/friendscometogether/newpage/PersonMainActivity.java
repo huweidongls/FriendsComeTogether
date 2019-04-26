@@ -749,6 +749,7 @@ public class PersonMainActivity extends BaseActivity {
             case R.id.iv_person_icon:
                     intent.setClass(PersonMainActivity.this,PersonImpressionActivity.class);
                     intent.putExtra("person_id",person_id);
+                    intent.putExtra("user_icon",model.getObj().getInfo().getUserpic());
                     startActivity(intent);
                 break;
         }

@@ -323,5 +323,6 @@ public class NetConfig {
     public static String userCommentLabel = "action/ac_user/userCommentLabel";//action/ac_user/userCommentLabel  评论标签接口  传userID登录用户的ID   buserID 被评论用户的ID    labelID 标签ID
     //获取个人评论标签接口
     public static String userCommentLabelList = "action/ac_user/userCommentLabelList";//action/ac_user/userCommentLabelList  我的评论标签接口   传 userID 登录用户的ID   type=0返回 10个     1返回全部 返回  label_name 标签名   num评论数量
-
+    //获取评论的人 接口
+    public static String clickUserList = "action/ac_user/clickUserList";//action/ac_user/clickUserList 点击的用户列表接口  传 userID登录用户ID  labelID标签ID   page分页
 }

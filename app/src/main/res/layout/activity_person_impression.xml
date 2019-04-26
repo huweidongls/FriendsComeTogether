@@ -20,7 +20,8 @@
 
         </RelativeLayout>
         <TextView
-            android:text="个人印象"
+            android:id="@+id/tv_title"
+            android:text="Ta的印象"
             style="@style/tv_top_title" />
     </RelativeLayout>
     <ScrollView
@@ -45,6 +46,7 @@
                     android:src="@mipmap/impresson_head_bg" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_head"
                     android:layout_width="205px"
                     android:layout_height="205px"
                     android:layout_gravity="center"
