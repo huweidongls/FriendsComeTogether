@@ -585,6 +585,47 @@ public class HomeFragment1 extends BaseFragment {
                         WeiboDialogUtils.closeDialog(dialog_loading);
                     }
                 });
+        ViseHttp.POST(NetConfig.allBannerUrl)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.allBannerUrl))
+                .addParam("type", "1")
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200) {
+                                Gson gson = new Gson();
+                                final AllBannerModel bannerModel = gson.fromJson(data, AllBannerModel.class);
+                                List<String> list = new ArrayList<>();
+                                for (int i = 0; i < bannerModel.getObj().size(); i++) {
+                                    list.add(bannerModel.getObj().get(i).getPic());
+                                }
+                                init(banner, list);
+                                banner.setOnBannerListener(new OnBannerListener() {
+                                    @Override
+                                    public void OnBannerClick(int position) {
+//                                        if (bannerModel.getObj().get(position).getFirst_type().equals("0")) {
+//                                            Intent intent = new Intent(getContext(), DetailsOfFriendTogetherWebActivity.class);
+//                                            intent.putExtra("pfID", bannerModel.getObj().get(position).getLeftid());
+//                                            startActivity(intent);
+//                                        } else if (bannerModel.getObj().get(position).getFirst_type().equals("1")) {
+//                                            Intent intent = new Intent(getContext(), DetailsOfFriendsWebActivity1.class);
+//                                            intent.putExtra("fmid", bannerModel.getObj().get(position).getLeftid());
+//                                            startActivity(intent);
+//                                        }
+                                    }
+                                });
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
     }
 
     @Override

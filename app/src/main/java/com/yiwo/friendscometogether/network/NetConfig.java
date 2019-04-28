@@ -6,7 +6,8 @@ package com.yiwo.friendscometogether.network;
 
 public class NetConfig {
 
-    public static String BaseUrl = "http://tb.91yiwo.cn/index.php/";
+//    public static String BaseUrl = "http://tb.91yiwo.cn/index.php/";
+    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
 //    public static String BaseUrl = "http://www.youlaiyouyue.com/";
 //    public static String BaseUrl = "http://47.92.136.19/index.php/";
 

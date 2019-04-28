@@ -37,7 +37,7 @@ public class BaseWebActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                WeiboDialogUtils.closeDialog(dialogLoading);
+//                WeiboDialogUtils.closeDialog(dialogLoading);
             }
 
             @Override
@@ -56,6 +56,6 @@ public class BaseWebActivity extends BaseActivity {
 
         }
         webView.loadUrl(url);
-        dialogLoading = WeiboDialogUtils.createLoadingDialog(this,"加载中...");
+//        dialogLoading = WeiboDialogUtils.createLoadingDialog(this,"加载中...");
     }
 }
