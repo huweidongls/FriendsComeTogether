@@ -107,6 +107,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
+
             android:id="@+id/tv_renjun"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="6px"
@@ -117,12 +118,16 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:lines="1"
+            android:ellipsize="end"
             android:id="@+id/tv_baoming"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="6px"
             android:textColor="#424242"
             android:textSize="30px"
-            android:text="活动地点：20人"
+            android:text="活动地点："
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -144,11 +149,14 @@
                 android:layout_height="wrap_content" />
 
             <RelativeLayout
+                android:layout_toRightOf="@+id/tv_shengyu"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="52px">
 
                 <LinearLayout
+                    android:layout_alignParentRight="true"
+                    android:gravity="right"
                     android:id="@+id/ll_go_address"
                     android:layout_marginRight="18px"
                     android:layout_marginLeft="18px"
@@ -164,12 +172,14 @@
                         android:layout_height="28px" />
 
                     <TextView
+                        android:ellipsize="end"
                         android:id="@+id/tv_address"
                         android:layout_marginLeft="4px"
                         android:layout_gravity="center_vertical"
                         android:textColor="#272A2C"
                         android:textSize="26px"
-                        android:text="北京"
+                        android:lines="1"
+                        android:text=""
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
