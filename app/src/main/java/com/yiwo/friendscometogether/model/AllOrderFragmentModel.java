@@ -64,6 +64,9 @@ public class AllOrderFragmentModel {
          * end_time : 2019.03.31
          * status : 待支付
          * order_type : 1
+         * "orderStatus": "2",// 0正常订单  1 我是被邀请的人  2 我是邀请的人
+         "User": "0912_130", //User 邀请人名字
+         "BUser": "花生", // Buser被邀请人名字
          */
 
         private String userID;
@@ -87,7 +90,9 @@ public class AllOrderFragmentModel {
         private String end_time;
         private String status;
         private String order_type;
-
+        private String orderStatus;
+        private String User;
+        private String BUser;
         public String getUserID() {
             return userID;
         }
@@ -254,6 +259,30 @@ public class AllOrderFragmentModel {
 
         public void setOrder_type(String order_type) {
             this.order_type = order_type;
+        }
+
+        public String getOrderStatus() {
+            return orderStatus;
+        }
+
+        public void setOrderStatus(String orderStatus) {
+            this.orderStatus = orderStatus;
+        }
+
+        public String getUser() {
+            return User;
+        }
+
+        public void setUser(String user) {
+            User = user;
+        }
+
+        public String getBUser() {
+            return BUser;
+        }
+
+        public void setBUser(String BUser) {
+            this.BUser = BUser;
         }
     }
 }

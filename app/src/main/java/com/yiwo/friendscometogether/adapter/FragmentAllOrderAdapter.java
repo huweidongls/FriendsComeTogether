@@ -110,8 +110,16 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
         ssb_money.setSpan(ab1,str_money.indexOf(".")+1,str_money.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 //        holder.tvPrice.setText("合计: ¥" +ssb_money);
+        if (data.get(position).getOrderStatus().equals("1")){  //我被邀请
+            holder.tvPriceDetails.setVisibility(View.VISIBLE);
+            holder.tvPriceDetails.setText("邀请人："+data.get(position).getUser());
+        }else if (data.get(position).getOrderStatus().equals("2")){//邀请他人
+            holder.tvPriceDetails.setVisibility(View.VISIBLE);
+            holder.tvPriceDetails.setText("邀请："+data.get(position).getBUser());
+        }else {
+            holder.tvPriceDetails.setVisibility(View.GONE);
+        }
         holder.tvPrice.setText(ssb_money);
-        holder.tvPriceDetails.setText(data.get(position).getPrice_type());
         holder.tvStatus.setText(data.get(position).getStatus());
         if(data.get(position).getOrder_type().equals("7")){//已取消
             holder.tvCancelTrip.setVisibility(View.GONE);
@@ -177,6 +185,10 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvOkReturn.setVisibility(View.GONE);
             holder.tvReturning.setVisibility(View.GONE);
         }
+        //如果为邀请他人的订单  只显示付款 其他提示由被邀请人操作（取消订单）
+        if (data.get(position).getOrderStatus().equals("2")){
+
+        }
         //不可点击按钮全部隐藏！！！20190301
         holder.tvToTrip.setVisibility(View.GONE);
         holder.tvTriping.setVisibility(View.GONE);
@@ -206,7 +218,6 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
     public int getItemCount() {
         return data == null ? 0 : data.size();
     }
-
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private RelativeLayout rlDetails;

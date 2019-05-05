@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_white_30px"
+    android:paddingBottom="10px"
     android:layout_marginTop="20px"
     android:layout_marginLeft="23px"
     android:layout_marginRight="23px">
@@ -102,10 +103,10 @@
         <TextView
             android:visibility="gone"
             android:id="@+id/fragment_all_order_rv_tv_price_details"
-            android:layout_marginLeft="40px"
+            android:layout_marginLeft="26px"
             android:layout_centerVertical="true"
             android:textColor="@color/black_333333"
-            android:textSize="28px"
+            android:textSize="26px"
             android:text="自费"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -124,6 +125,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_btns"
         android:paddingRight="10px"
         android:layout_width="match_parent"
         android:layout_height="86px">
@@ -236,5 +238,14 @@
         </LinearLayout>
 
     </RelativeLayout>
-
+    <TextView
+        android:id="@+id/tv_niming_staus"
+        android:textSize="26px"
+        android:textColor="@color/red_d84c37"
+        android:layout_marginRight="20px"
+        android:lines="1"
+        android:layout_gravity="right"
+        android:ellipsize="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>

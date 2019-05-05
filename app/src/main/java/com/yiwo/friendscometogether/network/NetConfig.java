@@ -6,8 +6,13 @@ package com.yiwo.friendscometogether.network;
 
 public class NetConfig {
 
+    //测试服务器
+    public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
 //    public static String BaseUrl = "http://tb.91yiwo.cn/index.php/";
-    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
+    //正式服务器
+//    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
+
+
 //    public static String BaseUrl = "http://www.youlaiyouyue.com/";
 //    public static String BaseUrl = "http://47.92.136.19/index.php/";
 
