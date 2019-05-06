@@ -49,11 +49,13 @@ public class SearchListModel {
          * title : 删除测试
          * id : 109
          * type : 1
+         * userpic 头像
          */
 
         private String title;
         private String id;
         private String type;
+        private String userpic;
 
         public String getTitle() {
             return title;
@@ -77,6 +79,14 @@ public class SearchListModel {
 
         public void setType(String type) {
             this.type = type;
+        }
+
+        public String getUserpic() {
+            return userpic;
+        }
+
+        public void setUserpic(String userpic) {
+            this.userpic = userpic;
         }
     }
 }

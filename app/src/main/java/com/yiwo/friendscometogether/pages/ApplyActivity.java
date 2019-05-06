@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -171,6 +172,20 @@ public class ApplyActivity extends BaseActivity {
         } else {
             getShowView();
         }
+        cb_allow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    isAlowAgreement = true;
+                    tvOnlinePay.setBackgroundResource(R.color.red_d84c37);
+                    apply_btn.setBackgroundResource(R.color.red_d84c37);
+                }else {
+                    isAlowAgreement = false;
+                    tvOnlinePay.setBackgroundResource(R.color.gray_c4ced3);
+                    apply_btn.setBackgroundResource(R.color.gray_c4ced3);
+                }
+            }
+        });
         Spannable string = new SpannableString("我已阅读并同意");
         // 前景色
         string.setSpan(new ForegroundColorSpan(Color.parseColor("#d84c37")), 0, string.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);

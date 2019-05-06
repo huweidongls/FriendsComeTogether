@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -106,6 +107,12 @@ public class MessageInvitationAdapter extends RecyclerView.Adapter<MessageInvita
             String str = "<font color='#0765AA'>"+"@"+data.get(position).getUsername()+"</font>拒绝了您邀请的活动<font color='#d84c37'>"+data.get(position).getPftitle()+"</font>";
             holder.tvNickname.setText(Html.fromHtml(str));
         }
+        if (data.get(position).getText().equals("")||data.get(position).getText() == null){
+            holder.rl_liuyan.setVisibility(View.GONE);
+        }else {
+            holder.rl_liuyan.setVisibility(View.VISIBLE);
+            holder.tv_liuyan.setText(data.get(position).getText());
+        }
         holder.llNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -183,6 +190,9 @@ public class MessageInvitationAdapter extends RecyclerView.Adapter<MessageInvita
 
         private LinearLayout ll;
         private LinearLayout llYaoQing;
+
+        private RelativeLayout rl_liuyan;
+        private TextView tv_liuyan;
         public ViewHolder(View itemView) {
             super(itemView);
             titleTv = (itemView).findViewById(R.id.message_view_title_tv);
@@ -195,6 +205,9 @@ public class MessageInvitationAdapter extends RecyclerView.Adapter<MessageInvita
             ivSex = itemView.findViewById(R.id.iv_sex);
             ll = itemView.findViewById(R.id.ll);
             llYaoQing = itemView.findViewById(R.id.ll_yaoqing);
+
+            rl_liuyan = itemView.findViewById(R.id.rl_liuyan);
+            tv_liuyan = itemView.findViewById(R.id.tv_liuyan);
         }
     }
 

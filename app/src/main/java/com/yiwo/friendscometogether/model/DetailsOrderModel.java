@@ -67,6 +67,9 @@ public class DetailsOrderModel {
          * 订单详情 refundInfo 退款说明
          * refundWhy 退款原因
          *  refund_money 退款金额
+         "orderStatus": "1",
+         "User": "神秘人",
+         "BUser": "花生"
          */
 
         private String title;
@@ -95,6 +98,13 @@ public class DetailsOrderModel {
         private String refundInfo;
         private String refundWhy;
         private String refund_money;
+
+        private String orderStatus;
+        private String User;
+        private String BUser;
+
+
+
 
         public String getTitle() {
             return title;
@@ -302,6 +312,30 @@ public class DetailsOrderModel {
 
         public void setRefund_money(String refund_money) {
             this.refund_money = refund_money;
+        }
+
+        public String getOrderStatus() {
+            return orderStatus;
+        }
+
+        public void setOrderStatus(String orderStatus) {
+            this.orderStatus = orderStatus;
+        }
+
+        public String getUser() {
+            return User;
+        }
+
+        public void setUser(String user) {
+            User = user;
+        }
+
+        public String getBUser() {
+            return BUser;
+        }
+
+        public void setBUser(String BUser) {
+            this.BUser = BUser;
         }
     }
 }

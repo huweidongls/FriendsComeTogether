@@ -158,5 +158,14 @@
             />
 
     </RelativeLayout>
-
+    <TextView
+        android:id="@+id/tv_niming_staus"
+        android:textSize="26px"
+        android:textColor="@color/black_333333"
+        android:layout_marginRight="20px"
+        android:lines="1"
+        android:layout_gravity="right"
+        android:ellipsize="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>

@@ -110,6 +110,7 @@ public class GuanZhuActivity extends BaseActivity {
     private List<UserActiveListModel.ObjBean> activeList;
     private int type = 3; //0 我付费，1 我不付费，3 免费
     private int typeNoName = 0; // 0不是匿名要请  1匿名要请
+
     private int type_showLayout = 0;//0为我关注的，1为关注我的，2 为关注活动
     private List<UserFocusModel.ObjBean> mWoGuanZhuDeList ;
     private WoGuanZhuDeAdapter woGuanZhuDeAdapter;

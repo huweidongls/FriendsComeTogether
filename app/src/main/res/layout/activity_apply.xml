@@ -471,7 +471,6 @@
                     <CheckBox
                         android:layout_gravity="center_vertical"
                         android:button="@drawable/check_box_red"
-                        android:clickable="false"
                         android:id="@+id/cb_allow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />

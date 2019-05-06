@@ -1,7 +1,9 @@
 package com.yiwo.friendscometogether.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
@@ -111,13 +113,16 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
 
 //        holder.tvPrice.setText("合计: ¥" +ssb_money);
         if (data.get(position).getOrderStatus().equals("1")){  //我被邀请
+            holder.tv_niming_staus.setVisibility(View.VISIBLE);
             holder.tvPriceDetails.setVisibility(View.VISIBLE);
             holder.tvPriceDetails.setText("邀请人："+data.get(position).getUser());
         }else if (data.get(position).getOrderStatus().equals("2")){//邀请他人
+            holder.tv_niming_staus.setVisibility(View.VISIBLE);
             holder.tvPriceDetails.setVisibility(View.VISIBLE);
             holder.tvPriceDetails.setText("邀请："+data.get(position).getBUser());
         }else {
-            holder.tvPriceDetails.setVisibility(View.GONE);
+            holder.tvPriceDetails.setVisibility(View.GONE);// 邀请：***、邀请人：***
+            holder.tv_niming_staus.setVisibility(View.GONE);// 被邀请人不取消活动，此订单不可退款
         }
         holder.tvPrice.setText(ssb_money);
         holder.tvStatus.setText(data.get(position).getStatus());
@@ -176,6 +181,10 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvOkReturn.setVisibility(View.GONE);
             holder.tvReturning.setVisibility(View.GONE);
         }else if(data.get(position).getOrder_type().equals("1")){//1待支付
+            if (data.get(position).getOrderStatus().equals("1")){  //我被邀请
+                holder.tv_niming_staus.setText("待邀请人支付");
+                holder.rl_btns.setVisibility(View.GONE);
+            }
             holder.tvCancelTrip.setVisibility(View.GONE);
             holder.tvDeleteTrip.setVisibility(View.VISIBLE);
             holder.tvToTrip.setVisibility(View.GONE);
@@ -185,10 +194,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvOkReturn.setVisibility(View.GONE);
             holder.tvReturning.setVisibility(View.GONE);
         }
-        //如果为邀请他人的订单  只显示付款 其他提示由被邀请人操作（取消订单）
-        if (data.get(position).getOrderStatus().equals("2")){
 
-        }
         //不可点击按钮全部隐藏！！！20190301
         holder.tvToTrip.setVisibility(View.GONE);
         holder.tvTriping.setVisibility(View.GONE);
@@ -203,7 +209,20 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
         holder.tvCancelTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener1.onCancel(position);
+                //如果为邀请他人的订单  只显示付款 其他提示由被邀请人操作（取消订单）
+                if (data.get(position).getOrderStatus().equals("2")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("需被邀请人取消订单，方可退款")
+                            .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    return;
+                                }
+                            }).show();
+                }else {
+                    listener1.onCancel(position);
+                }
+
             }
         });
         holder.tvDeleteTrip.setOnClickListener(new View.OnClickListener() {
@@ -241,6 +260,10 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
         private TextView tvJoinNum;
         private TextView tvNoName;
 
+        //
+        private TextView tv_niming_staus;
+        private RelativeLayout rl_btns;
+
         public ViewHolder(View itemView) {
             super(itemView);
             rlDetails = itemView.findViewById(R.id.fragment_all_order_rv_rl_details);
@@ -262,6 +285,9 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             tvEndTime = itemView.findViewById(R.id.tv_end_time);
             tvJoinNum = itemView.findViewById(R.id.tv_people_num);
             tvNoName = itemView.findViewById(R.id.tv_noname);
+
+            tv_niming_staus = itemView.findViewById(R.id.tv_niming_staus);
+            rl_btns = itemView.findViewById(R.id.rl_btns);
         }
     }
 

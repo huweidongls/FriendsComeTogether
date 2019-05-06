@@ -90,6 +90,7 @@ public class OrderCommentActivity extends BaseActivity {
             ViseHttp.POST(NetConfig.detailsOrderUrl)
                     .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.detailsOrderUrl))
                     .addParam("order_id", orderId)
+                    .addParam("userID",spImp.getUID())
                     .request(new ACallback<String>() {
                         @Override
                         public void onSuccess(String data) {

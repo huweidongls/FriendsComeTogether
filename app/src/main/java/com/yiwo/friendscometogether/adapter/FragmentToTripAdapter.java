@@ -1,7 +1,9 @@
 package com.yiwo.friendscometogether.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
@@ -75,7 +77,7 @@ public class FragmentToTripAdapter extends RecyclerView.Adapter<FragmentToTripAd
         holder.tvJoinNum.setText("参加人数："+ data.get(position).getJoin_num());
         holder.tvNoName.setText("是否匿名："+(data.get(position).getNoname().equals("0")? "否":"是"));
 
-        holder.tvPriceDetails.setText(data.get(position).getPrice_type());
+//        holder.tvPriceDetails.setText(data.get(position).getPrice_type());
 
         String str_money = "合计："+data.get(position).getOpaymoney();
 //        String str_money = "合计："+"48.90";
@@ -88,10 +90,34 @@ public class FragmentToTripAdapter extends RecyclerView.Adapter<FragmentToTripAd
         ssb_money.setSpan(ab1,str_money.indexOf(".")+1,str_money.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         holder.tvPrice.setText(ssb_money);
 
+        if (data.get(position).getOrderStatus().equals("1")){  //我被邀请
+            holder.tv_niming_staus.setVisibility(View.VISIBLE);
+            holder.tvPriceDetails.setVisibility(View.VISIBLE);
+            holder.tvPriceDetails.setText("邀请人："+data.get(position).getUser());
+        }else if (data.get(position).getOrderStatus().equals("2")){//邀请他人
+            holder.tv_niming_staus.setVisibility(View.VISIBLE);
+            holder.tvPriceDetails.setVisibility(View.VISIBLE);
+            holder.tvPriceDetails.setText("邀请："+data.get(position).getBUser());
+        }else {
+            holder.tvPriceDetails.setVisibility(View.GONE);// 邀请：***、邀请人：***
+            holder.tv_niming_staus.setVisibility(View.GONE);// 被邀请人不取消活动，此订单不可退款
+        }
         holder.tvCancelTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onCancel(position);
+                //如果为邀请他人的订单  只显示付款 其他提示由被邀请人操作（取消订单）
+                if (data.get(position).getOrderStatus().equals("2")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("需被邀请人取消订单，方可退款")
+                            .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    return;
+                                }
+                            }).show();
+                }else {
+                    listener.onCancel(position);
+                }
             }
         });
     }
@@ -116,6 +142,9 @@ public class FragmentToTripAdapter extends RecyclerView.Adapter<FragmentToTripAd
         private TextView tvJoinNum;
         private TextView tvNoName;
 
+        //
+        private TextView tv_niming_staus;
+
         public ViewHolder(View itemView) {
             super(itemView);
             rlDetails = itemView.findViewById(R.id.fragment_to_trip_rv_rl_details);
@@ -130,6 +159,8 @@ public class FragmentToTripAdapter extends RecyclerView.Adapter<FragmentToTripAd
             tvEndTime = itemView.findViewById(R.id.tv_end_time);
             tvJoinNum = itemView.findViewById(R.id.tv_people_num);
             tvNoName = itemView.findViewById(R.id.tv_noname);
+
+            tv_niming_staus = itemView.findViewById(R.id.tv_niming_staus);
         }
     }
 

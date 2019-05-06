@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.yiwo.friendscometogether.webpages.ApplyActivityAgreementWebActivity">
     <RelativeLayout
         android:id="@+id/activity_apply_agreement_rl_top"
@@ -24,47 +23,43 @@
         </RelativeLayout>
 
     </RelativeLayout>
-    <ScrollView
+    <WebView
+        android:layout_below="@+id/activity_apply_agreement_rl_top"
+        android:layout_above="@+id/ll_bottom"
+        android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            android:layout_marginTop="20px"
+            android:layout_marginBottom="20px"
+            android:background="@drawable/bg_btn_gray_agree"
+            android:textColor="@color/white_ffffff"
+            android:text="取消"
+            android:textSize="30px"
+            android:layout_weight="1"
+            android:id="@+id/btn_cancel"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <WebView
-                android:id="@+id/webView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <Button
-                    android:layout_marginLeft="50px"
-                    android:layout_marginRight="50px"
-                    android:layout_marginTop="20px"
-                    android:layout_marginBottom="20px"
-                    android:background="@drawable/bg_btn_gray_agree"
-                    android:textColor="@color/white_ffffff"
-                    android:text="取消"
-                    android:textSize="30px"
-                    android:layout_weight="1"
-                    android:id="@+id/btn_cancel"
-                    android:layout_width="match_parent"
-                    android:layout_height="80px" />
-                <Button
-                    android:layout_marginLeft="50px"
-                    android:layout_marginRight="50px"
-                    android:layout_marginTop="20px"
-                    android:layout_marginBottom="20px"
-                    android:background="@drawable/bg_btn_red_agree"
-                    android:textColor="@color/white_ffffff"
-                    android:text="我同意"
-                    android:textSize="30px"
-                    android:layout_weight="1"
-                    android:id="@+id/btn_agree"
-                    android:layout_width="match_parent"
-                    android:layout_height="80px" />
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+            android:layout_height="80px" />
+        <Button
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            android:layout_marginTop="20px"
+            android:layout_marginBottom="20px"
+            android:background="@drawable/bg_btn_red_agree"
+            android:textColor="@color/white_ffffff"
+            android:text="我同意"
+            android:textSize="30px"
+            android:layout_weight="1"
+            android:id="@+id/btn_agree"
+            android:layout_width="match_parent"
+            android:layout_height="80px" />
+    </LinearLayout>
+</RelativeLayout>

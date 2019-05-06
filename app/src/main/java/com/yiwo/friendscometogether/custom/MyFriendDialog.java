@@ -21,6 +21,7 @@ public class MyFriendDialog extends Dialog {
     private TextView tvDelete;
     private TextView tvBlack;
     private TextView tvInformation;
+    private TextView tvYaoQing;
     private OnMyFriendListener listener;
     private int type;
 
@@ -47,6 +48,7 @@ public class MyFriendDialog extends Dialog {
         tvDelete = view.findViewById(R.id.tv_delete_friend);
         tvBlack = view.findViewById(R.id.tv_add_black);
         tvInformation = view.findViewById(R.id.tv_information);
+        tvYaoQing = view.findViewById(R.id.tv_yaoqing);
         if(type == 2){
             tvDelete.setText("彻底删除");
             tvBlack.setText("移出黑名单");
@@ -73,7 +75,13 @@ public class MyFriendDialog extends Dialog {
                 dismiss();
             }
         });
-
+        tvYaoQing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onReturn(3);
+                dismiss();
+            }
+        });
     }
 
     public interface OnMyFriendListener{
