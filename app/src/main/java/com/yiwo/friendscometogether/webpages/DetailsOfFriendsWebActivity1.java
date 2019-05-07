@@ -52,10 +52,14 @@ import com.yiwo.friendscometogether.model.ActiveShareModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.MuLuItemYouJiAdapter;
 import com.yiwo.friendscometogether.newmodel.YouJiWebModel;
+import com.yiwo.friendscometogether.newpage.FindFriendByTelActivity;
+import com.yiwo.friendscometogether.newpage.JuBaoActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.pages.ArticleCommentActivity;
+import com.yiwo.friendscometogether.pages.BlackUserActivity;
 import com.yiwo.friendscometogether.pages.InsertIntercalationActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
+import com.yiwo.friendscometogether.pages.MyFriendActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.ShareUtils;
 
@@ -85,8 +89,8 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
     LinearLayout llIntercalation;
     @BindView(R.id.wv)
     WebView webView;
-    @BindView(R.id.rl_mulu)
-    RelativeLayout rlMuLu;
+    @BindView(R.id.rl_show_more)
+    RelativeLayout rlShowMore;
     @BindView(R.id.rl_bottom)
     RelativeLayout rl_bottom;
     @BindView(R.id.ll_comment)
@@ -268,11 +272,6 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
                                 listMuLu.addAll(model.getObj().getTitle());
                                 arrMulu = new YouJiWebModel.ObjBean.TitleBean[model.getObj().getTitle().size()];
                                 arrMuLuTitle = new String[model.getObj().getTitle().size()];
-                                if (arrMulu.length>0){
-                                    rlMuLu.setVisibility(View.VISIBLE);
-                                }else {
-                                    rlMuLu.setVisibility(View.GONE);
-                                }
                                 for (int i = 0;i<model.getObj().getTitle().size();i++){
                                     arrMulu[i] = model.getObj().getTitle().get(i);
                                     arrMuLuTitle[i] = model.getObj().getTitle().get(i).getFftitle();
@@ -334,13 +333,13 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
     }
     @OnClick({R.id.activity_details_of_friends_rl_back,R.id.activity_details_of_friends_ll_comment,
             R.id.activity_details_of_friends_ll_share,R.id.activity_details_of_friends_ll_praise,
-            R.id.activity_details_of_friends_ll_star,R.id.rl_mulu,R.id.activity_details_of_friends_ll_intercalation,
-            R.id.btn_pinglun,R.id.comment_tv_comment,R.id.rl_share})
+            R.id.activity_details_of_friends_ll_star,R.id.rl_show_more,R.id.activity_details_of_friends_ll_intercalation,
+            R.id.btn_pinglun,R.id.comment_tv_comment})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
-            case R.id.rl_mulu:
-                showMuLuPopupwindow(rlMuLu);
+            case R.id.rl_show_more:
+                showMore(rlShowMore);
                 break;
             case R.id.activity_details_of_friends_rl_back:
                 onBackPressed();
@@ -370,46 +369,6 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
                     intent.setClass(DetailsOfFriendsWebActivity1.this, ArticleCommentActivity.class);
                     intent.putExtra("id", fmID);
                     startActivity(intent);
-                }
-                break;
-            case R.id.rl_share:
-                if (TextUtils.isEmpty(uid) || uid.equals("0")) {
-                    intent.setClass(DetailsOfFriendsWebActivity1.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    ViseHttp.POST(NetConfig.activeShareUrl)
-                            .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.activeShareUrl))
-                            .addParam("id", fmID)
-                            .addParam("type", "1")
-                            .request(new ACallback<String>() {
-                                @Override
-                                public void onSuccess(String data) {
-                                    Log.d("asdasd",data);
-                                    try {
-                                        JSONObject jsonObject = new JSONObject(data);
-                                        if (jsonObject.getInt("code") == 200) {
-                                            Gson gson = new Gson();
-                                            final ActiveShareModel shareModel = gson.fromJson(data, ActiveShareModel.class);
-                                            new ShareAction(DetailsOfFriendsWebActivity1.this).setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
-                                                    .setShareboardclickCallback(new ShareBoardlistener() {
-                                                        @Override
-                                                        public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
-                                                            ShareUtils.shareWeb(DetailsOfFriendsWebActivity1.this, shareModel.getObj().getUrl(), model.getObj().getWho()+"的友记",
-                                                                    shareModel.getObj().getTitle(), shareModel.getObj().getImages(), share_media);
-                                                        }
-                                                    }).open();
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-
-                                @Override
-                                public void onFail(int errCode, String errMsg) {
-
-                                }
-                            });
                 }
                 break;
             case R.id.activity_details_of_friends_ll_share://分享
@@ -718,5 +677,115 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
             InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.showSoftInput(editText, 0);
         }
+    }
+    private void showMore(final View view_p) {
+
+        View view = LayoutInflater.from(DetailsOfFriendsWebActivity1.this).inflate(R.layout.popupwindow_detail_of_friend_web_activity_show_more, null);
+        final PopupWindow popupWindow;
+        popupWindow = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+
+        LinearLayout ll_show_more = view.findViewById(R.id.ll_show_more);
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ll_show_more.getLayoutParams();
+        LinearLayout llMuLu = view.findViewById(R.id.ll_mulu);
+
+        if (arrMulu.length>0){
+            llMuLu.setVisibility(View.VISIBLE);
+            params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        }else {
+            llMuLu.setVisibility(View.GONE);
+            params.height = 180;
+        }
+        ll_show_more.setLayoutParams(params);
+        ScreenAdapterTools.getInstance().loadView(view);//确定后dp
+        llMuLu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                showMuLuPopupwindow(view_p);
+            }
+        });
+        LinearLayout ll_share = view.findViewById(R.id.ll_share);
+        ll_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(uid) || uid.equals("0")) {
+                    Intent intent = new Intent();
+                    intent.setClass(DetailsOfFriendsWebActivity1.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    ViseHttp.POST(NetConfig.activeShareUrl)
+                            .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.activeShareUrl))
+                            .addParam("id", fmID)
+                            .addParam("type", "1")
+                            .request(new ACallback<String>() {
+                                @Override
+                                public void onSuccess(String data) {
+                                    Log.d("asdasd",data);
+                                    try {
+                                        JSONObject jsonObject = new JSONObject(data);
+                                        if (jsonObject.getInt("code") == 200) {
+                                            Gson gson = new Gson();
+                                            final ActiveShareModel shareModel = gson.fromJson(data, ActiveShareModel.class);
+                                            new ShareAction(DetailsOfFriendsWebActivity1.this).setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
+                                                    .setShareboardclickCallback(new ShareBoardlistener() {
+                                                        @Override
+                                                        public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+                                                            ShareUtils.shareWeb(DetailsOfFriendsWebActivity1.this, shareModel.getObj().getUrl(), model.getObj().getWho()+"的友记",
+                                                                    shareModel.getObj().getTitle(), shareModel.getObj().getImages(), share_media);
+                                                        }
+                                                    }).open();
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onFail(int errCode, String errMsg) {
+
+                                }
+                            });
+                }
+            }
+        });
+        LinearLayout llJuBao = view.findViewById(R.id.ll_jubao);
+        llJuBao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                Intent intent = new Intent();
+                intent.setClass(DetailsOfFriendsWebActivity1.this, JuBaoActivity.class);
+                intent.putExtra("pfID",fmID);
+                intent.putExtra("type","1");
+                startActivity(intent);
+            }
+        });
+
+        popupWindow.setTouchable(true);
+        popupWindow.setFocusable(true);
+        // 设置点击窗口外边窗口消失
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popupWindow.setOutsideTouchable(true);
+//        popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
+        popupWindow.showAsDropDown(view_p,0,0);
+        // 设置popWindow的显示和消失动画
+//        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
+//        WindowManager.LayoutParams params = getWindow().getAttributes();
+//        params.alpha = 0.5f;
+//        getWindow().setAttributes(params);
+        popupWindow.update();
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            // 在dismiss中恢复透明度
+            public void onDismiss() {
+//                WindowManager.LayoutParams params = getWindow().getAttributes();
+//                params.alpha = 1f;
+//                getWindow().setAttributes(params);
+            }
+        });
+
+
     }
 }

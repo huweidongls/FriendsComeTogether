@@ -189,6 +189,7 @@ public class ToCommentFragment extends OrderBaseFragment {
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 ViseHttp.POST(NetConfig.deleteOrderTripUrl)
                                                         .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.deleteOrderTripUrl))
+                                                        .addParam("userID",uid)
                                                         .addParam("order_id", mList.get(position).getOID())
                                                         .request(new ACallback<String>() {
                                                             @Override

@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
@@ -44,6 +45,7 @@ import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.MuLuItemYouJiAdapter;
 import com.yiwo.friendscometogether.newadapter.MuLuItemYouJuAdapter;
 import com.yiwo.friendscometogether.newmodel.YouJuWebModel;
+import com.yiwo.friendscometogether.newpage.JuBaoActivity;
 import com.yiwo.friendscometogether.newpage.MoreCommentHuodongActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.pages.ApplyActivity;
@@ -71,8 +73,8 @@ public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
     ImageView focusOnIv;
     @BindView(R.id.wv)
     WebView webView;
-    @BindView(R.id.rl_mulu)
-    RelativeLayout rl_mulu;
+    @BindView(R.id.rl_show_more)
+    RelativeLayout rl_show_more;
     private Unbinder unbinder;
     SpImp spImp;
     private String uid;
@@ -155,12 +157,6 @@ public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
                                 }
                                 listMuLu.clear();
                                 listMuLu.addAll(model.getObj().getTitle());
-
-                                if (listMuLu.size()>0){
-                                    rl_mulu.setVisibility(View.VISIBLE);
-                                }else {
-                                    rl_mulu.setVisibility(View.GONE);
-                                }
                                 //底部按钮
                                 //收藏
                                 focusOnIv.setImageResource(model.getObj().getCollect().equals("0") ? R.mipmap.heart_red_border : R.mipmap.heart_red);
@@ -177,7 +173,7 @@ public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
                 });
     }
     @OnClick({R.id.activity_details_of_friends_together_rl_back,R.id.details_applyTv,R.id.activity_details_of_friends_together_ll_share,
-                    R.id.activity_details_of_friends_together_ll_focus_on,R.id.consult_leaderLl,R.id.rl_mulu})
+                    R.id.activity_details_of_friends_together_ll_focus_on,R.id.consult_leaderLl,R.id.rl_show_more})
     public void OnClick(View view){
         switch (view.getId()){
             case R.id.activity_details_of_friends_together_rl_back:
@@ -316,8 +312,8 @@ public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
                     liaotian(model.getObj().getInfo().getWy_accid());
                 }
                 break;
-            case R.id.rl_mulu:
-                showMuLuPopupwindow(rl_mulu);
+            case R.id.rl_show_more:
+                showMore(rl_show_more);
                 break;
         }
     }
@@ -379,6 +375,71 @@ public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
             intent.putExtra("url",url);
             startActivity(intent);
         }
+    }
+    private void showMore(final View view_p) {
+
+        View view = LayoutInflater.from(DetailsOfFriendTogetherWebActivity.this).inflate(R.layout.popupwindow_detail_of_friend_together_web_activity_show_more, null);
+        final PopupWindow popupWindow;
+        popupWindow = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+
+        LinearLayout ll_show_more = view.findViewById(R.id.ll_show_more);
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ll_show_more.getLayoutParams();
+        LinearLayout llMuLu = view.findViewById(R.id.ll_mulu);
+
+        if (listMuLu.size()>0){
+            llMuLu.setVisibility(View.VISIBLE);
+            params.height = 200;
+        }else {
+            llMuLu.setVisibility(View.GONE);
+            params.height = 100;
+        }
+        ll_show_more.setLayoutParams(params);
+        ScreenAdapterTools.getInstance().loadView(view);//确定后dp
+        llMuLu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                showMuLuPopupwindow(view_p);
+            }
+        });
+        LinearLayout llJuBao = view.findViewById(R.id.ll_jubao);
+        llJuBao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                Intent intent = new Intent();
+                intent.setClass(DetailsOfFriendTogetherWebActivity.this, JuBaoActivity.class);
+                intent.putExtra("pfID",pfID);
+                intent.putExtra("type","2");
+                startActivity(intent);
+            }
+        });
+
+        popupWindow.setTouchable(true);
+        popupWindow.setFocusable(true);
+        // 设置点击窗口外边窗口消失
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popupWindow.setOutsideTouchable(true);
+//        popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
+        popupWindow.showAsDropDown(view_p,0,0);
+        // 设置popWindow的显示和消失动画
+//        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
+//        WindowManager.LayoutParams params = getWindow().getAttributes();
+//        params.alpha = 0.5f;
+//        getWindow().setAttributes(params);
+        popupWindow.update();
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            // 在dismiss中恢复透明度
+            public void onDismiss() {
+//                WindowManager.LayoutParams params = getWindow().getAttributes();
+//                params.alpha = 1f;
+//                getWindow().setAttributes(params);
+            }
+        });
+
+
     }
     private void showMuLuPopupwindow(View p_view) {
 

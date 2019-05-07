@@ -36,6 +36,7 @@ import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
+import com.yiwo.friendscometogether.custom.EditContentDialog;
 import com.yiwo.friendscometogether.model.DetailsOrderModel;
 import com.yiwo.friendscometogether.model.OrderToPayModel;
 import com.yiwo.friendscometogether.network.NetConfig;
@@ -51,6 +52,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.umeng.socialize.utils.DeviceConfig.context;
 
 public class DetailsToBePaidActivity extends BaseActivity {
 
@@ -343,16 +346,13 @@ public class DetailsToBePaidActivity extends BaseActivity {
 //                                }
 //                            }).show();
                     }else {
-                        AlertDialog.Builder normalDialog = new AlertDialog.Builder(DetailsToBePaidActivity.this);
-                        normalDialog.setIcon(R.mipmap.ic_launcher);
-                        normalDialog.setTitle("提示");
-                        normalDialog.setMessage("是否取消活动");
-                        normalDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        EditContentDialog dialog = new EditContentDialog(DetailsToBePaidActivity.this, new EditContentDialog.OnReturnListener() {
                             @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                            public void onReturn(final String content) {
                                 ViseHttp.POST(NetConfig.cancelOrderTripUrl)
                                         .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl+NetConfig.cancelOrderTripUrl))
                                         .addParam("order_id", orderId)
+                                        .addParam("info",content)
                                         .request(new ACallback<String>() {
                                             @Override
                                             public void onSuccess(String data) {
@@ -374,14 +374,7 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                         });
                             }
                         });
-                        normalDialog.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        });
-                        // 显示
-                        normalDialog.show();
+                        dialog.show();
                     }
                 }
 
@@ -397,6 +390,7 @@ public class DetailsToBePaidActivity extends BaseActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         ViseHttp.POST(NetConfig.deleteOrderTripUrl)
                                 .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl+NetConfig.deleteOrderTripUrl))
+                                .addParam("userID",uid)
                                 .addParam("order_id", orderId)
                                 .request(new ACallback<String>() {
                                     @Override

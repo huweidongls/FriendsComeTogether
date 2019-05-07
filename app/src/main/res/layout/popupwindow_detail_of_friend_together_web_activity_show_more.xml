@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:background="@mipmap/qipaoshowmore"
+        android:id="@+id/ll_show_more"
+        android:paddingTop="20px"
+        android:layout_marginRight="10px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="190px"
+        android:layout_height="180px"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_mulu"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:paddingRight="22px"
+                android:paddingLeft="22px"
+                android:paddingBottom="10px"
+                android:paddingTop="10px"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5px"
+                android:layout_width="match_parent"
+                android:layout_height="75px">
+                <ImageView
+                    android:src="@mipmap/mulu128"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="45px"
+                    android:layout_height="45px" />
+                <TextView
+                    android:layout_marginLeft="10px"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="32px"
+                    android:textColor="@color/white_ffffff"
+                    android:text="目录"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:background="#555457"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_width="match_parent"
+            android:layout_height="5px"></LinearLayout>
+        <LinearLayout
+            android:paddingRight="22px"
+            android:paddingLeft="22px"
+            android:paddingBottom="10px"
+            android:paddingTop="10px"
+            android:orientation="horizontal"
+            android:id="@+id/ll_jubao"
+            android:layout_width="match_parent"
+            android:layout_height="75px">
+            <ImageView
+                android:src="@mipmap/jubao"
+                android:layout_gravity="center_vertical"
+                android:layout_width="45px"
+                android:layout_height="45px" />
+            <TextView
+                android:layout_marginLeft="10px"
+                android:layout_gravity="center_vertical"
+                android:textSize="32px"
+                android:textColor="@color/white_ffffff"
+                android:text="举报"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

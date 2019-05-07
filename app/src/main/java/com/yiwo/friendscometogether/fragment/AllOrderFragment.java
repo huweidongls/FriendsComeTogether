@@ -37,8 +37,10 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.adapter.FragmentAllOrderAdapter;
 import com.yiwo.friendscometogether.adapter.FragmentToPayAdapter;
 import com.yiwo.friendscometogether.base.OrderBaseFragment;
+import com.yiwo.friendscometogether.custom.EditContentDialog;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.model.AllOrderFragmentModel;
+import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.model.OrderToPayModel;
 import com.yiwo.friendscometogether.model.PayFragmentModel;
 import com.yiwo.friendscometogether.model.UserFocusModel;
@@ -50,6 +52,7 @@ import com.yiwo.friendscometogether.pages.CreateFriendRememberActivity;
 import com.yiwo.friendscometogether.pages.CreateIntercalationActivity;
 import com.yiwo.friendscometogether.pages.MyFocusActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.utils.StringUtils;
 import com.yiwo.friendscometogether.utils.TokenUtils;
 
 import org.json.JSONException;
@@ -71,6 +74,8 @@ import io.reactivex.schedulers.Schedulers;
 import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
+
+import static com.umeng.socialize.utils.DeviceConfig.context;
 
 /**
  * Created by Administrator on 2018/7/18.
@@ -282,16 +287,13 @@ public class AllOrderFragment extends OrderBaseFragment {
 //                                                       }
 //                                                   }).show();
                                         }else {
-                                            AlertDialog.Builder normalDialog = new AlertDialog.Builder(getContext());
-                                            normalDialog.setIcon(R.mipmap.ic_launcher);
-                                            normalDialog.setTitle("提示");
-                                            normalDialog.setMessage("是否取消活动");
-                                            normalDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                            EditContentDialog dialog = new EditContentDialog(getContext(), new EditContentDialog.OnReturnListener() {
                                                 @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                public void onReturn(final String content) {
                                                     ViseHttp.POST(NetConfig.cancelOrderTripUrl)
                                                             .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.cancelOrderTripUrl))
                                                             .addParam("order_id", mList.get(position).getOID())
+                                                            .addParam("info",content)
                                                             .request(new ACallback<String>() {
                                                                 @Override
                                                                 public void onSuccess(String data) {
@@ -314,14 +316,7 @@ public class AllOrderFragment extends OrderBaseFragment {
                                                             });
                                                 }
                                             });
-                                            normalDialog.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    dialogInterface.dismiss();
-                                                }
-                                            });
-                                            // 显示
-                                            normalDialog.show();
+                                            dialog.show();
                                         }
                                     }
                                 });
@@ -337,6 +332,7 @@ public class AllOrderFragment extends OrderBaseFragment {
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 ViseHttp.POST(NetConfig.deleteOrderTripUrl)
                                                         .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.deleteOrderTripUrl))
+                                                        .addParam("userID",uid)
                                                         .addParam("order_id", mList.get(position).getOID())
                                                         .request(new ACallback<String>() {
                                                             @Override

@@ -480,7 +480,8 @@
         <activity android:name=".webpages.ApplyActivityAgreementWebActivity" />
         <activity android:name=".newpage.PersonImpressionActivity" />
         <activity android:name=".newpage.FindFriendByTelActivity" />
-        <activity android:name=".newpage.PersonsOfTheLabelActivity"></activity>
+        <activity android:name=".newpage.PersonsOfTheLabelActivity" />
+        <activity android:name=".newpage.JuBaoActivity"></activity>
     </application>
 
 </manifest>

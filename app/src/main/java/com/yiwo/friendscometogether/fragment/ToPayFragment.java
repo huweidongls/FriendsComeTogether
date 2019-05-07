@@ -34,10 +34,12 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.adapter.FragmentToPayAdapter;
 import com.yiwo.friendscometogether.base.OrderBaseFragment;
+import com.yiwo.friendscometogether.custom.EditContentDialog;
 import com.yiwo.friendscometogether.model.OrderToPayModel;
 import com.yiwo.friendscometogether.model.PayFragmentModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.network.UMConfig;
+import com.yiwo.friendscometogether.pages.DetailsToBePaidActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
 
@@ -49,6 +51,8 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.umeng.socialize.utils.DeviceConfig.context;
 
 /**
  * Created by Administrator on 2018/7/18.
@@ -197,16 +201,13 @@ public class ToPayFragment extends OrderBaseFragment {
                                 adapter.setOnCancelListener(new FragmentToPayAdapter.OnCancelListener() {
                                     @Override
                                     public void onCancel(final int position) {
-                                        AlertDialog.Builder normalDialog = new AlertDialog.Builder(getContext());
-                                        normalDialog.setIcon(R.mipmap.ic_launcher);
-                                        normalDialog.setTitle("提示");
-                                        normalDialog.setMessage("是否取消活动");
-                                        normalDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        EditContentDialog dialog = new EditContentDialog(getContext(), new EditContentDialog.OnReturnListener() {
                                             @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                            public void onReturn(final String content) {
                                                 ViseHttp.POST(NetConfig.cancelOrderTripUrl)
                                                         .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl+NetConfig.cancelOrderTripUrl))
                                                         .addParam("order_id", mList.get(position).getOID())
+                                                        .addParam("info",content)
                                                         .request(new ACallback<String>() {
                                                             @Override
                                                             public void onSuccess(String data) {
@@ -230,16 +231,10 @@ public class ToPayFragment extends OrderBaseFragment {
                                                         });
                                             }
                                         });
-                                        normalDialog.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                dialogInterface.dismiss();
-                                            }
-                                        });
-                                        // 显示
-                                        normalDialog.show();
+                                        dialog.show();
                                     }
                                 });
+
                                 adapter.setOnDeleteListener(new FragmentToPayAdapter.OnDeleteListener() {
                                     @Override
                                     public void onDelete(final int position) {
@@ -252,6 +247,7 @@ public class ToPayFragment extends OrderBaseFragment {
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 ViseHttp.POST(NetConfig.deleteOrderTripUrl)
                                                         .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl+NetConfig.deleteOrderTripUrl))
+                                                        .addParam("userID",uid)
                                                         .addParam("order_id", mList.get(position).getOID())
                                                         .request(new ACallback<String>() {
                                                             @Override

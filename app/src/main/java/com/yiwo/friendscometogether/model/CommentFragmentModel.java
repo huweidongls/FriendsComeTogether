@@ -89,6 +89,10 @@ public class CommentFragmentModel {
         private String status;
         private String order_type;
 
+        private String orderStatus;
+        private String User;
+        private String BUser;
+
         public String getUserID() {
             return userID;
         }
@@ -255,6 +259,30 @@ public class CommentFragmentModel {
 
         public void setOrder_type(String order_type) {
             this.order_type = order_type;
+        }
+
+        public String getOrderStatus() {
+            return orderStatus;
+        }
+
+        public void setOrderStatus(String orderStatus) {
+            this.orderStatus = orderStatus;
+        }
+
+        public String getUser() {
+            return User;
+        }
+
+        public void setUser(String user) {
+            User = user;
+        }
+
+        public String getBUser() {
+            return BUser;
+        }
+
+        public void setBUser(String BUser) {
+            this.BUser = BUser;
         }
     }
 }
