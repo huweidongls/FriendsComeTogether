@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,16 +13,28 @@
         android:layout_marginBottom="10px"
         android:layout_width="match_parent"
         android:layout_height="78px">
-
-        <TextView
-            android:id="@+id/fragment_to_comment_rv_tv_title"
+        <LinearLayout
             android:layout_marginLeft="26px"
             android:layout_centerVertical="true"
-            android:textColor="#333333"
-            android:textSize="26px"
-            android:text="云南旅游"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/my_head"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10px"
+                android:layout_width="30px"
+                android:layout_height="30px" />
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/fragment_to_comment_rv_tv_title"
+                android:layout_centerVertical="true"
+                android:textColor="#333333"
+                android:textSize="26px"
+                android:text="云南旅游"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/fragment_to_comment_rv_tv_status"
@@ -41,7 +54,8 @@
         android:layout_width="match_parent"
         android:layout_height="180px">
 
-        <ImageView
+        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            test:radius1="40px"
             android:id="@+id/fragment_to_comment_rv_iv"
             android:layout_marginLeft="24px"
             android:layout_centerVertical="true"
@@ -100,6 +114,7 @@
         android:layout_height="80px">
 
         <TextView
+            android:textStyle="bold"
             android:visibility="gone"
             android:id="@+id/fragment_to_comment_rv_tv_price_details"
             android:layout_marginLeft="40px"
@@ -112,12 +127,12 @@
 
         <TextView
             android:layout_marginRight="24px"
-            android:textColor="@color/yellow_ff9d00"
+            android:textColor="@color/red_d84c37"
             android:textSize="24px"
             android:id="@+id/fragment_to_comment_rv_tv_price"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:text="合计费用：¥8888"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

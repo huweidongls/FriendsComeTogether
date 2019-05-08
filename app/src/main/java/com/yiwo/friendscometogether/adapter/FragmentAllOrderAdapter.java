@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -113,13 +114,18 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
 
 //        holder.tvPrice.setText("合计: ¥" +ssb_money);
         if (data.get(position).getOrderStatus().equals("1")){  //我被邀请
-            holder.tv_niming_staus.setVisibility(View.VISIBLE);
+
             holder.tvPriceDetails.setVisibility(View.VISIBLE);
             holder.tvPriceDetails.setText("邀请人："+data.get(position).getUser());
         }else if (data.get(position).getOrderStatus().equals("2")){//邀请他人
-            holder.tv_niming_staus.setVisibility(View.VISIBLE);
-            holder.tvPriceDetails.setVisibility(View.VISIBLE);
-            holder.tvPriceDetails.setText("邀请："+data.get(position).getBUser());
+            if (data.get(position).getOrder_type().equals("4")){
+                holder.tvPriceDetails.setVisibility(View.VISIBLE);
+                String str ="邀请："+data.get(position).getBUser()+"<font color='#d84c37'>（已取消）</font>" ;
+                holder.tvPriceDetails.setText(Html.fromHtml(str));
+            }else {
+                holder.tvPriceDetails.setVisibility(View.VISIBLE);
+                holder.tvPriceDetails.setText("邀请："+data.get(position).getBUser());
+            }
         }else {
             holder.tvPriceDetails.setVisibility(View.GONE);// 邀请：***、邀请人：***
             holder.tv_niming_staus.setVisibility(View.GONE);// 被邀请人不取消活动，此订单不可退款
@@ -182,6 +188,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvReturning.setVisibility(View.GONE);
         }else if(data.get(position).getOrder_type().equals("1")){//1待支付
             if (data.get(position).getOrderStatus().equals("1")){  //我被邀请
+                holder.tv_niming_staus.setVisibility(View.VISIBLE);
                 holder.tv_niming_staus.setText("待邀请人支付");
                 holder.rl_btns.setVisibility(View.GONE);
             }

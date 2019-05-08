@@ -111,7 +111,7 @@ public class MessageInvitationAdapter extends RecyclerView.Adapter<MessageInvita
             holder.rl_liuyan.setVisibility(View.GONE);
         }else {
             holder.rl_liuyan.setVisibility(View.VISIBLE);
-            holder.tv_liuyan.setText(data.get(position).getText());
+            holder.tv_liuyan.setText(data.get(position).getUsername()+"："+data.get(position).getText());
         }
         holder.llNo.setOnClickListener(new View.OnClickListener() {
             @Override

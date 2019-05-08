@@ -174,7 +174,7 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                 tvPeopleNum.setText("参加人数: " + model.getObj().getGo_num());
                                 tvNoName.setText("是否匿名："+(model.getObj().getNoname().equals("0")? "否":"是"));
 //                                tvPriceDetails.setText(model.getObj().getPrice_type());
-                                tvReturnKnows.setText(model.getObj().getRefundInfo());
+                                tvReturnKnows.setText("-"+model.getObj().getRefundInfo()+"-");
                                 tvReturnMoney.setText("退款金额："+model.getObj().getRefund_money());
                                 tvReturnWhy.setText(model.getObj().getRefundWhy());
                                 //-----设置合计金额字体------------
@@ -197,12 +197,8 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                     tvTradeNumber.setText("支付宝交易号: " + model.getObj().getPaycode());
                                 }
                                 tvCreateTime.setText("创建时间: " + model.getObj().getCreate_time());
-                                tvPayTime.setText("付款时间: " + model.getObj().getPay_time());
-                                tvOkTime.setText("成交时间: " + model.getObj().getOver_time());
-
-                                tvOkTime.setVisibility(View.GONE);//隐藏成交时间
-                                tvCreateTime.setVisibility(View.GONE);//隐藏创建时间
-
+                                tvPayTime.setText("付款时间: " + model.getObj().getPay_time());//隐藏
+                                tvOkTime.setText("成交时间: " + model.getObj().getOver_time());//隐藏
                                 //不可点击按钮全部隐藏
                                 if(model.getObj().getOrder_type().equals("7")){
                                     tvDeleteTrip.setVisibility(View.VISIBLE);
@@ -233,7 +229,7 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                     tvCancelTrip.setVisibility(View.VISIBLE);
                                     tvToTrip.setVisibility(View.GONE);
                                 }else if(model.getObj().getOrder_type().equals("1")){
-                                    tvCancelTrip.setVisibility(View.VISIBLE);
+                                    tvDeleteTrip.setVisibility(View.VISIBLE);
                                     tvPay.setVisibility(View.VISIBLE);
                                     if (model.getObj().getOrderStatus().equals("1")){
                                         tv_niming_staus.setText("待邀请人支付");

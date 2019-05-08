@@ -92,7 +92,7 @@ public class FragmentToPayAdapter extends RecyclerView.Adapter<FragmentToPayAdap
             holder.tvPriceDetails.setVisibility(View.VISIBLE);
             holder.tvPriceDetails.setText("邀请人："+data.get(position).getUser());
         }else if (data.get(position).getOrderStatus().equals("2")){//邀请他人
-            holder.tv_niming_staus.setVisibility(View.VISIBLE);
+            holder.tv_niming_staus.setVisibility(View.GONE);
             holder.tvPriceDetails.setVisibility(View.VISIBLE);
             holder.tvPriceDetails.setText("邀请："+data.get(position).getBUser());
         }else {

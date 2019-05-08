@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_F8F8F8"
+    android:background="@color/gray_f1f1f1"
     tools:context="com.yiwo.friendscometogether.pages.DetailsToBePaidActivity">
 
     <RelativeLayout
@@ -38,23 +39,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:background="@color/white_ffffff"
+                android:layout_marginLeft="25px"
+                android:layout_marginRight="25px"
+                android:layout_marginBottom="10px"
+                android:background="@drawable/bg_white_30px"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="78px">
-
-                    <TextView
-                        android:id="@+id/activity_details_to_pay_tv_title"
+                    <LinearLayout
                         android:layout_marginLeft="26px"
                         android:layout_centerVertical="true"
-                        android:textColor="#333333"
-                        android:textSize="26px"
-                        android:text="云南旅游"
+                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:src="@mipmap/my_head"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10px"
+                            android:layout_width="30px"
+                            android:layout_height="30px" />
+                        <TextView
+                            android:layout_gravity="center_vertical"
+                            android:textStyle="bold"
+                            android:id="@+id/activity_details_to_pay_tv_title"
+                            android:textColor="#333333"
+                            android:textSize="26px"
+                            android:text="云南旅游"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
                     <TextView
                         android:id="@+id/tv_order_status"
                         android:layout_marginRight="26px"
@@ -67,13 +83,16 @@
                         android:layout_height="wrap_content" />
 
                 </RelativeLayout>
-
+                <View
+                    android:background="@color/gray_f1f1f1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"/>
                 <RelativeLayout
-                    android:background="#F1F1F1"
                     android:layout_width="match_parent"
                     android:layout_height="210px">
 
-                    <ImageView
+                    <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+                        test:radius1="40px"
                         android:id="@+id/activity_details_to_pay_iv_title"
                         android:scaleType="centerCrop"
                         android:layout_marginLeft="24px"
@@ -91,7 +110,7 @@
                         <TextView
                             android:layout_weight="1"
                             android:id="@+id/tv_start_time"
-                            android:textColor="#333333"
+                            android:textColor="@color/gray_999999"
                             android:textSize="24px"
                             android:text="开始时间："
                             android:layout_width="wrap_content"
@@ -99,7 +118,7 @@
                         <TextView
                             android:layout_weight="1"
                             android:id="@+id/tv_end_time"
-                            android:textColor="#333333"
+                            android:textColor="@color/gray_999999"
                             android:textSize="24px"
                             android:text="结束时间："
                             android:layout_width="wrap_content"
@@ -108,7 +127,7 @@
 
                         <TextView
                             android:layout_weight="1"
-                            android:textColor="#333333"
+                            android:textColor="@color/gray_999999"
                             android:textSize="24px"
                             android:id="@+id/tv_people_num"
                             android:text="参加人数："
@@ -116,7 +135,7 @@
                             android:layout_height="wrap_content" />
                         <TextView
                             android:layout_weight="1"
-                            android:textColor="#333333"
+                            android:textColor="@color/gray_999999"
                             android:textSize="24px"
                             android:id="@+id/tv_noname"
                             android:text="是否匿名："
@@ -124,11 +143,15 @@
                             android:layout_height="wrap_content" />
                     </LinearLayout>
                 </RelativeLayout>
-
+                <View
+                    android:background="@color/gray_f1f1f1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="80px">
                     <TextView
+                        android:textStyle="bold"
                         android:visibility="gone"
                         android:id="@+id/activity_details_to_pay_tv_price_details"
                         android:layout_marginLeft="40px"
@@ -161,6 +184,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:textStyle="bold"
                     android:text="订单信息"
                     android:textSize="28px"
                     android:textColor="@color/color_black_333333"
@@ -172,19 +196,9 @@
                     android:id="@+id/activity_details_to_pay_tv_order_number"
                     android:layout_marginLeft="38px"
                     android:layout_marginTop="22px"
-                    android:textColor="@color/color_black_ff666666"
+                    android:textColor="@color/gray_999999"
                     android:textSize="26px"
                     android:text="订单编号："
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:textSize="26px"
-                    android:layout_marginLeft="38px"
-                    android:layout_marginTop="18px"
-                    android:textColor="@color/color_black_ff666666"
-                    android:id="@+id/activity_details_to_pay_tv_trade_number"
-                    android:text="交易号："
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -193,17 +207,29 @@
                     android:textSize="26px"
                     android:layout_marginLeft="38px"
                     android:layout_marginTop="18px"
-                    android:textColor="@color/color_black_ff666666"
-                    android:id="@+id/activity_details_to_pay_tv_create_time"
-                    android:text="创建时间：2018-04-02 12：12：31"
+                    android:textColor="@color/gray_999999"
+                    android:id="@+id/activity_details_to_pay_tv_trade_number"
+                    android:text="交易号："
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:visibility="visible"
                     android:textSize="26px"
                     android:layout_marginLeft="38px"
                     android:layout_marginTop="18px"
-                    android:textColor="@color/color_black_ff666666"
+                    android:textColor="@color/gray_999999"
+                    android:id="@+id/activity_details_to_pay_tv_create_time"
+                    android:text="创建时间："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:textSize="26px"
+                    android:layout_marginLeft="38px"
+                    android:layout_marginTop="18px"
+                    android:textColor="@color/gray_999999"
                     android:id="@+id/activity_details_to_pay_tv_pay_time"
                     android:text="付款时间："
                     android:layout_width="wrap_content"
@@ -214,28 +240,9 @@
                     android:textSize="26px"
                     android:layout_marginLeft="38px"
                     android:layout_marginTop="18px"
-                    android:textColor="@color/color_black_ff666666"
+                    android:textColor="@color/gray_999999"
                     android:id="@+id/activity_details_to_pay_tv_pay_ok_time"
                     android:text="成交时间：2018-04-02 12：12：31"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_marginLeft="38px"
-                    android:layout_marginRight="38px"
-                    android:layout_marginTop="18px"
-                    android:textSize="26px"
-                    android:text="退款说明："
-                    android:textColor="@color/color_black_ff666666"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_marginTop="5px"
-                    android:layout_marginLeft="100px"
-                    android:layout_marginRight="38px"
-                    android:id="@+id/tv_return_know"
-                    android:textSize="26px"
-                    android:text=""
-                    android:textColor="@color/color_black_ff666666"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -243,7 +250,7 @@
                     android:textSize="26px"
                     android:layout_marginLeft="38px"
                     android:layout_marginTop="18px"
-                    android:textColor="@color/color_black_ff666666"
+                    android:textColor="@color/gray_999999"
                     android:id="@+id/tv_return_money"
                     android:text="退款金额：0.00"
                     android:layout_width="wrap_content"
@@ -260,19 +267,30 @@
                     <TextView
                         android:textSize="26px"
                         android:text="活动取消原因："
-                        android:textColor="@color/color_black_ff666666"
+                        android:textColor="@color/gray_999999"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/tv_return_why"
                         android:textSize="26px"
                         android:text="退款原因退款原因退款原因退款原因退款原因退款原因"
-                        android:textColor="@color/color_black_ff666666"
+                        android:textColor="@color/gray_999999"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
             </LinearLayout>
-
+            <TextView
+                android:textStyle="bold"
+                android:lines="1"
+                android:ellipsize="end"
+                android:layout_marginTop="40px"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/tv_return_know"
+                android:textSize="26px"
+                android:text=""
+                android:textColor="@color/gray_999999"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
     <LinearLayout
@@ -401,16 +419,16 @@
 
         </RelativeLayout>
         <TextView
-
+            android:background="@color/red_d84c37"
             android:id="@+id/tv_niming_staus"
             android:textSize="30px"
-            android:textColor="@color/black_333333"
-            android:layout_marginRight="50px"
+            android:textColor="@color/white_ffffff"
             android:lines="1"
-            android:layout_gravity="right|center_vertical"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:ellipsize="end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 </RelativeLayout>
