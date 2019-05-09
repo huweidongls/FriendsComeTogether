@@ -333,5 +333,6 @@ public class NetConfig {
     public static String clickUserList = "action/ac_user/clickUserList";//action/ac_user/clickUserList 点击的用户列表接口  传 userID登录用户ID  labelID标签ID   page分页
     //action/ac_public/Report 举报
     public static String report = "action/ac_public/Report";//  传userID 举报人ID  reportID 友记或友聚的ID    type 0友聚 1友记 info举报内容
-
+    //action/ac_public/addGroup 邀请加入群   传userID群主ID   phone电话号   gid 群id
+    public static String addGroup = "action/ac_public/addGroup";
 }

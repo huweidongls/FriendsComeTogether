@@ -18,7 +18,17 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:titleTextAppearance="@style/Toolbar.TitleText">
-
+            <RelativeLayout
+                android:id="@+id/rl_add_person"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical">
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/tb_add_person_in_group"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+            </RelativeLayout>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 

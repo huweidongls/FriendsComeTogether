@@ -47,6 +47,7 @@ import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.broadcastreceiver.MyGoPersonMainBroadcastReceiver;
 import com.yiwo.friendscometogether.broadcastreceiver.MyShenQingJinQunBroadcastReceiver;
+import com.yiwo.friendscometogether.broadcastreceiver.MyYaoQingJinQunBroadcastReceiver;
 import com.yiwo.friendscometogether.custom.OnDoubleClickListener;
 import com.yiwo.friendscometogether.fragment.ChatFragment;
 import com.yiwo.friendscometogether.fragment.FriendsRememberFragment;
@@ -135,6 +136,7 @@ public class MainActivity extends FragmentActivity {
 
     private MyGoPersonMainBroadcastReceiver myGoPersonMainBroadcastReceiver;
     private MyShenQingJinQunBroadcastReceiver myShenQingJinQunBroadcastReceiver;
+    private MyYaoQingJinQunBroadcastReceiver myYaoQingJinQunBroadcastReceiver;
     private long exitTime = 0;
 
     private SpImp spImp;
@@ -171,6 +173,10 @@ public class MainActivity extends FragmentActivity {
         IntentFilter intentFilter1 = new IntentFilter();
         intentFilter1.addAction("com.yiwo.friendscometogether.broadcastreceiver.MyShenQingJinQunBroadcastReceiver");
         registerReceiver(myShenQingJinQunBroadcastReceiver, intentFilter1);
+        myYaoQingJinQunBroadcastReceiver = new MyYaoQingJinQunBroadcastReceiver();
+        IntentFilter intentFilter2 = new IntentFilter();
+        intentFilter1.addAction("com.yiwo.friendscometogether.broadcastreceiver.MyYaoQingJinQunBroadcastReceiver");
+        registerReceiver(myYaoQingJinQunBroadcastReceiver, intentFilter1);
     }
 
     @Override
@@ -184,6 +190,7 @@ public class MainActivity extends FragmentActivity {
         super.onDestroy();
         unregisterReceiver(myGoPersonMainBroadcastReceiver);
         unregisterReceiver(myShenQingJinQunBroadcastReceiver);
+        unregisterReceiver(myYaoQingJinQunBroadcastReceiver);
         Log.d("destory++destory","Maindestory");
     }
 

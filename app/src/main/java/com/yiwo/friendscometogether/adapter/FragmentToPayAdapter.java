@@ -100,7 +100,11 @@ public class FragmentToPayAdapter extends RecyclerView.Adapter<FragmentToPayAdap
             holder.tv_niming_staus.setVisibility(View.GONE);// 被邀请人不取消活动，此订单不可退款
         }
         if (data.get(position).getOrderStatus().equals("1")){  //我被邀请
-            holder.tv_niming_staus.setText("待邀请人支付");
+            if (data.get(position).getDel_type().equals("1")){//邀请人 未付款， 删除了订单
+                holder.tv_niming_staus.setText("邀请人已取消邀请");
+            }else {
+                holder.tv_niming_staus.setText("待邀请人支付");
+            }
             holder.rl_btns.setVisibility(View.GONE);
         }
 //        String str_money = "合计："+"48.90";

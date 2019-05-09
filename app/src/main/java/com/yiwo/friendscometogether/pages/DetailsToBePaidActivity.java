@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -228,25 +229,41 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                 }else if(model.getObj().getOrder_type().equals("2")){
                                     tvCancelTrip.setVisibility(View.VISIBLE);
                                     tvToTrip.setVisibility(View.GONE);
-                                }else if(model.getObj().getOrder_type().equals("1")){
+                                }else if(model.getObj().getOrder_type().equals("1")){//待支付
                                     tvDeleteTrip.setVisibility(View.VISIBLE);
                                     tvPay.setVisibility(View.VISIBLE);
-                                    if (model.getObj().getOrderStatus().equals("1")){
-                                        tv_niming_staus.setText("待邀请人支付");
-                                        rl_btns.setVisibility(View.GONE);
+                                    if (model.getObj().getOrderStatus().equals("1")){//被邀请的订单
+                                        if (model.getObj().getDel_type().equals("1")){//邀请人未付款,删除订单
+                                            tv_niming_staus.setVisibility(View.GONE);//底部提示隐藏
+                                            tvDeleteTrip.setVisibility(View.VISIBLE);//删除按钮显示
+                                            tvPay.setVisibility(View.GONE);//不显示付款按钮
+                                        }else {//邀请人未付款,未删除订单，
+                                            tv_niming_staus.setVisibility(View.VISIBLE);
+                                            tv_niming_staus.setText("待邀请人支付");//底部提示
+                                            rl_btns.setVisibility(View.GONE);//不显示任何按钮
+                                        }
                                     }
                                 }
                                 if (model.getObj().getOrderStatus().equals("1")){  //我被邀请
-                                    tv_niming_staus.setVisibility(View.VISIBLE);
                                     tvPriceDetails.setVisibility(View.VISIBLE);
                                     tvPriceDetails.setText("邀请人："+model.getObj().getUser());
+                                    if (model.getObj().getDel_type().equals("1")){//邀请人未付款,删除订单
+                                        String str ="邀请人："+model.getObj().getBUser()+"<font color='#d84c37'>（已取消邀请）</font>" ;
+                                        tvPriceDetails.setText(Html.fromHtml(str));
+                                    }else {
+                                        tvPriceDetails.setText("邀请人："+model.getObj().getUser());
+                                    }
+
                                 }else if (model.getObj().getOrderStatus().equals("2")){//邀请他人
-                                    tv_niming_staus.setVisibility(View.VISIBLE);
                                     tvPriceDetails.setVisibility(View.VISIBLE);
-                                    tvPriceDetails.setText("邀请："+model.getObj().getBUser());
+                                    if (model.getObj().getOrder_type().equals("4")||model.getObj().getOrder_type().equals("5")){
+                                        String str ="邀请："+model.getObj().getBUser()+"<font color='#d84c37'>（已取消）</font>" ;
+                                        tvPriceDetails.setText(Html.fromHtml(str));
+                                    }else {
+                                        tvPriceDetails.setText("邀请："+model.getObj().getBUser());
+                                    }
                                 }else {
                                     tvPriceDetails.setVisibility(View.GONE);// 邀请：***、邀请人：***
-                                    tv_niming_staus.setVisibility(View.GONE);// 被邀请人不取消活动，此订单不可退款
                                 }
                             }
                         } catch (JSONException e) {

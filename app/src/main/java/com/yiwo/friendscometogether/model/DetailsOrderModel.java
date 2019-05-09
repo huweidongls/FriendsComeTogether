@@ -103,6 +103,7 @@ public class DetailsOrderModel {
         private String User;
         private String BUser;
 
+        private String del_type;//0未删除 1邀请人已删除
 
 
 
@@ -336,6 +337,14 @@ public class DetailsOrderModel {
 
         public void setBUser(String BUser) {
             this.BUser = BUser;
+        }
+
+        public String getDel_type() {
+            return del_type;
+        }
+
+        public void setDel_type(String del_type) {
+            this.del_type = del_type;
         }
     }
 }

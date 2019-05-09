@@ -118,7 +118,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvPriceDetails.setVisibility(View.VISIBLE);
             holder.tvPriceDetails.setText("邀请人："+data.get(position).getUser());
         }else if (data.get(position).getOrderStatus().equals("2")){//邀请他人
-            if (data.get(position).getOrder_type().equals("4")){
+            if (data.get(position).getOrder_type().equals("4")||data.get(position).getOrder_type().equals("5")){
                 holder.tvPriceDetails.setVisibility(View.VISIBLE);
                 String str ="邀请："+data.get(position).getBUser()+"<font color='#d84c37'>（已取消）</font>" ;
                 holder.tvPriceDetails.setText(Html.fromHtml(str));
@@ -189,8 +189,14 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
         }else if(data.get(position).getOrder_type().equals("1")){//1待支付
             if (data.get(position).getOrderStatus().equals("1")){  //我被邀请
                 holder.tv_niming_staus.setVisibility(View.VISIBLE);
-                holder.tv_niming_staus.setText("待邀请人支付");
+                if (data.get(position).getDel_type().equals("1")){//邀请人 未付款， 删除了订单
+                    holder.tv_niming_staus.setText("邀请人已取消邀请");
+                }else {
+                    holder.tv_niming_staus.setText("待邀请人支付");
+                }
                 holder.rl_btns.setVisibility(View.GONE);
+            }else {
+                holder.tv_niming_staus.setVisibility(View.GONE);
             }
             holder.tvCancelTrip.setVisibility(View.GONE);
             holder.tvDeleteTrip.setVisibility(View.VISIBLE);

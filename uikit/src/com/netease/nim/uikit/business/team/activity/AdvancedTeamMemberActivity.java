@@ -1,12 +1,16 @@
 package com.netease.nim.uikit.business.team.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.api.NimUIKit;
@@ -22,6 +26,8 @@ import com.netease.nim.uikit.common.activity.ToolBarOptions;
 import com.netease.nim.uikit.common.activity.UI;
 import com.netease.nim.uikit.common.adapter.TAdapterDelegate;
 import com.netease.nim.uikit.common.adapter.TViewHolder;
+import com.netease.nim.uikit.tongban.EditContentDialog_L;
+import com.netease.nim.uikit.tongban.EditContentDialog_content_one_line;
 import com.netease.nimlib.sdk.team.constant.TeamMemberType;
 import com.netease.nimlib.sdk.team.model.Team;
 import com.netease.nimlib.sdk.team.model.TeamMember;
@@ -56,6 +62,8 @@ public class AdvancedTeamMemberActivity extends UI implements TAdapterDelegate,
     private boolean isMemberChange = false;
     private UserInfoObserver userInfoObserver;
 
+    private RelativeLayout rl_add_person;
+
     public static void startActivityForResult(Activity context, String tid, int resCode) {
         Intent intent = new Intent();
         intent.putExtra(EXTRA_ID, tid);
@@ -74,7 +82,33 @@ public class AdvancedTeamMemberActivity extends UI implements TAdapterDelegate,
         ToolBarOptions options = new NimToolBarOptions();
         options.titleId = R.string.team_member;
         setToolBar(R.id.toolbar, options);
+        rl_add_person = findViewById(R.id.rl_add_person);
+        rl_add_person.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditContentDialog_content_one_line dialog_l = new EditContentDialog_content_one_line(AdvancedTeamMemberActivity.this, "邀请入群", new EditContentDialog_content_one_line.OnReturnListener() {
+                    @Override
+                    public boolean onReturn(String content) {
 
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                        if (content.equals("")){
+                            Toast.makeText(AdvancedTeamMemberActivity.this,"请输入账号！",Toast.LENGTH_SHORT).show();
+                            return false;
+                        }else {
+                            //发送邀请进群的广播
+                            Intent intent = new Intent();
+                            intent.putExtra("phone",content);
+                            intent.putExtra("gid",teamId);
+                            intent.setAction("com.yiwo.friendscometogether.broadcastreceiver.MyYaoQingJinQunBroadcastReceiver");
+                            sendBroadcast(intent);
+                            return true;
+                        }
+                    }
+                });
+                dialog_l.show();
+            }
+        });
         parseIntentData();
         loadTeamInfo();
         initAdapter();
@@ -156,6 +190,17 @@ public class AdvancedTeamMemberActivity extends UI implements TAdapterDelegate,
         }
 
         addTeamMembers(members, true);
+        rl_add_person.setVisibility(View.GONE);
+        if (creator.equals(NimUIKit.getAccount())){//  群主时
+            rl_add_person.setVisibility(View.VISIBLE);
+        }else {
+            for (String memberAccount : managerList) {
+                if (memberAccount.equals(NimUIKit.getAccount())) {//是管理员
+                    rl_add_person.setVisibility(View.VISIBLE);
+                    return;
+                }
+            }
+        }
     }
 
     private void addTeamMembers(final List<TeamMember> m, boolean clear) {

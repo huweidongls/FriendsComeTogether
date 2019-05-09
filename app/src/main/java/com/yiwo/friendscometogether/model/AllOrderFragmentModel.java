@@ -67,6 +67,7 @@ public class AllOrderFragmentModel {
          * "orderStatus": "2",// 0正常订单  1 我是被邀请的人  2 我是邀请的人
          "User": "0912_130", //User 邀请人名字
          "BUser": "花生", // Buser被邀请人名字
+         del_type  0未删除 1邀请人已删除
          */
 
         private String userID;
@@ -93,6 +94,7 @@ public class AllOrderFragmentModel {
         private String orderStatus;
         private String User;
         private String BUser;
+        private String del_type;
         public String getUserID() {
             return userID;
         }
@@ -283,6 +285,14 @@ public class AllOrderFragmentModel {
 
         public void setBUser(String BUser) {
             this.BUser = BUser;
+        }
+
+        public String getDel_type() {
+            return del_type;
+        }
+
+        public void setDel_type(String del_type) {
+            this.del_type = del_type;
         }
     }
 }
