@@ -70,6 +70,7 @@ public class DetailsOrderModel {
          "orderStatus": "1",
          "User": "神秘人",
          "BUser": "花生"
+         opaytype: 1.我自己的订单,未付款 2.我自己的订单,已付款 3.邀请人未付款 4.邀请人已付款 5.未付款取消订单
          */
 
         private String title;
@@ -98,6 +99,7 @@ public class DetailsOrderModel {
         private String refundInfo;
         private String refundWhy;
         private String refund_money;
+        private String opaytype;
 
         private String orderStatus;
         private String User;
@@ -345,6 +347,14 @@ public class DetailsOrderModel {
 
         public void setDel_type(String del_type) {
             this.del_type = del_type;
+        }
+
+        public String getOpaytype() {
+            return opaytype;
+        }
+
+        public void setOpaytype(String opaytype) {
+            this.opaytype = opaytype;
         }
     }
 }

@@ -237,14 +237,15 @@ public class ApplyActivity extends BaseActivity {
                                 String city = model.getObj().getPfaddress();
                                 tvCity.setText("活动地点: " + city);
 
-//                                if (sex.equals("无限制")) {
-//                                    apply_num_ll.setVisibility(View.VISIBLE);
-//                                }
+                                if (sex.equals("无限制")) {
+                                    apply_num_ll.setVisibility(View.VISIBLE);
+                                }
                                 if (if_pay.equals("2")) {
                                     setApplyPaymentView(1);
                                 } else if (if_pay.equals("0")) {
                                     tvPayDecs.setText("现场支付");
                                 } else if (if_pay.equals("1")) {
+                                    apply_num_ll.setVisibility(View.GONE);
                                     tvPayDecs.setText("邀请人支付");
                                 }else if (if_pay.equals("3")){
                                     tvPayDecs.setText("免费参加");

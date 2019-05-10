@@ -110,7 +110,7 @@ public class AllOrderFragment extends OrderBaseFragment {
         ButterKnife.bind(this, view);
         api = WXAPIFactory.createWXAPI(getContext(), null);
         spImp = new SpImp(getContext());
-
+        uid = spImp.getUID();
         return view;
     }
 
@@ -192,9 +192,6 @@ public class AllOrderFragment extends OrderBaseFragment {
                         });
             }
         });
-
-        uid = spImp.getUID();
-
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
@@ -233,59 +230,6 @@ public class AllOrderFragment extends OrderBaseFragment {
 
                                                        }
                                                    }).show();
-//                                           builder.setMessage("此订单不可退款，是否继续取消活动？")
-//                                                   .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                                                       @Override
-//                                                       public void onClick(DialogInterface dialog, int which) {
-//                                                           AlertDialog.Builder normalDialog = new AlertDialog.Builder(getContext());
-//                                                           normalDialog.setIcon(R.mipmap.ic_launcher);
-//                                                           normalDialog.setTitle("提示");
-//                                                           normalDialog.setMessage("是否取消活动");
-//                                                           normalDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                                                               @Override
-//                                                               public void onClick(DialogInterface dialogInterface, int i) {
-//                                                                   ViseHttp.POST(NetConfig.cancelOrderTripUrl)
-//                                                                           .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.cancelOrderTripUrl))
-//                                                                           .addParam("order_id", mList.get(position).getOID())
-//                                                                           .request(new ACallback<String>() {
-//                                                                               @Override
-//                                                                               public void onSuccess(String data) {
-//                                                                                   try {
-//                                                                                       JSONObject jsonObject1 = new JSONObject(data);
-//                                                                                       if (jsonObject1.getInt("code") == 200) {
-//                                                                                           Toast.makeText(getContext(), "取消活动成功", Toast.LENGTH_SHORT).show();
-//                                                                                           mList.get(position).setOrder_type("7");
-//                                                                                           mList.get(position).setStatus("已取消");
-//                                                                                           adapter.notifyDataSetChanged();
-//                                                                                       }
-//                                                                                   } catch (JSONException e) {
-//                                                                                       e.printStackTrace();
-//                                                                                   }
-//                                                                               }
-//
-//                                                                               @Override
-//                                                                               public void onFail(int errCode, String errMsg) {
-//
-//                                                                               }
-//                                                                           });
-//                                                               }
-//                                                           });
-//                                                           normalDialog.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
-//                                                               @Override
-//                                                               public void onClick(DialogInterface dialogInterface, int i) {
-//                                                                   dialogInterface.dismiss();
-//                                                               }
-//                                                           });
-//                                                           // 显示
-//                                                           normalDialog.show();
-//                                                       }
-//                                                   })
-//                                                   .setNegativeButton("关闭", new DialogInterface.OnClickListener() {
-//                                                       @Override
-//                                                       public void onClick(DialogInterface dialog, int which) {
-//                                                            return;
-//                                                       }
-//                                                   }).show();
                                         }else {
                                             EditContentDialog dialog = new EditContentDialog(getContext(), new EditContentDialog.OnReturnListener() {
                                                 @Override

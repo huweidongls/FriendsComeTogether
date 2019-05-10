@@ -123,6 +123,9 @@ public class DetailsToBePaidActivity extends BaseActivity {
     RelativeLayout rl_btns;
     @BindView(R.id.tv_niming_staus)
     TextView tv_niming_staus;
+
+    @BindView(R.id.activity_details_to_pay_tv_who_pay)
+    TextView tv_who_pay;
     private SpImp spImp;
     private String uid = "";
     private String orderId = "";
@@ -200,6 +203,12 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                 tvCreateTime.setText("创建时间: " + model.getObj().getCreate_time());
                                 tvPayTime.setText("付款时间: " + model.getObj().getPay_time());//隐藏
                                 tvOkTime.setText("成交时间: " + model.getObj().getOver_time());//隐藏
+                                if (model.getObj().getOpaytype().equals("4")&&model.getObj().getOrderStatus().equals("1")){
+                                    tv_who_pay.setVisibility(View.VISIBLE);
+                                    tv_who_pay.setText("费用：邀请人已支付");
+                                }else {
+                                    tv_who_pay.setVisibility(View.GONE);
+                                }
                                 //不可点击按钮全部隐藏
                                 if(model.getObj().getOrder_type().equals("7")){
                                     tvDeleteTrip.setVisibility(View.VISIBLE);
@@ -248,7 +257,7 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                     tvPriceDetails.setVisibility(View.VISIBLE);
                                     tvPriceDetails.setText("邀请人："+model.getObj().getUser());
                                     if (model.getObj().getDel_type().equals("1")){//邀请人未付款,删除订单
-                                        String str ="邀请人："+model.getObj().getBUser()+"<font color='#d84c37'>（已取消邀请）</font>" ;
+                                        String str ="邀请人："+model.getObj().getUser()+"<font color='#d84c37'>（已取消邀请）</font>" ;
                                         tvPriceDetails.setText(Html.fromHtml(str));
                                     }else {
                                         tvPriceDetails.setText("邀请人："+model.getObj().getUser());

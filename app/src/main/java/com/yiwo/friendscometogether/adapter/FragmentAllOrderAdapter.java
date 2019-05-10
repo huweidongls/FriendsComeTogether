@@ -132,6 +132,8 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
         }
         holder.tvPrice.setText(ssb_money);
         holder.tvStatus.setText(data.get(position).getStatus());
+        holder.tv_niming_staus.setVisibility(View.GONE);
+        holder.rl_btns.setVisibility(View.VISIBLE);
         if(data.get(position).getOrder_type().equals("7")){//已取消
             holder.tvCancelTrip.setVisibility(View.GONE);
             holder.tvDeleteTrip.setVisibility(View.VISIBLE);
@@ -197,6 +199,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
                 holder.rl_btns.setVisibility(View.GONE);
             }else {
                 holder.tv_niming_staus.setVisibility(View.GONE);
+                holder.rl_btns.setVisibility(View.VISIBLE);
             }
             holder.tvCancelTrip.setVisibility(View.GONE);
             holder.tvDeleteTrip.setVisibility(View.VISIBLE);
