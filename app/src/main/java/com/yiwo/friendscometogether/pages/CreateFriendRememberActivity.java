@@ -398,19 +398,19 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
         customDatePicker1 = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
             @Override
             public void handle(String time) { // 回调接口，获得选中的时间
-                tvTimeStart.setText(time);
+                tvTimeStart.setText(time.substring(0,10));
             }
         }, "1900-01-01 00:00", "2100-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
-        customDatePicker1.showSpecificTime(true); // 不显示时和分
+        customDatePicker1.showSpecificTime(false); // 不显示时和分
         customDatePicker1.setIsLoop(false); // 不允许循环滚动
 
         customDatePicker2 = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
             @Override
             public void handle(String time) { // 回调接口，获得选中的时间
-                tvTimeEnd.setText(time);
+                tvTimeEnd.setText(time.substring(0,10));
             }
         }, "1900-01-01 00:00", "2100-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
-        customDatePicker2.showSpecificTime(true); // 显示时和分
+        customDatePicker2.showSpecificTime(false); // 显示时和分
         customDatePicker2.setIsLoop(false); // 允许循环滚动
     }
 
@@ -480,7 +480,7 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                 else {
                     //判断如果填写开始时间和结束时间   结束时间必须大于开始时间
                     if (!tvTimeStart.getText().toString().equals("")&&!tvTimeEnd.getText().toString().equals("")){
-                        if (StringUtils.getTimeCompareSize(tvTimeStart.getText().toString(),tvTimeEnd.getText().toString())!=3){
+                        if (StringUtils.getTimeCompareSize(tvTimeStart.getText().toString(),tvTimeEnd.getText().toString())==1){
                             Toast.makeText(CreateFriendRememberActivity.this, "活动开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
                             break;
                         }
@@ -784,7 +784,7 @@ public class CreateFriendRememberActivity extends TakePhotoActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         //判断如果填写开始时间和结束时间   结束时间必须大于开始时间
                         if (!tvTimeStart.getText().toString().equals("")&&!tvTimeEnd.getText().toString().equals("")){
-                            if (StringUtils.getTimeCompareSize(tvTimeStart.getText().toString(),tvTimeEnd.getText().toString())!=3){
+                            if (StringUtils.getTimeCompareSize(tvTimeStart.getText().toString(),tvTimeEnd.getText().toString())==1){
                                 Toast.makeText(CreateFriendRememberActivity.this, "活动开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
                                 return;
                             }

@@ -192,6 +192,19 @@ public class HomeFragment1 extends BaseFragment {
             initData();
         } else if (netMobile == -1) {
             Log.e("2222", "inspectNet:当前没有网络");
+            if (labelModel == null){
+                youji_all.setVisibility(View.GONE);
+                youji_gonglue.setVisibility(View.GONE);
+                youji_lvxing.setVisibility(View.GONE);
+                youji_meishi.setVisibility(View.GONE);
+                youji_tandian.setVisibility(View.GONE);
+            }else {
+                youji_all.setVisibility(View.VISIBLE);
+                youji_gonglue.setVisibility(View.VISIBLE);
+                youji_lvxing.setVisibility(View.VISIBLE);
+                youji_meishi.setVisibility(View.VISIBLE);
+                youji_tandian.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -207,6 +220,19 @@ public class HomeFragment1 extends BaseFragment {
         });
         if (!isNetConnect()){
             toToast(getContext(),"当前无网络！");
+            if (labelModel == null){
+                youji_all.setVisibility(View.GONE);
+                youji_gonglue.setVisibility(View.GONE);
+                youji_lvxing.setVisibility(View.GONE);
+                youji_meishi.setVisibility(View.GONE);
+                youji_tandian.setVisibility(View.GONE);
+            }else {
+                youji_all.setVisibility(View.VISIBLE);
+                youji_gonglue.setVisibility(View.VISIBLE);
+                youji_lvxing.setVisibility(View.VISIBLE);
+                youji_meishi.setVisibility(View.VISIBLE);
+                youji_tandian.setVisibility(View.VISIBLE);
+            }
             return;
         }
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {

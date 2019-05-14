@@ -454,19 +454,19 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
         customDatePicker1 = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
             @Override
             public void handle(String time) { // 回调接口，获得选中的时间
-                tvTimeStart.setText(time);
+                tvTimeStart.setText(time.substring(0,10));
             }
-        }, now, "2100-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
-        customDatePicker1.showSpecificTime(true); // 不显示时和分
+        }, "1900-01-01 00:00", "2100-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        customDatePicker1.showSpecificTime(false); // 不显示时和分
         customDatePicker1.setIsLoop(false); // 不允许循环滚动
 
         customDatePicker2 = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
             @Override
             public void handle(String time) { // 回调接口，获得选中的时间
-                tvTimeEnd.setText(time);
+                tvTimeEnd.setText(time.substring(0,10));
             }
-        }, now, "2100-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
-        customDatePicker2.showSpecificTime(true); // 显示时和分
+        }, "1900-01-01 00:00", "2100-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        customDatePicker2.showSpecificTime(false); // 显示时和分
         customDatePicker2.setIsLoop(false); // 允许循环滚动
     }
 
@@ -565,11 +565,24 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
 
                 break;
             case R.id.activity_create_friend_remember_rl_complete:
-                if(TextUtils.isEmpty(etTitle.getText().toString())||TextUtils.isEmpty(tvLabel.getText().toString())){
-                    Toast.makeText(ModifyFriendRememberActivity.this, "请完善信息", Toast.LENGTH_SHORT).show();
-                }else if(mList.size()<1){
-                    Toast.makeText(ModifyFriendRememberActivity.this, "请至少上传1张图片", Toast.LENGTH_SHORT).show();
-                }else {
+                if(TextUtils.isEmpty(etTitle.getText().toString())){
+                    Toast.makeText(ModifyFriendRememberActivity.this, "请填写标题", Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(tvLabel.getText().toString())){
+                    Toast.makeText(ModifyFriendRememberActivity.this, "请选择标签", Toast.LENGTH_SHORT).show();
+                }
+                //20190225 限制友记上传图片数量 1
+                else if(mList.size()<1){
+                    Toast.makeText(ModifyFriendRememberActivity.this, "请至少上传1张照片", Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(tvCity.getText().toString())){
+                    Toast.makeText(ModifyFriendRememberActivity.this, "请填写地点", Toast.LENGTH_SHORT).show();
+                }{
+                    //判断如果填写开始时间和结束时间   结束时间必须大于开始时间
+                    if (!tvTimeStart.getText().toString().equals("")&&!tvTimeEnd.getText().toString().equals("")){
+                        if (StringUtils.getTimeCompareSize(tvTimeStart.getText().toString(),tvTimeEnd.getText().toString())==1){
+                            Toast.makeText(ModifyFriendRememberActivity.this, "活动开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                    }
                     onSave();
                 }
                 break;

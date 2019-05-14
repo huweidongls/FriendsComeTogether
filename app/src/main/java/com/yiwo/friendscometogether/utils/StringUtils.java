@@ -540,7 +540,8 @@ public class StringUtils {
 	 */
 	public static int getTimeCompareSize(String startTime, String endTime){
 		int i=0;
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");//年-月-日 时-分
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");//年-月-日 时-分
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");//年-月-日
 		try {
 			Date date1 = dateFormat.parse(startTime);//开始时间
 			Date date2 = dateFormat.parse(endTime);//结束时间
