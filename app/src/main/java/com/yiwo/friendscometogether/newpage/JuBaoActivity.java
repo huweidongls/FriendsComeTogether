@@ -36,6 +36,7 @@ public class JuBaoActivity extends BaseActivity {
 
     private String pfID;
     private String type;
+    private String reportUserID = "";
     private SpImp spImp;
 //    @"垃圾营销",@"涉黄信息",@"不实信息",@"人身攻击",@"有害信息",@"违法信息",@"诈骗信息"
     private String[] strs = new String[]{"垃圾营销","涉黄信息","不实信息","人身攻击","有害信息","违法信息","诈骗信息"};
@@ -51,6 +52,9 @@ public class JuBaoActivity extends BaseActivity {
 
         pfID = getIntent().getStringExtra("pfID");
         type = getIntent().getStringExtra("type");
+        if (getIntent().getStringExtra("reportUserID")!=null){
+            reportUserID = getIntent().getStringExtra("reportUserID");
+        }
         LinearLayoutManager manager = new LinearLayoutManager(JuBaoActivity.this){
             @Override
             public boolean canScrollVertically() {
@@ -102,6 +106,7 @@ public class JuBaoActivity extends BaseActivity {
                     ViseHttp.POST(NetConfig.report)
                             .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.report))
                             .addParam("userID",spImp.getUID())
+                            .addParam("reportUserID",reportUserID)
                             .addParam("reportID",pfID)
                             .addParam("type",type)
                             .request(new ACallback<String>() {

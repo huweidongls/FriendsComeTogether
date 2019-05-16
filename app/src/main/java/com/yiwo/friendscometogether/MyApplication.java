@@ -47,6 +47,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
+import com.yiwo.friendscometogether.location.NimDemoLocationProvider;
 
 
 public class MyApplication extends Application {
@@ -124,6 +125,9 @@ public class MyApplication extends Application {
             // 2、相关Service调用
             // 初始化
             NimUIKit.init(this);
+            // 注册定位信息提供者类（可选）,如果需要发送地理位置消息，必须提供。
+            // demo中使用高德地图实现了该提供者，开发者可以根据自身需求，选用高德，百度，google等任意第三方地图和定位SDK。
+            NimUIKit.setLocationProvider(new NimDemoLocationProvider());
         }
 
     }

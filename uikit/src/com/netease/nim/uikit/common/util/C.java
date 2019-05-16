@@ -60,6 +60,6 @@ public class C {
 
         public static final String MIME_VIDEO_ALL = "video/*";
 
-        public static final String MIME_LOCATION_GOOGLE = "location/google";
+        public static final String MIME_LOCATION_GOOGLE = "com/yiwo/friendscometogether/location/google";
     }
 }

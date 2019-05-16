@@ -143,7 +143,6 @@
             android:configChanges="keyboardHidden"
             android:theme="@style/DarkTheme"/>
 
-
         <provider
             android:name="com.netease.nim.uikit.common.media.picker.model.GenericFileProvider"
             android:authorities="${applicationId}.generic.file.provider"

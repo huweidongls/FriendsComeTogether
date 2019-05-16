@@ -87,7 +87,7 @@
     <color name="color_grey_999999">#999999</color>
     <color name="color_grey_ababab">#ababab</color>
     <color name="color_grey_eaeaea">#eaeaea</color>
-    <color name="color_message_default_bg">#e9ecf0</color>
+    <color name="color_message_default_bg">#f5f5f5</color>
     <color name="color_red_ccfa3c55">#ccfa3c55</color>
     <color name="color_red_d84c37">#d84c37</color>
     <color name="color_split_line_cccccc">#cccccc</color>
@@ -254,8 +254,10 @@
     <string name="empty"/>
     <string name="file_transfer_state_downloaded">已下载</string>
     <string name="file_transfer_state_undownload">未下载</string>
+    <string name="format_mylocation">我的位置：%s</string>
     <string name="forward_to_person">转发到个人</string>
     <string name="forward_to_team">转发到群聊</string>
+    <string name="friends_map_navigation_web">在网页中打开</string>
     <string name="fts_enable">全文检索(FTS4)</string>
     <string name="fts_prefix_hit">前缀匹配高亮检索结果</string>
     <string name="gallery_invalid">你的手机没有图库程序</string>
@@ -278,6 +280,12 @@
     <string name="load_end">没有更多数据</string>
     <string name="load_failed">加载失败，请点我重试</string>
     <string name="loading">正在加载中...</string>
+    <string name="location_address_fail">获取位置信息失败</string>
+    <string name="location_address_unkown">该位置信息暂无</string>
+    <string name="location_loading">正在定位</string>
+    <string name="location_map">地图定位</string>
+    <string name="location_navigate">导航</string>
+    <string name="location_open_map_error">打开地图出错</string>
     <string name="look_up_original_photo_format">查看原图（%s）</string>
     <string name="look_video_fail">无法播放该视频</string>
     <string name="look_video_fail_try_again">暂时无法播放视频，请重试</string>
@@ -294,6 +302,7 @@
     <string name="msg_type_image">图片</string>
     <string name="multi_image_compressed_size">原始图片总大小为: %1$s,</string>
     <string name="mute_msg">设置禁言</string>
+    <string name="my_location">我的位置</string>
     <string name="my_team_card">我的群名片</string>
     <string name="network_is_not_available">网络连接失败，请检查你的网络设置</string>
     <string name="no_permission">没有权限</string>
@@ -409,6 +418,7 @@
     <string name="team_update_cancel">取消更新</string>
     <string name="team_update_failed">群头像设置失败</string>
     <string name="timer_default">00:00</string>
+    <string name="tools_selected">选择工具</string>
     <string name="trans_voice_failed">语音转化失败</string>
     <string name="transfer_team">转让群</string>
     <string name="unknow_size">未知大小</string>
@@ -427,7 +437,7 @@
     <string name="withdrawn_msg">撤 回</string>
     <string name="without_content">暂无</string>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/color_gray_d9d9d9</item>
         <item name="colorAccent">@color/color_blue_0888ff</item>
@@ -443,7 +453,7 @@
         <item name="windowNoTitle">true</item>
     </style>
     <style name="DarkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        
         <item name="colorPrimary">@color/color_black_333333</item>
         <item name="colorPrimaryDark">@color/black</item>
         <item name="colorAccent">@color/color_blue_0888ff</item>
@@ -518,17 +528,17 @@
     </style>
     <style name="easy_dialog_style" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
-        <!-- 边框 -->
+        
         <item name="android:windowIsFloating">true</item>
-        <!-- 是否浮现在activity之上 -->
+        
         <item name="android:windowIsTranslucent">true</item>
-        <!-- 半透明 -->
+        
         <item name="android:windowNoTitle">true</item>
-        <!-- 无标题 -->
+        
         <item name="android:windowBackground">@color/transparent</item>
-        <!-- 背景透明 -->
+        
         <item name="android:backgroundDimEnabled">true</item>
-        <!-- 后面的activity变暗 -->
+        
     </style>
     <style name="edit_text_style">
         <item name="android:textCursorDrawable">@color/black</item>

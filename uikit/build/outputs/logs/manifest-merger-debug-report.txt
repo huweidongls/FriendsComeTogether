@@ -1,28 +1,28 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-157:12
-INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-157:12
-INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-157:12
-INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-157:12
-INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-157:12
-INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-157:12
-INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-157:12
+ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-156:12
+INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-156:12
+INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-156:12
+INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-156:12
+INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-156:12
+INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-156:12
+INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-156:12
 	package
 		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:2:5-36
 		INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml
 		INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml
-		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-157:12
+		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-156:12
 		INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml
 	android:versionCode
 		INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml
-		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-157:12
+		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:1-156:12
 		INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:1:11-69
 application
-ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:5:5-156:19
+ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:5:5-155:19
 meta-data#com.netease.nim.uikit.support.glide.NIMGlideModule
 ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:7:9-9:42
 	android:value
@@ -268,21 +268,21 @@ ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:142:9-144:47
 	android:name
 		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:142:19-89
 provider#com.netease.nim.uikit.common.media.picker.model.GenericFileProvider
-ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:147:9-155:20
+ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:146:9-154:20
 	android:grantUriPermissions
-		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:151:13-47
+		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:150:13-47
 	android:authorities
-		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:149:13-73
+		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:148:13-73
 	android:exported
-		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:150:13-37
+		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:149:13-37
 	android:name
-		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:148:13-95
+		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:147:13-95
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:152:13-154:57
+ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:151:13-153:57
 	android:resource
-		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:154:17-55
+		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:153:17-55
 	android:name
-		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:153:17-67
+		ADDED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml:152:17-67
 uses-sdk
 INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\project\FriendsComeTogether\uikit\AndroidManifest.xml

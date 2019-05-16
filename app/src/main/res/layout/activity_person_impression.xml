@@ -32,7 +32,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+            <RelativeLayout
+                android:paddingTop="15px"
+                android:paddingBottom="15px"
+                android:paddingRight="40px"
+                android:paddingLeft="35px"
+                android:id="@+id/rl_algin_right_wode"
+                android:layout_gravity="right"
+                android:background="@drawable/bg_red_left_35px"
+                android:layout_marginTop="55px"
+                android:layout_width="wrap_content"
+                android:layout_height="70px">
+                <ImageView
+                    android:id="@+id/iv_heart"
+                    android:layout_centerVertical="true"
+                    android:layout_width="38px"
+                    android:layout_height="37px"
+                    android:src="@mipmap/heart_white"/>
+                <TextView
+                    android:textStyle="bold"
+                    android:textSize="30px"
+                    android:textColor="@color/white_ffffff"
+                    android:text="心动女生"
+                    android:layout_toRightOf="@+id/iv_heart"
+                    android:layout_marginLeft="15px"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
             <FrameLayout
                 android:id="@+id/rl_show_impresson"
                 android:layout_width="match_parent"
@@ -378,8 +405,13 @@
                         android:textSize="25px" />
                 </LinearLayout>
             </FrameLayout>
+            <android.support.v7.widget.RecyclerView
+                android:layout_marginBottom="30px"
+                android:id="@+id/rv_person_impression"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
             <com.yiwo.friendscometogether.widget.NestedRecyclerView
-                android:id="@+id/rl_impresson"
+                android:id="@+id/rv_impresson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

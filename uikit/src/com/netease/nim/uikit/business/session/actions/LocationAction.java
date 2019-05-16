@@ -1,5 +1,7 @@
 package com.netease.nim.uikit.business.session.actions;
 
+import android.util.Log;
+
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.api.model.location.LocationProvider;
 import com.netease.nim.uikit.impl.NimUIKitImpl;
@@ -19,9 +21,11 @@ public class LocationAction extends BaseAction {
     @Override
     public void onClick() {
         if (NimUIKitImpl.getLocationProvider() != null) {
+            Log.d(TAG,"notNUll");
             NimUIKitImpl.getLocationProvider().requestLocation(getActivity(), new LocationProvider.Callback() {
                 @Override
                 public void onSuccess(double longitude, double latitude, String address) {
+                    Log.d(TAG,"add"+address);
                     IMMessage message = MessageBuilder.createLocationMessage(getAccount(), getSessionType(), latitude, longitude,
                             address);
                     sendMessage(message);

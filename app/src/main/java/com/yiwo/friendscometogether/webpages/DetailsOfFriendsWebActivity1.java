@@ -623,6 +623,15 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
                 startActivity(intent);
             }
         }
+        @JavascriptInterface
+        public void reportuser(String uId,String pId){//举报  评论人 的ID，评论ID
+            Intent intent = new Intent();
+            intent.setClass(DetailsOfFriendsWebActivity1.this, JuBaoActivity.class);
+            intent.putExtra("pfID",pId);
+            intent.putExtra("reportUserID",uId);
+            intent.putExtra("type","3");
+            startActivity(intent);
+        }
     }
     private void showMuLuPopupwindow(View p_view) {
 

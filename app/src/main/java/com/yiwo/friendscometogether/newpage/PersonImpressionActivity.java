@@ -2,6 +2,8 @@ package com.yiwo.friendscometogether.newpage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,6 +20,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newadapter.ImpressionPersonAdapter;
 import com.yiwo.friendscometogether.newadapter.PersonImpressonRvAdapter;
 import com.yiwo.friendscometogether.newmodel.PersonImpressonModel;
 import com.yiwo.friendscometogether.newmodel.UserPersonImpressionModel;
@@ -40,8 +43,10 @@ import butterknife.OnClick;
 public class PersonImpressionActivity extends BaseActivity {
 
 
-    @BindView(R.id.rl_impresson)
-    NestedRecyclerView rl_impresson;
+    @BindView(R.id.rv_person_impression)
+    RecyclerView rv_person_impression;
+    @BindView(R.id.rv_impresson)
+    NestedRecyclerView rv_impresson;
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.tv0)
@@ -90,7 +95,8 @@ public class PersonImpressionActivity extends BaseActivity {
     private String person_id;
     private List<PersonImpressonModel.ObjBean> listAllLabel = new ArrayList<>();
     private List<UserPersonImpressionModel.ObjBean> listUserLabel = new ArrayList<>();
-    private PersonImpressonRvAdapter adapter;
+    private PersonImpressonRvAdapter adapter;//评价按钮
+    private ImpressionPersonAdapter adapter_person;//被评价的标签
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,7 +150,7 @@ public class PersonImpressionActivity extends BaseActivity {
         ViseHttp.POST(NetConfig.userCommentLabelList)
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userCommentLabelList))
                 .addParam("userID",person_id)
-                .addParam("type","0")
+                .addParam("type","1")
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
@@ -225,15 +231,30 @@ public class PersonImpressionActivity extends BaseActivity {
                     break;
             }
         }
+        if (listUserLabel.size()>10){
+            rv_person_impression.setVisibility(View.VISIBLE);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PersonImpressionActivity.this);
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            rv_person_impression.setLayoutManager(linearLayoutManager);
+            adapter_person = new ImpressionPersonAdapter(listUserLabel.subList(10,listUserLabel.size()),person_id);
+            rv_person_impression.setAdapter(adapter_person);
+        }else {
+            rv_person_impression.setVisibility(View.GONE);
+        }
     }
     private void initRv() {
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PersonImpressionActivity.this);
+//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        rv_person_impression.setLayoutManager(linearLayoutManager);
+//        adapter_person = new ImpressionPersonAdapter(listUserLabel.subList(10,listUserLabel.size()));
+//        rv_person_impression.setAdapter(adapter_person);
         FlowLayoutManager manager = new FlowLayoutManager(){
             @Override
             public boolean canScrollVertically() {
                 return false;
             }
         };
-        rl_impresson.setLayoutManager(manager);
+        rv_impresson.setLayoutManager(manager);
         adapter = new PersonImpressonRvAdapter(listAllLabel);
         adapter.setListenner(new PersonImpressonRvAdapter.OnCommentListenner() {
             @Override
@@ -278,7 +299,7 @@ public class PersonImpressionActivity extends BaseActivity {
 
             }
         });
-        rl_impresson.setAdapter(adapter);
+        rv_impresson.setAdapter(adapter);
 
     }
 
