@@ -37,7 +37,7 @@
                 android:paddingBottom="15px"
                 android:paddingRight="40px"
                 android:paddingLeft="35px"
-                android:id="@+id/rl_algin_right_wode"
+                android:id="@+id/rl_algin_right_heart"
                 android:layout_gravity="right"
                 android:background="@drawable/bg_red_left_35px"
                 android:layout_marginTop="55px"
@@ -47,9 +47,10 @@
                     android:id="@+id/iv_heart"
                     android:layout_centerVertical="true"
                     android:layout_width="38px"
-                    android:layout_height="37px"
-                    android:src="@mipmap/heart_white"/>
+                    android:layout_height="38px"
+                    android:src="@mipmap/xindong"/>
                 <TextView
+                    android:id="@+id/tv_xindong"
                     android:textStyle="bold"
                     android:textSize="30px"
                     android:textColor="@color/white_ffffff"

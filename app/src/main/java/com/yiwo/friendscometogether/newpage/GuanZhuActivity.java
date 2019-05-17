@@ -730,6 +730,7 @@ public class GuanZhuActivity extends BaseActivity {
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
+                        Log.d("sadasd",data);
                         try {
                             JSONObject jsonObject = new JSONObject(data);
                             if (jsonObject.getInt("code") == 200) {
@@ -744,12 +745,14 @@ public class GuanZhuActivity extends BaseActivity {
                                     activeName[i] = model.getObj().get(i).getPftitle();
                                     block[i] = model.getObj().get(i).getBlock();
                                 }
-                                if(block[0].equals("0")){
-                                    checkBox.setVisibility(View.GONE);
-                                    type = 3;
-                                }else {
-                                    checkBox.setVisibility(View.VISIBLE);
-                                    type = 1;
+                                if (block.length>0){
+                                    if(block[0].equals("0")){
+                                        checkBox.setVisibility(View.GONE);
+                                        type = 3;
+                                    }else {
+                                        checkBox.setVisibility(View.VISIBLE);
+                                        type = 1;
+                                    }
                                 }
                             }
                         } catch (JSONException e) {

@@ -514,12 +514,13 @@ public class MainActivity extends FragmentActivity {
         NimUIKit.setSessionListener(new SessionEventListener() {
             @Override
             public void onAvatarClicked(Context context, IMMessage message) {//设置头像点击监听
-                Intent intent = new Intent();
-                intent.putExtra("person_id",message.getFromAccount());
-                intent.putExtra("status","1");
-                intent.setClass(context, PersonMainActivity.class);
-                context.startActivity(intent);
-
+                if (!message.getFromAccount().equals("tongbanxiaozhushou")){
+                    Intent intent = new Intent();
+                    intent.putExtra("person_id",message.getFromAccount());
+                    intent.putExtra("status","1");
+                    intent.setClass(context, PersonMainActivity.class);
+                    context.startActivity(intent);
+                }
             }
 
             @Override

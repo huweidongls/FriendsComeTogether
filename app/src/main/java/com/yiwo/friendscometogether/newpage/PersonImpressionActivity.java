@@ -43,6 +43,12 @@ import butterknife.OnClick;
 public class PersonImpressionActivity extends BaseActivity {
 
 
+    @BindView(R.id.rl_algin_right_heart)
+    RelativeLayout rlXinDong;
+    @BindView(R.id.tv_xindong)
+    TextView tv_xindong;
+    @BindView(R.id.iv_heart)
+    ImageView iv_heart;
     @BindView(R.id.rv_person_impression)
     RecyclerView rv_person_impression;
     @BindView(R.id.rv_impresson)
@@ -93,6 +99,7 @@ public class PersonImpressionActivity extends BaseActivity {
     ImageView iv_head;
     private SpImp spImp;
     private String person_id;
+    private boolean isHeart;
     private List<PersonImpressonModel.ObjBean> listAllLabel = new ArrayList<>();
     private List<UserPersonImpressionModel.ObjBean> listUserLabel = new ArrayList<>();
     private PersonImpressonRvAdapter adapter;//评价按钮
@@ -105,6 +112,16 @@ public class PersonImpressionActivity extends BaseActivity {
         ButterKnife.bind(PersonImpressionActivity.this);
         spImp = new SpImp(PersonImpressionActivity.this);
         person_id = getIntent().getStringExtra("person_id");
+        if (spImp.getUID().equals(person_id)){
+            tv_xindong.setText("对我心动");
+        }else {
+            if (getIntent().getStringExtra("sex").equals("0")){
+                tv_xindong.setText("心动男生");
+            }else {
+                tv_xindong.setText("心动女生");
+            }
+        }
+
         if (person_id.equals(spImp.getUID())){
             tv_title.setText("我的印象");
         }else {
@@ -117,6 +134,37 @@ public class PersonImpressionActivity extends BaseActivity {
     }
 
     private void initData() {
+        // 心动状态
+        ViseHttp.POST(NetConfig.heartBeatStatus)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.heartBeatStatus))
+                .addParam("heartbeatID",person_id)
+                .addParam("userID",spImp.getUID())
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                JSONObject jsonObject1 = jsonObject.getJSONObject("obj");
+                                if (jsonObject1.getString("status").equals("0")){
+                                    iv_heart.setImageResource(R.mipmap.xindong_border);
+                                    isHeart = false;
+                                }else {
+                                    iv_heart.setImageResource(R.mipmap.xindong);
+                                    isHeart = true;
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
         ViseHttp.POST(NetConfig.commentLabel)
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.commentLabel))
                 .addParam("userID",person_id)
@@ -309,13 +357,28 @@ public class PersonImpressionActivity extends BaseActivity {
 //        }
 //    }
 
-    @OnClick({R.id.rl_back,R.id.lay0,R.id.lay1,R.id.lay2,R.id.lay3,R.id.lay4,R.id.lay5,R.id.lay6,R.id.lay7,R.id.lay8,R.id.lay9})
+    @OnClick({R.id.rl_back,R.id.rl_algin_right_heart,R.id.lay0,R.id.lay1,R.id.lay2,R.id.lay3,R.id.lay4,R.id.lay5,R.id.lay6,R.id.lay7,R.id.lay8,R.id.lay9})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
 
             case R.id.rl_back:
                 finish();
+                break;
+            case R.id.rl_algin_right_heart:
+                if (!TextUtils.isEmpty(spImp.getUID()) && !spImp.getUID().equals("0")) {
+                    if (person_id.equals(spImp.getUID())){//自己查看自己
+                        intent.setClass(PersonImpressionActivity.this,PersonsWhoHeartMeActivity.class);
+                        intent.putExtra("person_id",person_id);
+                        intent.putExtra("title","对我心动的人");
+                        startActivity(intent);
+                    }else {
+                        duiTaXinDong();
+                    }
+                }else {
+                    intent.setClass(PersonImpressionActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.lay0:
                 intent.setClass(PersonImpressionActivity.this,PersonsOfTheLabelActivity.class);
@@ -389,5 +452,31 @@ public class PersonImpressionActivity extends BaseActivity {
                 break;
 
         }
+    }
+
+    private void duiTaXinDong() {
+        ViseHttp.POST(NetConfig.heartbeat)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.heartbeat))
+                .addParam("heartbeatID",person_id)
+                .addParam("userID",spImp.getUID())
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                isHeart = !isHeart;
+                                iv_heart.setImageResource(isHeart?R.mipmap.xindong:R.mipmap.xindong_border);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
     }
 }

@@ -632,6 +632,13 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
             intent.putExtra("type","3");
             startActivity(intent);
         }
+        @JavascriptInterface
+        public void jumpyouji(String fmID){
+            Intent intent = new Intent();
+            intent.setClass(DetailsOfFriendsWebActivity1.this, DetailsOfFriendsWebActivity1.class);
+            intent.putExtra("fmid", fmID);
+            startActivity(intent);
+        }
     }
     private void showMuLuPopupwindow(View p_view) {
 

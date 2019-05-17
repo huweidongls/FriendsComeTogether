@@ -154,6 +154,9 @@ public class MessageFragment extends TFragment implements ModuleProxy {
             if (oneIsKeFu(sessionId,NimUIKit.getAccount())){
                 ll_bottom.setVisibility(View.VISIBLE);
                 rl_bottom_notfriend.setVisibility(View.GONE);
+            }else if (oneIsTongBanZhuShou(sessionId,NimUIKit.getAccount())){
+                ll_bottom.setVisibility(View.GONE);
+                rl_bottom_notfriend.setVisibility(View.GONE);
             }else {
                 if (!(NIMClient.getService(FriendService.class).isMyFriend(sessionId))){
                     ll_bottom.setVisibility(View.GONE);
@@ -437,6 +440,13 @@ public class MessageFragment extends TFragment implements ModuleProxy {
 
     private boolean oneIsKeFu(String accID0,String accID1){
         if (accID0.indexOf("kf")!= -1||accID1.indexOf("kf")!= -1){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    private boolean oneIsTongBanZhuShou(String accID0,String accID1){
+        if (accID0.equals("tongbanxiaozhushou")||accID1.equals("tongbanxiaozhushou")){
             return true;
         }else {
             return false;

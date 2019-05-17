@@ -7,10 +7,10 @@ package com.yiwo.friendscometogether.network;
 public class NetConfig {
 
     //测试服务器
-    public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
+//    public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
 //    public static String BaseUrl = "http://tb.91yiwo.cn/index.php/";
     //正式服务器
-//    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
+    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
 
 
 //    public static String BaseUrl = "http://www.youlaiyouyue.com/";
@@ -323,6 +323,13 @@ public class NetConfig {
     public static String clearComment = "action/ac_user/clearComment";
     // 搜索好友
     public static String searchUser = "action/ac_user/searchUser";//    action/ac_user /     searchUser   搜索用户接口     传 userLogin用户账号 userID 我的ID  返回  userID 用户id  username 用户名   userpic 头像 status  0 不是好友  1是好友
+
+   //获取心动状态接口
+    public static String heartBeatStatus = "action/ac_user/heartBeatStatus" ; //action/ ac_user  /  heartBeatStatus 状态接口   传userID用户ID   heartbeatID 新东人的id   返回 status 0不是 1是
+    //点击心动操作
+    public static String heartbeat = "action/ac_user/heartbeat"; //点击心动操作   传userID用户id  heartbeatID心动人的id
+    //对我心动的人
+    public static String heartList = "action/ac_user/heartList"; // 列表    传userID用户id           返回userID用户id  username用户名   userpic头像\n"
     //获取所有个人评论标签接口
     public static String commentLabel = "action/ac_user/commentLabel"; //action/ac_user/commentLabel  评论标签接口   传 userID  被评论人的ID   uid登录用户的ID   返回 id 标签的ID   label_name标签名 status 0未评价过  1评价过
     //论标签接口

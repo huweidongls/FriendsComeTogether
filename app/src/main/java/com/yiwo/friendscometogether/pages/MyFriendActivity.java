@@ -376,12 +376,14 @@ public class MyFriendActivity extends AppCompatActivity {
                                     activeName[i] = model.getObj().get(i).getPftitle();
                                     block[i] = model.getObj().get(i).getBlock();
                                 }
-                                if(block[0].equals("0")){
-                                    checkBox.setVisibility(View.GONE);
-                                    type = 3;
-                                }else {
-                                    checkBox.setVisibility(View.VISIBLE);
-                                    type = 1;
+                                if (block.length>0){
+                                    if(block[0].equals("0")){
+                                        checkBox.setVisibility(View.GONE);
+                                        type = 3;
+                                    }else {
+                                        checkBox.setVisibility(View.VISIBLE);
+                                        type = 1;
+                                    }
                                 }
                             }
                         } catch (JSONException e) {

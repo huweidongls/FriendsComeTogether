@@ -493,6 +493,7 @@
         <activity android:name=".newpage.PersonImpressionActivity" />
         <activity android:name=".newpage.FindFriendByTelActivity" />
         <activity android:name=".newpage.PersonsOfTheLabelActivity" />
+        <activity android:name=".newpage.PersonsWhoHeartMeActivity" />
         <activity android:name=".newpage.JuBaoActivity"></activity>
 
         <!--位置-->

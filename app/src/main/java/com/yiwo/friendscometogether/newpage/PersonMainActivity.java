@@ -750,6 +750,7 @@ public class PersonMainActivity extends BaseActivity {
                     intent.setClass(PersonMainActivity.this,PersonImpressionActivity.class);
                     intent.putExtra("person_id",person_id);
                     intent.putExtra("user_icon",model.getObj().getInfo().getUserpic());
+                    intent.putExtra("sex",model.getObj().getInfo().getSex());
                     startActivity(intent);
                 break;
         }
