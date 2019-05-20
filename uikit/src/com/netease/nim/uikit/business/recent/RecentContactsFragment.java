@@ -34,10 +34,13 @@ import com.netease.nimlib.sdk.ResponseCode;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
+import com.netease.nimlib.sdk.msg.constant.MsgTypeEnum;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.QueryDirectionEnum;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
+import com.netease.nimlib.sdk.team.TeamService;
+import com.netease.nimlib.sdk.team.constant.TeamMessageNotifyTypeEnum;
 import com.netease.nimlib.sdk.team.model.Team;
 import com.netease.nimlib.sdk.team.model.TeamMember;
 
@@ -237,6 +240,45 @@ public class RecentContactsFragment extends TFragment {
     private void showLongClickMenu(final RecentContact recent, final int position) {
         CustomAlertDialog alertDialog = new CustomAlertDialog(getActivity());
         alertDialog.setTitle(UserInfoHelper.getUserTitleName(recent.getContactId(), recent.getSessionType()));
+        if (recent.getSessionType().equals(SessionTypeEnum.Team)){
+            String title = NIMClient.getService(TeamService.class).queryTeamBlock(recent.getContactId())
+                    .getMessageNotifyType().compareTo(TeamMessageNotifyTypeEnum.All) == 0 ? "屏蔽群消息提醒":"接收群消息提醒";
+//            recent.getContactId()
+            alertDialog.addItem(title, new onSeparateItemClickListener() {
+                @Override
+                public void onClick() {
+                    TeamMessageNotifyTypeEnum type ;
+                    if (NIMClient.getService(TeamService.class).queryTeamBlock(recent.getContactId())
+                            .getMessageNotifyType().compareTo(TeamMessageNotifyTypeEnum.All) == 0){
+                        type = TeamMessageNotifyTypeEnum.Mute;
+                    }else {
+                        type = TeamMessageNotifyTypeEnum.All;
+                    }
+                    NIMClient.getService(TeamService.class).muteTeam(recent.getContactId(), type).setCallback(new RequestCallback<Void>() {
+                        @Override
+                        public void onSuccess(Void param) {
+                            // 设置成功
+                            postRunnable(new Runnable() {
+                                @Override
+                                public void run() {
+                                    refreshMessages(true);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onFailed(int code) {
+                            // 设置失败
+                        }
+
+                        @Override
+                        public void onException(Throwable exception) {
+                            // 错误
+                        }
+                    });
+                }
+            });
+        }
         String title = getString(R.string.main_msg_list_delete_chatting);
         alertDialog.addItem(title, new onSeparateItemClickListener() {
             @Override
