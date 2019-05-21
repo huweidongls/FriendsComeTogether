@@ -29,6 +29,7 @@ import com.yiwo.friendscometogether.newpage.AllHuoDongActivity;
 import com.yiwo.friendscometogether.newpage.AllRememberActivity;
 import com.yiwo.friendscometogether.newpage.GuanZhuActivity;
 import com.yiwo.friendscometogether.newpage.MessageActivity;
+import com.yiwo.friendscometogether.newpage.MyContactActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.newpage.SuperLikeActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
@@ -243,7 +244,7 @@ public class MyFragment1 extends BaseFragment {
                 break;
             case R.id.rl_my_friend:
                 if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
-                    intent.setClass(getContext(), MyFriendActivity.class);
+                    intent.setClass(getContext(), MyContactActivity.class);
                     startActivity(intent);
                 } else {
                     intent.setClass(getContext(), LoginActivity.class);

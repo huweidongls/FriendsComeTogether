@@ -71,12 +71,11 @@
 
     <uses-permission android:name="com.yiwo.friendscometogether.permission.MIPUSH_RECEIVE" />
 
-
-    <!--用于申请调用A-GPS模块-->
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission>
-    <!--用于申请获取蓝牙信息进行室内定位-->
-    <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
+    <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <!-- 小米推送 权限end -->
     <application
@@ -240,11 +239,12 @@
         <activity android:name=".pages.OrderCommentActivity" />
         <activity android:name=".pages.EditorFriendTogetherSubTitleContentActivity" />
 
-
-        <!--高德 定位service-->
-        <service android:name="com.amap.api.location.APSService"></service>
+        <!-- 高德 定位service -->
+        <service android:name="com.amap.api.location.APSService" />
         <!-- 高德定位 key -->
-        <meta-data  android:name="com.amap.api.v2.apikey" android:value="3f4d4394729beecde1b844edf81b822a" />
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="3f4d4394729beecde1b844edf81b822a" />
         <!--
              APP key, 可以在这里设置，也可以在 SDKOptions 中提供。
             如果 SDKOptions 中提供了，取 SDKOptions 中的值。
@@ -494,21 +494,22 @@
         <activity android:name=".newpage.FindFriendByTelActivity" />
         <activity android:name=".newpage.PersonsOfTheLabelActivity" />
         <activity android:name=".newpage.PersonsWhoHeartMeActivity" />
-        <activity android:name=".newpage.JuBaoActivity"></activity>
+        <activity android:name=".newpage.JuBaoActivity" />
 
-        <!--位置-->
+        <!-- 位置 -->
         <activity
-            android:name="com.yiwo.friendscometogether.location.activity.LocationAmapActivity"
+            android:name=".location.activity.LocationAmapActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/location_map"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.yiwo.friendscometogether.location.activity.NavigationAmapActivity"
+            android:name=".location.activity.NavigationAmapActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/location_navigate"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".newpage.MyContactActivity"></activity>
     </application>
 
 </manifest>

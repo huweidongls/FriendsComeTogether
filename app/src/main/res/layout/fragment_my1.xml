@@ -441,7 +441,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="33px"
                         android:layout_toRightOf="@+id/iv2"
-                        android:text="我的好友"
+                        android:text="通讯录"
                         android:textColor="@color/black_333333"
                         android:textSize="32px"
                         android:layout_width="wrap_content"
