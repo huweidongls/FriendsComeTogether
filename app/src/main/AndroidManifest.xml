@@ -509,7 +509,9 @@
             android:label="@string/location_navigate"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".newpage.MyContactActivity"></activity>
+        <activity android:name=".newpage.MyContactActivity" />
+        <activity android:name=".newpage.CreateFriendRememberNew_ChoosePicsActivity" />
+        <activity android:name=".newpage.CreateFriendRememberActivityNew"></activity>
     </application>
 
 </manifest>

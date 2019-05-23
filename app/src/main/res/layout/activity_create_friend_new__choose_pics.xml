@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yiwo.friendscometogether.newpage.CreateFriendRememberNew_ChoosePicsActivity">
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        style="@style/rl_top_bar">
+
+        <TextView
+            android:id="@+id/tv"
+            android:text="全部友记"
+            style="@style/tv_top_title" />
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView
+                style="@style/iv_return" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <com.yiwo.friendscometogether.widget.choose_pics_view.CoordinatorLinearLayout
+        android:id="@+id/coordinator_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.yiwo.friendscometogether.widget.choose_pics_view.MCropImageView
+            android:id="@+id/crop_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <com.yiwo.friendscometogether.widget.choose_pics_view.CoordinatorRecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.yiwo.friendscometogether.widget.choose_pics_view.CoordinatorRecyclerView>
+    </com.yiwo.friendscometogether.widget.choose_pics_view.CoordinatorLinearLayout>
+</LinearLayout>

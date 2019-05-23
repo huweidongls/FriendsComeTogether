@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yiwo.friendscometogether.widget.choose_pics_view.SquareLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5px"
+            android:scaleType="centerCrop"
+            />
+        <TextView
+            android:gravity="center"
+            android:background="@drawable/bg_oval_round_white"
+            android:id="@+id/tv_num"
+            android:textColor="@color/white_ffffff"
+            android:textSize="12sp"
+            android:layout_margin="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="18dp"
+            android:layout_height="18dp" />
+    </RelativeLayout>
+
+</com.yiwo.friendscometogether.widget.choose_pics_view.SquareLinearLayout>

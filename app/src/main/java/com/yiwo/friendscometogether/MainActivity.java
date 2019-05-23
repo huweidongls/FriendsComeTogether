@@ -1,8 +1,6 @@
 package com.yiwo.friendscometogether;
 
 import android.Manifest;
-import android.app.ActivityManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -10,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -18,29 +15,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.model.session.SessionEventListener;
-import com.netease.nim.uikit.business.session.module.MsgForwardFilter;
-import com.netease.nim.uikit.business.session.module.MsgRevokeFilter;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
-import com.netease.nimlib.sdk.RequestCallback;
-import com.netease.nimlib.sdk.auth.AuthService;
-import com.netease.nimlib.sdk.auth.LoginInfo;
-import com.netease.nimlib.sdk.chatroom.model.ChatRoomMessage;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
@@ -52,18 +40,16 @@ import com.yiwo.friendscometogether.custom.OnDoubleClickListener;
 import com.yiwo.friendscometogether.fragment.ChatFragment;
 import com.yiwo.friendscometogether.fragment.FriendsRememberFragment;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment;
-import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment1;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment2;
 import com.yiwo.friendscometogether.fragment.HomeFragment;
 import com.yiwo.friendscometogether.fragment.HomeFragment1;
 import com.yiwo.friendscometogether.fragment.MyFragment;
 import com.yiwo.friendscometogether.fragment.MyFragment1;
 import com.yiwo.friendscometogether.newfragment.YouJiFragment;
+import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivityNew;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.pages.CreateFriendRememberActivity;
-import com.yiwo.friendscometogether.pages.GuideActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
-import com.yiwo.friendscometogether.pages.WelcomeActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.AppUpdateUtil;
 
@@ -297,7 +283,8 @@ public class MainActivity extends FragmentActivity {
 //                    selectText(tvFriendRemember);
 //                    switchFragment(2);
                     if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
-                        intent.setClass(context, CreateFriendRememberActivity.class);
+//                        intent.setClass(context, CreateFriendRememberActivity.class);
+                        intent.setClass(context, CreateFriendRememberActivityNew.class);
                         startActivity(intent);
                     } else {
                         intent.setClass(context, LoginActivity.class);
@@ -334,7 +321,8 @@ public class MainActivity extends FragmentActivity {
 //                    selectText(tvFriendRemember);
 //                    switchFragment(2);
                     if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
-                        intent.setClass(context, CreateFriendRememberActivity.class);
+//                        intent.setClass(context, CreateFriendRememberActivity.class);
+                        intent.setClass(context, CreateFriendRememberActivityNew.class);
                         startActivity(intent);
                     } else {
                         intent.setClass(context, LoginActivity.class);
