@@ -24,6 +24,20 @@
                 style="@style/iv_return" />
 
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_next"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_marginRight="40px"
+                android:text="下一步"
+                android:textSize="30px"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white_ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
 
     </RelativeLayout>
     <com.yiwo.friendscometogether.widget.choose_pics_view.CoordinatorLinearLayout

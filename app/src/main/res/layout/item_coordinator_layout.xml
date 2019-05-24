@@ -24,6 +24,11 @@
             android:layout_alignParentRight="true"
             android:layout_width="18dp"
             android:layout_height="18dp" />
+        <RelativeLayout
+            android:background="@drawable/bg_d84c37_choose_pic"
+            android:id="@+id/rl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></RelativeLayout>
     </RelativeLayout>
 
 </com.yiwo.friendscometogether.widget.choose_pics_view.SquareLinearLayout>

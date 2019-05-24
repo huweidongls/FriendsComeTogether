@@ -1,12 +1,14 @@
 package com.yiwo.friendscometogether.newfragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.util.ArrayMap;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -29,6 +32,7 @@ import com.yiwo.friendscometogether.base.BaseFragment;
 import com.yiwo.friendscometogether.create_friendremember.PicBean;
 import com.yiwo.friendscometogether.create_friendremember.PicMuluModel;
 import com.yiwo.friendscometogether.create_friendremember.PicsMuLuAdapter;
+import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivity1;
 import com.yiwo.friendscometogether.newpage.CreateFriendRememberNew_ChoosePicsActivity;
 import com.yiwo.friendscometogether.widget.choose_pics_view.CoordinatorLinearLayout;
 import com.yiwo.friendscometogether.widget.choose_pics_view.CoordinatorRecyclerView;
@@ -37,7 +41,10 @@ import com.yiwo.friendscometogether.widget.choose_pics_view.MCropImageView;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,6 +73,11 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
     private PopupWindow popupWindow;
 
     private MyAdapter myAdapter;
+    private int choose_num = 0;//选择照片数量
+    private int last_postion = -1;//上一张选中的照片的postion
+    private Map<Integer,String> map_choose_postion = new LinkedHashMap<>();//选择的照片 的 索引
+//    private List<Integer> list_choose_postion = new ArrayList<>();//选择的照片 的 索引
+    //    List<Integer> list_choosed_postion = new ArrayList<>(); //选择过的 item Postion;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -84,8 +96,8 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
         myAdapter = new MyAdapter();
         recyclerView.setAdapter(myAdapter);
         myAdapter.setNewData(data_pic);
-        Log.d("sssssssss",datas.get(0).getList().get(0).getPath());
-        mMCropImageView.setImagePath(datas.get(0).getList().get(0).getPath());
+//        Log.d("sssssssss",datas.get(0).getList().get(0).getPath());
+        mMCropImageView.setImagePath(data_pic.get(0).getPath());
         // 实现回调接口
         recyclerView.setOnCoordinatorListener(new CoordinatorRecyclerView.OnCoordinatorListener() {
             @Override
@@ -121,11 +133,21 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
             }
         });
     }
-    @OnClick({R.id.tv})
+    @OnClick({R.id.tv,R.id.rl_next})
     public void OnCLick(View v){
         switch (v.getId()){
             case R.id.tv:
                 getAllPhotoInfo();
+                break;
+            case R.id.rl_next:
+                ArrayList<String> list = new ArrayList<>();
+                for (Map.Entry<Integer, String> entry : map_choose_postion.entrySet()) {
+                    list.add(entry.getValue());
+                }
+                Intent intent = new Intent();
+                intent.putStringArrayListExtra("paths",list);
+                intent.setClass(context, CreateFriendRememberActivity1.class);
+                context.startActivity(intent);
                 break;
         }
     }
@@ -254,6 +276,9 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
                 textView.setText(datas.get(postion).getMuluName().substring(datas.get(postion).getMuluName().lastIndexOf("/")+1));
                 data_pic.clear();
                 data_pic.addAll(datas.get(postion).getList());
+                choose_num = 0;
+                map_choose_postion.clear();
+                mMCropImageView.setImagePath(data_pic.get(0).getPath());
                 myAdapter.setNewData(data_pic);
                 popupWindow.dismiss();
             }
@@ -302,22 +327,77 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
         return rect.contains(touchX, touchY);
     }
     public class MyAdapter extends BaseQuickAdapter<PicBean, BaseViewHolder> {
-
         public MyAdapter() {
             super(R.layout.item_coordinator_layout, new ArrayList<PicBean>());
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, final PicBean item) {
+        protected void convert(final BaseViewHolder helper, final PicBean item) {
+            ImageView imageView = helper.itemView.findViewById(R.id.iv);
+            final RelativeLayout rl = helper.itemView.findViewById(R.id.rl);
+            final TextView tv_num = helper.itemView.findViewById(R.id.tv_num);
+
+            Glide.with(context).load(item.getPath()).into(imageView);
+            if (item.getSelected()){
+                rl.setVisibility(View.VISIBLE);
+            }else {
+                rl.setVisibility(View.GONE);
+            }
+            tv_num.setBackgroundResource(item.getChoose_num()>=0 ? R.drawable.bg_oval_red:R.drawable.bg_oval_round_white);
+            tv_num.setText(item.getChoose_num()>=0 ? item.getChoose_num()+"":"");
+
+            tv_num.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    helper.itemView.callOnClick();
+                    if (item.getChoose_num()<0){
+                        if (choose_num<9){
+                            choose_num ++;
+                            item.setChoose_num(choose_num);
+                            tv_num.setBackgroundResource(R.drawable.bg_oval_red);
+                            tv_num.setText(item.getChoose_num()+"");
+                            map_choose_postion.put(helper.getLayoutPosition(),item.getPath());
+                        }else {
+                            toToast(context,"最多选择9张图片");
+                        }
+                    }else {
+                        if (choose_num>=0){
+                            int last_num = item.getChoose_num();
+                            item.setChoose_num(-1);
+                            tv_num.setBackgroundResource(R.drawable.bg_oval_round_white);
+                            tv_num.setText("");
+                            map_choose_postion.remove(helper.getLayoutPosition());
+                            for (Map.Entry<Integer, String> entry : map_choose_postion.entrySet()) {
+                                int num = data_pic.get(entry.getKey()).getChoose_num();
+                                if (num>=last_num){
+                                    data_pic.get(entry.getKey()).setChoose_num(num-1);
+                                    notifyItemChanged(entry.getKey());
+                                }
+                            }
+                            choose_num --;
+                        }
+                    }
+                }
+            });
             helper.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.d("ssss",item.getPath());
                     mMCropImageView.setImagePath(item.getPath());
+                    if (item.getSelected()){
+//                        item.setSelected(false);
+//                        rl.setBackground(null);
+                    }else {
+                        item.setSelected(true);
+                        notifyItemChanged(helper.getLayoutPosition());
+                        if (last_postion>=0){
+                            data_pic.get(last_postion).setSelected(false);
+                            notifyItemChanged(last_postion);
+                        }
+                        last_postion = helper.getLayoutPosition();
+                    }
                 }
             });
-            ImageView imageView = helper.itemView.findViewById(R.id.iv);
-//            imageView.setImageResource(R.mipmap.ic_launcher);
-            Glide.with(context).load(item.getPath()).into(imageView);
         }
     }
 }

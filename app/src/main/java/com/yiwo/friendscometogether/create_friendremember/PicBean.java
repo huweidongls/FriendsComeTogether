@@ -13,8 +13,8 @@ public class PicBean {
     private String path;
     private int size;
     private String displayName;
-    private Boolean isChoose = false;
-
+    private Boolean isSelected = false;
+    private int choose_num = -1;
     public String getPath() {
         return path;
     }
@@ -39,11 +39,19 @@ public class PicBean {
         this.displayName = displayName;
     }
 
-    public Boolean getChoose() {
-        return isChoose;
+    public Boolean getSelected() {
+        return isSelected;
     }
 
-    public void setChoose(Boolean choose) {
-        isChoose = choose;
+    public void setSelected(Boolean selected) {
+        isSelected = selected;
+    }
+
+    public int getChoose_num() {
+        return choose_num;
+    }
+
+    public void setChoose_num(int choose_num) {
+        this.choose_num = choose_num;
     }
 }
