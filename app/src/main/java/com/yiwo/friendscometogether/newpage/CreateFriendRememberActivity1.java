@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -219,6 +220,7 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
         initUpData();
         mList.clear();
         for (String path:getIntent().getStringArrayListExtra("paths")){
+            Log.d("ddaad",path);
             mList.add(new UserIntercalationPicModel(path,""));
         }
         adapter.notifyDataSetChanged();
@@ -230,7 +232,10 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
     private void initUpData() {
 
         mList = new ArrayList<>();
-        GridLayoutManager manager = new GridLayoutManager(CreateFriendRememberActivity1.this, 3);
+//        GridLayoutManager manager = new GridLayoutManager(CreateFriendRememberActivity1.this, 3);
+//        recyclerView.setLayoutManager(manager);
+        LinearLayoutManager manager = new LinearLayoutManager(CreateFriendRememberActivity1.this);
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(manager);
         adapter = new IntercalationAdapter(mList);
         adapter.setDescribe(false);

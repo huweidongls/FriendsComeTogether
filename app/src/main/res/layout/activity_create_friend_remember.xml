@@ -160,7 +160,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="12px"
+                android:layout_height="5px"
                 android:background="@color/line" />
             <RelativeLayout
                 android:focusable="true"
@@ -201,7 +201,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="12px"
+                android:layout_height="5px"
                 android:background="@color/line" />
             <RelativeLayout
                 android:id="@+id/activity_create_friend_remember_rl_label"
@@ -251,7 +251,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="12px"
+                android:layout_height="5px"
                 android:background="@color/line" />
             <RelativeLayout
                 android:id="@+id/activity_create_friend_remember_rl_activity_city"
@@ -317,7 +317,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="12px"
+                android:layout_height="5px"
                 android:background="@color/line" />
 
             <RelativeLayout
@@ -402,7 +402,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="12px"
+                    android:layout_height="5px"
                     android:background="@color/line" />
 
                 <RelativeLayout
@@ -451,7 +451,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="12px"
+                    android:layout_height="5px"
                     android:background="@color/line" />
 
                 <RelativeLayout
@@ -500,7 +500,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="12px"
+                    android:layout_height="5px"
                     android:background="@color/line" />
 
                 <RelativeLayout
@@ -549,7 +549,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="12px"
+                    android:layout_height="5px"
                     android:background="@color/line" />
 
                 <RelativeLayout
@@ -599,7 +599,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="12px"
+                    android:layout_height="5px"
                     android:background="@color/line" />
 
                 <RelativeLayout

@@ -755,5 +755,13 @@ public class MCropImageView extends AppCompatImageView implements ViewTreeObserv
     private LruCache<String, Bitmap> getMLruCache(){
         return this.mLruCache;
     }
-
+    public Bitmap getBitmap(int w_,int h_){
+        int w = w_;
+        int h = h_;
+        Bitmap bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(bmp);
+        layout(0, 0, w, h);
+        draw(c);
+        return bmp;
+    }
 }

@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -34,11 +35,13 @@ import com.yiwo.friendscometogether.create_friendremember.PicMuluModel;
 import com.yiwo.friendscometogether.create_friendremember.PicsMuLuAdapter;
 import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivity1;
 import com.yiwo.friendscometogether.newpage.CreateFriendRememberNew_ChoosePicsActivity;
+import com.yiwo.friendscometogether.widget.choose_pics_view.BitmapUtils;
 import com.yiwo.friendscometogether.widget.choose_pics_view.CoordinatorLinearLayout;
 import com.yiwo.friendscometogether.widget.choose_pics_view.CoordinatorRecyclerView;
 import com.yiwo.friendscometogether.widget.choose_pics_view.MCropImageView;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -141,13 +144,32 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
                 break;
             case R.id.rl_next:
                 ArrayList<String> list = new ArrayList<>();
+                boolean isFirst = true;
                 for (Map.Entry<Integer, String> entry : map_choose_postion.entrySet()) {
+                    Log.d("ddaad",";;Key:"+entry.getKey()+"//Value:"+entry.getValue());
+//                    if (isFirst&&map_choose_postion.size()>0){
+//
+////                        String new_path = "/storage/emulated/0/Pictures/tongban_"+entry.getValue().substring(entry.getValue().lastIndexOf("/")+1);
+//                        String new_path = "/storage/emulated/0/Pictures/"+"瞳伴友记_"+System.currentTimeMillis() + ".jpg";
+//                        BitmapUtils.saveBitmap(BitmapUtils.getFixedBitmap(context,entry.getValue(),false),new_path);
+////                        BitmapUtils.saveBitmap(mMCropImageView.getBitmap(mMCropImageView.getWidth(),mMCropImageView.getHeight()),new_path);
+//                        BitmapUtils.saveBitmap(BitmapUtils.getFixedBitmap(context,entry.getValue(),false),new_path);
+//                        list.add(new_path);
+//                        isFirst = false;
+//                        Log.d("ddaad",";;Key:"+entry.getKey()+"//Value:"+entry.getValue()+"//new_path"+new_path+ isFirst);
+//                        continue;
+//                    }
                     list.add(entry.getValue());
+                }
+                if (list.size()<1){
+                    toToast(context,"请选择图片");
+                    break;
                 }
                 Intent intent = new Intent();
                 intent.putStringArrayListExtra("paths",list);
                 intent.setClass(context, CreateFriendRememberActivity1.class);
                 context.startActivity(intent);
+                getActivity().finish();
                 break;
         }
     }

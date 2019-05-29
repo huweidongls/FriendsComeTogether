@@ -4,6 +4,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.util.Log;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by wenshi on 2019/3/6.
@@ -104,6 +110,27 @@ public class BitmapUtils {
         }
 
         return Bitmap.createBitmap(rectBitmap, x, y, rectWidth - 2 * x, rectHeight - 2 * y);
+    }
+    public static void saveBitmap(Bitmap bitmap,String path)
+    {
+        Log.e("ddaad", "保存图片");
+        File f = new File(path);
+        if (f.exists()) {
+            f.delete();
+        }
+        try {
+            FileOutputStream out = new FileOutputStream(f);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.flush();
+            out.close();
+            Log.i("ddaad", "已经保存");
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
 }
