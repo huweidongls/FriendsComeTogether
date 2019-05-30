@@ -129,18 +129,17 @@ dependencies {
     implementation files('libs/alipaySdk-20180601.jar')
     compile 'com.github.hackware1993:MagicIndicator:1.5.0'
     implementation files('libs/MiPush_SDK_Client_3_6_12.jar')
-//    implementation files('libs/nim-push-6.0.0.jar')
+    //    implementation files('libs/nim-push-6.0.0.jar')
     compile 'org.greenrobot:greendao:3.1.0'
     compile 'org.greenrobot:greendao-generator:3.1.0'
     compile 'com.huawei.android.hms:push:2.6.3.301'
-
     // 小米、华为、魅族、fcm 推送
     implementation 'com.netease.nimlib:push:5.5.0'
-
     compile 'com.tencent.bugly:crashreport:2.1.9'
     //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
     compile 'com.tencent.bugly:nativecrashreport:3.0'
     //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
-
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    implementation files('libs/Transcode-2.5.1.jar')
+    implementation files('libs/VideoEffect-3.1.1.jar')
 }

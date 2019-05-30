@@ -8,13 +8,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.base.BaseActivity;
+import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
 import com.yiwo.friendscometogether.newadapter.AllRememberViewpagerAdapter;
 import com.yiwo.friendscometogether.newfragment.CreateFriendRememberNew_ChoosePicsFragment;
+import com.yiwo.friendscometogether.pages.WelcomeActivity;
+import com.yiwo.friendscometogether.wangyiyunshipin.TakeVideoFragment;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -33,7 +38,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CreateFriendRememberActivityNew extends AppCompatActivity {
+public class CreateFriendRememberActivityNew extends BaseActivity {
 
     @BindView(R.id.magic_indicator)
     MagicIndicator magicIndicator;
@@ -52,6 +57,7 @@ public class CreateFriendRememberActivityNew extends AppCompatActivity {
         setContentView(R.layout.activity_create_friend_remeber);
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(CreateFriendRememberActivityNew.this);
+        StatusBarUtils.setStatusBarTransparent(CreateFriendRememberActivityNew.this);
         mFragmentManager = getSupportFragmentManager();
         initData();
     }
@@ -59,11 +65,30 @@ public class CreateFriendRememberActivityNew extends AppCompatActivity {
 
         fragmentList = new ArrayList<>();
         fragmentList.add(new CreateFriendRememberNew_ChoosePicsFragment());
-        fragmentList.add(new CreateFriendRememberNew_ChoosePicsFragment());
+        fragmentList.add(new TakeVideoFragment());
         fragmentList.add(new CreateFriendRememberNew_ChoosePicsFragment());
         mViewPagerFragmentAdapter = new AllRememberViewpagerAdapter(mFragmentManager, fragmentList);
         mViewPager.setAdapter(mViewPagerFragmentAdapter);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 1){
+                    StatusBarUtils.setStatusBarTransparent(CreateFriendRememberActivityNew.this);
+                }else {
+                    StatusBarUtils.setStatusBar(CreateFriendRememberActivityNew.this,Color.parseColor("#d84c37"));
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         mTitleDataList = new ArrayList<>();
         mTitleDataList.add("相册");
         mTitleDataList.add("视频");

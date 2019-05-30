@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.util.ArrayMap;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -146,7 +145,7 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
                 ArrayList<String> list = new ArrayList<>();
                 boolean isFirst = true;
                 for (Map.Entry<Integer, String> entry : map_choose_postion.entrySet()) {
-                    Log.d("ddaad",";;Key:"+entry.getKey()+"//Value:"+entry.getValue());
+//                    Log.d("ddaad",";;Key:"+entry.getKey()+"//Value:"+entry.getValue());
 //                    if (isFirst&&map_choose_postion.size()>0){
 //
 ////                        String new_path = "/storage/emulated/0/Pictures/tongban_"+entry.getValue().substring(entry.getValue().lastIndexOf("/")+1);
@@ -194,7 +193,7 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
                 String path = mCursor.getString(mCursor.getColumnIndex(MediaStore.Images.Media.DATA));
                 int size = mCursor.getInt(mCursor.getColumnIndex(MediaStore.Images.Media.SIZE))/1024;
                 String displayName = mCursor.getString(mCursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME));
-                Log.d("asdas","1:"+path+";;\n2:"+displayName);
+//                Log.d("asdas","1:"+path+";;\n2:"+displayName);
                 //用于展示相册初始化界面
                 mediaBeen.add(new PicBean(path,size,displayName));
                 // 获取该图片的父路径名
@@ -248,7 +247,7 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
                         String path = mCursor.getString(mCursor.getColumnIndex(MediaStore.Images.Media.DATA));
                         int size = mCursor.getInt(mCursor.getColumnIndex(MediaStore.Images.Media.SIZE))/1024;
                         String displayName = mCursor.getString(mCursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME));
-                        Log.d("asdas","1:"+path+";;\n2:"+displayName);
+//                        Log.d("asdas","1:"+path+";;\n2:"+displayName);
                         //用于展示相册初始化界面
                         mediaBeen.add(new PicBean(path,size,displayName));
                         // 获取该图片的父路径名
@@ -404,7 +403,7 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
             helper.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("ssss",item.getPath());
+//                    Log.d("ssss",item.getPath());
                     mMCropImageView.setImagePath(item.getPath());
                     if (item.getSelected()){
 //                        item.setSelected(false);

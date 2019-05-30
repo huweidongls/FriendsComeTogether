@@ -5,11 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
+        android:background="@color/red_d84c37"
+        android:layout_width="match_parent"
+        android:layout_height="128px"
         android:layout_alignParentTop="true"
         android:id="@+id/rl_top"
         style="@style/rl_top_bar">
 
         <TextView
+            android:layout_marginBottom="19px"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:id="@+id/tv"
             android:text="所有照片"
             style="@style/tv_top_title" />
@@ -27,8 +33,9 @@
         <RelativeLayout
             android:id="@+id/rl_next"
             android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="80px">
             <TextView
                 android:layout_marginRight="40px"
                 android:text="下一步"
