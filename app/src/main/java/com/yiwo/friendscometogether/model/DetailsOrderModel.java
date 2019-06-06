@@ -71,6 +71,7 @@ public class DetailsOrderModel {
          "User": "神秘人",
          "BUser": "花生"
          opaytype: 1.我自己的订单,未付款 2.我自己的订单,已付款 3.邀请人未付款 4.邀请人已付款 5.未付款取消订单
+         couponPrice:
          */
 
         private String title;
@@ -100,6 +101,8 @@ public class DetailsOrderModel {
         private String refundWhy;
         private String refund_money;
         private String opaytype;
+
+        private String couponPrice;
 
         private String orderStatus;
         private String User;
@@ -355,6 +358,14 @@ public class DetailsOrderModel {
 
         public void setOpaytype(String opaytype) {
             this.opaytype = opaytype;
+        }
+
+        public String getCouponPrice() {
+            return couponPrice;
+        }
+
+        public void setCouponPrice(String couponPrice) {
+            this.couponPrice = couponPrice;
         }
     }
 }

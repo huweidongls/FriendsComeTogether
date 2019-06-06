@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/combination_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    android:background="@color/black">
+
+    <ImageView
+        android:id="@+id/loading_image"
+        android:layout_width="211dp"
+        android:layout_height="374dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp" />
+
+    <com.yiwo.friendscometogether.wangyiyunshipin.widget.CircleProgressView
+        android:id="@+id/loading_view"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loading_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:textColor="@color/white"
+        android:text="正在保存视频，为防止视频丢失请\n不要关闭本页面" />
+</RelativeLayout>

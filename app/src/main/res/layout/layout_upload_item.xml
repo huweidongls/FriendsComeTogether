@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/rl_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp">
+
+        <ImageView
+            android:id="@+id/iv_thumb"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="15dp"
+            android:scaleType="centerCrop" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_toRightOf="@id/iv_thumb"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textColor="#333333"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_other_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="8dp"
+                android:text="完成"
+                android:textColor="@color/color_upload_normal"
+                android:textSize="12sp" />
+
+            <ProgressBar
+                android:id="@+id/transcode_progress"
+                style="@style/Base.Widget.AppCompat.ProgressBar"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tv_other_state"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_upload_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/progress"
+                android:text="上传中"
+                android:textColor="@color/color_upload_normal"
+                android:textSize="12sp"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/tv_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/progress"
+                android:layout_toRightOf="@id/tv_upload_state"
+                android:text="(80%)"
+                android:textColor="#999999"
+                android:textSize="12sp"
+                android:visibility="invisible" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:max="100"
+                android:progress="100"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/upload_retry"
+                style="@style/main_button"
+                android:layout_width="60dp"
+                android:layout_height="33dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:text="重试"
+                android:textSize="15sp"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/iv_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/arrow_right"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/iv_thumb"
+            android:background="#ffc8c7cc" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:background="#ff3b30"
+        android:gravity="center"
+        android:text="删除"
+        android:textColor="@android:color/white" />
+
+
+</LinearLayout>

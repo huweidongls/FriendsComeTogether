@@ -54,4 +54,15 @@
 
   <color name="bg_indicator_point_normal">#D8D8D8</color>
   <color name="bg_indicator_point_selected">#A6A6A6</color>
+
+  <color name="mix_audio_bg">#80000000</color>
+  <color name="color_upload_normal">#999999</color>
+  <color name="color_upload_fail">#f05b60</color>
+  <color name="color_black_CC000000">#CC000000</color>
+  <color name="color_blue_FF2084FF">#FF2084FF</color>
+  <color name="color_black_cc000000">#cc000000</color>
+  <color name="color_white_66ffffff">#66ffffff</color>
+  <color name="color_grey_1affffff">#1AFFFFFF</color>
+  <color name="color_gray_73ffffff">#73ffffff</color>
+  <color name="color_gray_1affffff">#1AFFFFFF</color>
 </resources>

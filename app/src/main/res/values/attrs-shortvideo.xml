@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TwoWaysVerticalSeekBar">
+        <attr name="seekbar_width" format="dimension"/> <!-- seekbar宽度(不包含thumb的宽度) -->
+    </declare-styleable>
+</resources>

@@ -223,7 +223,16 @@
                     android:text="创建时间："
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-
+                <TextView
+                    android:visibility="visible"
+                    android:textSize="26px"
+                    android:layout_marginLeft="38px"
+                    android:layout_marginTop="18px"
+                    android:textColor="@color/gray_999999"
+                    android:id="@+id/activity_details_to_pay_tv_youhuiquan"
+                    android:text="优惠券："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
                 <TextView
                     android:visibility="gone"
                     android:textSize="26px"

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/words_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    tools:showIn="@layout/short_video_edit_activity">
+
+    <TextView
+        android:id="@+id/none_word_btn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="83dp"
+        android:background="@drawable/ic_none_word"
+        android:enabled="false"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/yellow_word_btn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="83dp"
+        android:layout_toRightOf="@id/none_word_btn"
+        android:background="@drawable/ic_yellow_word"
+        android:enabled="true"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/red_word_btn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="83dp"
+        android:layout_toRightOf="@id/yellow_word_btn"
+        android:background="@drawable/ic_red_word"
+        android:enabled="true"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/bubble_word_btn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="83dp"
+        android:layout_toRightOf="@id/red_word_btn"
+        android:background="@drawable/ic_bubble_word"
+        android:enabled="true"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/black_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="31dp"
+        android:layout_marginTop="190dp"
+        android:background="@mipmap/ic_black" />
+
+    <TextView
+        android:id="@+id/white_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="190dp"
+        android:layout_toRightOf="@id/black_btn"
+        android:background="@mipmap/ic_white" />
+
+    <TextView
+        android:id="@+id/yellow_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="190dp"
+        android:layout_toRightOf="@id/white_btn"
+        android:background="@mipmap/ic_yellow" />
+
+    <TextView
+        android:id="@+id/red_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="190dp"
+        android:layout_toRightOf="@id/yellow_btn"
+        android:background="@mipmap/ic_red" />
+
+    <TextView
+        android:id="@+id/blue_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="190dp"
+        android:layout_toRightOf="@id/red_btn"
+        android:background="@mipmap/ic_blue" />
+
+    <TextView
+        android:id="@+id/green_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="190dp"
+        android:layout_toRightOf="@id/blue_btn"
+        android:background="@mipmap/ic_green" />
+
+</RelativeLayout>
+
+        

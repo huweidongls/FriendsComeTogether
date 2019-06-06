@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/subsection_sound_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="45dp"
+    tools:showIn="@layout/short_video_edit_activity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="56dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="30dp"
+            android:text="原声大小"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="9dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <SeekBar
+            android:id="@+id/volume_seekbar"
+            android:layout_width="188dp"
+            android:layout_height="wrap_content"
+            android:progress="10"
+            android:maxHeight="3dp"
+            android:thumb="@mipmap/ic_blue_circle"
+            android:progressDrawable="@drawable/seekbar_drawable"/>
+
+        <TextView
+            android:layout_width="23dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:text="10"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

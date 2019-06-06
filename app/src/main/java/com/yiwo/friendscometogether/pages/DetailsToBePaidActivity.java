@@ -76,6 +76,8 @@ public class DetailsToBePaidActivity extends BaseActivity {
     TextView tvTradeNumber;
     @BindView(R.id.activity_details_to_pay_tv_create_time)
     TextView tvCreateTime;
+    @BindView(R.id.activity_details_to_pay_tv_youhuiquan)
+    TextView tvYouHuiQuan;
     @BindView(R.id.activity_details_to_pay_tv_pay_time)
     TextView tvPayTime;
     @BindView(R.id.activity_details_to_pay_tv_pay_ok_time)
@@ -203,6 +205,14 @@ public class DetailsToBePaidActivity extends BaseActivity {
                                 tvCreateTime.setText("创建时间: " + model.getObj().getCreate_time());
                                 tvPayTime.setText("付款时间: " + model.getObj().getPay_time());//隐藏
                                 tvOkTime.setText("成交时间: " + model.getObj().getOver_time());//隐藏
+                                //如果使用优惠券显示
+                                if (!TextUtils.isEmpty(model.getObj().getCouponPrice())){
+                                    tvYouHuiQuan.setVisibility(View.VISIBLE);
+                                    tvYouHuiQuan.setText("优惠券：优惠"+model.getObj().getCouponPrice()+"元");
+                                }else {
+                                    tvYouHuiQuan.setVisibility(View.GONE);
+                                }
+//
                                 if (model.getObj().getOpaytype().equals("4")&&model.getObj().getOrderStatus().equals("1")){
                                     tv_who_pay.setVisibility(View.VISIBLE);
                                     tv_who_pay.setText("费用：邀请人已支付");

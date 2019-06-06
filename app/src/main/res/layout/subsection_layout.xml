@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/subsection_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="87dp"
+    android:visibility="gone"
+    tools:showIn="@layout/short_video_edit_activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:id="@+id/circle_1_layout"
+                android:layout_width="30dp"
+                android:layout_height="30dp">
+
+                <ImageView
+                    android:id="@+id/circle_1"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/gray" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/picture_1_layout"
+                android:layout_width="48dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp">
+
+                <ImageView
+                    android:id="@+id/picture_1"
+                    android:layout_width="48dp"
+                    android:layout_height="30dp"
+                    android:background="@mipmap/ic_first_subsection" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:id="@+id/circle_2_layout"
+                android:layout_width="30dp"
+                android:layout_height="30dp">
+
+                <ImageView
+                    android:id="@+id/circle_2"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/gray" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/picture_2_layout"
+                android:layout_width="48dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp">
+
+                <ImageView
+                    android:id="@+id/picture_2"
+                    android:layout_width="48dp"
+                    android:layout_height="30dp"
+                    android:background="@mipmap/ic_second_subsection" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:id="@+id/circle_3_layout"
+                android:layout_width="30dp"
+                android:layout_height="30dp">
+
+                <ImageView
+                    android:id="@+id/circle_3"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/gray" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/picture_3_layout"
+                android:layout_width="48dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp">
+
+                <ImageView
+                    android:id="@+id/picture_3"
+                    android:layout_width="48dp"
+                    android:layout_height="30dp"
+                    android:background="@mipmap/ic_third_subsection" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- circleButton_layout  -->
+    <include layout="@layout/subsection_circle_layout" />
+
+    <!-- imageview_layout -->
+    <include layout="@layout/subsection_imageview_layout" />
+
+</RelativeLayout>
+
+        

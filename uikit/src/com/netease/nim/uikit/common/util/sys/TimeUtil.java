@@ -1,5 +1,7 @@
 package com.netease.nim.uikit.common.util.sys;
 
+import android.text.TextUtils;
+
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -307,5 +309,31 @@ public class TimeUtil {
             sb.append(second).append("秒");
         }
         return sb.toString();
+    }
+    public static long formatTimeToTime(String formatTime) {
+        long time;
+        if (TextUtils.isEmpty(formatTime)) {
+            return 0;
+        }
+        int index = formatTime.indexOf(":");
+        String hour = formatTime.substring(0, index);
+        String minute = formatTime.substring(index + 1);
+        time = Long.parseLong(hour) * 60 + Long.parseLong(minute);
+        return time * 1000;
+    }
+    public static String secondToTime(int time) {
+        int seconds = time / 1000;
+        SimpleDateFormat formatter;
+        if (seconds < 60) {
+            formatter = new SimpleDateFormat("ss:S");//初始化Formatter的转换格式。
+        } else {
+            formatter = new SimpleDateFormat("mm:ss:S");//初始化Formatter的转换格式。
+        }
+
+        String hms = formatter.format(time);
+        return hms;
+    }
+    public static String getMonthTimeString(long milliseconds) {
+        return getDateTimeString(milliseconds, "MMddHHmmss");
     }
 }

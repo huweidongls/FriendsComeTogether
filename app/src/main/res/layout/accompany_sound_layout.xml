@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/accompany_sound_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="67dp"
+    android:visibility="gone"
+    tools:showIn="@layout/short_video_edit_activity">
+    <!--android:layout_alignParentBottom="true"-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/empty_sound"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="30dp"
+            android:background="@color/color_grey_1affffff"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:gravity="center"
+                android:src="@mipmap/empty" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/sound_1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="25dp"
+            android:background="@color/color_grey_1affffff"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="37dp"
+                android:layout_height="20dp"
+                android:text="伴音1"
+                android:textColor="#FFFFFFFF"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sound_2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="25dp"
+            android:background="@color/color_grey_1affffff"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="37dp"
+                android:layout_height="20dp"
+                android:text="伴音2"
+                android:textColor="#FFFFFFFF"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sound_3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="25dp"
+            android:background="@color/color_grey_1affffff"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="37dp"
+                android:layout_height="20dp"
+                android:gravity="center"
+                android:text="伴音3"
+                android:textColor="#FFFFFFFF"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!-- 原声+伴音 -->
+    <include layout="@layout/sound_layout" />
+
+</RelativeLayout>

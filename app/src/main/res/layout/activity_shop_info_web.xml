@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context="com.yiwo.friendscometogether.webpages.ShopInfoWebActivity">
     <RelativeLayout
-        android:id="@+id/activity_details_of_friends_together_rl_top"
         style="@style/rl_top_bar">
 
         <TextView

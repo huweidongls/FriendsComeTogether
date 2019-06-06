@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/subsection_imageview_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="67dp"
+    android:visibility="gone"
+    tools:showIn="@layout/short_video_edit_activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/left_text"
+            android:layout_width="28dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="30dp"
+            android:text="排序"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/move_forward"
+            android:layout_width="28dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="203dp"
+            android:enabled="false"
+            android:text="前移"
+            android:textColor="@drawable/movement_color_seletor"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/move_backward"
+            android:layout_width="56dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="28dp"
+            android:text="后移"
+            android:textColor="@drawable/movement_color_seletor"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <!-- sound -->
+    <include layout="@layout/subsection_sound_layout" />
+
+</RelativeLayout>

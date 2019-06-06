@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/black">
+
+        <TextView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="返回"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="编辑视频"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/done_btn"
+            android:layout_width="50dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/blue_btn_normal"
+            android:gravity="center"
+            android:text="完成"
+            android:textColor="@color/color_blue_FF2084FF"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <com.netease.vcloud.video.render.NeteaseView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+        <com.yiwo.friendscometogether.wangyiyunshipin.widget.MoveImageView
+            android:id="@+id/big_textures"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginLeft="129dp"
+            android:layout_marginTop="129dp" />
+
+    </FrameLayout>
+
+    <com.yiwo.friendscometogether.wangyiyunshipin.widget.AutoResizeEditText
+        android:id="@+id/word_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="16dp"
+        android:hint="点击输入文字..."
+        android:background="@null"
+        android:layout_marginTop="170dp"
+        android:maxLength="25"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/edit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="278dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_black_cc000000">
+
+        <!-- 标题栏 -->
+        <LinearLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="21dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/adjust_text"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="46dp"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:text="调整"
+                android:textColor="@drawable/edit_text_color"
+                android:textSize="14sp" />
+            <!--android:enabled="true"-->
+
+            <TextView
+                android:id="@+id/subsection_text"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:text="分段"
+                android:textColor="@drawable/edit_text_color"
+                android:textSize="14sp" />
+            <!--android:enabled="false"-->
+
+            <TextView
+                android:id="@+id/words_text"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:text="文字"
+                android:textColor="@drawable/edit_text_color"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textures_text"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:text="贴图"
+                android:textColor="@drawable/edit_text_color"
+                android:textSize="14sp" />
+            <!--android:enabled="false"-->
+
+            <TextView
+                android:id="@+id/accompany_sound_text"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:text="伴音"
+                android:textColor="@drawable/edit_text_color"
+                android:textSize="14sp" />
+            <!--android:enabled="false"-->
+        </LinearLayout>
+
+        <View
+            android:layout_width="315dp"
+            android:layout_height="0.5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="57dp"
+            android:background="@color/color_white_66ffffff" />
+
+        <!-- 调整页面 -->
+        <include layout="@layout/adjust_layout" />
+
+        <!-- 分段页面 -->
+        <include layout="@layout/subsection_layout" />
+
+        <!-- 文字页面 -->
+        <include layout="@layout/words_layout" />
+
+        <!-- 贴图页面 -->
+        <include layout="@layout/textures_layout" />
+
+        <!-- 伴音页面 -->
+        <include layout="@layout/accompany_sound_layout" />
+
+    </RelativeLayout>
+
+
+    <!-- 拼接中layout -->
+    <include layout="@layout/combination_layout" />
+
+</RelativeLayout>

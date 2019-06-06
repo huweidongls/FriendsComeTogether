@@ -7,8 +7,8 @@ android {
         applicationId "com.yiwo.friendscometogether"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 28
-        versionName "2.8"
+        versionCode 29
+        versionName "2.9"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
@@ -86,6 +86,7 @@ dependencies {
         force = true
     }
     compile project(path: ':uikit')
+    compile project(path: ':Fulive')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     api 'com.jakewharton:butterknife:8.4.0'
@@ -142,4 +143,9 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     implementation files('libs/Transcode-2.5.1.jar')
     implementation files('libs/VideoEffect-3.1.1.jar')
+    implementation files('libs/vcloudUpload.jar')
+    implementation files('libs/nos-android-sdk-allin-2.0.3.jar')
+    implementation files('libs/Livestreaming_v2.1.0.jar')
+    implementation files('libs/NELivePlayer-1.3.0.jar')
+    compile 'com.github.Jay-Goo:RangeSeekBar:v1.0.7'
 }

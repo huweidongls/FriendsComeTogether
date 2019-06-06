@@ -500,6 +500,7 @@
         <activity android:name=".webpages.DetailsOfFriendTogetherWebActivity" />
         <activity android:name=".newpage.MoreCommentHuodongActivity" />
         <activity android:name=".webpages.ShopInfoWebActivity" />
+        <activity android:name=".webpages.YouHuiQuanWebActivity" />
         <activity android:name=".webpages.ApplyActivityAgreementWebActivity" />
         <activity android:name=".newpage.PersonImpressionActivity" />
         <activity android:name=".newpage.FindFriendByTelActivity" />
@@ -523,6 +524,23 @@
         <activity android:name=".newpage.MyContactActivity" />
         <activity android:name=".newpage.CreateFriendRememberNew_ChoosePicsActivity" />
         <activity android:name=".newpage.CreateFriendRememberActivityNew"></activity>
+
+        <activity
+            android:name=".wangyiyunshipin.VideoImportActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|stateUnchanged" />
+
+        <activity
+            android:name=".wangyiyunshipin.ShortVideoEditActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged" />
+
+        <activity
+            android:name=".wangyiyunshipin.VideoPlayerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
     </application>
 
 </manifest>

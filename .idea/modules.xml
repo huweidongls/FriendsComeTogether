@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FriendsComeTogether.iml" filepath="$PROJECT_DIR$/FriendsComeTogether.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Fulive/Fulive.iml" filepath="$PROJECT_DIR$/Fulive/Fulive.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/uikit/uikit.iml" filepath="$PROJECT_DIR$/uikit/uikit.iml" />
     </modules>

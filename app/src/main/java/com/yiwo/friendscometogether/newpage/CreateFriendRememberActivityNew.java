@@ -20,6 +20,7 @@ import com.yiwo.friendscometogether.newadapter.AllRememberViewpagerAdapter;
 import com.yiwo.friendscometogether.newfragment.CreateFriendRememberNew_ChoosePicsFragment;
 import com.yiwo.friendscometogether.pages.WelcomeActivity;
 import com.yiwo.friendscometogether.wangyiyunshipin.TakeVideoFragment;
+import com.yiwo.friendscometogether.wangyiyunshipin.TakeVideoFragment_new;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -40,6 +41,7 @@ import butterknife.ButterKnife;
 
 public class CreateFriendRememberActivityNew extends BaseActivity {
 
+    public static final String EXTRA_FROM_UPLOAD_NOTIFY = "extra_from_upload_notify"; //由上传通知启动
     @BindView(R.id.magic_indicator)
     MagicIndicator magicIndicator;
     @BindView(R.id.vp)
@@ -63,9 +65,10 @@ public class CreateFriendRememberActivityNew extends BaseActivity {
     }
     private void initData() {
 
+
         fragmentList = new ArrayList<>();
         fragmentList.add(new CreateFriendRememberNew_ChoosePicsFragment());
-        fragmentList.add(new TakeVideoFragment());
+        fragmentList.add(new TakeVideoFragment_new());
         fragmentList.add(new CreateFriendRememberNew_ChoosePicsFragment());
         mViewPagerFragmentAdapter = new AllRememberViewpagerAdapter(mFragmentManager, fragmentList);
         mViewPager.setAdapter(mViewPagerFragmentAdapter);
@@ -78,7 +81,7 @@ public class CreateFriendRememberActivityNew extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
                 if (position == 1){
-                    StatusBarUtils.setStatusBarTransparent(CreateFriendRememberActivityNew.this);
+                    StatusBarUtils.setStatusBar(CreateFriendRememberActivityNew.this,Color.BLACK);
                 }else {
                     StatusBarUtils.setStatusBar(CreateFriendRememberActivityNew.this,Color.parseColor("#d84c37"));
                 }

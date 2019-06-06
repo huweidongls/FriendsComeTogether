@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/adjust_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_marginTop="70dp"
+    tools:showIn="@layout/short_video_edit_activity">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_weight="1">
+
+        <com.yiwo.friendscometogether.wangyiyunshipin.widget.TwoWaysVerticalSeekBar
+            android:id="@+id/brightness_seekbar"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            app:seekbar_width="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@id/brightness_seekbar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="亮度"
+            android:textColor="@color/color_blue_FF2084FF" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <com.yiwo.friendscometogether.wangyiyunshipin.widget.TwoWaysVerticalSeekBar
+            android:id="@+id/contrast_seekbar"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            app:seekbar_width="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@id/contrast_seekbar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="对比度"
+            android:textColor="@color/color_blue_FF2084FF" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <com.yiwo.friendscometogether.wangyiyunshipin.widget.TwoWaysVerticalSeekBar
+            android:id="@+id/saturation_seekbar"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            app:seekbar_width="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@id/saturation_seekbar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="饱和度"
+            android:textColor="@color/color_blue_FF2084FF" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <com.yiwo.friendscometogether.wangyiyunshipin.widget.TwoWaysVerticalSeekBar
+            android:id="@+id/color_temperature_seekbar"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            app:seekbar_width="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@id/color_temperature_seekbar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="色温"
+            android:textColor="@color/color_blue_FF2084FF" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1">
+
+        <com.yiwo.friendscometogether.wangyiyunshipin.widget.TwoWaysVerticalSeekBar
+            android:id="@+id/sharpness_seekbar"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            app:seekbar_width="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@id/sharpness_seekbar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="锐度"
+            android:textColor="@color/color_blue_FF2084FF" />
+    </RelativeLayout>
+</LinearLayout>

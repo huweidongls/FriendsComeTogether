@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/showtime_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="152dp"
+    android:visibility="gone"
+    tools:showIn="@layout/short_video_edit_activity">
+
+    <TextView
+        android:layout_width="56dp"
+        android:layout_height="26dp"
+        android:layout_marginLeft="30dp"
+        android:text="显示时间"
+        android:textColor="#FFFFFFFF"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/texture_min_time"
+        android:layout_width="38dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="29dp"
+        android:text="00:00"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <com.jaygoo.widget.RangeSeekBar
+        android:id="@+id/texture_seekbar"
+        android:layout_width="140dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:minHeight="12dp"
+        android:minWidth="140dp"
+        app:hideProgressHint="true"
+        app:hintBGHeight="2dp"
+        app:lineColorEdge="@color/color_gray_73ffffff"
+        app:lineColorSelected="@color/color_blue_FF2084FF"
+        app:seekBarHeight="3dp"
+        app:seekBarResId="@mipmap/ic_blue_circle"
+        app:thumbSize="12dp" />
+
+    <TextView
+        android:id="@+id/texture_max_time"
+        android:layout_width="35dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:text="10:00"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+</LinearLayout>
+

@@ -51,6 +51,8 @@ import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.BigDecimalUtils;
 import com.yiwo.friendscometogether.utils.StringUtils;
 import com.yiwo.friendscometogether.webpages.ApplyActivityAgreementWebActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
+import com.yiwo.friendscometogether.webpages.YouHuiQuanWebActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -131,6 +133,11 @@ public class ApplyActivity extends BaseActivity {
     TextView tvAllowAgreement;
     @BindView(R.id.ll_allow_agreement)
     LinearLayout llAllowAgreement;
+
+    @BindView(R.id.tv_text_youhuiquan)
+    TextView tv_text_youhuiquan;
+    @BindView(R.id.apply_ll_youhuiquan)
+    LinearLayout apply_ll_youhuiquan;
     private String yourChoice = "";
     private int payState = 0;
     private String pfID = "0";
@@ -141,6 +148,8 @@ public class ApplyActivity extends BaseActivity {
     private int num = 1;
     private String money;
     private Double perMoney;
+    private Double youhui_money = 0.00;
+    private String youhuiquan_id = "";
 
     private List<ApplyChooseDateModel.ObjBean> applyChooseDateModels;
     private ApplyHuoDongChooseDateAdapter applyHuoDongChooseDateAdapter;
@@ -236,7 +245,7 @@ public class ApplyActivity extends BaseActivity {
                                 tvIssingle.setText(issingle);
                                 String city = model.getObj().getPfaddress();
                                 tvCity.setText("活动地点: " + city);
-
+                                apply_ll_youhuiquan.setVisibility(View.GONE);
                                 if (sex.equals("无限制")) {
                                     apply_num_ll.setVisibility(View.VISIBLE);
                                 }
@@ -268,9 +277,10 @@ public class ApplyActivity extends BaseActivity {
                                                         String price = model.getObj().get(chooseDateIndex).getPhase_price();
                                                         perMoney = Double.valueOf(price);
                                                         money = BigDecimalUtils.mul(perMoney+"",num+"",2);
+
 //        String begin_time = getIntent().getStringExtra("begin_time");
                                                         tvPrice.setText("¥" + price + "元/人");
-                                                        tvAllPrice.setText("¥" + money);
+                                                        setTextMoney();
                                                         tvTimeStart.setText("出发时间: " + model.getObj().get(chooseDateIndex).getPhase_begin_time());
                                                         tvTimeEnd.setText("结束时间: "+model.getObj().get(chooseDateIndex).getPhase_over_time());
                                                         applyChooseDateModels = model.getObj();
@@ -299,9 +309,11 @@ public class ApplyActivity extends BaseActivity {
                                                                 String price = phaseBean.getPhase_price();
                                                                 perMoney = Double.valueOf(price);
                                                                 money = BigDecimalUtils.mul(perMoney+"",num+"",2);
+
 //        String begin_time = getIntent().getStringExtra("begin_time");
+
                                                                 tvPrice.setText("¥" + price + "元/人");
-                                                                tvAllPrice.setText("¥" + money);
+                                                                setTextMoney();
                                                                 tvTimeStart.setText("出发时间: " + phaseBean.getPhase_begin_time());
                                                                 tvTimeEnd.setText("结束时间: "+phaseBean.getPhase_over_time());
                                                             }
@@ -331,7 +343,7 @@ public class ApplyActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.activity_apply_rl_back, R.id.apply_btn, R.id.iv_jian, R.id.iv_jia, R.id.online_pay, R.id.apply_ll_is_noname,R.id.ll_allow_agreement})
+    @OnClick({R.id.activity_apply_rl_back, R.id.apply_btn, R.id.iv_jian, R.id.iv_jia, R.id.online_pay, R.id.apply_ll_is_noname,R.id.ll_allow_agreement,R.id.apply_ll_youhuiquan})
 //,R.id.apply_sex_tv
     public void OnClick(View v) {
         switch (v.getId()) {
@@ -346,14 +358,14 @@ public class ApplyActivity extends BaseActivity {
                     num = num - 1;
                     tvNum.setText(num + "");
                     money = BigDecimalUtils.sub(money+"", perMoney+"",2);
-                    tvAllPrice.setText("¥" + money);
+                    setTextMoney();
                 }
                 break;
             case R.id.iv_jia:
                 num = num + 1;
                 tvNum.setText(num + "");
                 money = BigDecimalUtils.add(money+"" , perMoney+"",2);
-                tvAllPrice.setText("¥" + money);
+                setTextMoney();
                 break;
             case R.id.online_pay:
                 apply();
@@ -392,6 +404,14 @@ public class ApplyActivity extends BaseActivity {
                 intent.setClass(ApplyActivity.this, ApplyActivityAgreementWebActivity.class);
                 startActivityForResult(intent,1);
                 break;
+            case R.id.apply_ll_youhuiquan:
+                Intent intent0 = new Intent();
+                intent0.setClass(ApplyActivity.this,YouHuiQuanWebActivity.class);
+                String url = "http://www.91yiwo.com/ylyy/action/ac_coupon/canUseCoupon?pfID="+pfID+"&userID="+spImp.getUID();
+                Log.d("urlurlurl",url);
+                intent0.putExtra("url",url);
+                startActivityForResult(intent0,2);
+                break;
         }
 
     }
@@ -404,7 +424,16 @@ public class ApplyActivity extends BaseActivity {
             isAlowAgreement = true;
             tvOnlinePay.setBackgroundResource(R.color.red_d84c37);
             apply_btn.setBackgroundResource(R.color.red_d84c37);
+        }else if (requestCode == 2 && resultCode == 1){//选择优惠券
+            useYouHuiQUan(data.getStringExtra("youhui_id"),data.getStringExtra("youhui_price"));
         }
+    }
+
+    private void useYouHuiQUan(String youhuiquan_id,String youhuiquan_price) {
+        youhui_money = Double.parseDouble(youhuiquan_price);
+        this.youhuiquan_id = youhuiquan_id;
+        tv_text_youhuiquan.setText("已选择优惠券 优惠：¥"+ youhui_money);
+        setTextMoney();
     }
 
     public void setApplyPaymentView(int state) {
@@ -434,6 +463,7 @@ public class ApplyActivity extends BaseActivity {
             });
             apply_vessel_ll.addView(v);
             apply_btn.setVisibility(View.INVISIBLE);
+            apply_ll_youhuiquan.setVisibility(View.VISIBLE);
             llPay.setVisibility(View.VISIBLE);
         }
     }
@@ -485,7 +515,6 @@ public class ApplyActivity extends BaseActivity {
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.getPhase))
                 .addParam("pfID",pfID)
                 .request(new ACallback<String>() {
-
                     @Override
                     public void onSuccess(String data) {
                         Log.d("132132",data);
@@ -500,7 +529,7 @@ public class ApplyActivity extends BaseActivity {
                                 money = BigDecimalUtils.mul(perMoney+"",num+"",2);
 //        String begin_time = getIntent().getStringExtra("begin_time");
                                 tvPrice.setText("¥" + price + "元/人");
-                                tvAllPrice.setText("¥" + money);
+                                setTextMoney();
                                 tvTimeStart.setText("出发时间: " + model.getObj().get(chooseDateIndex).getPhase_begin_time());
                                 tvTimeEnd.setText("结束时间: "+model.getObj().get(chooseDateIndex).getPhase_over_time());
                                 applyChooseDateModels = model.getObj();
@@ -531,7 +560,7 @@ public class ApplyActivity extends BaseActivity {
                                         money = BigDecimalUtils.mul(perMoney+"",num+"",2);
 //        String begin_time = getIntent().getStringExtra("begin_time");
                                         tvPrice.setText("¥" + price + "元/人");
-                                        tvAllPrice.setText("¥" + money);
+                                        setTextMoney();
                                         tvTimeStart.setText("出发时间: " + phaseBean.getPhase_begin_time());
                                         tvTimeEnd.setText("结束时间: "+phaseBean.getPhase_over_time());
                                     }
@@ -575,6 +604,7 @@ public class ApplyActivity extends BaseActivity {
                     .addParam("phone", etPhoneNum.getText().toString())
                     .addParam("need_paytype", payState + "")
                     .addParam("id", yqid)
+                    .addParam("myCouponID",youhuiquan_id)
                     .request(new ACallback<String>() {
                         @Override
                         public void onFail(int errCode, String errMsg) {
@@ -661,5 +691,16 @@ public class ApplyActivity extends BaseActivity {
         }
 
     };
+    private void  setTextMoney(){
+        String text_money = BigDecimalUtils.sub(money,youhui_money+"",2);
+        if (BigDecimalUtils.compare(text_money,"0.00")){
+            apply_btn.setVisibility(View.INVISIBLE);
+            llPay.setVisibility(View.VISIBLE);
+            tvAllPrice.setText("¥" + text_money);
+        }else {
+            apply_btn.setVisibility(View.VISIBLE);
+            llPay.setVisibility(View.INVISIBLE);
+        }
+    }
 
 }
