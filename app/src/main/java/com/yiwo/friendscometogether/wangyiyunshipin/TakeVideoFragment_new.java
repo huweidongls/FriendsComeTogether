@@ -25,6 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.netease.LSMediaCapture.lsMessageHandler;
 import com.netease.fulive.EffectAndFilterSelectAdapter;
 import com.netease.fulive.FuVideoEffect;
 import com.netease.nim.uikit.common.ui.dialog.EasyAlertDialog;
@@ -322,12 +323,33 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
 
     @Override
     public void onRelease() {
-
+        if (isFinish) {
+            return;
+        }
+        videoView.setVisibility(View.GONE);
+        mediaCaptureController = null;
+        if (hasDone) {
+            // 点击了完成，进入编辑界面
+            enterEdit(true);
+            return;
+        }
+        if (currentCount == videoCaptureParams.getCount()) {
+            // 最后一段视频录制完成, 跳转到编辑界面
+            enterEdit(false);
+        } else {
+            // 参数选择后，重新初始化
+            initMediaCapture();
+        }
     }
 
     @Override
     public void onError(int code) {
-
+        if (code == lsMessageHandler.MSG_AUDIO_RECORD_ERROR) {
+            Toast.makeText(getContext(), "录音模块异常", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "录制异常:" + code, Toast.LENGTH_SHORT).show();
+        }
+//        finish();
     }
 
     @Override
@@ -532,7 +554,7 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
     private void fuLiveEffect(){
         mediaCaptureController.getMediaRecord().setCaptureRawDataCB(new VideoCallback() {
             @Override
-            public int onVideoCapture(byte[] bytes, int i, int i1, int i2, int i3) {
+            public int onVideoCapture(byte[] bytes, int i, int i1, int i2) {
                 //SDK回调的线程已经创建了GLContext
                 if(mFuEffect == null){
                     mFuEffect = new FuVideoEffect();

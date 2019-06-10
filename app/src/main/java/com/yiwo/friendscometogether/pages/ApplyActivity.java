@@ -407,7 +407,7 @@ public class ApplyActivity extends BaseActivity {
             case R.id.apply_ll_youhuiquan:
                 Intent intent0 = new Intent();
                 intent0.setClass(ApplyActivity.this,YouHuiQuanWebActivity.class);
-                String url = "http://www.91yiwo.com/ylyy/action/ac_coupon/canUseCoupon?pfID="+pfID+"&userID="+spImp.getUID();
+                String url = NetConfig.BaseUrl+"action/ac_coupon/canUseCoupon?pfID="+pfID+"&userID="+spImp.getUID();
                 Log.d("urlurlurl",url);
                 intent0.putExtra("url",url);
                 startActivityForResult(intent0,2);

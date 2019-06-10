@@ -780,15 +780,16 @@ public class DemoServerHttpClient {
 
 
     public static String readAppKey() {
-        try {
-            ApplicationInfo appInfo = DemoCache.getContext().getPackageManager()
-                    .getApplicationInfo(DemoCache.getContext().getPackageName(), PackageManager.GET_META_DATA);
-            if (appInfo != null) {
-                return appInfo.metaData.getString("com.netease.nim.appKey");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+//        try {
+//            ApplicationInfo appInfo = DemoCache.getContext().getPackageManager()
+//                    .getApplicationInfo(DemoCache.getContext().getPackageName(), PackageManager.GET_META_DATA);
+//            if (appInfo != null) {
+//                return appInfo.metaData.getString("com.netease.nim.appKey");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+        return "dc4285450493b9851169ad13a64b4cd8";
     }
 }

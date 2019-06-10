@@ -73,7 +73,7 @@ public class MediaCaptureController implements MessageHandler {
         MediaRecord.MediaRecordPara mediaRecordPara = new MediaRecord.MediaRecordPara();
         mediaRecordPara.setAppKey(DemoServerHttpClient.readAppKey());  //APPKEY
         mediaRecordPara.setContext(context.getApplicationContext()); //APP上下文
-//        mediaRecordPara.setLogLevel(LogUtil.LogLevel.INFO); //日志级别
+        mediaRecordPara.setLogLevel(LogUtil.LogLevel.INFO); //日志级别
         mediaRecordPara.setMessageHandler(this); //消息回调
         mediaRecord = new MediaRecord(mediaRecordPara);
     }
