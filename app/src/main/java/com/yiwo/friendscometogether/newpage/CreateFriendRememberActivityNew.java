@@ -1,11 +1,13 @@
 package com.yiwo.friendscometogether.newpage;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -45,6 +47,7 @@ public class CreateFriendRememberActivityNew extends BaseActivity {
     private List<Fragment> fragmentList;
 
     private ArrayList<String> mTitleDataList;
+    private SimplePagerTitleView simplePagerTitleView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,14 @@ public class CreateFriendRememberActivityNew extends BaseActivity {
         mFragmentManager = getSupportFragmentManager();
         initData();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        fragmentList.get(1).onActivityResult(requestCode, resultCode, data);
+        Log.d("onActivityResulton___","requestCode:"+requestCode+"///"+"resultCode:"+resultCode);
+    }
+
     private void initData() {
 
 
@@ -74,7 +85,7 @@ public class CreateFriendRememberActivityNew extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
                 if (position == 1){
-                    StatusBarUtils.setStatusBar(CreateFriendRememberActivityNew.this,Color.BLACK);
+                    StatusBarUtils.setStatusBar(CreateFriendRememberActivityNew.this,Color.TRANSPARENT);
                 }else {
                     StatusBarUtils.setStatusBar(CreateFriendRememberActivityNew.this,Color.parseColor("#d84c37"));
                 }
@@ -100,7 +111,7 @@ public class CreateFriendRememberActivityNew extends BaseActivity {
 
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
-                SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
+                simplePagerTitleView = new ColorTransitionPagerTitleView(context);
                 simplePagerTitleView.setText(mTitleDataList.get(index));
                 //设置字体
                 simplePagerTitleView.setTextSize(18);

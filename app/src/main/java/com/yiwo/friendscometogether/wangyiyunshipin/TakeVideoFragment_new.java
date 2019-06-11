@@ -164,6 +164,7 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d("onActivityResulton","requestCode:"+requestCode+"///"+"resultCode:"+resultCode);
         if (resultCode != Activity.RESULT_OK) {
             return;
         }

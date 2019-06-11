@@ -19,7 +19,7 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <com.netease.demo.live.liveplayer.NEVideoView
+    <com.yiwo.friendscometogether.wangyiyunshipin.liveplayer.NEVideoView
         android:id="@+id/video_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
