@@ -94,6 +94,9 @@ public class IntercalationAdapter extends RecyclerView.Adapter<IntercalationAdap
                 holder.tvContent.setText(null);
             }
         }
+        //不在此界面添加照片 隐藏 添加按钮----------
+        holder.rlAdd.setVisibility(View.GONE);//  \
+        //------------------------------------------
         holder.rlAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

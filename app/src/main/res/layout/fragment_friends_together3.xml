@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:background="@color/red_d84c37"
+        android:layout_width="match_parent"
+        android:layout_height="128px">
+        <RelativeLayout
+            android:visibility="visible"
+            android:id="@+id/rl_fanhui"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="100px"
+            android:layout_height="80px">
+
+
+            <ImageView
+                android:src="@mipmap/shangyitiao"
+                android:layout_centerInParent="true"
+                android:layout_width="45px"
+                android:layout_height="45px" />
+
+        </RelativeLayout>
+        <TextView
+            android:layout_marginBottom="19px"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white_ffffff"
+            android:textSize="36px"
+            android:text="友聚"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/rl_shuaxin"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="100px"
+            android:layout_height="80px">
+
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:src="@mipmap/shuaxin"
+                android:layout_width="45px"
+                android:layout_height="45px" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <com.yiwo.friendscometogether.swipecard.SwipeFlingView
+        android:id="@+id/swipe_view"
+        android:paddingTop="20px"
+        android:paddingLeft="41px"
+        android:paddingRight="41px"
+        android:layout_above="@+id/rl_bottom"
+        android:layout_below="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="180px">
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="110px"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/iv_youju_focus"
+                android:src="@mipmap/guanzhu128_g"
+                android:layout_width="64px"
+                android:layout_height="64px" />
+            <TextView
+                android:textSize="30px"
+                android:textColor="@color/black_333333"
+                android:layout_marginTop="3px"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/iv_youju_focus"
+                android:text="关注"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_baoming"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/woyaobaoming2"
+            android:layout_width="160px"
+            android:layout_height="160px" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginRight="110px"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/iv_shaixuan"
+                android:src="@mipmap/shaixuan128"
+                android:layout_width="64px"
+                android:layout_height="64px" />
+            <TextView
+                android:textColor="@color/black_333333"
+                android:textSize="30px"
+                android:layout_marginTop="3px"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/iv_youju_focus"
+                android:text="筛选"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

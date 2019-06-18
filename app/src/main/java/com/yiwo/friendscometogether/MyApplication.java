@@ -48,6 +48,7 @@ import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
 import com.yiwo.friendscometogether.location.NimDemoLocationProvider;
+import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
 
 
 public class MyApplication extends Application {
@@ -129,7 +130,7 @@ public class MyApplication extends Application {
             // demo中使用高德地图实现了该提供者，开发者可以根据自身需求，选用高德，百度，google等任意第三方地图和定位SDK。
             NimUIKit.setLocationProvider(new NimDemoLocationProvider());
         }
-
+        DemoCache.setContext(this);
     }
 
     public synchronized static MyApplication getInstance() {

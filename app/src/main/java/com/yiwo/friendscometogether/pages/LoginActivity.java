@@ -165,6 +165,8 @@ public class LoginActivity extends BaseActivity {
                                     spImp.setUID(js.optString("uid"));
                                     spImp.setYXID(js.optString("wy_accid"));
                                     spImp.setYXTOKEN(js.optString("token"));
+                                    spImp.setWyUpAccid(js.optString("wy_up_accid"));
+                                    spImp.setWyUpToken(js.optString("wy_up_token"));
                                     account = js.optString("wy_accid");
                                     String token = js.optString("token");
                                     LoginInfo info = new LoginInfo(account, token);

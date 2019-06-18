@@ -22,6 +22,7 @@ import com.netease.vcloudnosupload.UploadBuilder;
 import com.netease.vcloudnosupload.VcloudUpload;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivityNew;
+import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
 import com.yiwo.friendscometogether.wangyiyunshipin.config.DemoServers;
 import com.yiwo.friendscometogether.wangyiyunshipin.server.DemoServerHttpClient;
@@ -83,10 +84,12 @@ public class UploadService extends Service {
     private VideoItem uploadingItem; //当前正在上传的item
     private boolean needStopUpload; //是否需要停止上传
 
+    private SpImp spImp;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        spImp = new SpImp(this);
         Log.i(TAG, "upload service create");
     }
 
@@ -253,8 +256,8 @@ public class UploadService extends Service {
                 public void onSuccess(CallRet callRet) {
                     videoItem.setState(STATE_UPLOAD_COMPLETE);
                     UploadTotalDataAccessor.getInstance().uploadSuccess(videoItem);
-
                     JSONObject json = JSON.parseObject(callRet.getCallbackRetMsg());
+                    Log.d("asdasdsd",json.toJSONString()+"\n"+json.toString());
                     if (json != null && json.getInteger("code") == 200) {
                         long vid = json.getJSONObject("ret").getLong("vid");
                         videoItem.setVid(vid);
@@ -286,7 +289,7 @@ public class UploadService extends Service {
                     }
                 }
             });
-
+            Log.d("asdasdsd","疑似URl："+nosUrl);
             synchronized (lock) {
                 lock.wait();
             }
@@ -373,7 +376,9 @@ public class UploadService extends Service {
     }
 
     private UploadBuilder getUploadBuild(String name) {
-        UploadBuilder builder = new UploadBuilder(DemoCache.getContext(), getAppKey(), DemoCache.getAccount(), DemoCache.getVodtoken())
+        Log.d("aaaaaaaaaaaaaaaaaa","getAppKey::"+getAppKey()+"///getAccount::"+spImp.getWyUpAccid()+"///getVodtoken::"+spImp.getWyUpToken());
+        UploadBuilder builder = new UploadBuilder(DemoCache.getContext(), getAppKey(), spImp.getWyUpAccid(),spImp.getWyUpToken())
+//        UploadBuilder builder = new UploadBuilder(DemoCache.getContext(), "d49345914660a3af65e7fa287ec90e6b", "15754633415", "e10adc3949ba59abbe56e057f20f883e")
                 .setOriginFileName(getValidateFileName(name))
                 .setUserFileName(name)
                 .setCallbackUrl(DemoServers.apiServer() + TRANSCODE_CALL_BACK)
@@ -402,6 +407,7 @@ public class UploadService extends Service {
             @Override
             public void run() {
                 if (videoItem.getType() == UploadType.SHORT_VIDEO) {
+                    Log.d("asdasdsd","addVideo:::"+"videoItem.getVid()|||"+videoItem.getVid()+";;videoItem.getDisplayName()"+videoItem.getDisplayName());
                     DemoServerHttpClient.getInstance().addVideo(videoItem.getVid(), videoItem.getDisplayName(), 1, new DemoServerHttpClient.DemoServerHttpCallback<AddVideoResponseEntity>() {
                         @Override
                         public void onSuccess(AddVideoResponseEntity addVideoResponseEntity) {
@@ -411,9 +417,9 @@ public class UploadService extends Service {
 
                             controller.onAddVideoResult(200, videoItem.getId(), addVideoResponseEntity);
                         }
-
                         @Override
                         public void onFailed(int code, String errorMsg) {
+                            Log.d("asdasdsd;;"+UploadType.SHORT_VIDEO,code+"||||"+errorMsg);
                             controller.onAddVideoResult(code, videoItem.getId(), null);
                         }
                     });

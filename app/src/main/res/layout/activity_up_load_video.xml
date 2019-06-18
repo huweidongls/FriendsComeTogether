@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yiwo.friendscometogether.newpage.UpLoadVideoActivity">
+    <RelativeLayout
+        android:id="@+id/activity_up_load_video_rl_top"
+        style="@style/rl_top_bar">
+
+        <TextView
+            style="@style/tv_top_title"
+            android:text="创建友记" />
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView style="@style/iv_return" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/activity_up_load_video_rl_complete"
+            android:layout_alignParentRight="true"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textColor="@color/white_ffffff"
+                android:textSize="30px"
+                android:text="完成"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="20px"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv"
+            android:scaleType="centerCrop"
+            android:layout_width="300px"
+            android:layout_height="400px" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5px"
+        android:background="@color/line" />
+    <RelativeLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_marginTop="20px"
+            android:layout_marginBottom="20px"
+            android:maxLength="300"
+            android:gravity="start"
+            android:background="@null"
+            android:id="@+id/activity_up_load_video_tv_title"
+            android:layout_width="490px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40px"
+            android:ellipsize="end"
+            android:lines="9"
+            android:hint="请输入内容"
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+        <TextView
+            android:layout_alignTop="@+id/activity_up_load_video_tv_title"
+            android:id="@+id/activity_up_load_video_tv_title_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40px"
+            android:text="0/300"
+            android:textColor="@color/black_333333"
+            android:textSize="28px" />
+
+    </RelativeLayout>
+</LinearLayout>

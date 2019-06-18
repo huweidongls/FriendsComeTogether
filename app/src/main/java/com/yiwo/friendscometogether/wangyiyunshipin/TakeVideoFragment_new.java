@@ -42,6 +42,7 @@ import com.netease.vcloud.video.effect.VideoEffect;
 import com.netease.vcloud.video.render.NeteaseView;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
+import com.yiwo.friendscometogether.newpage.UpLoadVideoActivity;
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.MediaCaptureController;
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.model.MediaCaptureOptions;
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.model.ResolutionType;
@@ -102,9 +103,9 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
     /**
      * 顶部控制条
      */
-//    private ImageButton filterBtn; // 滤镜按钮
+    private ImageButton filterBtn; // 滤镜按钮
     private ImageButton cameraSwitchBtn; // 摄像头转换按钮
-//    private RadioGroup filterGroup; // 滤镜按钮
+    private RadioGroup filterGroup; // 滤镜按钮
     private RelativeLayout filterLayout; // 滤镜布局
 //    private View closeBtn; // 关闭按钮
     private ImageButton faceuBtn; // faceu按钮
@@ -142,7 +143,7 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
         findViews(view);
         setListener(view);
         initVideoParams();
-//        initData();
+        initData();
         initMediaCapture();
 //        requestBasicPermission();
         return view;
@@ -184,9 +185,11 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
                 // 视频编辑完成
                 VideoItem videoItem = (VideoItem)  data.getSerializableExtra(EXTRA_VIDEO_ITEM);
                 if (videoItem != null) {
-                    Intent intent = new Intent();
-                    intent.putExtra(EXTRA_VIDEO_ITEM, data.getSerializableExtra(EXTRA_VIDEO_ITEM));
-                    getActivity().setResult(Activity.RESULT_OK, intent);
+                    UpLoadVideoActivity.startUpLoadVideoActivity(getContext(), (VideoItem) data.getSerializableExtra(EXTRA_VIDEO_ITEM),videoPathList.get(0));
+//                    Intent intent = new Intent(getContext(),UpLoadVideoActivity.class);
+//                    intent.putExtra(EXTRA_VIDEO_ITEM, data.getSerializableExtra(EXTRA_VIDEO_ITEM));
+//                    getContext().startActivity(intent);
+//                    getActivity().setResult(Activity.RESULT_OK, intent);
                 }
                 getActivity().finish();
             } else {
@@ -280,13 +283,16 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
                 // faceu布局显示
                 showOrHideFaceULayout(true,getView());
                 break;
+            case R.id.filter_btn:
+                filterLayout.setVisibility(View.VISIBLE);
+                break;
             case R.id.switch_btn:
                 if (mediaCaptureController != null) {
                     mediaCaptureController.switchCamera();
                 }
                 break;
             case R.id.shortvideo_filter_layout:
-//                filterLayout.setVisibility(filterGroup.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+                filterLayout.setVisibility(filterGroup.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
                 break;
             case R.id.previous_btn:
                 // 删除上一分段视频
@@ -411,10 +417,10 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
         }
 
         // 顶部控制条按钮
-//        filterBtn = view.findViewById(R.id.filter_btn);
+        filterBtn = view.findViewById(R.id.filter_btn);
         faceuBtn = view.findViewById(R.id.faceu_btn);
         cameraSwitchBtn = view.findViewById(R.id.switch_btn);
-//        filterGroup = view.findViewById(R.id.filter_group);
+        filterGroup = view.findViewById(R.id.filter_group);
         filterLayout = view.findViewById(R.id.shortvideo_filter_layout);
 //        closeBtn = view.findViewById(R.id.close_btn);
         // 录制相关按钮
@@ -492,19 +498,19 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
             }
         });
         // 顶部控制条
-//        filterBtn.setOnClickListener(this);
+        filterBtn.setOnClickListener(this);
         faceuBtn.setOnClickListener(this);
         cameraSwitchBtn.setOnClickListener(this);
         filterLayout.setOnClickListener(this);
-//        filterGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-//                int resId = radioGroup.getCheckedRadioButtonId();
-//                if (mediaCaptureController != null) {
-//                    mediaCaptureController.setFilterType(filterArray.get(resId));
-//                }
-//            }
-//        });
+        filterGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int resId = radioGroup.getCheckedRadioButtonId();
+                if (mediaCaptureController != null) {
+                    mediaCaptureController.getMediaRecord().setFilterType(filterArray.get(resId));
+                }
+            }
+        });
 //        closeBtn.setOnClickListener(this);
         // 录制相关按钮
         previousBtn.setOnClickListener(this);
@@ -515,21 +521,21 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
         videoCaptureParams = new VideoCaptureParams(DEFAULT_VIDEO_COUNTS, DEFAULT_VIDEO_TIME, ResolutionType.HD);
         videoCaptureParams.setResolutionType(hdRadio.isChecked() ? ResolutionType.HD : ResolutionType.FLUENT);
     }
-//    private void initData() {
-//        filterArray = new SparseArray<>();
-//        filterArray.put(R.id.no_filter_btn, VideoEffect.FilterType.none);
-//        filterArray.put(R.id.filter_a_btn, VideoEffect.FilterType.pixar);
-//        filterArray.put(R.id.filter_b_btn, VideoEffect.FilterType.fairytale);
-//        filterArray.put(R.id.filter_c_btn, VideoEffect.FilterType.calm);
-//        filterArray.put(R.id.filter_d_btn, VideoEffect.FilterType.brooklyn);
-//    }
+    private void initData() {
+        filterArray = new SparseArray<>();
+        filterArray.put(R.id.no_filter_btn, VideoEffect.FilterType.none);
+        filterArray.put(R.id.filter_a_btn, VideoEffect.FilterType.pixar);
+        filterArray.put(R.id.filter_b_btn, VideoEffect.FilterType.fairytale);
+        filterArray.put(R.id.filter_c_btn, VideoEffect.FilterType.calm);
+        filterArray.put(R.id.filter_d_btn, VideoEffect.FilterType.brooklyn);
+    }
     private void initMediaCapture() {
         mediaCaptureOptions = new MediaCaptureOptions();
         initCaptureOptions();
         setResolution();
         mediaCaptureController = new MediaCaptureController(getContext(), this, mediaCaptureOptions);
         // faceU要在startPreview之前初始化
-        fuLiveEffect();
+//        fuLiveEffect();
         mediaCaptureController.startPreview(videoView);
     }
     private void initCaptureOptions() {

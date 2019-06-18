@@ -384,7 +384,14 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
         findView(R.id.done_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showNameDialog();
+//                showNameDialog();
+                displayName = "友记视频" + TimeUtil.getMonthTimeString(System.currentTimeMillis());
+                videoView.setVisibility(View.GONE);
+                editRoot.setVisibility(View.GONE);
+                DialogMaker.showProgressDialog(ShortVideoEditActivity.this, "等待截图");
+                stopPlayer();
+
+                startVideoProcess();
             }
         });
     }

@@ -1,4 +1,6 @@
 package com.yiwo.friendscometogether.wangyiyunshipin.upload.model;
+import android.util.Log;
+
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.UploadState;
 
 import java.util.ArrayList;
@@ -48,6 +50,7 @@ public class UploadTotalDataAccessor {
     }
 
     public void uploadSuccess(VideoItem videoItem) {
+        Log.d("asdasdsd:","UploadTotalDataAccessor_uploadSuccess");
         if (videoItem.getState() == UploadState.STATE_UPLOAD_COMPLETE) {
             uploadList.remove(videoItem);
         }

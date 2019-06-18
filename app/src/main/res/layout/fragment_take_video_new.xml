@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="#000000"
-    android:id="@+id/shortvideo_filter_layout"
     android:paddingTop="25dp"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
@@ -35,6 +35,7 @@
             android:background="@mipmap/take_videos_camera" />
 
         <ImageButton
+            android:visibility="gone"
             android:id="@+id/faceu_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,6 +43,15 @@
             android:layout_marginRight="40dp"
             android:layout_toLeftOf="@id/switch_btn"
             android:background="@mipmap/ic_faceu" />
+        <ImageButton
+            android:id="@+id/filter_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="40dp"
+            android:layout_toLeftOf="@id/switch_btn"
+            android:visibility="visible"
+            android:background="@drawable/filter_btn_selector" />
     </RelativeLayout>
 
 
@@ -150,7 +160,7 @@
     </RelativeLayout>
 
     <!--&lt;!&ndash; 滤镜选择layout &ndash;&gt;-->
-    <!--<include layout="@layout/shortvideo_filter_layout" />-->
+    <include layout="@layout/shortvideo_filter_layout" />
 
     <!-- 选中参数显示layout -->
     <include layout="@layout/param_layout" />

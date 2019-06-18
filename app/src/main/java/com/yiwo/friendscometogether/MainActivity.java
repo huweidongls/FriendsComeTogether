@@ -41,6 +41,7 @@ import com.yiwo.friendscometogether.fragment.ChatFragment;
 import com.yiwo.friendscometogether.fragment.FriendsRememberFragment;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment2;
+import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment3;
 import com.yiwo.friendscometogether.fragment.HomeFragment;
 import com.yiwo.friendscometogether.fragment.HomeFragment1;
 import com.yiwo.friendscometogether.fragment.MyFragment;
@@ -227,6 +228,7 @@ public class MainActivity extends FragmentActivity {
         fragmentHome = new HomeFragment1();
 //        Fragment fragmentFriendTogether = new FriendsTogetherFragment1();
         Fragment fragmentFriendTogether = new FriendsTogetherFragment2();
+//        Fragment fragmentFriendTogether = new FriendsTogetherFragment3();
         Fragment fragmentFriendRemember = new YouJiFragment();
         fragmentChat = new ChatFragment();
         Fragment fragmentMy = new MyFragment1();
@@ -321,8 +323,8 @@ public class MainActivity extends FragmentActivity {
 //                    selectText(tvFriendRemember);
 //                    switchFragment(2);
                     if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
-//                        intent.setClass(context, CreateFriendRememberActivity.class);
-                        intent.setClass(context, CreateFriendRememberActivityNew.class);
+                        intent.setClass(context, CreateFriendRememberActivity.class);
+//                        intent.setClass(context, CreateFriendRememberActivityNew.class);
                         startActivity(intent);
                     } else {
                         intent.setClass(context, LoginActivity.class);

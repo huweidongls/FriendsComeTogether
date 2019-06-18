@@ -44,4 +44,9 @@
     <string name="select_time">选择时间</string>
     <string name="current_time">当前时间</string>
 
+    <string name="no_filter">无滤镜</string>
+    <string name="filter_a">滤镜A</string>
+    <string name="filter_b">滤镜B</string>
+    <string name="filter_c">滤镜C</string>
+    <string name="filter_d">滤镜D</string>
 </resources>

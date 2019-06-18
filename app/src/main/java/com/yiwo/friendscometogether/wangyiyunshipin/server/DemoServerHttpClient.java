@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
@@ -11,6 +12,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.netease.nim.uikit.common.http.NimHttpClient;
 import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.netease.nim.uikit.common.util.string.MD5;
+import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
 import com.yiwo.friendscometogether.wangyiyunshipin.config.DemoServers;
 import com.yiwo.friendscometogether.wangyiyunshipin.server.entity.AddVideoResponseEntity;
@@ -562,8 +564,10 @@ public class DemoServerHttpClient {
         headers.put(HEADER_CONTENT_TYPE, "application/x-www-form-urlencoded; charset=utf-8");
         headers.put(HEADER_DEMO_ID, HEADER_DEMO_ID_VALUE);
 
+        Log.d("asdasdsd","getWyUpAccid()getWyUpAccid()::"+new SpImp(DemoCache.getContext()).getWyUpAccid());
         Map<String, Object> body = new HashMap<>();
-        body.put(REQUEST_SID, DemoCache.getSid());
+//        body.put(REQUEST_SID, DemoCache.getSid());
+        body.put(REQUEST_SID, new SpImp(DemoCache.getContext()).getWyUpAccid());
         body.put(VID, vid);
         body.put(FILE_NAME, name);
         body.put(TYPE, type);

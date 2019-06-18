@@ -114,4 +114,23 @@ public class SpImp {
     public boolean getSTATE(){
         return sp.getBoolean(SpPublic.STATE,false);
     }
+
+    //网易云上传accid
+    public String getWyUpAccid() {
+        return sp.getString(SpPublic.WY_UP_ACCID, "0");
+    }
+
+    public void setWyUpAccid(String wyUpAccid) {
+        editor.putString(SpPublic.WY_UP_ACCID, wyUpAccid).toString();
+        editor.commit();
+    }
+    //网易云上传token
+    public String getWyUpToken() {
+        return sp.getString(SpPublic.WY_UP_TOKEN, "0");
+    }
+
+    public void setWyUpToken(String wyToken) {
+        editor.putString(SpPublic.WY_UP_TOKEN, wyToken).toString();
+        editor.commit();
+    }
 }

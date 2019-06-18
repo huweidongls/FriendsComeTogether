@@ -132,6 +132,7 @@ public class UploadController extends BaseUiController<UploadController.UploadUi
      * @param videoItems
      */
     public void uploadLocalItem(List<VideoItem> videoItems, int type, boolean needSave) {
+        Log.d("asdasdsd:",";;;uploadLocalItem");
         if (type == UploadType.SHORT_VIDEO) {
             shortVideoDataAccessor.addLocalItemList(videoItems, needSave);
         } else {
@@ -176,6 +177,7 @@ public class UploadController extends BaseUiController<UploadController.UploadUi
     }
 
     public void startUploadIfAllow() {
+        Log.d("asdasdsd:",";;;startUploadIfAllow");
         if (!UploadTotalDataAccessor.getInstance().isFullySuccess() && UploadTotalDataAccessor.getInstance().hasWaitTask()) {
 
             if (!allowMobileNetwork && NetworkUtils.getNetworkType() == NetworkUtils.TYPE_MOBILE) {
@@ -230,11 +232,13 @@ public class UploadController extends BaseUiController<UploadController.UploadUi
     }
 
     public void startUpload() {
+        Log.d("asdasdsd:",";;;startUpload");
         if (!mBound) {
             LogUtil.i(TAG, "bind service");
             bindService();
         } else {
             LogUtil.i(TAG, "binder.startUpload");
+            Log.d("asdasdsd:",";;;binder.startUpload");
             mBinder.startUpload();
         }
         needResumeUpload = false;
@@ -252,6 +256,7 @@ public class UploadController extends BaseUiController<UploadController.UploadUi
     }
 
     private void bindService() {
+        Log.d("asdasdsd:",";;;bindService");
         Intent intent = new Intent(mContext, UploadService.class);
         mContext.bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
