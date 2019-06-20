@@ -55,7 +55,7 @@ public class LabelAdapter extends RecyclerView.Adapter<LabelAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 isReset = false;
-                holder.tv.setBackgroundResource(R.drawable.bg_red_4px);
+                holder.tv.setBackgroundResource(R.drawable.bg_redd84c37_border_5dp);
                 listener.onSelete(position);
             }
         });

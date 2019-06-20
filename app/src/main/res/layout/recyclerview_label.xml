@@ -4,15 +4,15 @@
     android:layout_height="wrap_content">
 
     <TextView
+       android:layout_margin="10px"
+        android:padding="5px"
         android:id="@+id/tv"
-        android:layout_marginTop="28px"
-        android:layout_marginLeft="28px"
-        android:background="@drawable/bg_gray_4px"
-        android:textSize="24px"
-        android:textColor="@color/black_333333"
+        android:background="@drawable/bg_gray9a9a9a_border_5dp"
+        android:textSize="30px"
+        android:textColor="#676767"
         android:text="分类"
         android:gravity="center"
-        android:layout_width="192px"
+        android:layout_width="150px"
         android:layout_height="60px" />
 
 </LinearLayout>

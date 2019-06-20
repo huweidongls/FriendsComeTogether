@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="#f9f9f9"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.yiwo.friendscometogether.newpage.YoujuShaixuanActivity">
@@ -36,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
+            android:layout_marginTop="30px"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -43,30 +45,31 @@
                 android:id="@+id/rl_key_word"
                 android:layout_below="@+id/rl_top"
                 android:layout_width="match_parent"
-                android:layout_height="180px">
+                android:layout_height="120px">
                 <TextView
+                    android:layout_marginRight="30px"
+                    android:layout_centerVertical="true"
                     android:id="@+id/tv_key_word"
                     android:textStyle="bold"
-                    android:layout_marginLeft="46px"
-                    android:layout_marginTop="32px"
                     android:textSize="28px"
                     android:textColor="@color/black_333333"
                     android:text="关键字"
-                    android:layout_width="wrap_content"
+                    android:gravity="right"
+                    android:layout_width="170px"
                     android:layout_height="wrap_content" />
                 <EditText
+                    android:layout_marginRight="50px"
+                    android:layout_centerVertical="true"
                     android:paddingLeft="20px"
-                    android:layout_marginLeft="46px"
-                    android:layout_marginRight="46px"
                     android:layout_marginTop="5px"
                     android:layout_marginBottom="20px"
-                    android:layout_below="@+id/tv_key_word"
+                    android:layout_toRightOf="@+id/tv_key_word"
                     android:id="@+id/et_key_word"
                     android:textColor="@color/black_333333"
-                    android:textColorHint="#BFBFC4"
+                    android:textColorHint="#676767"
                     android:textSize="26px"
                     android:hint="请输入搜索关键字"
-                    android:background="#F5F5F5"
+                    android:background="@drawable/bg_gray9a9a9a_border_5dp"
                     android:layout_height="75px"
                     android:layout_width="match_parent"/>
                 <View
@@ -80,30 +83,29 @@
                 android:id="@+id/rl_shang_jia"
                 android:layout_below="@+id/rl_top"
                 android:layout_width="match_parent"
-                android:layout_height="180px">
+                android:layout_height="120px">
                 <TextView
+                    android:layout_marginRight="30px"
+                    android:layout_centerVertical="true"
                     android:id="@+id/tv_shangjia"
                     android:textStyle="bold"
-                    android:layout_marginLeft="46px"
-                    android:layout_marginTop="32px"
                     android:textSize="28px"
                     android:textColor="@color/black_333333"
                     android:text="商家名称"
-                    android:layout_width="wrap_content"
+                    android:gravity="right"
+                    android:layout_width="170px"
                     android:layout_height="wrap_content" />
                 <EditText
+                    android:layout_marginRight="50px"
+                    android:layout_centerVertical="true"
                     android:paddingLeft="20px"
-                    android:layout_marginLeft="46px"
-                    android:layout_marginRight="46px"
-                    android:layout_marginTop="5px"
-                    android:layout_marginBottom="20px"
-                    android:layout_below="@+id/tv_shangjia"
+                    android:layout_toRightOf="@+id/tv_shangjia"
                     android:id="@+id/et_shangjia"
                     android:textColor="@color/black_333333"
-                    android:textColorHint="#BFBFC4"
+                    android:textColorHint="#676767"
                     android:textSize="26px"
                     android:hint="请输入商家名称"
-                    android:background="#F5F5F5"
+                    android:background="@drawable/bg_gray9a9a9a_border_5dp"
                     android:layout_height="75px"
                     android:layout_width="match_parent"/>
                 <View
@@ -117,26 +119,26 @@
                 android:id="@+id/rl_jiage"
                 android:layout_below="@+id/rl_shang_jia"
                 android:layout_width="match_parent"
-                android:layout_height="212px">
+                android:layout_height="120px">
 
                 <TextView
+                    android:layout_marginRight="30px"
+                    android:layout_centerVertical="true"
                     android:id="@+id/tv"
                     android:textStyle="bold"
-                    android:layout_marginLeft="46px"
-                    android:layout_marginTop="32px"
                     android:textSize="28px"
                     android:textColor="@color/black_333333"
-                    android:text="价格区间(元)"
-                    android:layout_width="wrap_content"
+                    android:text="价格区间"
+                    android:gravity="right"
+                    android:layout_width="170px"
                     android:layout_height="wrap_content" />
 
                 <RelativeLayout
+                    android:layout_marginRight="80px"
+                    android:layout_centerVertical="true"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
-                    android:layout_marginRight="46px"
-                    android:layout_marginLeft="46px"
-                    android:layout_marginTop="32px"
-                    android:layout_below="@+id/tv"
+                    android:layout_toRightOf="@+id/tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -144,19 +146,19 @@
                         android:inputType="number"
                         android:id="@+id/et_min"
                         android:textColor="@color/black_333333"
-                        android:textColorHint="#BFBFC4"
+                        android:textColorHint="#676767"
                         android:textSize="26px"
                         android:hint="最低价"
                         android:gravity="center"
-                        android:background="#F5F5F5"
-                        android:layout_width="270px"
+                        android:background="@drawable/bg_gray9a9a9a_border_5dp"
+                        android:layout_width="200px"
                         android:layout_height="75px" />
 
                     <TextView
                         android:layout_centerInParent="true"
                         android:textSize="36px"
-                        android:textColor="#000000"
-                        android:text="-"
+                        android:textColor="#676767"
+                        android:text="—"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -165,12 +167,12 @@
                         android:id="@+id/et_max"
                         android:layout_alignParentRight="true"
                         android:textColor="@color/black_333333"
-                        android:textColorHint="#BFBFC4"
+                        android:textColorHint="#676767"
                         android:textSize="26px"
                         android:hint="最高价"
                         android:gravity="center"
-                        android:background="#F5F5F5"
-                        android:layout_width="270px"
+                        android:background="@drawable/bg_gray9a9a9a_border_5dp"
+                        android:layout_width="200px"
                         android:layout_height="75px" />
 
                 </RelativeLayout>
@@ -185,23 +187,22 @@
             <RelativeLayout
                 android:id="@+id/rl_city"
                 android:layout_width="match_parent"
-                android:layout_height="180px">
+                android:layout_height="120px">
                 <TextView
+                    android:layout_marginRight="30px"
+                    android:layout_centerVertical="true"
                     android:id="@+id/tv_city"
                     android:textStyle="bold"
-                    android:layout_marginLeft="46px"
-                    android:layout_marginTop="32px"
                     android:textSize="28px"
                     android:textColor="@color/black_333333"
                     android:text="城市"
-                    android:layout_width="wrap_content"
+                    android:gravity="right"
+                    android:layout_width="170px"
                     android:layout_height="wrap_content" />
                 <LinearLayout
-                    android:layout_marginLeft="46px"
-                    android:layout_marginRight="46px"
-                    android:layout_marginTop="5px"
-                    android:layout_marginBottom="20px"
-                    android:layout_below="@+id/tv_city"
+                    android:layout_marginRight="50px"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_city"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -209,12 +210,12 @@
                         android:paddingLeft="20px"
                         android:id="@+id/et_city"
                         android:textColor="@color/black_333333"
-                        android:textColorHint="#BFBFC4"
+                        android:textColorHint="#676767"
                         android:textSize="26px"
                         android:hint="请输入城市名称"
-                        android:background="#F5F5F5"
+                        android:background="@drawable/bg_gray9a9a9a_border_5dp"
                         android:layout_height="75px"
-                        android:layout_width="450px"/>
+                        android:layout_width="300px"/>
                     <TextView
                         android:id="@+id/tv_choose_city"
                         android:layout_marginLeft="50px"
@@ -244,15 +245,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="120px">
                 <TextView
+                    android:layout_marginRight="30px"
                     android:layout_centerVertical="true"
                     android:id="@+id/tv_tuijian"
                     android:textStyle="bold"
-                    android:layout_marginLeft="46px"
-                    android:layout_marginTop="32px"
                     android:textSize="28px"
                     android:textColor="@color/black_333333"
                     android:text="商家推荐"
-                    android:layout_width="wrap_content"
+                    android:gravity="right"
+                    android:layout_width="170px"
                     android:layout_height="wrap_content" />
                 <ImageView
                     android:id="@+id/iv_expand_search"
@@ -278,15 +279,17 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_marginLeft="46px"
                     android:layout_marginTop="32px"
                     android:textStyle="bold"
                     android:textColor="@color/black_333333"
                     android:textSize="28px"
                     android:text="活动标签"
-                    android:layout_width="wrap_content"
+                    android:gravity="right"
+                    android:layout_width="170px"
                     android:layout_height="wrap_content" />
                 <RelativeLayout
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
                     <android.support.v7.widget.RecyclerView

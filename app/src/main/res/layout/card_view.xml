@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
     android:id="@+id/click_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
     <LinearLayout
+        android:paddingTop="20px"
         android:id="@+id/ll"
         android:background="@color/white_ffffff"
-        android:elevation="4px"
+        android:elevation="10px"
         android:layout_marginTop="10px"
         android:layout_marginLeft="10px"
         android:layout_marginRight="10px"
-        android:layout_marginBottom="2px"
+        android:layout_marginBottom="10px"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="550px"
+        android:layout_height="wrap_content">
+        <!--顶部商家名称和头像 隐藏-->
         <RelativeLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -71,32 +75,46 @@
                 android:layout_width="80px"
                 android:layout_height="80px" />
         </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textStyle="bold"
-            android:textColor="@color/black_333333"
-            android:textSize="36px"
+        <!--活动名称-->
+        <LinearLayout
             android:layout_marginTop="14px"
             android:layout_marginRight="30px"
             android:layout_marginLeft="30px"
-            android:text="一次神秘的智慧之旅一次神秘的智慧之 旅一次神秘的智慧之旅"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginRight="20px"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/youjuitem_icon_huodong"
+                android:layout_width="35px"
+                android:layout_height="35px" />
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:id="@+id/tv_title"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textStyle="bold"
+                android:textColor="@color/black_333333"
+                android:textSize="36px"
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
         
-        <ImageView
+        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            test:left_top_radius1="12px"
+            test:right_top_radius1="12px"
             android:id="@+id/iv_title"
-            android:layout_marginRight="30px"
-            android:layout_marginLeft="30px"
             android:layout_marginTop="14px"
             android:scaleType="centerCrop"
             android:src="@mipmap/welcome"
             android:layout_width="match_parent"
             android:layout_height="380px" />
-
+        <!--开始时间-->
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_start_time"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16px"
@@ -105,41 +123,98 @@
             android:text="开始时间：10/3-10/8（9：30）"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
-        <TextView
-
-            android:id="@+id/tv_renjun"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="6px"
-            android:textColor="#424242"
-            android:textSize="30px"
-            android:text="人均消费：RNB200/人"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_marginLeft="30px"
-            android:layout_marginRight="30px"
-            android:lines="1"
-            android:ellipsize="end"
-            android:id="@+id/tv_baoming"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="6px"
-            android:textColor="#424242"
-            android:textSize="30px"
-            android:text="活动地点："
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <RelativeLayout
-            android:layout_marginBottom="16px"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_marginRight="30px"
             android:layout_marginLeft="30px"
             android:layout_marginTop="16px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <TextView
+                android:text="活动要求："
+                android:ellipsize="end"
+                android:id="@+id/tv_yaoqiu"
+                android:layout_marginLeft="4px"
+                android:textColor="#6a6a6a"
+                android:textSize="30px"
+                android:maxLines="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:ellipsize="end"
+                android:id="@+id/tv_address"
+                android:layout_marginLeft="4px"
+                android:textColor="#6a6a6a"
+                android:textSize="30px"
+                android:maxLines="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <!--人均消费-->
+        <LinearLayout
+            android:layout_marginRight="30px"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="16px"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_gravity="bottom"
+                android:textColor="@color/color_red_d84c37"
+                android:textSize="34px"
+                android:textStyle="bold"
+                android:text="¥ "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/tv_renjun"
+                android:textColor="@color/color_red_d84c37"
+                android:textSize="40px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_marginBottom="10px"
+            android:layout_marginRight="30px"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="10px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--活动天数-->
+                <TextView
+
+                    android:layout_alignParentLeft="true"
+                    android:text="活动天数："
+                    android:ellipsize="end"
+                    android:id="@+id/tv_tianshu"
+                    android:layout_marginLeft="4px"
+                    android:textColor="#6a6a6a"
+                    android:textSize="30px"
+                    android:maxLines="1"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <!--报名人数-->
+                <TextView
+                    android:layout_alignParentRight="true"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:id="@+id/tv_baoming"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#6a6a6a"
+                    android:textSize="30px"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <!--剩余名额-->
+            <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_shengyu"
                 android:layout_centerVertical="true"
                 android:textColor="@color/black_333333"
@@ -148,7 +223,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
+            <!--出发地点-->
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_toRightOf="@+id/tv_shengyu"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
@@ -171,20 +248,94 @@
                         android:layout_width="22px"
                         android:layout_height="28px" />
 
-                    <TextView
-                        android:ellipsize="end"
-                        android:id="@+id/tv_address"
-                        android:layout_marginLeft="4px"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="#272A2C"
-                        android:textSize="26px"
-                        android:lines="1"
-                        android:text=""
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                    <!--<TextView-->
+                        <!--android:ellipsize="end"-->
+                        <!--android:id="@+id/tv_address"-->
+                        <!--android:layout_marginLeft="4px"-->
+                        <!--android:layout_gravity="center_vertical"-->
+                        <!--android:textColor="#272A2C"-->
+                        <!--android:textSize="26px"-->
+                        <!--android:lines="1"-->
+                        <!--android:text=""-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content" />-->
 
                 </LinearLayout>
             </RelativeLayout>
+        </RelativeLayout>
+        <View
+
+            android:layout_marginRight="5px"
+            android:layout_marginLeft="5px"
+            android:background="@color/line"
+            android:layout_width="match_parent"
+            android:layout_height="2px"/>
+        <RelativeLayout
+            android:layout_marginBottom="20px"
+            android:id="@+id/rl_bottom"
+            android:layout_marginTop="16px"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/ll_guanzhu"
+                android:paddingLeft="10px"
+                android:paddingRight="10px"
+                android:layout_marginBottom="20px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="80px"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/iv_guanzhu"
+                    android:src="@mipmap/youjuitem_heart_border"
+                    android:layout_width="50px"
+                    android:layout_height="50px" />
+                <TextView
+                    android:id="@+id/tv_guanzhu"
+                    android:textSize="25px"
+                    android:textColor="#696969"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_below="@+id/iv_youju_focus"
+                    android:text="关注"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_baoming"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/youjuitem_baoming"
+                android:layout_width="120px"
+                android:layout_height="120px" />
+            <LinearLayout
+                android:id="@+id/ll_fenxiang"
+                android:paddingLeft="10px"
+                android:paddingRight="10px"
+                android:orientation="vertical"
+                android:layout_marginRight="80px"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/youjuitem_share"
+                    android:layout_width="50px"
+                    android:layout_height="50px" />
+                <TextView
+                    android:textSize="25px"
+                    android:textColor="#696969"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_below="@+id/iv_youju_focus"
+                    android:text="分享"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

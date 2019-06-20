@@ -1,1 +1,1 @@
-include ':app', ':uikit', ':Fulive'
+include ':app', ':uikit', ':Fulive', ':library'

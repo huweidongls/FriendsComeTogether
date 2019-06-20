@@ -227,8 +227,8 @@ public class MainActivity extends FragmentActivity {
         rl5.setOnClickListener(listener);
         fragmentHome = new HomeFragment1();
 //        Fragment fragmentFriendTogether = new FriendsTogetherFragment1();
-        Fragment fragmentFriendTogether = new FriendsTogetherFragment2();
-//        Fragment fragmentFriendTogether = new FriendsTogetherFragment3();
+//        Fragment fragmentFriendTogether = new FriendsTogetherFragment2();
+        Fragment fragmentFriendTogether = new FriendsTogetherFragment3();
         Fragment fragmentFriendRemember = new YouJiFragment();
         fragmentChat = new ChatFragment();
         Fragment fragmentMy = new MyFragment1();

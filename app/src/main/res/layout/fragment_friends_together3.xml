@@ -1,29 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:id="@+id/rl_top"
         android:background="@color/red_d84c37"
         android:layout_width="match_parent"
         android:layout_height="128px">
-        <RelativeLayout
-            android:visibility="visible"
-            android:id="@+id/rl_fanhui"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_width="100px"
-            android:layout_height="80px">
-
-
-            <ImageView
-                android:src="@mipmap/shangyitiao"
-                android:layout_centerInParent="true"
-                android:layout_width="45px"
-                android:layout_height="45px" />
-
-        </RelativeLayout>
         <TextView
             android:layout_marginBottom="19px"
             android:layout_alignParentBottom="true"
@@ -35,33 +20,79 @@
             android:layout_height="wrap_content" />
 
         <RelativeLayout
-            android:id="@+id/rl_shuaxin"
+            android:layout_marginRight="5px"
+            android:id="@+id/rl_shaixuan"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_width="100px"
             android:layout_height="80px">
 
-
-            <ImageView
+            <TextView
+                android:textColor="@color/white_ffffff"
+                android:textSize="35px"
+                android:text="筛选"
                 android:layout_centerInParent="true"
-                android:src="@mipmap/shuaxin"
-                android:layout_width="45px"
-                android:layout_height="45px" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </RelativeLayout>
 
     </RelativeLayout>
-    <com.yiwo.friendscometogether.swipecard.SwipeFlingView
-        android:id="@+id/swipe_view"
-        android:paddingTop="20px"
-        android:paddingLeft="41px"
-        android:paddingRight="41px"
-        android:layout_above="@+id/rl_bottom"
-        android:layout_below="@+id/rl_top"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <RelativeLayout
+        android:orientation="vertical"
+        android:layout_below="@+id/rl_top"
+        android:layout_above="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/rl_label1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView
+                android:layout_marginTop="55px"
+                android:id="@+id/rv_label_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <View
+                android:layout_below="@+id/rv_label_1"
+                android:background="#ededed"
+                android:layout_width="match_parent"
+                android:layout_height="2px"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@+id/rl_label1"
+            android:id="@+id/rl_label2"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView
+                android:layout_marginTop="30px"
+                android:id="@+id/rv_label_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <View
+                android:layout_below="@+id/rv_label_2"
+                android:background="#ededed"
+                android:layout_width="match_parent"
+                android:layout_height="2px"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_centerVertical="true"
+            android:layout_below="@+id/rl_label2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.example.library.banner.BannerLayout
+                android:layout_marginTop="30px"
+                android:id="@+id/recyclerbanner"
+                app:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <!--底部按钮隐藏 在banner的item 中操作-->
+    <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/rl_bottom"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"

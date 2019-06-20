@@ -106,7 +106,7 @@ public class YoujuShaixuanActivity extends BaseActivity {
                                 Gson gson = new Gson();
                                 UserLabelModel userLabelModel = gson.fromJson(data, UserLabelModel.class);
                                 mList = userLabelModel.getObj();
-                                GridLayoutManager manager = new GridLayoutManager(context, 3){
+                                GridLayoutManager manager = new GridLayoutManager(context, 4){
                                     @Override
                                     public boolean canScrollVertically() {
                                         return false;

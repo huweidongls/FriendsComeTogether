@@ -70,6 +70,9 @@ public class FriendsTogethermodel {
          * focusOn : 0
          * "go_address": "",
          * 是否是商家推荐  0否 1是
+         * share_url 链接
+         * pftitle 标题
+         * pfpic 图片
          */
 
         private String pftime;
@@ -100,6 +103,9 @@ public class FriendsTogethermodel {
 
         private String go_address;
         private String shop_recommend;
+
+        private String share_url;
+
         public String getPftime() {
             return pftime;
         }
@@ -306,6 +312,14 @@ public class FriendsTogethermodel {
 
         public void setShop_recommend(String shop_recommend) {
             this.shop_recommend = shop_recommend;
+        }
+
+        public String getShare_url() {
+            return share_url;
+        }
+
+        public void setShare_url(String share_url) {
+            this.share_url = share_url;
         }
     }
 }

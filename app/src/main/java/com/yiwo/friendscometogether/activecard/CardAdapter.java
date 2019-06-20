@@ -2,6 +2,7 @@ package com.yiwo.friendscometogether.activecard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private Context context;
     private List<FriendsTogethermodel.ObjBean> data;
     private int currentPositon = 0;
-
+    private OnBottomButtonClickListionner onBottomButtonClickListionner;
     public CardAdapter(List<FriendsTogethermodel.ObjBean> data) {
         this.data = data;
     }
@@ -57,13 +58,24 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         holder.tvNickname.setText(data.get(position).getUsername());
         holder.tvTitle.setText(data.get(position).getPftitle());
         Glide.with(context).load(data.get(position).getPfpic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.ivTitle);
-        holder.tvFabuTime.setText(data.get(position).getPftime());
-        holder.tvStartTime.setText("开始时间: "+data.get(position).getPfgotime());
-        holder.tvRenjun.setText("人均消费: RMB"+data.get(position).getPfspend()+"/人");
-        holder.tvBaoming.setText("报名人数: "+data.get(position).getHave_num()+"人");
-        holder.tvShengyu.setText("剩余名额: "+data.get(position).getSurplus()+"人");
-        holder.tvAddress.setText(data.get(position).getPfaddress());
 
+        holder.tvBaoming.setText("报名人数: "+data.get(position).getHave_num()+"人");
+        holder.tvAddress.setText("活动地点："+data.get(position).getPfaddress());
+
+//        -----------------------已隐藏字段-------------------------------------------
+        holder.tvFabuTime.setText(data.get(position).getPftime());
+        holder.tvShengyu.setText("剩余名额: "+data.get(position).getSurplus()+"人");
+        holder.tvStartTime.setText("开始时间: "+data.get(position).getPfgotime());
+        holder.tvRenjun.setText(data.get(position).getPfspend()+"/人");
+//        ----------------------------------------------------------------------------
+
+        if (data.get(position).getFocusOn().equals("0")){
+            Glide.with(context).load(R.mipmap.youjuitem_heart_border).into(holder.ivGuanzhu);
+            holder.tvGuanzhu.setTextColor(Color.parseColor("#696969"));
+        }else {
+            Glide.with(context).load(R.mipmap.youjuitem_heart_red).into(holder.ivGuanzhu);
+            holder.tvGuanzhu.setTextColor(Color.parseColor("#d84c37"));
+        }
         holder.rl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,11 +103,33 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
                 }
             }
         });
+        holder.llGuanZhu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBottomButtonClickListionner.OnGuanZhuClick(position);
+            }
+        });
+        holder.llFenXiang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBottomButtonClickListionner.OnFenXiangClick(position);
+            }
+        });
+        holder.ivBaoming.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBottomButtonClickListionner.OnBaoMingClick(position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return data == null ? 0 : data.size();
+    }
+
+    public void setOnBottomButtonClickListionner(OnBottomButtonClickListionner onBottomButtonClickListionner) {
+        this.onBottomButtonClickListionner = onBottomButtonClickListionner;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -111,6 +145,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         private TextView tvShengyu;
         private TextView tvAddress;
         private LinearLayout ll;
+        private LinearLayout llGuanZhu;
+        private LinearLayout llFenXiang;
+        private ImageView ivBaoming;
+        private ImageView ivGuanzhu;
+        private TextView tvGuanzhu;
         private RelativeLayout rl;
         public ViewHolder(View itemView) {
             super(itemView);
@@ -125,8 +164,17 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             tvShengyu = itemView.findViewById(R.id.tv_shengyu);
             tvAddress = itemView.findViewById(R.id.tv_address);
             ll = itemView.findViewById(R.id.ll);
+            llFenXiang = itemView.findViewById(R.id.ll_fenxiang);
+            llGuanZhu = itemView.findViewById(R.id.ll_guanzhu);
             rl = itemView.findViewById(R.id.click_layout);
+            ivBaoming = itemView.findViewById(R.id.iv_baoming);
+            ivGuanzhu = itemView.findViewById(R.id.iv_guanzhu);
+            tvGuanzhu = itemView.findViewById(R.id.tv_guanzhu);
         }
     }
-
+    public interface OnBottomButtonClickListionner{
+        void OnGuanZhuClick(int postion);
+        void OnBaoMingClick(int postion);
+        void OnFenXiangClick(int postion);
+    }
 }

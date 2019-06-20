@@ -87,6 +87,7 @@ dependencies {
     }
     compile project(path: ':uikit')
     compile project(path: ':Fulive')
+    compile project(path: ':library')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     api 'com.jakewharton:butterknife:8.4.0'
