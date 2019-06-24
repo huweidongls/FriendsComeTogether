@@ -67,7 +67,7 @@ public class ArticleCommentAdapter extends RecyclerView.Adapter<ArticleCommentAd
         holder.tvNickname.setText(data.get(position).getUsername());
         holder.tvTitle.setText(data.get(position).getNewsTile());
         holder.tvContent.setText(data.get(position).getFctitle());
-        holder.tvContent.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.ll.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -129,6 +129,9 @@ public class ArticleCommentAdapter extends RecyclerView.Adapter<ArticleCommentAd
         private TextView tvTime;
         private RecyclerView recyclerView;
         private TextView tvReply;
+
+        private LinearLayout ll;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ivAvatar = itemView.findViewById(R.id.activity_article_comment_rv_iv_avatar);
@@ -138,6 +141,7 @@ public class ArticleCommentAdapter extends RecyclerView.Adapter<ArticleCommentAd
             tvTime = itemView.findViewById(R.id.activity_article_comment_rv_tv_time);
             recyclerView = itemView.findViewById(R.id.activity_article_comment_rv_rv);
             tvReply = itemView.findViewById(R.id.activity_article_comment_rv_tv_reply);
+            ll = itemView.findViewById(R.id.ll);
         }
     }
 

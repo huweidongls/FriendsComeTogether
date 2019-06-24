@@ -27,13 +27,11 @@
             android:layout_width="100px"
             android:layout_height="80px">
 
-            <TextView
-                android:textColor="@color/white_ffffff"
-                android:textSize="35px"
-                android:text="筛选"
+            <ImageView
+                android:src="@mipmap/youjushaixuan_top"
                 android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="35px"
+                android:layout_height="35px" />
 
         </RelativeLayout>
 
@@ -49,11 +47,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <android.support.v7.widget.RecyclerView
+                android:layout_marginLeft="60px"
+                android:layout_marginRight="60px"
                 android:layout_marginTop="55px"
                 android:id="@+id/rv_label_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <View
+                android:layout_marginLeft="60px"
+                android:layout_marginRight="60px"
                 android:layout_below="@+id/rv_label_1"
                 android:background="#ededed"
                 android:layout_width="match_parent"
@@ -67,11 +69,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <android.support.v7.widget.RecyclerView
+                android:layout_marginLeft="60px"
+                android:layout_marginRight="60px"
                 android:layout_marginTop="30px"
                 android:id="@+id/rv_label_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <View
+                android:layout_marginLeft="60px"
+                android:layout_marginRight="60px"
                 android:layout_below="@+id/rv_label_2"
                 android:background="#ededed"
                 android:layout_width="match_parent"

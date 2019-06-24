@@ -131,6 +131,7 @@ public class YouJuWebModel {
              * address : 齐齐哈尔
              * tel : 15754633415
              * others : 吃不了兜着走
+             * pfcontent:详情简介
              */
 
             private String wy_accid;
@@ -145,7 +146,7 @@ public class YouJuWebModel {
             private String address;
             private String tel;
             private String others;
-
+            private String pfcontent;
             public String getWy_accid() {
                 return wy_accid;
             }
@@ -240,6 +241,14 @@ public class YouJuWebModel {
 
             public void setOthers(String others) {
                 this.others = others;
+            }
+
+            public String getPfcontent() {
+                return pfcontent;
+            }
+
+            public void setPfcontent(String pfcontent) {
+                this.pfcontent = pfcontent;
             }
         }
 

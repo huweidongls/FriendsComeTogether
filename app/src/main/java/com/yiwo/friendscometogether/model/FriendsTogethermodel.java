@@ -73,6 +73,12 @@ public class FriendsTogethermodel {
          * share_url 链接
          * pftitle 标题
          * pfpic 图片
+         *
+         * 190620 新写字段
+         * condition 要求
+         * days 天数
+         * activity_address 地点
+         * join_num 人数
          */
 
         private String pftime;
@@ -105,6 +111,11 @@ public class FriendsTogethermodel {
         private String shop_recommend;
 
         private String share_url;
+
+        private String condition;
+        private String days;
+        private String activity_address;
+        private String join_num;
 
         public String getPftime() {
             return pftime;
@@ -320,6 +331,38 @@ public class FriendsTogethermodel {
 
         public void setShare_url(String share_url) {
             this.share_url = share_url;
+        }
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public void setCondition(String condition) {
+            this.condition = condition;
+        }
+
+        public String getDays() {
+            return days;
+        }
+
+        public void setDays(String days) {
+            this.days = days;
+        }
+
+        public String getActivity_address() {
+            return activity_address;
+        }
+
+        public void setActivity_address(String activity_address) {
+            this.activity_address = activity_address;
+        }
+
+        public String getJoin_num() {
+            return join_num;
+        }
+
+        public void setJoin_num(String join_num) {
+            this.join_num = join_num;
         }
     }
 }

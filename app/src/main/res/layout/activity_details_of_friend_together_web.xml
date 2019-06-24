@@ -42,6 +42,13 @@
         android:layout_above="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></WebView>
+    <ProgressBar
+        android:id="@+id/progresss_bar"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_below="@+id/activity_details_of_friends_together_rl_top"
+        android:progressDrawable="@drawable/web_progress_bg"
+        android:layout_width="match_parent"
+        android:layout_height="5px" />
     <LinearLayout
         android:id="@+id/bottom"
         android:layout_width="match_parent"

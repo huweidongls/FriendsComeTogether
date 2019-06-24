@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -46,14 +47,14 @@ public class ArticleCommentCommentAdapter extends RecyclerView.Adapter<ArticleCo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.tv.setText(data.get(position).getFctitle());
+        holder.tv.setText(data.get(position).getUsername()+"："+data.get(position).getFctitle());
         holder.tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.onReplyComment(data.get(position).getFcID());
             }
         });
-        holder.tv.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.ll.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -87,10 +88,11 @@ public class ArticleCommentCommentAdapter extends RecyclerView.Adapter<ArticleCo
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tv;
-
+        private LinearLayout ll;
         public ViewHolder(View itemView) {
             super(itemView);
             tv = itemView.findViewById(R.id.activity_article_comment_rv_rv_tv);
+            ll = itemView.findViewById(R.id.ll);
         }
     }
 

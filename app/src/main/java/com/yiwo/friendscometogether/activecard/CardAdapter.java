@@ -59,9 +59,17 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         holder.tvTitle.setText(data.get(position).getPftitle());
         Glide.with(context).load(data.get(position).getPfpic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.ivTitle);
 
-        holder.tvBaoming.setText("报名人数: "+data.get(position).getHave_num()+"人");
-        holder.tvAddress.setText("活动地点："+data.get(position).getPfaddress());
-
+        if (data.get(position).getShop_recommend().equals("0")){
+            holder.iv_tuijian.setVisibility(View.GONE);
+        }else if (data.get(position).getShop_recommend().equals("1")){
+            holder.iv_tuijian.setVisibility(View.VISIBLE);
+        }
+//        holder.tvBaoming.setText("报名人数: "+data.get(position).getHave_num()+"人");
+//        holder.tvAddress.setText("活动地点："+data.get(position).getPfaddress());
+        holder.tv_yaoqiu.setText(data.get(position).getCondition());
+        holder.tv_tianshu.setText(data.get(position).getDays());
+        holder.tv_baoming.setText(data.get(position).getJoin_num());
+        holder.tv_address.setText(data.get(position).getActivity_address());
 //        -----------------------已隐藏字段-------------------------------------------
         holder.tvFabuTime.setText(data.get(position).getPftime());
         holder.tvShengyu.setText("剩余名额: "+data.get(position).getSurplus()+"人");
@@ -141,16 +149,23 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         private ImageView ivTitle;
         private TextView tvStartTime;
         private TextView tvRenjun;
-        private TextView tvBaoming;
+//        private TextView tvBaoming;
         private TextView tvShengyu;
-        private TextView tvAddress;
+//        private TextView tvAddress;
         private LinearLayout ll;
         private LinearLayout llGuanZhu;
         private LinearLayout llFenXiang;
         private ImageView ivBaoming;
         private ImageView ivGuanzhu;
         private TextView tvGuanzhu;
+
+        private TextView tv_yaoqiu;
+        private TextView tv_address;
+        private TextView tv_tianshu;
+        private TextView tv_baoming;
         private RelativeLayout rl;
+
+        private ImageView iv_tuijian;
         public ViewHolder(View itemView) {
             super(itemView);
             ivAvatar = itemView.findViewById(R.id.iv_avatar);
@@ -160,9 +175,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             ivTitle = itemView.findViewById(R.id.iv_title);
             tvStartTime = itemView.findViewById(R.id.tv_start_time);
             tvRenjun = itemView.findViewById(R.id.tv_renjun);
-            tvBaoming = itemView.findViewById(R.id.tv_baoming);
+//            tvBaoming = itemView.findViewById(R.id.tv_baoming);
             tvShengyu = itemView.findViewById(R.id.tv_shengyu);
-            tvAddress = itemView.findViewById(R.id.tv_address);
+//            tvAddress = itemView.findViewById(R.id.tv_address);
             ll = itemView.findViewById(R.id.ll);
             llFenXiang = itemView.findViewById(R.id.ll_fenxiang);
             llGuanZhu = itemView.findViewById(R.id.ll_guanzhu);
@@ -170,6 +185,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             ivBaoming = itemView.findViewById(R.id.iv_baoming);
             ivGuanzhu = itemView.findViewById(R.id.iv_guanzhu);
             tvGuanzhu = itemView.findViewById(R.id.tv_guanzhu);
+
+            tv_yaoqiu = itemView.findViewById(R.id.tv_yaoqiu);
+            tv_address = itemView.findViewById(R.id.tv_address);
+            tv_tianshu = itemView.findViewById(R.id.tv_tianshu);
+            tv_baoming = itemView.findViewById(R.id.tv_baoming);
+            iv_tuijian = itemView.findViewById(R.id.iv_tuijian);
         }
     }
     public interface OnBottomButtonClickListionner{

@@ -270,37 +270,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="12px"
                 android:background="@color/line" />
-            <LinearLayout
-                android:layout_marginLeft="40px"
-                android:layout_marginRight="40px"
-                android:id="@+id/apply_ll_is_noname"
-                android:layout_width="match_parent"
-                android:layout_height="70px"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="140px"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="是否匿名:"
-                    android:textColor="@color/black_333333"
-                    android:textSize="28px" />
-
-                <TextView
-                    android:id="@+id/apply_is_noname"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20px"
-                    android:gravity="center_vertical|end"
-                    android:maxLength="30"
-                    android:text="否"
-                    android:textColor="@color/black_333333"
-                    android:textSize="28px" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="12px"
-                android:background="@color/line" />
             <RelativeLayout
                 android:layout_marginTop="5px"
                 android:layout_marginBottom="5px"
@@ -394,7 +363,7 @@
                 android:layout_height="88px"
                 android:layout_marginLeft="40px"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:textColor="@color/black_333333"
@@ -446,7 +415,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="2px"
                 android:background="@color/line" />
+            <LinearLayout
+                android:layout_marginLeft="40px"
+                android:layout_marginRight="40px"
+                android:id="@+id/apply_ll_is_noname"
+                android:layout_width="match_parent"
+                android:layout_height="70px"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="140px"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="是否匿名:"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+
+                <TextView
+                    android:id="@+id/apply_is_noname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20px"
+                    android:gravity="center_vertical|end"
+                    android:maxLength="30"
+                    android:text="否"
+                    android:textColor="@color/black_333333"
+                    android:textSize="28px" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12px"
+                android:background="@color/line" />
             <LinearLayout
                 android:id="@+id/apply_vessel_ll"
                 android:layout_width="match_parent"

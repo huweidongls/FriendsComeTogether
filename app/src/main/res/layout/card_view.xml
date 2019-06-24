@@ -5,7 +5,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
     <LinearLayout
-        android:paddingTop="20px"
         android:id="@+id/ll"
         android:background="@color/white_ffffff"
         android:elevation="10px"
@@ -22,7 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:layout_toLeftOf="@+id/iv_tuijian"
                 android:layout_marginRight="30px"
                 android:layout_marginLeft="30px"
                 android:layout_marginTop="20px"
@@ -66,6 +64,39 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px">
+            <!--活动名称-->
+            <LinearLayout
+                android:layout_toLeftOf="@+id/iv_tuijian"
+                android:layout_marginTop="14px"
+                android:layout_marginRight="30px"
+                android:layout_marginLeft="30px"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginRight="20px"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/youjuitem_icon_huodong"
+                    android:layout_width="35px"
+                    android:layout_height="35px" />
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/tv_title"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_333333"
+                    android:textSize="36px"
+                    android:text=""
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
             <ImageView
                 android:visibility="gone"
                 android:id="@+id/iv_tuijian"
@@ -75,34 +106,6 @@
                 android:layout_width="80px"
                 android:layout_height="80px" />
         </RelativeLayout>
-        <!--活动名称-->
-        <LinearLayout
-            android:layout_marginTop="14px"
-            android:layout_marginRight="30px"
-            android:layout_marginLeft="30px"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_marginRight="20px"
-                android:layout_gravity="center_vertical"
-                android:src="@mipmap/youjuitem_icon_huodong"
-                android:layout_width="35px"
-                android:layout_height="35px" />
-            <TextView
-                android:layout_gravity="center_vertical"
-                android:id="@+id/tv_title"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textStyle="bold"
-                android:textColor="@color/black_333333"
-                android:textSize="36px"
-                android:text=""
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        
         <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
             test:left_top_radius1="12px"
             test:right_top_radius1="12px"
@@ -130,8 +133,8 @@
             android:layout_marginTop="16px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <!--活动要求-->
             <TextView
-                android:text="活动要求："
                 android:ellipsize="end"
                 android:id="@+id/tv_yaoqiu"
                 android:layout_marginLeft="4px"
@@ -140,6 +143,7 @@
                 android:maxLines="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+            <!--活动地点-->
             <TextView
                 android:ellipsize="end"
                 android:id="@+id/tv_address"
@@ -189,7 +193,6 @@
                 <TextView
 
                     android:layout_alignParentLeft="true"
-                    android:text="活动天数："
                     android:ellipsize="end"
                     android:id="@+id/tv_tianshu"
                     android:layout_marginLeft="4px"

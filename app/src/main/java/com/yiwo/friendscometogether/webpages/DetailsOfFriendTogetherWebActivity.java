@@ -14,10 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
@@ -75,6 +77,8 @@ public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
     WebView webView;
     @BindView(R.id.rl_show_more)
     RelativeLayout rl_show_more;
+    @BindView(R.id.progresss_bar)
+    ProgressBar progresss_bar;
     private Unbinder unbinder;
     SpImp spImp;
     private String uid;
@@ -108,6 +112,18 @@ public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
         lookHistoryDbModelDao = mDaoSession.getLookHistoryDbModelDao();
         url = NetConfig.BaseUrl+"action/ac_activity/youJuWeb?pfID="+pfID+"&uid="+uid;
         initWebView(webView,url);
+        webView.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if(newProgress==100){
+                    progresss_bar.setVisibility(View.GONE);//加载完网页进度条消失
+                }else{
+                    progresss_bar.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
+                    progresss_bar.setProgress(newProgress);//设置进度值				}
+                }
+                super.onProgressChanged(view, newProgress);
+            }
+        });
         webView.addJavascriptInterface(new DetailsOfFriendTogetherWebActivity.AndroidInterface(),"android");//交互
         initData();
     }

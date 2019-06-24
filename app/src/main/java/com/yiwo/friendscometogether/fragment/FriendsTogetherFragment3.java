@@ -200,6 +200,7 @@ public class FriendsTogetherFragment3 extends BaseFragment {
                                 YouJuTopLabelModel modelFir = new YouJuTopLabelModel();
                                 modelFir.setId("");
                                 modelFir.setName("推荐");
+                                modelFir.setIstSelected(true);
                                 labelList_1.add(modelFir);
                                 if (finalIsChangPing){
                                     for (int i =0;i<labelList.size()/2;i++){
@@ -392,7 +393,7 @@ public class FriendsTogetherFragment3 extends BaseFragment {
                             @Override
                             public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
                                 ShareUtils.shareWeb(getActivity(), mList.get(postion).getShare_url(), mList.get(postion).getPftitle(),
-                                        "", mList.get(postion).getPfpic(), share_media);
+                                        mList.get(postion).getPfcontent(), mList.get(postion).getPfpic(), share_media);
                             }
                         }).open();
             }

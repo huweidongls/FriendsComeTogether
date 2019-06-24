@@ -19,11 +19,13 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -103,6 +105,8 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
     TextView tvComment;
     @BindView(R.id.iv_biaoqing)
     ImageView ivBiaoqing;
+    @BindView(R.id.progresss_bar)
+    ProgressBar progresss_bar;
     private String fmID;
     private String uid;
     private SpImp spImp;
@@ -147,6 +151,18 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
         Log.d("aaaa",url);
 //        url = NetConfig.BaseUrl+"action/ac_article/youJiWeb?id="+fmID;
         initWebView(webView,url);
+        webView.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                if(newProgress==100){
+                    progresss_bar.setVisibility(View.GONE);//加载完网页进度条消失
+                    }else{
+                    progresss_bar.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
+                    progresss_bar.setProgress(newProgress);//设置进度值				}
+                    }
+            }
+        });
         webView.addJavascriptInterface(new AndroidInterface(),"android");//交互
         webView.setOnTouchListener(new View.OnTouchListener() {
             @Override
