@@ -15,6 +15,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
 import com.yiwo.friendscometogether.newadapter.EditorLabelSaveAdapter;
+import com.yiwo.friendscometogether.newmodel.NewPersonMainMode_part1;
 import com.yiwo.friendscometogether.newmodel.PersonMainModel;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.widget.FlowLayoutManager;
@@ -98,7 +99,7 @@ public class PersonLabelActivity extends BaseActivity {
     private SpImp spImp;
     private String userName;
     private String userSex;
-    private PersonMainModel.ObjBean.UsertagBean model;
+    private NewPersonMainMode_part1.ObjBean.UsertagBean model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +173,7 @@ public class PersonLabelActivity extends BaseActivity {
 //        intent.putExtra("labelData",model.getObj().getUsertag());
         userName = getIntent().getStringExtra("userName");
         userSex = getIntent().getStringExtra("userSex");
-        model = (PersonMainModel.ObjBean.UsertagBean) getIntent().getSerializableExtra("labelData");
+        model = (NewPersonMainMode_part1.ObjBean.UsertagBean) getIntent().getSerializableExtra("labelData");
         tvTitle.setText(userSex+"的标签");
 //        tv0.setText("");
         tv1.setText(userSex+"还没填写个性标签");

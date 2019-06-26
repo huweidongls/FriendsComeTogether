@@ -37,6 +37,7 @@ import com.yiwo.friendscometogether.model.MyFriendModel;
 import com.yiwo.friendscometogether.model.UserActiveListModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.MyFriendActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
@@ -194,7 +195,7 @@ public class MyFriendFragment  extends BaseFragment{
                                                         //进主页
                                                         Intent intent = new Intent();
                                                         intent.putExtra("person_id", mDatas.get(i).getUid());
-                                                        intent.setClass(getContext(), PersonMainActivity.class);
+                                                        intent.setClass(getContext(), PersonMainActivity1.class);
                                                         startActivity(intent);
                                                         break;
                                                     case 3:

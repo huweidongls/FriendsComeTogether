@@ -31,6 +31,7 @@ import com.yiwo.friendscometogether.newpage.GuanZhuActivity;
 import com.yiwo.friendscometogether.newpage.MessageActivity;
 import com.yiwo.friendscometogether.newpage.MyContactActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.newpage.SuperLikeActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.LookHistoryActivity;
@@ -317,7 +318,7 @@ public class MyFragment1 extends BaseFragment {
             case R.id.ll_person_page:
                 if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
                     Intent intent0 = new Intent();
-                    intent0.setClass(getContext(), PersonMainActivity.class);
+                    intent0.setClass(getContext(), PersonMainActivity1.class);
                     intent0.putExtra("person_id",uid);
                     startActivity(intent0);
                 } else {

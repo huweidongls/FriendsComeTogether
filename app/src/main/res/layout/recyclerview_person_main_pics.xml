@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_item"
+    android:layout_marginTop="20px"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <RelativeLayout
+        android:layout_marginLeft="13px"
+        android:layout_marginRight="13px"
+        android:layout_marginBottom="10px"
+        android:elevation="5px"
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_16px">
+
+        <LinearLayout
+            android:layout_marginBottom="50px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+                android:id="@+id/iv"
+                android:layout_width="match_parent"
+                android:layout_height="400px"
+                android:scaleType="centerCrop"
+                test:left_top_radius1="16px"
+                test:right_top_radius1="16px" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

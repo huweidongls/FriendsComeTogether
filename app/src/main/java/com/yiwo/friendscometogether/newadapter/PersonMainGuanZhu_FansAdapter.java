@@ -18,6 +18,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.UserFocusModel;
 import com.yiwo.friendscometogether.newmodel.PersonMainGuanZhu_FansModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.sp.SpImp;
 
 import java.util.List;
@@ -64,7 +65,7 @@ public class PersonMainGuanZhu_FansAdapter extends RecyclerView.Adapter<PersonMa
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(context, PersonMainActivity.class);
+                Intent it = new Intent(context, PersonMainActivity1.class);
                 it.putExtra("person_id", bean.getUserID());
                 context.startActivity(it);
 

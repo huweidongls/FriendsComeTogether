@@ -1,12 +1,19 @@
 package com.yiwo.friendscometogether.newpage;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -25,47 +32,69 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
+import com.yiwo.friendscometogether.MyApplication;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.adapter.OrderPagerAdapter;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.custom.FriendDescribeDialog;
 import com.yiwo.friendscometogether.custom.HuoZanDialog;
 import com.yiwo.friendscometogether.model.KVMode;
+import com.yiwo.friendscometogether.model.PersonMain_Pics_model;
+import com.yiwo.friendscometogether.model.PersonMain_YouJu_model;
+import com.yiwo.friendscometogether.model.PersonMain_Youji_model;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newadapter.AllRememberViewpagerAdapter;
+import com.yiwo.friendscometogether.newadapter.PersonMainActivity_Pics_Adapter;
+import com.yiwo.friendscometogether.newadapter.PersonMainActivity_YouJi_Adapter;
+import com.yiwo.friendscometogether.newadapter.PersonMainActivity_YouJu_Adapter;
 import com.yiwo.friendscometogether.newadapter.PersonSameLabelAdapter;
 import com.yiwo.friendscometogether.newadapter.TaRenZhuYePicsAdapter;
 import com.yiwo.friendscometogether.newadapter.TaRenZhuYeYouJiAdapter;
 import com.yiwo.friendscometogether.newadapter.TaRenZhuYeYouJuAdapter;
+import com.yiwo.friendscometogether.newadapter.YouJiAdapter;
+import com.yiwo.friendscometogether.newfragment.HuoDongApplyFragment;
+import com.yiwo.friendscometogether.newfragment.HuoDongHistoryFragment;
+import com.yiwo.friendscometogether.newfragment.NewPersonMainActivity_PicsFragment;
+import com.yiwo.friendscometogether.newfragment.NewPersonMainActivity_YouJiFragment;
+import com.yiwo.friendscometogether.newfragment.NewPersonMainActivity_YouJuFragment;
+import com.yiwo.friendscometogether.newmodel.NewPersonMainMode_part1;
 import com.yiwo.friendscometogether.newmodel.PersonMainModel;
+import com.yiwo.friendscometogether.newmodel.YouJiListModel;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.MyFriendActivity;
-import com.yiwo.friendscometogether.pages.MyInformationActivity;
 import com.yiwo.friendscometogether.pages.MyPicturesActivity;
 import com.yiwo.friendscometogether.pages.OtherPicActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.utils.TokenUtils;
 import com.yiwo.friendscometogether.widget.FlowLayoutManager;
 import com.yiwo.friendscometogether.widget.NestedRecyclerView;
+import com.yiwo.friendscometogether.widget.WrapContentHeightViewPager;
+
+import net.lucode.hackware.magicindicator.MagicIndicator;
+import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PersonMainActivity extends BaseActivity {
+public class PersonMainActivity1 extends BaseActivity {
 
     @BindView(R.id.recycler_view_labels)
     NestedRecyclerView recycler_view_labels;
-    @BindView(R.id.recycler_view_pics)
-    RecyclerView recyclerView_pics;
-    @BindView(R.id.recycler_view_youji)
-    RecyclerView recyclerView_youji;
-    @BindView(R.id.recycler_view_youju)
-    RecyclerView recyclerView_youju;
     @BindView(R.id.rl_back)
     RelativeLayout rl_back;
 
@@ -74,12 +103,6 @@ public class PersonMainActivity extends BaseActivity {
     TextView tv_label_wode_or_tade;
     @BindView(R.id.tv_title_wode_or_tade)
     TextView tv_title_wode_or_tade;
-    @BindView(R.id.tv_pics_wode_or_tade)
-    TextView tv_pics_wode_or_tade;
-    @BindView(R.id.tv_youji_wode_or_tade)
-    TextView tv_youji_wode_or_tade;
-    @BindView(R.id.tv_youju_wode_or_tade)
-    TextView tv_youju_wode_or_tade;
 
     @BindView(R.id.tv_more_label)
     TextView tv_more_label;
@@ -124,13 +147,20 @@ public class PersonMainActivity extends BaseActivity {
     ImageView iv_kefu;
     @BindView(R.id.rl_label_text)
     RelativeLayout rl_label_text;
-    @BindView(R.id.rl_pics_text)
-    RelativeLayout rl_pics_text;
-    @BindView(R.id.rl_youji_text)
-    RelativeLayout rl_youji_text;
-    @BindView(R.id.rl_youju_text)
-    RelativeLayout rl_youju_text;
-
+    @BindView(R.id.rl_tab_1)
+    RelativeLayout rl_tab_1;
+    @BindView(R.id.rl_tab_2)
+    RelativeLayout rl_tab_2;
+    @BindView(R.id.rl_tab_3)
+    RelativeLayout rl_tab_3;
+    @BindView(R.id.bottom_line_1)
+    View bottom_line_1;
+    @BindView(R.id.bottom_line_2)
+    View bottom_line_2;
+    @BindView(R.id.bottom_line_3)
+    View bottom_line_3;
+    @BindView(R.id.rv_pic_youji_youju)
+    RecyclerView rv_pic_youji_youju;
     @BindView(R.id.person_main_refreshLayout)
     RefreshLayout refreshLayout;
     private String ta = "他";
@@ -139,24 +169,34 @@ public class PersonMainActivity extends BaseActivity {
     private String person_id;// 进入activity传入的id 可能为云信ID
     private String otherUserId;//储存 接口返回的UID
     private String  status; //status   =0时传 用户ID    =1时传网易ID
-    private PersonMainModel model;
-    private List<PersonMainModel.ObjBean.PhotoBean> list_pics = new ArrayList<>();
-    private List<PersonMainModel.ObjBean.FriendBean> list_youji = new ArrayList<>();
-    private List<PersonMainModel.ObjBean.ActivityBean> list_youju = new ArrayList<>();
+    private NewPersonMainMode_part1 model;
 
     private List<KVMode> list_label = new ArrayList<>();
     private int isFollow = -1;//是否关注 0为未关注 1为已关注
 
-    private TaRenZhuYePicsAdapter taRenZhuYePicsAdapter;
-    private TaRenZhuYeYouJiAdapter taRenZhuYeYouJiAdapter;
-    private TaRenZhuYeYouJuAdapter  taRenZhuYeYouJuAdapter;
+    //recyclerView
+    private int show_tab = 1;//1为照片 2为友记 3为友聚
+    private int page1 = 1;
+    private int page2 = 1;
+    private int page3 = 1;
+    //照片
+    private PersonMainActivity_Pics_Adapter picsAdapter;
+    private List<PersonMain_Pics_model.ObjBean.PhotoBean> picsList = new ArrayList<>();
+    //友记
+    private PersonMainActivity_YouJi_Adapter youJiAdapter;
+    private List<PersonMain_Youji_model.ObjBean.FriendBean> youJiList = new ArrayList<>();
+    //y友聚
+    private PersonMainActivity_YouJu_Adapter youJuAdapter;
+    private List<PersonMain_YouJu_model.ObjBean.ActivityBean> youJuList = new ArrayList<>();
+
     private PersonSameLabelAdapter personSameLabelAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_person_main);
+        setContentView(R.layout.activity_person_main_1);
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
-        ButterKnife.bind(PersonMainActivity.this);
+        ButterKnife.bind(PersonMainActivity1.this);
         person_id = getIntent().getStringExtra("person_id");
         if (getIntent().getStringExtra("status") == null||getIntent().getStringExtra("status").equals("")){
             status = "0";
@@ -164,7 +204,7 @@ public class PersonMainActivity extends BaseActivity {
             status = getIntent().getStringExtra("status");
         }
         Log.d("person_id", person_id);
-        spImp = new SpImp(PersonMainActivity.this);
+        spImp = new SpImp(PersonMainActivity1.this);
         if (spImp.getUID().equals(person_id)||spImp.getYXID().equals(person_id)) {
             type_tade_or_wode = 1;
             recycler_view_labels.setVisibility(View.GONE);
@@ -188,34 +228,135 @@ public class PersonMainActivity extends BaseActivity {
         if (type_tade_or_wode == 0) {
 //            iv_image_heart.setVisibility(View.VISIBLE);
             RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE);
-        Glide.with(PersonMainActivity.this).load(R.drawable.sayhi).apply(options).into(iv_image_heart);
+        Glide.with(PersonMainActivity1.this).load(R.drawable.sayhi).apply(options).into(iv_image_heart);
             rl_algin_right_tade.setVisibility(View.VISIBLE);
             rl_algin_right_wode.setVisibility(View.GONE);
         } else if (type_tade_or_wode == 1) {
             tv_label_wode_or_tade.setText("我的标签");
             tv_title_wode_or_tade.setText("我的主页");
-            tv_pics_wode_or_tade.setText("我的照片");
-            tv_youji_wode_or_tade.setText("我的友记");
-            tv_youju_wode_or_tade.setText("我的友聚");
 //            iv_image_heart.setVisibility(View.GONE);
             rl_algin_right_tade.setVisibility(View.GONE);
             rl_algin_right_wode.setVisibility(View.VISIBLE);
         }
+        initRecyclerView();
         initRefresh();
+    }
+
+    private void initRecyclerView() {
+        // recyclerView初始化开始
+        StaggeredGridLayoutManager mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rv_pic_youji_youju.setLayoutManager(mLayoutManager);
+
+        //----------照片----------
+        ViseHttp.POST(NetConfig.homepagePartFour)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartFour))
+                .addParam("uid", spImp.getUID())
+                .addParam("tid", person_id)
+                .addParam("status",status)
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            Log.d("asdasfsada_zhaopain",data);
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                Gson gson = new Gson();
+                                PersonMain_Pics_model model = gson.fromJson(data,PersonMain_Pics_model.class);
+                                picsList.clear();
+                                picsList.addAll(model.getObj().getPhoto());
+                                Collections.shuffle(picsList);
+                                picsAdapter = new PersonMainActivity_Pics_Adapter(picsList);
+                                rv_pic_youji_youju.setAdapter(picsAdapter);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
+
+        //----------友记----------
+        ViseHttp.POST(NetConfig.homepagePartTwo)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartTwo))
+                .addParam("uid", spImp.getUID())
+                .addParam("tid", person_id)
+                .addParam("status",status)
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        Log.d("asdasfsada_Youji",data);
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                Gson gson = new Gson();
+                                PersonMain_Youji_model model = gson.fromJson(data,PersonMain_Youji_model.class);
+                                youJiList.clear();
+                                youJiList.addAll(model.getObj().getFriend());
+                                Collections.shuffle(youJiList);
+                                youJiAdapter = new PersonMainActivity_YouJi_Adapter(youJiList);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
+        //----------友聚----------
+        ViseHttp.POST(NetConfig.homepagePartthree)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartTwo))
+                .addParam("uid", spImp.getUID())
+                .addParam("tid", person_id)
+                .addParam("status",status)
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        Log.d("asdasfsada_YouJu",data);
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                Gson gson = new Gson();
+                                PersonMain_YouJu_model model = gson.fromJson(data,PersonMain_YouJu_model.class);
+                                youJuList.clear();
+                                youJuList.addAll(model.getObj().getActivity());
+                                Collections.shuffle(youJuList);
+                                youJuAdapter = new PersonMainActivity_YouJu_Adapter(youJuList);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
     }
 
     private void initRefresh() {
         refreshLayout.setEnableLoadMore(false);
-        refreshLayout.setRefreshHeader(new ClassicsHeader(PersonMainActivity.this));
+        refreshLayout.setRefreshHeader(new ClassicsHeader(PersonMainActivity1.this));
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
-                ViseHttp.POST(NetConfig.personMain)
+                ViseHttp.POST(NetConfig.homepagePartOne)
                         .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.personMain))
                         .addParam("uid", spImp.getUID())
                         .addParam("tid", person_id)
                         .addParam("status",status)//=0时传 用户ID    =1时传网易ID
-                        .addParam("type", "0")//0 为5条  1为全部
                         .request(new ACallback<String>() {
                             @Override
                             public void onSuccess(String data) {
@@ -224,37 +365,22 @@ public class PersonMainActivity extends BaseActivity {
                                     JSONObject jsonObject = new JSONObject(data);
                                     if (jsonObject.getInt("code") == 200) {
                                         Gson gson = new Gson();
-                                        model = gson.fromJson(data, PersonMainModel.class);
+                                        model = gson.fromJson(data, NewPersonMainMode_part1.class);
                                         otherUserId = model.getObj().getInfo().getOtherUserId();//
-                                        Glide.with(PersonMainActivity.this).load(model.getObj().getInfo().getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(iv_person_icon);
-                                        if (model.getObj().getPhoto().size() == 0){
-                                            rl_pics_text.setVisibility(View.GONE);
-                                        }
-                                        if (model.getObj().getFriend().size() == 0){
-                                            rl_youji_text.setVisibility(View.GONE);
-                                        }
-                                        if (model.getObj().getActivity().size() == 0){
-                                            rl_youju_text.setVisibility(View.GONE);
-                                        }
+                                        Glide.with(PersonMainActivity1.this).load(model.getObj().getInfo().getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(iv_person_icon);
 
                                         if (model.getObj().getInfo().getSex().equals("0")) {
                                             ta = "他";
                                             if (type_tade_or_wode == 0) {
                                                 tv_title_wode_or_tade.setText(ta + "的主页");
-                                                tv_pics_wode_or_tade.setText(ta + "的照片");
-                                                tv_youji_wode_or_tade.setText(ta + "的友记");
-                                                tv_youju_wode_or_tade.setText(ta + "的友聚");
                                                 tv_more_label.setText(ta+"的更多标签");
                                             }
-                                            Glide.with(PersonMainActivity.this).load(R.mipmap.nan).into(iv_person_sex);
+                                            Glide.with(PersonMainActivity1.this).load(R.mipmap.nan).into(iv_person_sex);
                                         } else if (model.getObj().getInfo().getSex().equals("1")) {
-                                            Glide.with(PersonMainActivity.this).load(R.mipmap.nv).into(iv_person_sex);
+                                            Glide.with(PersonMainActivity1.this).load(R.mipmap.nv).into(iv_person_sex);
                                             ta = "她";
                                             if (type_tade_or_wode == 0) {
                                                 tv_title_wode_or_tade.setText(ta + "的主页");
-                                                tv_pics_wode_or_tade.setText(ta + "的照片");
-                                                tv_youji_wode_or_tade.setText(ta + "的友记");
-                                                tv_youju_wode_or_tade.setText(ta + "的友聚");
                                                 tv_more_label.setText(ta+"的更多标签");
                                             }
                                         }
@@ -279,20 +405,20 @@ public class PersonMainActivity extends BaseActivity {
                                         tv_huozan_num.setText(model.getObj().getInfo().getGiveCount() + "");
                                         tv_fans_num.setText(model.getObj().getInfo().getFans());
                                         if (model.getObj().getInfo().getFriends().equals("1")) {
-                                            Glide.with(PersonMainActivity.this).load(R.mipmap.other_send_msg).into(iv_addfriend);
+                                            Glide.with(PersonMainActivity1.this).load(R.mipmap.other_send_msg).into(iv_addfriend);
                                         } else if (model.getObj().getInfo().getFriends().equals("0")) {
-                                            Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_tianjiahaoyou).into(iv_addfriend);
+                                            Glide.with(PersonMainActivity1.this).load(R.mipmap.tarenzhuye_tianjiahaoyou).into(iv_addfriend);
 
                                         }
                                         if(model.getObj().getInfo().getIf_kefu().equals("1")){//如果是客服 直接可以聊天
-                                            Glide.with(PersonMainActivity.this).load(R.mipmap.other_send_msg).into(iv_addfriend);
+                                            Glide.with(PersonMainActivity1.this).load(R.mipmap.other_send_msg).into(iv_addfriend);
                                         }
                                         if (model.getObj().getInfo().getFollow().equals("0")) {
                                             isFollow = 0 ;
-                                            Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_heart).into(iv_image_guanzhu);
+                                            Glide.with(PersonMainActivity1.this).load(R.mipmap.tarenzhuye_heart).into(iv_image_guanzhu);
                                         } else if (model.getObj().getInfo().getFollow().equals("1")) {
                                             isFollow = 1 ;
-                                            Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_heartwhite).into(iv_image_guanzhu);
+                                            Glide.with(PersonMainActivity1.this).load(R.mipmap.tarenzhuye_heartwhite).into(iv_image_guanzhu);
                                         }
                                         if (model.getObj().getInfo().getIf_kefu().equals("0")){
                                             iv_kefu.setVisibility(View.GONE);
@@ -300,7 +426,7 @@ public class PersonMainActivity extends BaseActivity {
                                             iv_kefu.setVisibility(View.VISIBLE);
                                         }
                                         //--------共同标签----------------------
-                                        PersonMainModel.ObjBean.UsertagBean.SameBean sameBean = model.getObj().getUsertag().getSame();
+                                        NewPersonMainMode_part1.ObjBean.UsertagBean.SameBean sameBean = model.getObj().getUsertag().getSame();
                                         list_label.clear();
                                         String[] strings1 = sameBean.getPersonality().split(",");
                                         String[] strings2 = sameBean.getMotion().split(",");
@@ -316,33 +442,13 @@ public class PersonMainActivity extends BaseActivity {
                                         list_label.addAll(addLabelToList(5,strings5));
                                         list_label.addAll(addLabelToList(6,strings6));
                                         list_label.addAll(addLabelToList(7,strings7));
+                                        if (list_label.size() == 0){
+                                            KVMode kvMode = new KVMode();
+                                            kvMode.setI(1);
+                                            kvMode.setString("暂无共同标签");
+                                            list_label.add(kvMode);
+                                        }
                                         personSameLabelAdapter.notifyDataSetChanged();
-                                        //--------照片-------------------------
-                                        list_pics.clear();
-                                        list_pics.addAll(model.getObj().getPhoto());
-                                        taRenZhuYePicsAdapter.notifyDataSetChanged();
-
-                                        //----------友记---------------
-                                        LinearLayoutManager manager1 = new LinearLayoutManager(PersonMainActivity.this) {
-                                            @Override
-                                            public boolean canScrollVertically() {
-                                                return false;
-                                            }
-                                        };
-                                        list_youji.clear();
-                                        list_youji.addAll(model.getObj().getFriend());
-                                        taRenZhuYeYouJiAdapter.notifyDataSetChanged();
-
-                                        //-----------友聚-------------
-                                        LinearLayoutManager manager2 = new LinearLayoutManager(PersonMainActivity.this) {
-                                            @Override
-                                            public boolean canScrollVertically() {
-                                                return false;
-                                            }
-                                        };
-                                        list_youju.clear();
-                                        list_youju.addAll(model.getObj().getActivity());
-                                        taRenZhuYeYouJuAdapter.notifyDataSetChanged();
                                     }
                                     refreshLayout.finishRefresh(1000);
                                 } catch (JSONException e) {
@@ -360,9 +466,9 @@ public class PersonMainActivity extends BaseActivity {
     }
 
     private void initData() {
-
-        ViseHttp.POST(NetConfig.personMain)
-                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.personMain))
+        // --------- 顶部数据----
+        ViseHttp.POST(NetConfig.homepagePartOne)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartOne))
                 .addParam("uid", spImp.getUID())
                 .addParam("tid", person_id)
                 .addParam("status",status)
@@ -375,37 +481,22 @@ public class PersonMainActivity extends BaseActivity {
                             JSONObject jsonObject = new JSONObject(data);
                             if (jsonObject.getInt("code") == 200) {
                                 Gson gson = new Gson();
-                                model = gson.fromJson(data, PersonMainModel.class);
+                                model = gson.fromJson(data, NewPersonMainMode_part1.class);
                                 otherUserId = model.getObj().getInfo().getOtherUserId();//
-                                Glide.with(PersonMainActivity.this).load(model.getObj().getInfo().getUserpic()).into(iv_person_icon);
-                                if (model.getObj().getPhoto().size() == 0){
-                                    rl_pics_text.setVisibility(View.GONE);
-                                }
-                                if (model.getObj().getFriend().size() == 0){
-                                    rl_youji_text.setVisibility(View.GONE);
-                                }
-                                if (model.getObj().getActivity().size() == 0){
-                                    rl_youju_text.setVisibility(View.GONE);
-                                }
+                                Glide.with(PersonMainActivity1.this).load(model.getObj().getInfo().getUserpic()).into(iv_person_icon);
 
                                 if (model.getObj().getInfo().getSex().equals("0")) {
                                     ta = "他";
                                     if (type_tade_or_wode == 0) {
                                         tv_title_wode_or_tade.setText(ta + "的主页");
-                                        tv_pics_wode_or_tade.setText(ta + "的照片");
-                                        tv_youji_wode_or_tade.setText(ta + "的友记");
-                                        tv_youju_wode_or_tade.setText(ta + "的友聚");
                                         tv_more_label.setText(ta+"的更多标签");
                                     }
-                                    Glide.with(PersonMainActivity.this).load(R.mipmap.nan).into(iv_person_sex);
+                                    Glide.with(PersonMainActivity1.this).load(R.mipmap.nan).into(iv_person_sex);
                                 } else if (model.getObj().getInfo().getSex().equals("1")) {
-                                    Glide.with(PersonMainActivity.this).load(R.mipmap.nv).into(iv_person_sex);
+                                    Glide.with(PersonMainActivity1.this).load(R.mipmap.nv).into(iv_person_sex);
                                     ta = "她";
                                     if (type_tade_or_wode == 0) {
                                         tv_title_wode_or_tade.setText(ta + "的主页");
-                                        tv_pics_wode_or_tade.setText(ta + "的照片");
-                                        tv_youji_wode_or_tade.setText(ta + "的友记");
-                                        tv_youju_wode_or_tade.setText(ta + "的友聚");
                                         tv_more_label.setText(ta+"的更多标签");
                                     }
                                 }
@@ -431,19 +522,19 @@ public class PersonMainActivity extends BaseActivity {
                                 tv_huozan_num.setText(model.getObj().getInfo().getGiveCount() + "");
                                 tv_fans_num.setText(model.getObj().getInfo().getFans());
                                 if (model.getObj().getInfo().getFriends().equals("1")) {
-                                    Glide.with(PersonMainActivity.this).load(R.mipmap.other_send_msg).into(iv_addfriend);
+                                    Glide.with(PersonMainActivity1.this).load(R.mipmap.other_send_msg).into(iv_addfriend);
                                 } else if (model.getObj().getInfo().getFriends().equals("0")) {
-                                    Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_tianjiahaoyou).into(iv_addfriend);
+                                    Glide.with(PersonMainActivity1.this).load(R.mipmap.tarenzhuye_tianjiahaoyou).into(iv_addfriend);
                                 }
                                 if(model.getObj().getInfo().getIf_kefu().equals("1")){//如果是客服 直接可以聊天
-                                    Glide.with(PersonMainActivity.this).load(R.mipmap.other_send_msg).into(iv_addfriend);
+                                    Glide.with(PersonMainActivity1.this).load(R.mipmap.other_send_msg).into(iv_addfriend);
                                 }
                                 if (model.getObj().getInfo().getFollow().equals("0")) {
                                     isFollow = 0 ;
-                                    Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_heart).into(iv_image_guanzhu);
+                                    Glide.with(PersonMainActivity1.this).load(R.mipmap.tarenzhuye_heart).into(iv_image_guanzhu);
                                 } else if (model.getObj().getInfo().getFollow().equals("1")) {
                                     isFollow = 1 ;
-                                    Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_heartwhite).into(iv_image_guanzhu);
+                                    Glide.with(PersonMainActivity1.this).load(R.mipmap.tarenzhuye_heartwhite).into(iv_image_guanzhu);
                                 }
                                 if (model.getObj().getInfo().getIf_kefu().equals("0")){
                                     iv_kefu.setVisibility(View.GONE);
@@ -451,7 +542,7 @@ public class PersonMainActivity extends BaseActivity {
                                     iv_kefu.setVisibility(View.VISIBLE);
                                 }
                                 //---------共同标签-----------------------------
-                                PersonMainModel.ObjBean.UsertagBean.SameBean sameBean = model.getObj().getUsertag().getSame();
+                                NewPersonMainMode_part1.ObjBean.UsertagBean.SameBean sameBean = model.getObj().getUsertag().getSame();
 
                                 String[] strings1 = sameBean.getPersonality().split(",");
                                 String[] strings2 = sameBean.getMotion().split(",");
@@ -467,41 +558,14 @@ public class PersonMainActivity extends BaseActivity {
                                 list_label.addAll(addLabelToList(5,strings5));
                                 list_label.addAll(addLabelToList(6,strings6));
                                 list_label.addAll(addLabelToList(7,strings7));
+                                if (list_label.size() == 0){
+                                    KVMode kvMode = new KVMode();
+                                    kvMode.setI(1);
+                                    kvMode.setString("暂无共同标签");
+                                    list_label.add(kvMode);
+                                }
                                 personSameLabelAdapter =new PersonSameLabelAdapter(list_label);
                                 recycler_view_labels.setAdapter(personSameLabelAdapter);
-                                //--------照片-------------------------
-                                list_pics.addAll(model.getObj().getPhoto());
-                                GridLayoutManager manager = new GridLayoutManager(PersonMainActivity.this, 3) {
-                                    @Override
-                                    public boolean canScrollVertically() {
-                                        return false;
-                                    }
-                                };
-                                recyclerView_pics.setLayoutManager(manager);
-                                taRenZhuYePicsAdapter = new TaRenZhuYePicsAdapter(list_pics, otherUserId);
-                                recyclerView_pics.setAdapter(taRenZhuYePicsAdapter);
-                                //----------友记---------------
-                                LinearLayoutManager manager1 = new LinearLayoutManager(PersonMainActivity.this) {
-                                    @Override
-                                    public boolean canScrollVertically() {
-                                        return false;
-                                    }
-                                };
-                                list_youji.addAll(model.getObj().getFriend());
-                                recyclerView_youji.setLayoutManager(manager1);
-                                taRenZhuYeYouJiAdapter = new TaRenZhuYeYouJiAdapter(list_youji);
-                                recyclerView_youji.setAdapter(taRenZhuYeYouJiAdapter);
-                                //-----------友聚-------------
-                                LinearLayoutManager manager2 = new LinearLayoutManager(PersonMainActivity.this) {
-                                    @Override
-                                    public boolean canScrollVertically() {
-                                        return false;
-                                    }
-                                };
-                                list_youju.addAll(model.getObj().getActivity());
-                                recyclerView_youju.setLayoutManager(manager2);
-                                taRenZhuYeYouJuAdapter = new TaRenZhuYeYouJuAdapter(list_youju);
-                                recyclerView_youju.setAdapter(taRenZhuYeYouJuAdapter);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -528,8 +592,9 @@ public class PersonMainActivity extends BaseActivity {
         return list;
     }
 
-    @OnClick({R.id.rl_back,R.id.rl_label_text, R.id.ll_person_all_pics, R.id.ll_person_all_youji, R.id.ll_person_all_youju,
-            R.id.rl_algin_right_wode, R.id.rl_add_friend, R.id.rl_guanzhu,R.id.iv_heart,R.id.ll_huozan,R.id.ll_guanzhu,R.id.ll_fans,R.id.iv_person_icon})
+    @OnClick({R.id.rl_back,R.id.rl_label_text,
+            R.id.rl_algin_right_wode, R.id.rl_add_friend, R.id.rl_guanzhu,R.id.iv_heart,R.id.ll_huozan,R.id.ll_guanzhu,R.id.ll_fans,R.id.iv_person_icon,
+            R.id.rl_tab_1,R.id.rl_tab_2,R.id.rl_tab_3})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -538,56 +603,38 @@ public class PersonMainActivity extends BaseActivity {
                 break;
             case R.id.rl_label_text:
                 if (type_tade_or_wode == 0){
-                    intent.setClass(PersonMainActivity.this,PersonLabelActivity.class);
+                    intent.setClass(PersonMainActivity1.this,PersonLabelActivity.class);
                     intent.putExtra("userName",model.getObj().getInfo().getUsername());
                     intent.putExtra("userSex",ta);
                     intent.putExtra("labelData",model.getObj().getUsertag());
                     startActivity(intent);
                 }else {
-                    intent.setClass(PersonMainActivity.this, EditorLabelActivity.class);
+                    intent.setClass(PersonMainActivity1.this, EditorLabelActivity.class);
                     startActivity(intent);
                 }
                 break;
             case R.id.ll_person_all_pics:
                 if (type_tade_or_wode == 1) {
-                    intent.setClass(PersonMainActivity.this, MyPicturesActivity.class);
+                    intent.setClass(PersonMainActivity1.this, MyPicturesActivity.class);
                 } else if (type_tade_or_wode == 0) {
                     intent.putExtra("otheruid", otherUserId);
-                    intent.setClass(PersonMainActivity.this, OtherPicActivity.class);
+                    intent.setClass(PersonMainActivity1.this, OtherPicActivity.class);
                 }
                 startActivity(intent);
                 break;
-            case R.id.ll_person_all_youji:
-                if (model.getObj().getFriend().size() > 0) {
-                    intent.setClass(PersonMainActivity.this, PersonRememberActivity.class);
-                    intent.putExtra("person_id", otherUserId);
-                    startActivity(intent);
-                } else {
-                    toToast(PersonMainActivity.this, "他还没有发过友记");
-                }
-                break;
-            case R.id.ll_person_all_youju:
-                if (model.getObj().getActivity().size() > 0) {
-                    intent.setClass(PersonMainActivity.this, PersonTogetherActivity.class);
-                    intent.putExtra("person_id", otherUserId);
-                    startActivity(intent);
-                } else {
-                    toToast(PersonMainActivity.this, "他还没有参加过友聚");
-                }
-                break;
             case R.id.rl_algin_right_wode:
-                intent.setClass(PersonMainActivity.this, MyFriendActivity.class);
+                intent.setClass(PersonMainActivity1.this, MyFriendActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rl_add_friend:
                 if (TextUtils.isEmpty(spImp.getUID()) || spImp.getUID().equals("0")) {
-                    intent.setClass(PersonMainActivity.this, LoginActivity.class);
+                    intent.setClass(PersonMainActivity1.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
                     if (model.getObj().getInfo().getFriends().equals("1")||model.getObj().getInfo().getIf_kefu().equals("1")) {//如果是客服 直接可以聊天
                         liaotian(model.getObj().getInfo().getWy_accid());
                     } else{
-                        FriendDescribeDialog dialog = new FriendDescribeDialog(PersonMainActivity.this);
+                        FriendDescribeDialog dialog = new FriendDescribeDialog(PersonMainActivity1.this);
                         dialog.show();
                         dialog.setOnReturnListener(new FriendDescribeDialog.OnReturnListener() {
                             @Override
@@ -603,9 +650,9 @@ public class PersonMainActivity extends BaseActivity {
                                                 try {
                                                     JSONObject jsonObject = new JSONObject(data);
                                                     if (jsonObject.getInt("code") == 200) {
-                                                        toToast(PersonMainActivity.this, "好友请求已发送");
+                                                        toToast(PersonMainActivity1.this, "好友请求已发送");
                                                     } else {
-                                                        toToast(PersonMainActivity.this, jsonObject.getString("message"));
+                                                        toToast(PersonMainActivity1.this, jsonObject.getString("message"));
                                                     }
                                                 } catch (JSONException e) {
                                                     e.printStackTrace();
@@ -624,7 +671,7 @@ public class PersonMainActivity extends BaseActivity {
                 break;
             case R.id.rl_guanzhu:
                 if (TextUtils.isEmpty(spImp.getUID()) || spImp.getUID().equals("0")) {
-                    intent.setClass(PersonMainActivity.this, LoginActivity.class);
+                    intent.setClass(PersonMainActivity1.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
                     if (isFollow == 0){
@@ -638,11 +685,11 @@ public class PersonMainActivity extends BaseActivity {
                                         try {
                                             JSONObject jsonObject = new JSONObject(data);
                                             if (jsonObject.getInt("code") == 200) {
-                                                toToast(PersonMainActivity.this, "关注成功");
-                                                Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_heartwhite).into(iv_image_guanzhu);
+                                                toToast(PersonMainActivity1.this, "关注成功");
+                                                Glide.with(PersonMainActivity1.this).load(R.mipmap.tarenzhuye_heartwhite).into(iv_image_guanzhu);
                                                 isFollow = 1;
                                             } else {
-                                                toToast(PersonMainActivity.this, jsonObject.getString("message"));
+                                                toToast(PersonMainActivity1.this, jsonObject.getString("message"));
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
@@ -664,11 +711,11 @@ public class PersonMainActivity extends BaseActivity {
                                         try {
                                             JSONObject jsonObject = new JSONObject(data);
                                             if (jsonObject.getInt("code") == 200) {
-                                                toToast(PersonMainActivity.this, "取消关注成功");
-                                                Glide.with(PersonMainActivity.this).load(R.mipmap.tarenzhuye_heart).into(iv_image_guanzhu);
+                                                toToast(PersonMainActivity1.this, "取消关注成功");
+                                                Glide.with(PersonMainActivity1.this).load(R.mipmap.tarenzhuye_heart).into(iv_image_guanzhu);
                                                 isFollow = 0;
                                             } else {
-                                                toToast(PersonMainActivity.this, jsonObject.getString("message"));
+                                                toToast(PersonMainActivity1.this, jsonObject.getString("message"));
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
@@ -696,9 +743,9 @@ public class PersonMainActivity extends BaseActivity {
                                     jsonObject = new JSONObject(data);
                                     if (jsonObject.getInt("code") == 200) {
                                         Log.d("22222", data);
-                                        toToast(PersonMainActivity.this, "打招呼成功！");
+                                        toToast(PersonMainActivity1.this, "打招呼成功！");
                                     } else {
-                                        toToast(PersonMainActivity.this, "您已经打过招呼了");
+                                        toToast(PersonMainActivity1.this, "您已经打过招呼了");
                                     }
 
                                 } catch (JSONException e) {
@@ -713,14 +760,14 @@ public class PersonMainActivity extends BaseActivity {
                         });
                 break;
             case R.id.ll_huozan:
-                HuoZanDialog dialog = new HuoZanDialog(PersonMainActivity.this,tv_person_name.getText().toString(),tv_huozan_num.getText().toString());
+                HuoZanDialog dialog = new HuoZanDialog(PersonMainActivity1.this,tv_person_name.getText().toString(),tv_huozan_num.getText().toString());
                 dialog.show();
                 break;
             case R.id.ll_guanzhu:
                 if (model.getObj().getInfo().getUserlike().equals("0")){
-                    toToast(PersonMainActivity.this,"他还没有关注任何人");
+                    toToast(PersonMainActivity1.this,"他还没有关注任何人");
                 }else {
-                    intent.setClass(PersonMainActivity.this,PersonGuanZhuActivity.class);
+                    intent.setClass(PersonMainActivity1.this,PersonGuanZhuActivity.class);
                     intent.putExtra("userID",otherUserId);
                     intent.putExtra("type",1);
                     if (type_tade_or_wode == 1){
@@ -733,9 +780,9 @@ public class PersonMainActivity extends BaseActivity {
                 break;
             case R.id.ll_fans:
                 if (model.getObj().getInfo().getFans().equals("0")){
-                    toToast(PersonMainActivity.this,"他还没有粉丝");
+                    toToast(PersonMainActivity1.this,"他还没有粉丝");
                 }else {
-                    intent.setClass(PersonMainActivity.this,PersonGuanZhuActivity.class);
+                    intent.setClass(PersonMainActivity1.this,PersonGuanZhuActivity.class);
                     intent.putExtra("userID",otherUserId);
                     intent.putExtra("type",2);
                     if (type_tade_or_wode == 1){
@@ -747,11 +794,32 @@ public class PersonMainActivity extends BaseActivity {
                 }
                 break;
             case R.id.iv_person_icon:
-                    intent.setClass(PersonMainActivity.this,PersonImpressionActivity.class);
+                    intent.setClass(PersonMainActivity1.this,PersonImpressionActivity.class);
                     intent.putExtra("person_id",otherUserId);
                     intent.putExtra("user_icon",model.getObj().getInfo().getUserpic());
                     intent.putExtra("sex",model.getObj().getInfo().getSex());
                     startActivity(intent);
+                break;
+            case R.id.rl_tab_1:
+                show_tab = 1;
+                bottom_line_1.setVisibility(View.VISIBLE);
+                bottom_line_2.setVisibility(View.GONE);
+                bottom_line_3.setVisibility(View.GONE);
+                rv_pic_youji_youju.setAdapter(picsAdapter);
+                break;
+            case R.id.rl_tab_2:
+                bottom_line_1.setVisibility(View.GONE);
+                bottom_line_2.setVisibility(View.VISIBLE);
+                bottom_line_3.setVisibility(View.GONE);
+                show_tab = 2;
+                rv_pic_youji_youju.setAdapter(youJiAdapter);
+                break;
+            case R.id.rl_tab_3:
+                bottom_line_1.setVisibility(View.GONE);
+                bottom_line_2.setVisibility(View.GONE);
+                bottom_line_3.setVisibility(View.VISIBLE);
+                rv_pic_youji_youju.setAdapter(youJuAdapter);
+                show_tab = 3;
                 break;
         }
 
@@ -760,6 +828,6 @@ public class PersonMainActivity extends BaseActivity {
 
     private void liaotian(String liaotianAccount) {
         NimUIKit.setAccount(spImp.getYXID());
-        NimUIKit.startP2PSession(PersonMainActivity.this, liaotianAccount);
+        NimUIKit.startP2PSession(PersonMainActivity1.this, liaotianAccount);
     }
 }

@@ -7,10 +7,9 @@ package com.yiwo.friendscometogether.network;
 public class NetConfig {
 
     //测试服务器
-//    public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
-//    public static String BaseUrl = "http://tb.91yiwo.cn/index.php/";
+    public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
     //正式服务器
-    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
+//    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
 
 
 //    public static String BaseUrl = "http://www.youlaiyouyue.com/";
@@ -344,4 +343,9 @@ public class NetConfig {
     public static String addGroup = "action/ac_public/addGroup";
     //群列表
     public static String groupList = "action/ac_public/groupList";//群列表    传userID 用户id    返回 name群名称   groupid群ID
+    //新个人主页
+    public static String homepagePartOne = "action/ac_user/HomepagePartOne"; //action/ac_user/HomepagePartOne 用户基本信息接口 传status  tid  uid
+    public static String homepagePartTwo = "action/ac_user/HomepagePartTwo"; //action/ac_user/HomepagePartTwo 友记数据 传status  tid  uid
+    public static String homepagePartthree = "action/ac_user/HomepagePartThree"; //action/ac_user/HomepagePartTwo 友聚数据 传status  tid  uid
+    public static String homepagePartFour = "action/ac_user/HomepagePartFour"; //action/ac_user/HomepagePartTwo 照片 传status  tid  uid
 }
