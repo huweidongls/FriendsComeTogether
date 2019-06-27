@@ -20,7 +20,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.DetailsRememberModel;
 import com.yiwo.friendscometogether.network.NetConfig;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
@@ -83,7 +83,7 @@ public class DetailsOfFriendsIntercalation1Adapter extends RecyclerView.Adapter<
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(context, PersonMainActivity.class);
+                intent.setClass(context, PersonMainActivity1.class);
                 intent.putExtra("person_id", data.get(position).getUserID());
                 context.startActivity(intent);
             }

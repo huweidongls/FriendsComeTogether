@@ -56,7 +56,7 @@ import com.yiwo.friendscometogether.newadapter.MuLuItemYouJiAdapter;
 import com.yiwo.friendscometogether.newmodel.YouJiWebModel;
 import com.yiwo.friendscometogether.newpage.FindFriendByTelActivity;
 import com.yiwo.friendscometogether.newpage.JuBaoActivity;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.ArticleCommentActivity;
 import com.yiwo.friendscometogether.pages.BlackUserActivity;
 import com.yiwo.friendscometogether.pages.InsertIntercalationActivity;
@@ -615,7 +615,7 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
         @JavascriptInterface
         public void userinfo(String uid){
             Intent intent = new Intent();
-            intent.setClass(DetailsOfFriendsWebActivity1.this, PersonMainActivity.class);
+            intent.setClass(DetailsOfFriendsWebActivity1.this, PersonMainActivity1.class);
             intent.putExtra("person_id", uid);
             startActivity(intent);
         }

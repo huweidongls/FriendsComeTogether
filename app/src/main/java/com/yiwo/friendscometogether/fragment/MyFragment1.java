@@ -30,7 +30,6 @@ import com.yiwo.friendscometogether.newpage.AllRememberActivity;
 import com.yiwo.friendscometogether.newpage.GuanZhuActivity;
 import com.yiwo.friendscometogether.newpage.MessageActivity;
 import com.yiwo.friendscometogether.newpage.MyContactActivity;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.newpage.SuperLikeActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;

@@ -48,7 +48,7 @@ import com.yiwo.friendscometogether.fragment.MyFragment;
 import com.yiwo.friendscometogether.fragment.MyFragment1;
 import com.yiwo.friendscometogether.newfragment.YouJiFragment;
 import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivityNew;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.CreateFriendRememberActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -508,7 +508,7 @@ public class MainActivity extends FragmentActivity {
                     Intent intent = new Intent();
                     intent.putExtra("person_id",message.getFromAccount());
                     intent.putExtra("status","1");
-                    intent.setClass(context, PersonMainActivity.class);
+                    intent.setClass(context, PersonMainActivity1.class);
                     context.startActivity(intent);
                 }
             }

@@ -20,7 +20,7 @@ import com.yiwo.friendscometogether.adapter.ArticleCommentAdapter;
 import com.yiwo.friendscometogether.adapter.ArticleCommentCommentAdapter;
 import com.yiwo.friendscometogether.model.ArticleCommentListModel;
 import com.yiwo.friendscometogether.newmodel.AllCommentHuoDongModel;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class AllCommentHuoDongAdapter extends RecyclerView.Adapter<AllCommentHuo
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("person_id", data.get(position).getUserID());
-                intent.setClass(context, PersonMainActivity.class);
+                intent.setClass(context, PersonMainActivity1.class);
                 context.startActivity(intent);
             }
         });

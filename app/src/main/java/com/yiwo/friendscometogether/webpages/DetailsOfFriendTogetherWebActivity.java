@@ -49,7 +49,7 @@ import com.yiwo.friendscometogether.newadapter.MuLuItemYouJuAdapter;
 import com.yiwo.friendscometogether.newmodel.YouJuWebModel;
 import com.yiwo.friendscometogether.newpage.JuBaoActivity;
 import com.yiwo.friendscometogether.newpage.MoreCommentHuodongActivity;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.ApplyActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.RealNameActivity;
@@ -367,7 +367,7 @@ public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
         @JavascriptInterface
         public void userinfo(String uid){
             Intent intent = new Intent();
-            intent.setClass(DetailsOfFriendTogetherWebActivity.this, PersonMainActivity.class);
+            intent.setClass(DetailsOfFriendTogetherWebActivity.this, PersonMainActivity1.class);
             intent.putExtra("person_id", uid);
             startActivity(intent);
         }

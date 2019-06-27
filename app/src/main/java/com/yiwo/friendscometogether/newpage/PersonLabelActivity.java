@@ -16,7 +16,6 @@ import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
 import com.yiwo.friendscometogether.newadapter.EditorLabelSaveAdapter;
 import com.yiwo.friendscometogether.newmodel.NewPersonMainMode_part1;
-import com.yiwo.friendscometogether.newmodel.PersonMainModel;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.widget.FlowLayoutManager;
 import com.yiwo.friendscometogether.widget.NestedRecyclerView;
@@ -26,7 +25,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class PersonLabelActivity extends BaseActivity {
-
 
     @BindView(R.id.rl0)
     RelativeLayout rl0;

@@ -16,7 +16,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.ZAndScModel;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
 
 import java.util.List;
@@ -59,7 +59,7 @@ public class ZAndScAdapter extends RecyclerView.Adapter<ZAndScAdapter.ViewHolder
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("person_id", data.get(position).getUid());
-                intent.setClass(context, PersonMainActivity.class);
+                intent.setClass(context, PersonMainActivity1.class);
                 context.startActivity(intent);
             }
         });

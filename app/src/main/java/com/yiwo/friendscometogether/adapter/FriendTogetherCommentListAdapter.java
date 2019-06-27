@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.FriendsTogetherDetailsModel;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 
 import java.util.List;
 
@@ -52,7 +52,7 @@ public class FriendTogetherCommentListAdapter extends RecyclerView.Adapter<Frien
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.putExtra("person_id", data.get(position).getUserID());
-                intent.setClass(context, PersonMainActivity.class);
+                intent.setClass(context, PersonMainActivity1.class);
                 context.startActivity(intent);
             }
         });

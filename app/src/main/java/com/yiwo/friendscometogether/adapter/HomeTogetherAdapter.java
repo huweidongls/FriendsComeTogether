@@ -24,7 +24,7 @@ import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.model.FocusOnLeaderModel;
 import com.yiwo.friendscometogether.model.HomeTogetherModel;
 import com.yiwo.friendscometogether.network.NetConfig;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
@@ -136,7 +136,7 @@ public class HomeTogetherAdapter extends RecyclerView.Adapter<HomeTogetherAdapte
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.putExtra("person_id", data.get(position).getCaptain());
-                intent.setClass(context, PersonMainActivity.class);
+                intent.setClass(context, PersonMainActivity1.class);
                 context.startActivity(intent);
             }
         });

@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.UserFocusModel;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 
 import java.util.List;
 
@@ -80,7 +80,7 @@ public class MyFocusAdapter extends RecyclerView.Adapter<MyFocusAdapter.ViewHold
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.putExtra("person_id", data.get(position).getLikeuserID());
-                intent.setClass(context, PersonMainActivity.class);
+                intent.setClass(context, PersonMainActivity1.class);
                 context.startActivity(intent);
             }
         });

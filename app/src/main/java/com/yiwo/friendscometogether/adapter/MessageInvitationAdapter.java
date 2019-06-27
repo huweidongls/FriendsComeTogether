@@ -21,7 +21,7 @@ import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.MessageInvitationListModel;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 
 import java.util.List;
@@ -71,7 +71,7 @@ public class MessageInvitationAdapter extends RecyclerView.Adapter<MessageInvita
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("person_id", data.get(position).getUid());
-                intent.setClass(context, PersonMainActivity.class);
+                intent.setClass(context, PersonMainActivity1.class);
                 context.startActivity(intent);
             }
         });
@@ -90,7 +90,7 @@ public class MessageInvitationAdapter extends RecyclerView.Adapter<MessageInvita
                     public void onClick(View v) {
                         Intent intent = new Intent();
                         intent.putExtra("person_id", data.get(position).getUid());
-                        intent.setClass(context, PersonMainActivity.class);
+                        intent.setClass(context, PersonMainActivity1.class);
                         context.startActivity(intent);
                     }
                 });

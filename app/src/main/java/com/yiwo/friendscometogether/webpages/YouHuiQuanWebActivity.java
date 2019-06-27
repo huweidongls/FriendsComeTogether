@@ -11,17 +11,6 @@ import android.webkit.WebView;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseWebActivity;
-import com.yiwo.friendscometogether.imagepreview.Consts;
-import com.yiwo.friendscometogether.imagepreview.ImagePreviewActivity;
-import com.yiwo.friendscometogether.newpage.MoreCommentHuodongActivity;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -16,7 +16,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.PersonGroupModel;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class PersonGroupAdapter extends RecyclerView.Adapter<PersonGroupAdapter.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(context, PersonMainActivity.class);
+                intent.setClass(context, PersonMainActivity1.class);
                 intent.putExtra("person_id",data.get(position).getUserID());
                 context.startActivity(intent);
             }

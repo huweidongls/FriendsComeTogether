@@ -21,7 +21,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.ArticleCommentListModel;
 import com.yiwo.friendscometogether.newpage.JuBaoActivity;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
 
 import java.util.List;
@@ -59,7 +59,7 @@ public class ArticleCommentAdapter extends RecyclerView.Adapter<ArticleCommentAd
         holder.ivAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(context, PersonMainActivity.class);
+                Intent it = new Intent(context, PersonMainActivity1.class);
                 it.putExtra("person_id", data.get(position).getUserID());
                 context.startActivity(it);
             }

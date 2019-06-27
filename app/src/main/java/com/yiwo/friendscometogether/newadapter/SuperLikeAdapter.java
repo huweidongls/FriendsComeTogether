@@ -23,7 +23,7 @@ import com.netease.nim.uikit.common.ui.recyclerview.decoration.SpacingDecoration
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.SuperLikeModel;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.CreateFriendTogetherActivity;
 import com.yiwo.friendscometogether.widget.FlowLayoutManager;
 import com.yiwo.friendscometogether.widget.NestedRecyclerView;
@@ -85,7 +85,7 @@ public class SuperLikeAdapter extends RecyclerView.Adapter<SuperLikeAdapter.View
         holder.iv_icon_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, PersonMainActivity.class);
+                Intent intent = new Intent(context, PersonMainActivity1.class);
                 intent.putExtra("person_id",data.get(position).getUserID());
                 context.startActivity(intent);
             }

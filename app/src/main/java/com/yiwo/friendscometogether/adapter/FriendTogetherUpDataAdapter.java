@@ -26,7 +26,7 @@ import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.model.FriendsTogethermodel;
 import com.yiwo.friendscometogether.network.NetConfig;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.ActiveEvaluationActivity;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
@@ -161,7 +161,7 @@ public class FriendTogetherUpDataAdapter extends RecyclerView.Adapter<FriendToge
         holder.personll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(context, PersonMainActivity.class);
+                Intent it = new Intent(context, PersonMainActivity1.class);
                 it.putExtra("person_id", data.get(position).getCaptain());
                 context.startActivity(it);
             }

@@ -15,7 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.FindFriendByTelModel;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class FindFriendByTelAdapter extends RecyclerView.Adapter<FindFriendByTel
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(context, PersonMainActivity.class);
+                intent.setClass(context, PersonMainActivity1.class);
                 intent.putExtra("person_id",data.get(position).getUserID());
                 context.startActivity(intent);
             }

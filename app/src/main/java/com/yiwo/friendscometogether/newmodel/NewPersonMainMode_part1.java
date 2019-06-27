@@ -434,7 +434,7 @@ public class NewPersonMainMode_part1 {
                 this.Same = Same;
             }
 
-            public static class SameBean {
+            public static class SameBean implements Serializable {
                 /**
                  * personality :
                  * motion :

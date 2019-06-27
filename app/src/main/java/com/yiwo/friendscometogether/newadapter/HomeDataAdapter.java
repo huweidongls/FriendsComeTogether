@@ -24,7 +24,7 @@ import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.ArticleCommentActivity;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
@@ -203,7 +203,7 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
                 public void onClick(View v) {
                     Intent intent = new Intent();
                     intent.putExtra("person_id", data.get(position).getUserID());
-                    intent.setClass(context, PersonMainActivity.class);
+                    intent.setClass(context, PersonMainActivity1.class);
                     context.startActivity(intent);
                 }
             });

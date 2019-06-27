@@ -40,7 +40,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.MyFriendActivity;
 import com.yiwo.friendscometogether.sp.SpImp;

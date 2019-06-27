@@ -39,7 +39,7 @@ import com.yiwo.friendscometogether.model.UserActiveListModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newpage.FindFriendByTelActivity;
 import com.yiwo.friendscometogether.newpage.GuanZhuActivity;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.StringUtils;
 import com.yiwo.friendscometogether.utils.TokenUtils;
@@ -202,7 +202,7 @@ public class MyFriendActivity extends AppCompatActivity {
                                                         //进主页
                                                         Intent intent = new Intent();
                                                         intent.putExtra("person_id", mDatas.get(i).getUid());
-                                                        intent.setClass(MyFriendActivity.this, PersonMainActivity.class);
+                                                        intent.setClass(MyFriendActivity.this, PersonMainActivity1.class);
                                                         startActivity(intent);
                                                         break;
                                                     case 3:

@@ -36,9 +36,7 @@ import com.yiwo.friendscometogether.custom.MyFriendDialog;
 import com.yiwo.friendscometogether.model.MyFriendModel;
 import com.yiwo.friendscometogether.model.UserActiveListModel;
 import com.yiwo.friendscometogether.network.NetConfig;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
-import com.yiwo.friendscometogether.pages.MyFriendActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
 

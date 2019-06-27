@@ -18,6 +18,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -27,7 +28,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -68,17 +71,6 @@ import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
 import com.yiwo.friendscometogether.widget.FlowLayoutManager;
 import com.yiwo.friendscometogether.widget.NestedRecyclerView;
-import com.yiwo.friendscometogether.widget.WrapContentHeightViewPager;
-
-import net.lucode.hackware.magicindicator.MagicIndicator;
-import net.lucode.hackware.magicindicator.ViewPagerHelper;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -94,7 +86,7 @@ import butterknife.OnClick;
 public class PersonMainActivity1 extends BaseActivity {
 
     @BindView(R.id.recycler_view_labels)
-    NestedRecyclerView recycler_view_labels;
+    RecyclerView recycler_view_labels;
     @BindView(R.id.rl_back)
     RelativeLayout rl_back;
 
@@ -159,8 +151,20 @@ public class PersonMainActivity1 extends BaseActivity {
     View bottom_line_2;
     @BindView(R.id.bottom_line_3)
     View bottom_line_3;
-    @BindView(R.id.rv_pic_youji_youju)
-    RecyclerView rv_pic_youji_youju;
+    @BindView(R.id.rv_pic)
+    RecyclerView rv_pic;
+    @BindView(R.id.rv_youji)
+    RecyclerView rv_youji;
+    @BindView(R.id.rv_youju)
+    RecyclerView rv_youju;
+
+    @BindView(R.id.rl_pics)
+    RelativeLayout rl_pics;
+    @BindView(R.id.rl_youji)
+    RelativeLayout rl_youji;
+    @BindView(R.id.rl_youju)
+    RelativeLayout rl_youju;
+
     @BindView(R.id.person_main_refreshLayout)
     RefreshLayout refreshLayout;
     private String ta = "他";
@@ -215,13 +219,16 @@ public class PersonMainActivity1 extends BaseActivity {
             rl_label_text.setVisibility(View.VISIBLE);
         }
         //---------------先设置label 的 manager-------------
-        FlowLayoutManager managerFlow = new FlowLayoutManager(){
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        };
-        recycler_view_labels.setLayoutManager(managerFlow);
+//        FlowLayoutManager managerFlow = new FlowLayoutManager(){
+//            @Override
+//            public boolean canScrollVertically() {
+//                return false;
+//            }
+//        };
+//        recycler_view_labels.setLayoutManager(managerFlow);
+        LinearLayoutManager manager_labs = new LinearLayoutManager(PersonMainActivity1.this);
+        manager_labs.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recycler_view_labels.setLayoutManager(manager_labs);
 //        ----------------------------------------------------
         Log.d("personIDIDID",person_id);
         initData();
@@ -244,13 +251,37 @@ public class PersonMainActivity1 extends BaseActivity {
 
     private void initRecyclerView() {
         // recyclerView初始化开始
-        StaggeredGridLayoutManager mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL){
+        StaggeredGridLayoutManager mLayoutManager1 = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL){
             @Override
             public boolean canScrollVertically() {
                 return false;
             }
         };
-        rv_pic_youji_youju.setLayoutManager(mLayoutManager);
+        rv_pic.setLayoutManager(mLayoutManager1);
+        picsAdapter = new PersonMainActivity_Pics_Adapter(picsList);
+        rv_pic.setAdapter(picsAdapter);
+
+
+        StaggeredGridLayoutManager mLayoutManager2 = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rv_youji.setLayoutManager(mLayoutManager2);
+        youJiAdapter = new PersonMainActivity_YouJi_Adapter(youJiList);
+        rv_youji.setAdapter(youJiAdapter);
+
+
+        StaggeredGridLayoutManager mLayoutManager3 = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rv_youju.setLayoutManager(mLayoutManager3);
+        youJuAdapter = new PersonMainActivity_YouJu_Adapter(youJuList);
+        rv_youju.setAdapter(youJuAdapter);
 
         //----------照片----------
         ViseHttp.POST(NetConfig.homepagePartFour)
@@ -270,8 +301,8 @@ public class PersonMainActivity1 extends BaseActivity {
                                 picsList.clear();
                                 picsList.addAll(model.getObj().getPhoto());
                                 Collections.shuffle(picsList);
-                                picsAdapter = new PersonMainActivity_Pics_Adapter(picsList);
-                                rv_pic_youji_youju.setAdapter(picsAdapter);
+                                picsAdapter.notifyDataSetChanged();
+                                page1 = 2;
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -302,7 +333,8 @@ public class PersonMainActivity1 extends BaseActivity {
                                 youJiList.clear();
                                 youJiList.addAll(model.getObj().getFriend());
                                 Collections.shuffle(youJiList);
-                                youJiAdapter = new PersonMainActivity_YouJi_Adapter(youJiList);
+                                youJiAdapter.notifyDataSetChanged();
+                                page2 = 2;
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -332,7 +364,8 @@ public class PersonMainActivity1 extends BaseActivity {
                                 youJuList.clear();
                                 youJuList.addAll(model.getObj().getActivity());
                                 Collections.shuffle(youJuList);
-                                youJuAdapter = new PersonMainActivity_YouJu_Adapter(youJuList);
+                                youJuAdapter.notifyDataSetChanged();
+                                page3 = 3;
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -347,8 +380,8 @@ public class PersonMainActivity1 extends BaseActivity {
     }
 
     private void initRefresh() {
-        refreshLayout.setEnableLoadMore(false);
         refreshLayout.setRefreshHeader(new ClassicsHeader(PersonMainActivity1.this));
+        refreshLayout.setRefreshFooter(new ClassicsFooter(PersonMainActivity1.this));
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
@@ -461,6 +494,118 @@ public class PersonMainActivity1 extends BaseActivity {
                                 refreshLayout.finishRefresh(1000);
                             }
                         });
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull final RefreshLayout refreshLayout) {
+                switch (show_tab)
+                {
+                    case 1:
+                        //----------照片----------
+                        ViseHttp.POST(NetConfig.homepagePartFour)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartFour))
+                                .addParam("uid", spImp.getUID())
+                                .addParam("tid", person_id)
+                                .addParam("status",status)
+                                .addParam("page",page1+"")
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        try {
+                                            Log.d("asdasfsada_zhaopain",data);
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if (jsonObject.getInt("code") == 200){
+                                                Gson gson = new Gson();
+                                                PersonMain_Pics_model model = gson.fromJson(data,PersonMain_Pics_model.class);
+                                                picsList.addAll(model.getObj().getPhoto());
+                                                Collections.shuffle(picsList);
+                                                picsAdapter.notifyDataSetChanged();
+                                                page1 ++;
+                                            }
+                                            refreshLayout.finishLoadMore(1000);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+                                        refreshLayout.finishLoadMore(1000);
+
+                                    }
+                                });
+                        break;
+                    case 2:
+                        //----------友记----------
+                        ViseHttp.POST(NetConfig.homepagePartTwo)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartTwo))
+                                .addParam("uid", spImp.getUID())
+                                .addParam("tid", person_id)
+                                .addParam("status",status)
+                                .addParam("page",page2+"")
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        Log.d("asdasfsada_Youji",data);
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if (jsonObject.getInt("code") == 200){
+                                                Gson gson = new Gson();
+                                                PersonMain_Youji_model model = gson.fromJson(data,PersonMain_Youji_model.class);
+                                                youJiList.addAll(model.getObj().getFriend());
+                                                Collections.shuffle(youJiList);
+                                                youJiAdapter.notifyDataSetChanged();
+                                                page2++;
+
+                                            }
+                                            refreshLayout.finishLoadMore(1000);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+                                        refreshLayout.finishLoadMore(1000);
+                                    }
+                                });
+                        break;
+                    case 3:
+                        //----------友聚----------
+                        ViseHttp.POST(NetConfig.homepagePartthree)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartTwo))
+                                .addParam("uid", spImp.getUID())
+                                .addParam("tid", person_id)
+                                .addParam("status",status)
+                                .addParam("page",page3+"")
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        Log.d("asdasfsada_YouJu",data);
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if (jsonObject.getInt("code") == 200){
+                                                Gson gson = new Gson();
+                                                PersonMain_YouJu_model model = gson.fromJson(data,PersonMain_YouJu_model.class);
+                                                youJuList.addAll(model.getObj().getActivity());
+                                                Collections.shuffle(youJuList);
+                                                youJuAdapter.notifyDataSetChanged();
+                                                page3++;
+                                            }
+                                            refreshLayout.finishLoadMore(1000);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+                                        refreshLayout.finishLoadMore(1000);
+                                    }
+                                });
+                        break;
+                }
             }
         });
     }
@@ -805,20 +950,26 @@ public class PersonMainActivity1 extends BaseActivity {
                 bottom_line_1.setVisibility(View.VISIBLE);
                 bottom_line_2.setVisibility(View.GONE);
                 bottom_line_3.setVisibility(View.GONE);
-                rv_pic_youji_youju.setAdapter(picsAdapter);
+                rl_pics.setVisibility(View.VISIBLE);
+                rl_youji.setVisibility(View.GONE);
+                rl_youju.setVisibility(View.GONE);
                 break;
             case R.id.rl_tab_2:
                 bottom_line_1.setVisibility(View.GONE);
                 bottom_line_2.setVisibility(View.VISIBLE);
                 bottom_line_3.setVisibility(View.GONE);
+                rl_pics.setVisibility(View.GONE);
+                rl_youji.setVisibility(View.VISIBLE);
+                rl_youju.setVisibility(View.GONE);
                 show_tab = 2;
-                rv_pic_youji_youju.setAdapter(youJiAdapter);
                 break;
             case R.id.rl_tab_3:
                 bottom_line_1.setVisibility(View.GONE);
                 bottom_line_2.setVisibility(View.GONE);
                 bottom_line_3.setVisibility(View.VISIBLE);
-                rv_pic_youji_youju.setAdapter(youJuAdapter);
+                rl_pics.setVisibility(View.GONE);
+                rl_youji.setVisibility(View.GONE);
+                rl_youju.setVisibility(View.VISIBLE);
                 show_tab = 3;
                 break;
         }

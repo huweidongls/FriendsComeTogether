@@ -42,7 +42,7 @@ import com.yiwo.friendscometogether.model.FriendsTogetherDetailsModel;
 import com.yiwo.friendscometogether.model.IsRealNameModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.ChooseDateAdapter;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.ShareUtils;
 import com.yiwo.friendscometogether.utils.StringUtils;
@@ -526,7 +526,7 @@ public class DetailsOfFriendTogetherActivity extends BaseActivity {
                 break;
             case R.id.headIv:
 //                toToast(this, "这是领队的ID" + model.getObj().getCaptain());
-                Intent it = new Intent(this, PersonMainActivity.class);
+                Intent it = new Intent(this, PersonMainActivity1.class);
                 it.putExtra("person_id", model.getObj().getCaptain());
                 startActivity(it);
                 break;

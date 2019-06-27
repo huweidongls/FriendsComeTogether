@@ -371,8 +371,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="28px"
-                        android:layout_marginLeft="28px"
-                        >
+                        android:layout_marginLeft="28px">
                     </com.yiwo.friendscometogether.widget.NestedRecyclerView>
                 </RelativeLayout>
 

@@ -16,7 +16,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.PinglunAtModel;
-import com.yiwo.friendscometogether.newpage.PersonMainActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.ArticleCommentActivity;
 
 import java.util.List;
@@ -53,7 +53,7 @@ public class PinglunAtAdapter extends RecyclerView.Adapter<PinglunAtAdapter.View
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("person_id", data.get(position).getUid());
-                intent.setClass(context, PersonMainActivity.class);
+                intent.setClass(context, PersonMainActivity1.class);
                 context.startActivity(intent);
             }
         });
