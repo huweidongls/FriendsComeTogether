@@ -52,7 +52,7 @@ public class UserModel {
          * usercodeok : 已认证
          * usermarry : 1
          * usergrade : 1
-         * sign : 0
+         * sign : 0   0 不是领队 1 是领队
          * vip : 1
          * news : 15
          * Friendnote : 1

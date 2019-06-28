@@ -300,7 +300,6 @@ public class PersonMainActivity1 extends BaseActivity {
                                 PersonMain_Pics_model model = gson.fromJson(data,PersonMain_Pics_model.class);
                                 picsList.clear();
                                 picsList.addAll(model.getObj().getPhoto());
-                                Collections.shuffle(picsList);
                                 picsAdapter.notifyDataSetChanged();
                                 page1 = 2;
                             }
@@ -332,7 +331,6 @@ public class PersonMainActivity1 extends BaseActivity {
                                 PersonMain_Youji_model model = gson.fromJson(data,PersonMain_Youji_model.class);
                                 youJiList.clear();
                                 youJiList.addAll(model.getObj().getFriend());
-                                Collections.shuffle(youJiList);
                                 youJiAdapter.notifyDataSetChanged();
                                 page2 = 2;
                             }
@@ -363,7 +361,6 @@ public class PersonMainActivity1 extends BaseActivity {
                                 PersonMain_YouJu_model model = gson.fromJson(data,PersonMain_YouJu_model.class);
                                 youJuList.clear();
                                 youJuList.addAll(model.getObj().getActivity());
-                                Collections.shuffle(youJuList);
                                 youJuAdapter.notifyDataSetChanged();
                                 page3 = 3;
                             }
@@ -406,7 +403,7 @@ public class PersonMainActivity1 extends BaseActivity {
                                             ta = "他";
                                             if (type_tade_or_wode == 0) {
                                                 tv_title_wode_or_tade.setText(ta + "的主页");
-                                                tv_more_label.setText(ta+"的更多标签");
+//                                                tv_more_label.setText(ta+"的更多标签");
                                             }
                                             Glide.with(PersonMainActivity1.this).load(R.mipmap.nan).into(iv_person_sex);
                                         } else if (model.getObj().getInfo().getSex().equals("1")) {
@@ -414,7 +411,7 @@ public class PersonMainActivity1 extends BaseActivity {
                                             ta = "她";
                                             if (type_tade_or_wode == 0) {
                                                 tv_title_wode_or_tade.setText(ta + "的主页");
-                                                tv_more_label.setText(ta+"的更多标签");
+//                                                tv_more_label.setText(ta+"的更多标签");
                                             }
                                         }
                                         tv_person_name.setText(model.getObj().getInfo().getUsername());
@@ -477,7 +474,7 @@ public class PersonMainActivity1 extends BaseActivity {
                                         list_label.addAll(addLabelToList(7,strings7));
                                         if (list_label.size() == 0){
                                             KVMode kvMode = new KVMode();
-                                            kvMode.setI(1);
+                                            kvMode.setI(2);
                                             kvMode.setString("暂无共同标签");
                                             list_label.add(kvMode);
                                         }
@@ -519,7 +516,6 @@ public class PersonMainActivity1 extends BaseActivity {
                                                 Gson gson = new Gson();
                                                 PersonMain_Pics_model model = gson.fromJson(data,PersonMain_Pics_model.class);
                                                 picsList.addAll(model.getObj().getPhoto());
-                                                Collections.shuffle(picsList);
                                                 picsAdapter.notifyDataSetChanged();
                                                 page1 ++;
                                             }
@@ -554,7 +550,6 @@ public class PersonMainActivity1 extends BaseActivity {
                                                 Gson gson = new Gson();
                                                 PersonMain_Youji_model model = gson.fromJson(data,PersonMain_Youji_model.class);
                                                 youJiList.addAll(model.getObj().getFriend());
-                                                Collections.shuffle(youJiList);
                                                 youJiAdapter.notifyDataSetChanged();
                                                 page2++;
 
@@ -589,7 +584,6 @@ public class PersonMainActivity1 extends BaseActivity {
                                                 Gson gson = new Gson();
                                                 PersonMain_YouJu_model model = gson.fromJson(data,PersonMain_YouJu_model.class);
                                                 youJuList.addAll(model.getObj().getActivity());
-                                                Collections.shuffle(youJuList);
                                                 youJuAdapter.notifyDataSetChanged();
                                                 page3++;
                                             }
@@ -634,7 +628,7 @@ public class PersonMainActivity1 extends BaseActivity {
                                     ta = "他";
                                     if (type_tade_or_wode == 0) {
                                         tv_title_wode_or_tade.setText(ta + "的主页");
-                                        tv_more_label.setText(ta+"的更多标签");
+//                                        tv_more_label.setText(ta+"的更多标签");
                                     }
                                     Glide.with(PersonMainActivity1.this).load(R.mipmap.nan).into(iv_person_sex);
                                 } else if (model.getObj().getInfo().getSex().equals("1")) {
@@ -642,7 +636,7 @@ public class PersonMainActivity1 extends BaseActivity {
                                     ta = "她";
                                     if (type_tade_or_wode == 0) {
                                         tv_title_wode_or_tade.setText(ta + "的主页");
-                                        tv_more_label.setText(ta+"的更多标签");
+//                                        tv_more_label.setText(ta+"的更多标签");
                                     }
                                 }
                                 tv_person_name.setText(model.getObj().getInfo().getUsername());
@@ -705,7 +699,7 @@ public class PersonMainActivity1 extends BaseActivity {
                                 list_label.addAll(addLabelToList(7,strings7));
                                 if (list_label.size() == 0){
                                     KVMode kvMode = new KVMode();
-                                    kvMode.setI(1);
+                                    kvMode.setI(2);
                                     kvMode.setString("暂无共同标签");
                                     list_label.add(kvMode);
                                 }

@@ -41,6 +41,9 @@ import com.yiwo.friendscometogether.pages.MyOrderActivity;
 import com.yiwo.friendscometogether.pages.MyPicturesActivity;
 import com.yiwo.friendscometogether.pages.SetActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
+import com.yiwo.friendscometogether.webpages.RenWuWebActivity;
+import com.yiwo.friendscometogether.webpages.ShopInfoWebActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,6 +76,8 @@ public class MyFragment1 extends BaseFragment {
     TextView tvNum4;
     @BindView(R.id.iv_find_super_like)
     ImageView iv_find_super_like;
+    @BindView(R.id.iv_renwu)
+    ImageView iv_renwu;
     private SpImp spImp;
     private String uid = "";
 
@@ -132,6 +137,11 @@ public class MyFragment1 extends BaseFragment {
 //                                    } else {
 //                                        Picasso.with(getContext()).load(userModel.getObj().getHeadeimg()).into(ivAvatar);
 //                                    }
+                                    if (userModel.getObj().getSign().equals("1")){
+                                        iv_renwu.setVisibility(View.VISIBLE);
+                                    }else {
+                                        iv_renwu.setVisibility(View.GONE);
+                                    }
                                     tvNickname.setText("昵称: " + userModel.getObj().getUsername());
                                     if(TextUtils.isEmpty(userModel.getObj().getUserautograph())){
 
@@ -179,7 +189,8 @@ public class MyFragment1 extends BaseFragment {
     }
 
     @OnClick({R.id.ll_order_all, R.id.ll_to_pay, R.id.ll_to_trip, R.id.ll_to_comment, R.id.ll_return_money, R.id.rl_my_picture, R.id.rl_my_friend,
-    R.id.rl_my_comment, R.id.rl_history, R.id.rl_person_set, R.id.ll_remember,R.id.ll_guanzhu, R.id.ll_huodong, R.id.ll_message,R.id.ll_person_page,R.id.iv_avatar,R.id.iv_find_super_like})
+    R.id.rl_my_comment, R.id.rl_history, R.id.rl_person_set, R.id.ll_remember,R.id.ll_guanzhu, R.id.ll_huodong, R.id.ll_message,R.id.ll_person_page,
+            R.id.iv_avatar,R.id.iv_find_super_like,R.id.iv_renwu})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -342,6 +353,11 @@ public class MyFragment1 extends BaseFragment {
                     intent.setClass(getContext(), LoginActivity.class);
                     startActivity(intent);
                 }
+                break;
+            case R.id.iv_renwu:
+                intent.setClass(getContext(),RenWuWebActivity.class);
+                intent.putExtra("url",NetConfig.BaseUrl+NetConfig.gameList);
+                startActivity(intent);
                 break;
         }
     }
