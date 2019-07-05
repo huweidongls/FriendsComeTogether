@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="180px"
+    android:paddingBottom="10px"
+    android:layout_marginTop="20px"
+    android:layout_marginLeft="23px"
+    android:layout_marginRight="23px"
+    android:background="@drawable/bg_white_30px">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            test:radius1="40px"
+            android:layout_marginLeft="24px"
+            android:layout_marginTop="20px"
+            android:layout_marginBottom="20px"
+            android:layout_marginRight="30px"
+            android:id="@+id/iv"
+            android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
+            android:layout_width="150px"
+            android:layout_height="150px" />
+        <RelativeLayout
+            android:layout_alignTop="@+id/iv"
+            android:layout_toRightOf="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_marginTop="10px"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textStyle="bold"
+                android:id="@+id/tv_title"
+                android:textColor="#333333"
+                android:textSize="30px"
+                android:text="我的视频"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="30px"
+                android:layout_below="@+id/tv_title"
+                android:id="@+id/tv_time"
+                android:textColor="#999999"
+                android:textSize="28px"
+                android:text="2018-9-3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginBottom="8px"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:paddingTop="5px"
+                    android:paddingBottom="5px"
+                    android:paddingLeft="30px"
+                    android:paddingRight="30px"
+                    android:id="@+id/tv_btn_delete"
+                    android:background="@drawable/bg_gray_border_27px"
+                    android:layout_marginRight="10px"
+                    android:gravity="center"
+                    android:textSize="24px"
+                    android:textColor="#686868"
+                    android:text="删除"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:paddingTop="5px"
+                    android:paddingBottom="5px"
+                    android:paddingLeft="30px"
+                    android:paddingRight="30px"
+                    android:id="@+id/tv_btn_edit"
+                    android:background="@drawable/bg_gray_border_27px"
+                    android:layout_marginRight="10px"
+                    android:gravity="center"
+                    android:textSize="24px"
+                    android:textColor="#686868"
+                    android:text="编辑"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.yiwo.friendscometogether.newpage.CreateFriendRememberActivityNew">
-    <android.support.v4.view.ViewPager
+    <com.yiwo.friendscometogether.widget.CanNotScollViewPager
         android:layout_above="@+id/magic_indicator"
         android:id="@+id/vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v4.view.ViewPager>
+    </com.yiwo.friendscometogether.widget.CanNotScollViewPager>
     <net.lucode.hackware.magicindicator.MagicIndicator
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"

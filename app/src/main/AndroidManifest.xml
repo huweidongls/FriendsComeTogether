@@ -542,9 +542,11 @@
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".newpage.UpLoadVideoActivity"></activity>
-        <!--云视频上传服务-->
+        <activity android:name=".newpage.UpLoadVideoActivity" />
+        <!-- 云视频上传服务 -->
         <service android:name=".wangyiyunshipin.upload.controller.UploadService" />
+
+        <activity android:name=".newpage.MyVideosActivity"></activity>
     </application>
 
 </manifest>

@@ -33,7 +33,7 @@
             android:button="@null"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
-            android:text="6s"
+            android:text="15s"
             android:textColor="@drawable/radio_text_color" />
 
         <RadioButton
@@ -45,7 +45,7 @@
             android:checked="true"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
-            android:text="10s"
+            android:text="30s"
             android:textColor="@drawable/radio_text_color" />
 
         <RadioButton
@@ -55,7 +55,7 @@
             android:button="@null"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
-            android:text="30s"
+            android:text="45s"
             android:textColor="@drawable/radio_text_color" />
     </RadioGroup>
 </RelativeLayout>

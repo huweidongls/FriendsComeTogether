@@ -566,7 +566,7 @@ public class DemoServerHttpClient {
 
         Log.d("asdasdsd","getWyUpAccid()getWyUpAccid()::"+new SpImp(DemoCache.getContext()).getWyUpAccid());
         Map<String, Object> body = new HashMap<>();
-//        body.put(REQUEST_SID, DemoCache.getSid());
+        body.put(REQUEST_SID, DemoCache.getSid());
         body.put(REQUEST_SID, new SpImp(DemoCache.getContext()).getWyUpAccid());
         body.put(VID, vid);
         body.put(FILE_NAME, name);
@@ -580,7 +580,7 @@ public class DemoServerHttpClient {
                     callback.onFailed(code, e!=null? e.getMessage() : "error code :" + code);
                     return;
                 }
-
+                Log.d("asdasdsd","responseresponse::"+response);
                 try{
                     JSONObject jsonObject = JSONObject.parseObject(response);
                     int resCode = jsonObject.getIntValue(RESULT_KEY_CODE);
@@ -784,16 +784,16 @@ public class DemoServerHttpClient {
 
 
     public static String readAppKey() {
-//        try {
-//            ApplicationInfo appInfo = DemoCache.getContext().getPackageManager()
-//                    .getApplicationInfo(DemoCache.getContext().getPackageName(), PackageManager.GET_META_DATA);
-//            if (appInfo != null) {
-//                return appInfo.metaData.getString("com.netease.nim.appKey");
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-        return "dc4285450493b9851169ad13a64b4cd8";
+        try {
+            ApplicationInfo appInfo = DemoCache.getContext().getPackageManager()
+                    .getApplicationInfo(DemoCache.getContext().getPackageName(), PackageManager.GET_META_DATA);
+            if (appInfo != null) {
+                return appInfo.metaData.getString("com.netease.nim.appKey");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+//        return "dc4285450493b9851169ad13a64b4cd8";
     }
 }

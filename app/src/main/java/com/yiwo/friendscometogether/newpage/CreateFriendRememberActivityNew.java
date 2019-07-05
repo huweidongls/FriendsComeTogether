@@ -17,6 +17,7 @@ import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
 import com.yiwo.friendscometogether.newadapter.AllRememberViewpagerAdapter;
 import com.yiwo.friendscometogether.newfragment.CreateFriendRememberNew_ChoosePicsFragment;
 import com.yiwo.friendscometogether.wangyiyunshipin.TakeVideoFragment_new;
+import com.yiwo.friendscometogether.widget.CanNotScollViewPager;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -40,7 +41,7 @@ public class CreateFriendRememberActivityNew extends BaseActivity {
     @BindView(R.id.magic_indicator)
     MagicIndicator magicIndicator;
     @BindView(R.id.vp)
-    ViewPager mViewPager;
+    CanNotScollViewPager mViewPager;
 
     private FragmentManager mFragmentManager;
     private AllRememberViewpagerAdapter mViewPagerFragmentAdapter;
@@ -73,9 +74,10 @@ public class CreateFriendRememberActivityNew extends BaseActivity {
         fragmentList = new ArrayList<>();
         fragmentList.add(new CreateFriendRememberNew_ChoosePicsFragment());
         fragmentList.add(new TakeVideoFragment_new());
-        fragmentList.add(new CreateFriendRememberNew_ChoosePicsFragment());
+//        fragmentList.add(new CreateFriendRememberNew_ChoosePicsFragment());
         mViewPagerFragmentAdapter = new AllRememberViewpagerAdapter(mFragmentManager, fragmentList);
         mViewPager.setAdapter(mViewPagerFragmentAdapter);
+        mViewPager.setScanScroll(false);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -99,7 +101,7 @@ public class CreateFriendRememberActivityNew extends BaseActivity {
         mTitleDataList = new ArrayList<>();
         mTitleDataList.add("相册");
         mTitleDataList.add("视频");
-        mTitleDataList.add("拍照");
+//        mTitleDataList.add("拍照");
 
         CommonNavigator commonNavigator = new CommonNavigator(this);
         commonNavigator.setAdjustMode(true);  //ture 即标题平分屏幕宽度的模式

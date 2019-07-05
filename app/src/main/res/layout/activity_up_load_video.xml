@@ -65,11 +65,12 @@
         <EditText
             android:layout_marginTop="20px"
             android:layout_marginBottom="20px"
-            android:maxLength="300"
+            android:layout_toLeftOf="@+id/activity_up_load_video_tv_title_num"
+            android:maxLength="200"
             android:gravity="start"
             android:background="@null"
             android:id="@+id/activity_up_load_video_tv_title"
-            android:layout_width="490px"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="40px"
@@ -86,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="40px"
-            android:text="0/300"
+            android:text="0/200"
             android:textColor="@color/black_333333"
             android:textSize="28px" />
 

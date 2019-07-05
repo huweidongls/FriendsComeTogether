@@ -58,6 +58,6 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/second_split"
-        android:text="10秒"
+        android:text="30秒"
         android:textColor="@color/white" />
 </RelativeLayout>

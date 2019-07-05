@@ -329,7 +329,7 @@ public class VideoImportActivity extends BaseActivity implements ShortVideoGalle
         inputFilePara.setFilePaths(arr);
         videoProcessOptions.setSource(inputFilePara);
         // sdk bug，只有一个视频的时候，参数无效。只能添加这个规避一下
-        inputFilePara.setVideoFadeDuration(100);
+//        inputFilePara.setVideoFadeDuration(100);
         // 设置文件剪切参数
         TranscodingAPI.TranTimeCut fileCutPara = videoProcessOptions.getTimeCut();
         int duration = (int) filterTime;

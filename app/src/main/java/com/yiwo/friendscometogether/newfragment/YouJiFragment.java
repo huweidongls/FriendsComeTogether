@@ -205,6 +205,7 @@ public class YouJiFragment extends Fragment {
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
+                        Log.d("aaaaa",data);
                         try {
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.getInt("code") == 200){

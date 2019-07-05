@@ -16,6 +16,7 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -403,7 +404,6 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
         mPlayer = MediaPlayerAPI.getInstance();
         mPlayer.init(getApplicationContext(), arr, videoView);
         mPlayer.start();
-
     }
 
     private void setListener() {
@@ -1094,8 +1094,10 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
             // 过渡
             if (isTrasition) {
                 inputFilePara.setVideoFadeDuration(1000);
+                Log.d("jianrujianchu:","设置渐入渐出TRUE");
             } else {
-                inputFilePara.setVideoFadeDuration(100);
+                Log.d("jianrujianchu:","设置渐入渐出False");
+                inputFilePara.setVideoFadeDuration(1);
             }
 
             // 设置拼接后文件存储地址

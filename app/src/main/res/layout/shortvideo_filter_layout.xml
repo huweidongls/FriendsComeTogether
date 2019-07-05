@@ -36,7 +36,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:checked="true"
-            android:text="@string/filter_a"
+            android:text="柔和"
             android:textColor="@drawable/radio_text_color"
             android:textSize="14sp" />
 
@@ -47,7 +47,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:button="@null"
-            android:text="@string/filter_b"
+            android:text="艳丽"
             android:textColor="@drawable/radio_text_color"
             android:textSize="14sp" />
 
@@ -58,7 +58,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:button="@null"
-            android:text="@string/filter_c"
+            android:text="怀旧"
             android:textColor="@drawable/radio_text_color"
             android:textSize="14sp" />
 
@@ -69,7 +69,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:button="@null"
-            android:text="@string/filter_d"
+            android:text="粉嫩"
             android:textColor="@drawable/radio_text_color"
             android:textSize="14sp" />
     </RadioGroup>

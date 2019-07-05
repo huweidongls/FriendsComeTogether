@@ -69,7 +69,7 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
 
     // constant
     private static final int DEFAULT_VIDEO_COUNTS = 3;
-    private static final long DEFAULT_VIDEO_TIME = 10 * 1000;
+    private static final long DEFAULT_VIDEO_TIME = 30 * 1000;
     public static final String EXTRA_VIDEO_ITEM = "video_item";
     public static final int REQUEST_CODE = 1000;
     private static final String TAG = TakeVideoFragment_new.class.getSimpleName();
@@ -488,12 +488,12 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int resId = radioGroup.getCheckedRadioButtonId();
                 RadioButton button = view.findViewById(resId);
-                if (button.getText().equals("6s")) {
-                    videoCaptureParams.setTime(6 * 1000);
-                } else if (button.getText().equals("10s")) {
-                    videoCaptureParams.setTime(10 * 1000);
-                } else {
+                if (button.getText().equals("15s")) {
+                    videoCaptureParams.setTime(15 * 1000);
+                } else if (button.getText().equals("30s")) {
                     videoCaptureParams.setTime(30 * 1000);
+                } else {
+                    videoCaptureParams.setTime(45 * 1000);
                 }
             }
         });
@@ -598,8 +598,8 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
         } else {
             modeText.setText("流畅");
         }
-        timeText.setText(String.format("%d段", videoCaptureParams.getTime() / 1000));
-        countsText.setText(String.format("%d秒", videoCaptureParams.getCount()));
+        timeText.setText(String.format("%d秒", videoCaptureParams.getTime() / 1000));
+        countsText.setText(String.format("%d段", videoCaptureParams.getCount()));
         // 分段数进度条
         takeCountsImage.setBackgroundResource(0);
         if (videoCaptureParams.getCount() == 1) {

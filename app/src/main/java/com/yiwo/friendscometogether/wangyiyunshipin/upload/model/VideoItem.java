@@ -20,6 +20,7 @@ public class VideoItem implements Serializable {
     long width;
     long height;
     long vid; //上传至云端后的视频, 才具有vid
+    String requestId;
     int uploadProgress; //上传进度
 
     //nos用于断点续传
@@ -176,5 +177,13 @@ public class VideoItem implements Serializable {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
     }
 }

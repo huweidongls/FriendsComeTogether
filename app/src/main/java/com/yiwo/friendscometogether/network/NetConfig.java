@@ -7,9 +7,9 @@ package com.yiwo.friendscometogether.network;
 public class NetConfig {
 
     //测试服务器
-//    public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
+    public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
     //正式服务器
-    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
+//    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
 
 
 //    public static String BaseUrl = "http://www.youlaiyouyue.com/";
@@ -351,4 +351,16 @@ public class NetConfig {
 
     //任务URL
     public static String gameList = "action/ac_coupon/gameList";
+    //添加视频接口
+    public static String upLoadVideo = "action/ac_video/uploadVideo"; //添加视频接口   传userID用户id  vname视频名称   vurl视频地址
+    //获取视频信息接口
+    public static String videoInfo = "action/ac_video/videoInfo";//   传vid"
+    //我的视频列表
+    public static String myVideo = "action/ac_video/myVideo"; //传userID 用户id   page分页  返回 vID 视频ID   vname名称   vurl地址  vtime时间  img图片地址
+    //编辑视频名称
+    public static String videoEdit = "action/ac_video/videoEdit";//编辑   传vname 名称  vID视频ID   userID用户id
+    //删除视频
+    public static String videoDel = "action/ac_video/videoDel"; // 删除   传userID 用户id   vID视频ID
+
+
 }

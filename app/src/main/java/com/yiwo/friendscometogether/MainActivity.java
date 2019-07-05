@@ -285,8 +285,8 @@ public class MainActivity extends FragmentActivity {
 //                    selectText(tvFriendRemember);
 //                    switchFragment(2);
                     if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
-                        intent.setClass(context, CreateFriendRememberActivity.class);
-//                        intent.setClass(context, CreateFriendRememberActivityNew.class);
+//                        intent.setClass(context, CreateFriendRememberActivity.class);
+                        intent.setClass(context, CreateFriendRememberActivityNew.class);
                         startActivity(intent);
                     } else {
                         intent.setClass(context, LoginActivity.class);
@@ -323,8 +323,8 @@ public class MainActivity extends FragmentActivity {
 //                    selectText(tvFriendRemember);
 //                    switchFragment(2);
                     if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
-                        intent.setClass(context, CreateFriendRememberActivity.class);
-//                        intent.setClass(context, CreateFriendRememberActivityNew.class);
+//                        intent.setClass(context, CreateFriendRememberActivity.class);
+                        intent.setClass(context, CreateFriendRememberActivityNew.class);
                         startActivity(intent);
                     } else {
                         intent.setClass(context, LoginActivity.class);

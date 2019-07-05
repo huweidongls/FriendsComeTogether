@@ -30,6 +30,7 @@ import com.yiwo.friendscometogether.newpage.AllRememberActivity;
 import com.yiwo.friendscometogether.newpage.GuanZhuActivity;
 import com.yiwo.friendscometogether.newpage.MessageActivity;
 import com.yiwo.friendscometogether.newpage.MyContactActivity;
+import com.yiwo.friendscometogether.newpage.MyVideosActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.newpage.SuperLikeActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
@@ -188,7 +189,7 @@ public class MyFragment1 extends BaseFragment {
         }
     }
 
-    @OnClick({R.id.ll_order_all, R.id.ll_to_pay, R.id.ll_to_trip, R.id.ll_to_comment, R.id.ll_return_money, R.id.rl_my_picture, R.id.rl_my_friend,
+    @OnClick({R.id.ll_order_all, R.id.ll_to_pay, R.id.ll_to_trip, R.id.ll_to_comment, R.id.ll_return_money, R.id.rl_my_picture,R.id.rl_my_video, R.id.rl_my_friend,
     R.id.rl_my_comment, R.id.rl_history, R.id.rl_person_set, R.id.ll_remember,R.id.ll_guanzhu, R.id.ll_huodong, R.id.ll_message,R.id.ll_person_page,
             R.id.iv_avatar,R.id.iv_find_super_like,R.id.iv_renwu})
     public void onClick(View view){
@@ -247,6 +248,15 @@ public class MyFragment1 extends BaseFragment {
             case R.id.rl_my_picture:
                 if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
                     intent.setClass(getContext(), MyPicturesActivity.class);
+                    startActivity(intent);
+                } else {
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.rl_my_video:
+                if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                    intent.setClass(getContext(), MyVideosActivity.class);
                     startActivity(intent);
                 } else {
                     intent.setClass(getContext(), LoginActivity.class);

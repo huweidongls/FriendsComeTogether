@@ -1,6 +1,9 @@
 package com.yiwo.friendscometogether.newpage;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,15 +22,23 @@ import com.netease.nim.uikit.common.ui.dialog.EasyAlertDialogHelper;
 import com.netease.nim.uikit.common.util.storage.StorageType;
 import com.netease.nim.uikit.common.util.storage.StorageUtil;
 import com.netease.nim.uikit.common.util.sys.NetworkUtil;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
+import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
+import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.wangyiyunshipin.TakeVideoFragment_new;
 import com.yiwo.friendscometogether.wangyiyunshipin.server.entity.AddVideoResponseEntity;
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.UploadState;
 import com.yiwo.friendscometogether.wangyiyunshipin.upload.constant.UploadType;
 import com.yiwo.friendscometogether.wangyiyunshipin.upload.controller.UploadController;
 import com.yiwo.friendscometogether.wangyiyunshipin.upload.model.VideoItem;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -48,7 +59,8 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
     TextView tv_num;
     private VideoItem videoItem;
     private String url_screenshot;
-
+    private SpImp spImp;
+    private Dialog dialog;
     public  static void startUpLoadVideoActivity(Context context,VideoItem videoItem,String url_screenshot){
         Intent intent = new Intent(context,UpLoadVideoActivity.class);
         intent.putExtra(TakeVideoFragment_new.EXTRA_VIDEO_ITEM,videoItem);
@@ -61,6 +73,7 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
         setContentView(R.layout.activity_up_load_video);
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(this);
+        spImp = new SpImp(UpLoadVideoActivity.this);
         editText.addTextChangedListener(textTitleWatcher);
         videoItem = (VideoItem) getIntent().getSerializableExtra(TakeVideoFragment_new.EXTRA_VIDEO_ITEM);
         url_screenshot = getIntent().getStringExtra("screenshot");
@@ -73,9 +86,26 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
      public void onClick(View view){
         switch (view.getId()){
             case R.id.rl_back:
+                AlertDialog.Builder dialog = new AlertDialog.Builder(UpLoadVideoActivity.this);
+                dialog.setMessage("确定退出并取消发布视频？")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).show();
                 break;
             case R.id.activity_up_load_video_rl_complete:
-                uploadFile(videoItem);
+                if (editText.getText().toString().equals("")){
+                    toToast(UpLoadVideoActivity.this,"请输入视频名字！");
+                }else {
+                    uploadFile(videoItem);
+                }
                 break;
         }
     }
@@ -91,6 +121,7 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
      * 调用上传接口，上传视频
      */
     private void doRealUpload(VideoItem videoItem) {
+        dialog = WeiboDialogUtils.createLoadingDialog(UpLoadVideoActivity.this,"正在上传...");
         Log.d("asdasdsd:",";;;doRealUpload");
         videoItem.setType(UploadType.SHORT_VIDEO);
         videoItem.setState(UploadState.STATE_WAIT);
@@ -119,8 +150,8 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
 
         @Override
         public void afterTextChanged(Editable editable) {
-            tv_num.setText(temp.length()+"/300");
-            if(temp.length()>=300){
+            tv_num.setText(temp.length()+"/200");
+            if(temp.length()>=200){
                 Toast.makeText(UpLoadVideoActivity.this, "您输入的字数已经超过了限制", Toast.LENGTH_SHORT).show();
             }
         }
@@ -163,11 +194,56 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
 
     @Override
     public void onAddVideoResult(int code, String id, AddVideoResponseEntity addVideoResponseEntity) {
-        Log.d("asdasdsd",code+"////"+id);
+        Log.d("asdasdsd",code+"////  "+addVideoResponseEntity.getVideoInfoEntity().getSnapshotUrl());
+        WeiboDialogUtils.closeDialog(dialog);
         if (code == 200){
-            if (addVideoResponseEntity.getVideoInfoEntity()!=null){
-                Log.d("asdasdsd",addVideoResponseEntity.getVideoInfoEntity().getOrigUrl());
-            }
+//            if (addVideoResponseEntity.getVideoInfoEntity()!=null){
+//                Log.d("asdasdsd",addVideoResponseEntity.getVideoInfoEntity().getOrigUrl());
+//            }
+                ViseHttp.POST(NetConfig.upLoadVideo)
+                        .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.upLoadVideo))
+                        .addParam("userID", spImp.getUID())
+                        .addParam("vname",editText.getText().toString())
+                        .addParam("vurl",addVideoResponseEntity.getVideoInfoEntity().getOrigUrl())
+                        .addParam("img",addVideoResponseEntity.getVideoInfoEntity().getSnapshotUrl())
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(data);
+                                    if (jsonObject.getInt("code") == 200){
+                                        toToast(UpLoadVideoActivity.this,"发布成功");
+                                        finish();
+                                    }else {
+                                        toToast(UpLoadVideoActivity.this,"发布失败");
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+
+                            }
+                        });
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(UpLoadVideoActivity.this);
+        dialog.setMessage("确定退出并取消发布视频？")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).show();
     }
 }
