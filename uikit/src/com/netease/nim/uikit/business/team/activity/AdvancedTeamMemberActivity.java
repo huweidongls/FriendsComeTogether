@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -191,15 +192,17 @@ public class AdvancedTeamMemberActivity extends UI implements TAdapterDelegate,
 
         addTeamMembers(members, true);
         rl_add_person.setVisibility(View.GONE);
-        if (creator.equals(NimUIKit.getAccount())){//  群主时
+//        if (creator.equals(NimUIKit.getAccount())){//  群主时
+        if (isSelfManager||isSelfAdmin){//  群主时 或管理员
             rl_add_person.setVisibility(View.VISIBLE);
         }else {
-            for (String memberAccount : managerList) {
-                if (memberAccount.equals(NimUIKit.getAccount())) {//是管理员
-                    rl_add_person.setVisibility(View.VISIBLE);
-                    return;
-                }
-            }
+            rl_add_person.setVisibility(View.GONE);
+//            for (String memberAccount : managerList) {
+//                if (memberAccount.equals(NimUIKit.getAccount())) {//是管理员
+//                    rl_add_person.setVisibility(View.VISIBLE);
+//                    return;
+//                }
+//            }
         }
     }
 
@@ -338,15 +341,18 @@ public class AdvancedTeamMemberActivity extends UI implements TAdapterDelegate,
 
     @Override
     public void onHeadImageViewClick(String account) { //群成员头像点击监听
-        if (creator.equals(NimUIKit.getAccount())){//  群主时
+//        if (creator.equals(NimUIKit.getAccount())){//  群主时
+        if (isSelfManager||isSelfAdmin){//  群主时 或管理员
+                Log.d("asasaa群主",creator.toString());
             AdvancedTeamMemberInfoActivity.startActivityForResult(AdvancedTeamMemberActivity.this, account, teamId);
         }else {
-            for (String memberAccount:managerList){
-                if (memberAccount.equals(NimUIKit.getAccount())){//是管理员
-                    AdvancedTeamMemberInfoActivity.startActivityForResult(AdvancedTeamMemberActivity.this, account, teamId);
-                    return;
-                }
-            }
+//            for (String memberAccount:managerList){
+//                if (memberAccount.equals(NimUIKit.getAccount())){//是管理员
+//                    AdvancedTeamMemberInfoActivity.startActivityForResult(AdvancedTeamMemberActivity.this, account, teamId);
+//                    Log.d("asasaa管理员",memberAccount.toString());
+//                    return;
+//                }
+//            }
             //发送打开个人主页的广播
             Intent intent = new Intent();
             intent.putExtra("person_id",account);

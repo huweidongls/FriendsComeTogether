@@ -1,5 +1,7 @@
 package com.yiwo.friendscometogether.newfragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -55,7 +57,53 @@ public class MyGroupFragment extends BaseFragment {
     private void initData() {
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         rv.setLayoutManager(manager);
+        adapter.setListenner(new MyGroupAdapter.OnLongClickListenner() {
+            @Override
+            public void onLongClick(final int postion) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("确定退出该群？")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ViseHttp.POST(NetConfig.moveOutGroup)
+                                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.moveOutGroup))
+                                        .addParam("group_id",list.get(postion).getGroupid())
+                                        .addParam("userID",spImp.getUID())
+                                        .request(new ACallback<String>() {
+                                            @Override
+                                            public void onSuccess(String data) {
+                                                try {
+                                                    JSONObject jsonObject = new JSONObject(data);
+                                                    if (jsonObject.getInt("code") == 200){
+                                                        toToast(getContext(),"已退出该群");
+                                                        list.remove(postion);
+                                                        adapter.notifyDataSetChanged();
+                                                    }else {
+                                                        toToast(getContext(),"删除失败:");
+                                                    }
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFail(int errCode, String errMsg) {
+                                                toToast(getContext(),"删除失败"+errCode+":"+errMsg);
+                                            }
+                                        });
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).show();
+
+            }
+        });
         rv.setAdapter(adapter);
+
         ViseHttp.POST(NetConfig.groupList)
                 .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.groupList))
                 .addParam("userID", spImp.getUID())

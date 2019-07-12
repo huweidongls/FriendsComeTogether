@@ -57,10 +57,12 @@ public class MessageInvitationListModel {
          * kind ：
          * "uid": "79"//邀请人  ID
          * "no_name": "0", //是否  0不是匿名要请  1匿名要请
+         * phase_id:   //期数ID
          */
 
         private String id;
         private String tid;
+        private String phase_id;
         private String type;
         private String yqtime;
         private String text;
@@ -174,6 +176,14 @@ public class MessageInvitationListModel {
 
         public void setKind(String kind) {
             this.kind = kind;
+        }
+
+        public String getPhase_id() {
+            return phase_id;
+        }
+
+        public void setPhase_id(String phase_id) {
+            this.phase_id = phase_id;
         }
     }
 }

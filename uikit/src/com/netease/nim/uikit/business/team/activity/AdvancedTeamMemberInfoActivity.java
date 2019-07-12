@@ -446,13 +446,18 @@ public class AdvancedTeamMemberInfoActivity extends UI implements View.OnClickLi
      * @param isSet 是否设置
      */
     private void switchManagerButton(boolean isSet) {
+        List<String> btnNames = new ArrayList<>();
+        btnNames.add("转让群主");
         if (isSet) {
             if (setAdminDialog == null) {
-                List<String> btnNames = new ArrayList<>();
                 btnNames.add(getString(R.string.set_team_admin));
                 setAdminDialog = new MenuDialog(this, btnNames, new MenuDialog.MenuDialogOnButtonClickListener() {
                     @Override
                     public void onButtonClick(String name) {
+                        if (name.equals("转让群主")){
+                            zhuanRangQunZhu();
+                            return;
+                        }
                         addManagers();
                         setAdminDialog.dismiss();
                     }
@@ -461,11 +466,14 @@ public class AdvancedTeamMemberInfoActivity extends UI implements View.OnClickLi
             setAdminDialog.show();
         } else {
             if (cancelAdminDialog == null) {
-                List<String> btnNames = new ArrayList<>();
                 btnNames.add(getString(R.string.cancel_team_admin));
                 cancelAdminDialog = new MenuDialog(this, btnNames, new MenuDialog.MenuDialogOnButtonClickListener() {
                     @Override
                     public void onButtonClick(String name) {
+                        if (name.equals("转让群主")){
+                            zhuanRangQunZhu();
+                            return;
+                        }
                         removeManagers();
                         cancelAdminDialog.dismiss();
                     }
@@ -473,6 +481,29 @@ public class AdvancedTeamMemberInfoActivity extends UI implements View.OnClickLi
             }
             cancelAdminDialog.show();
         }
+    }
+
+    private void zhuanRangQunZhu() {
+        DialogMaker.showProgressDialog(this, getString(R.string.empty));
+        NIMClient.getService(TeamService.class).transferTeam(teamId,account,false).setCallback(new RequestCallback<List<TeamMember>>() {
+            @Override
+            public void onSuccess(List<TeamMember> teamMembers) {
+                DialogMaker.dismissProgressDialog();
+                Toast.makeText(AdvancedTeamMemberInfoActivity.this, R.string.update_success, Toast.LENGTH_LONG).show();
+                finish();
+            }
+
+            @Override
+            public void onFailed(int i) {
+                DialogMaker.dismissProgressDialog();
+                Toast.makeText(AdvancedTeamMemberInfoActivity.this, String.format(getString(R.string.update_failed), i), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onException(Throwable throwable) {
+                DialogMaker.dismissProgressDialog();
+            }
+        });
     }
 
     /**

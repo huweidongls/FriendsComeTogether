@@ -872,6 +872,7 @@ public class GuanZhuActivity extends BaseActivity {
                             @Override
                             public void onSuccess(String data) {
                                 try {
+                                    Log.d("datdadta",data);
                                     JSONObject jsonObject = new JSONObject(data);
                                     if(jsonObject.getInt("code") == 200){
                                         toToast(GuanZhuActivity.this, "邀请成功");

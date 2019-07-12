@@ -29,7 +29,7 @@ public class MyGroupAdapter extends RecyclerView.Adapter<MyGroupAdapter.ViewHold
     public MyGroupAdapter(List<MyGroupListModel.ObjBean> data) {
         this.data = data;
     }
-
+    private OnLongClickListenner listenner;
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
@@ -49,11 +49,24 @@ public class MyGroupAdapter extends RecyclerView.Adapter<MyGroupAdapter.ViewHold
                 team(data.get(position).getGroupid());
             }
         });
+        holder.rl.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (listenner!=null){
+                    listenner.onLongClick(position);
+                }
+                return false;
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return data == null ? 0 : data.size();
+    }
+
+    public void setListenner(OnLongClickListenner listenner) {
+        this.listenner = listenner;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -69,5 +82,8 @@ public class MyGroupAdapter extends RecyclerView.Adapter<MyGroupAdapter.ViewHold
         String account = spImp.getYXID();
         NimUIKit.setAccount(account);
         NimUIKit.startTeamSession(context, teamId);
+    }
+    public interface OnLongClickListenner{
+        void onLongClick(int postion);
     }
 }

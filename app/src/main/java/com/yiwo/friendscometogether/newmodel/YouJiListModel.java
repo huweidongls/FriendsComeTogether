@@ -1,5 +1,6 @@
 package com.yiwo.friendscometogether.newmodel;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ public class YouJiListModel {
         this.obj = obj;
     }
 
-    public static class ObjBean {
+    public static class ObjBean implements Serializable{
         /**
          * fmID : 253
          * fmtitle : 测试2
@@ -67,6 +68,10 @@ public class YouJiListModel {
         private String type;
         private String vurl;
         private String accesspassword;
+
+        private String praise_num;//视频赞数量
+        private String comment_num;//视频评论数量
+        private String status ;// 视频点赞状态
 
         public String getFmID() {
             return fmID;
@@ -154,6 +159,30 @@ public class YouJiListModel {
 
         public void setAccesspassword(String accesspassword) {
             this.accesspassword = accesspassword;
+        }
+
+        public String getPraise_num() {
+            return praise_num;
+        }
+
+        public void setPraise_num(String praise_num) {
+            this.praise_num = praise_num;
+        }
+
+        public String getComment_num() {
+            return comment_num;
+        }
+
+        public void setComment_num(String comment_num) {
+            this.comment_num = comment_num;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
         }
     }
 }

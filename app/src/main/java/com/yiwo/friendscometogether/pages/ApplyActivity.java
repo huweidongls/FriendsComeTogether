@@ -177,7 +177,8 @@ public class ApplyActivity extends BaseActivity {
         String id = getIntent().getStringExtra("id");
         String tid = getIntent().getStringExtra("tid");
         if (!TextUtils.isEmpty(id) && !TextUtils.isEmpty(tid)) {//邀请入口进入该界面
-            getShowViewTwo(id, tid);
+            String phase_id = getIntent().getStringExtra("phase_id");
+            getShowViewTwo(id, tid,phase_id);
         } else {
             getShowView();
         }
@@ -207,7 +208,7 @@ public class ApplyActivity extends BaseActivity {
         tvAllowAgreement.append(string1);
     }
 
-    private void getShowViewTwo(String id, String tid) {
+    private void getShowViewTwo(String id, String tid, final String phase_id) {
 
         yqid = id;
 
@@ -273,6 +274,11 @@ public class ApplyActivity extends BaseActivity {
                                                     if (jsonObject.getInt("code") == 200){
                                                         Gson gson = new Gson();
                                                         ApplyChooseDateModel model = gson.fromJson(data,ApplyChooseDateModel.class);
+                                                        for (int i = 0;i<model.getObj().size();i++){
+                                                            if (phase_id.equals(model.getObj().get(i).getPhase_id())){
+                                                                chooseDateIndex = i;
+                                                            }
+                                                        }
                                                         chooseDateID = model.getObj().get(chooseDateIndex).getPhase_id();
                                                         String price = model.getObj().get(chooseDateIndex).getPhase_price();
                                                         perMoney = Double.valueOf(price);
@@ -281,6 +287,11 @@ public class ApplyActivity extends BaseActivity {
 //        String begin_time = getIntent().getStringExtra("begin_time");
                                                         tvPrice.setText("¥" + price + "元/人");
                                                         setTextMoney();
+                                                        //如果是不需要支付的 不显示 金额 直接报名（邀请人支付情况）
+                                                        if(!if_pay.equals("2")){
+                                                            apply_btn.setVisibility(View.VISIBLE);
+                                                            llPay.setVisibility(View.INVISIBLE);
+                                                        }
                                                         tvTimeStart.setText("出发时间: " + model.getObj().get(chooseDateIndex).getPhase_begin_time());
                                                         tvTimeEnd.setText("结束时间: "+model.getObj().get(chooseDateIndex).getPhase_over_time());
                                                         applyChooseDateModels = model.getObj();
@@ -295,27 +306,28 @@ public class ApplyActivity extends BaseActivity {
                                                         rv_choose_date.setLayoutManager(manager);
                                                         applyChooseDateModels.get(chooseDateIndex).setSelected(true);
                                                         applyHuoDongChooseDateAdapter = new ApplyHuoDongChooseDateAdapter(applyChooseDateModels);
+                                                        //不允许选择
                                                         applyHuoDongChooseDateAdapter.setChooseDatePostionListen(new ApplyHuoDongChooseDateAdapter.ChooseDatePostionListener() {
                                                             @Override
                                                             public void choosePOstion(int postion) {
-                                                                chooseDateIndex = postion;
-                                                                for (int i =0;i<applyChooseDateModels.size();i++){
-                                                                    applyChooseDateModels.get(i).setSelected(false);
-                                                                }
-                                                                applyChooseDateModels.get(postion).setSelected(true);
-                                                                applyHuoDongChooseDateAdapter.notifyDataSetChanged();
-                                                                ApplyChooseDateModel.ObjBean phaseBean = applyChooseDateModels.get(postion);
-                                                                chooseDateID = phaseBean.getPhase_id();
-                                                                String price = phaseBean.getPhase_price();
-                                                                perMoney = Double.valueOf(price);
-                                                                money = BigDecimalUtils.mul(perMoney+"",num+"",2);
-
-//        String begin_time = getIntent().getStringExtra("begin_time");
-
-                                                                tvPrice.setText("¥" + price + "元/人");
-                                                                setTextMoney();
-                                                                tvTimeStart.setText("出发时间: " + phaseBean.getPhase_begin_time());
-                                                                tvTimeEnd.setText("结束时间: "+phaseBean.getPhase_over_time());
+//                                                                chooseDateIndex = postion;
+//                                                                for (int i =0;i<applyChooseDateModels.size();i++){
+//                                                                    applyChooseDateModels.get(i).setSelected(false);
+//                                                                }
+//                                                                applyChooseDateModels.get(postion).setSelected(true);
+//                                                                applyHuoDongChooseDateAdapter.notifyDataSetChanged();
+//                                                                ApplyChooseDateModel.ObjBean phaseBean = applyChooseDateModels.get(postion);
+//                                                                chooseDateID = phaseBean.getPhase_id();
+//                                                                String price = phaseBean.getPhase_price();
+//                                                                perMoney = Double.valueOf(price);
+//                                                                money = BigDecimalUtils.mul(perMoney+"",num+"",2);
+//
+////        String begin_time = getIntent().getStringExtra("begin_time");
+//
+//                                                                tvPrice.setText("¥" + price + "元/人");
+//                                                                setTextMoney();
+//                                                                tvTimeStart.setText("出发时间: " + phaseBean.getPhase_begin_time());
+//                                                                tvTimeEnd.setText("结束时间: "+phaseBean.getPhase_over_time());
                                                             }
                                                         });
                                                         rv_choose_date.setAdapter(applyHuoDongChooseDateAdapter);
@@ -608,7 +620,7 @@ public class ApplyActivity extends BaseActivity {
                     .request(new ACallback<String>() {
                         @Override
                         public void onFail(int errCode, String errMsg) {
-                            Log.e("222", errMsg);
+                            Log.e("222", errCode+""+errMsg);
                         }
 
                         @Override

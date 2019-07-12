@@ -110,6 +110,7 @@ public class MessageInvitationActivity extends BaseActivity {
                                                 intent.setClass(MessageInvitationActivity.this, ApplyActivity.class);
                                                 intent.putExtra("id", mList.get(position).getId());
                                                 intent.putExtra("tid", mList.get(position).getTid());
+                                                intent.putExtra("phase_id",mList.get(position).getPhase_id());
                                                 startActivity(intent);
                                                 finish();
                                                 break;

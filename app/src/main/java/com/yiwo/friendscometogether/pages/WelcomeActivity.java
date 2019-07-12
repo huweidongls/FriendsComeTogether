@@ -19,7 +19,9 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.wangyiyunshipin.utils.AssetCopyer;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,10 +39,18 @@ public class WelcomeActivity extends BaseActivity {
         StatusBarUtils.setStatusBarTransparent(WelcomeActivity.this);
         spImp = new SpImp(WelcomeActivity.this);
         spCache = new SpCache(WelcomeActivity.this);
+        initAsset();
         initData();
 
     }
-
+    private void initAsset() {
+        AssetCopyer assetCopyer = new AssetCopyer(this);
+        try {
+            assetCopyer.copy();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private void initData() {
         account = spImp.getYXID();
         String token = spImp.getYXTOKEN();

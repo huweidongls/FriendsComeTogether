@@ -229,7 +229,7 @@ public class YouJiFragment extends Fragment {
                     @Override
                     public void onFail(int errCode, String errMsg) {
                         WeiboDialogUtils.closeDialog(dialog);
-                        Toast.makeText(getContext(),"加载失败",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"加载失败："+errCode+"-"+errMsg,Toast.LENGTH_SHORT).show();
                     }
                 });
 

@@ -71,10 +71,15 @@ public class YouJiAdapter extends RecyclerView.Adapter<YouJiAdapter.ViewHolder>{
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(context, VideoActivity.class);
-                it.putExtra("videoUrl", data.get(position).getVurl());
-                it.putExtra("title", data.get(position).getFmtitle());
-                it.putExtra("picUrl", data.get(position).getFmpic());
-                it.putExtra("vid", data.get(position).getFmID());
+//                it.putExtra("videoUrl", data.get(position).getVurl());
+//                it.putExtra("title", data.get(position).getFmtitle());
+//                it.putExtra("picUrl", data.get(position).getFmpic());
+//                it.putExtra("vid", data.get(position).getFmID());
+//
+//                it.putExtra("praise_num",data.get(position).getPraise_num());
+//                it.putExtra("comment_num",data.get(position).getComment_num());
+//                it.putExtra("status",data.get(position).getStatus());
+                it.putExtra("data",data.get(position));
                 context.startActivity(it);
             }
         });

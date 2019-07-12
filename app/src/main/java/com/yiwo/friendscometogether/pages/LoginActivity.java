@@ -146,6 +146,7 @@ public class LoginActivity extends BaseActivity {
 
     private void login(String phone, String pwd) {
         if (!StringUtils.isPhoneNumberValid(phone)) {
+//        if (false) {
             toToast(this, "请输入正确的手机号");
         } else {
             String token = getToken(NetConfig.BaseUrl + NetConfig.loginUrl);

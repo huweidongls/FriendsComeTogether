@@ -245,6 +245,8 @@ public class PersonMainActivity1 extends BaseActivity {
             rl_algin_right_tade.setVisibility(View.GONE);
             rl_algin_right_wode.setVisibility(View.VISIBLE);
         }
+        rl_youji.setVisibility(View.VISIBLE);
+        bottom_line_2.setVisibility(View.VISIBLE);
         initRecyclerView();
         initRefresh();
     }

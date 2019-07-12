@@ -9,7 +9,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.Layout;
@@ -171,6 +173,13 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
     private ViewGroup sound_1;
     private ViewGroup sound_2;
     private ViewGroup sound_3;
+    private ViewGroup sound_4;
+    private ViewGroup sound_5;
+    private ViewGroup sound_6;
+    private ViewGroup sound_7;
+    private ViewGroup sound_8;
+    private ViewGroup sound_9;
+    private ViewGroup sound_10;
     private SeekBar accompanySeekBar;
     private ViewGroup soundLayout;
 
@@ -215,6 +224,7 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
 
     private ViewGroup subsectionCircleLayout;
 
+    private MediaPlayer mediaPlayer;
     public static void startActivityForResult(Context context, List<String> pathList,
                                               float totalTime, MediaCaptureOptions mediaCaptureOptions) {
         Intent intent = new Intent();
@@ -231,11 +241,34 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
 
         initData();
         updateUI();
+        initMusicPlayer();
+    }
+
+    private void initMusicPlayer() {
+        mediaPlayer = new MediaPlayer();
+    }
+    private void playBanYin(){
+        mediaPlayer.stop();
+        mediaPlayer.reset();
+        if (accompanySoundPath==null){
+
+            return;
+        }
+        try {
+            mediaPlayer.setDataSource(accompanySoundPath);
+            mediaPlayer.prepare();
+            mediaPlayer.setLooping(true);
+            mediaPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     protected void onDestroy() {
         stopPlayer();
+        mediaPlayer.stop();
+        mediaPlayer.release();
         super.onDestroy();
     }
 
@@ -334,6 +367,13 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
         sound_1 = findView(R.id.sound_1);
         sound_2 = findView(R.id.sound_2);
         sound_3 = findView(R.id.sound_3);
+        sound_4 = findView(R.id.sound_4);
+        sound_5 = findView(R.id.sound_5);
+        sound_6 = findView(R.id.sound_6);
+        sound_7 = findView(R.id.sound_7);
+        sound_8 = findView(R.id.sound_8);
+        sound_9 = findView(R.id.sound_9);
+        sound_10 = findView(R.id.sound_10);
         soundLayout = findView(R.id.sound_layout);
         accompanySeekBar = findView(R.id.accompany_volume_seekbar);
         accompanySeekBar.setMax(100);
@@ -434,6 +474,13 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
         sound_1.setOnClickListener(this);
         sound_2.setOnClickListener(this);
         sound_3.setOnClickListener(this);
+        sound_4.setOnClickListener(this);
+        sound_5.setOnClickListener(this);
+        sound_6.setOnClickListener(this);
+        sound_7.setOnClickListener(this);
+        sound_8.setOnClickListener(this);
+        sound_9.setOnClickListener(this);
+        sound_10.setOnClickListener(this);
         accompanySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -681,6 +728,27 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
             case R.id.sound_3:
                 updateSoundLayout(4);
                 break;
+            case R.id.sound_4:
+                updateSoundLayout(5);
+                break;
+            case R.id.sound_5:
+                updateSoundLayout(6);
+                break;
+            case R.id.sound_6:
+                updateSoundLayout(7);
+                break;
+            case R.id.sound_7:
+                updateSoundLayout(8);
+                break;
+            case R.id.sound_8:
+                updateSoundLayout(9);
+                break;
+            case R.id.sound_9:
+                updateSoundLayout(10);
+                break;
+            case R.id.sound_10:
+                updateSoundLayout(11);
+                break;
             case R.id.circle_1_layout:
                 updateCircle(1);
                 break;
@@ -832,21 +900,51 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
         sound_1.setBackgroundResource(2 == currentSoundLayout ? R.drawable.border : R.color.color_gray_1affffff);
         sound_2.setBackgroundResource(3 == currentSoundLayout ? R.drawable.border : R.color.color_gray_1affffff);
         sound_3.setBackgroundResource(4 == currentSoundLayout ? R.drawable.border : R.color.color_gray_1affffff);
+        sound_4.setBackgroundResource(5 == currentSoundLayout ? R.drawable.border : R.color.color_gray_1affffff);
+        sound_5.setBackgroundResource(6 == currentSoundLayout ? R.drawable.border : R.color.color_gray_1affffff);
+        sound_6.setBackgroundResource(7 == currentSoundLayout ? R.drawable.border : R.color.color_gray_1affffff);
+        sound_7.setBackgroundResource(8 == currentSoundLayout ? R.drawable.border : R.color.color_gray_1affffff);
+        sound_8.setBackgroundResource(9 == currentSoundLayout ? R.drawable.border : R.color.color_gray_1affffff);
+        sound_9.setBackgroundResource(10 == currentSoundLayout ? R.drawable.border : R.color.color_gray_1affffff);
+        sound_10.setBackgroundResource(11 == currentSoundLayout ? R.drawable.border : R.color.color_gray_1affffff);
 
         switch (currentSoundLayout) {
             case 1:
                 accompanySoundPath = null;
                 break;
             case 2:
-                accompanySoundPath = "sdcard/sound/test_1.mp3";
+                accompanySoundPath = "sdcard/sound/tb_banyin_anjing.mp3";
                 break;
             case 3:
-                accompanySoundPath = "sdcard/sound/test_2.mp3";
+                accompanySoundPath = "sdcard/sound/tb_banyin_guwu.mp3";
                 break;
             case 4:
-                accompanySoundPath = "sdcard/sound/test_3.mp3";
+                accompanySoundPath = "sdcard/sound/tb_banyin_huankuai.mp3";
+                break;
+            case 5:
+                accompanySoundPath = "sdcard/sound/tb_banyin_jiang.mp3";
+                break;
+            case 6:
+                accompanySoundPath = "sdcard/sound/tb_banyin_jinzhang.mp3";
+                break;
+            case 7:
+                accompanySoundPath = "sdcard/sound/tb_banyin_langman.mp3";
+                break;
+            case 8:
+                accompanySoundPath = "sdcard/sound/tb_banyin_longzhong.mp3";
+                break;
+            case 9:
+                accompanySoundPath = "sdcard/sound/tb_banyin_nengliang.mp3";
+                break;
+            case 10:
+                accompanySoundPath = "sdcard/sound/tb_banyin_qingkuai.mp3";
+                break;
+            case 11:
+                accompanySoundPath = "sdcard/sound/tb_banyin_wennuan.mp3";
                 break;
         }
+        //播放伴音
+        playBanYin();
     }
 
     // 选中贴图中的哪个表情

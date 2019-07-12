@@ -33,6 +33,67 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/activity_video_rv"
         android:layout_width="match_parent"
-        android:layout_height="375dp" />
+        android:layout_height="100dp" />
+    <LinearLayout
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <RelativeLayout
+            android:id="@+id/activity_article_comment_rl_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="4dp"
+                android:layout_toLeftOf="@+id/ll_xiaolian"
+                android:layout_width="match_parent"
+                android:layout_height="25dp">
+
+                <EditText
+                    android:id="@+id/et_comment"
+                    android:paddingLeft="12dp"
+                    android:background="@drawable/bg_article_comment"
+                    android:gravity="center_vertical"
+                    android:textSize="9sp"
+                    android:hint="输入评论..."
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/ll_xiaolian"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/tv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_biaoqing"
+                    android:src="@drawable/ic_emotion"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginRight="4dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:textColor="#FF9D00"
+                android:textSize="11sp"
+                android:id="@+id/tv_comment"
+                android:text="发送"
+                android:layout_width="28dp"
+                android:layout_height="25dp" />
+
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

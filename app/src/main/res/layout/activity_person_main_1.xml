@@ -491,6 +491,7 @@
                                 android:textStyle="bold" />
 
                             <View
+                                android:visibility="gone"
                                 android:id="@+id/bottom_line_1"
                                 android:layout_width="100px"
                                 android:layout_height="10px"
@@ -556,6 +557,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <RelativeLayout
+                        android:visibility="gone"
                         android:id="@+id/rl_pics"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">

@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -78,9 +79,10 @@ public class MyVideosActivity extends BaseActivity {
                                         .request(new ACallback<String>() {
                                             @Override
                                             public void onSuccess(String data) {
+                                                Log.d("sdasdas",data);
                                                 try {
                                                     JSONObject jsonObject = new JSONObject(data);
-                                                    if (jsonObject.getInt("200") == 200){
+                                                    if (jsonObject.getInt("code") == 200){
                                                         toToast(MyVideosActivity.this,"删除成功！");
                                                         list.remove(i);
                                                         adapter.notifyDataSetChanged();

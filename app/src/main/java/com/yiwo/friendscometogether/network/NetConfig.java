@@ -8,7 +8,7 @@ public class NetConfig {
 
     //测试服务器
     public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
-    //正式服务器
+//    正式服务器
 //    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
 
 
@@ -343,6 +343,8 @@ public class NetConfig {
     public static String addGroup = "action/ac_public/addGroup";
     //群列表
     public static String groupList = "action/ac_public/groupList";//群列表    传userID 用户id    返回 name群名称   groupid群ID
+    //退出群
+    public static String moveOutGroup = "action/ac_public/moveOutGroup";  //action/ac_public/moveOutGroup 退出群   传group_id群 ID   userID用户ID
     //新个人主页
     public static String homepagePartOne = "action/ac_user/HomepagePartOne"; //action/ac_user/HomepagePartOne 用户基本信息接口 传status  tid  uid
     public static String homepagePartTwo = "action/ac_user/HomepagePartTwo"; //action/ac_user/HomepagePartTwo 友记数据 传status  tid  uid
@@ -361,6 +363,15 @@ public class NetConfig {
     public static String videoEdit = "action/ac_video/videoEdit";//编辑   传vname 名称  vID视频ID   userID用户id
     //删除视频
     public static String videoDel = "action/ac_video/videoDel"; // 删除   传userID 用户id   vID视频ID
-
+    //视频点赞
+    public static String videoPraise = "action/ac_video/videoPraise";//action/ac_video / videoPraise  点赞/取消点赞     传id视频id  uid用户id
+    //视频点赞数据
+    public static String videoNumInfo = "action/ac_video/videoNumInfo";//action/ac_video  /  videoNumInfo   传vID视频ID   uid用户ID    返回 praise_num赞数量   comment_num评论数量   status 0未赞过  1已赞
+    //视频评论列表
+    public static String videoReviewsList = "action/ac_video/videoReviewsList";//action/ac_article  /   videoReviewsList  评论列表   传vID视频ID   page分页     返回 vcID评论ID   vcontent内容   vctime时间  username用户名    userpic用户图片   replyList回复列表
+    //视频评论
+    public static String videoReviews = "action/ac_video/videoReviews";//action/ac_article / videoReviews  评论  传id视频id  fctitle内容  uid用户id
+    //回复视频评论
+    public static String replyVideoReviews = "action/ac_video/reply";// 回复接口   传userID用户ID  vcID评论的ID  vinfo回复内容
 
 }

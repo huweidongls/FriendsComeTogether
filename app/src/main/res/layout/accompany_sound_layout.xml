@@ -9,82 +9,196 @@
     tools:showIn="@layout/short_video_edit_activity">
     <!--android:layout_alignParentBottom="true"-->
 
-
-    <LinearLayout
+    <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
-        <RelativeLayout
-            android:id="@+id/empty_sound"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="30dp"
-            android:background="@color/color_grey_1affffff"
-            android:gravity="center">
+            <RelativeLayout
+                android:id="@+id/empty_sound"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
 
-            <ImageView
-                android:layout_width="21dp"
-                android:layout_height="21dp"
-                android:gravity="center"
-                android:src="@mipmap/empty" />
+                <ImageView
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:gravity="center"
+                    android:src="@mipmap/empty" />
 
-        </RelativeLayout>
+            </RelativeLayout>
 
 
-        <RelativeLayout
-            android:id="@+id/sound_1"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="25dp"
-            android:background="@color/color_grey_1affffff"
-            android:gravity="center">
+            <RelativeLayout
+                android:id="@+id/sound_1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="25dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
 
-            <TextView
-                android:layout_width="37dp"
-                android:layout_height="20dp"
-                android:text="伴音1"
-                android:textColor="#FFFFFFFF"
-                android:textSize="14sp" />
+                <TextView
+                    android:layout_width="37dp"
+                    android:layout_height="20dp"
+                    android:text="安静"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="14sp" />
 
-        </RelativeLayout>
+            </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/sound_2"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="25dp"
-            android:background="@color/color_grey_1affffff"
-            android:gravity="center">
+            <RelativeLayout
+                android:id="@+id/sound_2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="25dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
 
-            <TextView
-                android:layout_width="37dp"
-                android:layout_height="20dp"
-                android:text="伴音2"
-                android:textColor="#FFFFFFFF"
-                android:textSize="14sp" />
+                <TextView
+                    android:layout_width="37dp"
+                    android:layout_height="20dp"
+                    android:text="鼓舞"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="14sp" />
 
-        </RelativeLayout>
+            </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/sound_3"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="25dp"
-            android:background="@color/color_grey_1affffff"
-            android:gravity="center">
+            <RelativeLayout
+                android:id="@+id/sound_3"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="25dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
 
-            <TextView
-                android:layout_width="37dp"
-                android:layout_height="20dp"
-                android:gravity="center"
-                android:text="伴音3"
-                android:textColor="#FFFFFFFF"
-                android:textSize="14sp" />
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="37dp"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:text="欢快"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/sound_4"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="25dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="37dp"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:text="激昂"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/sound_5"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="25dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="37dp"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:text="紧张"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/sound_6"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="25dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="37dp"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:text="浪漫"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/sound_7"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="25dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="37dp"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:text="隆重"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/sound_8"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="25dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="37dp"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:text="能量"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/sound_9"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="25dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="37dp"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:text="轻快"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/sound_10"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="25dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="37dp"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:text="温暖"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <!-- 原声+伴音 -->
     <include layout="@layout/sound_layout" />

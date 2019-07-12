@@ -15,7 +15,7 @@ public class MsgViewHolderUnknown extends MsgViewHolderBase {
 
     @Override
     protected int getContentResId() {
-        return R.layout.nim_message_item_unknown;
+        return R.layout.nim_message_item_not_in_group;
     }
 
     @Override

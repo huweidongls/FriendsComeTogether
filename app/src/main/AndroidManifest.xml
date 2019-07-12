@@ -322,6 +322,7 @@
         <activity android:name=".pages.SearchListActivity" />
         <activity
             android:name=".pages.VideoActivity"
+            android:windowSoftInputMode="adjustResize"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity android:name=".pages.ModifyFriendRememberActivity" />
