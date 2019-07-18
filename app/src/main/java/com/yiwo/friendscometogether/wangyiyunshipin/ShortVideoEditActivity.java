@@ -8,20 +8,24 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.InputType;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -159,9 +163,14 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
     private TwoWaysVerticalSeekBar sharpnessSeekbar;
     //textures
     private ViewGroup emptyLayout;
-    private ViewGroup kissLayout;
-    private ViewGroup knifeLayout;
-    private ViewGroup grimaceLayout;
+    private ViewGroup texturesLayout1;
+    private ViewGroup texturesLayout2;
+    private ViewGroup texturesLayout3;
+    private ViewGroup texturesLayout4;
+    private ViewGroup texturesLayout5;
+    private ViewGroup texturesLayout6;
+    private ViewGroup texturesLayout7;
+    private ViewGroup texturesLayout8;
     private MoveImageView big_textures;
     private RangeSeekBar textureSeekBar;
     private TextView textureMinText;
@@ -221,7 +230,7 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
     private TextView greenBtn;
 
     private AutoResizeEditText wordEdit; // 界面上的文字背景
-
+    private RelativeLayout rl_edt_world;
     private ViewGroup subsectionCircleLayout;
 
     private MediaPlayer mediaPlayer;
@@ -351,9 +360,15 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
 
         //textures layout
         emptyLayout = findView(R.id.empty_layout);
-        kissLayout = findView(R.id.kiss_layout);
-        knifeLayout = findView(R.id.knife_layout);
-        grimaceLayout = findView(R.id.grimace_layout);
+        texturesLayout1 = findViewById(R.id.texturesLayout1);
+        texturesLayout2 = findViewById(R.id.texturesLayout2);
+        texturesLayout3 = findViewById(R.id.texturesLayout3);
+        texturesLayout4 = findViewById(R.id.texturesLayout4);
+        texturesLayout5 = findViewById(R.id.texturesLayout5);
+        texturesLayout6 = findViewById(R.id.texturesLayout6);
+        texturesLayout7 = findViewById(R.id.texturesLayout7);
+        texturesLayout8 = findViewById(R.id.texturesLayout8);
+
         big_textures = findView(R.id.big_textures);
         textureSeekBar = findView(R.id.texture_seekbar);
         textureMinText = findView(R.id.texture_min_time);
@@ -411,7 +426,7 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
         // 文字
         wordEdit = findView(R.id.word_edit);
         wordEdit.setCursorVisible(false);
-
+        rl_edt_world = findViewById(R.id.rl_edt_world);
         setListener();
     }
 
@@ -431,7 +446,7 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
                 editRoot.setVisibility(View.GONE);
                 DialogMaker.showProgressDialog(ShortVideoEditActivity.this, "等待截图");
                 stopPlayer();
-
+                mediaPlayer.stop();
                 startVideoProcess();
             }
         });
@@ -454,9 +469,15 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
         accompanySoundText.setOnClickListener(this);
 
         emptyLayout.setOnClickListener(this);
-        kissLayout.setOnClickListener(this);
-        knifeLayout.setOnClickListener(this);
-        grimaceLayout.setOnClickListener(this);
+        texturesLayout1.setOnClickListener(this);
+        texturesLayout2.setOnClickListener(this);
+        texturesLayout3.setOnClickListener(this);
+        texturesLayout4.setOnClickListener(this);
+        texturesLayout5.setOnClickListener(this);
+        texturesLayout6.setOnClickListener(this);
+        texturesLayout7.setOnClickListener(this);
+        texturesLayout8.setOnClickListener(this);
+
         if (totalTime > 1000) {
             textureSeekBar.setRange(0, totalTime / 1000);
             textureSeekBar.setValue(0, totalTime / 1000);
@@ -640,9 +661,14 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
         textureDuration = totalTime;
 
         textureBitmaps = new ArrayList<>();
-        textureBitmaps.add(convertDrawableToBitmap(R.mipmap.big_kiss));
-        textureBitmaps.add(convertDrawableToBitmap(R.mipmap.big_knife));
-        textureBitmaps.add(convertDrawableToBitmap(R.mipmap.big_grimace));
+        textureBitmaps.add(convertDrawableToBitmap(R.mipmap.biaoqing_01));
+        textureBitmaps.add(convertDrawableToBitmap(R.mipmap.biaoqing_02));
+        textureBitmaps.add(convertDrawableToBitmap(R.mipmap.biaoqing_03));
+        textureBitmaps.add(convertDrawableToBitmap(R.mipmap.biaoqing_04));
+        textureBitmaps.add(convertDrawableToBitmap(R.mipmap.biaoqing_05));
+        textureBitmaps.add(convertDrawableToBitmap(R.mipmap.biaoqing_06));
+        textureBitmaps.add(convertDrawableToBitmap(R.mipmap.biaoqing_07));
+        textureBitmaps.add(convertDrawableToBitmap(R.mipmap.biaoqing_08));
     }
 
     private Bitmap convertDrawableToBitmap(int drawable) {
@@ -689,17 +715,33 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
                 currentTab = ACCOMPANY_SOUND_TAB;
                 switchTab();
                 break;
+                //贴图
             case R.id.empty_layout:
+                updateTexturesLayout(0);
+                break;
+            case R.id.texturesLayout1:
                 updateTexturesLayout(1);
                 break;
-            case R.id.kiss_layout:
+            case R.id.texturesLayout2:
                 updateTexturesLayout(2);
                 break;
-            case R.id.knife_layout:
+            case R.id.texturesLayout3:
                 updateTexturesLayout(3);
                 break;
-            case R.id.grimace_layout:
+            case R.id.texturesLayout4:
                 updateTexturesLayout(4);
+                break;
+            case R.id.texturesLayout5:
+                updateTexturesLayout(5);
+                break;
+            case R.id.texturesLayout6:
+                updateTexturesLayout(6);
+                break;
+            case R.id.texturesLayout7:
+                updateTexturesLayout(7);
+                break;
+            case R.id.texturesLayout8:
+                updateTexturesLayout(8);
                 break;
             case R.id.picture_1_layout:
                 updatePictureLayout(1);
@@ -876,13 +918,16 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) wordEdit.getLayoutParams();
         if (!yellowWordBtn.isEnabled()) {
             wordEdit.setBackgroundResource(R.mipmap.ic_yellow_edit);
+            wordEdit.setGravity(Gravity.NO_GRAVITY);
             layoutParams.width = ScreenUtil.screenWidth;
             layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         } else if (!redWordBtn.isEnabled()) {
+            wordEdit.setGravity(Gravity.CENTER);
             wordEdit.setBackgroundResource(R.mipmap.ic_red_edit);
             layoutParams.width = ScreenUtil.dip2px(250);
             layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         } else if (!bubbleWordBtn.isEnabled()) {
+            wordEdit.setGravity(Gravity.NO_GRAVITY);
             wordEdit.setBackgroundResource(R.mipmap.ic_bubble_edit);
             layoutParams.width = ScreenUtil.dip2px(100);
             layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -950,12 +995,19 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
     // 选中贴图中的哪个表情
     private void updateTexturesLayout(int currentTexturesLayout) {
         this.currentTexturesLayout = currentTexturesLayout;
-        showTimeLayout.setVisibility(1 == currentTexturesLayout ? View.GONE : View.VISIBLE);
-        emptyLayout.setBackgroundResource(1 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
-        kissLayout.setBackgroundResource(2 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
-        knifeLayout.setBackgroundResource(3 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
-        grimaceLayout.setBackgroundResource(4 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
-
+        showTimeLayout.setVisibility(0 == currentTexturesLayout ? View.GONE : View.VISIBLE);
+//        emptyLayout.setBackgroundResource(1 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
+//        kissLayout.setBackgroundResource(2 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
+//        knifeLayout.setBackgroundResource(3 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
+//        grimaceLayout.setBackgroundResource(4 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
+        texturesLayout1.setBackgroundResource(1 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
+        texturesLayout2.setBackgroundResource(2 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
+        texturesLayout3.setBackgroundResource(3 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
+        texturesLayout4.setBackgroundResource(4 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
+        texturesLayout5.setBackgroundResource(5 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
+        texturesLayout6.setBackgroundResource(6 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
+        texturesLayout7.setBackgroundResource(7 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
+        texturesLayout8.setBackgroundResource(8 == currentTexturesLayout ? R.drawable.border : R.color.color_gray_1affffff);
         updateBigTextures(currentTexturesLayout, 1 == currentTexturesLayout);
 
     }
@@ -963,26 +1015,51 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
     //选项图片并且贴到图像上
     private void updateBigTextures(int currentTexturesLayout, boolean isHide) {
         switch (currentTexturesLayout) {
-            case 1:
+            case 0:
                 big_textures.setVisibility(View.GONE);
                 if (isHide) {
                     textureBitmap = null;
                 }
                 break;
+            case 1:
+                big_textures.setVisibility(View.VISIBLE);
+                big_textures.setBackgroundResource(R.mipmap.biaoqing_01);
+                textureBitmap = textureBitmaps.get(0);
+                break;
             case 2:
                 big_textures.setVisibility(View.VISIBLE);
-                big_textures.setBackgroundResource(R.mipmap.big_kiss);
-                textureBitmap = textureBitmaps.get(0);
+                big_textures.setBackgroundResource(R.mipmap.biaoqing_02);
+                textureBitmap = textureBitmaps.get(1);
                 break;
             case 3:
                 big_textures.setVisibility(View.VISIBLE);
-                big_textures.setBackgroundResource(R.mipmap.big_knife);
-                textureBitmap = textureBitmaps.get(1);
+                big_textures.setBackgroundResource(R.mipmap.biaoqing_03);
+                textureBitmap = textureBitmaps.get(2);
                 break;
             case 4:
                 big_textures.setVisibility(View.VISIBLE);
-                big_textures.setBackgroundResource(R.mipmap.big_grimace);
-                textureBitmap = textureBitmaps.get(2);
+                big_textures.setBackgroundResource(R.mipmap.biaoqing_04);
+                textureBitmap = textureBitmaps.get(3);
+                break;
+            case 5:
+                big_textures.setVisibility(View.VISIBLE);
+                big_textures.setBackgroundResource(R.mipmap.biaoqing_05);
+                textureBitmap = textureBitmaps.get(4);
+                break;
+            case 6:
+                big_textures.setVisibility(View.VISIBLE);
+                big_textures.setBackgroundResource(R.mipmap.biaoqing_06);
+                textureBitmap = textureBitmaps.get(5);
+                break;
+            case 7:
+                big_textures.setVisibility(View.VISIBLE);
+                big_textures.setBackgroundResource(R.mipmap.biaoqing_07);
+                textureBitmap = textureBitmaps.get(6);
+                break;
+            case 8:
+                big_textures.setVisibility(View.VISIBLE);
+                big_textures.setBackgroundResource(R.mipmap.biaoqing_08);
+                textureBitmap = textureBitmaps.get(7);
                 break;
         }
 
@@ -1188,18 +1265,21 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
             inputFilePara.setMergeHeight(mediaCaptureOptions.mVideoPreviewHeight);
             // 原声大小
             inputFilePara.setAudioVolume(volume);
-            videoProcessOptions.setSource(inputFilePara);
             // 过渡
             if (isTrasition) {
-                inputFilePara.setVideoFadeDuration(1000);
+                inputFilePara.setVideoFadeDuration(3000);
                 Log.d("jianrujianchu:","设置渐入渐出TRUE");
             } else {
                 Log.d("jianrujianchu:","设置渐入渐出False");
-                inputFilePara.setVideoFadeDuration(1);
+                inputFilePara.setVideoFadeDuration(3000);
             }
+            videoProcessOptions.setSource(inputFilePara);
+
 
             // 设置拼接后文件存储地址
             outputPath = StorageUtil.getWritePath(displayName + ".mp4", StorageType.TYPE_VIDEO);
+//            outputPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath();
+
             TranscodingAPI.TranOut outputFilePara = videoProcessOptions.getOutputFilePara();
             outputFilePara.setFilePath(outputPath);
             videoProcessOptions.setOutputFilePara(outputFilePara);
@@ -1271,18 +1351,26 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
 
             int drawable = 0;
             if (!yellowWordBtn.isEnabled()) {
+                wordMark.setBitmap(matchParentFinalBitmap(saveEidtTextAsBitmap(wordEdit)));
                 drawable = R.mipmap.ic_yellow_edit;
             } else if (!redWordBtn.isEnabled()) {
+                wordMark.setBitmap(otherFinalBitmap(saveEidtTextAsBitmap(wordEdit)));
                 drawable = R.mipmap.ic_red_edit;
             } else if (!bubbleWordBtn.isEnabled()) {
+                wordMark.setBitmap(otherFinalBitmap(saveEidtTextAsBitmap(wordEdit)));
                 drawable = R.mipmap.ic_bubble_edit;
+            }else {
+                wordMark.setBitmap(otherFinalBitmap(saveEidtTextAsBitmap(wordEdit)));
             }
-            wordMark.setBitmap(addTextToBitmap(wordEdit.getText().toString(),
-                    wordEdit.getTextSize(), wordEdit.getCurrentTextColor(),
-                    drawable));
-
+//            wordMark.setBitmap(addTextToBitmap(wordEdit.getText().toString(),
+//                    wordEdit.getTextSize(), wordEdit.getCurrentTextColor(),
+//                    drawable));
+            float xpos = (wordEdit.getLastX() - (wordEdit.getWidth() / 2)) * videoWidth / (float) ScreenUtil.screenWidth;
+            float ypos = (wordEdit.getLastY() - (wordEdit.getHeight() / 2)) * videoHeight / (float) ScreenUtil.screenHeight;
+            wordMark.setX((int) xpos);
+            wordMark.setY((int) ypos);
             // 贴在视频中间
-            wordMark.setRect(VideoEffect.Rect.center);
+//            wordMark.setRect(VideoEffect.Rect.center);
             // 时间单位毫秒
             wordMark.setDuration((int) totalTime);
             wordMark.setStart(0);
@@ -1335,17 +1423,48 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
         Rect dst = new Rect(0, 0, pictureWidth, pictureHeight);//创建一个指定的新矩形的坐标
         canvas.drawBitmap(source, src, dst, photoPaint);//将photo 缩放或则扩大到 dst使用的填充区photoPaint
 
-        Bitmap textBitmap = textAsBitmap(text, textSize, pictureWidth, textColor);
-        src = new Rect(0, 0, textBitmap.getWidth(), textBitmap.getHeight());//创建一个指定的新矩形的坐标
-        dst = new Rect(ScreenUtil.dip2px(12), ScreenUtil.dip2px(8),
+        Bitmap textBitmap = textAsBitmap(text, wordEdit.getHeight(), wordEdit.getWidth(), textColor);
+        src = new Rect(0, 0, textBitmap.getWidth(), textBitmap.getHeight() - ScreenUtil.dip2px(2));//创建一个指定的新矩形的坐标
+        dst = new Rect(ScreenUtil.dip2px(14), ScreenUtil.dip2px(8),
                 pictureWidth - ScreenUtil.dip2px(8), pictureHeight - ScreenUtil.dip2px(8));//创建一个指定的新矩形的坐标
         canvas.drawBitmap(textBitmap, src, dst, photoPaint);//将photo 缩放或则扩大到 dst使用的填充区photoPaint
 
         canvas.save(Canvas.ALL_SAVE_FLAG);
         canvas.restore();
+//        Bitmap bitmap =finalBitmap(icon);
         return icon;
     }
+    private Bitmap otherFinalBitmap(Bitmap bitmap){
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        // 设置想要的大小
+//        int newWidth = wordEdit.getWidth() ;
+        // 计算缩放比例
+        float scale = 0.59f;
+        Matrix matrix = new Matrix();
+        matrix.postScale(scale, scale);
+        Bitmap mbitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
 
+        return mbitmap;
+    }
+    private Bitmap matchParentFinalBitmap(Bitmap bitmap){
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        // 设置想要的大小
+//        int newWidth = wordEdit.getWidth() ;
+        int newWidth =videoWidth ;
+        int newHeight = wordEdit.getHeight();
+        // 计算缩放比例
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        float scale = scaleWidth;
+        Log.d("aaaaddd",scaleHeight+"///"+scaleWidth);
+        Matrix matrix = new Matrix();
+        matrix.postScale(scale, scale);
+        Bitmap mbitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+
+        return mbitmap;
+    }
     /**
      * **************** VideoProcessCallback *******************
      */
@@ -1407,5 +1526,17 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
 
         String result = numberFormat.format((float) process / (float) total * 100);
         loadingView.setContent(result);
+    }
+    private Bitmap saveEidtTextAsBitmap(EditText editText) {
+        if(editText == null)
+            return null;
+        editText.setDrawingCacheEnabled(true);
+        Bitmap bitmap = editText.getDrawingCache();
+        if(bitmap != null) {
+            return bitmap;
+        } else {
+            Toast.makeText(this, "save Textimage error", Toast.LENGTH_SHORT).show();
+            return null;
+        }
     }
 }

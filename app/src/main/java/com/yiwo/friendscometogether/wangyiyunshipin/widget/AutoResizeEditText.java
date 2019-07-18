@@ -6,7 +6,10 @@ import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
+
+import com.netease.nim.uikit.common.util.sys.ScreenUtil;
 
 /**
  * Created by winnie on 2017/9/6.
@@ -25,10 +28,27 @@ public class AutoResizeEditText extends AppCompatEditText {
 
     private float trySize;
 
+    private int lastX = 0;
+    private int lastY = 0;
+
+    private boolean isMove = false;
+
+
     public AutoResizeEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
+    public int getLastX() {
+        return lastX;
+    }
+
+    public int getLastY() {
+        return lastY;
+    }
+
+    public boolean isMove() {
+        return isMove;
+    }
     private void initialise() {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         if (this.textPaint == null) {
@@ -122,5 +142,52 @@ public class AutoResizeEditText extends AppCompatEditText {
     public void setLayoutParams(ViewGroup.LayoutParams params) {
         this.fitText(this.getText().toString(), params.width);
         super.setLayoutParams(params);
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+
+                lastX = (int) event.getRawX();
+                lastY = (int) event.getRawY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                isMove = true;
+                int dx = (int) event.getRawX() - lastX;
+                int dy = (int) event.getRawY() - lastY;
+                int left = getLeft() + dx;
+                int top = getTop() + dy;
+                int right = getRight() + dx;
+                int bottom = getBottom() + dy;
+                if (left < 0) {
+                    dx = 0;
+                }
+                if (right > ScreenUtil.screenWidth) {
+                    dx = 0;
+                }
+                if (top < 0) {
+                    dy = 0;
+                }
+                if (bottom > (ScreenUtil.screenHeight - (getHeight() / 2))) {
+                    dy = 0;
+                }
+
+                setPosition(dx, dy);
+                lastX = (int) event.getRawX();
+                lastY = (int) event.getRawY();
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            default:
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
+
+    private void setPosition(int dx, int dy) {
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) getLayoutParams();
+        layoutParams.leftMargin = layoutParams.leftMargin + dx;
+        layoutParams.topMargin = layoutParams.topMargin + dy;
+        setLayoutParams(layoutParams);
     }
 }

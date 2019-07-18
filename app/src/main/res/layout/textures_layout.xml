@@ -7,77 +7,153 @@
     android:layout_marginTop="67dp"
     android:visibility="gone"
     tools:showIn="@layout/short_video_edit_activity">
-
-    <LinearLayout
+    <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:id="@+id/empty_layout"
-            android:layout_width="60dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginLeft="30dp"
-            android:background="@color/color_grey_1affffff"
-            android:gravity="center">
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/empty_layout"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/empty_view"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:src="@mipmap/empty" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/texturesLayout1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
 
             <ImageView
-                android:id="@+id/empty_view"
+                android:id="@+id/textures_iv1"
                 android:layout_width="21dp"
                 android:layout_height="21dp"
-                android:src="@mipmap/empty" />
+                android:src="@mipmap/biaoqing_01" />
 
-        </RelativeLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/texturesLayout2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
 
-        <RelativeLayout
-            android:id="@+id/kiss_layout"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="25dp"
-            android:background="@color/color_grey_1affffff"
-            android:gravity="center">
+                <ImageView
+                    android:id="@+id/textures_iv2"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:src="@mipmap/biaoqing_02" />
 
-            <ImageView
-                android:id="@+id/kiss_view"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@mipmap/small_kiss" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/texturesLayout3"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
 
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/textures_iv3"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:src="@mipmap/biaoqing_03" />
 
-        <RelativeLayout
-            android:id="@+id/knife_layout"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="25dp"
-            android:background="@color/color_grey_1affffff"
-            android:gravity="center">
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/texturesLayout4"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
 
-            <ImageView
-                android:id="@+id/knife_view"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@mipmap/knife" />
+                <ImageView
+                    android:id="@+id/textures_iv4"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:src="@mipmap/biaoqing_04" />
 
-        </RelativeLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/texturesLayout5"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
 
-        <RelativeLayout
-            android:id="@+id/grimace_layout"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="25dp"
-            android:background="@color/color_grey_1affffff"
-            android:gravity="center">
+                <ImageView
+                    android:id="@+id/textures_iv5"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:src="@mipmap/biaoqing_05" />
 
-            <ImageView
-                android:id="@+id/grimace_view"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@mipmap/grimace" />
-        </RelativeLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/texturesLayout6"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
 
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/textures_iv6"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:src="@mipmap/biaoqing_06" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/texturesLayout7"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/textures_iv7"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:src="@mipmap/biaoqing_07" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/texturesLayout8"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:background="@color/color_grey_1affffff"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/textures_iv8"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:src="@mipmap/biaoqing_08" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <!-- 显示时间的layout -->
     <include layout="@layout/showtime_layout" />

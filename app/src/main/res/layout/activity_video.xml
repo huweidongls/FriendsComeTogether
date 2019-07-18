@@ -114,7 +114,7 @@
         </LinearLayout>
     </RelativeLayout>
     <LinearLayout
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/ll_pinglun"
         android:layout_alignParentBottom="true"
         android:orientation="vertical"

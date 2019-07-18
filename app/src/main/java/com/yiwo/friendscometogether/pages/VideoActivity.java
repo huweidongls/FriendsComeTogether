@@ -171,7 +171,11 @@ public class VideoActivity extends FragmentActivity {
                                 data_pinglun.clear();
                                 data_pinglun.addAll(model.getObj());
                                 articleCommentVideoAdapter.notifyDataSetChanged();
-                                vPingLunPageVID = data_pinglun.get(data_pinglun.size()-1).getVcID();
+                                if (data_pinglun.size()>0){
+                                    vPingLunPageVID = data_pinglun.get(data_pinglun.size()-1).getVcID();
+                                }else {
+                                    vPingLunPageVID = "";
+                                }
                                 pinglun_page = 2;
                             }
                         } catch (JSONException e) {
@@ -204,7 +208,11 @@ public class VideoActivity extends FragmentActivity {
                                         data_pinglun.clear();
                                         data_pinglun.addAll(model.getObj());
                                         articleCommentVideoAdapter.notifyDataSetChanged();
-                                        vPingLunPageVID = data_pinglun.get(data_pinglun.size()-1).getVcID();
+                                        if (data_pinglun.size()>0){
+                                            vPingLunPageVID = data_pinglun.get(data_pinglun.size()-1).getVcID();
+                                        }else {
+                                            vPingLunPageVID = "";
+                                        }
                                         pinglun_page = 2;
                                     }
                                 } catch (JSONException e) {
@@ -237,7 +245,11 @@ public class VideoActivity extends FragmentActivity {
                                         ActicleCommentVideoModel model = gson.fromJson(data,ActicleCommentVideoModel.class);
                                         data_pinglun.addAll(model.getObj());
                                         articleCommentVideoAdapter.notifyDataSetChanged();
-                                        vPingLunPageVID = data_pinglun.get(data_pinglun.size()-1).getVcID();
+                                        if (data_pinglun.size()>0){
+                                            vPingLunPageVID = data_pinglun.get(data_pinglun.size()-1).getVcID();
+                                        }else {
+                                            vPingLunPageVID = "";
+                                        }
                                         pinglun_page++;
                                     }
                                 } catch (JSONException e) {
@@ -347,6 +359,7 @@ public class VideoActivity extends FragmentActivity {
                 if (TextUtils.isEmpty(uid) || uid.equals("0")) {
                     intent.setClass(VideoActivity.this, LoginActivity.class);
                     startActivity(intent);
+                    finish();
                     break;
                 }
                 toZan();
@@ -355,6 +368,7 @@ public class VideoActivity extends FragmentActivity {
                 if (TextUtils.isEmpty(uid) || uid.equals("0")) {
                     intent.setClass(VideoActivity.this, LoginActivity.class);
                     startActivity(intent);
+                    finish();
                     break;
                 }
                 startPingLunShowAnim();
@@ -363,6 +377,7 @@ public class VideoActivity extends FragmentActivity {
                 if (TextUtils.isEmpty(uid) || uid.equals("0")) {
                     intent.setClass(VideoActivity.this, LoginActivity.class);
                     startActivity(intent);
+                    finish();
                     break;
                 }
                 new ShareAction(VideoActivity.this).setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
@@ -546,6 +561,7 @@ public class VideoActivity extends FragmentActivity {
         emotionMainFragment.hideEmotionKeyboard();
         etComment.setText(null);
         isComment = true;
+        etComment.setHint("输入评论...");
 //        /设置动画，从自身位置的最下端向上滑动了自身的高度，持续时间为500ms
         final TranslateAnimation ctrlAnimation = new TranslateAnimation(
                 TranslateAnimation.RELATIVE_TO_SELF, 0, TranslateAnimation.RELATIVE_TO_SELF, 0,
@@ -573,6 +589,7 @@ public class VideoActivity extends FragmentActivity {
             InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.showSoftInput(editText, 0);
             isComment = false;
+            etComment.setHint("输入回复...");
         }
     }
     /**
@@ -651,6 +668,7 @@ public class VideoActivity extends FragmentActivity {
                                 articleCommentVideoAdapter.notifyDataSetChanged();
                                 rv_pinglun.scrollToPosition(pingLunPostion);
                                 isComment = true;
+                                etComment.setHint("输入评论...");
                             }else {
                                 toToast(VideoActivity.this, "回复失败");
                             }
@@ -665,6 +683,7 @@ public class VideoActivity extends FragmentActivity {
                         WeiboDialogUtils.closeDialog(dialog);
                         isComment = true;
                         etComment.setText(null);
+                        etComment.setHint("输入评论....");
                         toToast(VideoActivity.this, "回复失败"+errCode+":"+errMsg);
                     }
                 });

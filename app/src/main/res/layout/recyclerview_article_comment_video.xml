@@ -49,7 +49,7 @@
 
             <TextView
                 android:id="@+id/activity_article_comment_rv_tv_nickname"
-                android:layout_marginTop="40px"
+                android:layout_marginTop="58px"
                 android:textColor="@color/black_333333"
                 android:textSize="30px"
                 android:text="昵称：帅气的小迷糊"
@@ -57,6 +57,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/activity_article_comment_rv_tv_title"
                 android:layout_marginTop="4px"
                 android:lines="1"

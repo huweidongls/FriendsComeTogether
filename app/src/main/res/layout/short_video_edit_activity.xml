@@ -63,18 +63,23 @@
             android:layout_marginTop="129dp" />
 
     </FrameLayout>
-
-    <com.yiwo.friendscometogether.wangyiyunshipin.widget.AutoResizeEditText
-        android:id="@+id/word_edit"
+    <RelativeLayout
+        android:id="@+id/rl_edt_world"
+        android:layout_below="@id/toolbar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:padding="16dp"
-        android:hint="点击输入文字..."
-        android:background="@null"
-        android:layout_marginTop="170dp"
-        android:maxLength="25"
-        android:visibility="gone" />
+        android:layout_height="wrap_content">
+        <com.yiwo.friendscometogether.wangyiyunshipin.widget.AutoResizeEditText
+            android:id="@+id/word_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:hint="点击输入文字..."
+            android:background="@null"
+            android:layout_marginTop="170dp"
+            android:maxLength="25"
+            android:visibility="gone" />
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/edit_layout"

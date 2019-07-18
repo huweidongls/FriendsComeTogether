@@ -5,6 +5,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -30,6 +33,8 @@ import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.utils.FileUtils;
+import com.yiwo.friendscometogether.utils.InsertMediaToSystem;
 import com.yiwo.friendscometogether.wangyiyunshipin.TakeVideoFragment_new;
 import com.yiwo.friendscometogether.wangyiyunshipin.server.entity.AddVideoResponseEntity;
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.UploadState;
@@ -61,6 +66,7 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
     private String url_screenshot;
     private SpImp spImp;
     private Dialog dialog;
+    private Boolean save2SdCard = false;
     public  static void startUpLoadVideoActivity(Context context,VideoItem videoItem,String url_screenshot){
         Intent intent = new Intent(context,UpLoadVideoActivity.class);
         intent.putExtra(TakeVideoFragment_new.EXTRA_VIDEO_ITEM,videoItem);
@@ -104,7 +110,21 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
                 if (editText.getText().toString().equals("")){
                     toToast(UpLoadVideoActivity.this,"请输入视频名字！");
                 }else {
-                    uploadFile(videoItem);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UpLoadVideoActivity.this);
+                    builder.setMessage("是否发布并保存到本地？")
+                            .setNegativeButton("仅发布", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    save2SdCard = false;
+                                    uploadFile(videoItem);
+                                }
+                            }).setPositiveButton("保存", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    save2SdCard = true;
+                                    uploadFile(videoItem);
+                                }
+                    }).show();
                 }
                 break;
         }
@@ -212,7 +232,23 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
                                 try {
                                     JSONObject jsonObject = new JSONObject(data);
                                     if (jsonObject.getInt("code") == 200){
+                                        // 保存至相册
+                                        if (save2SdCard){
+                                            File pictureFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsoluteFile();
+                                            File appDir = new File(pictureFolder ,"Camera");
+                                            if (!appDir.exists()) {
+                                                appDir.mkdirs();
+                                            }
+                                            String fileName = "瞳伴视频_"+System.currentTimeMillis() + ".MP4";
+                                            File destFile = new File(appDir, fileName);
+                                            FileUtils.copy(new File(videoItem.getFilePath()), destFile);
+                                            // 最后通知图库更新
+                                            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                                                    Uri.fromFile(new File(destFile.getPath()))));
+                                        }
                                         toToast(UpLoadVideoActivity.this,"发布成功");
+                                        //删除之前文件夹的视频
+                                        deleteSingleFile(videoItem.getFilePath());
                                         finish();
                                     }else {
                                         toToast(UpLoadVideoActivity.this,"发布失败");
@@ -227,6 +263,26 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
 
                             }
                         });
+        }
+    }
+    /** 删除单个文件
+     * @param filePath$Name 要删除的文件的文件名
+     * @return 单个文件删除成功返回true，否则返回false
+     */
+    private boolean deleteSingleFile(String filePath$Name) {
+        File file = new File(filePath$Name);
+        // 如果文件路径所对应的文件存在，并且是一个文件，则直接删除
+        if (file.exists() && file.isFile()) {
+            if (file.delete()) {
+                Log.e("--Method--", "Copy_Delete.deleteSingleFile: 删除单个文件" + filePath$Name + "成功！");
+                return true;
+            } else {
+                Log.e("--Method--", "Copy_Delete.deleteSingleFile: 删除单个文件" + filePath$Name + "失败！");
+                return false;
+            }
+        } else {
+            Log.e("--Method--", "Copy_Delete.deleteSingleFile: 删除单个文件失败" + filePath$Name + "不存在！");
+            return false;
         }
     }
 

@@ -35,7 +35,17 @@
             android:layout_marginTop="69px"
             android:src="@mipmap/my_head" />
 
+        <!--android:ems="11"-->
+        <!--android:inputType="phone"-->
+        <!--android:maxLength="11"-->
+        <!--android:hint="请输入手机号"-->
         <EditText
+
+            android:ems="11"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:hint="请输入手机号"
+
             android:id="@+id/login_phoneEt"
             android:layout_width="match_parent"
             android:layout_height="52px"
@@ -43,11 +53,7 @@
             android:layout_marginRight="50px"
             android:layout_marginTop="67px"
             android:background="@null"
-            android:ems="11"
             android:gravity="center_vertical"
-            android:hint="请输入手机号"
-            android:inputType="phone"
-            android:maxLength="11"
             android:textSize="32px" />
         <RelativeLayout
             android:orientation="horizontal"
