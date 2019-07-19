@@ -65,6 +65,12 @@ public class YouJiAdapter extends RecyclerView.Adapter<YouJiAdapter.ViewHolder>{
             holder.rv_video.setVisibility(View.VISIBLE);
             holder.rv_youji.setVisibility(View.GONE);
             Glide.with(context).load(data.get(position).getFmpic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_video);
+
+            holder.video_tv_youji_title.setText(data.get(position).getFmtitle());
+            Glide.with(context).load(data.get(position).getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.video_iv_icon_user);
+            holder.video_tv_username.setText(data.get(position).getUsername());
+            holder.video_tv_time.setText(data.get(position).getFmtime());
+            holder.video_tv_good_num.setText(data.get(position).getFmgood());
         }
 
         holder.rv_video.setOnClickListener(new View.OnClickListener() {
@@ -130,6 +136,12 @@ public class YouJiAdapter extends RecyclerView.Adapter<YouJiAdapter.ViewHolder>{
         private TextView tvUsername;
         private TextView tvTime;
         private TextView tvGoodNum;
+
+        private ImageView video_iv_icon_user;
+        private TextView video_tv_username;
+        private TextView video_tv_time;
+        private TextView video_tv_good_num;
+        private TextView video_tv_youji_title;
         //        https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=3585167714,172627266&fm=173&app=49&f=JPEG?w=640&h=497&s=1E8E136D4E4A74559805DDA20300F009
         public ViewHolder(View itemView) {
             super(itemView);
@@ -142,6 +154,12 @@ public class YouJiAdapter extends RecyclerView.Adapter<YouJiAdapter.ViewHolder>{
             tvUsername = itemView.findViewById(R.id.tv_username);
             tvTime = itemView.findViewById(R.id.tv_time);
             tvGoodNum = itemView.findViewById(R.id.tv_good_num);
+
+            video_iv_icon_user = itemView.findViewById(R.id.video_iv_icon_user);
+            video_tv_username = itemView.findViewById(R.id.video_tv_username);
+            video_tv_time = itemView.findViewById(R.id.video_tv_time);
+            video_tv_good_num = itemView.findViewById(R.id.video_tv_good_num);
+            video_tv_youji_title = itemView.findViewById(R.id.video_tv_youji_title);
         }
     }
 }

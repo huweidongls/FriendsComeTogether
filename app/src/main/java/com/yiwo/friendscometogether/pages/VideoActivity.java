@@ -111,7 +111,9 @@ public class VideoActivity extends FragmentActivity {
     RefreshLayout refresh_layout;
     private PopupWindow popupWindow;
     private String vid;
-
+    private String url ;
+    private String title ;
+    private String picUrl;
 
     private SpImp spImp;
     private String uid = "";
@@ -268,12 +270,19 @@ public class VideoActivity extends FragmentActivity {
     }
 
     private void initData() {
-        Log.d("asasas",getIntent().getSerializableExtra("data").hashCode()+"");
         mode = (YouJiListModel.ObjBean) getIntent().getSerializableExtra("data");
-        Log.d("asasas",mode.hashCode()+"");
-        String url = mode.getVurl();
-        String title = mode.getFmtitle();
-        vid = mode.getFmID();
+        if (mode!=null){
+            url = mode.getVurl();
+            title = mode.getFmtitle();
+            vid = mode.getFmID();
+            picUrl = mode.getFmpic();
+        }else {
+            url = getIntent().getStringExtra("videoUrl");
+            title = getIntent().getStringExtra("title");
+            vid = getIntent().getStringExtra("vid");
+            picUrl = getIntent().getStringExtra("picUrl");
+        }
+
         Log.d("vidvidvid",vid);
         ViseHttp.POST(NetConfig.videoNumInfo)
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.videoNumInfo))
@@ -384,8 +393,8 @@ public class VideoActivity extends FragmentActivity {
                         .setShareboardclickCallback(new ShareBoardlistener() {
                             @Override
                             public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
-                                ShareUtils.shareWeb(VideoActivity.this, mode.getVurl(), mode.getFmtitle(),
-                                        "瞳伴app视频分享", mode.getFmpic(), share_media);
+                                ShareUtils.shareWeb(VideoActivity.this,url , title,
+                                        "瞳伴app视频分享", picUrl, share_media);
                             }
                         }).open();
                 break;

@@ -21,7 +21,6 @@ import com.yiwo.friendscometogether.imagepreview.Consts;
 import com.yiwo.friendscometogether.imagepreview.ImagePreviewActivity;
 import com.yiwo.friendscometogether.model.PersonMain_Pics_model;
 import com.yiwo.friendscometogether.newmodel.YouJiListModel;
-import com.yiwo.friendscometogether.pages.VideoActivity;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
 
 import java.util.ArrayList;

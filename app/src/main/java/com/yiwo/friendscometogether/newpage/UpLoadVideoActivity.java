@@ -5,17 +5,27 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +42,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.pages.VideoActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.FileUtils;
 import com.yiwo.friendscometogether.utils.InsertMediaToSystem;
@@ -66,7 +77,7 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
     private String url_screenshot;
     private SpImp spImp;
     private Dialog dialog;
-    private Boolean save2SdCard = false;
+    private PopupWindow popupWindow;
     public  static void startUpLoadVideoActivity(Context context,VideoItem videoItem,String url_screenshot){
         Intent intent = new Intent(context,UpLoadVideoActivity.class);
         intent.putExtra(TakeVideoFragment_new.EXTRA_VIDEO_ITEM,videoItem);
@@ -107,25 +118,21 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
                 }).show();
                 break;
             case R.id.activity_up_load_video_rl_complete:
-                if (editText.getText().toString().equals("")){
-                    toToast(UpLoadVideoActivity.this,"请输入视频名字！");
-                }else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(UpLoadVideoActivity.this);
-                    builder.setMessage("是否发布并保存到本地？")
-                            .setNegativeButton("仅发布", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    save2SdCard = false;
-                                    uploadFile(videoItem);
-                                }
-                            }).setPositiveButton("保存", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    save2SdCard = true;
-                                    uploadFile(videoItem);
-                                }
-                    }).show();
-                }
+
+                showActivePopupwindow();
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(UpLoadVideoActivity.this);
+//                    builder.setMessage("是否发布并保存到本地？")
+//                            .setNegativeButton("仅发布", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    uploadFile(videoItem);
+//                                }
+//                            }).setPositiveButton("保存", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    uploadFile(videoItem);
+//                                }
+//                    }).show();
                 break;
         }
     }
@@ -232,20 +239,6 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
                                 try {
                                     JSONObject jsonObject = new JSONObject(data);
                                     if (jsonObject.getInt("code") == 200){
-                                        // 保存至相册
-                                        if (save2SdCard){
-                                            File pictureFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsoluteFile();
-                                            File appDir = new File(pictureFolder ,"Camera");
-                                            if (!appDir.exists()) {
-                                                appDir.mkdirs();
-                                            }
-                                            String fileName = "瞳伴视频_"+System.currentTimeMillis() + ".MP4";
-                                            File destFile = new File(appDir, fileName);
-                                            FileUtils.copy(new File(videoItem.getFilePath()), destFile);
-                                            // 最后通知图库更新
-                                            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                                                    Uri.fromFile(new File(destFile.getPath()))));
-                                        }
                                         toToast(UpLoadVideoActivity.this,"发布成功");
                                         //删除之前文件夹的视频
                                         deleteSingleFile(videoItem.getFilePath());
@@ -301,5 +294,83 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
 
             }
         }).show();
+    }
+    private void showActivePopupwindow() {
+
+        View view = LayoutInflater.from(UpLoadVideoActivity.this).inflate(R.layout.popupwindow_video_fabu, null);
+
+        TextView btnUp = view.findViewById(R.id.btn_up);
+        TextView btnSave = view.findViewById(R.id.btn_save);
+        TextView btnCanel = view.findViewById(R.id.btn_cancel);
+        btnUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editText.getText().toString().equals("")){
+                    toToast(UpLoadVideoActivity.this,"请输入视频名字！");
+                }else {
+                    uploadFile(videoItem);
+                }
+                popupWindow.dismiss();
+            }
+        });
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 保存至相册
+                File pictureFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsoluteFile();
+                File appDir = new File(pictureFolder, "Camera");
+                if (!appDir.exists()) {
+                    appDir.mkdirs();
+                }
+                String fileName = "瞳伴视频_" + System.currentTimeMillis() + ".MP4";
+                File destFile = new File(appDir, fileName);
+                FileUtils.copy(new File(videoItem.getFilePath()), destFile);
+                // 最后通知图库更新
+                sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                        Uri.fromFile(new File(destFile.getPath()))));
+                toToast(UpLoadVideoActivity.this,"保存成功！");
+                popupWindow.dismiss();
+                finish();
+            }
+        });
+
+        popupWindow = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+        //这句话，让pop覆盖在输入法上面
+        popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+
+        //这句话，让pop自适应输入状态
+        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+//        popupWindow.setSoftInputMode(PopupWindow.INPUT_METHOD_NEEDED);
+//        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        popupWindow.setTouchable(true);
+        popupWindow.setFocusable(true);
+        // 设置点击窗口外边窗口消失
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0,0);
+        // 设置popWindow的显示和消失动画
+        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.alpha = 0.5f;
+        getWindow().setAttributes(params);
+        popupWindow.update();
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            // 在dismiss中恢复透明度
+            public void onDismiss() {
+                WindowManager.LayoutParams params = getWindow().getAttributes();
+                params.alpha = 1f;
+                getWindow().setAttributes(params);
+            }
+        });
+
+        btnCanel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
+
     }
 }

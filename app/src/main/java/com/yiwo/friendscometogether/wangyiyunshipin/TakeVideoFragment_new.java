@@ -557,21 +557,21 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
             mediaCaptureOptions.resolutionType = ResolutionType.SD;
         }
     }
-    //FU的滤镜
-    private void fuLiveEffect(){
-        mediaCaptureController.getMediaRecord().setCaptureRawDataCB(new VideoCallback() {
-            @Override
-            public int onVideoCapture(byte[] bytes, int i, int i1, int i2) {
-                //SDK回调的线程已经创建了GLContext
-                if(mFuEffect == null){
-                    mFuEffect = new FuVideoEffect();
-                    mFuEffect.filterInit(getContext());
-                }
-                int result = mFuEffect.ifilterNV21Image(bytes, i, i1);
-                return result;
-            }
-        });
-    }
+//    //FU的滤镜
+//    private void fuLiveEffect(){
+//        mediaCaptureController.getMediaRecord().setCaptureRawDataCB(new VideoCallback() {
+//            @Override
+//            public int onVideoCapture(byte[] bytes, int i, int i1, int i2) {
+//                //SDK回调的线程已经创建了GLContext
+//                if(mFuEffect == null){
+//                    mFuEffect = new FuVideoEffect();
+//                    mFuEffect.filterInit(getContext());
+//                }
+//                int result = mFuEffect.ifilterNV21Image(bytes, i, i1);
+//                return result;
+//            }
+//        });
+//    }
     private void startRecording() {
         currentCount++;
         mediaCaptureController.startRecording();

@@ -76,7 +76,7 @@
             android:layout_marginLeft="40px"
             android:ellipsize="end"
             android:lines="9"
-            android:hint="请输入内容"
+            android:hint="请输入标题内容"
             android:textColor="@color/black_333333"
             android:textSize="28px" />
 

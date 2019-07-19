@@ -243,7 +243,6 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
         intent.putExtra(EXTRA_MEDIA_OPTIONS, (Serializable) mediaCaptureOptions);
         ((Activity) context).startActivityForResult(intent, EXTRA_REQUEST_CODE);
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -444,7 +443,7 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
                 displayName = "友记视频" + TimeUtil.getMonthTimeString(System.currentTimeMillis());
                 videoView.setVisibility(View.GONE);
                 editRoot.setVisibility(View.GONE);
-                DialogMaker.showProgressDialog(ShortVideoEditActivity.this, "等待截图");
+                DialogMaker.showProgressDialog(ShortVideoEditActivity.this, "");
                 stopPlayer();
                 mediaPlayer.stop();
                 startVideoProcess();
@@ -458,6 +457,7 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
         arr = pathList.toArray(arr);
         mPlayer = MediaPlayerAPI.getInstance();
         mPlayer.init(getApplicationContext(), arr, videoView);
+        mPlayer.setVolume(volume);
         mPlayer.start();
     }
 
@@ -485,8 +485,8 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
         textureSeekBar.setOnRangeChangedListener(new RangeSeekBar.OnRangeChangedListener() {
             @Override
             public void onRangeChanged(RangeSeekBar view, float min, float max, boolean isFromUser) {
-                textureOffset = min;
-                textureDuration = max - textureOffset;
+                textureOffset = min*1000;
+                textureDuration = (max - textureOffset)*1000;
             }
         });
 
@@ -1173,7 +1173,7 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
                 requestDialog.dismiss();
                 videoView.setVisibility(View.GONE);
                 editRoot.setVisibility(View.GONE);
-                DialogMaker.showProgressDialog(ShortVideoEditActivity.this, "等待截图");
+                DialogMaker.showProgressDialog(ShortVideoEditActivity.this, "");
                 stopPlayer();
 
                 startVideoProcess();
@@ -1267,11 +1267,11 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
             inputFilePara.setAudioVolume(volume);
             // 过渡
             if (isTrasition) {
-                inputFilePara.setVideoFadeDuration(3000);
+                inputFilePara.setVideoFadeDuration(1000);
                 Log.d("jianrujianchu:","设置渐入渐出TRUE");
             } else {
                 Log.d("jianrujianchu:","设置渐入渐出False");
-                inputFilePara.setVideoFadeDuration(3000);
+                inputFilePara.setVideoFadeDuration(0);
             }
             videoProcessOptions.setSource(inputFilePara);
 
