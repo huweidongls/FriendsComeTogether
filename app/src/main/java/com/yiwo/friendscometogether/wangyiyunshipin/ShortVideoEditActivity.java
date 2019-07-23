@@ -506,6 +506,7 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 accompanyVolume = (float) progress / 100;
+                mediaPlayer.setVolume(accompanyVolume,accompanyVolume);
             }
 
             @Override
@@ -1470,7 +1471,7 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
      */
     @Override
     public void onVideoProcessSuccess() {
-        Toast.makeText(this, "保存成功！", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "保存成功！", Toast.LENGTH_SHORT).show();
         for (String path : pathList) {
             FileUtil.deleteFile(path);
         }

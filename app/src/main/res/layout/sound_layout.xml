@@ -8,41 +8,44 @@
     android:layout_marginTop="76dp"
     tools:showIn="@layout/short_video_edit_activity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="66dp"
         android:orientation="horizontal">
-
-        <SeekBar
-            android:id="@+id/accompany_volume_seekbar"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:maxHeight="3dp"
-            android:progress="10"
-            android:progressDrawable="@drawable/seekbar_drawable"
-            android:thumb="@mipmap/ic_blue_circle" />
-
         <TextView
-            android:layout_width="28dp"
+            android:layout_width="56dp"
             android:layout_height="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/accompany_volume_seekbar"
-            android:text="原声"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="28dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/accompany_volume_seekbar"
-            android:text="伴音"
+            android:layout_marginLeft="30dp"
+            android:text="伴音大小"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-    </RelativeLayout>
+        <TextView
+            android:layout_width="9dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+        <SeekBar
+            android:id="@+id/accompany_volume_seekbar"
+
+            android:layout_width="188dp"
+            android:layout_height="wrap_content"
+            android:progress="10"
+            android:maxHeight="3dp"
+            android:progressDrawable="@drawable/seekbar_drawable"
+            android:layout_centerHorizontal="true"
+            android:thumb="@mipmap/ic_blue_circle" />
+        <TextView
+            android:layout_width="23dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:text="10"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
 
 
 </RelativeLayout>

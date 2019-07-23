@@ -133,11 +133,13 @@
 
         <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
             android:id="@+id/iv_video"
+            android:layout_above="@+id/ll_video_info"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@mipmap/welcome"
-            test:radius1="16px" />
+            test:left_top_radius1="16px"
+            test:right_top_radius1="16px" />
 
         <ImageView
             android:layout_width="55px"
@@ -148,6 +150,7 @@
             android:layout_marginTop="16px"
             android:src="@mipmap/youji_video" />
         <LinearLayout
+            android:id="@+id/ll_video_info"
             android:background="@drawable/bg_white_16px"
             android:orientation="vertical"
             android:layout_alignParentBottom="true"

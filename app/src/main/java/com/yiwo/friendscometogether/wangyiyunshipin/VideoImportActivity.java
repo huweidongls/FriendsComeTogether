@@ -178,7 +178,7 @@ public class VideoImportActivity extends BaseActivity implements ShortVideoGalle
     /**
      * 初始化视频选择列表
      */
-    private void initRecyclerView() {
+    private void initRecyclerView(){
         recyclerView = findView(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         dataAccessor = new VideoGalleryDataAccessor();

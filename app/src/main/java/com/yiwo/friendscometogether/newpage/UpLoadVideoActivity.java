@@ -330,7 +330,6 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
                         Uri.fromFile(new File(destFile.getPath()))));
                 toToast(UpLoadVideoActivity.this,"保存成功！");
                 popupWindow.dismiss();
-                finish();
             }
         });
 
