@@ -37,6 +37,7 @@
 
     </RelativeLayout>
     <RelativeLayout
+        android:background="@mipmap/bg_youju_img"
         android:orientation="vertical"
         android:layout_below="@+id/rl_top"
         android:layout_above="@+id/rl_bottom"

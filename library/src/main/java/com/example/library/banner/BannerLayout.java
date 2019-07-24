@@ -89,7 +89,7 @@ public class BannerLayout extends FrameLayout {
         showIndicator = a.getBoolean(R.styleable.BannerLayout_showIndicator, true);
         autoPlayDuration = a.getInt(R.styleable.BannerLayout_interval, 4000);
         isAutoPlaying = a.getBoolean(R.styleable.BannerLayout_autoPlaying, true);
-        itemSpace = a.getInt(R.styleable.BannerLayout_itemSpace, 20);
+        itemSpace = a.getInt(R.styleable.BannerLayout_itemSpace, 50);
         centerScale = a.getFloat(R.styleable.BannerLayout_centerScale, 1.2f);
         moveSpeed = a.getFloat(R.styleable.BannerLayout_moveSpeed, 1.0f);
         if (mSelectedDrawable == null) {
