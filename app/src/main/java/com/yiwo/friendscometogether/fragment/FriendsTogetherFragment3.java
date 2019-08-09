@@ -104,8 +104,6 @@ public class FriendsTogetherFragment3 extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_friends_together3, null);
-
-        StatusBarUtils.setStatusBar(getActivity(), Color.parseColor("#d84c37"));
         ButterKnife.bind(this, view);
         ScreenAdapterTools.getInstance().loadView(view);
         //第一种方式获取屏幕的像素宽高在Activity里面可使用

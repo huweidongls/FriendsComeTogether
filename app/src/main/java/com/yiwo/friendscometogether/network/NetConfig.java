@@ -7,9 +7,9 @@ package com.yiwo.friendscometogether.network;
 public class NetConfig {
 
     //测试服务器
-//    public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
+    public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
 //    正式服务器
-    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
+//    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
 
 
 //    public static String BaseUrl = "http://www.youlaiyouyue.com/";
@@ -373,5 +373,13 @@ public class NetConfig {
     public static String videoReviews = "action/ac_video/videoReviews";//action/ac_article / videoReviews  评论  传id视频id  fctitle内容  uid用户id
     //回复视频评论
     public static String replyVideoReviews = "action/ac_video/reply";// 回复接口   传userID用户ID  vcID评论的ID  vinfo回复内容
+    //新首页 推荐列表接口
+    public static String homeRecommend = "action/ac_activity/HomeRecommend"; //action/ac_activity/HomeRecommend 推荐 传 page 分页 uid用户id 未登录传0    city城市
+    //新首页 视频列表接口
+    public static String homeVideo = "action/ac_activity/HomeVideo";//action/ac_activity/HomeVideo  视频   传page 分页 uid用户id 未登陆传0   返回    status 是否赞过 0未赞 1已赞  praise_num赞数量  comment_num评论数量  vID视频ID  vname视频名称  img图片  vurl视频地址  userID发视频人的ID    vtime发布时间  username发布视频的用户的昵称
+    //新首页 友记列表接口
+    public static String homeYouJi = "action/ac_activity/HomeYouJi";//action/ac_activity/HomeYouJi 友记   传page分页 uid 用户id  city城市
+    //新首页 关注接口
+    public static String homeGuanZhu = "action/ac_activity/HomeGuanZhu";//action/ac_activity/HomeGuanZhu 关注   传page  分页uid用户id
 
 }

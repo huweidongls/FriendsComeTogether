@@ -551,6 +551,10 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
                 tvFirstIv.setVisibility(View.INVISIBLE);
                 break;
             case R.id.activity_create_friend_remember_rl_label:
+                if (labelList.size()==0){
+                    Toast.makeText(CreateFriendRememberActivity1.this,"暂无标签",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 OptionsPickerView pvOptions1 = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
                     @Override
                     public void onOptionsSelect(int options1, int options2, int options3, View v) {

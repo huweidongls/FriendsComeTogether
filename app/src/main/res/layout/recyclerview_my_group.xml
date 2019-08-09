@@ -9,7 +9,7 @@
         android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:src="@mipmap/group_icon"
+            android:src="@mipmap/group_icon_01"
             android:layout_margin="5dp"
             android:id="@+id/iv"
             android:layout_width="50dp"

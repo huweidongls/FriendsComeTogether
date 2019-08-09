@@ -3,6 +3,7 @@ package com.yiwo.friendscometogether.newfragment;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
@@ -78,8 +79,12 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
     private int choose_num = 0;//选择照片数量
     private int last_postion = -1;//上一张选中的照片的postion
     private Map<Integer,String> map_choose_postion = new LinkedHashMap<>();//选择的照片 的 索引
+    private Map<Integer,Bitmap> map_choose_bitmap = new LinkedHashMap<>();//选择照片 的bitmap
 //    private List<Integer> list_choose_postion = new ArrayList<>();//选择的照片 的 索引
     //    List<Integer> list_choosed_postion = new ArrayList<>(); //选择过的 item Postion;
+
+    private List<Bitmap> listCropBitmap = new ArrayList<>();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -144,6 +149,8 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
             case R.id.rl_next:
                 ArrayList<String> list = new ArrayList<>();
                 boolean isFirst = true;
+                String new_path = "/storage/emulated/0/Pictures/"+"瞳伴diyi友记_"+System.currentTimeMillis() + ".jpg";
+                BitmapUtils.saveBitmap(mMCropImageView.convertToBitmap(),new_path);
                 for (Map.Entry<Integer, String> entry : map_choose_postion.entrySet()) {
 //                    Log.d("ddaad",";;Key:"+entry.getKey()+"//Value:"+entry.getValue());
 //                    if (isFirst&&map_choose_postion.size()>0){

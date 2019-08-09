@@ -58,6 +58,7 @@ public class UserModel {
          * Friendnote : 1
          * Focusonnews : 9
          * Activitymessage : 1
+         * type  0未开启  1已开启
          */
 
         private String headeimg;
@@ -76,7 +77,7 @@ public class UserModel {
         private int Friendnote;
         private int Focusonnews;
         private int Activitymessage;
-
+        private String type;
         public String getHeadeimg() {
             return headeimg;
         }
@@ -203,6 +204,14 @@ public class UserModel {
 
         public void setActivitymessage(int Activitymessage) {
             this.Activitymessage = Activitymessage;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
         }
     }
 }

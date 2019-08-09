@@ -71,6 +71,7 @@
                     android:layout_height="20px"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_marginLeft="30px"
                     android:id="@+id/activity_my_information_iv_avatar"
                     android:layout_width="200px"
                     android:layout_height="200px"
@@ -84,59 +85,99 @@
                     android:layout_marginLeft="36px"
                     android:layout_toRightOf="@+id/activity_my_information_iv_avatar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/activity_my_information_iv_sex"
-                        android:layout_alignParentRight="true"
-                        android:src="@mipmap/nan"
-                        android:layout_width="40px"
-                        android:layout_height="40px" />
-
-                    <TextView
-                        android:ellipsize="end"
-                        android:lines="1"
-                        android:textColor="@color/black_333333"
-                        android:textStyle="bold"
-                        android:textSize="36px"
-                        android:text="昵称："
-                        android:layout_marginRight="10px"
-                        android:layout_toLeftOf="@+id/activity_my_information_iv_sex"
-                        android:id="@+id/activity_my_information_tv_nickname"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
+                    android:layout_height="wrap_content">
                     <RelativeLayout
-                        android:id="@+id/activity_my_information_rl_sign_team"
-                        android:background="@mipmap/level_bg"
-                        android:layout_marginTop="14px"
-                        android:layout_below="@+id/activity_my_information_tv_nickname"
-                        android:layout_width="153px"
-                        android:layout_height="50px">
-
-                        <TextView
-                            android:id="@+id/tv_level"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="22px"
-                            android:layout_alignParentRight="true"
-                            android:textColor="@color/white_ffffff"
-                            android:textSize="30px"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:id="@+id/ll_nickname"
+                            android:orientation="horizontal"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:ellipsize="end"
+                                android:lines="1"
+                                android:maxLength="12"
+                                android:textColor="@color/black_333333"
+                                android:textStyle="bold"
+                                android:textSize="36px"
+                                android:text="昵称："
+                                android:layout_marginRight="10px"
+                                android:id="@+id/activity_my_information_tv_nickname"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <ImageView
+                                android:layout_gravity="center_vertical"
+                                android:id="@+id/activity_my_information_iv_sex"
+                                android:src="@mipmap/nan"
+                                android:layout_width="40px"
+                                android:layout_height="40px" />
+                        </LinearLayout>
 
+                        <RelativeLayout
+                            android:id="@+id/activity_my_information_rl_sign_team"
+                            android:background="@mipmap/level_bg"
+                            android:layout_marginTop="14px"
+                            android:layout_below="@+id/ll_nickname"
+                            android:layout_width="153px"
+                            android:layout_height="50px">
+
+                            <TextView
+                                android:id="@+id/tv_level"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="22px"
+                                android:layout_alignParentRight="true"
+                                android:textColor="@color/white_ffffff"
+                                android:textSize="30px"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                        </RelativeLayout>
+
+                        <ImageView
+                            android:visibility="gone"
+                            android:id="@+id/iv_is_sign"
+                            android:layout_marginLeft="10px"
+                            android:layout_toRightOf="@+id/activity_my_information_rl_sign_team"
+                            android:layout_marginTop="14px"
+                            android:layout_below="@+id/ll_nickname"
+                            android:src="@mipmap/sign_gray"
+                            android:layout_width="50px"
+                            android:layout_height="50px" />
                     </RelativeLayout>
-
-                    <ImageView
-                        android:visibility="gone"
-                        android:id="@+id/iv_is_sign"
-                        android:layout_marginLeft="10px"
-                        android:layout_toRightOf="@+id/activity_my_information_rl_sign_team"
-                        android:layout_marginTop="14px"
-                        android:layout_below="@+id/activity_my_information_tv_nickname"
-                        android:src="@mipmap/sign_gray"
-                        android:layout_width="50px"
-                        android:layout_height="50px" />
-
+                    <LinearLayout
+                        android:id="@+id/ll_woyaolianai"
+                        android:orientation="vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_gravity="center_horizontal"
+                            android:src="@mipmap/gerenxinxi_woyaolianai"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/iv_woyaolianai"
+                                android:layout_marginRight="5px"
+                                android:layout_gravity="center_vertical"
+                                android:src="@mipmap/gerenxinxi_woyaolianai_kong"
+                                android:layout_width="25px"
+                                android:layout_height="25px" />
+                            <TextView
+                                android:text="我要恋爱"
+                                android:textSize="28px"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                    </LinearLayout>
                 </RelativeLayout>
 
             </RelativeLayout>

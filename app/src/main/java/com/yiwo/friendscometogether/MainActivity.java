@@ -44,6 +44,7 @@ import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment2;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment3;
 import com.yiwo.friendscometogether.fragment.HomeFragment;
 import com.yiwo.friendscometogether.fragment.HomeFragment1;
+import com.yiwo.friendscometogether.fragment.HomeFragment2;
 import com.yiwo.friendscometogether.fragment.MyFragment;
 import com.yiwo.friendscometogether.fragment.MyFragment1;
 import com.yiwo.friendscometogether.newfragment.YouJiFragment;
@@ -131,7 +132,8 @@ public class MainActivity extends FragmentActivity {
     private String account = "";
 
     private ChatFragment fragmentChat;
-    private HomeFragment1 fragmentHome;
+//    private HomeFragment1 fragmentHome;
+    private HomeFragment2 fragmentHome;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -225,7 +227,8 @@ public class MainActivity extends FragmentActivity {
         rl3.setOnClickListener(listener);
         rl4.setOnClickListener(listener);
         rl5.setOnClickListener(listener);
-        fragmentHome = new HomeFragment1();
+//        fragmentHome = new HomeFragment1();
+        fragmentHome = new HomeFragment2();
 //        Fragment fragmentFriendTogether = new FriendsTogetherFragment1();
 //        Fragment fragmentFriendTogether = new FriendsTogetherFragment2();
         Fragment fragmentFriendTogether = new FriendsTogetherFragment3();

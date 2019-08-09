@@ -143,6 +143,11 @@ public class MyFragment1 extends BaseFragment {
                                     }else {
                                         iv_renwu.setVisibility(View.GONE);
                                     }
+                                    if(userModel.getObj().getType().equals("0")){
+                                        iv_find_super_like.setVisibility(View.GONE);
+                                    }else {
+                                        iv_find_super_like.setVisibility(View.VISIBLE);
+                                    }
                                     tvNickname.setText("昵称: " + userModel.getObj().getUsername());
                                     if(TextUtils.isEmpty(userModel.getObj().getUserautograph())){
 

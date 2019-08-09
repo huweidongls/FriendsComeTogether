@@ -51,7 +51,6 @@ import com.yiwo.friendscometogether.newadapter.PersonMainActivity_Pics_Adapter;
 import com.yiwo.friendscometogether.newadapter.PersonMainActivity_YouJi_Adapter;
 import com.yiwo.friendscometogether.newadapter.PersonMainActivity_YouJu_Adapter;
 import com.yiwo.friendscometogether.newadapter.PersonSameLabelAdapter;
-import com.yiwo.friendscometogether.newadapter.TaRenZhuYePicsAdapter;
 import com.yiwo.friendscometogether.newadapter.TaRenZhuYeYouJiAdapter;
 import com.yiwo.friendscometogether.newadapter.TaRenZhuYeYouJuAdapter;
 import com.yiwo.friendscometogether.newadapter.YouJiAdapter;

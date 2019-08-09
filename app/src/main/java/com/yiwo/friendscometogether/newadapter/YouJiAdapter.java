@@ -2,7 +2,6 @@ package com.yiwo.friendscometogether.newadapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -38,8 +37,8 @@ public class YouJiAdapter extends RecyclerView.Adapter<YouJiAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_youju_waterfall_item, parent, false);
-//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_youju_waterfall_item,null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_youji_waterfall_item, parent, false);
+//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_youji_waterfall_item,null);
         ScreenAdapterTools.getInstance().loadView(view);
         YouJiAdapter.ViewHolder holder = new YouJiAdapter.ViewHolder(view);
         return holder;

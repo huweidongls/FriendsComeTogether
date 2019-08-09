@@ -115,6 +115,11 @@ public class MyInformationActivity extends TakePhotoActivity {
     TextView tvTopLevel;
     @BindView(R.id.iv_is_sign)
     ImageView ivIsSign;
+    @BindView(R.id.iv_woyaolianai)
+    ImageView iv_woyaolianai;
+
+
+    private String woYaoLianAiType = "0";
 
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
@@ -209,7 +214,12 @@ public class MyInformationActivity extends TakePhotoActivity {
                                 } else {
                                     Picasso.with(MyInformationActivity.this).load(R.mipmap.nv).into(ivSex);
                                 }
-
+                                woYaoLianAiType = userModel.getObj().getType();
+                                if (woYaoLianAiType.equals("0")){
+                                    iv_woyaolianai.setImageResource(R.mipmap.gerenxinxi_woyaolianai_kong);
+                                }else {
+                                    iv_woyaolianai.setImageResource(R.mipmap.gerenxinxi_woyaolianai_xuanzhong);
+                                }
                                 tvTopLevel.setText("LV" + userModel.getObj().getUsergrade());
                                 if (userModel.getObj().getSign().equals("0")) {
                                     Glide.with(MyInformationActivity.this).load(R.mipmap.sign_gray).into(ivIsSign);
@@ -244,7 +254,7 @@ public class MyInformationActivity extends TakePhotoActivity {
 
     @OnClick({R.id.activity_my_information_rl_back, R.id.activity_my_information_rl_sex, R.id.activity_my_information_rl_location, R.id.activity_my_information_rl_birthday,
             R.id.activity_my_information_rl_register_time, R.id.activity_my_information_rl_is_single, R.id.activity_my_information_rl_real_name, R.id.activity_my_information_rl_save,
-            R.id.activity_my_information_iv_avatar, R.id.activity_my_information_rl_sign})
+            R.id.activity_my_information_iv_avatar, R.id.activity_my_information_rl_sign,R.id.ll_woyaolianai})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -383,6 +393,15 @@ public class MyInformationActivity extends TakePhotoActivity {
             case R.id.activity_my_information_rl_sign:
                 intent.setClass(MyInformationActivity.this, EditorLabelActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.ll_woyaolianai:
+                if (woYaoLianAiType.equals("0")){
+                    woYaoLianAiType = "1";
+                    iv_woyaolianai.setImageResource(R.mipmap.gerenxinxi_woyaolianai_xuanzhong);
+                }else {
+                    woYaoLianAiType = "0";
+                    iv_woyaolianai.setImageResource(R.mipmap.gerenxinxi_woyaolianai_kong);
+                }
                 break;
         }
     }
@@ -554,6 +573,7 @@ public class MyInformationActivity extends TakePhotoActivity {
                 .addParam("userbirthday", tvBirthday.getText().toString())
 //                .addParam("usertime", tvRegister.getText().toString())
                 .addParam("usermarry", tvSingle.getText().toString().equals("是") ? "1" : "2")
+                .addParam("type",woYaoLianAiType)
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {

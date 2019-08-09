@@ -55,6 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <View
+                android:visibility="gone"
                 android:layout_marginLeft="60px"
                 android:layout_marginRight="60px"
                 android:layout_below="@+id/rv_label_1"
@@ -77,6 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <View
+                android:visibility="gone"
                 android:layout_marginLeft="60px"
                 android:layout_marginRight="60px"
                 android:layout_below="@+id/rv_label_2"

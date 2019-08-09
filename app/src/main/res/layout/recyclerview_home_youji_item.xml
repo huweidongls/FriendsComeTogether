@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_youju_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="25px"
+    android:layout_marginLeft="13px"
+    android:layout_marginRight="13px">
+
+    <RelativeLayout
+        android:elevation="1px"
+        android:layout_margin="1px"
+        android:visibility="visible"
+        android:id="@+id/rv_youji"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_16px">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+                android:id="@+id/iv_youju"
+                android:layout_width="wrap_content"
+                android:layout_height="220px"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/welcome"
+                test:left_top_radius1="16px"
+                test:right_top_radius1="16px" />
+
+            <TextView
+                android:id="@+id/tv_youji_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20px"
+                android:layout_marginLeft="21px"
+                android:layout_marginRight="21px"
+                android:layout_marginTop="20px"
+                android:ellipsize="end"
+                android:maxLines="4"
+                android:text="巴厘岛小众神秘彭丽普兰，被认为是世界上最清洁的三个村庄之一巴厘岛小众神秘彭丽普兰，被认为是世界上最清洁的三个村庄之一"
+                android:textColor="#424242"
+                android:textSize="32px" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="112px"
+                android:layout_marginBottom="22px"
+                android:layout_marginLeft="16px"
+                android:layout_marginRight="16px">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_icon_user"
+                    android:layout_width="70px"
+                    android:layout_height="70px"
+                    android:layout_marginRight="8px"
+                    android:layout_marginTop="20px"
+                    android:src="@mipmap/my_head" />
+
+                <RelativeLayout
+                    android:layout_width="145px"
+                    android:layout_height="66px"
+                    android:layout_marginBottom="2px"
+                    android:layout_marginTop="22px"
+                    android:layout_toRightOf="@+id/iv_icon_user">
+
+                    <TextView
+                        android:id="@+id/tv_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="扁脸折耳猫"
+                        android:textColor="@color/black_333333"
+                        android:textSize="26px" />
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="15小时前"
+                        android:textColor="@color/black_333333"
+                        android:textSize="24px" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="21px"
+                    android:layout_marginRight="16px">
+
+                    <ImageView
+                        android:layout_width="34px"
+                        android:layout_height="34px"
+                        android:layout_marginRight="6px"
+                        android:src="@mipmap/youji_dianzan_red" />
+
+                    <TextView
+                        android:id="@+id/tv_good_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:maxWidth="50px"
+                        android:text="15"
+                        android:textColor="@color/black_333333"
+                        android:textSize="26px" />
+                </LinearLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
