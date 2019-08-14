@@ -16,9 +16,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.library.banner.BannerLayout;
 import com.google.gson.Gson;
 import com.umeng.socialize.ShareAction;
@@ -44,6 +46,8 @@ import com.yiwo.friendscometogether.newadapter.LabelAdapter;
 import com.yiwo.friendscometogether.newadapter.SwipeFIingViewAdapter;
 import com.yiwo.friendscometogether.newmodel.HuoDongShaiXuanMode;
 import com.yiwo.friendscometogether.newmodel.YouJuTopLabelModel;
+import com.yiwo.friendscometogether.newpage.AllHuoDongActivity;
+import com.yiwo.friendscometogether.newpage.GuanZhuActivity;
 import com.yiwo.friendscometogether.newpage.YoujuShaixuanActivity;
 import com.yiwo.friendscometogether.pages.ApplyActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
@@ -81,6 +85,22 @@ public class FriendsTogetherFragment3 extends BaseFragment {
     RecyclerView rv_label_2;
     @BindView(R.id.rl_label2)
     RelativeLayout rl_label2;
+    @BindView(R.id.iv_guanzhu_icon1)
+    ImageView iv_guanzhu_icon1;
+    @BindView(R.id.iv_guanzhu_icon2)
+    ImageView iv_guanzhu_icon2;
+    @BindView(R.id.iv_guanzhu_icon3)
+    ImageView iv_guanzhu_icon3;
+    @BindView(R.id.tv_guanzhu_user_names)
+    TextView tv_guanzhu_user_names;
+    @BindView(R.id.tv_guanzhu_num)
+    TextView tv_guanzhu_num;
+    @BindView(R.id.ll_guanzhu_num)
+    LinearLayout ll_guanzhu_num;
+    @BindView(R.id.rl_myhuodong)
+    RelativeLayout rl_myhuodong;
+    @BindView(R.id.tv_daikaishi)
+    TextView tvDaiKaiShi;
     private List<FriendsTogethermodel.ObjBean> mList = new ArrayList<>() ;
     private CardAdapter adapter;
 
@@ -94,6 +114,7 @@ public class FriendsTogetherFragment3 extends BaseFragment {
 
     private FriendsTogethermodel.ObjBean bean;
     private Dialog dialog;
+    boolean isChangPing = false;
 
     private List<UserLabelModel.ObjBean> labelList = new ArrayList<>();//所有label 的list
     private List<YouJuTopLabelModel> labelList_1 = new ArrayList<>();//第一行label 的list
@@ -126,9 +147,35 @@ public class FriendsTogetherFragment3 extends BaseFragment {
 
     private void initLabelTop() {
         /**
+         * 获取顶部未开始活动数量
+         *
+         *
+         * */
+        ViseHttp.POST(NetConfig.myWillBegin)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.myWillBegin))
+                .addParam("uid", uid)
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                String s = jsonObject.getJSONObject("obj").getString("willBeginNum");
+                                tvDaiKaiShi.setText("您有"+s+"个待开始活动");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
+        /**
          * 判断屏幕比例 决定显示几排标签
          */
-        boolean isChangPing = false;
         //获取屏幕的像素高度PIX
         double screenHeight = getResources().getDisplayMetrics().heightPixels;
         //获取屏幕的像素宽度PIX
@@ -179,7 +226,8 @@ public class FriendsTogetherFragment3 extends BaseFragment {
         });
         rv_label_2.setAdapter(labelTopAdapter2);
 
-        final boolean finalIsChangPing = isChangPing;
+//        final boolean finalIsChangPing = isChangPing;
+        final boolean finalIsChangPing = false;//此处修改于0812，无论长短屏幕 上方只显示一排标签，改为长屏在下方显示关注人数
         ViseHttp.POST(NetConfig.userLabel)
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userLabel))
                 .addParam("type", "0")
@@ -411,6 +459,8 @@ public class FriendsTogetherFragment3 extends BaseFragment {
                 } else {
                     Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
                 }
+                //关注数量
+                initGuanzhuNum();
             }
         });
     }
@@ -467,6 +517,13 @@ public class FriendsTogetherFragment3 extends BaseFragment {
                                     } else {
                                         Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
                                     }
+                                    //关注数量
+                                    initGuanzhuNum();
+                                }
+                                if (isChangPing){
+                                    ll_guanzhu_num.setVisibility(View.VISIBLE);
+                                }else {
+                                    ll_guanzhu_num.setVisibility(View.GONE);
                                 }
 //                                updateListView();
                                 WeiboDialogUtils.closeDialog(dialog);
@@ -485,7 +542,7 @@ public class FriendsTogetherFragment3 extends BaseFragment {
 
     }
 
-    @OnClick({R.id.iv_shaixuan, R.id.iv_baoming, R.id.iv_youju_focus,R.id.rl_shaixuan})
+    @OnClick({R.id.iv_shaixuan, R.id.iv_baoming, R.id.iv_youju_focus,R.id.rl_shaixuan,R.id.rl_myhuodong})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -619,6 +676,15 @@ public class FriendsTogetherFragment3 extends BaseFragment {
                     startActivity(intent);
                 }
                 break;
+            case R.id.rl_myhuodong:
+                if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                    intent.setClass(getContext(), AllHuoDongActivity.class);
+                    startActivity(intent);
+                } else {
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
 //            case R.id.rl_shuaxin:
 ////                String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
 ////                ViseHttp.POST(NetConfig.friendsTogetherUrl)
@@ -688,6 +754,8 @@ public class FriendsTogetherFragment3 extends BaseFragment {
                                     } else {
                                         Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
                                     }
+                                    //关注数量
+                                    initGuanzhuNum();
                                 } else {
                                     Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
                                 }
@@ -746,6 +814,8 @@ public class FriendsTogetherFragment3 extends BaseFragment {
                                         } else {
                                             Glide.with(getContext()).load(R.mipmap.guanzhu128_r).into(ivFocus);
                                         }
+                                        //关注数量
+                                        initGuanzhuNum();
                                     } else {
                                         Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
                                     }
@@ -897,6 +967,47 @@ public class FriendsTogetherFragment3 extends BaseFragment {
 //        }else if (resultCode == 7){//没有选择任何条件
 //            initData();
 //        }
+    }
+    private void initGuanzhuNum(){
+        //关注数量
+        if (bean.getUserimgs().size()<1){
+            iv_guanzhu_icon1.setVisibility(View.VISIBLE);
+            iv_guanzhu_icon1.setImageResource(R.mipmap.zanwutupian);
+            iv_guanzhu_icon2.setVisibility(View.GONE);
+            iv_guanzhu_icon3.setVisibility(View.GONE);
+            tv_guanzhu_num.setVisibility(View.GONE);
+            tv_guanzhu_user_names.setVisibility(View.VISIBLE);
+            tv_guanzhu_user_names.setText("还没有人关注");
+        }else if (bean.getUserimgs().size()==1){
+            Glide.with(getContext()).load(bean.getUserimgs().get(0)).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_guanzhu_icon1);
+            tv_guanzhu_user_names.setText(bean.getUsernames()+"已经关注");
+            iv_guanzhu_icon1.setVisibility(View.VISIBLE);
+            iv_guanzhu_icon2.setVisibility(View.GONE);
+            iv_guanzhu_icon3.setVisibility(View.GONE);
+            tv_guanzhu_user_names.setVisibility(View.VISIBLE);
+            tv_guanzhu_num.setVisibility(View.GONE);
+        }else if (bean.getUserimgs().size()==2){
+            Glide.with(getContext()).load(bean.getUserimgs().get(0)).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_guanzhu_icon1);
+            Glide.with(getContext()).load(bean.getUserimgs().get(1)).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_guanzhu_icon2);
+            iv_guanzhu_icon1.setVisibility(View.VISIBLE);
+            iv_guanzhu_icon2.setVisibility(View.VISIBLE);
+            iv_guanzhu_icon3.setVisibility(View.GONE);
+            tv_guanzhu_user_names.setVisibility(View.VISIBLE);
+            tv_guanzhu_num.setVisibility(View.VISIBLE);
+            tv_guanzhu_user_names.setText(bean.getUsernames());
+            tv_guanzhu_num.setText("等"+bean.getAttentionNum()+"人已经关注");
+        }else {
+            Glide.with(getContext()).load(bean.getUserimgs().get(0)).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_guanzhu_icon1);
+            Glide.with(getContext()).load(bean.getUserimgs().get(1)).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_guanzhu_icon2);
+            Glide.with(getContext()).load(bean.getUserimgs().get(2)).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_guanzhu_icon3);
+            iv_guanzhu_icon1.setVisibility(View.VISIBLE);
+            iv_guanzhu_icon2.setVisibility(View.VISIBLE);
+            iv_guanzhu_icon3.setVisibility(View.VISIBLE);
+            tv_guanzhu_user_names.setVisibility(View.VISIBLE);
+            tv_guanzhu_num.setVisibility(View.VISIBLE);
+            tv_guanzhu_user_names.setText(bean.getUsernames());
+            tv_guanzhu_num.setText("等"+bean.getAttentionNum()+"人已经关注");
+        }
     }
     private void updateListView() {
 //        adapter.data = mList;

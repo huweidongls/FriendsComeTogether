@@ -16,6 +16,8 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -53,10 +55,13 @@ import com.yiwo.friendscometogether.network.ActivityConfig;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.HomeDataAdapter;
 import com.yiwo.friendscometogether.newadapter.HomeDataAdapter1;
+import com.yiwo.friendscometogether.newadapter.HomeDataRecommendAdapter1;
+import com.yiwo.friendscometogether.newadapter.HomeDataRecommendAdapter2;
 import com.yiwo.friendscometogether.newadapter.HomeListVideoAdapter;
 import com.yiwo.friendscometogether.newadapter.HomeListYouJiAdapter;
 import com.yiwo.friendscometogether.newadapter.YouJiAdapter;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
+import com.yiwo.friendscometogether.newmodel.HomeDataModel1;
 import com.yiwo.friendscometogether.newmodel.HomeVideoListModel;
 import com.yiwo.friendscometogether.newmodel.IndexLabelModel;
 import com.yiwo.friendscometogether.newpage.MessageActivity;
@@ -65,6 +70,7 @@ import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.SearchActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.UserUtils;
+import com.yiwo.friendscometogether.widget.ViewPagerForScrollView;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
@@ -91,14 +97,8 @@ public class HomeFragment2 extends BaseFragment {
     RefreshLayout refreshLayout;
     @BindView(R.id.fragment_home_banner)
     Banner banner;
-    @BindView(R.id.rv_home_1)
-    RecyclerView recyclerView1;//推荐
-    @BindView(R.id.rv_home_2)
-    RecyclerView recyclerView2;//关注
-    @BindView(R.id.rv_home_3)
-    RecyclerView recyclerView3;//友记
-    @BindView(R.id.rv_home_4)
-    RecyclerView recyclerView4;//小视频
+    @BindView(R.id.vp)
+    ViewPagerForScrollView viewPager;
     @BindView(R.id.tv_city_name)
     TextView cityTv;
     @BindView(R.id.ll_home_youji_all)
@@ -144,8 +144,13 @@ public class HomeFragment2 extends BaseFragment {
     @BindView(R.id.tv4)
     TextView tv4;
 
-    @BindView(R.id.scroll_view)
-    ScrollView scrollView;
+    @BindView(R.id.tv_date_info)
+    TextView tvDateInfo;
+    @BindView(R.id.tv_weiduxiaoxi)
+    TextView tvWeiduxiaoxi;
+
+//    @BindView(R.id.scroll_view)
+//    ScrollView scrollView;
     private LocationManager locationManager;
     private double latitude = 0.0;
     private double longitude = 0.0;
@@ -165,11 +170,19 @@ public class HomeFragment2 extends BaseFragment {
 
     };
 
-    private HomeDataAdapter1 adapter1;//推荐列表适配器
+    RecyclerView recyclerView1_1;//推荐_youji
+    RecyclerView recyclerView1_2;//推荐_youju
+    RecyclerView recyclerView2;//关注
+    RecyclerView recyclerView3;//友记
+    RecyclerView recyclerView4;//小视频
+
+    private HomeDataRecommendAdapter1 adapter1_1;//推荐列表youji适配器
+    private HomeDataRecommendAdapter2 adapter1_2;//推荐列表友聚适配器
     private HomeDataAdapter1 adapter2;//关注列表适配器
     private HomeListYouJiAdapter adapter3;//友记列表适配器
     private HomeListVideoAdapter adapter4;//视频列表适配器
-    private List<HomeDataModel.ObjBean> mList1;
+    private List<HomeDataModel1.ObjBean.ArticleBean> mList1;
+    private List<HomeDataModel1.ObjBean.ActivityBean> mlist1_youju;
     private List<HomeDataModel.ObjBean> mList2;
     private List<HomeDataModel.ObjBean> mList3;
     private List<HomeVideoListModel.ObjBean> mList4;
@@ -183,6 +196,8 @@ public class HomeFragment2 extends BaseFragment {
     private String cityName = "";
     private IndexLabelModel labelModel;
 
+    private List<View> viewList = new ArrayList<>();
+    private View view1,view2,view3,view4;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -194,7 +209,141 @@ public class HomeFragment2 extends BaseFragment {
 //        AppUpdateUtil.checkUpdate(getActivity(),true);
         getLocation();
         initData();
+        initRv_Vp();
         return rootView;
+    }
+
+    private void initRv_Vp() {
+        view1 = getLayoutInflater().inflate(R.layout.layout_home_tuijian, null);
+        view2 = getLayoutInflater().inflate(R.layout.layout_home_guanzhu, null);
+        view3 = getLayoutInflater().inflate(R.layout.layout_home_youji, null);
+        view4 = getLayoutInflater().inflate(R.layout.layout_home_shipin, null);
+        viewList.add(view1);
+        viewList.add(view2);
+        viewList.add(view3);
+        viewList.add(view4);
+        recyclerView1_1 = view1.findViewById(R.id.rv_home_1_2);
+        recyclerView1_2 = view1.findViewById(R.id.rv_home_1_1);
+        recyclerView2 = view2.findViewById(R.id.rv_home_2);
+        recyclerView3 = view3.findViewById(R.id.rv_home_3);
+        recyclerView4 = view4.findViewById(R.id.rv_home_4);
+        PagerAdapter pagerAdapter = new PagerAdapter() {
+
+                    @Override
+            public boolean isViewFromObject(View arg0, Object arg1) {
+                                // TODO Auto-generated method stub
+                                return arg0 == arg1;
+                            }
+
+                    @Override
+            public int getCount() {
+                                // TODO Auto-generated method stub
+                                return viewList.size();
+                            }
+
+                    @Override
+            public void destroyItem(ViewGroup container, int position,
+                    Object object) {
+                                // TODO Auto-generated method stub
+                                container.removeView(viewList.get(position));
+                            }
+
+                    @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                                // TODO Auto-generated method stub
+                                container.addView(viewList.get(position));
+                                viewPager.setObjectForPosition(viewList.get(position),position);
+                                return viewList.get(position);
+                            }
+        };
+
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                viewPager.resetHeight(position);
+                switch (position){
+                    case 0:
+//                        tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+//                        tvRl2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+//                        tvRl3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+//                        tvRl4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+//                        tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+//                        tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+//                        tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+//                        tvRl4.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                        v1.setVisibility(View.GONE);
+                        v2.setVisibility(View.GONE);
+                        v3.setVisibility(View.GONE);
+                        v4.setVisibility(View.GONE);
+
+                        type = "1";
+                        break;
+                    case 1:
+                        if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+//                            tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+//                            tvRl2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+//                            tvRl3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+//                            tvRl4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+//                            tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+//                            tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+//                            tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+//                            tvRl4.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                            v1.setVisibility(View.GONE);
+                            v2.setVisibility(View.VISIBLE);
+                            v3.setVisibility(View.GONE);
+                            v4.setVisibility(View.GONE);
+                            type = "2";
+                        } else {
+                            Intent intent = new Intent();
+                            intent.setClass(getContext(), LoginActivity.class);
+                            startActivity(intent);
+                            viewPager.setCurrentItem(0);
+                        }
+                        break;
+                    case 2:
+//                        tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+//                        tvRl2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+//                        tvRl3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+//                        tvRl4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+//                        tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+//                        tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+//                        tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+//                        tvRl4.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                        v1.setVisibility(View.GONE);
+                        v2.setVisibility(View.GONE);
+                        v3.setVisibility(View.VISIBLE);
+                        v4.setVisibility(View.GONE);
+                        type = "3";
+                        break;
+                    case 3:
+//                        tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+//                        tvRl2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+//                        tvRl3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+//                        tvRl4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+//                        tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+//                        tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+//                        tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+//                        tvRl4.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                        v1.setVisibility(View.GONE);
+                        v2.setVisibility(View.GONE);
+                        v3.setVisibility(View.GONE);
+                        v4.setVisibility(View.VISIBLE);
+                        type = "4";
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
@@ -228,12 +377,41 @@ public class HomeFragment2 extends BaseFragment {
     }
 
     private void initData() {
+
+        /*
+           首页顶部日期  未读消息数
+         */
+        ViseHttp.POST(NetConfig.dataInfo)
+                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.dataInfo))
+                .addParam("uid", uid)
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                String s1 = jsonObject.getJSONObject("obj").getString("news");
+                                String s2 = jsonObject.getJSONObject("obj").getString("day");
+                                tvWeiduxiaoxi.setText("您有"+s1+"条消息");
+                                tvDateInfo.setText(s2);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
+
         ClassicsHeader header = new ClassicsHeader(getContext());
-        header.setAccentColor(Color.WHITE);
-        header.setPrimaryColor(Color.parseColor("#d84c37"));
+//        header.setAccentColor(Color.WHITE);
+//        header.setPrimaryColor(Color.parseColor("#d84c37"));
         refreshLayout.setRefreshHeader(header);
         ClassicsFooter footer = new ClassicsFooter(getContext());
-        footer.setPrimaryColor(Color.parseColor("#F8F8F8"));
+//        footer.setPrimaryColor(Color.parseColor("#F8F8F8"));
         refreshLayout.setRefreshFooter(footer);
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -278,11 +456,13 @@ public class HomeFragment2 extends BaseFragment {
                                             JSONObject jsonObject = new JSONObject(data);
                                             if(jsonObject.getInt("code") == 200){
                                                 Gson gson = new Gson();
-                                                HomeDataModel model = gson.fromJson(data, HomeDataModel.class);
+                                                HomeDataModel1 model = gson.fromJson(data, HomeDataModel1.class);
 //                                        mList.clear();
-                                                if (model.getObj().size()>0){
-                                                    mList1.addAll(model.getObj());
-                                                    adapter1.notifyDataSetChanged();
+                                                if (model.getObj().getArticle().size()>0){
+                                                    mList1.addAll(model.getObj().getArticle());
+                                                    mlist1_youju.addAll(model.getObj().getActivity());
+                                                    adapter1_1.notifyDataSetChanged();
+                                                    adapter1_2.notifyDataSetChanged();
                                                     page1++;
                                                 }
                                                 refreshLayout.finishLoadMore(1000);
@@ -413,43 +593,6 @@ public class HomeFragment2 extends BaseFragment {
                                 });
                         break;
                 }
-                ViseHttp.POST(NetConfig.newHomeData)
-                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.newHomeData))
-                        .addParam("type", type)
-                        .addParam("uid", uid)
-                        .addParam("city", cityName)
-                        .addParam("page",page1+"")
-                        .request(new ACallback<String>() {
-                            @Override
-                            public void onSuccess(String data) {
-                                Log.e("123123", type+"--------"+uid);
-                                Log.e("123123", data);
-                                try {
-                                    JSONObject jsonObject = new JSONObject(data);
-                                    if(jsonObject.getInt("code") == 200){
-                                        Gson gson = new Gson();
-                                        HomeDataModel model = gson.fromJson(data, HomeDataModel.class);
-//                                        mList.clear();
-                                        if (model.getObj().size()>0){
-                                            mList1.addAll(model.getObj());
-                                            adapter1.notifyDataSetChanged();
-                                            page1++;
-                                        }
-                                        refreshLayout.finishLoadMore(1000);
-                                    }
-
-                                } catch (JSONException e) {
-                                    refreshLayout.finishLoadMore(1000);
-                                    e.printStackTrace();
-                                }
-                            }
-
-                            @Override
-                            public void onFail(int errCode, String errMsg) {
-                                refreshLayout.finishLoadMore(1000);
-                                toToast(getContext(),"加载失败");
-                            }
-                        });
             }
         });
         ViseHttp.POST(NetConfig.allBannerUrl)
@@ -537,18 +680,35 @@ public class HomeFragment2 extends BaseFragment {
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.getInt("code") == 200){
                                 Gson gson = new Gson();
-                                HomeDataModel model = gson.fromJson(data, HomeDataModel.class);
+                                HomeDataModel1 model = gson.fromJson(data, HomeDataModel1.class);
                                 page1 = 2;
-                                mList1 = model.getObj();
-                                adapter1 = new HomeDataAdapter1(mList1);
+                                mList1 = model.getObj().getArticle();
+                                adapter1_1 = new HomeDataRecommendAdapter1(mList1);
                                 LinearLayoutManager manager = new LinearLayoutManager(getContext()){
                                     @Override
                                     public boolean canScrollVertically() {
                                         return false;
                                     }
                                 };
-                                recyclerView1.setLayoutManager(manager);
-                                recyclerView1.setAdapter(adapter1);
+                                recyclerView1_1.setLayoutManager(manager);
+                                recyclerView1_1.setAdapter(adapter1_1);
+                                mlist1_youju = model.getObj().getActivity();
+                                adapter1_2 = new HomeDataRecommendAdapter2(mlist1_youju);
+                                LinearLayoutManager manager2 = new LinearLayoutManager(getContext()){
+                                    @Override
+                                    public boolean canScrollVertically() {
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean canScrollHorizontally() {
+                                        return true;
+                                    }
+                                };
+                                manager2.setOrientation(LinearLayoutManager.HORIZONTAL);
+                                recyclerView1_2.setLayoutManager(manager2);
+                                recyclerView1_2.setAdapter(adapter1_2);
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -573,6 +733,17 @@ public class HomeFragment2 extends BaseFragment {
                                 HomeDataModel model = gson.fromJson(data, HomeDataModel.class);
                                 page2 = 2;
                                 mList2 = model.getObj();
+                                adapter2= new HomeDataAdapter1(mList2);
+                                LinearLayoutManager manager = new LinearLayoutManager(getContext()){
+                                    @Override
+                                    public boolean canScrollVertically() {
+                                        return false;
+                                    }
+                                };
+                                recyclerView2.setLayoutManager(manager);
+                                recyclerView2.setAdapter(adapter2);
+                            }else {
+                                mList2 = new ArrayList<>();
                                 adapter2= new HomeDataAdapter1(mList2);
                                 LinearLayoutManager manager = new LinearLayoutManager(getContext()){
                                     @Override
@@ -726,7 +897,7 @@ public class HomeFragment2 extends BaseFragment {
     }
     @OnClick({R.id.ll_home_youji_gonglue,R.id.ll_home_youji_all,
                     R.id.ll_home_youji_meishi,R.id.ll_home_youji_tandian,R.id.ll_home_youji_lvxing, R.id.locationRl, R.id.ll_search, R.id.iv_msg,
-    R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl4})
+    R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl4,R.id.ll_xiaoxi})
     public void onClick(View view) {
         MainActivity mainActivity = (MainActivity) getActivity();
         Intent intent = new Intent();
@@ -780,107 +951,35 @@ public class HomeFragment2 extends BaseFragment {
                     startActivity(intent);
                 }
                 break;
-            case R.id.rl1:
-                tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                tvRl2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-                tvRl3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-                tvRl4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-//                tvRl1.setTextColor(Color.parseColor("#333333"));
-//                tvRl2.setTextColor(Color.parseColor("#9e9e9e"));
-//                tvRl3.setTextColor(Color.parseColor("#9e9e9e"));
-//                tvRl4.setTextColor(Color.parseColor("#9e9e9e"));
-                tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                tvRl4.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                v1.setVisibility(View.VISIBLE);
-                v2.setVisibility(View.GONE);
-                v3.setVisibility(View.GONE);
-                v4.setVisibility(View.GONE);
-                type = "1";
-//                refresh("1");
-                recyclerView1.setVisibility(View.VISIBLE);
-                recyclerView2.setVisibility(View.GONE);
-                recyclerView3.setVisibility(View.GONE);
-                recyclerView4.setVisibility(View.GONE);
-                break;
-            case R.id.rl2:
-                tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-                tvRl2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                tvRl3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-                tvRl4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-//                tvRl1.setTextColor(Color.parseColor("#9e9e9e"));
-//                tvRl2.setTextColor(Color.parseColor("#333333"));
-//                tvRl3.setTextColor(Color.parseColor("#9e9e9e"));
-//                tvRl4.setTextColor(Color.parseColor("#9e9e9e"));
-                tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                tvRl4.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                v1.setVisibility(View.GONE);
-                v2.setVisibility(View.VISIBLE);
-                v3.setVisibility(View.GONE);
-                v4.setVisibility(View.GONE);
-                type = "2";
-//                refresh("2");
-                recyclerView1.setVisibility(View.GONE);
-                recyclerView2.setVisibility(View.VISIBLE);
-                recyclerView3.setVisibility(View.GONE);
-                recyclerView4.setVisibility(View.GONE);
-                break;
-            case R.id.rl3:
-                tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-                tvRl2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-                tvRl3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                tvRl4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-//                tvRl1.setTextColor(Color.parseColor("#9e9e9e"));
-//                tvRl2.setTextColor(Color.parseColor("#9e9e9e"));
-//                tvRl3.setTextColor(Color.parseColor("#333333"));
-//                tvRl4.setTextColor(Color.parseColor("#9e9e9e"));
-                tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                tvRl4.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                v1.setVisibility(View.GONE);
-                v2.setVisibility(View.GONE);
-                v3.setVisibility(View.VISIBLE);
-                v4.setVisibility(View.GONE);
-                type = "3";
-//                refresh("3");
-                recyclerView1.setVisibility(View.GONE);
-                recyclerView2.setVisibility(View.GONE);
-                recyclerView3.setVisibility(View.VISIBLE);
-                recyclerView4.setVisibility(View.GONE);
-                break;
-            case R.id.rl4:
+            case R.id.ll_xiaoxi:
                 if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
-                    tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-                    tvRl2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-                    tvRl3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-                    tvRl4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-//                    tvRl1.setTextColor(Color.parseColor("#9e9e9e"));
-//                    tvRl2.setTextColor(Color.parseColor("#9e9e9e"));
-//                    tvRl3.setTextColor(Color.parseColor("#9e9e9e"));
-//                    tvRl4.setTextColor(Color.parseColor("#333333"));
-                    tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                    tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                    tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                    tvRl4.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                    v1.setVisibility(View.GONE);
-                    v2.setVisibility(View.GONE);
-                    v3.setVisibility(View.GONE);
-                    v4.setVisibility(View.VISIBLE);
-                    type = "4";
-//                    refresh("4");
-                    recyclerView1.setVisibility(View.GONE);
-                    recyclerView2.setVisibility(View.GONE);
-                    recyclerView3.setVisibility(View.GONE);
-                    recyclerView4.setVisibility(View.VISIBLE);
-
+                    intent.setClass(getContext(), MessageActivity.class);
+                    startActivity(intent);
                 } else {
                     intent.setClass(getContext(), LoginActivity.class);
                     startActivity(intent);
                 }
+                break;
+            case R.id.rl1:
+                type = "1";
+                viewPager.setCurrentItem(0);
+                break;
+            case R.id.rl2:
+                if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                    viewPager.setCurrentItem(1);
+                    type = "2";
+                } else {
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.rl3:
+                viewPager.setCurrentItem(2);
+                type = "3";
+                break;
+            case R.id.rl4:
+                viewPager.setCurrentItem(3);
+                type = "4";
                 break;
         }
     }
@@ -893,9 +992,8 @@ public class HomeFragment2 extends BaseFragment {
         dialog_loading = WeiboDialogUtils.createLoadingDialog(getContext(),"加载中...");
         switch (type){
             case "1":
-                ViseHttp.POST(NetConfig.newHomeData)
+                ViseHttp.POST(NetConfig.homeRecommend)
                         .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.newHomeData))
-                        .addParam("type", type)
                         .addParam("uid", uid)
                         .addParam("city", cityName)
                         .request(new ACallback<String>() {
@@ -907,10 +1005,13 @@ public class HomeFragment2 extends BaseFragment {
                                     JSONObject jsonObject = new JSONObject(data);
                                     if(jsonObject.getInt("code") == 200){
                                         Gson gson = new Gson();
-                                        HomeDataModel model = gson.fromJson(data, HomeDataModel.class);
+                                        HomeDataModel1 model = gson.fromJson(data, HomeDataModel1.class);
                                         mList1.clear();
-                                        mList1.addAll(model.getObj());
-                                        adapter1.notifyDataSetChanged();
+                                        mList1.addAll(model.getObj().getArticle());
+                                        mlist1_youju.clear();
+                                        mlist1_youju.addAll(model.getObj().getActivity());
+                                        adapter1_1.notifyDataSetChanged();
+                                        adapter1_2.notifyDataSetChanged();
                                         page1 = 2;
                                     }
                                     WeiboDialogUtils.closeDialog(dialog_loading);
@@ -1078,10 +1179,13 @@ public class HomeFragment2 extends BaseFragment {
                                 JSONObject jsonObject = new JSONObject(data);
                                 if(jsonObject.getInt("code") == 200){
                                     Gson gson = new Gson();
-                                    HomeDataModel model = gson.fromJson(data, HomeDataModel.class);
+                                    HomeDataModel1 model = gson.fromJson(data, HomeDataModel1.class);
                                     mList1.clear();
-                                    mList1.addAll(model.getObj());
-                                    adapter1.notifyDataSetChanged();
+                                    mList1.addAll(model.getObj().getArticle());
+                                    mlist1_youju.clear();
+                                    mlist1_youju.addAll(model.getObj().getActivity());
+                                    adapter1_1.notifyDataSetChanged();
+                                    adapter1_2.notifyDataSetChanged();
                                 }
                                 WeiboDialogUtils.closeDialog(dialog_loading);
                             } catch (JSONException e) {
@@ -1112,10 +1216,13 @@ public class HomeFragment2 extends BaseFragment {
                                 JSONObject jsonObject = new JSONObject(data);
                                 if(jsonObject.getInt("code") == 200){
                                     Gson gson = new Gson();
-                                    HomeDataModel model = gson.fromJson(data, HomeDataModel.class);
+                                    HomeDataModel1 model = gson.fromJson(data, HomeDataModel1.class);
                                     mList1.clear();
-                                    mList1.addAll(model.getObj());
-                                    adapter1.notifyDataSetChanged();
+                                    mList1.addAll(model.getObj().getArticle());
+                                    mlist1_youju.clear();
+                                    mlist1_youju.addAll(model.getObj().getActivity());
+                                    adapter1_1.notifyDataSetChanged();
+                                    adapter1_2.notifyDataSetChanged();
                                 }
                                 WeiboDialogUtils.closeDialog(dialog_loading);
                             } catch (JSONException e) {
@@ -1146,10 +1253,13 @@ public class HomeFragment2 extends BaseFragment {
                                 JSONObject jsonObject = new JSONObject(data);
                                 if(jsonObject.getInt("code") == 200){
                                     Gson gson = new Gson();
-                                    HomeDataModel model = gson.fromJson(data, HomeDataModel.class);
+                                    HomeDataModel1 model = gson.fromJson(data, HomeDataModel1.class);
                                     mList1.clear();
-                                    mList1.addAll(model.getObj());
-                                    adapter1.notifyDataSetChanged();
+                                    mList1.addAll(model.getObj().getArticle());
+                                    mlist1_youju.clear();
+                                    mlist1_youju.addAll(model.getObj().getActivity());
+                                    adapter1_1.notifyDataSetChanged();
+                                    adapter1_2.notifyDataSetChanged();
                                 }
                                 WeiboDialogUtils.closeDialog(dialog_loading);
                             } catch (JSONException e) {
@@ -1166,6 +1276,6 @@ public class HomeFragment2 extends BaseFragment {
         }
     }
     public void scroll2top(){
-        scrollView.fullScroll(View.FOCUS_UP);
+//        scrollView.fullScroll(View.FOCUS_UP);
     }
 }

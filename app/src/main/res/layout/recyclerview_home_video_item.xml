@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="25px"
-    android:layout_marginLeft="13px"
-    android:layout_marginRight="13px">
+    android:layout_marginLeft="5px"
+    android:layout_marginRight="5px">
     <RelativeLayout
         android:elevation="1px"
         android:layout_margin="1px"
@@ -46,10 +46,10 @@
                 android:id="@+id/video_tv_youji_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20px"
+                android:layout_marginBottom="15px"
                 android:layout_marginLeft="21px"
                 android:layout_marginRight="21px"
-                android:layout_marginTop="20px"
+                android:layout_marginTop="10px"
                 android:ellipsize="end"
                 android:maxLines="4"
                 android:text="巴厘岛小众神秘彭丽普兰，被认为是世界上最清洁的三个村庄之一巴厘岛小众神秘彭丽普兰，被认为是世界上最清洁的三个村庄之一"
@@ -64,7 +64,7 @@
             <RelativeLayout
                 android:id="@+id/rl_video_info"
                 android:layout_width="match_parent"
-                android:layout_height="112px"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="22px"
                 android:layout_marginLeft="16px"
                 android:layout_marginRight="16px">
@@ -74,14 +74,14 @@
                     android:layout_width="70px"
                     android:layout_height="70px"
                     android:layout_marginRight="8px"
-                    android:layout_marginTop="20px"
+                    android:layout_marginTop="10px"
                     android:src="@mipmap/my_head" />
 
                 <RelativeLayout
                     android:layout_width="145px"
                     android:layout_height="66px"
                     android:layout_marginBottom="2px"
-                    android:layout_marginTop="22px"
+                    android:layout_marginTop="10px"
                     android:layout_toRightOf="@+id/video_iv_icon_user">
 
                     <TextView
@@ -110,9 +110,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
+                    android:layout_alignBottom="@+id/video_iv_icon_user"
                     android:layout_alignParentRight="true"
-                    android:layout_marginBottom="21px"
                     android:layout_marginRight="16px">
 
                     <ImageView

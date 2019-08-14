@@ -379,7 +379,12 @@ public class NetConfig {
     public static String homeVideo = "action/ac_activity/HomeVideo";//action/ac_activity/HomeVideo  视频   传page 分页 uid用户id 未登陆传0   返回    status 是否赞过 0未赞 1已赞  praise_num赞数量  comment_num评论数量  vID视频ID  vname视频名称  img图片  vurl视频地址  userID发视频人的ID    vtime发布时间  username发布视频的用户的昵称
     //新首页 友记列表接口
     public static String homeYouJi = "action/ac_activity/HomeYouJi";//action/ac_activity/HomeYouJi 友记   传page分页 uid 用户id  city城市
-    //新首页 关注接口
+    //新首页 关注列表接口
     public static String homeGuanZhu = "action/ac_activity/HomeGuanZhu";//action/ac_activity/HomeGuanZhu 关注   传page  分页uid用户id
+    //新首页 日期 和消息数 接口
+    public  static String dataInfo = "action/ac_user/dataInfo";//传uid   返回 news消息数  day日期
+    //友聚页面 要开始活动数量接口
+    public static  String myWillBegin = "action/ac_user/myWillBegin";//要开始的活动数量   传uid用户id  返回 willBeginNum 活动个数
+
 
 }

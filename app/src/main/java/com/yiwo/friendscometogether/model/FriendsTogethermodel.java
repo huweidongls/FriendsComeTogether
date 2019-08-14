@@ -79,6 +79,8 @@ public class FriendsTogethermodel {
          * days 天数
          * activity_address 地点
          * join_num 人数
+         *
+         * userimgs 关注人的头像   usernames关注人昵称  attentionNum关注数量
          */
 
         private String pftime;
@@ -116,6 +118,10 @@ public class FriendsTogethermodel {
         private String days;
         private String activity_address;
         private String join_num;
+
+        private List<String> userimgs;
+        private String usernames;
+        private String attentionNum;
 
         public String getPftime() {
             return pftime;
@@ -363,6 +369,30 @@ public class FriendsTogethermodel {
 
         public void setJoin_num(String join_num) {
             this.join_num = join_num;
+        }
+
+        public List<String> getUserimgs() {
+            return userimgs;
+        }
+
+        public void setUserimgs(List<String> userimgs) {
+            this.userimgs = userimgs;
+        }
+
+        public String getUsernames() {
+            return usernames;
+        }
+
+        public void setUsernames(String usernames) {
+            this.usernames = usernames;
+        }
+
+        public String getAttentionNum() {
+            return attentionNum;
+        }
+
+        public void setAttentionNum(String attentionNum) {
+            this.attentionNum = attentionNum;
         }
     }
 }

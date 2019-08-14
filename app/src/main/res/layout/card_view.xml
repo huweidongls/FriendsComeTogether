@@ -7,11 +7,11 @@
     <LinearLayout
         android:id="@+id/ll"
         android:background="@color/white_ffffff"
-        android:elevation="10px"
-        android:layout_marginTop="10px"
-        android:layout_marginLeft="10px"
-        android:layout_marginRight="10px"
-        android:layout_marginBottom="10px"
+        android:elevation="15px"
+        android:layout_marginTop="15px"
+        android:layout_marginLeft="15px"
+        android:layout_marginRight="15px"
+        android:layout_marginBottom="15px"
         android:orientation="vertical"
         android:layout_width="550px"
         android:layout_height="wrap_content">

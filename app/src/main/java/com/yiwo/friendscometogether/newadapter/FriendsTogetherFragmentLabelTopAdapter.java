@@ -4,9 +4,12 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -47,13 +50,13 @@ public class FriendsTogetherFragmentLabelTopAdapter extends RecyclerView.Adapter
             }
         });
         if (data.get(position).getIstSelected()){
-            holder.tv_label.setTextSize(18);
-            holder.tv_label.setTextColor(Color.parseColor("#333333"));
+            holder.tv_label.setTextSize(23);
+            holder.tv_label.setTextColor(Color.WHITE);
             holder.tv_label.getPaint().setFakeBoldText(true);
-            holder.bottom_line.setVisibility(View.VISIBLE);
+            holder.bottom_line.setVisibility(View.GONE);
         }else {
             holder.tv_label.setTextSize(17);
-            holder.tv_label.setTextColor(Color.parseColor("#696969"));
+            holder.tv_label.setTextColor(Color.WHITE);
             holder.tv_label.getPaint().setFakeBoldText(false);
             holder.bottom_line.setVisibility(View.GONE);
         }

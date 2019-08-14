@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginLeft="15px"
+        android:layout_marginRight="15px"
+        android:layout_marginBottom="5px"
+        android:orientation="vertical"
+        android:id="@+id/rv_video"
+        android:layout_width="300px"
+        android:layout_height="wrap_content"
+        android:visibility="visible">
+
+        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            android:elevation="5px"
+            android:layout_margin="5px"
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="450px"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/welcome"
+            test:radius1="18px"
+            />
+        <TextView
+            android:id="@+id/tv_name"
+            android:ellipsize="end"
+            android:layout_marginLeft="8px"
+            android:maxWidth="400px"
+            android:text="活动名称"
+            android:textSize="32px"
+            android:textColor="@color/black_333333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_marginLeft="8px"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/white_ffffff"
+                android:paddingTop="3px"
+                android:paddingBottom="3px"
+                android:paddingRight="10px"
+                android:paddingLeft="10px"
+                android:textSize="25px"
+                android:text="#周末游"
+                android:background="@drawable/bg_d84c37_30px"
+                android:layout_margin="3px"
+                android:id="@+id/tv_tab_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="@color/white_ffffff"
+                android:paddingTop="3px"
+                android:paddingBottom="3px"
+                android:paddingRight="10px"
+                android:paddingLeft="10px"
+                android:textSize="25px"
+                android:text="#周末游"
+                android:background="@drawable/bg_f2cac6_30px"
+                android:layout_margin="3px"
+                android:id="@+id/tv_tab_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
