@@ -26,7 +26,7 @@
             <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
                 android:id="@+id/iv_youju"
                 android:layout_width="wrap_content"
-                android:layout_height="220px"
+                android:layout_height="320px"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/welcome"
                 test:left_top_radius1="16px"

@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.HomeVideoListModel;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.VideoActivity;
 
 import java.util.List;
@@ -44,6 +45,15 @@ public class HomeListVideoAdapter extends RecyclerView.Adapter<HomeListVideoAdap
         Glide.with(context).load(data.get(position).getImg()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_video);
         holder.video_tv_youji_title.setText(data.get(position).getVname());
         Glide.with(context).load(data.get(position).getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.video_iv_icon_user);
+        holder.video_iv_icon_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("person_id", data.get(position).getUserID());
+                intent.setClass(context, PersonMainActivity1.class);
+                context.startActivity(intent);
+            }
+        });
         holder.video_tv_username.setText(data.get(position).getUsername());
         holder.video_tv_time.setText(data.get(position).getVtime());
         holder.video_tv_good_num.setText(data.get(position).getPraise_num());

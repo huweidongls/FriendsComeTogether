@@ -19,6 +19,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
 import com.yiwo.friendscometogether.newmodel.YouJiListModel;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.VideoActivity;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
 
@@ -52,6 +53,15 @@ public class HomeListYouJiAdapter extends RecyclerView.Adapter<HomeListYouJiAdap
         Glide.with(context).load(data.get(position).getPfpic().get(0)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_youji);
         holder.tvYoujiTitle.setText(data.get(position).getPftitle());
         Glide.with(context).load(data.get(position).getHeadportrait()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.ivAvatar);
+        holder.ivAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("person_id", data.get(position).getUserID());
+                intent.setClass(context, PersonMainActivity1.class);
+                context.startActivity(intent);
+            }
+        });
         holder.tvUsername.setText(data.get(position).getUsername());
         holder.tvTime.setText(data.get(position).getPftime());
         holder.tvGoodNum.setText(data.get(position).getFmgood());

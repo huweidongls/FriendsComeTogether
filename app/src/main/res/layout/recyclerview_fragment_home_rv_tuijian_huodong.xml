@@ -19,12 +19,13 @@
             android:layout_margin="5px"
             android:id="@+id/iv"
             android:layout_width="match_parent"
-            android:layout_height="450px"
+            android:layout_height="400px"
             android:scaleType="centerCrop"
             android:src="@mipmap/welcome"
             test:radius1="18px"
             />
         <TextView
+            android:layout_marginTop="10px"
             android:id="@+id/tv_name"
             android:ellipsize="end"
             android:layout_marginLeft="8px"
@@ -35,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <LinearLayout
+            android:layout_marginTop="5px"
             android:layout_marginLeft="8px"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
@@ -60,7 +62,7 @@
                 android:paddingLeft="10px"
                 android:textSize="25px"
                 android:text="#周末游"
-                android:background="@drawable/bg_f2cac6_30px"
+                android:background="@drawable/bg_yelllow_ff9d00_30px"
                 android:layout_margin="3px"
                 android:id="@+id/tv_tab_2"
                 android:layout_width="wrap_content"

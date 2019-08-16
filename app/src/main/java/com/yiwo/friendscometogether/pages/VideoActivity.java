@@ -55,6 +55,7 @@ import com.yiwo.friendscometogether.adapter.ArticleCommentVideoAdapter;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.emoji.EmotionMainFragment;
+import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
 import com.yiwo.friendscometogether.model.ActicleCommentVideoModel;
 import com.yiwo.friendscometogether.model.ArticleCommentListModel;
 import com.yiwo.friendscometogether.model.VideoActiveModel;
@@ -88,6 +89,8 @@ public class VideoActivity extends FragmentActivity {
     @BindView(R.id.rl_active)
     RelativeLayout rlActive;
 
+    @BindView(R.id.ll_btns)
+    LinearLayout ll_btns;
     @BindView(R.id.iv_zan)
     ImageView iv_zan;
     @BindView(R.id.tv_zan_num)
@@ -125,6 +128,7 @@ public class VideoActivity extends FragmentActivity {
     public YouJiListModel.ObjBean mode;//视频mode
     private EmotionMainFragment emotionMainFragment;
     private Dialog dialog;
+    private StandardVideoController controller;
 
     //评论列表
     private ArticleCommentVideoAdapter articleCommentVideoAdapter;
@@ -135,6 +139,7 @@ public class VideoActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        StatusBarUtils.setStatusBarTransparent(this);
         ButterKnife.bind(this);
         spImp = new SpImp(VideoActivity.this);
         uid = spImp.getUID();
@@ -329,7 +334,8 @@ public class VideoActivity extends FragmentActivity {
 
         ijkVideoView.setUrl(url); //设置视频地址
 //        ijkVideoView.setTitle(title); //设置视频标题
-        StandardVideoController controller = new StandardVideoController(this);
+        controller.hide();
+         controller = new StandardVideoController(this);
         ijkVideoView.setVideoController(controller); //设置控制器，如需定制可继承BaseVideoController
         ijkVideoView.start(); //开始播放，不调用则不自动播放
 
@@ -731,6 +737,13 @@ public class VideoActivity extends FragmentActivity {
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN&&ll_pinglun.isShown()&&!isTouchView(new View[]{ll_pinglun},event)){
             startPingLunHideAnim();
+        }
+        if (event.getAction() == MotionEvent.ACTION_UP&&!isTouchView(new View[]{ll_btns,ivBack,rlActive},event)){
+
+//            ll_btns.setVisibility(ll_btns.getVisibility() == View.VISIBLE ? View.GONE:View.VISIBLE);controller.isShown()
+            ll_btns.setVisibility(controller.isShown()? View.VISIBLE:View.GONE);
+            ivBack.setVisibility(ivBack.getVisibility() == View.VISIBLE ? View.GONE:View.VISIBLE);
+            rlActive.setVisibility(rlActive.getVisibility() == View.VISIBLE ? View.GONE:View.VISIBLE);
         }
         return super.dispatchTouchEvent(event);
     }

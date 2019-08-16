@@ -33,7 +33,7 @@
                     android:id="@+id/ll_search"
                     android:layout_width="match_parent"
                     android:layout_height="50px"
-                    android:layout_marginLeft="40px"
+                    android:layout_marginLeft="25px"
                     android:layout_marginRight="14px"
                     android:orientation="horizontal">
 
@@ -81,11 +81,11 @@
             <RelativeLayout
                 android:id="@+id/rl_myhuodong"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="1.5"
+                android:layout_weight="1.2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
-                    android:layout_marginRight="20px"
+                    android:layout_marginRight="40px"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:orientation="horizontal"

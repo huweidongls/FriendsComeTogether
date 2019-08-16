@@ -65,8 +65,16 @@ public class HomeDataRecommendAdapter2 extends RecyclerView.Adapter<HomeDataReco
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
             holder.tvName.setText(data.get(position).getPftitle());
-            holder.tvLab1.setText("#周末有欧");
-            holder.tvLab2.setText("#周末有欧");
+            if (data.get(position).getActivity_label().size()>=2){
+                holder.tvLab1.setText(""+data.get(position).getActivity_label().get(0).getName());
+                holder.tvLab2.setText(""+data.get(position).getActivity_label().get(1).getName());
+            }else if (data.get(position).getActivity_label().size()>=1){
+                holder.tvLab1.setText(""+data.get(position).getActivity_label().get(0).getName());
+                holder.tvLab2.setVisibility(View.GONE);
+            }else {
+                holder.tvLab1.setVisibility(View.GONE);
+                holder.tvLab2.setVisibility(View.GONE);
+            }
             Glide.with(context).load(data.get(position).getPfpic().get(0)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv);
     }
 

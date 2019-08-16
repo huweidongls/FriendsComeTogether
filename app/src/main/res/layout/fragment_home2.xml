@@ -158,13 +158,13 @@
 
         </LinearLayout>
         <RelativeLayout
+            android:layout_marginBottom="6px"
             android:layout_width="match_parent"
             android:layout_height="70px">
             <TextView
-                android:textStyle="bold"
                 android:layout_centerVertical="true"
                 android:text="周二，2月2日"
-                android:layout_marginLeft="60px"
+                android:layout_marginLeft="30px"
                 android:textSize="30px"
                 android:textColor="@color/white_ffffff"
                 android:id="@+id/tv_date_info"
