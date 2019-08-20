@@ -158,7 +158,6 @@
 
         </LinearLayout>
         <RelativeLayout
-            android:layout_marginBottom="6px"
             android:layout_width="match_parent"
             android:layout_height="70px">
             <TextView
@@ -198,32 +197,31 @@
             </LinearLayout>
         </RelativeLayout>
         <RelativeLayout
+            android:paddingBottom="10px"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="120px">
             <LinearLayout
-                android:layout_centerVertical="true"
+                android:id="@+id/ll_tab"
+                android:layout_alignParentBottom="true"
                 android:layout_toLeftOf="@+id/ll_left"
                 android:layout_marginLeft="10px"
                 android:layout_marginRight="10px"
-                android:layout_marginTop="20px"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="80px">
+                android:layout_height="100px">
 
                 <RelativeLayout
                     android:id="@+id/rl1"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:layout_width="0px"
                     android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/tv_rl1"
-                        android:textStyle="bold"
                         android:layout_centerHorizontal="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="10px"
                         android:textColor="@color/white"
-                        android:textSize="50px"
+                        android:textSize="68px"
                         android:text="推荐"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -248,7 +246,7 @@
                         android:id="@+id/tv_rl2"
                         android:layout_centerHorizontal="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="15px"
+                        android:layout_marginBottom="10px"
                         android:textColor="@color/white"
                         android:textSize="32px"
                         android:text="关注"
@@ -276,7 +274,7 @@
                         android:id="@+id/tv_rl3"
                         android:layout_centerHorizontal="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="15px"
+                        android:layout_marginBottom="10px"
                         android:textColor="@color/white"
                         android:textSize="32px"
                         android:text="友记"
@@ -296,7 +294,7 @@
 
                 <RelativeLayout
                     android:id="@+id/rl4"
-                    android:layout_weight="1.2"
+                    android:layout_weight="1"
                     android:layout_width="0px"
                     android:layout_height="match_parent">
 
@@ -304,10 +302,10 @@
                         android:id="@+id/tv_rl4"
                         android:layout_centerHorizontal="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="15px"
+                        android:layout_marginBottom="10px"
                         android:textColor="@color/white"
                         android:textSize="32px"
-                        android:text="小视频"
+                        android:text="视频"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -324,7 +322,8 @@
 
             </LinearLayout>
             <LinearLayout
-                android:layout_centerVertical="true"
+                android:layout_marginBottom="5px"
+                android:layout_alignParentBottom="true"
                 android:id="@+id/ll_left"
                 android:layout_marginRight="20px"
                 android:layout_alignParentRight="true"
@@ -333,7 +332,7 @@
                 android:layout_height="wrap_content">
                 <RelativeLayout
                     android:padding="8px"
-                    android:layout_gravity="center_vertical"
+                    android:layout_gravity="bottom"
                     android:background="@drawable/bg_grayf5f5f5_20px"
                     android:id="@+id/locationRl"
                     android:layout_width="170px"
@@ -370,8 +369,8 @@
                     android:background="@drawable/bg_oval_white"
                     android:layout_centerVertical="true"
                     android:id="@+id/ll_search"
-                    android:layout_width="50px"
-                    android:layout_height="50px"
+                    android:layout_width="65px"
+                    android:layout_height="65px"
                     android:layout_marginLeft="20px"
                     android:orientation="horizontal">
 

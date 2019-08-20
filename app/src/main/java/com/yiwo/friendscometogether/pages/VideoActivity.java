@@ -35,6 +35,7 @@ import android.widget.Toast;
 import com.dueeeke.videocontroller.StandardVideoController;
 import com.dueeeke.videoplayer.player.IjkVideoView;
 import com.dueeeke.videoplayer.player.PlayerConfig;
+import com.dueeeke.videoplayer.util.WindowUtil;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -323,6 +324,7 @@ public class VideoActivity extends FragmentActivity {
         //高级设置（可选，须在start()之前调用方可生效）
         PlayerConfig playerConfig = new PlayerConfig.Builder()
                 .enableCache() //启用边播边缓存功能
+
 //                .autoRotate() //启用重力感应自动进入/退出全屏功能
 //                .enableMediaCodec()//启动硬解码，启用后可能导致视频黑屏，音画不同步
                 .usingSurfaceView() //启用SurfaceView显示视频，不调用默认使用TextureView
@@ -331,10 +333,8 @@ public class VideoActivity extends FragmentActivity {
                 .setLooping() //循环播放当前正在播放的视频
                 .build();
         ijkVideoView.setPlayerConfig(playerConfig);
-
         ijkVideoView.setUrl(url); //设置视频地址
 //        ijkVideoView.setTitle(title); //设置视频标题
-        controller.hide();
          controller = new StandardVideoController(this);
         ijkVideoView.setVideoController(controller); //设置控制器，如需定制可继承BaseVideoController
         ijkVideoView.start(); //开始播放，不调用则不自动播放
@@ -739,11 +739,18 @@ public class VideoActivity extends FragmentActivity {
             startPingLunHideAnim();
         }
         if (event.getAction() == MotionEvent.ACTION_UP&&!isTouchView(new View[]{ll_btns,ivBack,rlActive},event)){
-
-//            ll_btns.setVisibility(ll_btns.getVisibility() == View.VISIBLE ? View.GONE:View.VISIBLE);controller.isShown()
-            ll_btns.setVisibility(controller.isShown()? View.VISIBLE:View.GONE);
-            ivBack.setVisibility(ivBack.getVisibility() == View.VISIBLE ? View.GONE:View.VISIBLE);
-            rlActive.setVisibility(rlActive.getVisibility() == View.VISIBLE ? View.GONE:View.VISIBLE);
+            LinearLayout bottomContainer = controller.findViewById(com.dueeeke.videocontroller.R.id.bottom_container);
+//            ll_btns.setVisibility(ll_btns.getVisibility() == View.VISIBLE ? View.GONE:View.VISIBLE);
+//            ivBack.setVisibility(ivBack.getVisibility() == View.VISIBLE ? View.GONE:View.VISIBLE);
+//            rlActive.setVisibility(rlActive.getVisibility() == View.VISIBLE ? View.GONE:View.VISIBLE);
+            ll_btns.setVisibility(bottomContainer.getVisibility() == View.GONE ? View.VISIBLE:View.GONE);
+            ivBack.setVisibility(bottomContainer.getVisibility() == View.GONE ? View.VISIBLE:View.GONE);
+            rlActive.setVisibility(bottomContainer.getVisibility() == View.GONE ? View.VISIBLE:View.GONE);
+//            if (bottomContainer == View.GONE){
+//                controller.hide();
+//            }else {
+//                controller.show();
+//            }
         }
         return super.dispatchTouchEvent(event);
     }

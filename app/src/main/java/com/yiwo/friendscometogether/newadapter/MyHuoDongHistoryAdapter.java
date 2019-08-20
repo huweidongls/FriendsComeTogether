@@ -141,27 +141,11 @@ public class MyHuoDongHistoryAdapter extends RecyclerView.Adapter<MyHuoDongHisto
             }
         });
         holder.tv_title.setText(bean.getPftitle());
-        holder.tv_phase.setText("第"+data.get(position).getPhase()+"期："+data.get(position).getPfgotime()+" - "+data.get(position).getPfendtime());
         Glide.with(context).load(bean.getPfpic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_image_huodong);
-        holder.tv_name_owner.setText(bean.getUsername());
-        holder.tv_name_owner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.putExtra("uid", data.get(position).getCaptain());
-//                intent.setClass(context, OtherInformationActivity.class);
-//                context.startActivity(intent);
-            }
-        });
-
-        Glide.with(context).load(data.get(position).getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.iv_icon_owner);
-        holder.iv_icon_owner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         holder.tv_timeinfo.setText(bean.getActivities_data());
+        holder.tv_qishu.setText("第"+data.get(position).getPhase()+"期");
+        holder.tv_start_time.setText("开始时间："+data.get(position).getPfgotime());
+        holder.tv_end_time.setText("结束时间："+data.get(position).getPfendtime());
     }
 
     @Override
@@ -176,28 +160,33 @@ public class MyHuoDongHistoryAdapter extends RecyclerView.Adapter<MyHuoDongHisto
         NimUIKit.startTeamSession(context, teamId);
     }
     class ViewHolder extends RecyclerView.ViewHolder{
+
         private TextView btn_gochatroom;//此按钮已隐藏
         private TextView btn_pingjia;
         private TextView btn_delete;
         private TextView tv_title;
-        private ImageView iv_icon_owner;
-        private TextView tv_name_owner;
         private TextView tv_timeinfo;
-        private TextView tv_phase;
         private ImageView iv_image_huodong;
         private LinearLayout ll_huodong_history;
+
+        private TextView tv_start_time;
+        private TextView tv_end_time;
+        private TextView tv_qishu;
+        private TextView tv_niming;
         public ViewHolder(View itemView) {
             super(itemView);
             btn_gochatroom = itemView.findViewById(R.id.btn_gochatroom);
             btn_pingjia = itemView.findViewById(R.id.btn_pingjia);
             btn_delete = itemView.findViewById(R.id.btn_delete);
             tv_title = itemView.findViewById(R.id.tv_huodong_title);
-            iv_icon_owner = itemView.findViewById(R.id.iv_icon_owner);
-            tv_name_owner = itemView.findViewById(R.id.tv_name_owner);
             tv_timeinfo = itemView.findViewById(R.id.tv_timeinfo);
-            tv_phase = itemView.findViewById(R.id.tv_huodong_phase);
             iv_image_huodong = itemView.findViewById(R.id.iv_image_huodong);
             ll_huodong_history = itemView.findViewById(R.id.ll_huodong_history);
+
+            tv_start_time = itemView.findViewById(R.id.tv_start_time);
+            tv_end_time = itemView.findViewById(R.id.tv_end_time);
+            tv_qishu = itemView.findViewById(R.id.tv_qishu);
+            tv_niming = itemView.findViewById(R.id.tv_noname);
         }
     }
     public void setDeleteListion(DeleteListion listion){

@@ -65,11 +65,28 @@ public class HomeDataRecommendAdapter2 extends RecyclerView.Adapter<HomeDataReco
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
             holder.tvName.setText(data.get(position).getPftitle());
+            String slab1 = "";
+            String slab2 = "";
             if (data.get(position).getActivity_label().size()>=2){
-                holder.tvLab1.setText(""+data.get(position).getActivity_label().get(0).getName());
-                holder.tvLab2.setText(""+data.get(position).getActivity_label().get(1).getName());
+                if (data.get(position).getActivity_label().get(0).getName().length()<3){
+                    slab1 = " "+data.get(position).getActivity_label().get(0).getName()+" ";
+                }else {
+                    slab1 = ""+data.get(position).getActivity_label().get(0).getName()+"";
+                }
+                if (data.get(position).getActivity_label().get(1).getName().length()<3){
+                    slab2 = " "+data.get(position).getActivity_label().get(1).getName()+" ";
+                }else {
+                    slab2 = ""+data.get(position).getActivity_label().get(1).getName()+"";
+                }
+                holder.tvLab1.setText(slab1);
+                holder.tvLab2.setText(slab2);
             }else if (data.get(position).getActivity_label().size()>=1){
-                holder.tvLab1.setText(""+data.get(position).getActivity_label().get(0).getName());
+                if (data.get(position).getActivity_label().get(0).getName().length()<3){
+                    slab1 = " "+data.get(position).getActivity_label().get(0).getName()+" ";
+                }else {
+                    slab1 = ""+data.get(position).getActivity_label().get(0).getName()+"";
+                }
+                holder.tvLab1.setText(slab1);
                 holder.tvLab2.setVisibility(View.GONE);
             }else {
                 holder.tvLab1.setVisibility(View.GONE);

@@ -134,23 +134,11 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
             }
         });
         holder.tv_title.setText(bean.getPftitle());
-        holder.tv_phase.setText("第"+data.get(position).getPhase()+"期："+data.get(position).getPfgotime()+" - "+data.get(position).getPfendtime());
         Glide.with(context).load(bean.getPfpic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_image_huodong);
-        holder.tv_name_owner.setText(bean.getUsername());
-        holder.tv_name_owner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        Glide.with(context).load(data.get(position).getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.iv_icon_owner);
-        holder.iv_icon_owner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         holder.tv_timeinfo.setText(bean.getActivities_data());
+        holder.tv_qishu.setText("第"+data.get(position).getPhase()+"期");
+        holder.tv_start_time.setText("开始时间："+data.get(position).getPfgotime());
+        holder.tv_end_time.setText("结束时间："+data.get(position).getPfendtime());
     }
 
     @Override
@@ -170,28 +158,30 @@ public class MyHuoDongApplyAdapter extends RecyclerView.Adapter<MyHuoDongApplyAd
     }
     class ViewHolder extends RecyclerView.ViewHolder{
 
+        private TextView tv_timeinfo;
         private TextView btn_gochatroom;
         private TextView btn_zixun;
         private TextView btn_cancel;
         private TextView tv_title;
-        private ImageView iv_icon_owner;
-        private TextView tv_name_owner;
-        private TextView tv_timeinfo;
-        private TextView tv_phase;
         private ImageView iv_image_huodong;
         private LinearLayout ll_huodong_apply;
+        private TextView tv_start_time;
+        private TextView tv_end_time;
+        private TextView tv_qishu;
+        private TextView tv_niming;
         public ViewHolder(View itemView) {
             super(itemView);
             btn_gochatroom = itemView.findViewById(R.id.btn_gochatroom);
             btn_zixun = itemView.findViewById(R.id.btn_zixun);
             btn_cancel = itemView.findViewById(R.id.btn_cancel);
             tv_title = itemView.findViewById(R.id.tv_huodong_title);
-            iv_icon_owner = itemView.findViewById(R.id.iv_icon_owner);
-            tv_name_owner = itemView.findViewById(R.id.tv_name_owner);
             tv_timeinfo = itemView.findViewById(R.id.tv_timeinfo);
             iv_image_huodong = itemView.findViewById(R.id.iv_image_huodong);
             ll_huodong_apply = itemView.findViewById(R.id.ll_huodong_apply);
-            tv_phase = itemView.findViewById(R.id.tv_huodong_phase);
+            tv_start_time = itemView.findViewById(R.id.tv_start_time);
+            tv_end_time = itemView.findViewById(R.id.tv_end_time);
+            tv_qishu = itemView.findViewById(R.id.tv_qishu);
+            tv_niming = itemView.findViewById(R.id.tv_noname);
         }
     }
 

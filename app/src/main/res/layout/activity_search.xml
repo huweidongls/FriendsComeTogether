@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.yiwo.friendscometogether.pages.SearchActivity">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"></LinearLayout>
     <com.czp.searchmlist.mSearchLayout
         android:id="@+id/mSearch"
         android:layout_width="match_parent"

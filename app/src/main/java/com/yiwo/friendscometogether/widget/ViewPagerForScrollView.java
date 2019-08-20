@@ -3,6 +3,7 @@ package com.yiwo.friendscometogether.widget;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -57,6 +58,10 @@ public class ViewPagerForScrollView extends ViewPager {
             } else {
                 layoutParams.height = height;
             }
+//            if (guanZhuHasNotData){
+//                layoutParams.height = RelativeLayout.LayoutParams.MATCH_PARENT;
+//                Log.d("aaaaab","guanzhuwushuju");
+//            }
             setLayoutParams(layoutParams);
         }
     }

@@ -9,8 +9,8 @@
     android:layout_marginLeft="5px"
     android:layout_marginRight="5px">
     <RelativeLayout
-        android:elevation="1px"
-        android:layout_margin="1px"
+        android:elevation="5px"
+        android:layout_margin="5px"
         android:id="@+id/rv_video"
         android:layout_width="match_parent"
         android:layout_height="580px"

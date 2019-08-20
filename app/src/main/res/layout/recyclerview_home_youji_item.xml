@@ -10,8 +10,8 @@
     android:layout_marginRight="5px">
 
     <RelativeLayout
-        android:elevation="1px"
-        android:layout_margin="1px"
+        android:elevation="5px"
+        android:layout_margin="5px"
         android:visibility="visible"
         android:id="@+id/rv_youji"
         android:layout_width="match_parent"

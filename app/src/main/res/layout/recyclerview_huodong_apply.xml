@@ -4,84 +4,113 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:id="@+id/ll_huodong_apply"
-    android:background="@color/white_ffffff"
+    android:background="@drawable/bg_white_30px"
+    android:paddingBottom="10px"
+    android:layout_marginTop="20px"
+    android:layout_marginLeft="23px"
+    android:layout_marginRight="23px"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <TextView
-    android:id="@+id/tv_huodong_title"
-    android:lines="1"
-    android:ellipsize="end"
-    android:layout_marginTop="30px"
-    android:layout_marginLeft="32px"
-    android:layout_marginRight="32px"
-    android:textSize="32px"
-    android:textColor="#333333"
-    android:text="【美食趴】双十二！跟着我们一起去探趴！"
-    android:textStyle="bold"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/tv_huodong_phase"
-        android:lines="1"
-        android:ellipsize="end"
-        android:layout_marginTop="5px"
-        android:layout_marginLeft="32px"
-        android:layout_marginRight="32px"
-        android:textSize="28px"
-        android:textColor="#9a9a9a"
-        android:text="第1期：2019-02-18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
-        test:radius1="12px"
-        android:id="@+id/iv_image_huodong"
-        android:layout_marginTop="30px"
-        android:layout_marginLeft="32px"
-        android:layout_marginRight="32px"
-        android:src="@mipmap/welcome"
-        android:scaleType="centerCrop"
-        android:layout_width="match_parent"
-        android:layout_height="300px" />
     <RelativeLayout
-        android:layout_marginTop="23px"
-        android:layout_marginLeft="32px"
-        android:layout_marginRight="32px"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_marginBottom="10px"
+        android:layout_height="78px">
         <LinearLayout
-            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="26px"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_icon_owner"
-                android:src="@mipmap/my_head"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10px"
-                android:layout_width="60px"
-                android:layout_height="60px" />
-            <TextView
-                android:lines="1"
-                android:ellipsize="end"
-                android:id="@+id/tv_name_owner"
+            <ImageView
+                android:src="@mipmap/order_icon"
                 android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:text="扁脸折耳猫扁脸折耳猫扁脸折耳猫扁脸折耳猫扁脸折耳猫扁脸折耳猫"
+                android:layout_marginRight="10px"
+                android:layout_width="30px"
+                android:layout_height="30px" />
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:textStyle="bold"
+                android:id="@+id/tv_huodong_title"
                 android:textColor="#333333"
-                android:textSize="32px"
-                android:layout_width="300px"
+                android:textSize="26px"
+                android:text="云南旅游"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/fragment_all_order_rv_rl_details"
+        android:layout_width="match_parent"
+        android:layout_height="180px">
+
+        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            test:radius1="40px"
+            android:layout_marginLeft="24px"
+            android:id="@+id/iv_image_huodong"
+            android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
+            android:layout_width="180px"
+            android:layout_height="180px" />
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:layout_alignTop="@+id/iv_image_huodong"
+            android:layout_marginLeft="20px"
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/iv_image_huodong"
+            android:layout_width="wrap_content"
+            android:layout_height="180px">
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/tv_start_time"
+                android:textColor="#999999"
+                android:textSize="24px"
+                android:text="开始时间："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/tv_end_time"
+                android:textColor="#999999"
+                android:textSize="24px"
+                android:text="结束时间："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:layout_weight="1"
+                android:textColor="#999999"
+                android:textSize="24px"
+                android:id="@+id/tv_noname"
+                android:text="是否匿名："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_weight="1"
+                android:textColor="#999999"
+                android:textSize="24px"
+                android:id="@+id/tv_qishu"
+                android:text="第一期"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <LinearLayout
            android:gravity="center_vertical"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="30px"
             android:layout_width="wrap_content"
             android:layout_height="50px">
             <ImageView
                 android:layout_gravity="center_vertical"
                 android:src="@mipmap/shijian_apply_huodong_red"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="10px"
+                android:layout_marginRight="20px"
                 android:layout_width="30px"
                 android:layout_height="30px" />
             <TextView
@@ -93,68 +122,54 @@
                 android:text="据活动开始还有3天"
                 android:textColor="@color/red_d84c37"
                 android:textSize="28px"
-                android:layout_width="269px"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </RelativeLayout>
-    <LinearLayout
-        android:layout_marginRight="32px"
-        android:layout_marginLeft="32px"
-        android:layout_marginTop="31px"
-        android:background="#D2D2D2"
-        android:layout_width="match_parent"
-        android:layout_height="1px"></LinearLayout>
     <RelativeLayout
-        android:layout_marginRight="32px"
-        android:layout_marginLeft="32px"
+        android:paddingRight="10px"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_alignParentLeft="true"
-            android:id="@+id/btn_gochatroom"
-            android:textSize="24px"
-            android:background="@drawable/bg_red_border_26px"
-            android:gravity="center"
-            android:text="进入群聊"
-            android:textColor="@color/red_d84c37"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30px"
-            android:layout_marginBottom="30px"
-            android:layout_marginLeft="13px"
-            android:layout_width="190px"
-            android:layout_height="52px" />
-        <TextView
-            android:layout_centerInParent="true"
-            android:id="@+id/btn_zixun"
-            android:textSize="24px"
-            android:background="@drawable/bg_red_border_26px"
-            android:gravity="center"
-            android:text="咨询"
-            android:textColor="@color/red_d84c37"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30px"
-            android:layout_marginBottom="30px"
-            android:layout_marginRight="13px"
-            android:layout_width="190px"
-            android:layout_height="52px" />
-        <TextView
+        android:layout_height="86px">
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_alignParentRight="true"
-            android:id="@+id/btn_cancel"
-            android:textSize="24px"
-            android:background="@drawable/bg_red_border_26px"
-            android:gravity="center"
-            android:text="取消活动"
-            android:textColor="#E51B23"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30px"
-            android:layout_marginBottom="30px"
-            android:layout_marginRight="13px"
-            android:layout_width="190px"
-            android:layout_height="52px" />
-    </RelativeLayout>
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:background="@drawable/bg_gray_border_27px"
+                android:layout_marginRight="10px"
+                android:gravity="center"
+                android:textSize="26px"
+                android:textColor="#686868"
+                android:layout_width="150px"
+                android:layout_height="54px"
+                android:id="@+id/btn_gochatroom"
+                android:text="进入群聊" />
+            <TextView
+                android:background="@drawable/bg_gray_border_27px"
+                android:layout_marginRight="10px"
+                android:gravity="center"
+                android:textSize="26px"
+                android:textColor="#686868"
+                android:layout_width="150px"
+                android:layout_height="54px"
+                android:id="@+id/btn_zixun"
+                android:text="咨询"
+                android:layout_gravity="center_horizontal"/>
+            <TextView
 
-    <LinearLayout
-        android:background="@color/white_F8F8F8"
-        android:layout_width="match_parent"
-        android:layout_height="10px"></LinearLayout>
+                android:textColor="#D84C37"
+                android:background="@drawable/bg_red_border_27px"
+                android:textSize="26px"
+                android:layout_width="150px"
+                android:layout_height="54px"
+                android:gravity="center"
+                android:layout_marginRight="10px"
+                android:layout_alignParentRight="true"
+                android:id="@+id/btn_cancel"
+                android:text="取消活动"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

@@ -198,6 +198,7 @@ public class HomeFragment2 extends BaseFragment {
 
     private List<View> viewList = new ArrayList<>();
     private View view1,view2,view3,view4;
+    private TextView tv_text_youji,tv_text_youju;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -223,10 +224,13 @@ public class HomeFragment2 extends BaseFragment {
         viewList.add(view3);
         viewList.add(view4);
         recyclerView1_1 = view1.findViewById(R.id.rv_home_1_2);
+        tv_text_youji = view1.findViewById(R.id.tv_text_youji);
+        tv_text_youju = view1.findViewById(R.id.tv_text_youju);
         recyclerView1_2 = view1.findViewById(R.id.rv_home_1_1);
         recyclerView2 = view2.findViewById(R.id.rv_home_2);
         recyclerView3 = view3.findViewById(R.id.rv_home_3);
         recyclerView4 = view4.findViewById(R.id.rv_home_4);
+
         PagerAdapter pagerAdapter = new PagerAdapter() {
 
                     @Override
@@ -266,7 +270,12 @@ public class HomeFragment2 extends BaseFragment {
 
             @Override
             public void onPageSelected(int position) {
-                viewPager.resetHeight(position);
+                if ((mList2.size() == 0&&position == 1)){//关注无数据时
+                    Log.d("aaaaa","guanzhuwushuju");
+                }else {
+                    viewPager.resetHeight(position);
+                    Log.d("aaaaa","guanzhuyoushuju");
+                }
                 switch (position){
                     case 0:
 //                        tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
@@ -277,7 +286,7 @@ public class HomeFragment2 extends BaseFragment {
 //                        tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
 //                        tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
 //                        tvRl4.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                        v1.setVisibility(View.GONE);
+                        v1.setVisibility(View.VISIBLE);
                         v2.setVisibility(View.GONE);
                         v3.setVisibility(View.GONE);
                         v4.setVisibility(View.GONE);
@@ -708,7 +717,8 @@ public class HomeFragment2 extends BaseFragment {
                                 manager2.setOrientation(LinearLayoutManager.HORIZONTAL);
                                 recyclerView1_2.setLayoutManager(manager2);
                                 recyclerView1_2.setAdapter(adapter1_2);
-
+                                tv_text_youji.setVisibility(View.VISIBLE);
+                                tv_text_youju.setVisibility(View.VISIBLE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

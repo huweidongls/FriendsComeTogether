@@ -15,6 +15,7 @@
             android:layout_height="match_parent" />
 
         <ImageView
+            android:visibility="gone"
             android:src="@mipmap/close_w"
             android:id="@+id/iv_back"
             android:layout_marginLeft="20dp"
@@ -23,7 +24,7 @@
             android:layout_height="20dp" />
 
         <RelativeLayout
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/rl_active"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
@@ -43,6 +44,7 @@
 
         </RelativeLayout>
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/ll_btns"
             android:paddingBottom="7dp"
             android:paddingTop="7dp"
