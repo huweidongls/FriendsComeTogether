@@ -1,5 +1,6 @@
 package com.yiwo.friendscometogether.newpage;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -149,9 +150,11 @@ public class PersonImpressionActivity extends BaseActivity {
                                 if (jsonObject1.getString("status").equals("0")){
                                     iv_heart.setImageResource(R.mipmap.xindong_border);
                                     isHeart = false;
-                                }else {
+                                }else if (jsonObject1.getString("status").equals("1")){
                                     iv_heart.setImageResource(R.mipmap.xindong);
                                     isHeart = true;
+                                }else {//未开启寻爱模式
+                                    rlXinDong.setVisibility(View.GONE);
                                 }
                             }
                         } catch (JSONException e) {

@@ -16,6 +16,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.GetEditorFriendTogetherModel;
 import com.yiwo.friendscometogether.model.SearchListModel;
+import com.yiwo.friendscometogether.pages.VideoActivity;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
 import com.yiwo.friendscometogether.pages.EditorFriendTogetherSubTitleContentActivity;
@@ -54,14 +55,22 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
             @Override
             public void onClick(View v) {
                 Intent it = new Intent();
-                if(data.get(position).getType().equals("1")){
+                if(data.get(position).getType().equals("0")){
                     it.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                     it.putExtra("pfID",data.get(position).getId());
-                } else {
+                    context.startActivity(it);
+                } else if (data.get(position).getType().equals("1")){
                     it.setClass(context, DetailsOfFriendsWebActivity1.class);
                     it.putExtra("fmid",data.get(position).getId());
+                    context.startActivity(it);
+                }else if (data.get(position).getType().equals("2")) {
+                    it.setClass(context, VideoActivity.class);
+                    it.putExtra("videoUrl", data.get(position).getVurl());
+                    it.putExtra("title", data.get(position).getTitle());
+                    it.putExtra("picUrl", data.get(position).getVimg());
+                    it.putExtra("vid", data.get(position).getId());
+                    context.startActivity(it);
                 }
-                context.startActivity(it);
 //                ac.finish();
             }
         });

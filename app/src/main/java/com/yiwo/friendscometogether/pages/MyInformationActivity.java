@@ -2,6 +2,7 @@ package com.yiwo.friendscometogether.pages;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,12 +35,16 @@ import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.custom.OpenLoveDialog;
+import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.model.JsonBean;
+import com.yiwo.friendscometogether.model.OpenLoveTiaoJianModel;
 import com.yiwo.friendscometogether.model.UserModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newpage.EditorLabelActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.GetJsonDataUtil;
+import com.yiwo.friendscometogether.utils.StringUtils;
 import com.yiwo.friendscometogether.utils.TokenUtils;
 
 import org.json.JSONArray;
@@ -118,6 +123,8 @@ public class MyInformationActivity extends TakePhotoActivity {
     @BindView(R.id.iv_woyaolianai)
     ImageView iv_woyaolianai;
 
+
+    private Dialog dialog;
 
     private String woYaoLianAiType = "0";
 
@@ -396,14 +403,54 @@ public class MyInformationActivity extends TakePhotoActivity {
                 break;
             case R.id.ll_woyaolianai:
                 if (woYaoLianAiType.equals("0")){
-                    woYaoLianAiType = "1";
-                    iv_woyaolianai.setImageResource(R.mipmap.gerenxinxi_woyaolianai_xuanzhong);
+                    showTiaoJianDialog();
                 }else {
                     woYaoLianAiType = "0";
                     iv_woyaolianai.setImageResource(R.mipmap.gerenxinxi_woyaolianai_kong);
                 }
                 break;
         }
+    }
+
+    private void showTiaoJianDialog() {
+        dialog = WeiboDialogUtils.createLoadingDialog(MyInformationActivity.this,"");
+        ViseHttp.POST(NetConfig.userSet)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.userSet))
+                .addParam("userID",uid)
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        WeiboDialogUtils.closeDialog(dialog);
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                Gson gson = new Gson();
+                                OpenLoveTiaoJianModel model = gson.fromJson(data,OpenLoveTiaoJianModel.class);
+                                final OpenLoveDialog dialog = new OpenLoveDialog(MyInformationActivity.this, model, new OpenLoveDialog.Listenner() {
+                                    @Override
+                                    public void onCanel(OpenLoveDialog dialog1) {
+                                        dialog1.dismiss();
+                                    }
+
+                                    @Override
+                                    public void onOpen(OpenLoveDialog dialog1) {
+                                        woYaoLianAiType = "1";
+                                        iv_woyaolianai.setImageResource(R.mipmap.gerenxinxi_woyaolianai_xuanzhong);
+                                        dialog1.dismiss();
+                                    }
+                                });
+                                dialog.show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+                        WeiboDialogUtils.closeDialog(dialog);
+                    }
+                });
     }
 
     @Override
@@ -774,5 +821,10 @@ public class MyInformationActivity extends TakePhotoActivity {
             }
         }
         return false;
+    }
+    public String getToken(String url) {
+        String token = StringUtils.stringToMD5(url);
+        String tokens = StringUtils.stringToMD5(token);
+        return tokens;
     }
 }

@@ -20,7 +20,6 @@ import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
 import com.yiwo.friendscometogether.newmodel.YouJiListModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
-import com.yiwo.friendscometogether.pages.VideoActivity;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
 
 import java.util.List;

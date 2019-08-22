@@ -7,8 +7,62 @@
     android:orientation="vertical"
     tools:context="com.yiwo.friendscometogether.pages.SearchActivity">
     <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="20dp"></LinearLayout>
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginRight="20px"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:textSize="13sp"
+            android:text="选择搜索："
+            android:textColor="@color/black_333333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioGroup
+            android:id="@+id/rg"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:checked="true"
+                android:button="@null"
+                android:background="@drawable/selector_search_choose_type"
+                android:textColor="@color/selector_search_choose_type_color"
+                android:textSize="12sp"
+                android:id="@+id/rb_youji"
+                android:layout_marginRight="15dp"
+                android:gravity="center"
+                android:text="友记"
+                android:layout_width="75dp"
+                android:layout_height="25dp" />
+            <RadioButton
+                android:button="@null"
+                android:background="@drawable/selector_search_choose_type"
+                android:textColor="@color/selector_search_choose_type_color"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:id="@+id/rb_huodong"
+                android:layout_marginRight="15dp"
+                android:text="活动"
+                android:layout_width="75dp"
+                android:layout_height="25dp" />
+            <RadioButton
+                android:button="@null"
+                android:background="@drawable/selector_search_choose_type"
+                android:textColor="@color/selector_search_choose_type_color"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:id="@+id/rb_video"
+                android:text="视频"
+                android:layout_width="75dp"
+                android:layout_height="25sp" />
+        </RadioGroup>
+    </LinearLayout>
     <com.czp.searchmlist.mSearchLayout
         android:id="@+id/mSearch"
         android:layout_width="match_parent"

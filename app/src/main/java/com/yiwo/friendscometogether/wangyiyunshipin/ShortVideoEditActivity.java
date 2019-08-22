@@ -48,6 +48,7 @@ import com.netease.transcoding.player.MediaPlayerAPI;
 import com.netease.vcloud.video.effect.VideoEffect;
 import com.netease.vcloud.video.render.NeteaseView;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.model.MediaCaptureOptions;
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.videoprocess.VideoProcessController;
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.videoprocess.model.VideoProcessOptions;
@@ -233,6 +234,7 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
     private RelativeLayout rl_edt_world;
     private ViewGroup subsectionCircleLayout;
 
+    private SpImp spImp ;
     private MediaPlayer mediaPlayer;
     public static void startActivityForResult(Context context, List<String> pathList,
                                               float totalTime, MediaCaptureOptions mediaCaptureOptions) {
@@ -247,6 +249,7 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        spImp = new SpImp(ShortVideoEditActivity.this);
         initData();
         updateUI();
         initMusicPlayer();
@@ -440,7 +443,7 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
             @Override
             public void onClick(View v) {
 //                showNameDialog();
-                displayName = "友记视频" + TimeUtil.getMonthTimeString(System.currentTimeMillis());
+                displayName = "友记视频:" + spImp.getUID()+"-"+TimeUtil.getMonthTimeString(System.currentTimeMillis());
                 videoView.setVisibility(View.GONE);
                 editRoot.setVisibility(View.GONE);
                 DialogMaker.showProgressDialog(ShortVideoEditActivity.this, "");

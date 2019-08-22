@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.RadioGroup;
 
 import com.czp.searchmlist.mSearchLayout;
 import com.google.gson.Gson;
@@ -32,6 +33,8 @@ public class SearchActivity extends BaseActivity {
     private Unbinder unbinder;
     @BindView(R.id.mSearch)
     mSearchLayout mSearch;
+    @BindView(R.id.rg)
+    RadioGroup radioGroup;
     //热门搜索数据
     String shareHotData = "日月潭,卢步坡,太阳岛";
     List skillHots = Arrays.asList(shareHotData.split(","));
@@ -39,7 +42,7 @@ public class SearchActivity extends BaseActivity {
     String shareData = "";
     List skills;
 
-    private String type;
+    private String type;//0,友聚活动，1友记文章,2视频
 
     private List<String> list;
 
@@ -54,7 +57,22 @@ public class SearchActivity extends BaseActivity {
         spImp = new SpImp(SearchActivity.this);
 
         initData();
-
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.rb_huodong:
+                        type = "0";
+                        break;
+                    case R.id.rb_youji:
+                        type = "1";
+                        break;
+                    case R.id.rb_video:
+                        type = "2";
+                        break;
+                }
+            }
+        });
     }
 
     private void initData() {

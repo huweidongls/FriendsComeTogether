@@ -32,8 +32,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.netease.nim.uikit.common.ui.dialog.EasyAlertDialogHelper;
-import com.netease.nim.uikit.common.util.storage.StorageType;
-import com.netease.nim.uikit.common.util.storage.StorageUtil;
 import com.netease.nim.uikit.common.util.sys.NetworkUtil;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -42,10 +40,8 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.network.NetConfig;
-import com.yiwo.friendscometogether.pages.VideoActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.FileUtils;
-import com.yiwo.friendscometogether.utils.InsertMediaToSystem;
 import com.yiwo.friendscometogether.wangyiyunshipin.TakeVideoFragment_new;
 import com.yiwo.friendscometogether.wangyiyunshipin.server.entity.AddVideoResponseEntity;
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.UploadState;
@@ -177,8 +173,8 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
 
         @Override
         public void afterTextChanged(Editable editable) {
-            tv_num.setText(temp.length()+"/200");
-            if(temp.length()>=200){
+            tv_num.setText(temp.length()+"/30");
+            if(temp.length()>=30){
                 Toast.makeText(UpLoadVideoActivity.this, "您输入的字数已经超过了限制", Toast.LENGTH_SHORT).show();
             }
         }

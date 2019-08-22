@@ -385,6 +385,7 @@ public class NetConfig {
     public  static String dataInfo = "action/ac_user/dataInfo";//传uid   返回 news消息数  day日期
     //友聚页面 要开始活动数量接口
     public static  String myWillBegin = "action/ac_user/myWillBegin";//要开始的活动数量   传uid用户id  返回 willBeginNum 活动个数
-
+    //个人信息开启恋爱模式 判断接口 action/ac_public/userSet   传userID
+    public static String userSet = "action/ac_public/userSet";
 
 }
