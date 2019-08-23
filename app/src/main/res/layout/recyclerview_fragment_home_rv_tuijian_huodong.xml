@@ -8,7 +8,7 @@
         android:layout_marginRight="30px"
         android:layout_marginBottom="5px"
         android:orientation="vertical"
-        android:id="@+id/rv_video"
+        android:id="@+id/ll"
         android:layout_width="300px"
         android:layout_height="wrap_content"
         android:visibility="visible">
@@ -24,7 +24,7 @@
             test:radius1="18px"
             />
         <TextView
-
+            android:maxLines="2"
             android:layout_marginTop="15px"
             android:id="@+id/tv_name"
             android:ellipsize="end"
@@ -41,32 +41,40 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <TextView
-                android:textColor="@color/white_ffffff"
-                android:paddingTop="3px"
-                android:paddingBottom="3px"
-                android:paddingRight="10px"
-                android:paddingLeft="10px"
-                android:textSize="25px"
-                android:text="#周末游"
+            <RelativeLayout
+                android:layout_marginRight="15px"
                 android:background="@drawable/bg_d84c37_30px"
-                android:layout_margin="3px"
-                android:id="@+id/tv_tab_1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:textColor="@color/white_ffffff"
-                android:paddingTop="3px"
-                android:paddingBottom="3px"
-                android:paddingRight="10px"
-                android:paddingLeft="10px"
-                android:textSize="25px"
-                android:text="#周末游"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginRight="20px"
+                    android:layout_marginBottom="5px"
+                    android:layout_marginTop="5px"
+                    android:layout_marginLeft="20px"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/white_ffffff"
+                    android:textSize="25px"
+                    android:text="#周末游"
+                    android:id="@+id/tv_tab_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <RelativeLayout
                 android:background="@drawable/bg_d84c37_30px"
-                android:layout_margin="3px"
-                android:id="@+id/tv_tab_2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginRight="20px"
+                    android:layout_marginBottom="5px"
+                    android:layout_marginTop="5px"
+                    android:layout_marginLeft="20px"
+                    android:textColor="@color/white_ffffff"
+                    android:textSize="25px"
+                    android:text="#周末游"
+                    android:id="@+id/tv_tab_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 

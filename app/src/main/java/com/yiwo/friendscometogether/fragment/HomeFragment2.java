@@ -472,6 +472,16 @@ public class HomeFragment2 extends BaseFragment {
                                                     mlist1_youju.addAll(model.getObj().getActivity());
                                                     adapter1_1.notifyDataSetChanged();
                                                     adapter1_2.notifyDataSetChanged();
+                                                    if (mlist1_youju.size()>0){
+                                                        tv_text_youju.setVisibility(View.VISIBLE);
+                                                    }else {
+                                                        tv_text_youju.setVisibility(View.GONE);
+                                                    }
+                                                    if (mList1.size()>0){
+                                                        tv_text_youji.setVisibility(View.VISIBLE);
+                                                    }else {
+                                                        tv_text_youji.setVisibility(View.GONE);
+                                                    }
                                                     page1++;
                                                 }
                                                 refreshLayout.finishLoadMore(1000);
@@ -717,8 +727,16 @@ public class HomeFragment2 extends BaseFragment {
                                 manager2.setOrientation(LinearLayoutManager.HORIZONTAL);
                                 recyclerView1_2.setLayoutManager(manager2);
                                 recyclerView1_2.setAdapter(adapter1_2);
-                                tv_text_youji.setVisibility(View.VISIBLE);
-                                tv_text_youju.setVisibility(View.VISIBLE);
+                                if (mlist1_youju.size()>0){
+                                    tv_text_youju.setVisibility(View.VISIBLE);
+                                }else {
+                                    tv_text_youju.setVisibility(View.GONE);
+                                }
+                                if (mList1.size()>0){
+                                    tv_text_youji.setVisibility(View.VISIBLE);
+                                }else {
+                                    tv_text_youji.setVisibility(View.GONE);
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -1003,7 +1021,7 @@ public class HomeFragment2 extends BaseFragment {
         switch (type){
             case "1":
                 ViseHttp.POST(NetConfig.homeRecommend)
-                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.newHomeData))
+                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeRecommend))
                         .addParam("uid", uid)
                         .addParam("city", cityName)
                         .request(new ACallback<String>() {
@@ -1022,6 +1040,16 @@ public class HomeFragment2 extends BaseFragment {
                                         mlist1_youju.addAll(model.getObj().getActivity());
                                         adapter1_1.notifyDataSetChanged();
                                         adapter1_2.notifyDataSetChanged();
+                                        if (mlist1_youju.size()>0){
+                                            tv_text_youju.setVisibility(View.VISIBLE);
+                                        }else {
+                                            tv_text_youju.setVisibility(View.GONE);
+                                        }
+                                        if (mList1.size()>0){
+                                            tv_text_youji.setVisibility(View.VISIBLE);
+                                        }else {
+                                            tv_text_youji.setVisibility(View.GONE);
+                                        }
                                         page1 = 2;
                                     }
                                     WeiboDialogUtils.closeDialog(dialog_loading);
@@ -1196,6 +1224,16 @@ public class HomeFragment2 extends BaseFragment {
                                     mlist1_youju.addAll(model.getObj().getActivity());
                                     adapter1_1.notifyDataSetChanged();
                                     adapter1_2.notifyDataSetChanged();
+                                    if (mlist1_youju.size()>0){
+                                        tv_text_youju.setVisibility(View.VISIBLE);
+                                    }else {
+                                        tv_text_youju.setVisibility(View.GONE);
+                                    }
+                                    if (mList1.size()>0){
+                                        tv_text_youji.setVisibility(View.VISIBLE);
+                                    }else {
+                                        tv_text_youji.setVisibility(View.GONE);
+                                    }
                                 }
                                 WeiboDialogUtils.closeDialog(dialog_loading);
                             } catch (JSONException e) {
@@ -1233,6 +1271,16 @@ public class HomeFragment2 extends BaseFragment {
                                     mlist1_youju.addAll(model.getObj().getActivity());
                                     adapter1_1.notifyDataSetChanged();
                                     adapter1_2.notifyDataSetChanged();
+                                    if (mlist1_youju.size()>0){
+                                        tv_text_youju.setVisibility(View.VISIBLE);
+                                    }else {
+                                        tv_text_youju.setVisibility(View.GONE);
+                                    }
+                                    if (mList1.size()>0){
+                                        tv_text_youji.setVisibility(View.VISIBLE);
+                                    }else {
+                                        tv_text_youji.setVisibility(View.GONE);
+                                    }
                                 }
                                 WeiboDialogUtils.closeDialog(dialog_loading);
                             } catch (JSONException e) {
@@ -1270,6 +1318,16 @@ public class HomeFragment2 extends BaseFragment {
                                     mlist1_youju.addAll(model.getObj().getActivity());
                                     adapter1_1.notifyDataSetChanged();
                                     adapter1_2.notifyDataSetChanged();
+                                    if (mlist1_youju.size()>0){
+                                        tv_text_youju.setVisibility(View.VISIBLE);
+                                    }else {
+                                        tv_text_youju.setVisibility(View.GONE);
+                                    }
+                                    if (mList1.size()>0){
+                                        tv_text_youji.setVisibility(View.VISIBLE);
+                                    }else {
+                                        tv_text_youji.setVisibility(View.GONE);
+                                    }
                                 }
                                 WeiboDialogUtils.closeDialog(dialog_loading);
                             } catch (JSONException e) {

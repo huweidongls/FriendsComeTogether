@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <RelativeLayout
-                android:visibility="visible"
+                android:visibility="gone"
                 android:paddingTop="15px"
                 android:paddingBottom="15px"
                 android:paddingRight="40px"

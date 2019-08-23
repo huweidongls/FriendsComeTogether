@@ -30,6 +30,7 @@ public class OpenLoveDialog extends Dialog {
     private Context context;
     private OpenLoveTiaoJianModel model;
     private Listenner listenner;
+    private OpenLoveDialogRvAdapter adapter;
     public OpenLoveDialog(@NonNull Context context, OpenLoveTiaoJianModel model,Listenner listenner) {
         super(context);
         this.context = context;
@@ -58,7 +59,20 @@ public class OpenLoveDialog extends Dialog {
         tvContent.setText(model.getObj().getInfo());
         LinearLayoutManager manager = new LinearLayoutManager(context);
         rv.setLayoutManager(manager);
-        rv.setAdapter(new OpenLoveDialogRvAdapter(model.getObj().getItem()));
+        adapter = new OpenLoveDialogRvAdapter(model.getObj().getItem());
+        adapter.setListionner(new OpenLoveDialogRvAdapter.OnClickJumpListionner() {
+            @Override
+            public void startShiMing() {
+                dismiss();
+            }
+
+            @Override
+            public void startBiaoqian() {
+                dismiss();
+            }
+        });
+        rv.setAdapter(adapter);
+
         if (model.getObj().getStart().equals("0")){
             btnOpen.setVisibility(View.GONE);
         }

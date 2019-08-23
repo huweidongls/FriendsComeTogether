@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -93,6 +94,33 @@ public class HomeDataRecommendAdapter2 extends RecyclerView.Adapter<HomeDataReco
                 holder.tvLab2.setVisibility(View.GONE);
             }
             Glide.with(context).load(data.get(position).getPfpic().get(0)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv);
+            holder.ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Intent intent = new Intent();
+                    if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
+                        intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
+                        intent.putExtra("pfID", data.get(position).getPfID());
+                        context.startActivity(intent);
+                    } else {
+                        LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(context, new LookPasswordDialog.SetPasswordListener() {
+                            @Override
+                            public boolean setActivityText(String s) {
+                                if (s.equals(data.get(position).getPfpwd())) {
+                                    intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
+                                    intent.putExtra("pfID", data.get(position).getPfID());
+                                    context.startActivity(intent);
+                                    return true;
+                                }else {
+                                    Toast.makeText(context,"密码错误",Toast.LENGTH_SHORT).show();
+                                    return false;
+                                }
+                            }
+                        });
+                        lookPasswordDialog.show();
+                    }
+                }
+            });
     }
 
     @Override
@@ -106,13 +134,14 @@ public class HomeDataRecommendAdapter2 extends RecyclerView.Adapter<HomeDataReco
         ImageView iv;
         TextView tvLab1;
         TextView tvLab2;
-
+        LinearLayout ll;
         public ViewHolder(View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
             tvLab1 = itemView.findViewById(R.id.tv_tab_1);
             tvLab2 = itemView.findViewById(R.id.tv_tab_2);
             iv = itemView.findViewById(R.id.iv);
+            ll = itemView.findViewById(R.id.ll);
         }
     }
 

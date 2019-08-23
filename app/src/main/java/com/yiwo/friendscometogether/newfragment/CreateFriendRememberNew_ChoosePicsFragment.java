@@ -140,7 +140,7 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
             }
         });
     }
-    @OnClick({R.id.tv,R.id.rl_next})
+    @OnClick({R.id.tv,R.id.rl_next,R.id.rl_back_text})
     public void OnCLick(View v){
         switch (v.getId()){
             case R.id.tv:
@@ -176,6 +176,9 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
                 intent.setClass(context, CreateFriendRememberActivity1.class);
                 context.startActivity(intent);
                 getActivity().finish();
+                break;
+            case R.id.rl_back_text:
+                    getActivity().finish();
                 break;
         }
     }

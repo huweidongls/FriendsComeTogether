@@ -37,7 +37,7 @@
                 android:id="@+id/rb_youji"
                 android:layout_marginRight="15dp"
                 android:gravity="center"
-                android:text="友记"
+                android:text="友记文章"
                 android:layout_width="75dp"
                 android:layout_height="25dp" />
             <RadioButton
@@ -48,7 +48,7 @@
                 android:gravity="center"
                 android:id="@+id/rb_huodong"
                 android:layout_marginRight="15dp"
-                android:text="活动"
+                android:text="友聚活动"
                 android:layout_width="75dp"
                 android:layout_height="25dp" />
             <RadioButton

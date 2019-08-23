@@ -81,9 +81,9 @@
                 <ImageView
                     android:layout_marginRight="20px"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/youjuitem_icon_huodong"
-                    android:layout_width="35px"
-                    android:layout_height="35px" />
+                    android:src="@mipmap/title"
+                    android:layout_width="45px"
+                    android:layout_height="45px" />
                 <TextView
                     android:layout_gravity="center_vertical"
                     android:id="@+id/tv_title"

@@ -147,14 +147,17 @@ public class PersonImpressionActivity extends BaseActivity {
                             JSONObject jsonObject = new JSONObject(data);
                             if (jsonObject.getInt("code") == 200){
                                 JSONObject jsonObject1 = jsonObject.getJSONObject("obj");
-                                if (jsonObject1.getString("status").equals("0")){
-                                    iv_heart.setImageResource(R.mipmap.xindong_border);
-                                    isHeart = false;
-                                }else if (jsonObject1.getString("status").equals("1")){
-                                    iv_heart.setImageResource(R.mipmap.xindong);
-                                    isHeart = true;
+                                if (jsonObject1.getString("openStatus").equals("1")){
+                                    rlXinDong.setVisibility(View.VISIBLE);
                                 }else {//未开启寻爱模式
                                     rlXinDong.setVisibility(View.GONE);
+                                }
+                                if (jsonObject1.getString("status").equals("0")){//没有对他心动
+                                    iv_heart.setImageResource(R.mipmap.xindong_border);
+                                    isHeart = false;
+                                }else if (jsonObject1.getString("status").equals("1")){//已经对他心动
+                                    iv_heart.setImageResource(R.mipmap.xindong);
+                                    isHeart = true;
                                 }
                             }
                         } catch (JSONException e) {
