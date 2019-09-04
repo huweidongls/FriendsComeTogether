@@ -4,6 +4,7 @@
     android:layout_height="120px"
     android:id="@+id/activity_editor_friend_together_rv_rl">
     <RelativeLayout
+        android:layout_marginLeft="20px"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <de.hdodenhof.circleimageview.CircleImageView
@@ -37,9 +38,11 @@
     </RelativeLayout>
 
     <View
+        android:layout_marginLeft="15px"
+        android:layout_marginRight="15px"
         android:layout_alignParentBottom="true"
-        android:background="@color/line"
+        android:background="#666666"
         android:layout_width="match_parent"
-        android:layout_height="5px"/>
+        android:layout_height="1px"/>
 
 </RelativeLayout>
