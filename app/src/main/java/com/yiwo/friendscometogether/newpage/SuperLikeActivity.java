@@ -134,7 +134,7 @@ public class SuperLikeActivity extends BaseActivity {
                                             tv_matching_text.setVisibility(View.GONE);
                                         } else {
                                             tv_matching_text.setVisibility(View.VISIBLE);
-                                            tv_matching_text.setText("没有找到和您匹配的瞳伴\n快去完善资料吧！");
+                                            tv_matching_text.setText("暂时没有找到和您匹配的人\n完善个人标签会增加匹配的几率哦！");
                                         }
                                         recyclerView.setLayoutManager(layoutManager);
                                         superLikeAdapter = new SuperLikeAdapter(list_data);
@@ -153,7 +153,7 @@ public class SuperLikeActivity extends BaseActivity {
                                 dialogOfSearch.dismiss();
                                 toToast(context,"网络错误");
                                 tv_matching_text.setVisibility(View.VISIBLE);
-                                tv_matching_text.setText("没有找到和您匹配的瞳伴\n快去完善资料吧！");
+                                tv_matching_text.setText("暂时没有找到和您匹配的人\n完善个人标签会增加匹配的几率哦！");
                             }
                         });
             }

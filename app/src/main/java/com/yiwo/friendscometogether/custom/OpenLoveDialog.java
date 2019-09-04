@@ -79,18 +79,18 @@ public class OpenLoveDialog extends Dialog {
         btnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listenner.onOpen(OpenLoveDialog.this);
+                listenner.onOpen();
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listenner.onCanel(OpenLoveDialog.this);
+                listenner.onCanel();
             }
         });
     }
     public interface Listenner{
-        void onCanel(OpenLoveDialog dialog);
-        void onOpen(OpenLoveDialog dialog);
+        void onCanel();
+        void onOpen();
     }
 }

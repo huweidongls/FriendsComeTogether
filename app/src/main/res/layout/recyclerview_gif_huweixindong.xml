@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:id="@+id/iv_gif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_centerInParent="true"
+                android:id="@+id/ll_icon"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/huweixindong_icon_bg"
+                        android:layout_width="200px"
+                        android:layout_height="200px" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_centerInParent="true"
+                        android:id="@+id/iv_icon_mine"
+                        android:src="@mipmap/my_head"
+                        android:layout_width="150px"
+                        android:layout_height="150px" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_centerInParent="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/huweixindong_icon_bg"
+                        android:layout_width="200px"
+                        android:layout_height="200px" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_centerInParent="true"
+                        android:id="@+id/iv_icon_other"
+                        android:src="@mipmap/my_head"
+                        android:layout_width="150px"
+                        android:layout_height="150px" />
+                </RelativeLayout>
+            </LinearLayout>
+            <ImageView
+                android:src="@drawable/huweixindong_text"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="190px"
+                android:layout_height="80px" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100px"
+    android:layout_height="120px"
     android:id="@+id/activity_editor_friend_together_rv_rl">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:layout_toRightOf="@+id/iv_icon"
             android:layout_centerVertical="true"
             android:id="@+id/activity_editor_friend_together_rv_tv"
-            android:textSize="28px"
+            android:textSize="30px"
             android:textColor="@color/black_333333"
             android:text="子标题"
             android:layout_width="wrap_content"
@@ -40,6 +40,6 @@
         android:layout_alignParentBottom="true"
         android:background="@color/line"
         android:layout_width="match_parent"
-        android:layout_height="12px"/>
+        android:layout_height="5px"/>
 
 </RelativeLayout>

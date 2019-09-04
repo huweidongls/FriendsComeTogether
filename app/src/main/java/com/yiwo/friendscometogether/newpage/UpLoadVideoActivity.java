@@ -2,6 +2,7 @@ package com.yiwo.friendscometogether.newpage;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -72,7 +73,8 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
     private VideoItem videoItem;
     private String url_screenshot;
     private SpImp spImp;
-    private Dialog dialog;
+//    private Dialog dialog;
+    private ProgressDialog progressDialog;
     private PopupWindow popupWindow;
     public  static void startUpLoadVideoActivity(Context context,VideoItem videoItem,String url_screenshot){
         Intent intent = new Intent(context,UpLoadVideoActivity.class);
@@ -86,6 +88,7 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
         setContentView(R.layout.activity_up_load_video);
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(this);
+        progressDialog = new ProgressDialog(UpLoadVideoActivity.this);
         spImp = new SpImp(UpLoadVideoActivity.this);
         editText.addTextChangedListener(textTitleWatcher);
         videoItem = (VideoItem) getIntent().getSerializableExtra(TakeVideoFragment_new.EXTRA_VIDEO_ITEM);
@@ -144,7 +147,14 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
      * 调用上传接口，上传视频
      */
     private void doRealUpload(VideoItem videoItem) {
-        dialog = WeiboDialogUtils.createLoadingDialog(UpLoadVideoActivity.this,"正在上传...");
+//        dialog = WeiboDialogUtils.createLoadingDialog(UpLoadVideoActivity.this,"正在上传...");
+        progressDialog.setMessage("正在上传...");
+        progressDialog.setMax(100);
+        //ProgressDialog.STYLE_SPINNER  默认进度条是转圈
+        //ProgressDialog.STYLE_HORIZONTAL  横向进度条
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.show();
+        progressDialog.setCancelable(false);
         Log.d("asdasdsd:",";;;doRealUpload");
         videoItem.setType(UploadType.SHORT_VIDEO);
         videoItem.setState(UploadState.STATE_WAIT);
@@ -197,12 +207,13 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
 
     @Override
     public void updateUploadState(int state) {
-
+        Log.d("aaaashangchuanSTATE::",state+"");
     }
 
     @Override
     public void updateItemProgress(String id, int progress, int state) {
-
+        Log.d("aaaashangchuanSTATE::",state+"");
+        progressDialog.setProgress(progress);
     }
 
     @Override
@@ -217,8 +228,9 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
 
     @Override
     public void onAddVideoResult(int code, String id, AddVideoResponseEntity addVideoResponseEntity) {
-        Log.d("asdasdsd",code+"////  "+addVideoResponseEntity.getVideoInfoEntity().getSnapshotUrl());
-        WeiboDialogUtils.closeDialog(dialog);
+        Log.d("asdasdsd",code+"////  "+addVideoResponseEntity.getVideoInfoEntity().getSnapshotUrl()+"//vid:::"+addVideoResponseEntity.getVideoInfoEntity().getVid());
+//        WeiboDialogUtils.closeDialog(dialog);
+        progressDialog.dismiss();
         if (code == 200){
 //            if (addVideoResponseEntity.getVideoInfoEntity()!=null){
 //                Log.d("asdasdsd",addVideoResponseEntity.getVideoInfoEntity().getOrigUrl());
@@ -229,6 +241,7 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
                         .addParam("vname",editText.getText().toString())
                         .addParam("vurl",addVideoResponseEntity.getVideoInfoEntity().getOrigUrl())
                         .addParam("img",addVideoResponseEntity.getVideoInfoEntity().getSnapshotUrl())
+                        .addParam("wy_vid",addVideoResponseEntity.getVideoInfoEntity().getVid()+"")
                         .request(new ACallback<String>() {
                             @Override
                             public void onSuccess(String data) {

@@ -177,6 +177,7 @@
         <activity android:name=".pages.MyDraftActivity" />
         <activity android:name=".pages.CreateFriendRememberActivity" />
         <activity android:name=".newpage.CreateFriendRememberActivity1" />
+        <activity android:name=".newpage.SuoShuHuoDongActivity" />
         <activity
             android:name="com.donkingliang.imageselector.ImageSelectorActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

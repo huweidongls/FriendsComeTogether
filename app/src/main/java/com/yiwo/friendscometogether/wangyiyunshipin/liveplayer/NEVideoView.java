@@ -23,6 +23,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -100,7 +101,7 @@ public class NEVideoView extends SurfaceView {
     }
 
     public void setVideoScalingMode(int videoScalingMode) {
-        //Log.d("zhukun", "in setVideoMode myVideoWidth:" + mVideoWidth +"height"+ mVideoHeight);
+        Log.d("zhukun", "in setVideoMode myVideoWidth:" + mVideoWidth +"height"+ mVideoHeight);
         LayoutParams layPara = getLayoutParams();
         int winWidth = 0;
         int winHeight = 0;

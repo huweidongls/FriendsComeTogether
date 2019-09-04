@@ -7,7 +7,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/black">
+        android:background="@color/red_d84c37">
 
         <TextView
             android:id="@+id/back_btn"
@@ -37,18 +37,19 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@mipmap/blue_btn_normal"
+            android:background="@drawable/bg_white_30px_border"
             android:gravity="center"
             android:text="完成"
-            android:textColor="@color/color_blue_FF2084FF"
+            android:textColor="@color/white_ffffff"
             android:textSize="14sp" />
     </RelativeLayout>
 
     <com.netease.vcloud.video.render.NeteaseView
+        android:layout_centerInParent="true"
         android:id="@+id/video_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar" />
+         />
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -2,9 +2,12 @@ package com.yiwo.friendscometogether.wangyiyunshipin.upload.model;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.netease.nim.uikit.common.util.sys.TimeUtil;
 import com.yiwo.friendscometogether.wangyiyunshipin.upload.VideoUtils;
@@ -64,25 +67,26 @@ public class VideoGalleryDataAccessor {
 
                 video_column_index = videoCursor.getColumnIndexOrThrow(MediaStore.Video.VideoColumns.DISPLAY_NAME);
                 videoItem.setDisplayName(videoCursor.getString(video_column_index));
-
+                Log.d("d导入视频的名字：",videoCursor.getString(video_column_index)+"");
                 video_column_index = videoCursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
-                videoItem.setFilePath(videoCursor.getString(video_column_index));
+                String path = videoCursor.getString(video_column_index);
+//                Log.d("d导入视频的宽//gao：",wVideo+"////"+hVideo);
+                videoItem.setFilePath(path);
 
                 video_column_index = videoCursor.getColumnIndexOrThrow(MediaStore.Video.VideoColumns.DURATION);
                 long duration = videoCursor.getLong(video_column_index);
                 if (duration > 0) {
                     videoItem.setDuration(VideoUtils.getFormatDuration(duration));
                 }
-
                 video_column_index = videoCursor.getColumnIndexOrThrow(MediaStore.Video.VideoColumns.SIZE);
                 videoItem.setSize(videoCursor.getLong(video_column_index));
 
-                video_column_index = videoCursor.getColumnIndexOrThrow(MediaStore.MediaColumns.WIDTH);
+                video_column_index = videoCursor.getColumnIndexOrThrow(MediaStore.Video.VideoColumns.WIDTH);
                 videoItem.setWidth(videoCursor.getLong(video_column_index));
-
-                video_column_index = videoCursor.getColumnIndexOrThrow(MediaStore.MediaColumns.HEIGHT);
+                Log.d("d导入视频的宽：",videoCursor.getLong(video_column_index)+"");
+                video_column_index = videoCursor.getColumnIndexOrThrow(MediaStore.Video.VideoColumns.HEIGHT);
                 videoItem.setHeight(videoCursor.getLong(video_column_index));
-
+                Log.d("d导入视频的高：",videoCursor.getLong(video_column_index)+"");
                 video_column_index = videoCursor.getColumnIndexOrThrow(MediaStore.Video.VideoColumns.DATE_TAKEN);
                 calendar.setTimeInMillis(videoCursor.getLong(video_column_index));
                 videoItem.setDateTaken(calendar.get(Calendar.YEAR) + "." + (calendar.get(Calendar.MONTH) < 10 ? "0" + calendar.get(Calendar.MONTH) : calendar.get(Calendar.MONTH)));
@@ -187,6 +191,7 @@ public class VideoGalleryDataAccessor {
     }
 
     public void filterVideoByResolution(int width, int height) {
+        Log.d("asdasdasd","aaaaaaaaaa");
         Iterator<VideoItem> it = rawVideoItems.iterator();
         while(it.hasNext()) {
             VideoItem item = it.next();

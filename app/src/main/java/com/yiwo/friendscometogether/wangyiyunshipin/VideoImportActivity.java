@@ -10,6 +10,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.netease.nim.uikit.common.util.sys.TimeUtil;
 import com.netease.transcoding.TranscodingAPI;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.wangyiyunshipin.liveplayer.NEVideoView;
+import com.yiwo.friendscometogether.wangyiyunshipin.liveplayer.VideoConstant;
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.adapter.ShortVideoGalleryAdapter;
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.adapter.ThumbAdapter;
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.model.MediaCaptureOptions;
@@ -152,6 +154,20 @@ public class VideoImportActivity extends BaseActivity implements ShortVideoGalle
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             videoView.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+            Log.d("dizhidizhiaaaaaaa::",videoItem.getWidth()+"/////"+videoItem.getHeight());
+            if (videoItem.getHeight()==0||videoItem.getWidth() == 0){
+                MediaMetadataRetriever retr = new MediaMetadataRetriever();
+                retr.setDataSource(videoItem.getFilePath());
+                Bitmap bm = retr.getFrameAtTime();
+                long wVideo = bm.getWidth();
+                long hVideo = bm.getHeight();
+                Log.d("d导入视频的宽//gao：",wVideo+"////"+hVideo);
+                videoView.upDateVideoSize((int) wVideo,(int) hVideo,0,0);
+            }else {
+                videoView.upDateVideoSize((int) videoItem.getWidth(),(int) videoItem.getHeight(),0,0);
+            }
+//            videoView.upDateVideoSize((int) videoItem.getWidth(),(int) videoItem.getHeight(),0,0);
+            videoView.setVideoScalingMode(VideoConstant.VIDEO_SCALING_MODE_FILL_BLACK);
             videoView.getHolder().addCallback(new SurfaceHolder.Callback() {
                 @Override
                 public void surfaceCreated(SurfaceHolder holder) {
@@ -356,6 +372,7 @@ public class VideoImportActivity extends BaseActivity implements ShortVideoGalle
             videoProcessOptions.setCrop(cropPara);
             LogUtil.i(TAG, "crop para. width:720, height:1280");
         }
+//        videoProcessOptions.setCrop(null);
         LogUtil.i(TAG, "cut param. duration:" + duration + ", start:" + offset);
         videoProcessController.startCombination(videoProcessOptions);
     }

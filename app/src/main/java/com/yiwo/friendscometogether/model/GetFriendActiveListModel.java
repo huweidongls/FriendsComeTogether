@@ -1,5 +1,6 @@
 package com.yiwo.friendscometogether.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ public class GetFriendActiveListModel {
         this.obj = obj;
     }
 
-    public static class ObjBean {
+    public static class ObjBean implements Serializable {
         /**
          * pfID : 43
          * pftitle : 泰国深度5日游

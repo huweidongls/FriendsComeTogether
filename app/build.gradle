@@ -7,8 +7,8 @@ android {
         applicationId "com.yiwo.friendscometogether"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 35
-        versionName "3.5"
+        versionCode 36
+        versionName "3.6"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
@@ -147,6 +147,5 @@ dependencies {
     implementation files('libs/Livestreaming_v2.1.0.jar')
     implementation files('libs/NELivePlayer-1.3.0.jar')
     compile 'com.github.Jay-Goo:RangeSeekBar:v1.0.7'
-    implementation files('libs/Transcode-2.5.1.jar')
-    implementation files('libs/VideoEffect-3.1.1.jar')
+    implementation files('libs/Transcode-2.5.5.jar')
 }

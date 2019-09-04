@@ -93,7 +93,8 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
     private TextView countsText; // 分段数显示
     private ImageView takeCountsImage; // 分段数显示进度条
     private CircleProgressView circleProgressView; // 录制时间进度条
-
+    private RelativeLayout rl_action;//提示语
+    private ImageView iv_close;//关闭按钮；
     /**
      * 录制相关按钮
      */
@@ -267,8 +268,10 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
                 VideoImportActivity.startActivityForResult(getContext(),
                         videoCaptureParams.getTime() / videoCaptureParams.getCount(),
                         videoPathList.get(videoPathList.size() - 1));
+                rl_action.setVisibility(View.GONE);
                 break;
             case R.id.param_layout:
+                rl_action.setVisibility(View.GONE);
                 showParamSelectionLayout(true);
                 break;
             case R.id.param_wrapper_layout:
@@ -302,6 +305,9 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
                 // 完成按钮，释放faceu和mediaRecord
                 hasDone = true;
                 doneRecording();
+                break;
+            case R.id.iv_close:
+                getActivity().finish();
                 break;
         }
     }
@@ -404,6 +410,10 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
         countsText = view.findViewById(R.id.counts);
         takeCountsImage = view.findViewById(R.id.take_counts_image);
         circleProgressView = view.findViewById(R.id.progress_view);
+
+        rl_action = view.findViewById(R.id.rl_action);
+
+        iv_close = view.findViewById(R.id.iv_close);
 
         // 5.0以下，不支持hd
         if (Build.VERSION.SDK_INT < 21) {
@@ -516,6 +526,7 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
         previousBtn.setOnClickListener(this);
         importAddVideoBtn.setOnClickListener(this);
         finishBtn.setOnClickListener(this);
+        iv_close.setOnClickListener(this);
     }
     private void initVideoParams() {
         videoCaptureParams = new VideoCaptureParams(DEFAULT_VIDEO_COUNTS, DEFAULT_VIDEO_TIME, ResolutionType.HD);

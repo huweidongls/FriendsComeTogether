@@ -3,17 +3,27 @@ package com.yiwo.friendscometogether.newpage;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.google.gson.Gson;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -105,6 +115,8 @@ public class PersonImpressionActivity extends BaseActivity {
     private List<UserPersonImpressionModel.ObjBean> listUserLabel = new ArrayList<>();
     private PersonImpressonRvAdapter adapter;//评价按钮
     private ImpressionPersonAdapter adapter_person;//被评价的标签
+
+    private PopupWindow popupWindow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -473,6 +485,9 @@ public class PersonImpressionActivity extends BaseActivity {
                             if (jsonObject.getInt("code") == 200){
                                 isHeart = !isHeart;
                                 iv_heart.setImageResource(isHeart?R.mipmap.xindong:R.mipmap.xindong_border);
+                                if (jsonObject.getJSONObject("obj").getString("status").equals("1")){
+                                    showPopHuWeiXinDong(jsonObject.getJSONObject("obj").getString("myPic"),jsonObject.getJSONObject("obj").getString("pic"));
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -484,5 +499,59 @@ public class PersonImpressionActivity extends BaseActivity {
 
                     }
                 });
+    }
+    private void showPopHuWeiXinDong(String myIconUrl,String personIconUrl){
+        View view = getLayoutInflater().inflate(R.layout.recyclerview_gif_huweixindong,null);
+        ImageView iv_gif,iv_icon_mine,iv_icon_other;
+        RelativeLayout rl;
+        iv_gif = view.findViewById(R.id.iv_gif);
+        iv_icon_mine = view.findViewById(R.id.iv_icon_mine);
+        iv_icon_other = view.findViewById(R.id.iv_icon_other);
+        rl = view.findViewById(R.id.rl);
+        rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        Glide.with(PersonImpressionActivity.this).load(personIconUrl)
+                .apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_icon_other);
+        Glide.with(PersonImpressionActivity.this).load(myIconUrl)
+                .apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_icon_mine);
+        Glide.with(PersonImpressionActivity.this).asGif().load(R.drawable.huweixindong)
+                .listener(new RequestListener<GifDrawable>() {//设置动图显示一次
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(GifDrawable resource, Object model, Target<GifDrawable> target, DataSource dataSource, boolean isFirstResource) {
+                if (resource instanceof GifDrawable){
+                    resource.setLoopCount(2);
+                }
+                return false;
+            }
+        })
+            .into(iv_gif);
+        ScreenAdapterTools.getInstance().loadView(view);
+        popupWindow = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAtLocation(view, Gravity.TOP,0,0);
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.alpha = 0f;
+        getWindow().setAttributes(params);
+        popupWindow.update();
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            // 在dismiss中恢复透明度
+            public void onDismiss() {
+                WindowManager.LayoutParams params = getWindow().getAttributes();
+                params.alpha = 1f;
+                getWindow().setAttributes(params);
+            }
+        });
+
     }
 }

@@ -125,7 +125,7 @@ public class MyInformationActivity extends TakePhotoActivity {
 
 
     private Dialog dialog;
-
+    private OpenLoveDialog dialogOpen;
     private String woYaoLianAiType = "0";
 
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
@@ -405,13 +405,45 @@ public class MyInformationActivity extends TakePhotoActivity {
                 if (woYaoLianAiType.equals("0")){
                     showTiaoJianDialog();
                 }else {
-                    woYaoLianAiType = "0";
-                    iv_woyaolianai.setImageResource(R.mipmap.gerenxinxi_woyaolianai_kong);
+                    postLianAiType("0");
                 }
                 break;
         }
     }
+    //请求接口设置恋爱状态 0为关闭 1为开启
+    private void postLianAiType(final String type){
+        dialog = WeiboDialogUtils.createLoadingDialog(MyInformationActivity.this,"");
+        ViseHttp.POST(NetConfig.changeType)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.changeType))
+                .addParam("uid",uid)
+                .addParam("type",type)//0关闭1开启
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                if (type.equals("0")){
+                                    iv_woyaolianai.setImageResource(R.mipmap.gerenxinxi_woyaolianai_kong);
+                                    woYaoLianAiType = "0";
+                                }else if (type.equals("1")){
+                                    woYaoLianAiType = "1";
+                                    iv_woyaolianai.setImageResource(R.mipmap.gerenxinxi_woyaolianai_xuanzhong);
+                                    dialogOpen.dismiss();
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        WeiboDialogUtils.closeDialog(dialog);
+                    }
 
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+                        WeiboDialogUtils.closeDialog(dialog);
+                    }
+                });
+    }
     private void showTiaoJianDialog() {
         dialog = WeiboDialogUtils.createLoadingDialog(MyInformationActivity.this,"");
         ViseHttp.POST(NetConfig.userSet)
@@ -426,20 +458,18 @@ public class MyInformationActivity extends TakePhotoActivity {
                             if (jsonObject.getInt("code") == 200){
                                 Gson gson = new Gson();
                                 OpenLoveTiaoJianModel model = gson.fromJson(data,OpenLoveTiaoJianModel.class);
-                                final OpenLoveDialog dialog = new OpenLoveDialog(MyInformationActivity.this, model, new OpenLoveDialog.Listenner() {
+                                 dialogOpen = new OpenLoveDialog(MyInformationActivity.this, model, new OpenLoveDialog.Listenner() {
                                     @Override
-                                    public void onCanel(OpenLoveDialog dialog1) {
-                                        dialog1.dismiss();
+                                    public void onCanel() {
+                                        dialogOpen.dismiss();
                                     }
 
                                     @Override
-                                    public void onOpen(OpenLoveDialog dialog1) {
-                                        woYaoLianAiType = "1";
-                                        iv_woyaolianai.setImageResource(R.mipmap.gerenxinxi_woyaolianai_xuanzhong);
-                                        dialog1.dismiss();
+                                    public void onOpen() {
+                                        postLianAiType("1");
                                     }
                                 });
-                                dialog.show();
+                                dialogOpen.show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

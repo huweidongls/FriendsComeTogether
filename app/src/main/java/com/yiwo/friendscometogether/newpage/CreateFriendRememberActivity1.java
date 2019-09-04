@@ -57,6 +57,7 @@ import com.yiwo.friendscometogether.model.UserReleaseModel;
 import com.yiwo.friendscometogether.network.ActivityConfig;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.pages.CityActivity;
+import com.yiwo.friendscometogether.pages.CreateFriendRememberActivity;
 import com.yiwo.friendscometogether.pages.CreateIntercalationActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.GetJsonDataUtil;
@@ -69,6 +70,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -173,6 +175,7 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
     private static final int REQUEST_CODE = 0x00000011;
     private static final int REQUEST_CODE1 = 0x00000012;
     private static final int REQUEST_CODE_GET_CITY = 1;
+    private static final int REQUEST_CODE_SUO_SHU_HUO_DONG = 2;
     private List<File> files = new ArrayList<>();
 
     /**
@@ -469,7 +472,7 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
 //                pvOptions.show();
                 Intent it = new Intent(CreateFriendRememberActivity1.this, CityActivity.class);
                 it.putExtra(ActivityConfig.ACTIVITY, "createYouJi");
-                startActivityForResult(it, 1);
+                startActivityForResult(it, REQUEST_CODE_GET_CITY);
                 break;
             case R.id.activity_create_friend_remember_rl_price:
 
@@ -580,38 +583,9 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
             case R.id.activity_create_friend_remember_rl_active_title:
                 //活动标题
                 if(activeList.size()>0){
-                    AlertDialog.Builder singleChoiceDialog1 =
-                            new AlertDialog.Builder(CreateFriendRememberActivity1.this);
-                    singleChoiceDialog1.setTitle("请选择活动标题");
-                    // 第二个参数是默认选项，此处设置为0
-                    singleChoiceDialog1.setSingleChoiceItems(activeName, 0,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    yourChoiceActiveName = activeName[which];
-                                    yourChoiceActiveId = activeId[which];
-                                }
-                            });
-                    singleChoiceDialog1.setPositiveButton("确定",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    if (TextUtils.isEmpty(yourChoiceActiveName)) {
-                                        tvActiveTitle.setText(activeName[0]);
-                                        yourChoiceActiveId = activeId[0];
-                                    } else {
-                                        tvActiveTitle.setText(yourChoiceActiveName);
-                                        yourChoiceActiveName = "";
-                                    }
-                                }
-                            });
-                    singleChoiceDialog1.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    singleChoiceDialog1.show();
+                    Intent it_suoshu = new Intent(CreateFriendRememberActivity1.this, SuoShuHuoDongActivity.class);
+                    it_suoshu.putExtra("list", (Serializable) activeList);
+                    startActivityForResult(it_suoshu, REQUEST_CODE_SUO_SHU_HUO_DONG);
                 }else {
                     Toast.makeText(CreateFriendRememberActivity1.this, "暂无活动", Toast.LENGTH_SHORT).show();
                 }
@@ -716,6 +690,12 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
         } else if (requestCode == REQUEST_CODE_GET_CITY && resultCode == 3) {//国际城市
             String city = data.getStringExtra("city");
             tvCity.setText(city);
+        }
+        if (requestCode == REQUEST_CODE_SUO_SHU_HUO_DONG && resultCode == 1){
+            GetFriendActiveListModel.ObjBean bean = (GetFriendActiveListModel.ObjBean) data.getSerializableExtra("suoshuhuodong");
+            yourChoiceActiveName = bean.getPftitle();
+            yourChoiceActiveId = bean.getPfID();
+            tvActiveTitle.setText(yourChoiceActiveName);
         }
     }
 

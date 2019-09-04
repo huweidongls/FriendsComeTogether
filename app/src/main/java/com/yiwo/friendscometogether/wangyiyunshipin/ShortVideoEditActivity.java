@@ -12,6 +12,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
@@ -456,6 +457,18 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
 
     private void initVideoView() {
         videoView = findView(R.id.video_view);
+        videoView.asCenterInside();
+//        if (videoItem.getHeight()==0||videoItem.getWidth() == 0){
+//            MediaMetadataRetriever retr = new MediaMetadataRetriever();
+//            retr.setDataSource(videoItem.getFilePath());
+//            Bitmap bm = retr.getFrameAtTime();
+//            long wVideo = bm.getWidth();
+//            long hVideo = bm.getHeight();
+//            Log.d("d导入视频的宽//gao：",wVideo+"////"+hVideo);
+//            videoView.asCenterInside();
+//        }else {
+//            videoView.upDateVideoSize((int) videoItem.getWidth(),(int) videoItem.getHeight(),0,0);
+//        }
         arr = new String[pathList.size()];
         arr = pathList.toArray(arr);
         mPlayer = MediaPlayerAPI.getInstance();
@@ -927,7 +940,8 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
             layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         } else if (!redWordBtn.isEnabled()) {
             wordEdit.setGravity(Gravity.CENTER);
-            wordEdit.setBackgroundResource(R.mipmap.ic_red_edit);
+//            wordEdit.setBackgroundResource(R.mipmap.ic_red_edit);
+            wordEdit.setBackground(null);
             layoutParams.width = ScreenUtil.dip2px(250);
             layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         } else if (!bubbleWordBtn.isEnabled()) {

@@ -53,7 +53,7 @@
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="250px"
-                android:text="没有找到和您匹配的瞳伴\n快去完善资料吧！"
+                android:text="暂时没有找到和您匹配的人\完善个人标签会增加匹配的几率哦！"
                 android:textSize="36px"
                 android:lineSpacingExtra="20px"
                 android:textColor="@color/black_333333"
