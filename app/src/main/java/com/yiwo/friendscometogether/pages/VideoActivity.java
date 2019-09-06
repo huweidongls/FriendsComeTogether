@@ -81,6 +81,8 @@ import butterknife.OnClick;
 
 public class VideoActivity extends FragmentActivity {
 
+    @BindView(R.id.rl_back)
+    RelativeLayout rl_back;
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.player)
@@ -360,12 +362,15 @@ public class VideoActivity extends FragmentActivity {
         transaction.commit();
     }
 
-    @OnClick({R.id.iv_back, R.id.rl_active,R.id.iv_zan,R.id.iv_pinglun,R.id.iv_fenxiang,R.id.iv_xiangguanhuodong,R.id.iv_close,R.id.tv_comment})
+    @OnClick({R.id.iv_back, R.id.rl_active,R.id.iv_zan,R.id.iv_pinglun,R.id.iv_fenxiang,R.id.iv_xiangguanhuodong,R.id.iv_close,R.id.tv_comment,R.id.rl_back})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
             case R.id.iv_back:
-                onBackPressed();
+                finish();
+                break;
+            case R.id.rl_back:
+                finish();
                 break;
             case R.id.rl_active:
 //                showActivePopupwindow();
@@ -738,7 +743,7 @@ public class VideoActivity extends FragmentActivity {
         if (event.getAction() == MotionEvent.ACTION_DOWN&&ll_pinglun.isShown()&&!isTouchView(new View[]{ll_pinglun},event)){
             startPingLunHideAnim();
         }
-        if (event.getAction() == MotionEvent.ACTION_UP&&!isTouchView(new View[]{ll_btns,ivBack,rlActive},event)){
+        if (event.getAction() == MotionEvent.ACTION_UP&&!isTouchView(new View[]{ll_btns,ivBack,rlActive,rl_back},event)){
             LinearLayout bottomContainer = controller.findViewById(com.dueeeke.videocontroller.R.id.bottom_container);
 //            ll_btns.setVisibility(ll_btns.getVisibility() == View.VISIBLE ? View.GONE:View.VISIBLE);
 //            ivBack.setVisibility(ivBack.getVisibility() == View.VISIBLE ? View.GONE:View.VISIBLE);

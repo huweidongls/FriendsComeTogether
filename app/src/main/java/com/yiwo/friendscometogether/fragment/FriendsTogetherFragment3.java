@@ -101,6 +101,8 @@ public class FriendsTogetherFragment3 extends BaseFragment {
     RelativeLayout rl_myhuodong;
     @BindView(R.id.tv_daikaishi)
     TextView tvDaiKaiShi;
+    @BindView(R.id.iv_zanwu)
+    ImageView iv_zanwu;
     private List<FriendsTogethermodel.ObjBean> mList = new ArrayList<>() ;
     private CardAdapter adapter;
 
@@ -511,6 +513,7 @@ public class FriendsTogetherFragment3 extends BaseFragment {
 //                                    mList.addAll(tList);
 //                                }
                                 if (mList.size() > 0) {
+                                    iv_zanwu.setVisibility(View.GONE);
                                     bean = mList.get(0);
                                     if (bean.getFocusOn().equals("0")) {
                                         Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
@@ -519,6 +522,8 @@ public class FriendsTogetherFragment3 extends BaseFragment {
                                     }
                                     //关注数量
                                     initGuanzhuNum();
+                                }else {
+                                    iv_zanwu.setVisibility(View.VISIBLE);
                                 }
                                 if (isChangPing){
                                     ll_guanzhu_num.setVisibility(View.VISIBLE);
@@ -748,6 +753,10 @@ public class FriendsTogetherFragment3 extends BaseFragment {
 ////                                        mList.addAll(tList);
 ////                                    }
                                 if (mList.size() > 0) {
+                                    if (isChangPing){
+                                        ll_guanzhu_num.setVisibility(View.VISIBLE);
+                                    }
+                                    iv_zanwu.setVisibility(View.GONE);
                                     bean = mList.get(0);
                                     if (bean.getFocusOn().equals("0")) {
                                         Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
@@ -757,7 +766,9 @@ public class FriendsTogetherFragment3 extends BaseFragment {
                                     //关注数量
                                     initGuanzhuNum();
                                 } else {
+                                    ll_guanzhu_num.setVisibility(View.GONE);
                                     Glide.with(getContext()).load(R.mipmap.guanzhu128_g).into(ivFocus);
+                                    iv_zanwu.setVisibility(View.VISIBLE);
                                 }
 //                                    updateListView();
                                 WeiboDialogUtils.closeDialog(dialog);

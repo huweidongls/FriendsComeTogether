@@ -26,7 +26,6 @@ public class ActivityVideoAdapter extends RecyclerView.Adapter<ActivityVideoAdap
 
     private Context context;
     private List<VideoActiveModel.ObjBean> data;
-
     public ActivityVideoAdapter(List<VideoActiveModel.ObjBean> data) {
         this.data = data;
     }

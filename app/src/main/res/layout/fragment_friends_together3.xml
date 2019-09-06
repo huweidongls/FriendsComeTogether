@@ -161,7 +161,12 @@
         android:layout_above="@+id/rl_bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <ImageView
+            android:id="@+id/iv_zanwu"
+            android:src="@mipmap/zanwushuju"
+            android:layout_centerInParent="true"
+            android:layout_width="550px"
+            android:layout_height="wrap_content" />
         <RelativeLayout
             android:layout_centerVertical="true"
             android:layout_above="@+id/ll_guanzhu_num"

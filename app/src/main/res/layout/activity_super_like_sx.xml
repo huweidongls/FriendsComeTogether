@@ -185,6 +185,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:visibility="gone"
         android:layout_marginLeft="38px"
         android:layout_marginRight="90px"
         android:layout_marginTop="70px"
