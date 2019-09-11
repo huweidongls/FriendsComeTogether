@@ -181,11 +181,11 @@ public class HomeFragment2 extends BaseFragment {
     private HomeDataAdapter1 adapter2;//关注列表适配器
     private HomeListYouJiAdapter adapter3;//友记列表适配器
     private HomeListVideoAdapter adapter4;//视频列表适配器
-    private List<HomeDataModel1.ObjBean.ArticleBean> mList1;
-    private List<HomeDataModel1.ObjBean.ActivityBean> mlist1_youju;
-    private List<HomeDataModel.ObjBean> mList2;
-    private List<HomeDataModel.ObjBean> mList3;
-    private List<HomeVideoListModel.ObjBean> mList4;
+    private List<HomeDataModel1.ObjBean.ArticleBean> mList1 = new ArrayList<>();
+    private List<HomeDataModel1.ObjBean.ActivityBean> mlist1_youju = new ArrayList<>();
+    private List<HomeDataModel.ObjBean> mList2 = new ArrayList<>();
+    private List<HomeDataModel.ObjBean> mList3 = new ArrayList<>();
+    private List<HomeVideoListModel.ObjBean> mList4 = new ArrayList<>();
     private int page1 = 1;
     private int page2 = 1;
     private int page3 = 1;

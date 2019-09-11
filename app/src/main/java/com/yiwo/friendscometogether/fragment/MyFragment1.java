@@ -32,6 +32,7 @@ import com.yiwo.friendscometogether.newpage.MessageActivity;
 import com.yiwo.friendscometogether.newpage.MyContactActivity;
 import com.yiwo.friendscometogether.newpage.MyVideosActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
+import com.yiwo.friendscometogether.newpage.RenWuActivity;
 import com.yiwo.friendscometogether.newpage.SuperLikeActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.LookHistoryActivity;
@@ -370,8 +371,10 @@ public class MyFragment1 extends BaseFragment {
                 }
                 break;
             case R.id.iv_renwu:
-                intent.setClass(getContext(),RenWuWebActivity.class);
-                intent.putExtra("url",NetConfig.BaseUrl+NetConfig.gameList);
+//                intent.setClass(getContext(),RenWuWebActivity.class);
+//                intent.putExtra("url",NetConfig.BaseUrl+NetConfig.gameList);
+//                startActivity(intent);
+                intent.setClass(getContext(),RenWuActivity.class);
                 startActivity(intent);
                 break;
         }

@@ -49,23 +49,49 @@
 	    android:background="#e6e6e6"
 	    android:visibility="visible">
 
-		<TextView
-            android:id="@+id/picker_bottombar_preview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:background="@drawable/nim_picker_preview_btn_selector"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:paddingLeft="8dip"
-            android:paddingRight="8dip"
-            android:gravity="center"
-            android:text="@string/picker_image_preview"
-            android:textColor="@color/color_picker_preview_selector"
-            android:textSize="14.0sp"
-            android:visibility="visible" />
+		<!--<TextView-->
+            <!--android:id="@+id/picker_bottombar_preview"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:enabled="false"-->
+            <!--android:layout_marginLeft="10dip"-->
+            <!--android:layout_marginRight="10dip"-->
+            <!--android:background="@drawable/nim_picker_preview_btn_selector"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:paddingLeft="8dip"-->
+            <!--android:paddingRight="8dip"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/picker_image_preview"-->
+            <!--android:textColor="@color/color_picker_preview_selector"-->
+            <!--android:textSize="14.0sp"-->
+            <!--android:visibility="visible" />-->
+		<LinearLayout
+			android:enabled="false"
+			android:id="@+id/ll_yuantu"
+			android:layout_centerVertical="true"
+			android:orientation="horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+			<ImageButton
+				android:enabled="false"
+				android:id="@+id/iv_yuantu"
+				android:layout_width="wrap_content"
+				android:layout_height="fill_parent"
+				android:layout_marginLeft="10dp"
+				android:background="@null"
+				android:src="@drawable/nim_picker_orignal_normal" />
+
+			<TextView
+				android:id="@+id/tv_yuantu"
+				android:layout_width="wrap_content"
+				android:layout_height="fill_parent"
+				android:layout_marginLeft="7dp"
+				android:gravity="center_vertical"
+				android:text="@string/picker_image_preview_original"
+				android:textColor="#999999"
+				android:textSize="14sp" />
+		</LinearLayout>
 
 		<TextView
             android:id="@+id/picker_bottombar_select"

@@ -51,11 +51,13 @@ import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.model.CityModel;
 import com.yiwo.friendscometogether.model.GetFriendActiveListModel;
 import com.yiwo.friendscometogether.model.JsonBean;
+import com.yiwo.friendscometogether.model.NewUserIntercalationPicModel;
 import com.yiwo.friendscometogether.model.UserIntercalationPicModel;
 import com.yiwo.friendscometogether.model.UserLabelModel;
 import com.yiwo.friendscometogether.model.UserReleaseModel;
 import com.yiwo.friendscometogether.network.ActivityConfig;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newadapter.NewCreateFriendRemberIntercalationAdapter;
 import com.yiwo.friendscometogether.pages.CityActivity;
 import com.yiwo.friendscometogether.pages.CreateFriendRememberActivity;
 import com.yiwo.friendscometogether.pages.CreateIntercalationActivity;
@@ -159,8 +161,8 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
     @BindView(R.id.activity_create_intercalation_rv)
     RecyclerView recyclerView;
 
-    private IntercalationAdapter adapter;
-    private List<UserIntercalationPicModel> mList;
+    private NewCreateFriendRemberIntercalationAdapter adapter;
+    private List<NewUserIntercalationPicModel> mList;
 
     private int mYear;
     private int mMonth;
@@ -222,9 +224,16 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
         initDatePicker();
         initUpData();
         mList.clear();
-        for (String path:getIntent().getStringArrayListExtra("paths")){
-            Log.d("ddaad",path);
-            mList.add(new UserIntercalationPicModel(path,""));
+        List<String> list_path = getIntent().getStringArrayListExtra("paths");
+        for (int i = 0;i<list_path.size();i++){
+            Log.d("ddaad",list_path.get(i));
+            NewUserIntercalationPicModel model = new NewUserIntercalationPicModel(list_path.get(i),"");
+            if (i==0){
+                model.setFirstPic(true);
+            }else {
+                model.setFirstPic(false);
+            }
+            mList.add(model);
         }
         adapter.notifyDataSetChanged();
     }
@@ -240,10 +249,10 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
         LinearLayoutManager manager = new LinearLayoutManager(CreateFriendRememberActivity1.this);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(manager);
-        adapter = new IntercalationAdapter(mList);
+        adapter = new NewCreateFriendRemberIntercalationAdapter(mList);
         adapter.setDescribe(false);
         recyclerView.setAdapter(adapter);
-        adapter.setListener(new IntercalationAdapter.OnAddImgListener() {
+        adapter.setListener(new NewCreateFriendRemberIntercalationAdapter.OnAddImgListener() {
             @Override
             public void onAddImg() {
                 //限数量的多选(比喻最多9张)
@@ -254,17 +263,44 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
 //                        .setSelected(selected) // 把已选的图片传入默认选中。
                         .start(CreateFriendRememberActivity1.this, REQUEST_CODE1); // 打开相册
             }
-        }, new IntercalationAdapter.OnDeleteImgListener() {
+        }, new NewCreateFriendRemberIntercalationAdapter.OnDeleteImgListener() {
             @Override
             public void onDeleteImg(int i) {
                 mList.remove(i);
                 adapter.notifyDataSetChanged();
             }
-        }, new IntercalationAdapter.OnAddDescribeListener() {
+        }, new NewCreateFriendRemberIntercalationAdapter.OnAddDescribeListener() {
             @Override
             public void onAddDescribe(int i, String s) {
                 mList.get(i).setDescribe(s);
                 adapter.notifyDataSetChanged();
+            }
+        }, new NewCreateFriendRemberIntercalationAdapter.OnSetFirstPicListienner() {
+            @Override
+            public void onSetFirst(final int postion) {
+               final AlertDialog.Builder builder = new AlertDialog.Builder(CreateFriendRememberActivity1.this);
+               builder.setMessage("设置为首图？")
+                       .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+                               for (int i = 0; i<mList.size();i++){
+                                   if (i == postion){
+//                                       NewUserIntercalationPicModel model = mList.get(postion);
+//                                       model.setFirstPic(true);
+                                       mList.get(i).setFirstPic(true);
+                                   }else {
+                                       mList.get(i).setFirstPic(false);
+                                   }
+                               }
+                               adapter.notifyDataSetChanged();
+                           }
+                       })
+                       .setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                           }
+                       }).show();
             }
         });
 
@@ -677,7 +713,7 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
             List<String> pic = data.getStringArrayListExtra(ImageSelector.SELECT_RESULT);
             for (int i = 0; i < pic.size(); i++) {
                 Log.i("333", pic.get(i));
-                mList.add(new UserIntercalationPicModel(pic.get(i), ""));
+                mList.add(new NewUserIntercalationPicModel(pic.get(i), ""));
             }
             adapter.notifyDataSetChanged();
         }
@@ -916,38 +952,14 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
                 Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
                     @Override
                     public void subscribe(final ObservableEmitter<Map<String, File>> e) throws Exception {
-//                        File file = new File(images);
-//                        Luban.with(CreateFriendRememberActivity.this)
-//                                .load(images)
-//                                .ignoreBy(100)
-//                                .filter(new CompressionPredicate() {
-//                                    @Override
-//                                    public boolean apply(String path) {
-//                                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-//                                    }
-//                                })
-//                                .setCompressListener(new OnCompressListener() {
-//                                    @Override
-//                                    public void onStart() {
-//                                        // TODO 压缩开始前调用，可以在方法内启动 loading UI
-//                                    }
-//
-//                                    @Override
-//                                    public void onSuccess(File file) {
-//                                        // TODO 压缩成功后调用，返回压缩后的图片文件
-//                                        e.onNext(file);
-//                                    }
-//
-//                                    @Override
-//                                    public void onError(Throwable e) {
-//                                        // TODO 当压缩过程出现问题时调用
-//                                    }
-//                                }).launch();
-
                         final Map<String, File> map = new LinkedHashMap<>();
                         final List<String> list = new ArrayList<>();
                         for (int i = 0; i < mList.size(); i++) {
-                            list.add(mList.get(i).getPic());
+                            if (mList.get(i).getFirstPic()){
+                                list.add(0,mList.get(i).getPic());
+                            }else {
+                                list.add(mList.get(i).getPic());
+                            }
                         }
                         Luban.with(CreateFriendRememberActivity1.this)
                                 .load(list)

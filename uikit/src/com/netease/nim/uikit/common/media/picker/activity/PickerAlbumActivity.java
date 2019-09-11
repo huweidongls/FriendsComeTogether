@@ -3,9 +3,12 @@ package com.netease.nim.uikit.common.media.picker.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,6 +25,7 @@ import com.netease.nim.uikit.common.media.picker.loader.PickerImageLoader;
 import com.netease.nim.uikit.common.media.picker.model.AlbumInfo;
 import com.netease.nim.uikit.common.media.picker.model.PhotoInfo;
 import com.netease.nim.uikit.common.media.picker.model.PickerContract;
+import com.netease.nim.uikit.common.media.picker.util.PickerUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,17 +47,20 @@ public class PickerAlbumActivity extends UI implements OnAlbumItemClickListener,
 
     private RelativeLayout pickerBottomBar;
 
-    private TextView pickerPreview;
+//    private TextView pickerPreview;
 
+    private ImageView iv_yuantu;
+    private TextView tv_yuantu;
+    private LinearLayout ll_yuantu;
     private TextView pickerSend;
 
     private List<PhotoInfo> hasSelectList = new ArrayList<PhotoInfo>();
 
     private boolean isMutiMode;
 
-    private boolean isSupportOriginal;
+    private boolean isSupportOriginal;//支持原图
 
-    private boolean isSendOriginalImage;
+    private boolean isSendOriginalImage;//发送原图
 
     private int mutiSelectLimitSize;
 
@@ -93,8 +100,14 @@ public class PickerAlbumActivity extends UI implements OnAlbumItemClickListener,
         } else {
             pickerBottomBar.setVisibility(View.GONE);
         }
-        pickerPreview = (TextView) findViewById(R.id.picker_bottombar_preview);
-        pickerPreview.setOnClickListener(this);
+//        pickerPreview = (TextView) findViewById(R.id.picker_bottombar_preview);
+//        pickerPreview.setOnClickListener(this);
+        iv_yuantu = findViewById(R.id.iv_yuantu);
+        iv_yuantu.setOnClickListener(this);
+        tv_yuantu = findViewById(R.id.tv_yuantu);
+        ll_yuantu = findViewById(R.id.ll_yuantu);
+        ll_yuantu.setOnClickListener(this);
+
         pickerSend = (TextView) findViewById(R.id.picker_bottombar_select);
         pickerSend.setOnClickListener(this);
 
@@ -220,12 +233,16 @@ public class PickerAlbumActivity extends UI implements OnAlbumItemClickListener,
     private void updateSelectBtnStatus() {
         int selectSize = hasSelectList.size();
         if (selectSize > 0) {
-            pickerPreview.setEnabled(true);
+//            pickerPreview.setEnabled(true);
+            ll_yuantu.setEnabled(true);
+            iv_yuantu.setEnabled(true);
             pickerSend.setEnabled(true);
             pickerSend.setText(String.format(this.getResources().getString(
                     R.string.picker_image_send_select), selectSize));
         } else {
-            pickerPreview.setEnabled(false);
+//            pickerPreview.setEnabled(false);
+            ll_yuantu.setEnabled(false);
+            iv_yuantu.setEnabled(false);
             pickerSend.setEnabled(false);
             pickerSend.setText(R.string.picker_image_send);
         }
@@ -233,10 +250,30 @@ public class PickerAlbumActivity extends UI implements OnAlbumItemClickListener,
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.picker_bottombar_preview) {
-            PickerAlbumPreviewActivity.start(this, hasSelectList, 0, isSupportOriginal,
-                    isSendOriginalImage, hasSelectList, mutiSelectLimitSize);
-        } else if (v.getId() == R.id.picker_bottombar_select) {
+
+//        if (v.getId() == R.id.picker_bottombar_preview) {
+//            PickerAlbumPreviewActivity.start(this, hasSelectList, 0, isSupportOriginal,
+//                    isSendOriginalImage, hasSelectList, mutiSelectLimitSize);
+//            Log.d("aaassss",isSupportOriginal+"");
+//        } else
+        if (v.getId() == R.id.ll_yuantu || v.getId() == R.id.iv_yuantu){
+            if (!isSendOriginalImage){
+                long totalSize = 0;
+                for (int i = 0; i < hasSelectList.size(); i++) {
+                    PhotoInfo pi = hasSelectList.get(i);
+                    totalSize += pi.getSize();
+                }
+//                tv_yuantu.setText(String.format(this.getResources().getString(
+//                        R.string.picker_image_preview_original_select), PickerUtil.getFileSizeString(totalSize)));
+                iv_yuantu.setImageResource(R.drawable.nim_picker_orignal_checked);
+                isSendOriginalImage = true;
+            }else {
+//                tv_yuantu.setText(R.string.picker_image_preview_original);
+                iv_yuantu.setImageResource(R.drawable.nim_picker_orignal_normal);
+                isSendOriginalImage = false;
+
+            }
+        }else if (v.getId() == R.id.picker_bottombar_select) {
             setResult(RESULT_OK, PickerContract.makeDataIntent(hasSelectList, isSendOriginalImage));
             finish();
         }
@@ -270,6 +307,19 @@ public class PickerAlbumActivity extends UI implements OnAlbumItemClickListener,
                 if (data != null) {
                     // update photo fragment
                     isSendOriginalImage = data.getBooleanExtra(Extras.EXTRA_IS_ORIGINAL, false);
+                    if (isSendOriginalImage){
+                        long totalSize = 0;
+                        for (int i = 0; i < hasSelectList.size(); i++) {
+                            PhotoInfo pi = hasSelectList.get(i);
+                            totalSize += pi.getSize();
+                        }
+//                        tv_yuantu.setText(String.format(this.getResources().getString(
+//                                R.string.picker_image_preview_original_select), PickerUtil.getFileSizeString(totalSize)));
+                        iv_yuantu.setImageResource(R.drawable.nim_picker_orignal_checked);
+                    }else {
+//                        tv_yuantu.setText(R.string.picker_image_preview_original);
+                        iv_yuantu.setImageResource(R.drawable.nim_picker_orignal_normal);
+                    }
                     List<PhotoInfo> list = PickerContract.getPhotos(data);
                     if (photoFragment != null && list != null) {
                         photoFragment.updateGridview(list);

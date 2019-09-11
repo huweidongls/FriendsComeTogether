@@ -57,8 +57,8 @@ public class ChatFragment extends BaseFragment{
 
     @BindView(R.id.rl_my_friend)
     RelativeLayout rlMyFriend;
-    @BindView(R.id.refresh_layout)
-    RefreshLayout refreshLayout;
+//    @BindView(R.id.refresh_layout)
+//    RefreshLayout refreshLayout;
     private String account;
     private String token;
 
@@ -74,21 +74,21 @@ public class ChatFragment extends BaseFragment{
         ButterKnife.bind(this, rootView);
         spImp = new SpImp(getContext());
         refreshRecentContactsFragment();
-        initRefresh();
+//        initRefresh();
         return rootView;
     }
-
-    private void initRefresh() {
-        refreshLayout.setEnableLoadMore(false);
-        refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                refreshRecentContactsFragment();
-                refreshLayout.finishRefresh(1000);
-            }
-        });
-    }
+//
+//    private void initRefresh() {
+//        refreshLayout.setEnableLoadMore(false);
+//        refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
+//        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+//            @Override
+//            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+//                refreshRecentContactsFragment();
+//                refreshLayout.finishRefresh(1000);
+//            }
+//        });
+//    }
 
     public void refreshRecentContactsFragment() {
         RecentContactsFragment fragment = new RecentContactsFragment();
@@ -102,7 +102,15 @@ public class ChatFragment extends BaseFragment{
     public void onStart() {
         super.onStart();
         uid = spImp.getUID();
+//        refreshRecentContactsFragment();
     }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        refreshRecentContactsFragment();
+    }
+
     @OnClick({R.id.rl_my_friend})
     public void onClick(View view){
         Intent intent = new Intent();

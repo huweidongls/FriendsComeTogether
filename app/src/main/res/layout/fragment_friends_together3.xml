@@ -198,7 +198,7 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/iv_guanzhu_icon2"
                     android:layout_marginLeft="40px"
-                    android:src="@mipmap/zanwutupian"
+                    android:src="@mipmap/group_icon"
                     android:layout_width="110px"
                     android:layout_height="110px" />
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -220,14 +220,14 @@
                     android:id="@+id/tv_guanzhu_user_names"
                     android:textSize="32px"
                     android:textColor="@color/black_333333"
-                    android:text="19 mulala，dasd"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/tv_guanzhu_num"
                     android:textColor="@color/black_333333"
                     android:textSize="30px"
-                    android:text="等20人已经关注"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>

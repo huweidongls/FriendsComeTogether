@@ -323,9 +323,9 @@
         <activity android:name=".pages.SearchListActivity" />
         <activity
             android:name=".pages.VideoActivity"
-            android:windowSoftInputMode="adjustResize"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".pages.ModifyFriendRememberActivity" />
         <activity android:name=".pages.ModifyIntercalationActivity" />
 
@@ -548,7 +548,8 @@
         <!-- 云视频上传服务 -->
         <service android:name=".wangyiyunshipin.upload.controller.UploadService" />
 
-        <activity android:name=".newpage.MyVideosActivity"></activity>
+        <activity android:name=".newpage.MyVideosActivity" />
+        <activity android:name=".newpage.RenWuActivity"></activity>
     </application>
 
 </manifest>

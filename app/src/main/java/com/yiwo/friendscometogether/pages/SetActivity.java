@@ -108,7 +108,6 @@ public class SetActivity extends BaseActivity {
                                 NimUIKit.logout();
                                 MyApplication.getInstance().exit();
                                 NIMClient.getService(AuthService.class).logout();
-
                             }
                         });
                 dialog1.show();

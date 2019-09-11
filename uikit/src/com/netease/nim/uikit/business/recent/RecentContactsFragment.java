@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.RequestCallbackWrapper;
 import com.netease.nimlib.sdk.ResponseCode;
+import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
@@ -97,6 +99,11 @@ public class RecentContactsFragment extends TFragment {
         registerObservers(true);
         registerDropCompletedListener(true);
         registerOnlineStateChangeListener(true);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -366,10 +373,13 @@ public class RecentContactsFragment extends TFragment {
                     return;
                 }
                 // 查询最近联系人列表数据
+//                NIMClient.getService(AuthService.class).openLocalCache(NimUIKit.getAccount());
+                Log.d("网易云信:","账号："+NimUIKit.getAccount()+";;;");
                 NIMClient.getService(MsgService.class).queryRecentContacts().setCallback(new RequestCallbackWrapper<List<RecentContact>>() {
 
                     @Override
                     public void onResult(int code, List<RecentContact> recents, Throwable exception) {
+                        Log.d("网易云信：","huoqulianxiren "+code);
                         if (code != ResponseCode.RES_SUCCESS || recents == null) {
                             return;
                         }

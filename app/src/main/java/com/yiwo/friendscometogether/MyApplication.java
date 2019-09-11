@@ -15,12 +15,14 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Environment;
 import android.support.multidex.MultiDex;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
+import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.mixpush.MixPushConfig;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
@@ -239,14 +241,25 @@ public class MyApplication extends Application {
 
     // 如果已经存在用户登录信息，返回LoginInfo，否则返回null即可
     private LoginInfo loginInfo() {
-//        String account = spImp.getYXID();
-//        NimUIKit.loginSuccess(account);
-        LoginInfo loginInfo = (LoginInfo) spCache.get("LoginInfo");
-        if(loginInfo == null){
+        Log.d("getgetwangyitoken","aaaa|||"+spImp.getYXID()+"|||"+spImp.getYXTOKEN());
+        // 从本地读取上次登录成功时保存的用户登录信息
+        String account = spImp.getYXID();
+        String token = spImp.getYXTOKEN();
+
+        if (!TextUtils.isEmpty(account) && !TextUtils.isEmpty(token)) {
+            DemoCache.setAccount(account.toLowerCase());
+            return new LoginInfo(account, token);
+        } else {
             return null;
-        }else {
-            return loginInfo;
         }
+//        String account = spImp.getYXID();
+////        NimUIKit.loginSuccess(account);
+//        LoginInfo loginInfo = (LoginInfo) spCache.get("LoginInfo");
+//        if(loginInfo == null){
+//            return null;
+//        }else {
+//            return loginInfo;
+//        }
     }
     public DaoSession getDaoSession() {
         return this.mDaoSession;

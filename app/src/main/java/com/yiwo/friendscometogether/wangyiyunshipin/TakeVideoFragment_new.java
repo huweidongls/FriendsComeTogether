@@ -268,10 +268,10 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
                 VideoImportActivity.startActivityForResult(getContext(),
                         videoCaptureParams.getTime() / videoCaptureParams.getCount(),
                         videoPathList.get(videoPathList.size() - 1));
-                rl_action.setVisibility(View.GONE);
+//                rl_action.setVisibility(View.GONE);
                 break;
             case R.id.param_layout:
-                rl_action.setVisibility(View.GONE);
+//                rl_action.setVisibility(View.GONE);
                 showParamSelectionLayout(true);
                 break;
             case R.id.param_wrapper_layout:
