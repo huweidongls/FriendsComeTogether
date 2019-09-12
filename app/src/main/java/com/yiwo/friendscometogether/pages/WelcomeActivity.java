@@ -89,79 +89,79 @@ public class WelcomeActivity extends BaseActivity {
                     finish();
                 }
             }, 2000);
-//            if(!isNetworkAvailable(WelcomeActivity.this)){
-//                toToast(WelcomeActivity.this,"当前无网络");
-//                return;
-//            }
-//            LoginInfo info = new LoginInfo(account, token);
-////            LoginInfo info = new LoginInfo(account, "1112");
-//            RequestCallback<LoginInfo> callback =
-//                    new RequestCallback<LoginInfo>() {
-//
-//                        @Override
-//                        public void onSuccess(LoginInfo loginInfo) {
-//                            NimUIKit.loginSuccess(account);
-//                            NimUIKit.setAccount(account);
-//                            toToast(WelcomeActivity.this, "登录成功");
-//                            NimUIKit.setMsgForwardFilter(new MsgForwardFilter() {
-//                                @Override
-//                                public boolean shouldIgnore(IMMessage message) {
-//                                    return false;
-//                                }
-//                            });
-//                            NimUIKit.setMsgRevokeFilter(new MsgRevokeFilter() {
-//                                @Override
-//                                public boolean shouldIgnore(IMMessage message) {
-//                                    return false;
-//                                }
-//                            });
-//                            Intent intent = new Intent();
-//                            if(TextUtils.isEmpty(spImp.getYd())){
-//                                intent.setClass(WelcomeActivity.this, GuideActivity.class);
-//                                startActivity(intent);
-//                            }else {
+            if(!isNetworkAvailable(WelcomeActivity.this)){
+                toToast(WelcomeActivity.this,"当前无网络");
+                return;
+            }
+            LoginInfo info = new LoginInfo(account, token);
+//            LoginInfo info = new LoginInfo(account, "1112");
+            RequestCallback<LoginInfo> callback =
+                    new RequestCallback<LoginInfo>() {
+
+                        @Override
+                        public void onSuccess(LoginInfo loginInfo) {
+                            NimUIKit.loginSuccess(account);
+                            NimUIKit.setAccount(account);
+                            toToast(WelcomeActivity.this, "登录成功");
+                            NimUIKit.setMsgForwardFilter(new MsgForwardFilter() {
+                                @Override
+                                public boolean shouldIgnore(IMMessage message) {
+                                    return false;
+                                }
+                            });
+                            NimUIKit.setMsgRevokeFilter(new MsgRevokeFilter() {
+                                @Override
+                                public boolean shouldIgnore(IMMessage message) {
+                                    return false;
+                                }
+                            });
+                            Intent intent = new Intent();
+                            if(TextUtils.isEmpty(spImp.getYd())){
+                                intent.setClass(WelcomeActivity.this, GuideActivity.class);
+                                startActivity(intent);
+                            }else {
+                                intent.setClass(WelcomeActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                            finish();
+                        }
+
+                        @Override
+                        public void onFailed(int i) {
+                            Log.d("dsadsda","登录失败："+i);
+                            toToast(WelcomeActivity.this, "登录失败");
+                            Intent intent = new Intent();
+                            if(TextUtils.isEmpty(spImp.getYd())){
+                                intent.setClass(WelcomeActivity.this, GuideActivity.class);
+                                startActivity(intent);
+                            }else {
 //                                intent.setClass(WelcomeActivity.this, MainActivity.class);
-//                                startActivity(intent);
-//                            }
-//                            finish();
-//                        }
-//
-//                        @Override
-//                        public void onFailed(int i) {
-//                            Log.d("dsadsda","登录失败："+i);
-//                            toToast(WelcomeActivity.this, "登录失败");
-//                            Intent intent = new Intent();
-//                            if(TextUtils.isEmpty(spImp.getYd())){
-//                                intent.setClass(WelcomeActivity.this, GuideActivity.class);
-//                                startActivity(intent);
-//                            }else {
-////                                intent.setClass(WelcomeActivity.this, MainActivity.class);
-//                                spImp.setUID("0");
-//                                spImp.setYXID("0");
-//                                spImp.setYXTOKEN("0");
-//                                spCache.clear();
-//                                intent.setClass(WelcomeActivity.this, MainActivity.class);
-//                                startActivity(intent);
-//                            }
-//                            finish();
-//                        }
-//
-//                        @Override
-//                        public void onException(Throwable throwable) {
-//                            toToast(WelcomeActivity.this, "登录出错");
-//                            Intent intent = new Intent();
-//                            if(TextUtils.isEmpty(spImp.getYd())){
-//                                intent.setClass(WelcomeActivity.this, GuideActivity.class);
-//                                startActivity(intent);
-//                            }else {
-//                                intent.setClass(WelcomeActivity.this, MainActivity.class);
-//                                startActivity(intent);
-//                            }
-//                            finish();
-//                        }
-//                        // 可以在此保存LoginInfo到本地，下次启动APP做自动登录用
-//                    };
-//            NimUIKit.login(info,callback);
+                                spImp.setUID("0");
+                                spImp.setYXID("0");
+                                spImp.setYXTOKEN("0");
+                                spCache.clear();
+                                intent.setClass(WelcomeActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                            finish();
+                        }
+
+                        @Override
+                        public void onException(Throwable throwable) {
+                            toToast(WelcomeActivity.this, "登录出错");
+                            Intent intent = new Intent();
+                            if(TextUtils.isEmpty(spImp.getYd())){
+                                intent.setClass(WelcomeActivity.this, GuideActivity.class);
+                                startActivity(intent);
+                            }else {
+                                intent.setClass(WelcomeActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                            finish();
+                        }
+                        // 可以在此保存LoginInfo到本地，下次启动APP做自动登录用
+                    };
+            NimUIKit.login(info,callback);
 ////            NIMClient.getService(AuthService.class).login(info)
 ////                    .setCallback(callback);
         }

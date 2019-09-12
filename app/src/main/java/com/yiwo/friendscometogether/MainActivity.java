@@ -1,7 +1,9 @@
 package com.yiwo.friendscometogether;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -29,9 +31,15 @@ import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.model.session.SessionEventListener;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
+import com.netease.nimlib.sdk.StatusCode;
+import com.netease.nimlib.sdk.auth.AuthService;
+import com.netease.nimlib.sdk.auth.AuthServiceObserver;
+import com.netease.nimlib.sdk.auth.ClientType;
+import com.netease.nimlib.sdk.auth.OnlineClient;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
+import com.vise.xsnow.cache.SpCache;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.broadcastreceiver.MyGoPersonMainBroadcastReceiver;
 import com.yiwo.friendscometogether.broadcastreceiver.MyShenQingJinQunBroadcastReceiver;
@@ -52,6 +60,7 @@ import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivityNew;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.CreateFriendRememberActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
+import com.yiwo.friendscometogether.pages.SetActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.AppUpdateUtil;
 
@@ -129,6 +138,7 @@ public class MainActivity extends FragmentActivity {
 
     private SpImp spImp;
     private String uid = "";
+    private SpCache spCache;
     private String account = "";
 
     private ChatFragment fragmentChat;
@@ -142,6 +152,7 @@ public class MainActivity extends FragmentActivity {
         ButterKnife.bind(MainActivity.this);
         MyApplication.getInstance().addActivity(this);
         spImp = new SpImp(context);
+        spCache = new SpCache(MainActivity.this);
 //        account = spImp.getYXID();
 //        NimUIKit.loginSuccess(account);
         getPermissions();
@@ -149,7 +160,10 @@ public class MainActivity extends FragmentActivity {
         init();
         initSessionListener();
         registReceiver();
-        AppUpdateUtil.checkUpdate(context,true);
+    }
+    //网易多端登陆监听
+    private void observeOtherClientsListen() {
+
     }
 
     private void registReceiver() {

@@ -197,7 +197,7 @@ public class ModifyFriendRememberModel {
             private String id;
             private String fid;
             private String pic;
-
+            private String type = "0";//0 不是首图，1 是首图
             public FmpicBean(String id, String fid, String pic) {
                 this.id = id;
                 this.fid = fid;
@@ -226,6 +226,14 @@ public class ModifyFriendRememberModel {
 
             public void setPic(String pic) {
                 this.pic = pic;
+            }
+
+            public String getType() {
+                return type;
+            }
+
+            public void setType(String type) {
+                this.type = type;
             }
         }
     }

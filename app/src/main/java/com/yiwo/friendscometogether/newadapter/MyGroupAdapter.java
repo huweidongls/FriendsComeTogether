@@ -80,7 +80,7 @@ public class MyGroupAdapter extends RecyclerView.Adapter<MyGroupAdapter.ViewHold
     }
     private void team(String teamId) {
         String account = spImp.getYXID();
-        NimUIKit.setAccount(account);
+//        NimUIKit.setAccount(account);
         NimUIKit.startTeamSession(context, teamId);
     }
     public interface OnLongClickListenner{

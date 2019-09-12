@@ -71,5 +71,20 @@
         android:src="@mipmap/delete"
         android:layout_width="35px"
         android:layout_height="35px" />
+    <RelativeLayout
+        android:id="@+id/rl_is_first"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5px"
+        android:background="@drawable/bg_black_trans"
+        android:layout_width="50px"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_centerInParent="true"
+            android:textSize="20px"
+            android:textColor="@color/white_ffffff"
+            android:text="首图"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 
 </RelativeLayout>

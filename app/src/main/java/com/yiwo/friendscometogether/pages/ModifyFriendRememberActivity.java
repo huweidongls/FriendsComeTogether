@@ -52,6 +52,7 @@ import com.yiwo.friendscometogether.model.UserLabelModel;
 import com.yiwo.friendscometogether.network.ActivityConfig;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.NewIntercalationAdapter;
+import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivity1;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.GetJsonDataUtil;
 import com.yiwo.friendscometogether.utils.StringUtils;
@@ -181,6 +182,7 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
 
     private String password;
 
+    private int firstPicIndex = 0;
     /**
      * 是否替换图片，true为替换
      */
@@ -352,6 +354,11 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
 //                                    mList.add(new UserIntercalationPicModel(mOldList.get(i).getPic(), ""));
 //                                }
                                 mList = model.getObj().getFmpic();
+                                for (int i = 0;i<mList.size();i++){
+                                    if (mList.get(i).getType().equals("1")){
+                                        firstPicIndex = i ;
+                                    }
+                                }
                                 GridLayoutManager manager = new GridLayoutManager(ModifyFriendRememberActivity.this, 3);
                                 recyclerView.setLayoutManager(manager);
                                 adapter = new NewIntercalationAdapter(mList);
@@ -372,7 +379,7 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
                                     @Override
                                     public void onDeleteImg(int i) {
                                         ModifyFriendRememberModel.ObjBean.FmpicBean bean = mList.remove(i);
-                                        if(!TextUtils.isEmpty(bean.getId())){
+                                        if (!TextUtils.isEmpty(bean.getId())) {
                                             deleteid = deleteid + bean.getId() + ",";
                                         }
                                         adapter.notifyDataSetChanged();
@@ -381,6 +388,31 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
                                     @Override
                                     public void onAddDescribe(int i, String s) {
                                         adapter.notifyDataSetChanged();
+                                    }
+                                }, new NewIntercalationAdapter.OnSetFirstPicListienner() {
+                                    @Override
+                                    public void onSetFirst(final int postion) {
+                                        final AlertDialog.Builder builder = new AlertDialog.Builder(ModifyFriendRememberActivity.this);
+                                        builder.setMessage("设置为首图？")
+                                                .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        for (int i = 0; i<mList.size();i++){
+                                                            if (i == postion){
+                                                                mList.get(i).setType("1");
+                                                            }else {
+                                                                mList.get(i).setType("0");
+                                                            }
+                                                        }
+                                                        adapter.notifyDataSetChanged();
+                                                    }
+                                                })
+                                                .setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        dialog.dismiss();
+                                                    }
+                                                }).show();
                                     }
                                 });
 
@@ -575,7 +607,7 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
                     Toast.makeText(ModifyFriendRememberActivity.this, "请至少上传1张照片", Toast.LENGTH_SHORT).show();
                 }else if (TextUtils.isEmpty(tvCity.getText().toString())){
                     Toast.makeText(ModifyFriendRememberActivity.this, "请填写地点", Toast.LENGTH_SHORT).show();
-                }{
+                }else {
                     //判断如果填写开始时间和结束时间   结束时间必须大于开始时间
                     if (!tvTimeStart.getText().toString().equals("")&&!tvTimeEnd.getText().toString().equals("")){
                         if (StringUtils.getTimeCompareSize(tvTimeStart.getText().toString(),tvTimeEnd.getText().toString())==1){
@@ -817,6 +849,9 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
                     for (int i = 0; i<mList.size(); i++){
                         if(TextUtils.isEmpty(mList.get(i).getId())){
                             list.add(mList.get(i).getPic());
+                            if (mList.get(i).getType().equals("1")){
+                                firstPicIndex = i;
+                            }
                         }
                     }
                     Luban.with(ModifyFriendRememberActivity.this)
@@ -879,6 +914,7 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
                             .addParam("accesspassword", password)
                             .addParam("id", fmId)
                             .addParam("deleteid", deleteid)
+                            .addParam("first",firstPicIndex+"")
                             .addFiles(value)
                             .request(new ACallback<String>() {
                                 @Override
@@ -918,6 +954,11 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer);
         }else {
+            for (int i = 0;i<mList.size();i++){
+                if (mList.get(i).getType().equals("1")){
+                    firstPicIndex = i;
+                }
+            }
             ViseHttp.POST(NetConfig.saveFriendRememberUrl)
                     .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.saveFriendRememberUrl))
                     .addParam("fmtitle", etTitle.getText().toString())
@@ -932,6 +973,7 @@ public class ModifyFriendRememberActivity extends TakePhotoActivity {
                     .addParam("accesspassword", password)
                     .addParam("id", fmId)
                     .addParam("deleteid", deleteid)
+                    .addParam("first",firstPicIndex+"")
                     .request(new ACallback<String>() {
                         @Override
                         public void onSuccess(String data) {
