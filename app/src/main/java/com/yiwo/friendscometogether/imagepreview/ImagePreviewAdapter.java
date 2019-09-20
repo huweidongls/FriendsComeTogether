@@ -16,21 +16,23 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.FutureTarget;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.github.chrisbanes.photoview.PhotoView;
-import com.squareup.picasso.Picasso;
-import com.vise.utils.file.FileUtil;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.imagepreview.glideprogress.ProgressInterceptor;
+import com.yiwo.friendscometogether.imagepreview.glideprogress.ProgressListener;
 import com.yiwo.friendscometogether.utils.FileUtils;
 
 import java.io.File;
@@ -69,13 +71,33 @@ public class ImagePreviewAdapter extends PagerAdapter {
         image.setMaximumScale(10.0F);
         image.setMinimumScale(0.8F);
 
-        Glide.with(context).load(imageList.get(position)).apply(new RequestOptions().format(DecodeFormat.PREFER_ARGB_8888)//设置图片解码格式
-                .placeholder(R.mipmap.zanwutupian)).into(new SimpleTarget<Drawable>() {
+        ProgressInterceptor.addListener(imageList.get(position), new ProgressListener() {
+            @Override
+            public void onProgress(int progress) {
+                Log.d("IMAGEPREVIEW::", "onProgress: " + progress);
+            }
+        });
+
+        SimpleTarget<Drawable> simpleTarge = new SimpleTarget<Drawable>() {
             @Override
             public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
                 image.setImageDrawable(resource);
+                Log.d("IMAGEPREVIEW::", "onResourceReady: ");
+                ProgressInterceptor.removeListener(imageList.get(position));
             }
-        });
+
+            @Override
+            public void onStart() {
+                super.onStart();
+                Log.d("IMAGEPREVIEW::", "onStart: ");
+            }
+        };
+        Glide.with(context).load(imageList.get(position)).apply(new RequestOptions()
+//                .diskCacheStrategy(DiskCacheStrategy.NONE)//不使用缓存
+//                .skipMemoryCache(true)
+                .format(DecodeFormat.PREFER_ARGB_8888)//设置图片解码格式
+                .placeholder(R.mipmap.zanwutupian))
+                .into(image);
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -49,7 +49,9 @@ public class HomeListYouJiAdapter extends RecyclerView.Adapter<HomeListYouJiAdap
 //            ViewGroup.LayoutParams layoutParams = holder.rv_youji.getLayoutParams();
 //            layoutParams.height = 546;//获取最终图片高度
 //            holder.rv_youji.setLayoutParams(layoutParams);//应用高度到布局中
-        Glide.with(context).load(data.get(position).getPfpic().get(0)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_youji);
+        if (data.get(position).getPfpic().size()>=0){
+            Glide.with(context).load(data.get(position).getPfpic().get(0)).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_youji);
+        }
         holder.tvYoujiTitle.setText(data.get(position).getPftitle());
         Glide.with(context).load(data.get(position).getHeadportrait()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.ivAvatar);
         holder.ivAvatar.setOnClickListener(new View.OnClickListener() {

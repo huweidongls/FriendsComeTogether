@@ -37,8 +37,8 @@
                         android:layout_centerInParent="true"
                         android:id="@+id/iv_icon_mine"
                         android:src="@mipmap/my_head"
-                        android:layout_width="150px"
-                        android:layout_height="150px" />
+                        android:layout_width="167px"
+                        android:layout_height="167px" />
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -53,8 +53,8 @@
                         android:layout_centerInParent="true"
                         android:id="@+id/iv_icon_other"
                         android:src="@mipmap/my_head"
-                        android:layout_width="150px"
-                        android:layout_height="150px" />
+                        android:layout_width="167px"
+                        android:layout_height="167px" />
                 </RelativeLayout>
             </LinearLayout>
             <ImageView

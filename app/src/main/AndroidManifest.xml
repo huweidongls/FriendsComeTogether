@@ -549,7 +549,14 @@
         <service android:name=".wangyiyunshipin.upload.controller.UploadService" />
 
         <activity android:name=".newpage.MyVideosActivity" />
-        <activity android:name=".newpage.RenWuActivity"></activity>
+        <activity android:name=".newpage.RenWuActivity" />
+
+        <!-- &lt;!&ndash;Glide Glide能够识别我们自定义的MyGlideModule&ndash;&gt; -->
+        <!-- <meta-data -->
+        <!-- android:name="com.yiwo.friendscometogether.imagepreview.glideprogress.MyGlideModel" -->
+        <!-- android:value="GlideModule" /> -->
+        <activity android:name=".newpage.DuiZhangXuanZeHuoDongActivity" />
+        <activity android:name=".newpage.YouXiFenZuActivity"></activity>
     </application>
 
 </manifest>

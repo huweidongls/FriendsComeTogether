@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yiwo.friendscometogether.newpage.YouXiFenZuActivity">
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        style="@style/rl_top_bar">
+        <TextView
+            style="@style/tv_top_title"
+            android:text="队员分组" />
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView style="@style/iv_return" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_right_btn"
+            android:layout_alignParentRight="true"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+            <TextView
+                android:textColor="@color/white_ffffff"
+                android:textSize="32px"
+                android:text="分组"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_above="@+id/tv_add_group"
+        android:layout_below="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="10px"
+                    android:id="@+id/rv_all_person"
+                    android:layout_width="match_parent"
+                    android:layout_height="450px"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+    <TextView
+        android:textSize="35px"
+        android:textColor="@color/white_ffffff"
+        android:gravity="center"
+        android:background="@color/red_d84c37"
+        android:id="@+id/tv_add_group"
+        android:layout_alignParentBottom="true"
+        android:text="添加分组"
+        android:layout_width="match_parent"
+        android:layout_height="100px" />
+</RelativeLayout>

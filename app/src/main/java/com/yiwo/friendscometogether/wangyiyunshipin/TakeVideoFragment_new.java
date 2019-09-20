@@ -589,6 +589,7 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
     }
     private void showParamSelectionLayout(boolean isShow) {
         paramWrapperLayout.setVisibility(isShow ? View.VISIBLE : View.GONE);
+        rl_action.setVisibility(isShow? View.GONE:View.VISIBLE);
     }
     private void doneRecording() {
         if (mediaCaptureController != null) {

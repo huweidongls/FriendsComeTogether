@@ -29,20 +29,36 @@
         android:background="@mipmap/renwu_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/tv_text_duizhangrenwu"
+        <LinearLayout
             android:layout_marginTop="150px"
-            android:textSize="100px"
-            android:textColor="@color/black_333333"
-            android:layout_centerHorizontal="true"
-            android:text="队 长 任 务"
+            android:layout_marginLeft="120px"
+            android:layout_marginRight="20px"
+            android:id="@+id/ll_yixuan_huodong"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+            <TextView
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:id="@+id/tv_yi_xuan_huodong"
+                android:textSize="40px"
+                android:textColor="@color/black_333333"
+                android:text="请选择活动"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="@color/black_333333"
+                android:textSize="30px"
+                android:id="@+id/tv_yi_xuan_qishu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
             android:layout_marginLeft="120px"
-            android:layout_marginTop="80px"
-            android:layout_below="@+id/tv_text_duizhangrenwu"
+            android:layout_marginRight="120px"
+            android:layout_marginTop="20px"
+            android:layout_below="@+id/ll_yixuan_huodong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -166,6 +182,27 @@
                     android:layout_gravity="center_vertical"
                     android:textColor="@color/black_333333"
                     android:text="知识问答"
+                    android:layout_marginLeft="30px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_7"
+                android:paddingRight="50px"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/renwu_point"
+                    android:layout_width="18px"
+                    android:layout_height="18px" />
+                <TextView
+                    android:textSize="40px"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black_333333"
+                    android:text="游戏"
                     android:layout_marginLeft="30px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />

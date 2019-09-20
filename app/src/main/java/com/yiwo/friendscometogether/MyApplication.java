@@ -75,7 +75,7 @@ public class MyApplication extends Application {
 
     public static String genPath;
 //    //数据库
-    private DaoMaster.DevOpenHelper mHelper;
+    private MigrationHelper mHelper;
     private SQLiteDatabase db;
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
@@ -275,7 +275,7 @@ public class MyApplication extends Application {
 //    所以，在正式的项目中，你还应该做一层封装，来实现数据库的安全升级。
 //        此处sport-db表示数据库名称 可以任意填写
         // 注意：该数据库连接属于 DaoMaster，所以多个 Session 指的是相同的数据库连接。
-        mHelper = new DaoMaster.DevOpenHelper(this, "usergive-db", null);
+        mHelper = new MigrationHelper(this, "usergive-db", null);
         db = mHelper.getWritableDatabase();
         mDaoMaster = new DaoMaster(db);
         mDaoSession = mDaoMaster.newSession();

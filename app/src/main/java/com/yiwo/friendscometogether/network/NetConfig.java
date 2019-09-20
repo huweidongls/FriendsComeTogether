@@ -7,9 +7,10 @@ package com.yiwo.friendscometogether.network;
 public class NetConfig {
 
     //测试服务器
-//    public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
+    public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
 //    正式服务器
-    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
+//    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
+
 //    public static String BaseUrl = "http://www.youlaiyouyue.com/";
 //    public static String BaseUrl = "http://47.92.136.19/index.php/";
 
@@ -387,5 +388,9 @@ public class NetConfig {
     public static String userSet = "action/ac_public/userSet";
     // 恋爱模式开启关闭接口 action/ac_user/changeType  传uid用户ID   type 0关闭 1开启
     public static String changeType = "action/ac_user/changeType";
+    //d获取队长的活动  action/ac_coupon/willBeginActivity  获取队长的活动   传 userID 队长id   返回 pfpic图片   pfID活动id   pftitle活动名
+    public static String willBeginActivity = "action/ac_coupon/willBeginActivity";
+    //获取报名活动的所有人员  action/ac_activity/getAllUser    传pfID活动id  phase_id期数id  返回userID用户id  username昵称  game_num号码
+    public static String getAllUser = "action/ac_activity/getAllUser";
 
 }
