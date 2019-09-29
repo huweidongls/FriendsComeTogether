@@ -116,6 +116,7 @@ public class NewPersonMainMode_part1 {
              * usercodeok : 1
              * otherUserId : 4
              * if_kefu : 0
+             * "captain": "1"
              */
 
             private String wy_accid;
@@ -135,7 +136,7 @@ public class NewPersonMainMode_part1 {
             private String usercodeok;
             private String otherUserId;
             private String if_kefu;
-
+            private String captain;
             public String getWy_accid() {
                 return wy_accid;
             }
@@ -270,6 +271,14 @@ public class NewPersonMainMode_part1 {
 
             public void setIf_kefu(String if_kefu) {
                 this.if_kefu = if_kefu;
+            }
+
+            public String getCaptain() {
+                return captain;
+            }
+
+            public void setCaptain(String captain) {
+                this.captain = captain;
             }
         }
 

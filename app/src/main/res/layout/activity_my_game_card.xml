@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yiwo.friendscometogether.newpage.MyGameCardActivity">
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        style="@style/rl_top_bar">
+        <TextView
+            style="@style/tv_top_title"
+            android:text="游戏分组" />
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView style="@style/iv_return" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/ll_info"
+            android:paddingVertical="20px"
+            android:orientation="vertical"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginLeft="30px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/black_333333"
+                android:textSize="30px"
+                android:id="@+id/tv_huodong_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:visibility="gone"
+                android:textColor="@color/black_333333"
+                android:textSize="30px"
+                android:id="@+id/tv_duizhang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="@color/black_333333"
+                android:textSize="30px"
+                android:id="@+id/tv_duiwu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ScrollView
+            android:layout_marginTop="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginLeft="30px"
+            android:layout_below="@+id/ll_info"
+            android:layout_above="@+id/rl_my_no"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </ScrollView>
+        <RelativeLayout
+            android:background="@color/red_d84c37"
+            android:id="@+id/rl_my_no"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="400px">
+            <TextView
+                android:layout_marginTop="20px"
+                android:id="@+id/text"
+                android:text="我的号码"
+                android:textSize="80px"
+                android:textStyle="bold"
+                android:textColor="@color/white_ffffff"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_below="@+id/text"
+                android:textColor="@color/white_ffffff"
+                android:textStyle="bold"
+                android:textSize="200px"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_horizontal"
+                android:text="0"
+                android:id="@+id/tv_my_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

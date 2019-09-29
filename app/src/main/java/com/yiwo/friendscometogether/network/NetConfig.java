@@ -7,9 +7,9 @@ package com.yiwo.friendscometogether.network;
 public class NetConfig {
 
     //测试服务器
-    public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
+//    public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
 //    正式服务器
-//    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
+    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
 
 //    public static String BaseUrl = "http://www.youlaiyouyue.com/";
 //    public static String BaseUrl = "http://47.92.136.19/index.php/";
@@ -323,7 +323,7 @@ public class NetConfig {
     public static String searchUser = "action/ac_user/searchUser";//    action/ac_user /     searchUser   搜索用户接口     传 userLogin用户账号 userID 我的ID  返回  userID 用户id  username 用户名   userpic 头像 status  0 不是好友  1是好友
 
    //获取心动状态接口
-    public static String heartBeatStatus = "action/ac_user/heartBeatStatus" ; //action/ ac_user  /  heartBeatStatus 状态接口   传userID用户ID   heartbeatID 新东人的id   返回 status 0不是 1是; openStatus  0未开启  1已开启
+    public static String heartBeatStatus = "action/ac_user/heartBeatStatus" ; //action/ ac_user  /  heartBeatStatus 状态接口   传userID用户ID   heartbeatID 新东人的id   返回 status 0不是 1是; openStatus  0未开启  1已开启; h 1 是互为心动，0 是没有互为心动
     //点击心动操作
     public static String heartbeat = "action/ac_user/heartbeat"; //点击心动操作   传userID用户id  heartbeatID心动人的id
     //对我心动的人
@@ -392,5 +392,9 @@ public class NetConfig {
     public static String willBeginActivity = "action/ac_coupon/willBeginActivity";
     //获取报名活动的所有人员  action/ac_activity/getAllUser    传pfID活动id  phase_id期数id  返回userID用户id  username昵称  game_num号码
     public static String getAllUser = "action/ac_activity/getAllUser";
+    //队长分组   传pfID活动id  phase_id期数id   userList   json字符串 userID   队长的id
+    public static String gameGroup = "action/ac_activity/gameGroup";
+    //获取用户所在信息接口  传userID
+    public static String lookGroup = "action/ac_activity/lookGroup";
 
 }

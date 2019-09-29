@@ -42,20 +42,27 @@ public class YouXiFenZuAdapter extends RecyclerView.Adapter<YouXiFenZuAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.tv.setText("第"+(position+1)+"组");
+
+        holder.tv_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listenner.deleteGroup(position);
+            }
+        });
         LinearLayoutManager manager = new LinearLayoutManager(context);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         YouXiFenZuPersonsAdapter adapter = new YouXiFenZuPersonsAdapter(list.get(position));
         adapter.setListener( new YouXiFenZuPersonsAdapter.OnItemClickListener() {
             @Override
             public void itemClick(int postion) {
-
+                listenner.deleteGroup(postion);
             }
         });
         adapter.showDeleteBtn();
         adapter.setDeleteListener(new YouXiFenZuPersonsAdapter.OnDeleteListener() {
             @Override
             public void delete(int postion1) {
-                listenner.delteItemListen(position,postion1);
+                listenner.deleteItemListen(position,postion1);
             }
         });
         holder.rv.setLayoutManager(manager);
@@ -79,6 +86,7 @@ public class YouXiFenZuAdapter extends RecyclerView.Adapter<YouXiFenZuAdapter.Vi
 
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView tv;
+        TextView tv_delete;
         RecyclerView rv;
         ImageView iv;
         public ViewHolder(View itemView) {
@@ -86,10 +94,13 @@ public class YouXiFenZuAdapter extends RecyclerView.Adapter<YouXiFenZuAdapter.Vi
             tv = itemView.findViewById(R.id.tv);
             rv = itemView.findViewById(R.id.rv);
             iv = itemView.findViewById(R.id.iv_add);
+            tv_delete = itemView.findViewById(R.id.tv_delete);
+
         }
     }
     public interface OnAddListenner{
         void onAddListen(int postion);
-        void delteItemListen(int postion,int itemPostion);
+        void deleteItemListen(int postion,int itemPostion);
+        void deleteGroup(int postion);
     }
 }

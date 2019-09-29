@@ -64,4 +64,38 @@
                 android:layout_height="80px" />
         </LinearLayout>
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/btn_liaotian"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80px"
+        android:background="@drawable/bg_a1833a_5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="100px" >
+        <LinearLayout
+            android:layout_marginRight="100px"
+            android:layout_marginLeft="70px"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/btn_message"
+                android:layout_marginLeft="8px"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/tv_mashanglianxi"
+                android:layout_width="70px"
+                android:layout_height="70px" />
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:id="@+id/tv_mashanglianxi"
+                android:layout_centerInParent="true"
+                android:textSize="40px"
+                android:textColor="@color/white_ffffff"
+                android:text="马上联系"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

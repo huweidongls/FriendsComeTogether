@@ -6,7 +6,9 @@ import android.util.Log;
 
 import com.yiwo.friendscometogether.greendao.gen.DaoMaster;
 import com.yiwo.friendscometogether.greendao.gen.DuiZhangDeHuoDongDbModelDao;
+import com.yiwo.friendscometogether.greendao.gen.DuiZhangFenZuDbModelDao;
 import com.yiwo.friendscometogether.greendao.gen.LookHistoryDbModelDao;
+import com.yiwo.friendscometogether.greendao.gen.MyGameCardDbModelDao;
 import com.yiwo.friendscometogether.greendao.gen.UserGiveModelDao;
 
 import org.greenrobot.greendao.database.Database;
@@ -31,6 +33,8 @@ public class MigrationHelper extends DaoMaster.DevOpenHelper {
         Log.i(TAG,"oldVersion="+oldVersion+",newVersion="+newVersion);
         if (newVersion > oldVersion) {
             new UpgradeHelper().migrate(db,
+                    DuiZhangFenZuDbModelDao.class,
+                    MyGameCardDbModelDao.class,
                     DuiZhangDeHuoDongDbModelDao.class,
                     LookHistoryDbModelDao.class,
                     UserGiveModelDao.class);

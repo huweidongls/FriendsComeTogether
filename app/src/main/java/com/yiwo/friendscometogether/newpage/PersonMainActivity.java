@@ -751,6 +751,7 @@ public class PersonMainActivity extends BaseActivity {
                     intent.putExtra("person_id",otherUserId);
                     intent.putExtra("user_icon",model.getObj().getInfo().getUserpic());
                     intent.putExtra("sex",model.getObj().getInfo().getSex());
+                    intent.putExtra("yx_id",model.getObj().getInfo().getWy_accid());
                     startActivity(intent);
                 break;
         }

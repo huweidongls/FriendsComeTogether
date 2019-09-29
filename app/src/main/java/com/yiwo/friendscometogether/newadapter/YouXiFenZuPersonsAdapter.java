@@ -42,7 +42,7 @@ public class YouXiFenZuPersonsAdapter extends RecyclerView.Adapter<YouXiFenZuPer
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.tv.setText(data.get(position).getGameNum()+". "+data.get(position).getUsername());
+        holder.tv.setText("No."+data.get(position).getGameNum()+"\n"+data.get(position).getUsername());
         Glide.with(context).load(data.get(position).getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv);
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override

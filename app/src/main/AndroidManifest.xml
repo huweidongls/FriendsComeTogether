@@ -556,7 +556,8 @@
         <!-- android:name="com.yiwo.friendscometogether.imagepreview.glideprogress.MyGlideModel" -->
         <!-- android:value="GlideModule" /> -->
         <activity android:name=".newpage.DuiZhangXuanZeHuoDongActivity" />
-        <activity android:name=".newpage.YouXiFenZuActivity"></activity>
+        <activity android:name=".newpage.YouXiFenZuActivity" />
+        <activity android:name=".newpage.MyGameCardActivity"></activity>
     </application>
 
 </manifest>

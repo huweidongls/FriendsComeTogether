@@ -1,5 +1,6 @@
 package com.yiwo.friendscometogether.imagepreview;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,6 +16,8 @@ import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -70,33 +73,53 @@ public class ImagePreviewAdapter extends PagerAdapter {
         image.setScaleType(ImageView.ScaleType.FIT_CENTER);
         image.setMaximumScale(10.0F);
         image.setMinimumScale(0.8F);
-
         ProgressInterceptor.addListener(imageList.get(position), new ProgressListener() {
             @Override
             public void onProgress(int progress) {
                 Log.d("IMAGEPREVIEW::", "onProgress: " + progress);
             }
         });
-
-        SimpleTarget<Drawable> simpleTarge = new SimpleTarget<Drawable>() {
-            @Override
-            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                image.setImageDrawable(resource);
-                Log.d("IMAGEPREVIEW::", "onResourceReady: ");
-                ProgressInterceptor.removeListener(imageList.get(position));
-            }
-
-            @Override
-            public void onStart() {
-                super.onStart();
-                Log.d("IMAGEPREVIEW::", "onStart: ");
-            }
-        };
-        Glide.with(context).load(imageList.get(position)).apply(new RequestOptions()
-//                .diskCacheStrategy(DiskCacheStrategy.NONE)//不使用缓存
-//                .skipMemoryCache(true)
+//
+//        SimpleTarget<Drawable> simpleTarge = new SimpleTarget<Drawable>() {
+//            @Override
+//            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+//                image.setImageDrawable(resource);
+//                Log.d("IMAGEPREVIEW::", "onResourceReady: ");
+//                ProgressInterceptor.removeListener(imageList.get(position));
+//            }
+//
+//            @Override
+//            public void onStart() {
+//                super.onStart();
+//                Log.d("IMAGEPREVIEW::", "onStart: ");
+//            }
+//        };
+        final ObjectAnimator anim = ObjectAnimator.ofInt(image, "ImageLevel", 0,3000);
+//        anim.setInterpolator(new LinearInterpolator());
+        anim.setDuration(800);
+        anim.setRepeatCount(ObjectAnimator.INFINITE);
+        anim.start();
+        Glide.with(context).load(imageList.get(position))
+                .apply(new RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.NONE)//不使用缓存
+                .skipMemoryCache(true)
                 .format(DecodeFormat.PREFER_ARGB_8888)//设置图片解码格式
-                .placeholder(R.mipmap.zanwutupian))
+                .placeholder(R.drawable.dra_loading))
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        anim.cancel();
+                        Log.d("IMAGE", "onException: ");
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        anim.cancel();
+                        Log.d("IMAGE", "onResourceReady: ");
+                        return false;
+                    }
+                })
                 .into(image);
         image.setOnClickListener(new View.OnClickListener() {
             @Override

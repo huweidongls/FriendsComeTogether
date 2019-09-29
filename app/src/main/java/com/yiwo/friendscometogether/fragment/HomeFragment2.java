@@ -69,6 +69,7 @@ import com.yiwo.friendscometogether.pages.CityActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.SearchActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.utils.AppUpdateUtil;
 import com.yiwo.friendscometogether.utils.UserUtils;
 import com.yiwo.friendscometogether.widget.ViewPagerForScrollView;
 import com.youth.banner.Banner;
@@ -207,7 +208,7 @@ public class HomeFragment2 extends BaseFragment {
         ButterKnife.bind(this, rootView);
         ScreenAdapterTools.getInstance().loadView(rootView);
         spImp = new SpImp(getContext());
-//        AppUpdateUtil.checkUpdate(getActivity(),true);
+        AppUpdateUtil.checkUpdate(getActivity(),true);
         getLocation();
         initData();
         initRv_Vp();

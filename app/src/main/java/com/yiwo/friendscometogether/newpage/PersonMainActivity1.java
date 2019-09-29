@@ -1,6 +1,8 @@
 package com.yiwo.friendscometogether.newpage;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -117,6 +119,8 @@ public class PersonMainActivity1 extends BaseActivity {
     TextView tv_person_marry;
     @BindView(R.id.tv_level)
     TextView tv_level;
+    @BindView(R.id.rl_level)
+    RelativeLayout rl_level;
 
     @BindView(R.id.tv_person_address)
     TextView tv_person_address;
@@ -418,6 +422,13 @@ public class PersonMainActivity1 extends BaseActivity {
                                         tv_person_name.setText(model.getObj().getInfo().getUsername());
 
                                         tv_level.setText("LV"+model.getObj().getInfo().getUsergrade());
+                                        if (model.getObj().getInfo().getCaptain().equals("1")){
+                                            rl_level.setBackgroundResource(R.mipmap.lv_duizhang_daidui);
+                                        }else if (model.getObj().getInfo().getCaptain().equals("2")){
+                                            rl_level.setBackgroundResource(R.mipmap.lv_duizhang_daili);
+                                        }else {
+                                            rl_level.setBackgroundResource(R.mipmap.lv_putong);
+                                        }
                                         if (model.getObj().getInfo().getUsermarry().equals("1")){
                                             tv_person_marry.setText("单身");
                                         }else if (model.getObj().getInfo().getUsermarry().equals("2")){
@@ -644,7 +655,13 @@ public class PersonMainActivity1 extends BaseActivity {
                                 tv_person_age.setText(model.getObj().getInfo().getAge());
                                 tv_person_address.setText(model.getObj().getInfo().getAddress());
                                 tv_person_sign_text.setText(model.getObj().getInfo().getAutograph());
-
+                                if (model.getObj().getInfo().getCaptain().equals("1")){
+                                    rl_level.setBackgroundResource(R.mipmap.lv_duizhang_daidui);
+                                }else if (model.getObj().getInfo().getCaptain().equals("2")){
+                                    rl_level.setBackgroundResource(R.mipmap.lv_duizhang_daili);
+                                }else {
+                                    rl_level.setBackgroundResource(R.mipmap.lv_putong);
+                                }
                                 tv_level.setText("LV"+model.getObj().getInfo().getUsergrade());
                                 if (model.getObj().getInfo().getUsermarry().equals("1")){
                                     tv_person_marry.setText("单身");
@@ -734,7 +751,7 @@ public class PersonMainActivity1 extends BaseActivity {
 
     @OnClick({R.id.rl_back,R.id.rl_label_text,
             R.id.rl_algin_right_wode, R.id.rl_add_friend, R.id.rl_guanzhu,R.id.iv_heart,R.id.ll_huozan,R.id.ll_guanzhu,R.id.ll_fans,R.id.iv_person_icon,
-            R.id.rl_tab_1,R.id.rl_tab_2,R.id.rl_tab_3})
+            R.id.rl_tab_1,R.id.rl_tab_2,R.id.rl_tab_3,R.id.rl_level})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -938,6 +955,7 @@ public class PersonMainActivity1 extends BaseActivity {
                     intent.putExtra("person_id",otherUserId);
                     intent.putExtra("user_icon",model.getObj().getInfo().getUserpic());
                     intent.putExtra("sex",model.getObj().getInfo().getSex());
+                    intent.putExtra("yx_id",model.getObj().getInfo().getWy_accid());
                     startActivity(intent);
                 break;
             case R.id.rl_tab_1:
@@ -967,9 +985,40 @@ public class PersonMainActivity1 extends BaseActivity {
                 rl_youju.setVisibility(View.VISIBLE);
                 show_tab = 3;
                 break;
+            case R.id.rl_level:
+                showDialogLvIcon();
+                break;
         }
 
 
+    }
+
+    private void showDialogLvIcon() {
+        int icon;
+        String title;
+        String message;
+        if (model.getObj().getInfo().getCaptain().equals("1")){
+            icon = R.mipmap.lv_icon_duizhang_daidui;
+            title = "瞳伴队长";
+            message = "全程陪同的主持人，带领团员观景、游戏、安排食宿。";
+        }else if (model.getObj().getInfo().getCaptain().equals("2")){
+            title = "代理队长";
+            icon = R.mipmap.lv_icon_duizhang_daili;
+            message = "瞳伴App运营人员，帮助引导线下客户参加瞳伴活动。";
+        }else {
+            return;
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(PersonMainActivity1.this);
+        builder.setIcon(icon)
+                .setTitle(title)
+                .setMessage(message)
+                .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
     private void liaotian(String liaotianAccount) {

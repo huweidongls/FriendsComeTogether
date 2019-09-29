@@ -32,35 +32,65 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <RelativeLayout
-                android:visibility="gone"
-                android:paddingTop="15px"
-                android:paddingBottom="15px"
-                android:paddingRight="40px"
-                android:paddingLeft="35px"
-                android:id="@+id/rl_algin_right_heart"
-                android:layout_gravity="right"
-                android:background="@drawable/bg_red_left_35px"
-                android:layout_marginTop="55px"
+                android:paddingLeft="20px"
                 android:layout_width="wrap_content"
-                android:layout_height="70px">
-                <ImageView
-                    android:id="@+id/iv_heart"
-                    android:layout_centerVertical="true"
-                    android:layout_width="38px"
-                    android:layout_height="38px"
-                    android:src="@mipmap/xindong"/>
-                <TextView
-                    android:id="@+id/tv_xindong"
-                    android:textStyle="bold"
-                    android:textSize="30px"
-                    android:textColor="@color/white_ffffff"
-                    android:text="心动女生"
-                    android:layout_toRightOf="@+id/iv_heart"
-                    android:layout_marginLeft="15px"
-                    android:layout_centerVertical="true"
+                android:layout_height="70px"
+                android:layout_gravity="right"
+                android:layout_marginTop="55px"
+                android:background="@drawable/bg_red_left_35px"
+                android:visibility="visible">
+                <LinearLayout
+                    android:paddingLeft="15px"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/ll_mashanglianxi"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="15px"
+                        android:src="@mipmap/mashanglianxi_icon"
+                        android:layout_width="40px"
+                        android:layout_height="40px" />
+                    <View
+                        android:id="@+id/view_line"
+                        android:layout_toRightOf="@+id/ll_mashanglianxi"
+                        android:background="@color/white"
+                        android:layout_marginBottom="12px"
+                        android:layout_marginTop="12px"
+                        android:layout_width="2px"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_marginLeft="15px"
+                    android:paddingRight="40px"
+                    android:layout_toRightOf="@+id/ll_mashanglianxi"
+                    android:id="@+id/rl_algin_right_heart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/iv_heart"
+                        android:layout_width="38px"
+                        android:layout_height="38px"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/xindong" />
+
+                    <TextView
+                        android:id="@+id/tv_xindong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15px"
+                        android:layout_toRightOf="@+id/iv_heart"
+                        android:text="心动女生"
+                        android:textColor="@color/white_ffffff"
+                        android:textSize="30px"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
             </RelativeLayout>
             <FrameLayout
                 android:id="@+id/rl_show_impresson"

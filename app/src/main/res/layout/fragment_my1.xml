@@ -565,7 +565,39 @@
                         android:layout_height="25px" />
 
                 </RelativeLayout>
+                <RelativeLayout
+                    android:background="@drawable/selector_fragment_my_bg"
+                    android:id="@+id/rl_game_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="90px">
 
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="33px"
+                        android:id="@+id/iv7"
+                        android:src="@mipmap/wode_youxifenzu"
+                        android:layout_width="48px"
+                        android:layout_height="40px" />
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="33px"
+                        android:layout_toRightOf="@+id/iv7"
+                        android:text="游戏分组"
+                        android:textColor="@color/black_333333"
+                        android:textSize="32px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:layout_marginRight="26px"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/right"
+                        android:layout_width="15px"
+                        android:layout_height="25px" />
+
+                </RelativeLayout>
             </LinearLayout>
 
             <RelativeLayout

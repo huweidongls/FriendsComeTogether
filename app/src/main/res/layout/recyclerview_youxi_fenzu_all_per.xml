@@ -25,6 +25,7 @@
             android:layout_height="40px" />
     </RelativeLayout>
     <TextView
+        android:gravity="center_horizontal"
         android:ellipsize="end"
         android:textColor="@color/black_333333"
         android:layout_margin="5px"

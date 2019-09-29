@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -25,6 +26,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.google.gson.Gson;
+import com.netease.nim.uikit.api.NimUIKit;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -108,6 +110,8 @@ public class PersonImpressionActivity extends BaseActivity {
     LinearLayout lay9;
     @BindView(R.id.iv_head)
     ImageView iv_head;
+    @BindView(R.id.ll_mashanglianxi)
+    LinearLayout ll_mashanglianxi;
     private SpImp spImp;
     private String person_id;
     private boolean isHeart;
@@ -170,6 +174,14 @@ public class PersonImpressionActivity extends BaseActivity {
                                 }else if (jsonObject1.getString("status").equals("1")){//已经对他心动
                                     iv_heart.setImageResource(R.mipmap.xindong);
                                     isHeart = true;
+                                }
+                                if (jsonObject1.getString("h").equals("1")){//互为心动了
+                                    ll_mashanglianxi.setVisibility(View.VISIBLE);
+                                }else {
+                                    ll_mashanglianxi.setVisibility(View.GONE);
+                                }
+                                if (spImp.getUID().equals(person_id)){//自己查看
+                                    ll_mashanglianxi.setVisibility(View.GONE);
                                 }
                             }
                         } catch (JSONException e) {
@@ -375,7 +387,7 @@ public class PersonImpressionActivity extends BaseActivity {
 //        }
 //    }
 
-    @OnClick({R.id.rl_back,R.id.rl_algin_right_heart,R.id.lay0,R.id.lay1,R.id.lay2,R.id.lay3,R.id.lay4,R.id.lay5,R.id.lay6,R.id.lay7,R.id.lay8,R.id.lay9})
+    @OnClick({R.id.rl_back,R.id.rl_algin_right_heart,R.id.lay0,R.id.lay1,R.id.lay2,R.id.lay3,R.id.lay4,R.id.lay5,R.id.lay6,R.id.lay7,R.id.lay8,R.id.lay9,R.id.ll_mashanglianxi})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -468,6 +480,9 @@ public class PersonImpressionActivity extends BaseActivity {
                 intent.putExtra("person_id",person_id);
                 startActivity(intent);
                 break;
+            case R.id.ll_mashanglianxi:
+                liaotian(getIntent().getStringExtra("yx_id"));
+                break;
 
         }
     }
@@ -487,6 +502,9 @@ public class PersonImpressionActivity extends BaseActivity {
                                 iv_heart.setImageResource(isHeart?R.mipmap.xindong:R.mipmap.xindong_border);
                                 if (jsonObject.getJSONObject("obj").getString("status").equals("1")){
                                     showPopHuWeiXinDong(jsonObject.getJSONObject("obj").getString("myPic"),jsonObject.getJSONObject("obj").getString("pic"));
+                                    ll_mashanglianxi.setVisibility(View.VISIBLE);
+                                }else {
+                                    ll_mashanglianxi.setVisibility(View.GONE);
                                 }
                             }
                         } catch (JSONException e) {
@@ -503,11 +521,13 @@ public class PersonImpressionActivity extends BaseActivity {
     private void showPopHuWeiXinDong(String myIconUrl,String personIconUrl){
         View view = getLayoutInflater().inflate(R.layout.recyclerview_gif_huweixindong,null);
         ImageView iv_gif,iv_icon_mine,iv_icon_other;
+        RelativeLayout btn_liaotian;
         RelativeLayout rl;
         iv_gif = view.findViewById(R.id.iv_gif);
         iv_icon_mine = view.findViewById(R.id.iv_icon_mine);
         iv_icon_other = view.findViewById(R.id.iv_icon_other);
         rl = view.findViewById(R.id.rl);
+        btn_liaotian = view.findViewById(R.id.btn_liaotian);
         rl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -534,6 +554,12 @@ public class PersonImpressionActivity extends BaseActivity {
             }
         })
             .into(iv_gif);
+        btn_liaotian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                liaotian(getIntent().getStringExtra("yx_id"));
+            }
+        });
         ScreenAdapterTools.getInstance().loadView(view);
         popupWindow = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
         popupWindow.setOutsideTouchable(true);
@@ -552,6 +578,9 @@ public class PersonImpressionActivity extends BaseActivity {
                 getWindow().setAttributes(params);
             }
         });
-
+    }
+    private void liaotian(String liaotianAccount) {
+        NimUIKit.setAccount(spImp.getYXID());
+        NimUIKit.startP2PSession(PersonImpressionActivity.this, liaotianAccount);
     }
 }

@@ -10,6 +10,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -55,6 +56,7 @@ public class AppUpdateUtil {
 
                     @Override
                     public void onSuccess(String data) {
+                        Log.d("VERSONVERSON:data:",data);
                         try {
                             JSONObject jsonObject = new JSONObject(data);
                             if (jsonObject.getInt("code") == 200){
@@ -121,6 +123,7 @@ public class AppUpdateUtil {
 
     //服务端版本号和本地版本号做比较
     private static boolean parseCode(String serverVersionCode, String localVersionCode) {
+        Log.d("VERSONVERSON:ser:",serverVersionCode+"///loc"+localVersionCode);
         int tempLength = serverVersionCode.length() - localVersionCode.length();
         String tempLongString = tempLength > 0 ? serverVersionCode : localVersionCode;
         String tempShortString = tempLength > 0 ? localVersionCode : serverVersionCode;

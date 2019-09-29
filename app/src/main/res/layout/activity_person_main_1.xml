@@ -248,7 +248,7 @@
                             android:textStyle="bold" />
 
                         <RelativeLayout
-
+                            android:id="@+id/rl_level"
                             android:layout_width="124px"
                             android:layout_height="40px"
                             android:layout_gravity="bottom"
