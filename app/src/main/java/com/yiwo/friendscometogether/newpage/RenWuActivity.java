@@ -64,7 +64,8 @@ public class RenWuActivity extends BaseActivity {
                 break;
             case R.id.ll_7:
                 if (yiXuanHuoDongModel == null|| TextUtils.isEmpty(yiXuanHuoDongModel.getPfID())||yiXuanHuoDongModel.getPfID() == null){
-                    toToast(RenWuActivity.this,"请选择活动！");
+                    Intent itHuoDong = new Intent(RenWuActivity.this, DuiZhangXuanZeHuoDongActivity.class);
+                    startActivityForResult(itHuoDong, REQUEST_CODE_XUAN_ZE_HUO_DONG);
                     break;
                 }
                 youxi();

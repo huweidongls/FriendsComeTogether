@@ -1,59 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="25px"
+    android:layout_marginLeft="5px"
+    android:layout_marginRight="5px">
     <RelativeLayout
         android:id="@+id/rl"
+        android:elevation="5px"
+        android:layout_margin="5px"
+        android:visibility="visible"
         android:layout_width="match_parent"
-        android:layout_height="250px">
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_16px">
 
-        <ImageView
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="30px"
-            android:id="@+id/activity_my_draft_rv_iv"
-            android:scaleType="centerCrop"
-            android:layout_width="300px"
-            android:layout_height="200px" />
-
-        <RelativeLayout
-            android:layout_alignBottom="@+id/activity_my_draft_rv_iv"
-            android:layout_marginLeft="20px"
-            android:layout_toRightOf="@+id/activity_my_draft_rv_iv"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200px">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+                android:id="@+id/activity_my_draft_rv_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="320px"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/welcome"
+                test:left_top_radius1="16px"
+                test:right_top_radius1="16px"  />
 
             <TextView
                 android:id="@+id/activity_my_draft_rv_tv_title"
-                android:layout_marginRight="20px"
-                android:layout_marginTop="4px"
-                android:lines="3"
-                android:ellipsize="end"
-                android:textColor="@color/black_333333"
-                android:textSize="32px"
-                android:text="香港一日游香港一日游"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20px"
+                android:layout_marginLeft="21px"
+                android:layout_marginRight="21px"
+                android:layout_marginTop="20px"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="巴厘岛小众神秘彭丽普兰，被认为是世界上最清洁的三个村庄之一巴厘岛小众神秘彭丽普兰，被认为是世界上最清洁的三个村庄之一"
+                android:textColor="#424242"
+                android:textSize="32px" />
             <TextView
+                android:layout_marginTop="10px"
+                android:layout_marginBottom="10px"
+                android:layout_marginLeft="21px"
+                android:layout_marginRight="21px"
                 android:id="@+id/activity_my_draft_rv_tv_c_time"
                 android:ellipsize="end"
-                android:lines="1"
-                android:layout_alignParentBottom="true"
                 android:textColor="@color/black_333333"
                 android:textSize="24px"
-                android:text="创建时间：2018-4-15 15：45：33"
+                android:text="创建时间："
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="20px"
+                android:layout_marginBottom="20px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:background="@drawable/bg_gray_border_27px"
+                    android:textSize="24px"
+                    android:id="@+id/btn_delete"
+                    android:textColor="@color/black_333333"
+                    android:gravity="center"
+                    android:text="删除"
+                    android:layout_marginLeft="40px"
+                    android:layout_marginRight="10px"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50px" />
+                <TextView
+                    android:background="@drawable/bg_gray_border_27px"
+                    android:textSize="24px"
+                    android:textColor="@color/black_333333"
+                    android:id="@+id/btn_edit"
+                    android:gravity="center"
+                    android:text="编辑"
+                    android:layout_marginLeft="10px"
+                    android:layout_marginRight="40px"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50px" />
+            </LinearLayout>
 
-        </RelativeLayout>
-
+        </LinearLayout>
     </RelativeLayout>
-    
-    <View
-        android:background="@color/line"
-        android:layout_width="match_parent"
-        android:layout_height="20px"/>
-    
+
 </LinearLayout>

@@ -472,10 +472,12 @@ public class FriendsTogetherFragment3 extends BaseFragment {
         //在这个判断，根据需要做处理
         if (netMobile == 1) {
             Log.e("2222", "inspectNet:连接wifi");
-//            initData();
+            initLabelTop();
+            initData();
         } else if (netMobile == 0) {
             Log.e("2222", "inspectNet:连接移动数据");
-//            initData();
+            initLabelTop();
+            initData();
         } else if (netMobile == -1) {
             Log.e("2222", "inspectNet:当前没有网络");
         }
@@ -491,7 +493,7 @@ public class FriendsTogetherFragment3 extends BaseFragment {
          min = "";
          max = "";
          label = "";
-        dialog = WeiboDialogUtils.createLoadingDialog(getContext(),"加载中...");
+//        dialog = WeiboDialogUtils.createLoadingDialog(getContext(),"加载中...");
         String token = getToken(NetConfig.BaseUrl + NetConfig.friendsTogetherUrl);
         ViseHttp.POST(NetConfig.friendsTogetherUrl)
                 .addParam("app_key", token)
@@ -531,17 +533,17 @@ public class FriendsTogetherFragment3 extends BaseFragment {
                                     ll_guanzhu_num.setVisibility(View.GONE);
                                 }
 //                                updateListView();
-                                WeiboDialogUtils.closeDialog(dialog);
+//                                WeiboDialogUtils.closeDialog(dialog);
                             }
                         } catch (JSONException e) {
-                            WeiboDialogUtils.closeDialog(dialog);
+//                            WeiboDialogUtils.closeDialog(dialog);
                             e.printStackTrace();
                         }
                     }
 
                     @Override
                     public void onFail(int errCode, String errMsg) {
-                        WeiboDialogUtils.closeDialog(dialog);
+//                        WeiboDialogUtils.closeDialog(dialog);
                     }
                 });
 

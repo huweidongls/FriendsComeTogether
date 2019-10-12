@@ -430,23 +430,23 @@ public class HomeFragment2 extends BaseFragment {
                 refreshLayout.finishRefresh(1000);
             }
         });
-        if (!isNetConnect()){
-            toToast(getContext(),"当前无网络！");
-            if (labelModel == null){
-                youji_all.setVisibility(View.GONE);
-                youji_gonglue.setVisibility(View.GONE);
-                youji_lvxing.setVisibility(View.GONE);
-                youji_meishi.setVisibility(View.GONE);
-                youji_tandian.setVisibility(View.GONE);
-            }else {
-                youji_all.setVisibility(View.VISIBLE);
-                youji_gonglue.setVisibility(View.VISIBLE);
-                youji_lvxing.setVisibility(View.VISIBLE);
-                youji_meishi.setVisibility(View.VISIBLE);
-                youji_tandian.setVisibility(View.VISIBLE);
-            }
-            return;
-        }
+//        if (!isNetConnect()){
+//            toToast(getContext(),"当前无网络！");
+//            if (labelModel == null){
+//                youji_all.setVisibility(View.GONE);
+//                youji_gonglue.setVisibility(View.GONE);
+//                youji_lvxing.setVisibility(View.GONE);
+//                youji_meishi.setVisibility(View.GONE);
+//                youji_tandian.setVisibility(View.GONE);
+//            }else {
+//                youji_all.setVisibility(View.VISIBLE);
+//                youji_gonglue.setVisibility(View.VISIBLE);
+//                youji_lvxing.setVisibility(View.VISIBLE);
+//                youji_meishi.setVisibility(View.VISIBLE);
+//                youji_tandian.setVisibility(View.VISIBLE);
+//            }
+//            return;
+//        }
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull final RefreshLayout refreshLayout) {
@@ -1014,11 +1014,11 @@ public class HomeFragment2 extends BaseFragment {
     }
 
     private void refresh(){
-        if (!isNetConnect()){
-            toToast(getContext(),"当前无网络！");
-            return;
-        }
-        dialog_loading = WeiboDialogUtils.createLoadingDialog(getContext(),"加载中...");
+//        if (!isNetConnect()){
+//            toToast(getContext(),"当前无网络！");
+//            return;
+//        }
+//        dialog_loading = WeiboDialogUtils.createLoadingDialog(getContext(),"加载中...");
         switch (type){
             case "1":
                 ViseHttp.POST(NetConfig.homeRecommend)
@@ -1053,7 +1053,7 @@ public class HomeFragment2 extends BaseFragment {
                                         }
                                         page1 = 2;
                                     }
-                                    WeiboDialogUtils.closeDialog(dialog_loading);
+//                                    WeiboDialogUtils.closeDialog(dialog_loading);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -1062,7 +1062,7 @@ public class HomeFragment2 extends BaseFragment {
                             @Override
                             public void onFail(int errCode, String errMsg) {
                                 toToast(getContext(),"加载失败");
-                                WeiboDialogUtils.closeDialog(dialog_loading);
+//                                WeiboDialogUtils.closeDialog(dialog_loading);
                             }
                         });
                 break;
@@ -1082,7 +1082,7 @@ public class HomeFragment2 extends BaseFragment {
                                         mList2.clear();
                                         mList2.addAll( model.getObj());
                                         adapter2.notifyDataSetChanged();
-                                        WeiboDialogUtils.closeDialog(dialog_loading);
+//                                        WeiboDialogUtils.closeDialog(dialog_loading);
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -1091,7 +1091,7 @@ public class HomeFragment2 extends BaseFragment {
 
                             @Override
                             public void onFail(int errCode, String errMsg) {
-                                WeiboDialogUtils.closeDialog(dialog_loading);
+//                                WeiboDialogUtils.closeDialog(dialog_loading);
                             }
                         });
                 break;
@@ -1112,7 +1112,7 @@ public class HomeFragment2 extends BaseFragment {
                                         mList3.clear();
                                         mList3.addAll(model.getObj());
                                         adapter3.notifyDataSetChanged();
-                                        WeiboDialogUtils.closeDialog(dialog_loading);
+//                                        WeiboDialogUtils.closeDialog(dialog_loading);
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -1121,7 +1121,7 @@ public class HomeFragment2 extends BaseFragment {
 
                             @Override
                             public void onFail(int errCode, String errMsg) {
-                                WeiboDialogUtils.closeDialog(dialog_loading);
+//                                WeiboDialogUtils.closeDialog(dialog_loading);
                             }
                         });
                 break;
@@ -1141,7 +1141,7 @@ public class HomeFragment2 extends BaseFragment {
                                         mList4.clear();
                                         mList4.addAll(model.getObj());
                                         adapter4.notifyDataSetChanged();
-                                        WeiboDialogUtils.closeDialog(dialog_loading);
+//                                        WeiboDialogUtils.closeDialog(dialog_loading);
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -1150,7 +1150,7 @@ public class HomeFragment2 extends BaseFragment {
 
                             @Override
                             public void onFail(int errCode, String errMsg) {
-                                WeiboDialogUtils.closeDialog(dialog_loading);
+//                                WeiboDialogUtils.closeDialog(dialog_loading);
                             }
                         });
                 break;

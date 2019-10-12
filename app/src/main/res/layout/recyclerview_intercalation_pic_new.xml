@@ -72,6 +72,7 @@
         android:layout_width="35px"
         android:layout_height="35px" />
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/rl_is_first"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5px"

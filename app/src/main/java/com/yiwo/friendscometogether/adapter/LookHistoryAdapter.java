@@ -28,7 +28,7 @@ public class LookHistoryAdapter extends RecyclerView.Adapter<LookHistoryAdapter.
 
     private Context context;
     private List<LookHistoryDbModel> data;
-
+    private OnDeleteListenner deleteListenner;
     public LookHistoryAdapter(List<LookHistoryDbModel> data) {
         this.data = data;
     }
@@ -62,6 +62,14 @@ public class LookHistoryAdapter extends RecyclerView.Adapter<LookHistoryAdapter.
                 }
             }
         });
+        holder.tvBtnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (deleteListenner!=null){
+                    deleteListenner.deleteListen(position);
+                }
+            }
+        });
     }
 
     @Override
@@ -69,11 +77,16 @@ public class LookHistoryAdapter extends RecyclerView.Adapter<LookHistoryAdapter.
         return data == null ? 0 : data.size();
     }
 
+    public void setDeleteListenner(OnDeleteListenner deleteListenner) {
+        this.deleteListenner = deleteListenner;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView ivTitle;
         private TextView tvTime;
         private TextView tvTitle;
+        private TextView tvBtnDelete;
         private LinearLayout ll;
 
         public ViewHolder(View itemView) {
@@ -82,7 +95,11 @@ public class LookHistoryAdapter extends RecyclerView.Adapter<LookHistoryAdapter.
             tvTime = itemView.findViewById(R.id.activity_look_history_rv_tv_time);
             tvTitle = itemView.findViewById(R.id.activity_look_history_rv_tv_title);
             ll = itemView.findViewById(R.id.activity_look_history_rv_ll);
+            tvBtnDelete = itemView.findViewById(R.id.tv_btn_delete);
         }
+    }
+    public interface OnDeleteListenner{
+        void deleteListen(int position);
     }
 
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="@color/black"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:id="@+id/iv_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@mipmap/bg_duizhangshow" />
+    <RelativeLayout
+        android:background="@mipmap/duizhangshow_icon_bg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400px"
+        android:id="@+id/rl_icon"
+        android:layout_width="400px"
+        android:layout_height="400px">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_centerInParent="true"
+            android:src="@mipmap/my_head"
+            android:id="@+id/iv_icon"
+            android:layout_width="270px"
+            android:layout_height="270px" />
+    </RelativeLayout>
+    <TextView
+        android:lineSpacingMultiplier="1.3"
+        android:gravity="center"
+        android:text="瞳伴队长（导游 | 领队 | 带队主持）\n关注我，和我一起出发吧！"
+        android:textSize="35px"
+        android:layout_marginTop="150px"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/rl_icon"
+        android:textColor="@color/white_ffffff"
+        android:id="@+id/tv_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:id="@+id/btn_guanzhu"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40px"
+        android:layout_below="@+id/tv_info"
+        android:background="@drawable/bg_d84c37_30px"
+        android:layout_width="300px"
+        android:layout_height="80px">
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_guanzhu"
+                android:textSize="32px"
+                android:textColor="@color/white_ffffff"
+                android:text="关注"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

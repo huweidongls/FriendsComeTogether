@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
 
@@ -60,9 +61,14 @@ public class MyVideosActivity extends BaseActivity {
     }
 
     private void initData() {
-        LinearLayoutManager manager = new LinearLayoutManager(MyVideosActivity.this);
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
+        // /设置布局管理器为2列，纵向
+        StaggeredGridLayoutManager mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL){
+            @Override
+            public boolean canScrollVertically() {
+                return true;
+            }
+        };
+        recyclerView.setLayoutManager(mLayoutManager);
         adapter = new MyVideosAdapter(list);
         adapter.setListener(new MyVideosAdapter.BtnClickListener() {
             @Override

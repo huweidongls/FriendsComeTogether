@@ -349,6 +349,7 @@ public class NetConfig {
     public static String homepagePartTwo = "action/ac_user/HomepagePartTwo"; //action/ac_user/HomepagePartTwo 友记数据 传status  tid  uid
     public static String homepagePartthree = "action/ac_user/HomepagePartThree"; //action/ac_user/HomepagePartTwo 友聚数据 传status  tid  uid
     public static String homepagePartFour = "action/ac_user/HomepagePartFour"; //action/ac_user/HomepagePartTwo 照片 传status  tid  uid
+    public static String homepageVideos = "action/ac_user/myVideos";//action/ac_user/myVideos   传tid   status =0 tid为用户id  =1为网易id   vID视频id,vname视频名,vurl视频地址,vtime视频时间,img图片,look_num查看数量,wy_vid网易视频vid
 
     //任务URL
     public static String gameList = "action/ac_coupon/gameList";

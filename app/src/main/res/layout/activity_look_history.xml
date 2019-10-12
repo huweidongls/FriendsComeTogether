@@ -41,10 +41,14 @@
 
     </RelativeLayout>
 
-    <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+    <!--<com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView-->
+        <!--android:id="@+id/activity_look_history_rv"-->
+        <!--android:layout_below="@+id/activity_look_history_rl_top"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"/>-->
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/activity_look_history_rv"
         android:layout_below="@+id/activity_look_history_rl_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
 </RelativeLayout>

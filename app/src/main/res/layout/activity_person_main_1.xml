@@ -56,6 +56,13 @@
                         android:layout_marginTop="34px"
                         android:scaleType="centerCrop"
                         android:src="@mipmap/my_head" />
+                    <ImageView
+                        android:src="@mipmap/per_images"
+                        android:layout_alignBottom="@+id/iv_person_icon"
+                        android:layout_toRightOf="@+id/iv_person_icon"
+                        android:id="@+id/iv_images"
+                        android:layout_width="50px"
+                        android:layout_height="50px" />
 
                     <LinearLayout
                         android:id="@+id/ll_nums"
@@ -468,14 +475,39 @@
                     android:layout_marginTop="40px">
 
                     <LinearLayout
-                        android:layout_width="600px"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center_horizontal"
                         android:orientation="horizontal">
 
+                        <!--<RelativeLayout-->
+                            <!--android:id="@+id/rl_tab_1"-->
+                            <!--android:layout_width="200px"-->
+                            <!--android:layout_height="80px">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_centerHorizontal="true"-->
+                                <!--android:layout_marginBottom="35px"-->
+                                <!--android:paddingBottom="1px"-->
+                                <!--android:text="照片"-->
+                                <!--android:textColor="@color/black_333333"-->
+                                <!--android:textSize="35px"-->
+                                <!--android:textStyle="bold" />-->
+
+                            <!--<View-->
+                                <!--android:visibility="gone"-->
+                                <!--android:id="@+id/bottom_line_1"-->
+                                <!--android:layout_width="100px"-->
+                                <!--android:layout_height="10px"-->
+                                <!--android:layout_alignParentBottom="true"-->
+                                <!--android:layout_centerHorizontal="true"-->
+                                <!--android:background="@drawable/bg_d84c37_30px" />-->
+                        <!--</RelativeLayout>-->
                         <RelativeLayout
-                            android:id="@+id/rl_tab_1"
+                            android:id="@+id/rl_tab_4"
                             android:layout_width="200px"
                             android:layout_height="80px">
 
@@ -484,22 +516,20 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerHorizontal="true"
                                 android:layout_marginBottom="35px"
-                                android:paddingBottom="1px"
-                                android:text="照片"
+                                android:text="视频"
                                 android:textColor="@color/black_333333"
                                 android:textSize="35px"
                                 android:textStyle="bold" />
 
                             <View
-                                android:visibility="gone"
-                                android:id="@+id/bottom_line_1"
+                                android:id="@+id/bottom_line_4"
                                 android:layout_width="100px"
                                 android:layout_height="10px"
                                 android:layout_alignParentBottom="true"
                                 android:layout_centerHorizontal="true"
-                                android:background="@drawable/bg_d84c37_30px" />
+                                android:background="@drawable/bg_d84c37_30px"
+                                android:visibility="gone" />
                         </RelativeLayout>
-
                         <RelativeLayout
                             android:id="@+id/rl_tab_2"
                             android:layout_width="200px"
@@ -556,16 +586,16 @@
                     android:background="#f5f5f5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <RelativeLayout
-                        android:visibility="gone"
-                        android:id="@+id/rl_pics"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/rv_pic"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
-                    </RelativeLayout>
+                    <!--<RelativeLayout-->
+                        <!--android:visibility="gone"-->
+                        <!--android:id="@+id/rl_pics"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
+                        <!--<android.support.v7.widget.RecyclerView-->
+                            <!--android:id="@+id/rv_pic"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"/>-->
+                    <!--</RelativeLayout>-->
                     <RelativeLayout
                         android:visibility="gone"
                         android:id="@+id/rl_youji"
@@ -583,6 +613,16 @@
                         android:layout_height="wrap_content">
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rv_youju"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:id="@+id/rl_vides"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rv_videos"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
                     </RelativeLayout>

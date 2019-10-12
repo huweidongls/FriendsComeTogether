@@ -25,11 +25,20 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
-    <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
-        android:id="@+id/activity_my_draft_rv"
+    <ScrollView
+        android:scrollbars="none"
         android:layout_below="@+id/activity_my_draft_rl_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_marginTop="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/activity_my_draft_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

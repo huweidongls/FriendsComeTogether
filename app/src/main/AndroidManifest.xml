@@ -557,7 +557,8 @@
         <!-- android:value="GlideModule" /> -->
         <activity android:name=".newpage.DuiZhangXuanZeHuoDongActivity" />
         <activity android:name=".newpage.YouXiFenZuActivity" />
-        <activity android:name=".newpage.MyGameCardActivity"></activity>
+        <activity android:name=".newpage.MyGameCardActivity" />
+        <activity android:name=".newpage.PersonImagesActivity"></activity>
     </application>
 
 </manifest>

@@ -1,61 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_look_history_rv_ll"
+    android:background="@drawable/bg_white_30px"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
+    android:layout_height="180px"
+    android:paddingBottom="10px"
+    android:layout_marginTop="20px"
+    android:layout_marginLeft="23px"
+    android:layout_marginRight="23px"
+    android:layout_width="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="250px">
-
-        <ImageView
+        android:layout_height="wrap_content">
+        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            test:radius1="40px"
+            android:layout_marginLeft="24px"
+            android:layout_marginTop="20px"
+            android:layout_marginBottom="20px"
+            android:layout_marginRight="30px"
             android:id="@+id/activity_look_history_rv_iv"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="40px"
             android:scaleType="centerCrop"
-            android:layout_width="300px"
-            android:layout_height="200px" />
-
+            android:layout_centerVertical="true"
+            android:layout_width="150px"
+            android:layout_height="150px" />
         <RelativeLayout
-            android:layout_marginRight="28px"
-            android:layout_marginLeft="20px"
-            android:layout_alignBottom="@+id/activity_look_history_rv_iv"
+            android:layout_alignTop="@+id/activity_look_history_rv_iv"
             android:layout_toRightOf="@+id/activity_look_history_rv_iv"
             android:layout_width="match_parent"
-            android:layout_height="200px">
-
+            android:layout_height="match_parent">
             <TextView
+                android:layout_marginTop="10px"
+                android:ellipsize="end"
                 android:lines="1"
-                android:ellipsize="end"
-                android:layout_alignParentBottom="true"
-                android:id="@+id/activity_look_history_rv_tv_time"
-                android:textSize="26px"
-                android:textColor="@color/black_333333"
-                android:text="2018.04.21 11:34"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
+                android:textStyle="bold"
                 android:id="@+id/activity_look_history_rv_tv_title"
-                android:lines="4"
-                android:ellipsize="end"
-                android:layout_marginTop="6px"
-                android:textColor="@color/black_333333"
+                android:textColor="#333333"
                 android:textSize="30px"
-                android:text="云南旅游活动云南旅游活动云南旅游活动云南"
+                android:text="我的视频"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
+            <TextView
+                android:layout_marginTop="30px"
+                android:layout_below="@+id/activity_look_history_rv_tv_title"
+                android:id="@+id/activity_look_history_rv_tv_time"
+                android:textColor="#999999"
+                android:textSize="28px"
+                android:text="2018-9-3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginBottom="8px"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:paddingTop="5px"
+                    android:paddingBottom="5px"
+                    android:paddingLeft="30px"
+                    android:paddingRight="30px"
+                    android:background="@drawable/bg_gray_border_27px"
+                    android:textSize="24px"
+                    android:id="@+id/tv_btn_delete"
+                    android:layout_marginRight="10px"
+                    android:gravity="center"
+                    android:textColor="#686868"
+                    android:text="删除"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </RelativeLayout>
-
     </RelativeLayout>
-    
-    <View
-        android:layout_marginRight="40px"
-        android:layout_marginLeft="40px"
-        android:background="@color/line"
-        android:layout_width="match_parent"
-        android:layout_height="2px"/>
-
 </LinearLayout>

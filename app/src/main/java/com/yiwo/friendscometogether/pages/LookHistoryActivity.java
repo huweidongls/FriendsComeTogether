@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,7 @@ public class LookHistoryActivity extends BaseActivity {
     @BindView(R.id.activity_look_history_rl_back)
     RelativeLayout rlBack;
     @BindView(R.id.activity_look_history_rv)
-    SwipeMenuRecyclerView recyclerView;
+    RecyclerView recyclerView;
 
 
     //    //数据库
@@ -94,8 +95,16 @@ public class LookHistoryActivity extends BaseActivity {
         recyclerView.setLayoutManager(manager);
         mList.addAll(lookHistoryDbModelDao.queryBuilder().where(LookHistoryDbModelDao.Properties.User_id.eq(spImp.getUID())).orderDesc(LookHistoryDbModelDao.Properties.Look_time).list());
         adapter = new LookHistoryAdapter(mList);
-        recyclerView.setSwipeMenuCreator(mSwipeMenuCreator);
-        recyclerView.setSwipeMenuItemClickListener(mMenuItemClickListener);
+        adapter.setDeleteListenner(new LookHistoryAdapter.OnDeleteListenner() {
+            @Override
+            public void deleteListen(int position) {
+                lookHistoryDbModelDao.delete(mList.get(position));
+                mList.remove(position);
+                adapter.notifyDataSetChanged();
+            }
+        });
+//        recyclerView.setSwipeMenuCreator(mSwipeMenuCreator);
+//        recyclerView.setSwipeMenuItemClickListener(mMenuItemClickListener);
         recyclerView.setAdapter(adapter);
 //
 //        adapter = new LookHistoryAdapter(mList);
