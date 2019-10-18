@@ -131,6 +131,9 @@ public class MyApplication extends Application {
             // 注册定位信息提供者类（可选）,如果需要发送地理位置消息，必须提供。
             // demo中使用高德地图实现了该提供者，开发者可以根据自身需求，选用高德，百度，google等任意第三方地图和定位SDK。
             NimUIKit.setLocationProvider(new NimDemoLocationProvider());
+
+            //关闭消息提醒。
+            NIMClient.toggleNotification(false);
         }
         DemoCache.setContext(this);
     }
@@ -194,7 +197,7 @@ public class MyApplication extends Application {
 
         // 如果将新消息通知提醒托管给 SDK 完成，需要添加以下配置。否则无需设置。
         StatusBarNotificationConfig config = new StatusBarNotificationConfig();
-        config.notificationEntrance = WelcomeActivity.class; // 点击通知栏跳转到该Activity
+        config.notificationEntrance = MainActivity.class; // 点击通知栏跳转到该Activity
         config.notificationSmallIconId = R.mipmap.logo_gray;
         // 呼吸灯配置
         config.ledARGB = Color.GREEN;

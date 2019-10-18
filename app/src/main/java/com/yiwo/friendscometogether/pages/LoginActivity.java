@@ -168,6 +168,7 @@ public class LoginActivity extends BaseActivity {
                                     spImp.setYXTOKEN(js.optString("token"));
                                     spImp.setWyUpAccid(js.optString("wy_up_accid"));
                                     spImp.setWyUpToken(js.optString("wy_up_token"));
+                                    spImp.setIsAdmin(js.getString("isAdmin"));
                                     account = js.optString("wy_accid");
                                     String token = js.optString("token");
                                     LoginInfo info = new LoginInfo(account, token);
@@ -179,14 +180,14 @@ public class LoginActivity extends BaseActivity {
 //                                                    NIMClient.getService(MsgService.class).();
                                                     toToast(LoginActivity.this, "登录成功");
 
-//                                                    NIMClient.getService(MsgService.class).queryRecentContacts().setCallback(new RequestCallbackWrapper<List<RecentContact>>() {
-//                                                        @Override
-//                                                        public void onResult(int i, List<RecentContact> recentContacts, Throwable throwable) {
-//                                                            for (int i1 = 0;i<recentContacts.size();i++){
-//                                                                NIMClient.getService(MsgService.class).updateRecent(recentContacts.get(i1));
-//                                                            }
-//                                                        }
-//                                                    });
+                                                    NIMClient.getService(MsgService.class).queryRecentContacts().setCallback(new RequestCallbackWrapper<List<RecentContact>>() {
+                                                        @Override
+                                                        public void onResult(int i, List<RecentContact> recentContacts, Throwable throwable) {
+                                                            for (int i1 = 0;i<recentContacts.size();i++){
+                                                                NIMClient.getService(MsgService.class).updateRecent(recentContacts.get(i1));
+                                                            }
+                                                        }
+                                                    });
                                                     NimUIKit.setMsgForwardFilter(new MsgForwardFilter() {
                                                         @Override
                                                         public boolean shouldIgnore(IMMessage message) {

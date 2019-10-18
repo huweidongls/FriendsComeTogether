@@ -19,6 +19,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.ActicleCommentVideoModel;
 import com.yiwo.friendscometogether.model.ArticleCommentListModel;
 import com.yiwo.friendscometogether.newpage.JuBaoActivity;
+import com.yiwo.friendscometogether.sp.SpImp;
 
 import java.util.List;
 
@@ -33,7 +34,8 @@ public class ArticleCommentCommentVideoAdapter extends RecyclerView.Adapter<Arti
     private Context context;
     private List<ActicleCommentVideoModel.ObjBean.ReplyListBean> data;
     private OnReplyCommentListener listener;
-
+    private OnDeleteHuiFuListener onDeleteHuiFuListener;
+    private SpImp spImp;
     public void setOnReplyCommentListener(OnReplyCommentListener listener){
         this.listener = listener;
     }
@@ -45,6 +47,7 @@ public class ArticleCommentCommentVideoAdapter extends RecyclerView.Adapter<Arti
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
+        spImp = new SpImp(context);
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_article_comment_comment_video, parent, false);
         ScreenAdapterTools.getInstance().loadView(view);
         ViewHolder holder = new ViewHolder(view);
@@ -60,6 +63,19 @@ public class ArticleCommentCommentVideoAdapter extends RecyclerView.Adapter<Arti
             @Override
             public void onClick(View view) {
                 listener.onReplyComment(data.get(position).getVcID());
+            }
+        });
+        if (spImp.getIsAdmin().equals("1")){
+            holder.btn_delete.setVisibility(View.VISIBLE);
+        }else {
+            holder.btn_delete.setVisibility(View.INVISIBLE);
+        }
+        holder.btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (spImp.getIsAdmin().equals("1")){
+                    onDeleteHuiFuListener.OnDelete(data.get(position).getVcID(),data.get(position).getVcontent());
+                }
             }
         });
 //        holder.ll.setOnLongClickListener(new View.OnLongClickListener() {
@@ -93,23 +109,32 @@ public class ArticleCommentCommentVideoAdapter extends RecyclerView.Adapter<Arti
         return data == null ? 0 : data.size();
     }
 
+    public void setOnDeleteHuiFuListener(OnDeleteHuiFuListener onDeleteHuiFuListener) {
+        this.onDeleteHuiFuListener = onDeleteHuiFuListener;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tv;
         private LinearLayout ll;
         private TextView tv_name;
         private ImageView imageView;
+        private TextView btn_delete;
         public ViewHolder(View itemView) {
             super(itemView);
             tv = itemView.findViewById(R.id.activity_article_comment_rv_rv_tv);
             ll = itemView.findViewById(R.id.ll);
             tv_name = itemView.findViewById(R.id.tv_name);
             imageView = itemView.findViewById(R.id.activity_article_comment_rv_rv_iv_avatar);
+            btn_delete = itemView.findViewById(R.id.btn_delete);
         }
+
     }
 
     public interface OnReplyCommentListener{
         void onReplyComment(String ID);
     }
-
+    public interface OnDeleteHuiFuListener{
+        void OnDelete(String id,String content);
+    }
 }

@@ -32,6 +32,7 @@ public class HomeListYouJiAdapter extends RecyclerView.Adapter<HomeListYouJiAdap
 
     private List<HomeDataModel.ObjBean> data;
     private Context context;
+    private OnLongClickListener onLongClickListener;
     public HomeListYouJiAdapter(List<HomeDataModel.ObjBean> data){
         this.data = data;
     }
@@ -66,6 +67,15 @@ public class HomeListYouJiAdapter extends RecyclerView.Adapter<HomeListYouJiAdap
         holder.tvUsername.setText(data.get(position).getUsername());
         holder.tvTime.setText(data.get(position).getPftime());
         holder.tvGoodNum.setText(data.get(position).getFmgood());
+        holder.rv_youji.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (onLongClickListener!=null){
+                    onLongClickListener.OnLongClick(position);
+                }
+                return false;
+            }
+        });
         holder.rv_youji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +112,14 @@ public class HomeListYouJiAdapter extends RecyclerView.Adapter<HomeListYouJiAdap
         return data == null ? 0 : data.size();
     }
 
+    public OnLongClickListener getOnLongClickListener() {
+        return onLongClickListener;
+    }
+
+    public void setOnLongClickListener(OnLongClickListener onLongClickListener) {
+        this.onLongClickListener = onLongClickListener;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder{
         private RelativeLayout rv_youji;
         private ImageView iv_youji;
@@ -121,5 +139,8 @@ public class HomeListYouJiAdapter extends RecyclerView.Adapter<HomeListYouJiAdap
             tvTime = itemView.findViewById(R.id.tv_time);
             tvGoodNum = itemView.findViewById(R.id.tv_good_num);
         }
+    }
+    public interface OnLongClickListener{
+        void OnLongClick(int position);
     }
 }

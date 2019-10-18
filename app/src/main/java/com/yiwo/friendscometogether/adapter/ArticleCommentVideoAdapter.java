@@ -21,6 +21,7 @@ import com.yiwo.friendscometogether.model.ActicleCommentVideoModel;
 import com.yiwo.friendscometogether.model.ArticleCommentListModel;
 import com.yiwo.friendscometogether.newpage.JuBaoActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
+import com.yiwo.friendscometogether.sp.SpImp;
 
 import java.util.List;
 
@@ -33,7 +34,8 @@ public class ArticleCommentVideoAdapter extends RecyclerView.Adapter<ArticleComm
     private Context context;
     private List<ActicleCommentVideoModel.ObjBean> data;
     private OnReplyListener listener;
-
+    private OnDeletePinLun deletePinLunLis;
+    private SpImp spImp;
     public void setOnReplyListener(OnReplyListener listener){
         this.listener = listener;
     }
@@ -45,6 +47,7 @@ public class ArticleCommentVideoAdapter extends RecyclerView.Adapter<ArticleComm
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
+        spImp = new SpImp(context);
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_article_comment_video, parent, false);
         ScreenAdapterTools.getInstance().loadView(view);
         ViewHolder holder = new ViewHolder(view);
@@ -90,6 +93,19 @@ public class ArticleCommentVideoAdapter extends RecyclerView.Adapter<ArticleComm
             }
         });
         holder.tvTime.setText(data.get(position).getVctime());
+        if (spImp.getIsAdmin().equals("1")){
+            holder.btn_delete_pinglun.setVisibility(View.VISIBLE);
+        }else {
+            holder.btn_delete_pinglun.setVisibility(View.GONE);
+        }
+        holder.btn_delete_pinglun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (deletePinLunLis!=null){
+                    deletePinLunLis.onDeletePinLun(data.get(position).getVcID(),data.get(position).getVcontent());
+                }
+            }
+        });
         if (data.get(position).getReplyList().size() > 0) {
             holder.recyclerView.setVisibility(View.VISIBLE);
             LinearLayoutManager manager = new LinearLayoutManager(context);
@@ -101,6 +117,12 @@ public class ArticleCommentVideoAdapter extends RecyclerView.Adapter<ArticleComm
                 @Override
                 public void onReplyComment(String ID) {
                     listener.onReply(position, ID);
+                }
+            });
+            adapter.setOnDeleteHuiFuListener(new ArticleCommentCommentVideoAdapter.OnDeleteHuiFuListener() {
+                @Override
+                public void OnDelete(String id, String content) {
+                    deletePinLunLis.onDeletePinLun(id,content);
                 }
             });
         }else {
@@ -119,6 +141,10 @@ public class ArticleCommentVideoAdapter extends RecyclerView.Adapter<ArticleComm
         return data == null ? 0 : data.size();
     }
 
+    public void setDeletePinLunLis(OnDeletePinLun deletePinLunLis) {
+        this.deletePinLunLis = deletePinLunLis;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView ivAvatar;
         private TextView tvNickname;
@@ -127,7 +153,7 @@ public class ArticleCommentVideoAdapter extends RecyclerView.Adapter<ArticleComm
         private TextView tvTime;
         private RecyclerView recyclerView;
         private TextView tvReply;
-
+        private TextView btn_delete_pinglun;
         private LinearLayout ll;
 
         public ViewHolder(View itemView) {
@@ -140,10 +166,14 @@ public class ArticleCommentVideoAdapter extends RecyclerView.Adapter<ArticleComm
             recyclerView = itemView.findViewById(R.id.activity_article_comment_rv_rv);
             tvReply = itemView.findViewById(R.id.activity_article_comment_rv_tv_reply);
             ll = itemView.findViewById(R.id.ll);
+            btn_delete_pinglun = itemView.findViewById(R.id.btn_delete_pinglun);
         }
     }
 
     public interface OnReplyListener{
         void onReply(int position, String id);
+    }
+    public interface OnDeletePinLun{
+        void onDeletePinLun(String id,String content);
     }
 }

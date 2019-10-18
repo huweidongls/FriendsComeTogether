@@ -1,8 +1,10 @@
 package com.yiwo.friendscometogether.pages;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -50,8 +52,6 @@ import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
-import com.yiwo.friendscometogether.adapter.ActivityVideoAdapter;
-import com.yiwo.friendscometogether.adapter.ArticleCommentAdapter;
 import com.yiwo.friendscometogether.adapter.ArticleCommentVideoAdapter;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
@@ -94,6 +94,8 @@ public class VideoActivity extends FragmentActivity {
 
     @BindView(R.id.ll_btns)
     LinearLayout ll_btns;
+    @BindView(R.id.ll_delete)
+    LinearLayout ll_delete;
     @BindView(R.id.iv_zan)
     ImageView iv_zan;
     @BindView(R.id.tv_zan_num)
@@ -163,6 +165,24 @@ public class VideoActivity extends FragmentActivity {
                 vcID = id;
                 vPostion = position;
                 showKeyboard(etComment);
+            }
+        });
+        articleCommentVideoAdapter.setDeletePinLunLis(new ArticleCommentVideoAdapter.OnDeletePinLun() {
+            @Override
+            public void onDeletePinLun(final String id, String content) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(VideoActivity.this);
+                builder.setMessage("是否删除“"+content+"”")
+                        .setNegativeButton("是", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deletePinglun(id);
+                            }
+                        }).setPositiveButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
             }
         });
         rv_pinglun.setAdapter(articleCommentVideoAdapter);
@@ -277,7 +297,40 @@ public class VideoActivity extends FragmentActivity {
         });
     }
 
+    private void deletePinglun(String id) {
+        ViseHttp.POST(NetConfig.managerComments)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.managerComments))
+                .addParam("type", "1")
+                .addParam("delID",id)
+                .addParam("userID",spImp.getUID())
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                toToast(VideoActivity.this,"删除成功");
+//                                initData();
+                                initPingLun();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+                        toToast(VideoActivity.this,"删除失败："+errCode+"/"+errMsg);
+                    }
+                });
+    }
+
     private void initData() {
+        if (spImp.getIsAdmin().equals("1")){
+            ll_delete.setVisibility(View.VISIBLE);
+        }else {
+            ll_delete.setVisibility(View.GONE);
+        }
         mode = (YouJiListModel.ObjBean) getIntent().getSerializableExtra("data");
         if (mode!=null){
             url = mode.getVurl();
@@ -362,7 +415,7 @@ public class VideoActivity extends FragmentActivity {
         transaction.commit();
     }
 
-    @OnClick({R.id.iv_back, R.id.rl_active,R.id.iv_zan,R.id.iv_pinglun,R.id.iv_fenxiang,R.id.iv_xiangguanhuodong,R.id.iv_close,R.id.tv_comment,R.id.rl_back})
+    @OnClick({R.id.iv_back, R.id.rl_active,R.id.iv_zan,R.id.iv_pinglun,R.id.iv_fenxiang,R.id.iv_xiangguanhuodong,R.id.ll_delete,R.id.iv_close,R.id.tv_comment,R.id.rl_back})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -410,6 +463,9 @@ public class VideoActivity extends FragmentActivity {
                         }).open();
                 break;
             case R.id.iv_xiangguanhuodong:
+                break;
+            case R.id.ll_delete:
+                deleteYouJiOrVideo("1",vid);
                 break;
             case R.id.iv_close:
                 startPingLunHideAnim();
@@ -782,5 +838,51 @@ public class VideoActivity extends FragmentActivity {
         String tokens = StringUtils.stringToMD5(token);
         return tokens;
     }
+    private void deleteYouJiOrVideo(final String type, final String delID) {// 传type 0删除游记 1删除视频  delID要删除的ID   userID登录用户的ID
+        Log.d("删除视频：：",""+delID);
+        AlertDialog.Builder builder = new AlertDialog.Builder(VideoActivity.this);
+        builder.setMessage("确定删除此视频？");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ViseHttp.POST(NetConfig.managerInfo)
+                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.managerInfo))
+                        .addParam("type", type)
+                        .addParam("delID",delID)
+                        .addParam("userID",spImp.getUID())
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(data);
+                                    if (jsonObject.getInt("code") == 200){
+                                        toToast(VideoActivity.this,"删除成功！");
+                                        Intent intent = new Intent();
+                                        intent.putExtra("deleteID",vid);
+                                        intent.setAction("android.friendscometogether.HomeFragment2.Video");
+//                                        intent.setAction("android.friendscometogether.HomeFragment2.GuanZhu");
+//                                        intent.setAction("android.friendscometogether.HomeFragment2.TuiJian_Youji");
+                                        //发送广播
+                                        sendBroadcast(intent);
+                                        finish();
+                                        finish();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
 
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+
+                            }
+                        });
+            }
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).show();
+    }
 }

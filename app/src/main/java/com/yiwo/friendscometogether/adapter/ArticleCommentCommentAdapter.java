@@ -15,6 +15,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.ArticleCommentListModel;
 import com.yiwo.friendscometogether.newpage.JuBaoActivity;
+import com.yiwo.friendscometogether.sp.SpImp;
 
 import java.util.List;
 
@@ -26,7 +27,9 @@ public class ArticleCommentCommentAdapter extends RecyclerView.Adapter<ArticleCo
 
     private Context context;
     private List<ArticleCommentListModel.ObjBean.PicBean> data;
+    private SpImp spImp;
     private OnReplyCommentListener listener;
+    private OnDeleteListener deleteListener;
 
     public void setOnReplyCommentListener(OnReplyCommentListener listener){
         this.listener = listener;
@@ -39,6 +42,7 @@ public class ArticleCommentCommentAdapter extends RecyclerView.Adapter<ArticleCo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
+        spImp = new SpImp(context);
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_article_comment_comment, parent, false);
         ScreenAdapterTools.getInstance().loadView(view);
         ViewHolder holder = new ViewHolder(view);
@@ -52,6 +56,19 @@ public class ArticleCommentCommentAdapter extends RecyclerView.Adapter<ArticleCo
             @Override
             public void onClick(View view) {
                 listener.onReplyComment(data.get(position).getFcID());
+            }
+        });
+        if (spImp.getIsAdmin().equals("1")){
+            holder.btn_delete.setVisibility(View.VISIBLE);
+        }else {
+            holder.btn_delete.setVisibility(View.INVISIBLE);
+        }
+        holder.btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (deleteListener!=null){
+                    deleteListener.onDelete(data.get(position).getFcID(),data.get(position).getFctitle());
+                }
             }
         });
         holder.ll.setOnLongClickListener(new View.OnLongClickListener() {
@@ -85,19 +102,27 @@ public class ArticleCommentCommentAdapter extends RecyclerView.Adapter<ArticleCo
         return data == null ? 0 : data.size();
     }
 
+    public void setDeleteListener(OnDeleteListener deleteListener) {
+        this.deleteListener = deleteListener;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tv;
+        private TextView btn_delete;
         private LinearLayout ll;
         public ViewHolder(View itemView) {
             super(itemView);
             tv = itemView.findViewById(R.id.activity_article_comment_rv_rv_tv);
             ll = itemView.findViewById(R.id.ll);
+            btn_delete = itemView.findViewById(R.id.btn_delete);
         }
     }
 
     public interface OnReplyCommentListener{
         void onReplyComment(String ID);
     }
-
+    public interface OnDeleteListener{
+        void onDelete(String id,String content);
+    }
 }

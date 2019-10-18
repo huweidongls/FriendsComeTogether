@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -14,13 +14,26 @@
             android:layout_width="50px"
             android:layout_height="50px" />
         <TextView
+            android:layout_toRightOf="@+id/activity_article_comment_rv_rv_iv_avatar"
             android:layout_margin="2px"
             android:id="@+id/tv_name"
             android:textSize="28px"
             android:textColor="@color/black_333333"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-    </LinearLayout>
+        <TextView
+            android:layout_marginRight="40px"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:id="@+id/btn_delete"
+            android:textSize="28px"
+            android:textColor="@color/red_d84c37"
+            android:text="删除"
+            android:layout_width="100px"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
     <TextView
         android:layout_marginTop="2px"
         android:layout_marginBottom="2px"

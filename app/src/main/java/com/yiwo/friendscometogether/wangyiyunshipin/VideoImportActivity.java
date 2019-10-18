@@ -334,7 +334,7 @@ public class VideoImportActivity extends BaseActivity implements ShortVideoGalle
      * 完成裁剪时间选择
      */
     private void finishCutFile() {
-        DialogMaker.showProgressDialog(this, "视频载入中");
+        DialogMaker.showProgressDialog(this, "视频载入中",false);
         MediaCaptureOptions mediaCaptureOptions = new MediaCaptureOptions();
         mediaCaptureOptions.mFilePath = videoItem.getFilePath();
         VideoProcessOptions videoProcessOptions = new VideoProcessOptions(mediaCaptureOptions);

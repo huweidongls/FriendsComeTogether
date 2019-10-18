@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
@@ -40,7 +41,11 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
+import com.yiwo.friendscometogether.model.CityModel;
+import com.yiwo.friendscometogether.network.ActivityConfig;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.pages.CityActivity;
+import com.yiwo.friendscometogether.pages.UpdateActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.FileUtils;
 import com.yiwo.friendscometogether.wangyiyunshipin.TakeVideoFragment_new;
@@ -70,6 +75,11 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
     EditText editText;
     @BindView(R.id.activity_up_load_video_tv_title_num)
     TextView tv_num;
+    @BindView(R.id.activity_create_friend_remember_tv_activity_city)
+    EditText tvCity;
+
+    private static final int REQUEST_CODE_GET_CITY = 1;
+
     private VideoItem videoItem;
     private String url_screenshot;
     private SpImp spImp;
@@ -98,23 +108,16 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
         Glide.with(UpLoadVideoActivity.this).load(videoItem.getUriString()).apply(new RequestOptions().error(R.mipmap.zanwutupian)).into(iv);
         initData();
     }
-    @OnClick({R.id.rl_back,R.id.activity_up_load_video_rl_complete})
+    @OnClick({R.id.rl_back,R.id.activity_up_load_video_rl_complete,R.id.rl_choose_address})
      public void onClick(View view){
         switch (view.getId()){
             case R.id.rl_back:
-                AlertDialog.Builder dialog = new AlertDialog.Builder(UpLoadVideoActivity.this);
-                dialog.setMessage("确定退出并取消发布视频？")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                            }
-                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                }).show();
+                close();
+                break;
+            case R.id.rl_choose_address:
+                Intent it = new Intent(UpLoadVideoActivity.this, CityActivity.class);
+                it.putExtra(ActivityConfig.ACTIVITY, "createYouJi");
+                startActivityForResult(it, REQUEST_CODE_GET_CITY);
                 break;
             case R.id.activity_up_load_video_rl_complete:
 
@@ -242,6 +245,7 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
                         .addParam("vurl",addVideoResponseEntity.getVideoInfoEntity().getOrigUrl())
                         .addParam("img",addVideoResponseEntity.getVideoInfoEntity().getSnapshotUrl())
                         .addParam("wy_vid",addVideoResponseEntity.getVideoInfoEntity().getVid()+"")
+                        .addParam("address",tvCity.getText().toString())
                         .request(new ACallback<String>() {
                             @Override
                             public void onSuccess(String data) {
@@ -290,19 +294,7 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(UpLoadVideoActivity.this);
-        dialog.setMessage("确定退出并取消发布视频？")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        }).show();
+        close();
     }
     private void showActivePopupwindow() {
 
@@ -316,6 +308,8 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
             public void onClick(View v) {
                 if (editText.getText().toString().equals("")){
                     toToast(UpLoadVideoActivity.this,"请输入视频名字！");
+                }else if (TextUtils.isEmpty(tvCity.getText().toString())){
+                    Toast.makeText(UpLoadVideoActivity.this, "请填写地点", Toast.LENGTH_SHORT).show();
                 }else {
                     uploadFile(videoItem);
                 }
@@ -325,19 +319,7 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 保存至相册
-                File pictureFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsoluteFile();
-                File appDir = new File(pictureFolder, "Camera");
-                if (!appDir.exists()) {
-                    appDir.mkdirs();
-                }
-                String fileName = "瞳伴视频_" + System.currentTimeMillis() + ".MP4";
-                File destFile = new File(appDir, fileName);
-                FileUtils.copy(new File(videoItem.getFilePath()), destFile);
-                // 最后通知图库更新
-                sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                        Uri.fromFile(new File(destFile.getPath()))));
-                toToast(UpLoadVideoActivity.this,"保存成功！");
+                saveVideo2Phone();
                 popupWindow.dismiss();
             }
         });
@@ -380,5 +362,52 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_GET_CITY && data != null && resultCode == 1) {//选择城市
+            CityModel model = (CityModel) data.getSerializableExtra(ActivityConfig.CITY);
+            tvCity.setText(model.getName());
+        } else if (requestCode == REQUEST_CODE_GET_CITY && resultCode == 2) {//重置
+            tvCity.setText("");
+            tvCity.setHint("请选择或输入活动地点");
+        } else if (requestCode == REQUEST_CODE_GET_CITY && resultCode == 3) {//国际城市
+            String city = data.getStringExtra("city");
+            tvCity.setText(city);
+        }
+    }
+    private void close(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(UpLoadVideoActivity.this);
+        dialog.setMessage("是否保存至相册？")
+                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        saveVideo2Phone();
+                        finish();
+                    }
+                })
+                .setNegativeButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+        }).show();
+    }
+    private void saveVideo2Phone(){
+        // 保存至相册
+        File pictureFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsoluteFile();
+        File appDir = new File(pictureFolder, "Camera");
+        if (!appDir.exists()) {
+            appDir.mkdirs();
+        }
+        String fileName = "瞳伴视频_" + System.currentTimeMillis() + ".MP4";
+        File destFile = new File(appDir, fileName);
+        FileUtils.copy(new File(videoItem.getFilePath()), destFile);
+        // 最后通知图库更新
+        sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                Uri.fromFile(new File(destFile.getPath()))));
+        toToast(UpLoadVideoActivity.this,"保存成功！");
     }
 }

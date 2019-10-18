@@ -254,6 +254,8 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
         initData();
         updateUI();
         initMusicPlayer();
+        //分段页面 默认第一段选中设置为
+        firstVideoLayout.callOnClick();
     }
 
     private void initMusicPlayer() {

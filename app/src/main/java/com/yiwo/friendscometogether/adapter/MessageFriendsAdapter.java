@@ -94,7 +94,7 @@ public class MessageFriendsAdapter extends RecyclerView.Adapter<MessageFriendsAd
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.putExtra("person_id", data.get(position).getFuserID());
+                intent.putExtra("person_id", data.get(position).getUserID());
                 intent.setClass(context, PersonMainActivity1.class);
                 context.startActivity(intent);
             }

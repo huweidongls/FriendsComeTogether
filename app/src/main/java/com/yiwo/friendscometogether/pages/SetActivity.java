@@ -104,6 +104,9 @@ public class SetActivity extends BaseActivity {
                                 spImp.setUID("0");
                                 spImp.setYXID("0");
                                 spImp.setYXTOKEN("0");
+                                spImp.setIsAdmin("0");
+                                spImp.setWyUpAccid("");
+                                spImp.setWyUpToken("");
                                 spCache.clear();
                                 NimUIKit.logout();
                                 MyApplication.getInstance().exit();

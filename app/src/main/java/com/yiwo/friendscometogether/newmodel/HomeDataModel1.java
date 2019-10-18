@@ -294,6 +294,7 @@ public class HomeDataModel1 {
              * comment_list : [{"username":"139","fcID":"75","fmID":"1716","fctitle":"测试","fctime":"1561353212","userID":"130","buserID":"30","fcreply":"0","fcquote":null,"fcquoteid":null,"which_fcID":"0","greatcomment":"0"},{"username":"139","fcID":"76","fmID":"1716","fctitle":"测试","fctime":"1561353457","userID":"130","buserID":"130","fcreply":"75","fcquote":null,"fcquoteid":null,"which_fcID":"75","greatcomment":"75"}]
              * commentcount : 5
              * data_type : 2
+             * vurl ; ""
              */
 
             private String pfID;
@@ -312,6 +313,7 @@ public class HomeDataModel1 {
             private String author;
             private String commentcount;
             private String data_type;
+            private String vurl;
             private List<String> pfpic;
             private List<CommentListBean> comment_list;
 
@@ -457,6 +459,14 @@ public class HomeDataModel1 {
 
             public void setComment_list(List<CommentListBean> comment_list) {
                 this.comment_list = comment_list;
+            }
+
+            public String getVurl() {
+                return vurl;
+            }
+
+            public void setVurl(String vurl) {
+                this.vurl = vurl;
             }
 
             public static class CommentListBean {

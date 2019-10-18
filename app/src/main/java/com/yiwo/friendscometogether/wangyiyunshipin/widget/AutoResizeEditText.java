@@ -20,7 +20,7 @@ public class AutoResizeEditText extends AppCompatEditText {
     // 最小字体
     private static final float DEFAULT_MIN_TEXT_SIZE = 8.0f;
     // 最大字体
-    private static final float DEFAULT_MAX_TEXT_SIZE = 16.0f;
+    private static final float DEFAULT_MAX_TEXT_SIZE = 28.0f;
 
     private Paint textPaint;
     private float minTextSize = DEFAULT_MIN_TEXT_SIZE;

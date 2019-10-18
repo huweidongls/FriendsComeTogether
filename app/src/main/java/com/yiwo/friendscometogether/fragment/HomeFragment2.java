@@ -2,9 +2,13 @@ package com.yiwo.friendscometogether.fragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -200,6 +204,7 @@ public class HomeFragment2 extends BaseFragment {
     private List<View> viewList = new ArrayList<>();
     private View view1,view2,view3,view4;
     private TextView tv_text_youji,tv_text_youju;
+    private NotifyAdatpterBroadcastReceiver broadcastReceiver = new NotifyAdatpterBroadcastReceiver();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -209,12 +214,12 @@ public class HomeFragment2 extends BaseFragment {
         ScreenAdapterTools.getInstance().loadView(rootView);
         spImp = new SpImp(getContext());
         AppUpdateUtil.checkUpdate(getActivity(),true);
+        registerBroadCaset();
         getLocation();
         initData();
         initRv_Vp();
         return rootView;
     }
-
     private void initRv_Vp() {
         view1 = getLayoutInflater().inflate(R.layout.layout_home_tuijian, null);
         view2 = getLayoutInflater().inflate(R.layout.layout_home_guanzhu, null);
@@ -452,8 +457,8 @@ public class HomeFragment2 extends BaseFragment {
             public void onLoadMore(@NonNull final RefreshLayout refreshLayout) {
                 switch (type){
                     case "1":
-                        ViseHttp.POST(NetConfig.homeRecommend)
-                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeRecommend))
+                        ViseHttp.POST(NetConfig.homeRecommend2)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeRecommend2))
                                 .addParam("uid", uid)
                                 .addParam("city", cityName)
                                 .addParam("page",page1+"")
@@ -502,8 +507,8 @@ public class HomeFragment2 extends BaseFragment {
                                 });
                         break;
                     case "2":
-                        ViseHttp.POST(NetConfig.homeGuanZhu)
-                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeGuanZhu))
+                        ViseHttp.POST(NetConfig.homeGuanZhu2)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeGuanZhu2))
                                 .addParam("uid", uid)
                                 .addParam("page",page2+"")
                                 .request(new ACallback<String>() {
@@ -689,8 +694,8 @@ public class HomeFragment2 extends BaseFragment {
 
         uid = spImp.getUID();
         //推荐
-        ViseHttp.POST(NetConfig.homeRecommend)
-                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeRecommend))
+        ViseHttp.POST(NetConfig.homeRecommend2)
+                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeRecommend2))
                 .addParam("uid", uid)
                 .addParam("city", cityName)
                 .request(new ACallback<String>() {
@@ -749,8 +754,8 @@ public class HomeFragment2 extends BaseFragment {
                     }
                 });
         //关注
-        ViseHttp.POST(NetConfig.homeGuanZhu)
-                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeGuanZhu))
+        ViseHttp.POST(NetConfig.homeGuanZhu2)
+                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeGuanZhu2))
                 .addParam("uid", uid)
                 .request(new ACallback<String>() {
                     @Override
@@ -808,6 +813,11 @@ public class HomeFragment2 extends BaseFragment {
                                 page3 = 2;
                                 mList3 = model.getObj();
                                 adapter3 = new HomeListYouJiAdapter(mList3);
+                                adapter3.setOnLongClickListener(new HomeListYouJiAdapter.OnLongClickListener() {
+                                    @Override
+                                    public void OnLongClick(int position) {
+                                    }
+                                });
                                 // /设置布局管理器为2列，纵向
                                 StaggeredGridLayoutManager mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL){
                                     @Override
@@ -862,6 +872,7 @@ public class HomeFragment2 extends BaseFragment {
                     }
                 });
     }
+
 
     @Override
     public void onStart() {
@@ -1021,8 +1032,8 @@ public class HomeFragment2 extends BaseFragment {
 //        dialog_loading = WeiboDialogUtils.createLoadingDialog(getContext(),"加载中...");
         switch (type){
             case "1":
-                ViseHttp.POST(NetConfig.homeRecommend)
-                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeRecommend))
+                ViseHttp.POST(NetConfig.homeRecommend2)
+                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeRecommend2))
                         .addParam("uid", uid)
                         .addParam("city", cityName)
                         .request(new ACallback<String>() {
@@ -1067,8 +1078,8 @@ public class HomeFragment2 extends BaseFragment {
                         });
                 break;
             case "2":
-                ViseHttp.POST(NetConfig.homeGuanZhu)
-                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeGuanZhu))
+                ViseHttp.POST(NetConfig.homeGuanZhu2)
+                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeGuanZhu2))
                         .addParam("uid", uid)
                         .request(new ACallback<String>() {
                             @Override
@@ -1207,8 +1218,8 @@ public class HomeFragment2 extends BaseFragment {
             cityName = model.getName();
             cityId = model.getId();
             dialog_loading = WeiboDialogUtils.createLoadingDialog(getContext(), "正在加载...");
-            ViseHttp.POST(NetConfig.homeRecommend)
-                    .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeRecommend))
+            ViseHttp.POST(NetConfig.homeRecommend2)
+                    .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeRecommend2))
                     .addParam("uid", uid)
                     .addParam("city", cityName)
                     .request(new ACallback<String>() {
@@ -1254,8 +1265,8 @@ public class HomeFragment2 extends BaseFragment {
 //            cityTv.setText(latLongString);
             cityTv.setText("选择城市");
             dialog_loading = WeiboDialogUtils.createLoadingDialog(getContext(),"正在加载...");
-            ViseHttp.POST(NetConfig.homeRecommend)
-                    .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeRecommend))
+            ViseHttp.POST(NetConfig.homeRecommend2)
+                    .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeRecommend2))
                     .addParam("uid", uid)
                     .addParam("city", cityName)
                     .request(new ACallback<String>() {
@@ -1301,8 +1312,8 @@ public class HomeFragment2 extends BaseFragment {
             cityName = city;
             cityTv.setText(city);
             dialog_loading = WeiboDialogUtils.createLoadingDialog(getContext(),"正在加载...");
-            ViseHttp.POST(NetConfig.homeRecommend)
-                    .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeRecommend))
+            ViseHttp.POST(NetConfig.homeRecommend2)
+                    .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeRecommend2))
                     .addParam("uid", uid)
                     .addParam("city", cityName)
                     .request(new ACallback<String>() {
@@ -1346,5 +1357,76 @@ public class HomeFragment2 extends BaseFragment {
     }
     public void scroll2top(){
 //        scrollView.fullScroll(View.FOCUS_UP);
+    }
+
+    @Override
+    public void onDestroy() {
+        getContext().unregisterReceiver(broadcastReceiver);
+        super.onDestroy();
+    }
+
+    private void registerBroadCaset() {
+        IntentFilter filter =new IntentFilter();
+        filter.addAction("android.friendscometogether.HomeFragment2.TuiJian_Youji");
+        filter.addAction("android.friendscometogether.HomeFragment2.TuiJian_Youju");
+        filter.addAction("android.friendscometogether.HomeFragment2.GuanZhu");
+        filter.addAction("android.friendscometogether.HomeFragment2.YouJi");
+        filter.addAction("android.friendscometogether.HomeFragment2.Video");
+        getContext().registerReceiver(broadcastReceiver, filter);
+    }
+    private class NotifyAdatpterBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+// TODO Auto-generated method stub
+            String action = intent.getAction();
+            String id = intent.getStringExtra("deleteID");
+            switch (action){
+                case "android.friendscometogether.HomeFragment2.TuiJian_Youji":
+                    for (int i =0;i<mList1.size();i++){
+                        if (mList1.get(i).getPfID().equals(id)){
+                            mList1.remove(i);
+                            adapter1_1.notifyDataSetChanged();
+                            break;
+                        }
+                    }
+                    break;
+                case "android.friendscometogether.HomeFragment2.TuiJian_Youju":
+                    for (int i =0;i<mlist1_youju.size();i++){
+                        if (mlist1_youju.get(i).getPfID().equals(id)){
+                            mlist1_youju.remove(i);
+                            adapter1_2.notifyDataSetChanged();
+                            break;
+                        }
+                    }
+                        break;
+                case "android.friendscometogether.HomeFragment2.GuanZhu":
+                    for (int i =0;i<mList2.size();i++){
+                        if (mList2.get(i).getPfID().equals(id)){
+                            mList2.remove(i);
+                            adapter2.notifyDataSetChanged();
+                            break;
+                        }
+                    }
+                    break;
+                case "android.friendscometogether.HomeFragment2.YouJi":
+                    for (int i =0;i<mList3.size();i++){
+                        if (mList3.get(i).getPfID().equals(id)){
+                            mList3.remove(i);
+                            adapter3.notifyDataSetChanged();
+                            break;
+                        }
+                    }
+                    break;
+                case "android.friendscometogether.HomeFragment2.Video":
+                    for (int i =0;i<mList4.size();i++){
+                        if (mList4.get(i).getVID().equals(id)){
+                            mList4.remove(i);
+                            adapter4.notifyDataSetChanged();
+                            break;
+                        }
+                    }
+                    break;
+            }
+        }
     }
 }

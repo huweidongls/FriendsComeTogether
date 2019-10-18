@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!-- 控制呼吸灯，振动器等，用于新消息提醒 -->
+    <!-- 控制呼吸灯，振动器等，用于新消息提醒 -->网易云
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- 外置存储存取权限 -->
@@ -529,7 +529,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".newpage.MyContactActivity" />
         <activity android:name=".newpage.CreateFriendRememberNew_ChoosePicsActivity" />
-        <activity android:name=".newpage.CreateFriendRememberActivityNew" />
+        <activity android:name=".newpage.CreateFriendRememberActivityChoosePicOrVideos" />
         <activity
             android:name=".wangyiyunshipin.VideoImportActivity"
             android:screenOrientation="portrait"

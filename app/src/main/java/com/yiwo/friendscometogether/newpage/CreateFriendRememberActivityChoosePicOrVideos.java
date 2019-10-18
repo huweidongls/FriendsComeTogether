@@ -35,7 +35,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CreateFriendRememberActivityNew extends BaseActivity {
+public class CreateFriendRememberActivityChoosePicOrVideos extends BaseActivity {
 
     public static final String EXTRA_FROM_UPLOAD_NOTIFY = "extra_from_upload_notify"; //由上传通知启动
     @BindView(R.id.magic_indicator)
@@ -53,10 +53,10 @@ public class CreateFriendRememberActivityNew extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_friend_remeber);
+        setContentView(R.layout.activity_create_friend_remeber_choose_pic_or_video);
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
-        ButterKnife.bind(CreateFriendRememberActivityNew.this);
-        StatusBarUtils.setStatusBarTransparent(CreateFriendRememberActivityNew.this);
+        ButterKnife.bind(CreateFriendRememberActivityChoosePicOrVideos.this);
+        StatusBarUtils.setStatusBarTransparent(CreateFriendRememberActivityChoosePicOrVideos.this);
         mFragmentManager = getSupportFragmentManager();
         initData();
     }
@@ -87,9 +87,9 @@ public class CreateFriendRememberActivityNew extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
                 if (position == 1){
-                    StatusBarUtils.setStatusBar(CreateFriendRememberActivityNew.this,Color.TRANSPARENT);
+                    StatusBarUtils.setStatusBar(CreateFriendRememberActivityChoosePicOrVideos.this,Color.TRANSPARENT);
                 }else {
-                    StatusBarUtils.setStatusBar(CreateFriendRememberActivityNew.this,Color.parseColor("#d84c37"));
+                    StatusBarUtils.setStatusBar(CreateFriendRememberActivityChoosePicOrVideos.this,Color.parseColor("#d84c37"));
                 }
             }
 

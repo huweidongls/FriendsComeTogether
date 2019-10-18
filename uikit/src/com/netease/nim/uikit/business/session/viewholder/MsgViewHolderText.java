@@ -3,6 +3,7 @@ package com.netease.nim.uikit.business.session.viewholder;
 import android.graphics.Color;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -40,6 +41,10 @@ public class MsgViewHolderText extends MsgViewHolderBase {
         bodyTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("msgHolder:","sssssssssssss");
+                if (NimUIKitImpl.getSessionListener() !=null){
+                    NimUIKitImpl.getSessionListener().onMsgTextClicked(context, message);
+                }
                 onItemClick();
             }
         });

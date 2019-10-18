@@ -3,32 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <com.netease.vcloud.video.render.NeteaseView
+        android:layout_centerInParent="true"
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         />
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/red_d84c37">
+        android:layout_height="40dp">
 
         <TextView
+            android:layout_width="50dp"
+            android:layout_height="24dp"
+            android:background="@drawable/bg_white_30px_border_gray"
             android:id="@+id/back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:gravity="center"
-            android:padding="10dp"
             android:text="返回"
             android:textColor="@color/white"
             android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="编辑视频"
-            android:textColor="@color/white"
-            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/done_btn"
@@ -37,20 +34,12 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/bg_white_30px_border"
+            android:background="@drawable/bg_white_30px_border_gray"
             android:gravity="center"
             android:text="完成"
             android:textColor="@color/white_ffffff"
             android:textSize="14sp" />
     </RelativeLayout>
-
-    <com.netease.vcloud.video.render.NeteaseView
-        android:layout_centerInParent="true"
-        android:id="@+id/video_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         />
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -77,6 +66,7 @@
             android:hint="点击输入文字..."
             android:background="@null"
             android:layout_marginTop="170dp"
+            android:textSize="15sp"
             android:maxLength="25"
             android:visibility="gone" />
     </RelativeLayout>

@@ -1,7 +1,9 @@
 package com.yiwo.friendscometogether.webpages;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -728,6 +730,19 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
             params.height = 180;
         }
         ll_show_more.setLayoutParams(params);
+        LinearLayout ll_delete = view.findViewById(R.id.ll_delete);
+        if (spImp.getIsAdmin().equals("1")){
+            ll_delete.setVisibility(View.VISIBLE);
+            params.height += 90;
+        }else {
+            ll_delete.setVisibility(View.GONE);
+        }
+        ll_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteYouJiOrVideo("0",fmID);
+            }
+        });
         ScreenAdapterTools.getInstance().loadView(view);//确定后dp
         llMuLu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -819,5 +834,52 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
         });
 
 
+    }
+    private void deleteYouJiOrVideo(final String type, final String delID) {// 传type 0删除游记 1删除视频  delID要删除的ID   userID登录用户的ID
+        AlertDialog.Builder builder = new AlertDialog.Builder(DetailsOfFriendsWebActivity1.this);
+        builder.setMessage("确定删除此友记？");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ViseHttp.POST(NetConfig.managerInfo)
+                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.managerInfo))
+                        .addParam("type ", type)
+                        .addParam("delID",delID)
+                        .addParam("userID",spImp.getUID())
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(data);
+                                    if (jsonObject.getInt("code") == 200){
+                                        toToast(DetailsOfFriendsWebActivity1.this,"删除成功！");
+                                        Intent intent = new Intent();
+                                        intent.putExtra("deleteID",fmID);
+                                        intent.setAction("android.friendscometogether.HomeFragment2.YouJi");
+//                                        intent.setAction("android.friendscometogether.HomeFragment2.GuanZhu");
+//                                        intent.setAction("android.friendscometogether.HomeFragment2.TuiJian_Youji");
+                                        //发送广播
+                                        sendBroadcast(intent);
+                                        finish();
+                                    }else {
+                                        toToast(DetailsOfFriendsWebActivity1.this,"删除失败："+jsonObject.getInt("code"));
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+                                toToast(DetailsOfFriendsWebActivity1.this,"删除失败："+errCode+"/"+errMsg);
+                            }
+                        });
+            }
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).show();
     }
 }

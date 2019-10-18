@@ -49,7 +49,7 @@
 
         </RelativeLayout>
         <LinearLayout
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/ll_btns"
             android:paddingBottom="7dp"
             android:paddingTop="7dp"
@@ -63,6 +63,27 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/ll_delete"
+                android:orientation="vertical"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/iv_delete"
+                    android:src="@mipmap/delete_white"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp" />
+                <TextView
+                    android:textColor="@color/white"
+                    android:layout_marginTop="2dp"
+                    android:text="删除"
+                    android:textSize="9sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_marginBottom="5dp"

@@ -24,7 +24,7 @@ import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.network.NetConfig;
-import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivityNew;
+import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivityChoosePicOrVideos;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.StringUtils;
 import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
@@ -584,8 +584,8 @@ public class UploadService extends Service {
                         .setTicker(content)
                         .setAutoCancel(autoCancel);
 
-        Intent intent = new Intent(this, CreateFriendRememberActivityNew.class);
-        intent.putExtra(CreateFriendRememberActivityNew.EXTRA_FROM_UPLOAD_NOTIFY, true);
+        Intent intent = new Intent(this, CreateFriendRememberActivityChoosePicOrVideos.class);
+        intent.putExtra(CreateFriendRememberActivityChoosePicOrVideos.EXTRA_FROM_UPLOAD_NOTIFY, true);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(pendingIntent);
         NotificationManager mNotificationManager =

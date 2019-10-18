@@ -139,6 +139,9 @@ public class WelcomeActivity extends BaseActivity {
                                 spImp.setUID("0");
                                 spImp.setYXID("0");
                                 spImp.setYXTOKEN("0");
+                                spImp.setIsAdmin("0");
+                                spImp.setWyUpAccid("");
+                                spImp.setWyUpToken("");
                                 spCache.clear();
                                 intent.setClass(WelcomeActivity.this, MainActivity.class);
                                 startActivity(intent);

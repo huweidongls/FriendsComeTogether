@@ -2,8 +2,10 @@ package com.yiwo.friendscometogether.pages;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -180,6 +182,24 @@ public class ArticleCommentActivity extends BaseActivity {
                                         showKeyboard(etComment);
                                     }
                                 });
+                                adapter.setDeleteListener(new ArticleCommentAdapter.OnDeleteListener() {
+                                    @Override
+                                    public void onDelete(final String id, String c) {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(ArticleCommentActivity.this);
+                                        builder.setMessage("是否删除“"+c+"”")
+                                                .setNegativeButton("是", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        deletePinglun(id);
+                                                    }
+                                                }).setPositiveButton("否", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        dialog.dismiss();
+                                            }
+                                        }).show();
+                                    }
+                                });
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -189,6 +209,34 @@ public class ArticleCommentActivity extends BaseActivity {
                     @Override
                     public void onFail(int errCode, String errMsg) {
 
+                    }
+                });
+
+    }
+
+    private void deletePinglun(String id) {
+        ViseHttp.POST(NetConfig.managerComments)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.managerComments))
+                .addParam("type", "0")
+                .addParam("delID",id)
+                .addParam("userID",spImp.getUID())
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                toToast(ArticleCommentActivity.this,"删除成功");
+                                initData();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+                        toToast(ArticleCommentActivity.this,"删除失败："+errCode+"/"+errMsg);
                     }
                 });
 
@@ -324,105 +372,105 @@ public class ArticleCommentActivity extends BaseActivity {
     /**
      * show comment popupwindow（弹出发表评论的popupWindow）
      */
-    @SuppressLint("WrongConstant")
-    private void showPopupCommnet(final int type, final String id, final String fcid) {// pe表示是评论还是举报1.代表评论。2.代表举报
-        View view = LayoutInflater.from(ArticleCommentActivity.this).inflate(
-                R.layout.comment_popupwindow, null);
-        ScreenAdapterTools.getInstance().loadView(view);
-        final EditText inputComment = view
-                .findViewById(R.id.comment);
-
-        btn_submit = view.findViewById(R.id.submit_comment);
-        btn_back = view.findViewById(R.id.btn_back);
-        if (type == 1) {
-            btn_submit.setText("提交");
-            inputComment.setHint("请输入你的评论...");
-        }
-        popupWindowhf = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT, true);
-
-        popupWindowhf.setTouchable(true);
-        popupWindowhf.setTouchInterceptor(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
-            }
-        });
-        popupWindowhf.setFocusable(true);
-        // 设置点击窗口外边窗口消失
-        popupWindowhf.setOutsideTouchable(true);
-//        popupWindow.setBackgroundDrawable(getResources().getDrawable(
-//                R.drawable.bg_activity_fb_dt_zt));
-
-        // 设置弹出窗体需要软键盘
-        popupWindowhf.setSoftInputMode(PopupWindow.INPUT_METHOD_NEEDED);
-        // 再设置模式，和Activity的一样，覆盖，调整大小。
-        popupWindowhf.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
-        popupWindowhf.showAtLocation(view, Gravity.BOTTOM, 0, 0);
-//        ColorDrawable cd = new ColorDrawable(0x000000);
-//        popupWindow.setBackgroundDrawable(cd);
-//        WindowManager.LayoutParams params = getWindow().getAttributes();
-//        params.alpha = 0.4f;
-//        getWindow().setAttributes(params);
-        // 设置popWindow的显示和消失动画
-        popupWindowhf.setAnimationStyle(R.style.mypopwindow_anim_style);
-        popupWindowhf.update();
-        popupInputMethodWindow();
-        popupWindowhf.setOnDismissListener(new PopupWindow.OnDismissListener() {
-
-            // 在dismiss中恢复透明度
-            public void onDismiss() {
-//                WindowManager.LayoutParams params = getWindow().getAttributes();
-//                params.alpha = 1f;
-//                getWindow().setAttributes(params);
-            }
-        });
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(TextUtils.isEmpty(inputComment.getText().toString())){
-                    toToast(ArticleCommentActivity.this, "请输入评论内容");
-                }else {
-                    ViseHttp.POST(NetConfig.replyCommentUrl)
-                            .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.replyCommentUrl))
-                            .addParam("commentid", id)
-                            .addParam("first_fcID", id)
-                            .addParam("ArticleId", fmID)
-                            .addParam("fctitle", inputComment.getText().toString())
-                            .addParam("uid", uid)
-                            .addParam("oneID", fcid)
-                            .request(new ACallback<String>() {
-                                @Override
-                                public void onSuccess(String data) {
-                                    try {
-                                        Log.e("222", data);
-                                        JSONObject jsonObject = new JSONObject(data);
-                                        if(jsonObject.getInt("code") == 200){
-                                            toToast(ArticleCommentActivity.this, "回复成功");
-                                            reload();
-                                            popupWindowhf.dismiss();
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-
-                                @Override
-                                public void onFail(int errCode, String errMsg) {
-
-                                }
-                            });
-                }
-            }
-        });
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupWindowhf.dismiss();
-            }
-        });
-    }
+//    @SuppressLint("WrongConstant")
+//    private void showPopupCommnet(final int type, final String id, final String fcid) {// pe表示是评论还是举报1.代表评论。2.代表举报
+//        View view = LayoutInflater.from(ArticleCommentActivity.this).inflate(
+//                R.layout.comment_popupwindow, null);
+//        ScreenAdapterTools.getInstance().loadView(view);
+//        final EditText inputComment = view
+//                .findViewById(R.id.comment);
+//
+//        btn_submit = view.findViewById(R.id.submit_comment);
+//        btn_back = view.findViewById(R.id.btn_back);
+//        if (type == 1) {
+//            btn_submit.setText("提交");
+//            inputComment.setHint("请输入你的评论...");
+//        }
+//        popupWindowhf = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT,
+//                WindowManager.LayoutParams.WRAP_CONTENT, true);
+//
+//        popupWindowhf.setTouchable(true);
+//        popupWindowhf.setTouchInterceptor(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                return false;
+//            }
+//        });
+//        popupWindowhf.setFocusable(true);
+//        // 设置点击窗口外边窗口消失
+//        popupWindowhf.setOutsideTouchable(true);
+////        popupWindow.setBackgroundDrawable(getResources().getDrawable(
+////                R.drawable.bg_activity_fb_dt_zt));
+//
+//        // 设置弹出窗体需要软键盘
+//        popupWindowhf.setSoftInputMode(PopupWindow.INPUT_METHOD_NEEDED);
+//        // 再设置模式，和Activity的一样，覆盖，调整大小。
+//        popupWindowhf.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+//
+//        popupWindowhf.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+////        ColorDrawable cd = new ColorDrawable(0x000000);
+////        popupWindow.setBackgroundDrawable(cd);
+////        WindowManager.LayoutParams params = getWindow().getAttributes();
+////        params.alpha = 0.4f;
+////        getWindow().setAttributes(params);
+//        // 设置popWindow的显示和消失动画
+//        popupWindowhf.setAnimationStyle(R.style.mypopwindow_anim_style);
+//        popupWindowhf.update();
+//        popupInputMethodWindow();
+//        popupWindowhf.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//
+//            // 在dismiss中恢复透明度
+//            public void onDismiss() {
+////                WindowManager.LayoutParams params = getWindow().getAttributes();
+////                params.alpha = 1f;
+////                getWindow().setAttributes(params);
+//            }
+//        });
+//        btn_submit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(TextUtils.isEmpty(inputComment.getText().toString())){
+//                    toToast(ArticleCommentActivity.this, "请输入评论内容");
+//                }else {
+//                    ViseHttp.POST(NetConfig.replyCommentUrl)
+//                            .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.replyCommentUrl))
+//                            .addParam("commentid", id)
+//                            .addParam("first_fcID", id)
+//                            .addParam("ArticleId", fmID)
+//                            .addParam("fctitle", inputComment.getText().toString())
+//                            .addParam("uid", uid)
+//                            .addParam("oneID", fcid)
+//                            .request(new ACallback<String>() {
+//                                @Override
+//                                public void onSuccess(String data) {
+//                                    try {
+//                                        Log.e("222", data);
+//                                        JSONObject jsonObject = new JSONObject(data);
+//                                        if(jsonObject.getInt("code") == 200){
+//                                            toToast(ArticleCommentActivity.this, "回复成功");
+//                                            reload();
+//                                            popupWindowhf.dismiss();
+//                                        }
+//                                    } catch (JSONException e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void onFail(int errCode, String errMsg) {
+//
+//                                }
+//                            });
+//                }
+//            }
+//        });
+//        btn_back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                popupWindowhf.dismiss();
+//            }
+//        });
+//    }
 
     private void reload (){
         ViseHttp.POST(NetConfig.articleCommentListUrl)

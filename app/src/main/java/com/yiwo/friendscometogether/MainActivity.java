@@ -1,9 +1,7 @@
 package com.yiwo.friendscometogether;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -31,13 +29,11 @@ import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.model.session.SessionEventListener;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
-import com.netease.nimlib.sdk.StatusCode;
-import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.AuthServiceObserver;
-import com.netease.nimlib.sdk.auth.ClientType;
-import com.netease.nimlib.sdk.auth.OnlineClient;
+import com.netease.nimlib.sdk.auth.constant.LoginSyncStatus;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
+import com.netease.nimlib.sdk.msg.constant.MsgTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.vise.xsnow.cache.SpCache;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -48,21 +44,17 @@ import com.yiwo.friendscometogether.custom.OnDoubleClickListener;
 import com.yiwo.friendscometogether.fragment.ChatFragment;
 import com.yiwo.friendscometogether.fragment.FriendsRememberFragment;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment;
-import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment2;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment3;
 import com.yiwo.friendscometogether.fragment.HomeFragment;
-import com.yiwo.friendscometogether.fragment.HomeFragment1;
 import com.yiwo.friendscometogether.fragment.HomeFragment2;
 import com.yiwo.friendscometogether.fragment.MyFragment;
 import com.yiwo.friendscometogether.fragment.MyFragment1;
 import com.yiwo.friendscometogether.newfragment.YouJiFragment;
-import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivityNew;
+import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivityChoosePicOrVideos;
+import com.yiwo.friendscometogether.newpage.MessageActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
-import com.yiwo.friendscometogether.pages.CreateFriendRememberActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
-import com.yiwo.friendscometogether.pages.SetActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
-import com.yiwo.friendscometogether.utils.AppUpdateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -159,6 +151,14 @@ public class MainActivity extends FragmentActivity {
 //        initView();
         init();
         initSessionListener();
+        NIMClient.getService(AuthServiceObserver.class).observeLoginSyncDataStatus(new Observer<LoginSyncStatus>() {
+            @Override
+            public void onEvent(LoginSyncStatus loginSyncStatus) {
+                if (loginSyncStatus == LoginSyncStatus.SYNC_COMPLETED){
+                    NIMClient.toggleNotification(true);
+                }
+            }
+        },true);
         registReceiver();
     }
     //网易多端登陆监听
@@ -303,7 +303,7 @@ public class MainActivity extends FragmentActivity {
 //                    switchFragment(2);
                     if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
 //                        intent.setClass(context, CreateFriendRememberActivity.class);
-                        intent.setClass(context, CreateFriendRememberActivityNew.class);
+                        intent.setClass(context, CreateFriendRememberActivityChoosePicOrVideos.class);
                         startActivity(intent);
                     } else {
                         intent.setClass(context, LoginActivity.class);
@@ -341,7 +341,7 @@ public class MainActivity extends FragmentActivity {
 //                    switchFragment(2);
                     if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
 //                        intent.setClass(context, CreateFriendRememberActivity.class);
-                        intent.setClass(context, CreateFriendRememberActivityNew.class);
+                        intent.setClass(context, CreateFriendRememberActivityChoosePicOrVideos.class);
                         startActivity(intent);
                     } else {
                         intent.setClass(context, LoginActivity.class);
@@ -539,6 +539,16 @@ public class MainActivity extends FragmentActivity {
             public void onAckMsgClicked(Context context, IMMessage message) {
 
             }
+
+            @Override
+            public void onMsgTextClicked(Context context, IMMessage message) {
+                if (message.getSessionId().equals("tongbanxiaozhushou")&&message.getMsgType()== MsgTypeEnum.text){//瞳伴小助手消息
+                    Intent intent = new Intent();
+                    intent.setClass(context, MessageActivity.class);
+                    startActivity(intent);
+                }
+            }
+
         });
     }
     public boolean isNetworkConnected(Context context) {

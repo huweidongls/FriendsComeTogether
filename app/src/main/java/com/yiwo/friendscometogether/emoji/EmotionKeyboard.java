@@ -14,6 +14,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.yiwo.friendscometogether.pages.ArticleCommentActivity;
+import com.yiwo.friendscometogether.utils.SoftKeyBoardListener;
+
 
 /**
  * author : zejian
@@ -33,7 +36,7 @@ public class EmotionKeyboard {
 	    private View mEmotionLayout;//表情布局
 	    private EditText mEditText;//
 	    private View mContentView;//内容布局view,即除了表情布局或者软键盘布局以外的布局，用于固定bar的高度，防止跳闪
-
+		private static int keyBoardHeightshow;
 	    private EmotionKeyboard(){
 
 	    }
@@ -48,6 +51,24 @@ public class EmotionKeyboard {
 	        emotionInputDetector.mActivity = activity;
 	        emotionInputDetector.mInputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
 	        emotionInputDetector.sp = activity.getSharedPreferences(SHARE_PREFERENCE_NAME, Context.MODE_PRIVATE);
+			keyBoardHeightshow = 800;
+			//注册软键盘的监听
+			SoftKeyBoardListener.setListener(activity,
+					new SoftKeyBoardListener.OnSoftKeyBoardChangeListener() {
+						@Override
+						public void keyBoardShow(int height) {
+//                        Toast.makeText(TieziXqActivity.this,
+//                                "键盘显示 高度" + height, Toast.LENGTH_SHORT).show();
+							keyBoardHeightshow = height;
+						}
+
+						@Override
+						public void keyBoardHide(int height) {
+//                        Toast.makeText(TieziXqActivity.this,
+//                                "键盘隐藏 高度" + height, Toast.LENGTH_SHORT).show();
+							keyBoardHeightshow = height;
+						}
+					});
 	        return emotionInputDetector;
 	    }
 	    
@@ -155,7 +176,8 @@ public class EmotionKeyboard {
 	            softInputHeight = getKeyBoardHeight();
 	        }
 	        hideSoftInput();
-	        mEmotionLayout.getLayoutParams().height = softInputHeight;
+//	        mEmotionLayout.getLayoutParams().height = softInputHeight;
+			mEmotionLayout.getLayoutParams().height = keyBoardHeightshow;
 	        mEmotionLayout.setVisibility(View.VISIBLE);
 	    }
 

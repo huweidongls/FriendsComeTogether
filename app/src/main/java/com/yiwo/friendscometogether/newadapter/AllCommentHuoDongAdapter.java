@@ -16,9 +16,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
-import com.yiwo.friendscometogether.adapter.ArticleCommentAdapter;
-import com.yiwo.friendscometogether.adapter.ArticleCommentCommentAdapter;
-import com.yiwo.friendscometogether.model.ArticleCommentListModel;
 import com.yiwo.friendscometogether.newmodel.AllCommentHuoDongModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 

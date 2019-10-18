@@ -22,6 +22,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.ArticleCommentListModel;
 import com.yiwo.friendscometogether.newpage.JuBaoActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
+import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
 
 import java.util.List;
@@ -35,7 +36,8 @@ public class ArticleCommentAdapter extends RecyclerView.Adapter<ArticleCommentAd
     private Context context;
     private List<ArticleCommentListModel.ObjBean> data;
     private OnReplyListener listener;
-
+    private OnDeleteListener deleteListener;
+    private SpImp spImp;
     public void setOnReplyListener(OnReplyListener listener){
         this.listener = listener;
     }
@@ -47,6 +49,7 @@ public class ArticleCommentAdapter extends RecyclerView.Adapter<ArticleCommentAd
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
+        spImp = new SpImp(context);
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_article_comment, parent, false);
         ScreenAdapterTools.getInstance().loadView(view);
         ViewHolder holder = new ViewHolder(view);
@@ -67,6 +70,19 @@ public class ArticleCommentAdapter extends RecyclerView.Adapter<ArticleCommentAd
         holder.tvNickname.setText(data.get(position).getUsername());
         holder.tvTitle.setText(data.get(position).getNewsTile());
         holder.tvContent.setText(data.get(position).getFctitle());
+        if (spImp.getIsAdmin().equals("1")){
+            holder.btn_delete_pinglun.setVisibility(View.VISIBLE);
+        }else {
+            holder.btn_delete_pinglun.setVisibility(View.GONE);
+        }
+        holder.btn_delete_pinglun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (deleteListener!=null){
+                    deleteListener.onDelete(data.get(position).getFcID(),data.get(position).getFctitle());
+                }
+            }
+        });
         holder.ll.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -105,6 +121,12 @@ public class ArticleCommentAdapter extends RecyclerView.Adapter<ArticleCommentAd
                     listener.onReply(position, ID);
                 }
             });
+            adapter.setDeleteListener(new ArticleCommentCommentAdapter.OnDeleteListener() {
+                @Override
+                public void onDelete(String id,String content) {
+                    deleteListener.onDelete(id,content);
+                }
+            });
         }else {
             holder.recyclerView.setVisibility(View.GONE);
         }
@@ -121,6 +143,10 @@ public class ArticleCommentAdapter extends RecyclerView.Adapter<ArticleCommentAd
         return data == null ? 0 : data.size();
     }
 
+    public void setDeleteListener(OnDeleteListener deleteListener) {
+        this.deleteListener = deleteListener;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView ivAvatar;
         private TextView tvNickname;
@@ -129,7 +155,7 @@ public class ArticleCommentAdapter extends RecyclerView.Adapter<ArticleCommentAd
         private TextView tvTime;
         private RecyclerView recyclerView;
         private TextView tvReply;
-
+        private TextView btn_delete_pinglun;
         private LinearLayout ll;
 
         public ViewHolder(View itemView) {
@@ -141,11 +167,15 @@ public class ArticleCommentAdapter extends RecyclerView.Adapter<ArticleCommentAd
             tvTime = itemView.findViewById(R.id.activity_article_comment_rv_tv_time);
             recyclerView = itemView.findViewById(R.id.activity_article_comment_rv_rv);
             tvReply = itemView.findViewById(R.id.activity_article_comment_rv_tv_reply);
+            btn_delete_pinglun = itemView.findViewById(R.id.btn_delete_pinglun);
             ll = itemView.findViewById(R.id.ll);
         }
     }
 
     public interface OnReplyListener{
         void onReply(int position, String id);
+    }
+    public interface OnDeleteListener{
+        void onDelete(String id,String content);
     }
 }

@@ -16,6 +16,42 @@
         >
         <LinearLayout
             android:visibility="gone"
+            android:id="@+id/ll_delete"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:paddingRight="22px"
+                android:paddingLeft="22px"
+                android:paddingBottom="10px"
+                android:paddingTop="10px"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5px"
+                android:layout_width="match_parent"
+                android:layout_height="75px">
+                <ImageView
+                    android:src="@mipmap/delete_white"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="45px"
+                    android:layout_height="45px" />
+                <TextView
+                    android:layout_marginLeft="10px"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="32px"
+                    android:textColor="@color/white_ffffff"
+                    android:text="删除"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:background="#555457"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_width="match_parent"
+                android:layout_height="5px"></LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
             android:id="@+id/ll_mulu"
             android:orientation="vertical"
             android:layout_width="match_parent"

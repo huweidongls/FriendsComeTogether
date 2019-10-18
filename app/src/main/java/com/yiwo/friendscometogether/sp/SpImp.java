@@ -133,4 +133,12 @@ public class SpImp {
         editor.putString(SpPublic.WY_UP_TOKEN, wyToken).toString();
         editor.commit();
     }
+
+    public String getIsAdmin(){
+        return sp.getString(SpPublic.IS_ADMIN, "0");
+    }
+    public void setIsAdmin(String isAdmin){
+        editor.putString(SpPublic.IS_ADMIN, isAdmin).toString();
+        editor.commit();
+    }
 }

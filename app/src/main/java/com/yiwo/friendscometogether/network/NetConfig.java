@@ -375,12 +375,14 @@ public class NetConfig {
     public static String replyVideoReviews = "action/ac_video/reply";// 回复接口   传userID用户ID  vcID评论的ID  vinfo回复内容
     //新首页 推荐列表接口
     public static String homeRecommend = "action/ac_activity/HomeRecommend"; //action/ac_activity/HomeRecommend 推荐 传 page 分页 uid用户id 未登录传0    city城市
+    public static String homeRecommend2 = "action/ac_activity/HomeRecommend2";
     //新首页 视频列表接口
     public static String homeVideo = "action/ac_activity/HomeVideo";//action/ac_activity/HomeVideo  视频   传page 分页 uid用户id 未登陆传0   返回    status 是否赞过 0未赞 1已赞  praise_num赞数量  comment_num评论数量  vID视频ID  vname视频名称  img图片  vurl视频地址  userID发视频人的ID    vtime发布时间  username发布视频的用户的昵称
     //新首页 友记列表接口
     public static String homeYouJi = "action/ac_activity/HomeYouJi";//action/ac_activity/HomeYouJi 友记   传page分页 uid 用户id  city城市
     //新首页 关注列表接口
     public static String homeGuanZhu = "action/ac_activity/HomeGuanZhu";//action/ac_activity/HomeGuanZhu 关注   传page  分页uid用户id
+    public static String homeGuanZhu2 = "action/ac_activity/HomeGuanZhu2";//action/ac_activity/HomeGuanZhu2 关注   传page  分页uid用户id
     //新首页 日期 和消息数 接口
     public  static String dataInfo = "action/ac_user/dataInfo";//传uid   返回 news消息数  day日期
     //友聚页面 要开始活动数量接口
@@ -397,5 +399,9 @@ public class NetConfig {
     public static String gameGroup = "action/ac_activity/gameGroup";
     //获取用户所在信息接口  传userID
     public static String lookGroup = "action/ac_activity/lookGroup";
+    //管理员删除友记视频接口 action/ac_user/managerInfo 删除友记  视频接口  传type 0删除游记 1删除视频  delID要删除的ID   userID登录用户的ID
+    public static String managerInfo = "action/ac_user/managerInfo";
+    //管理员删除评论接口 action/ac_user/managerComments  删除评论   传type 0友记  1视频  delID删除的ID   userID用户id
+    public static String managerComments = "action/ac_user/managerComments";
 
 }
