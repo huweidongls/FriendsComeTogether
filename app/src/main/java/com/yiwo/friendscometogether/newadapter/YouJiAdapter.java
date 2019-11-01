@@ -19,7 +19,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.newmodel.YouJiListModel;
 import com.yiwo.friendscometogether.pages.VideoActivity;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity2;
 
 import java.util.List;
 
@@ -94,7 +94,7 @@ public class YouJiAdapter extends RecyclerView.Adapter<YouJiAdapter.ViewHolder>{
             public void onClick(View v) {
                 if (TextUtils.isEmpty(data.get(position).getAccesspassword())) {
                     Intent intent = new Intent();
-                    intent.setClass(context, DetailsOfFriendsWebActivity1.class);
+                    intent.setClass(context, DetailsOfFriendsWebActivity2.class);
                     intent.putExtra("fmid", data.get(position).getFmID());
                     context.startActivity(intent);
                 } else {
@@ -103,7 +103,7 @@ public class YouJiAdapter extends RecyclerView.Adapter<YouJiAdapter.ViewHolder>{
                         public boolean setActivityText(String s) {
                             if (s.equals(data.get(position).getAccesspassword())) {
                                 Intent intent = new Intent();
-                                intent.setClass(context, DetailsOfFriendsWebActivity1.class);
+                                intent.setClass(context, DetailsOfFriendsWebActivity2.class);
                                 intent.putExtra("fmid", data.get(position).getFmID());
                                 context.startActivity(intent);
                                 return true;

@@ -23,6 +23,7 @@ import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
+import com.tencent.sonic.sdk.SonicEngine;
 import com.umeng.socialize.UMShareAPI;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -170,6 +171,13 @@ public class LoginActivity extends BaseActivity {
                                     spImp.setWyUpToken(js.optString("wy_up_token"));
                                     spImp.setIsAdmin(js.getString("isAdmin"));
                                     account = js.optString("wy_accid");
+                                    //清除vas_sonic缓存
+                                    SonicEngine.getInstance().cleanCache();
+                                    Intent intent = new Intent();
+                                    intent.setAction("android.friendscometogether.HomeFragment.PreLoadWebYouJiBroadcastReceiver");
+                                    //发送广播 预加载 web
+                                    sendBroadcast(intent);
+
                                     String token = js.optString("token");
                                     LoginInfo info = new LoginInfo(account, token);
                                     RequestCallback<LoginInfo> callback =

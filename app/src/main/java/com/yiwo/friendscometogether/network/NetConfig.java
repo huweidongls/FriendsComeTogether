@@ -299,6 +299,8 @@ public class NetConfig {
     public static String lookUserAttention ="action/ac_user/lookUserAttention";
     //私信消息 删除     传uid用户id    type =0删除一条  =1全部清空   id要删除一条的id
     public static String delFriendInfo =  "action/ac_user/delFriendInfo";
+    //友记详情web页面让Js 获取到UID的接口 传id 游记的id   uid登录用户的id  返回str  myID； 在此接口中 回调JS方法 （js交互方法  userGZinfo(gzStr,myID)）
+    public static String youJiDoInfo = "action/ac_article/youJiDoInfo";
     //友记详情web页面获取数据
     public static String getInfo = "action/ac_public/getInfo";
     //友聚详情web页面数据

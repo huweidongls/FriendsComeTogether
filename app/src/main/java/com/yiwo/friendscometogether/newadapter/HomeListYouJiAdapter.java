@@ -18,9 +18,8 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
-import com.yiwo.friendscometogether.newmodel.YouJiListModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity2;
 
 import java.util.List;
 
@@ -81,7 +80,7 @@ public class HomeListYouJiAdapter extends RecyclerView.Adapter<HomeListYouJiAdap
             public void onClick(View v) {
                 if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
                     Intent intent = new Intent();
-                    intent.setClass(context, DetailsOfFriendsWebActivity1.class);
+                    intent.setClass(context, DetailsOfFriendsWebActivity2.class);
                     intent.putExtra("fmid", data.get(position).getPfID());
                     context.startActivity(intent);
                 } else {
@@ -90,7 +89,7 @@ public class HomeListYouJiAdapter extends RecyclerView.Adapter<HomeListYouJiAdap
                         public boolean setActivityText(String s) {
                             if (s.equals(data.get(position).getPfpwd())) {
                                 Intent intent = new Intent();
-                                intent.setClass(context, DetailsOfFriendsWebActivity1.class);
+                                intent.setClass(context, DetailsOfFriendsWebActivity2.class);
                                 intent.putExtra("fmid", data.get(position).getPfID());
                                 context.startActivity(intent);
                                 return true;

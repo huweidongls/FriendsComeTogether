@@ -30,7 +30,7 @@
         android:layout_height="200px"
         android:layout_gravity="center"
         android:layout_marginTop="69px"
-        android:src="@mipmap/my_head" />
+        android:src="@mipmap/my_head_0" />
 
     <EditText
         android:id="@+id/register_phoneEt"

@@ -12,11 +12,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.squareup.picasso.Picasso;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.UserRememberModel;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity2;
 
 import java.util.List;
 
@@ -51,7 +50,7 @@ public class MyDraftAdapter extends RecyclerView.Adapter<MyDraftAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(context, DetailsOfFriendsWebActivity.class);
+                intent.setClass(context, DetailsOfFriendsWebActivity2.class);
                 intent.putExtra("fmid", data.get(position).getFmID());
                 context.startActivity(intent);
             }

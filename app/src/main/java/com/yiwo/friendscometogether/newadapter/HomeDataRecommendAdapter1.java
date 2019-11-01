@@ -23,7 +23,6 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.network.NetConfig;
-import com.yiwo.friendscometogether.newmodel.HomeDataModel;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel1;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.ArticleCommentActivity;
@@ -32,7 +31,7 @@ import com.yiwo.friendscometogether.pages.VideoActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity2;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,7 +57,7 @@ public class HomeDataRecommendAdapter1 extends RecyclerView.Adapter<HomeDataReco
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
         spImp = new SpImp(context);
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_fragment_home_rv_new_1, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_fragment_home_rv_new, parent, false);
         ScreenAdapterTools.getInstance().loadView(view);
         ViewHolder holder = new ViewHolder(view);
         return holder;
@@ -183,7 +182,7 @@ public class HomeDataRecommendAdapter1 extends RecyclerView.Adapter<HomeDataReco
                     final Intent intent = new Intent();
                     if (data.get(position).getData_type().equals("2")){//友记
                         if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
-                            intent.setClass(context, DetailsOfFriendsWebActivity1.class);
+                            intent.setClass(context, DetailsOfFriendsWebActivity2.class);
                             intent.putExtra("fmid", data.get(position).getPfID());
                             context.startActivity(intent);
                         } else {
@@ -191,7 +190,7 @@ public class HomeDataRecommendAdapter1 extends RecyclerView.Adapter<HomeDataReco
                                 @Override
                                 public boolean setActivityText(String s) {
                                     if (s.equals(data.get(position).getPfpwd())) {
-                                        intent.setClass(context, DetailsOfFriendsWebActivity1.class);
+                                        intent.setClass(context, DetailsOfFriendsWebActivity2.class);
                                         intent.putExtra("fmid", data.get(position).getPfID());
                                         context.startActivity(intent);
                                         return true;

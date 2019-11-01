@@ -500,8 +500,10 @@
         <activity android:name=".newpage.PersonGuanZhuActivity" />
         <activity android:name=".newpage.PersonLabelActivity" />
         <activity android:name=".base.BaseWebActivity" />
+        <activity android:name=".base.BaseSonicWebActivity" />
         <activity android:name=".webpages.DetailsOfFriendsWebActivity" />
         <activity android:name=".webpages.DetailsOfFriendsWebActivity1" />
+        <activity android:name=".webpages.DetailsOfFriendsWebActivity2" />
         <activity android:name=".webpages.DetailsOfFriendTogetherWebActivity" />
         <activity android:name=".newpage.MoreCommentHuodongActivity" />
         <activity android:name=".webpages.ShopInfoWebActivity" />

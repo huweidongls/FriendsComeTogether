@@ -3,6 +3,7 @@ package com.yiwo.friendscometogether.pages;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -34,6 +35,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.adapter.ArticleCommentAdapter;
 import com.yiwo.friendscometogether.base.BaseActivity;
+import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.emoji.EmotionMainFragment;
 import com.yiwo.friendscometogether.model.ArticleCommentListModel;
 import com.yiwo.friendscometogether.network.NetConfig;
@@ -73,6 +75,7 @@ public class ArticleCommentActivity extends BaseActivity {
     private String uid = "";
 
     private boolean isComment = true;
+    private Dialog dialog;
 
     /**
      * popupwindow相关
@@ -262,8 +265,8 @@ public class ArticleCommentActivity extends BaseActivity {
      * 提交评论
      */
     private void toComment() {
-
         if(isComment){
+            dialog = WeiboDialogUtils.createLoadingDialog(ArticleCommentActivity.this,"");
             ViseHttp.POST(NetConfig.articleCommentUrl)
                     .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.articleCommentUrl))
                     .addParam("id", fmID)
@@ -275,6 +278,7 @@ public class ArticleCommentActivity extends BaseActivity {
                             try {
                                 Log.e("222", data);
                                 JSONObject jsonObject = new JSONObject(data);
+                                WeiboDialogUtils.closeDialog(dialog);
                                 if (jsonObject.getInt("code") == 200) {
                                     toToast(ArticleCommentActivity.this, "评论成功");
                                     emotionMainFragment.hideEmotionKeyboard();
@@ -290,10 +294,13 @@ public class ArticleCommentActivity extends BaseActivity {
 
                         @Override
                         public void onFail(int errCode, String errMsg) {
+                            WeiboDialogUtils.closeDialog(dialog);
+                            toToast(ArticleCommentActivity.this, "评论失败："+errCode+"//"+errMsg);
                             etComment.setText(null);
                         }
                     });
         }else {
+            dialog = WeiboDialogUtils.createLoadingDialog(ArticleCommentActivity.this,"");
             ViseHttp.POST(NetConfig.replyCommentUrl)
                     .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.replyCommentUrl))
                     .addParam("commentid", userid)
@@ -309,6 +316,7 @@ public class ArticleCommentActivity extends BaseActivity {
                                 Log.e("222", data);
                                 JSONObject jsonObject = new JSONObject(data);
                                 if(jsonObject.getInt("code") == 200){
+                                    WeiboDialogUtils.closeDialog(dialog);
                                     toToast(ArticleCommentActivity.this, "回复成功");
                                     emotionMainFragment.hideEmotionKeyboard();
                                     etComment.setText(null);
@@ -322,6 +330,8 @@ public class ArticleCommentActivity extends BaseActivity {
 
                         @Override
                         public void onFail(int errCode, String errMsg) {
+                            WeiboDialogUtils.closeDialog(dialog);
+                            toToast(ArticleCommentActivity.this, "评论失败："+errCode+"//"+errMsg);
                             isComment = true;
                             etComment.setText(null);
                         }

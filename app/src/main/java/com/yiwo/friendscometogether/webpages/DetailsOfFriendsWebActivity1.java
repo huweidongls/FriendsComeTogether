@@ -56,21 +56,22 @@ import com.yiwo.friendscometogether.model.ActiveShareModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.MuLuItemYouJiAdapter;
 import com.yiwo.friendscometogether.newmodel.YouJiWebModel;
-import com.yiwo.friendscometogether.newpage.FindFriendByTelActivity;
 import com.yiwo.friendscometogether.newpage.JuBaoActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.ArticleCommentActivity;
-import com.yiwo.friendscometogether.pages.BlackUserActivity;
 import com.yiwo.friendscometogether.pages.InsertIntercalationActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
-import com.yiwo.friendscometogether.pages.MyFriendActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.ShareUtils;
+import com.yiwo.friendscometogether.utils.StringUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -150,9 +151,8 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
         userGiveModelDao =  mDaoSession.getUserGiveModelDao();
         lookHistoryDbModelDao = mDaoSession.getLookHistoryDbModelDao();
         url = NetConfig.BaseUrl+"action/ac_article/youJiWeb?id="+fmID+"&uid="+uid;
-        Log.d("aaaa",url);
-//        url = NetConfig.BaseUrl+"action/ac_article/youJiWeb?id="+fmID;
         initWebView(webView,url);
+        Log.d("aaaa",url);
         webView.setWebChromeClient(new WebChromeClient(){
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -207,6 +207,7 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
         transaction.commit();
     }
     private void toComment() {
+        dialog = WeiboDialogUtils.createLoadingDialog(DetailsOfFriendsWebActivity1.this,"");
         ViseHttp.POST(NetConfig.articleCommentUrl)
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.articleCommentUrl))
                 .addParam("id", fmID)
@@ -218,18 +219,23 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
                         try {
                             Log.e("222", data);
                             JSONObject jsonObject = new JSONObject(data);
+                            WeiboDialogUtils.closeDialog(dialog);
                             if (jsonObject.getInt("code") == 200) {
                                 toToast(DetailsOfFriendsWebActivity1.this, "评论成功");
+                                JSONObject jsonObject1 = jsonObject.getJSONObject("obj");
+                                String userpic = jsonObject1.getString("userpic");
+                                String username = jsonObject1.getString("username");
                                 emotionMainFragment.hideEmotionKeyboard();
-                                comment_et_comment.setText(null);
                                 ll_comment.setVisibility(View.GONE);
                                 rl_bottom.setVisibility(View.VISIBLE);
-                                webView.loadUrl("javascript:jumpPage()");
-//                                    reload();////////////////////
+//                                webView.loadUrl("javascript:jumpPage()");
+                                webView.loadUrl("javascript:addPL('"+userpic+"','"+comment_et_comment.getText().toString()+"','"+username+"')");//"+userpic+","+comment_et_comment.getText().toString()+","+username+"
+                                comment_et_comment.setText(null);
 //                                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 //                                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                             }
                         } catch (JSONException e) {
+                            WeiboDialogUtils.closeDialog(dialog);
                             e.printStackTrace();
                         }
                     }
@@ -237,6 +243,8 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
                     @Override
                     public void onFail(int errCode, String errMsg) {
                         comment_et_comment.setText(null);
+                        WeiboDialogUtils.closeDialog(dialog);
+                        toToast(DetailsOfFriendsWebActivity1.this, "评论失败："+errCode+"//"+errMsg);
                     }
                 });
     }
@@ -352,6 +360,7 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
     @OnClick({R.id.activity_details_of_friends_rl_back,R.id.activity_details_of_friends_ll_comment,
             R.id.activity_details_of_friends_ll_share,R.id.activity_details_of_friends_ll_praise,
             R.id.activity_details_of_friends_ll_star,R.id.rl_show_more,R.id.activity_details_of_friends_ll_intercalation,
+            R.id.comment_rl_comment,
             R.id.btn_pinglun,R.id.comment_tv_comment})
     public void onClick(View view){
         Intent intent = new Intent();
@@ -368,6 +377,7 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
                 showKeyboard(comment_et_comment);
                 break;
             case R.id.comment_tv_comment:
+            case R.id.comment_rl_comment:
                 if (TextUtils.isEmpty(comment_et_comment.getText().toString())) {
                     toToast(DetailsOfFriendsWebActivity1.this, "请输入评论内容");
                 } else {
@@ -855,9 +865,9 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
                                         toToast(DetailsOfFriendsWebActivity1.this,"删除成功！");
                                         Intent intent = new Intent();
                                         intent.putExtra("deleteID",fmID);
-                                        intent.setAction("android.friendscometogether.HomeFragment2.YouJi");
-//                                        intent.setAction("android.friendscometogether.HomeFragment2.GuanZhu");
-//                                        intent.setAction("android.friendscometogether.HomeFragment2.TuiJian_Youji");
+                                        intent.setAction("android.friendscometogether.HomeFragment.YouJi");
+//                                        intent.setAction("android.friendscometogether.HomeFragment.GuanZhu");
+//                                        intent.setAction("android.friendscometogether.HomeFragment.TuiJian_Youji");
                                         //发送广播
                                         sendBroadcast(intent);
                                         finish();
@@ -881,5 +891,24 @@ public class DetailsOfFriendsWebActivity1 extends BaseWebActivity {
 
             }
         }).show();
+    }
+    public static String geFileFromAssets(Context context, String fileName) {
+        if (context == null || StringUtils.isEmpty(fileName)) {
+            return null;
+        }
+
+        StringBuilder s = new StringBuilder("");
+        try {
+            InputStreamReader in = new InputStreamReader(context.getResources().getAssets().open(fileName));
+            BufferedReader br = new BufferedReader(in);
+            String line;
+            while ((line = br.readLine()) != null) {
+                s.append(line);
+            }
+            return s.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

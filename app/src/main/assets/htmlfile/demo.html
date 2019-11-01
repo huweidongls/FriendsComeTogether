@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body style="-webkit-overflow-scrolling: touch;">
+<iframe id="hbpage" src="1.html" frameborder="0" style="width:100%;height:auto;" scrolling="no"></iframe>
+<iframe id="hbpage1" src="http://www.91yiwo.com/ylyy/index.php/action/ac_article/youJiWeb?id=1772&uid=130"
+        frameborder="0"
+        style="width:100%;height:auto;"
+        scrolling="no"
+        onload="iFrameHeight()"></iframe>
+<script>
+//获取iframe子页面内容高度给iframe动态设置高度
+function iFrameHeight() {
+var ifm= document.getElementById("hbpage");
+var subWeb = document.frames ? document.frames["hbpage"].document : ifm.contentDocument;
+if(ifm != null && subWeb != null) {
+ifm.style.height = 'auto';//先取消掉之前iframe设置的高度
+ifm.style.height = subWeb.body.scrollHeight+'px';
+}
+var ifm1= document.getElementById("hbpage1");
+var subWeb1 = document.frames ? document.frames["hbpage1"].document : ifm.contentDocument;
+if(ifm1 != null && subWeb1 != null) {
+ifm1.style.height = 'auto';//先取消掉之前iframe设置的高度
+ifm1.style.height = subWeb1.body.scrollHeight*1.8 +'px';
+}
+};
+</script>
+</body>
+</html>

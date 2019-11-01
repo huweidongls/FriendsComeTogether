@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body style="-webkit-overflow-scrolling: touch;">
+<img id="yjImgg" src="6.jpg" style="width:99%;height:auto;margin:0 auto;border:0;">
+<iframe id="hbpage1" src="" frameborder="0" style="width:100%;height:auto;" scrolling="no" onload="this.height = this.contentWindow.document.documentElement.scrollHeight+'px'" ></iframe><!---->
+<script>
+
+function theUrl(url){
+	document.getElementById("hbpage1").src=url;
+}
+function showImgInfo(imgdata){
+	
+	document.getElementById("yjImgg").src=imgdata;
+	
+}
+</script>
+</body>
+</html>

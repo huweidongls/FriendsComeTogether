@@ -7,8 +7,8 @@ android {
         applicationId "com.yiwo.friendscometogether"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 41
-        versionName "4.1"
+        versionCode 43
+        versionName "4.3"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
@@ -151,4 +151,6 @@ dependencies {
     //okhttp + 拦截器
     api 'com.squareup.okhttp3:okhttp:3.4.1'
     api 'com.github.bumptech.glide:okhttp3-integration:4.3.1'
+    //
+    compile 'com.tencent.sonic:sdk:3.1.0'
 }

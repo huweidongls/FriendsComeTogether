@@ -16,7 +16,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.model.UserCollectionModel;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity2;
 
 import java.util.List;
 
@@ -62,7 +62,7 @@ public class AllCollectionAdapter extends RecyclerView.Adapter<AllCollectionAdap
                     context.startActivity(intent);
                 }else {
                     intent.putExtra("fmid", data.get(position).getFtableid());
-                    intent.setClass(context, DetailsOfFriendsWebActivity.class);
+                    intent.setClass(context, DetailsOfFriendsWebActivity2.class);
                     context.startActivity(intent);
                 }
             }

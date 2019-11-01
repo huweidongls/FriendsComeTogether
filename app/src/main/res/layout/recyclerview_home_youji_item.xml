@@ -5,9 +5,7 @@
     android:id="@+id/rl_youju_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="25px"
-    android:layout_marginLeft="5px"
-    android:layout_marginRight="5px">
+    android:layout_marginBottom="8px">
 
     <RelativeLayout
         android:elevation="5px"
@@ -26,65 +24,62 @@
             <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
                 android:id="@+id/iv_youju"
                 android:layout_width="wrap_content"
-                android:layout_height="320px"
+                android:layout_height="450px"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/welcome"
                 test:left_top_radius1="16px"
                 test:right_top_radius1="16px" />
 
             <TextView
+                android:textStyle="bold"
                 android:id="@+id/tv_youji_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20px"
-                android:layout_marginLeft="21px"
-                android:layout_marginRight="21px"
-                android:layout_marginTop="20px"
+                android:layout_marginBottom="10px"
+                android:layout_marginLeft="15px"
+                android:layout_marginRight="15px"
+                android:layout_marginTop="15px"
                 android:ellipsize="end"
-                android:maxLines="4"
+                android:maxLines="2"
                 android:text="巴厘岛小众神秘彭丽普兰，被认为是世界上最清洁的三个村庄之一巴厘岛小众神秘彭丽普兰，被认为是世界上最清洁的三个村庄之一"
-                android:textColor="#424242"
-                android:textSize="32px" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/line" />
+                android:textColor="@color/black_333333"
+                android:textSize="30px" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="112px"
-                android:layout_marginBottom="22px"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5px"
+                android:layout_marginBottom="8px"
                 android:layout_marginLeft="16px"
                 android:layout_marginRight="16px">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/iv_icon_user"
-                    android:layout_width="70px"
-                    android:layout_height="70px"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
                     android:layout_marginRight="8px"
-                    android:layout_marginTop="20px"
                     android:src="@mipmap/my_head" />
 
                 <RelativeLayout
-                    android:layout_width="145px"
-                    android:layout_height="66px"
-                    android:layout_marginBottom="2px"
-                    android:layout_marginTop="22px"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/iv_icon_user">
 
                     <TextView
+                        android:maxLength="10"
                         android:id="@+id/tv_username"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:text="扁脸折耳猫"
                         android:textColor="@color/black_333333"
-                        android:textSize="26px" />
+                        android:textSize="23px" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tv_time"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -97,16 +92,14 @@
                 </RelativeLayout>
 
                 <LinearLayout
+                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginBottom="21px"
-                    android:layout_marginRight="16px">
+                    android:layout_alignParentRight="true">
 
                     <ImageView
-                        android:layout_width="34px"
-                        android:layout_height="34px"
+                        android:layout_width="30px"
+                        android:layout_height="30px"
                         android:layout_marginRight="6px"
                         android:src="@mipmap/youji_dianzan_red" />
 

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -42,13 +43,9 @@ import com.yiwo.friendscometogether.broadcastreceiver.MyShenQingJinQunBroadcastR
 import com.yiwo.friendscometogether.broadcastreceiver.MyYaoQingJinQunBroadcastReceiver;
 import com.yiwo.friendscometogether.custom.OnDoubleClickListener;
 import com.yiwo.friendscometogether.fragment.ChatFragment;
-import com.yiwo.friendscometogether.fragment.FriendsRememberFragment;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment;
-import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment3;
 import com.yiwo.friendscometogether.fragment.HomeFragment;
-import com.yiwo.friendscometogether.fragment.HomeFragment2;
 import com.yiwo.friendscometogether.fragment.MyFragment;
-import com.yiwo.friendscometogether.fragment.MyFragment1;
 import com.yiwo.friendscometogether.newfragment.YouJiFragment;
 import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivityChoosePicOrVideos;
 import com.yiwo.friendscometogether.newpage.MessageActivity;
@@ -74,10 +71,6 @@ public class MainActivity extends FragmentActivity {
     // 定义数组来存放按钮图片
     private int mImageViewArray[] = {R.drawable.select_index,
             R.drawable.select_friends_together, R.drawable.select_friends_remember, R.drawable.select_chat, R.drawable.select_my};
-
-    // 定义数组来存放Fragment界面
-    private Class[] fragmentArray = {HomeFragment.class, FriendsTogetherFragment.class, FriendsRememberFragment.class, ChatFragment.class, MyFragment.class};
-
     //安卓6.0动态获取权限
     String[] permissions = new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.RECORD_AUDIO
@@ -135,7 +128,7 @@ public class MainActivity extends FragmentActivity {
 
     private ChatFragment fragmentChat;
 //    private HomeFragment1 fragmentHome;
-    private HomeFragment2 fragmentHome;
+    private HomeFragment fragmentHome;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -241,14 +234,11 @@ public class MainActivity extends FragmentActivity {
         rl3.setOnClickListener(listener);
         rl4.setOnClickListener(listener);
         rl5.setOnClickListener(listener);
-//        fragmentHome = new HomeFragment1();
-        fragmentHome = new HomeFragment2();
-//        Fragment fragmentFriendTogether = new FriendsTogetherFragment1();
-//        Fragment fragmentFriendTogether = new FriendsTogetherFragment2();
-        Fragment fragmentFriendTogether = new FriendsTogetherFragment3();
+        fragmentHome = new HomeFragment();
+        Fragment fragmentFriendTogether = new FriendsTogetherFragment();
         Fragment fragmentFriendRemember = new YouJiFragment();
         fragmentChat = new ChatFragment();
-        Fragment fragmentMy = new MyFragment1();
+        Fragment fragmentMy = new MyFragment();
         fragmentList.add(fragmentHome);
         fragmentList.add(fragmentFriendTogether);
         fragmentList.add(fragmentFriendRemember);
@@ -440,6 +430,7 @@ public class MainActivity extends FragmentActivity {
     /**
      * 给Tab按钮设置图标和文字
      */
+
 //    private View getTabItemView(int index) {
 //        View view = layoutInflater.inflate(R.layout.item_tableview, null);
 //        tabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
@@ -486,6 +477,19 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        if (fragments != null) {
+            for (Fragment fragment : fragments) {
+                if (fragment != null) {
+                    fragment.onRequestPermissionsResult(requestCode,permissions,grantResults);
+                }
+            }
+        }
     }
 
     /**

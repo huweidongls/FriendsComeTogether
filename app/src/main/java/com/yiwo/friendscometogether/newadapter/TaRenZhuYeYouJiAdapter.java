@@ -3,7 +3,6 @@ package com.yiwo.friendscometogether.newadapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +17,7 @@ import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.PersonMainModel;
 import com.yiwo.friendscometogether.pages.ArticleCommentActivity;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
-import com.yiwo.friendscometogether.pages.LoginActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity2;
 
 import java.util.List;
 
@@ -50,7 +48,7 @@ public class TaRenZhuYeYouJiAdapter extends RecyclerView.Adapter<TaRenZhuYeYouJi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(context, DetailsOfFriendsWebActivity1.class);
+                intent.setClass(context, DetailsOfFriendsWebActivity2.class);
                 intent.putExtra("fmid", data.get(position).getPfID());
                 context.startActivity(intent);
             }

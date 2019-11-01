@@ -26,11 +26,12 @@ import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.ArticleCommentActivity;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
 import com.yiwo.friendscometogether.pages.LoginActivity;
+import com.yiwo.friendscometogether.pages.VideoActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity2;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -168,33 +169,48 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
             holder.tvYoujuAddress.setText(data.get(position).getPfaddress());
             holder.tvYoujuLookNum.setText(data.get(position).getPflook());
         }else {
+            if (data.get(position).getData_type().equals("2")){//友记
+                holder.iv_video.setVisibility(View.GONE);
+            }else {//视频
+                holder.iv_video.setVisibility(View.VISIBLE);
+            }
             holder.llYouju.setVisibility(View.GONE);
             holder.llYouji.setVisibility(View.VISIBLE);
             holder.llYouji.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     final Intent intent = new Intent();
-                    if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
-                        intent.setClass(context, DetailsOfFriendsWebActivity1.class);
-                        intent.putExtra("fmid", data.get(position).getPfID());
-                        context.startActivity(intent);
-                    } else {
-                        LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(context, new LookPasswordDialog.SetPasswordListener() {
-                            @Override
-                            public boolean setActivityText(String s) {
-                                if (s.equals(data.get(position).getPfpwd())) {
-                                    intent.setClass(context, DetailsOfFriendsWebActivity1.class);
-                                    intent.putExtra("fmid", data.get(position).getPfID());
-                                    context.startActivity(intent);
-                                    return true;
-                                }else {
-                                    Toast.makeText(context,"密码错误",Toast.LENGTH_SHORT).show();
-                                    return false;
+                    if (data.get(position).getData_type().equals("2")){
+                        if (TextUtils.isEmpty(data.get(position).getPfpwd())) {
+                            intent.setClass(context, DetailsOfFriendsWebActivity2.class);
+                            intent.putExtra("fmid", data.get(position).getPfID());
+                            context.startActivity(intent);
+                        } else {
+                            LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(context, new LookPasswordDialog.SetPasswordListener() {
+                                @Override
+                                public boolean setActivityText(String s) {
+                                    if (s.equals(data.get(position).getPfpwd())) {
+                                        intent.setClass(context, DetailsOfFriendsWebActivity2.class);
+                                        intent.putExtra("fmid", data.get(position).getPfID());
+                                        context.startActivity(intent);
+                                        return true;
+                                    }else {
+                                        Toast.makeText(context,"密码错误",Toast.LENGTH_SHORT).show();
+                                        return false;
+                                    }
                                 }
-                            }
-                        });
-                        lookPasswordDialog.show();
+                            });
+                            lookPasswordDialog.show();
+                        }
+                    }else {
+                        Intent it = new Intent(context, VideoActivity.class);
+                        it.putExtra("videoUrl", data.get(position).getVurl());
+                        it.putExtra("title", data.get(position).getPftitle());
+                        it.putExtra("picUrl", data.get(position).getPfpic().get(0));
+                        it.putExtra("vid", data.get(position).getPfID());
+                        context.startActivity(it);
                     }
+
                 }
             });
             Glide.with(context).load(data.get(position).getHeadportrait()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.ivYoujiAvatar);
@@ -277,6 +293,8 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
             holder.tvYoujiTitle.setText(data.get(position).getPftitle());
             if(TextUtils.isEmpty(data.get(position).getPfaddress())){
                 holder.llCity.setVisibility(View.GONE);
+            }else {
+                holder.llCity.setVisibility(View.VISIBLE);
             }
             holder.tvYoujiAddress.setText(data.get(position).getPfaddress());
             holder.tvYoujiLookNum.setText(data.get(position).getPflook());
@@ -286,12 +304,20 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    if (TextUtils.isEmpty(spImp.getUID()) || spImp.getUID().equals("0")) {
-                        intent.setClass(context, LoginActivity.class);
-                        context.startActivity(intent);
-                    } else {
-                        intent.setClass(context, ArticleCommentActivity.class);
-                        intent.putExtra("id", data.get(position).getPfID());
+                    if (data.get(position).getData_type().equals("2")){
+                        if (TextUtils.isEmpty(spImp.getUID()) || spImp.getUID().equals("0")) {
+                            intent.setClass(context, LoginActivity.class);
+                            context.startActivity(intent);
+                        } else {
+                            intent.setClass(context, ArticleCommentActivity.class);
+                            intent.putExtra("id", data.get(position).getPfID());
+                            context.startActivity(intent);
+                        }
+                    }else if (data.get(position).equals("3")){
+                        intent.putExtra("videoUrl", data.get(position).getVurl());
+                        intent.putExtra("title", data.get(position).getPftitle());
+                        intent.putExtra("picUrl", data.get(position).getPfpic().get(0));
+                        intent.putExtra("vid", data.get(position).getPfID());
                         context.startActivity(intent);
                     }
                 }
@@ -319,12 +345,20 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    if (TextUtils.isEmpty(spImp.getUID()) || spImp.getUID().equals("0")) {
-                        intent.setClass(context, LoginActivity.class);
-                        context.startActivity(intent);
-                    } else {
-                        intent.setClass(context, ArticleCommentActivity.class);
-                        intent.putExtra("id", data.get(position).getPfID());
+                    if (data.get(position).getData_type().equals("2")){
+                        if (TextUtils.isEmpty(spImp.getUID()) || spImp.getUID().equals("0")) {
+                            intent.setClass(context, LoginActivity.class);
+                            context.startActivity(intent);
+                        } else {
+                            intent.setClass(context, ArticleCommentActivity.class);
+                            intent.putExtra("id", data.get(position).getPfID());
+                            context.startActivity(intent);
+                        }
+                    }else if (data.get(position).equals("3")){
+                        intent.putExtra("videoUrl", data.get(position).getVurl());
+                        intent.putExtra("title", data.get(position).getPftitle());
+                        intent.putExtra("picUrl", data.get(position).getPfpic().get(0));
+                        intent.putExtra("vid", data.get(position).getPfID());
                         context.startActivity(intent);
                     }
                 }
@@ -373,6 +407,7 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
         private TextView tvComment2;
         private TextView tvAllCommentNum;
         private LinearLayout llCity;
+        private ImageView iv_video;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -409,6 +444,7 @@ public class HomeDataAdapter extends RecyclerView.Adapter<HomeDataAdapter.ViewHo
             tvComment2 = itemView.findViewById(R.id.tv_comment2);
             tvAllCommentNum = itemView.findViewById(R.id.tv_all_comment_num);
             llCity = itemView.findViewById(R.id.ll_city);
+            iv_video = itemView.findViewById(R.id.iv_video);
         }
     }
 

@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:test="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:visibility="visible"
+        android:elevation="1px"
+        android:background="@drawable/bg_white_30px"
+        android:visibility="gone"
         android:id="@+id/ll_youju"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <RelativeLayout
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
             android:layout_width="match_parent"
             android:layout_height="76px"
             android:layout_marginTop="30px">
@@ -77,6 +82,8 @@
             test:radius1="12px" />
 
         <TextView
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
             android:id="@+id/tv_youju_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,6 +96,8 @@
             android:textStyle="bold" />
 
         <TextView
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
             android:id="@+id/tv_youju_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,6 +109,9 @@
             android:textSize="36px" />
 
         <RelativeLayout
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_marginBottom="20px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20px">
@@ -188,24 +200,20 @@
             </LinearLayout>
 
         </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="40px"
-            android:background="#DDDDDD" />
-
     </LinearLayout>
 
     <LinearLayout
-        android:visibility="gone"
+        android:elevation="1px"
+        android:visibility="visible"
         android:id="@+id/ll_youji"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white_ffffff"
+        android:background="@drawable/bg_white_30px"
         android:orientation="vertical">
 
         <RelativeLayout
+            android:layout_marginRight="20px"
+            android:layout_marginLeft="20px"
             android:layout_marginTop="26px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -255,14 +263,25 @@
 
         </RelativeLayout>
 
-        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
-            test:radius1="16px"
-            android:id="@+id/iv_youji_title1"
-            android:layout_width="match_parent"
-            android:layout_height="354px"
-            android:layout_marginTop="20px"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/zanwutupian" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+                test:radius1="16px"
+                android:id="@+id/iv_youji_title1"
+                android:layout_width="match_parent"
+                android:layout_height="354px"
+                android:layout_marginTop="20px"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/zanwutupian" />
+            <ImageView
+                android:id="@+id/iv_video"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/youji_video_list"
+                android:layout_width="80px"
+                android:layout_height="80px" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -302,6 +321,8 @@
         </LinearLayout>
 
         <TextView
+            android:layout_marginRight="20px"
+            android:layout_marginLeft="20px"
             android:id="@+id/tv_youji_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -314,6 +335,8 @@
             android:textStyle="bold" />
 
         <RelativeLayout
+            android:layout_marginRight="20px"
+            android:layout_marginLeft="20px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -405,6 +428,8 @@
         </RelativeLayout>
 
         <TextView
+            android:layout_marginRight="20px"
+            android:layout_marginLeft="20px"
             android:id="@+id/tv_youji_good_num"
             android:layout_width="400px"
             android:layout_height="wrap_content"
@@ -416,6 +441,8 @@
             android:textSize="24px" />
 
         <LinearLayout
+            android:layout_marginRight="20px"
+            android:layout_marginLeft="20px"
             android:id="@+id/ll_comment1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -446,6 +473,8 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginRight="20px"
+            android:layout_marginLeft="20px"
             android:id="@+id/ll_comment2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -476,6 +505,9 @@
         </LinearLayout>
 
         <TextView
+            android:layout_marginBottom="20px"
+            android:layout_marginRight="20px"
+            android:layout_marginLeft="20px"
             android:id="@+id/tv_all_comment_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -486,12 +518,10 @@
             android:textColor="#D84C37"
             android:textSize="24px" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:layout_marginTop="40px"
-            android:background="@color/line" />
-
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="40px"
+        android:background="#F8F8F8" />
 
-</RelativeLayout>
+</LinearLayout>

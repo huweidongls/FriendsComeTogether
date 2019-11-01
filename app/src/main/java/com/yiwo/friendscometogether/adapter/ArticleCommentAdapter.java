@@ -23,7 +23,6 @@ import com.yiwo.friendscometogether.model.ArticleCommentListModel;
 import com.yiwo.friendscometogether.newpage.JuBaoActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.sp.SpImp;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendsWebActivity1;
 
 import java.util.List;
 

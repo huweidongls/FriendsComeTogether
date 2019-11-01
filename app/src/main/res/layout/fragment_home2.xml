@@ -159,7 +159,7 @@
         </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="70px">
+            android:layout_height="wrap_content">
             <TextView
                 android:layout_centerVertical="true"
                 android:text="周二，2月2日"
@@ -199,7 +199,7 @@
         <RelativeLayout
             android:paddingBottom="10px"
             android:layout_width="match_parent"
-            android:layout_height="120px">
+            android:layout_height="110px">
             <LinearLayout
                 android:id="@+id/ll_tab"
                 android:layout_alignParentBottom="true"
@@ -227,6 +227,7 @@
                         android:layout_height="wrap_content" />
 
                     <View
+                        android:visibility="gone"
                         android:id="@+id/v1"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"

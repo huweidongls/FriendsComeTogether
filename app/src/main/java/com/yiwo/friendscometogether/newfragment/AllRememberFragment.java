@@ -16,23 +16,18 @@ import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
-import com.yiwo.friendscometogether.adapter.MyCollectionAdapter;
-import com.yiwo.friendscometogether.adapter.MyFriendRememberAdapter;
 import com.yiwo.friendscometogether.base.BaseFragment;
 import com.yiwo.friendscometogether.model.UserCollectionModel;
 import com.yiwo.friendscometogether.model.UserRememberModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.AllCollectionAdapter;
 import com.yiwo.friendscometogether.newadapter.MyRememberAdapter;
-import com.yiwo.friendscometogether.pages.MyCollectionActivity;
-import com.yiwo.friendscometogether.pages.MyFriendRememberActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.TokenUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;

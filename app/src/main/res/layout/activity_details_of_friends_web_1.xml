@@ -238,7 +238,7 @@
     </RelativeLayout>
     <LinearLayout
         android:background="@color/white_ffffff"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
         android:id="@+id/ll_comment"
@@ -278,7 +278,7 @@
                 android:orientation="vertical"
                 android:id="@+id/ll_xiaolian"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/comment_tv_comment"
+                android:layout_toLeftOf="@+id/comment_rl_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -289,18 +289,26 @@
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
-
-            <TextView
-                android:layout_marginRight="10px"
+            <RelativeLayout
+                android:id="@+id/comment_rl_comment"
                 android:layout_alignParentRight="true"
                 android:gravity="center"
                 android:layout_centerVertical="true"
-                android:textColor="#FF9D00"
-                android:textSize="28px"
-                android:id="@+id/comment_tv_comment"
-                android:text="发送"
-                android:layout_width="70px"
-                android:layout_height="64px" />
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_marginRight="20px"
+                    android:layout_marginLeft="20px"
+                    android:layout_centerInParent="true"
+
+
+                    android:textColor="#FF9D00"
+                    android:textSize="30px"
+                    android:id="@+id/comment_tv_comment"
+                    android:text="发送"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
 
         </RelativeLayout>
 
