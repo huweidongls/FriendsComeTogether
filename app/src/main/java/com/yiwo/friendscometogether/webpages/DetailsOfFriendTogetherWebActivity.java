@@ -32,6 +32,7 @@ import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.base.BaseSonicWebActivity;
 import com.yiwo.friendscometogether.base.BaseWebActivity;
 import com.yiwo.friendscometogether.dbmodel.LookHistoryDbModel;
 import com.yiwo.friendscometogether.greendao.gen.DaoMaster;
@@ -69,7 +70,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
+public class DetailsOfFriendTogetherWebActivity extends BaseSonicWebActivity {
 
     @BindView(R.id.activity_details_of_friends_together_iv_focus_on)
     ImageView focusOnIv;
@@ -112,6 +113,7 @@ public class DetailsOfFriendTogetherWebActivity extends BaseWebActivity {
         lookHistoryDbModelDao = mDaoSession.getLookHistoryDbModelDao();
         url = NetConfig.BaseUrl+"action/ac_activity/youJuWeb?pfID="+pfID+"&uid="+uid;
         initWebView(webView,url);
+        initIntentSonic(url,webView);
         webView.setWebChromeClient(new WebChromeClient(){
             @Override
             public void onProgressChanged(WebView view, int newProgress) {

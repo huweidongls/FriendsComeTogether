@@ -1,9 +1,13 @@
 package com.yiwo.friendscometogether.fragment;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +27,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.library.banner.BannerLayout;
 import com.google.gson.Gson;
+import com.tencent.sonic.sdk.SonicConfig;
+import com.tencent.sonic.sdk.SonicEngine;
+import com.tencent.sonic.sdk.SonicSessionConfig;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.shareboard.SnsPlatform;
@@ -44,6 +51,7 @@ import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.FriendsTogetherFragmentLabelTopAdapter;
 import com.yiwo.friendscometogether.newadapter.LabelAdapter;
 import com.yiwo.friendscometogether.newadapter.SwipeFIingViewAdapter;
+import com.yiwo.friendscometogether.newmodel.HomeDataModel;
 import com.yiwo.friendscometogether.newmodel.HuoDongShaiXuanMode;
 import com.yiwo.friendscometogether.newmodel.YouJuTopLabelModel;
 import com.yiwo.friendscometogether.newpage.AllHuoDongActivity;
@@ -56,6 +64,7 @@ import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.swipecard.SwipeFlingView;
 import com.yiwo.friendscometogether.utils.ShareUtils;
 import com.yiwo.friendscometogether.utils.TokenUtils;
+import com.yiwo.friendscometogether.vas_sonic.TBSonicRuntime;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 
 import org.json.JSONException;
@@ -63,6 +72,7 @@ import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -117,7 +127,7 @@ public class FriendsTogetherFragment extends BaseFragment {
     private FriendsTogethermodel.ObjBean bean;
     private Dialog dialog;
     boolean isChangPing = false;
-
+    private static final int PERMISSION_REQUEST_CODE_STORAGE = 2001;
     private List<UserLabelModel.ObjBean> labelList = new ArrayList<>();//所有label 的list
     private List<YouJuTopLabelModel> labelList_1 = new ArrayList<>();//第一行label 的list
     private List<YouJuTopLabelModel> labelList_2 = new ArrayList<>();//第二行label 的list
@@ -142,6 +152,7 @@ public class FriendsTogetherFragment extends BaseFragment {
         BigDecimal b2 = new BigDecimal(Double.valueOf(screenWidth));
         Log.d("asdasd","screenHeight:"+screenHeight+"///screenWidth::"+screenWidth+"///"+(b1.divide(b2, 4, BigDecimal.ROUND_HALF_UP).doubleValue()));
         spImp = new SpImp(getContext());
+        initSonicEngine();
         initLabelTop();
         initData();
         return view;
@@ -515,6 +526,11 @@ public class FriendsTogetherFragment extends BaseFragment {
 //                                    mList.addAll(tList);
 //                                }
                                 if (mList.size() > 0) {
+                                    if (hasPermission()){
+                                        preLoadYouJu(mList);
+                                    }else {
+                                        requestPermission();
+                                    }
                                     iv_zanwu.setVisibility(View.GONE);
                                     bean = mList.get(0);
                                     if (bean.getFocusOn().equals("0")) {
@@ -981,6 +997,37 @@ public class FriendsTogetherFragment extends BaseFragment {
 //            initData();
 //        }
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        Log.d("读写内存权限,","permissionsSize:"+permissions.length+"///"+"grantResultsSize:"+grantResults.length);
+        for (int i = 0;i<permissions.length;i++){
+            if (permissions[i].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    requestPermission();
+                } else {
+                    preLoadYouJu(mList);
+                }
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+    private void preLoadYouJu(List<FriendsTogethermodel.ObjBean> list) {
+        Log.d("读写内存权限","youquanxian");
+        for (int i = 0 ;i<list.size();i++){
+            String url = NetConfig.BaseUrl+"action/ac_activity/youJuWeb?pfID="+list.get(i).getPfID()+"&uid="+uid;
+            SonicSessionConfig.Builder sessionConfigBuilder = new SonicSessionConfig.Builder();
+            sessionConfigBuilder.setSupportLocalServer(true);
+            HashMap mapRp = new HashMap();
+            String str_vlue = "http://www.91yiwo.com/ylyy/include/activity_web/js/jquery-3.3.1.min.js;"
+                    +"http://www.91yiwo.com/ylyy/include/activity_web/css/web_main.css;"
+                    +"http://www.91yiwo.com/ylyy/include/activity_web/js/builder.js;";
+            mapRp.put("sonic-link",str_vlue);
+            sessionConfigBuilder.setCustomResponseHeaders(mapRp);
+            boolean preloadSuccess = SonicEngine.getInstance().preCreateSession(url, sessionConfigBuilder.build());
+            Log.d("preloadpreloadp",preloadSuccess+""+url);
+        }
+    }
     private void initGuanzhuNum(){
         //关注数量
         if (bean.getUserimgs().size()<1){
@@ -1026,5 +1073,28 @@ public class FriendsTogetherFragment extends BaseFragment {
 //        adapter.data = mList;
 //        sfv.refresh_view();//必须使用此方法  更新view
         adapter.notifyDataSetChanged();
+    }
+    private void initSonicEngine() {
+        // init sonic engine
+        if (!SonicEngine.isGetInstanceAllowed()) {
+            SonicConfig config = new SonicConfig.Builder()
+                    .setMaxPreloadSessionCount(100)
+                    .setMaxNumOfDownloadingTasks(10)
+                    .build();
+
+            SonicEngine.createInstance(new TBSonicRuntime(getContext()),config);
+            Log.d("SonicEngine.create","webPage_aaa");
+        }
+    }
+    private boolean hasPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+        }
+        return true;
+    }
+    private void requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE_STORAGE);
+        }
     }
 }

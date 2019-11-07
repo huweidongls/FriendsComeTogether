@@ -1,18 +1,39 @@
 package com.yiwo.friendscometogether.newpage;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.netease.nim.uikit.api.NimUIKit;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.msg.MessageBuilder;
+import com.netease.nimlib.sdk.msg.MsgService;
+import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
+import com.netease.nimlib.sdk.msg.model.IMMessage;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
+import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.model.GetFriendActiveListModel;
+import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.DuiZhangXuanZeHuoDongModel;
+import com.yiwo.friendscometogether.newmodel.MyGroupListModel;
+import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.webpages.RenWuWebActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
 import java.io.Serializable;
 
 import butterknife.BindView;
@@ -28,6 +49,8 @@ public class RenWuActivity extends BaseActivity {
     private static final int REQUEST_CODE_XUAN_ZE_HUO_DONG =1;
 
     private DuiZhangXuanZeHuoDongModel.ObjBean yiXuanHuoDongModel;
+    private SpImp spImp;
+    private Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +59,9 @@ public class RenWuActivity extends BaseActivity {
         ButterKnife.bind(this);
         yiXuanHuoDongModel = new DuiZhangXuanZeHuoDongModel.ObjBean();
         tvYiXuanZeHuoDong.setText("请选择活动");
-
+        spImp = new SpImp(RenWuActivity.this);
     }
-    @OnClick({R.id.activity_ren_wu_rl_back,R.id.ll_1,R.id.ll_2,R.id.ll_3,R.id.ll_4,R.id.ll_5,R.id.ll_6,R.id.ll_7,R.id.tv_yi_xuan_huodong})
+    @OnClick({R.id.activity_ren_wu_rl_back,R.id.ll_1,R.id.ll_2,R.id.ll_3,R.id.ll_4,R.id.ll_5,R.id.ll_6,R.id.ll_7,R.id.ll_8,R.id.tv_yi_xuan_huodong})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.activity_ren_wu_rl_back:
@@ -62,6 +85,9 @@ public class RenWuActivity extends BaseActivity {
             case R.id.ll_6:
                 startWeb("http://www.tongbanapp.com/action/ac_coupon/questionAnswerGame");//知识问答链接
                 break;
+            case R.id.ll_8:
+                shareImageToGroup(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator         + "aatb_sonic/IMG_20191105_100935.jpg");
+                break;
             case R.id.ll_7:
                 if (yiXuanHuoDongModel == null|| TextUtils.isEmpty(yiXuanHuoDongModel.getPfID())||yiXuanHuoDongModel.getPfID() == null){
                     Intent itHuoDong = new Intent(RenWuActivity.this, DuiZhangXuanZeHuoDongActivity.class);
@@ -75,6 +101,56 @@ public class RenWuActivity extends BaseActivity {
                 startActivityForResult(itHuoDong, REQUEST_CODE_XUAN_ZE_HUO_DONG);
                 break;
         }
+    }
+
+    private void shareImageToGroup(final String imgPath) {
+        dialog = WeiboDialogUtils.createLoadingDialog(RenWuActivity.this,"加载中...");
+        ViseHttp.POST(NetConfig.groupList)
+                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.groupList))
+                .addParam("userID", spImp.getUID())
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                Gson gson = new Gson();
+                                final MyGroupListModel model = gson.fromJson(data,MyGroupListModel.class);
+                                String[] strs = new String[model.getObj().size()];
+                                for (int i = 0;i<model.getObj().size();i++){
+                                    strs[i] = model.getObj().get(i).getName();
+                                }
+                                AlertDialog.Builder builder = new AlertDialog.Builder(RenWuActivity.this);
+                                builder.setTitle("请选择要分享的群");
+                                builder.setItems(strs, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // 以单聊类型为例
+                                        SessionTypeEnum sessionType = SessionTypeEnum.Team;
+                                        // 示例图片，需要开发者在相应目录下有图片
+                                        File file = new File(imgPath);
+                                        // 创建一个图片消息
+                                        IMMessage message = MessageBuilder.createImageMessage(model.getObj().get(which).getGroupid(), sessionType, file, file.getName());
+                                        // 发送给对方
+                                        NIMClient.getService(MsgService.class).sendMessage(message, false);
+                                        //跳转至群聊
+                                        NimUIKit.startTeamSession(RenWuActivity.this, model.getObj().get(which).getGroupid());
+                                    }
+                                });
+                                WeiboDialogUtils.closeDialog(dialog);
+                                builder.show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            WeiboDialogUtils.closeDialog(dialog);
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+                        WeiboDialogUtils.closeDialog(dialog);
+                    }
+                });
     }
 
     private void youxi() {

@@ -16,9 +16,13 @@ import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -68,55 +72,54 @@ public class ImagePreviewAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
+
         final PhotoView image = new PhotoView(context);
         image.setEnabled(true);
         image.setScaleType(ImageView.ScaleType.FIT_CENTER);
         image.setMaximumScale(10.0F);
         image.setMinimumScale(0.8F);
+
+//        ImageView imageView = new ImageView(context);
+//        Animation rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.image_preview_loading_rotate);
+//        LinearInterpolator interpolator = new LinearInterpolator();
+//        rotateAnimation.setInterpolator(interpolator);
+//        imageView.startAnimation(rotateAnimation);
+
+//        final ObjectAnimator anim = ObjectAnimator.ofInt(image, "ImageLevel", 0,3000);
+
+//        final ObjectAnimator anim = ObjectAnimator.ofFloat(image,"rotation",0,359);
+//        anim.setInterpolator(new LinearInterpolator());
+//        anim.setDuration(3000);
+//        anim.setRepeatCount(ObjectAnimator.INFINITE);
+//
+//        anim.start();
         ProgressInterceptor.addListener(imageList.get(position), new ProgressListener() {
             @Override
             public void onProgress(int progress) {
                 Log.d("IMAGEPREVIEW::", "onProgress: " + progress);
             }
         });
-//
-//        SimpleTarget<Drawable> simpleTarge = new SimpleTarget<Drawable>() {
-//            @Override
-//            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-//                image.setImageDrawable(resource);
-//                Log.d("IMAGEPREVIEW::", "onResourceReady: ");
-//                ProgressInterceptor.removeListener(imageList.get(position));
-//            }
-//
-//            @Override
-//            public void onStart() {
-//                super.onStart();
-//                Log.d("IMAGEPREVIEW::", "onStart: ");
-//            }
-//        };
-        final ObjectAnimator anim = ObjectAnimator.ofInt(image, "ImageLevel", 0,3000);
-//        anim.setInterpolator(new LinearInterpolator());
-        anim.setDuration(800);
-        anim.setRepeatCount(ObjectAnimator.INFINITE);
-        anim.start();
+//        Glide.with(context).load(imageList.get(position)).apply(options).thumbnail(Glide.with(imageView).load(placeholder == 0 ? R.drawable.img_loading : placeholder)).into(imageView);
         Glide.with(context).load(imageList.get(position))
                 .apply(new RequestOptions()
-                .diskCacheStrategy(DiskCacheStrategy.NONE)//不使用缓存
-                .skipMemoryCache(true)
-                .format(DecodeFormat.PREFER_ARGB_8888)//设置图片解码格式
-                .placeholder(R.drawable.dra_loading))
+//                .diskCacheStrategy(DiskCacheStrategy.NONE)//不使用缓存
+//                .skipMemoryCache(true)
+//                .format(DecodeFormat.PREFER_ARGB_8888)//设置图片解码格式
+//                .placeholder(R.drawable.laotou)
+                )
+                .thumbnail(Glide.with(context).load(R.drawable.loadgif))
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        anim.cancel();
                         Log.d("IMAGE", "onException: ");
+//                        anim.cancel();
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        anim.cancel();
                         Log.d("IMAGE", "onResourceReady: ");
+//                        anim.cancel();
                         return false;
                     }
                 })

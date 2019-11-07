@@ -102,7 +102,7 @@ class TBSonicSessionThreadPool {
      *
      */
     private TBSonicSessionThreadPool() {
-        executorServiceImpl = new ThreadPoolExecutor(1, 35,
+        executorServiceImpl = new ThreadPoolExecutor(1, 40,
                 60L, TimeUnit.SECONDS,
                 new SynchronousQueue<Runnable>(),
                 new TBSonicSessionThreadPool.SessionThreadFactory());

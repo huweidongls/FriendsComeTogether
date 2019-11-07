@@ -217,6 +217,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_8"
+                android:paddingRight="50px"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/renwu_point"
+                    android:layout_width="18px"
+                    android:layout_height="18px" />
+                <TextView
+                    android:textSize="40px"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black_333333"
+                    android:text="分享"
+                    android:layout_marginLeft="30px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>
