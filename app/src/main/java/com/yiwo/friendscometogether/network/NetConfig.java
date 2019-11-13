@@ -7,9 +7,9 @@ package com.yiwo.friendscometogether.network;
 public class NetConfig {
 
     //测试服务器
-    public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
+//    public static String BaseUrl = "http://www.91yiwo.com/ylyy/index.php/";
 //    正式服务器
-//    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
+    public static String BaseUrl = "http://www.tongbanapp.com/index.php/";
 
 //    public static String BaseUrl = "http://www.youlaiyouyue.com/";
 //    public static String BaseUrl = "http://47.92.136.19/index.php/";
@@ -405,5 +405,7 @@ public class NetConfig {
     public static String managerInfo = "action/ac_user/managerInfo";
     //管理员删除评论接口 action/ac_user/managerComments  删除评论   传type 0友记  1视频  delID删除的ID   userID用户id
     public static String managerComments = "action/ac_user/managerComments";
+    //队长游戏列表接口
+    public static String pictureGame = "action/ac_coupon/pictureGame";
 
 }

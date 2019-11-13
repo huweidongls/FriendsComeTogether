@@ -148,7 +148,7 @@ public class TBSonicRuntime extends com.tencent.sonic.sdk.SonicRuntime {
 
     @Override
     public File getSonicCacheDir() {
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator         + "aatb_sonic/";
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator         + "tbSonic/";
         File file = new File(path.trim());
         if(!file.exists()){
             file.mkdir();
@@ -163,7 +163,7 @@ public class TBSonicRuntime extends com.tencent.sonic.sdk.SonicRuntime {
 
     @Override
     public File getSonicResourceCacheDir() {
-        File file = new File(Environment.getExternalStorageDirectory(), "/aatb_SonicResource/");
+        File file = new File(Environment.getExternalStorageDirectory(), "/tbSonicResource/");
         if (!file.exists() && !file.mkdir()) {
             notifyError(null, file.getAbsolutePath(), SonicConstants.ERROR_CODE_MAKE_DIR_ERROR);
         }

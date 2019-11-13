@@ -86,7 +86,10 @@ public class RenWuActivity extends BaseActivity {
                 startWeb("http://www.tongbanapp.com/action/ac_coupon/questionAnswerGame");//知识问答链接
                 break;
             case R.id.ll_8:
-                shareImageToGroup(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator         + "aatb_sonic/IMG_20191105_100935.jpg");
+//                shareImageToGroup(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator         + "aatb_sonic/IMG_20191105_100935.jpg");
+                Intent intent = new Intent();
+                intent.setClass(RenWuActivity.this,DuiZhangGameListActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_7:
                 if (yiXuanHuoDongModel == null|| TextUtils.isEmpty(yiXuanHuoDongModel.getPfID())||yiXuanHuoDongModel.getPfID() == null){
@@ -101,56 +104,6 @@ public class RenWuActivity extends BaseActivity {
                 startActivityForResult(itHuoDong, REQUEST_CODE_XUAN_ZE_HUO_DONG);
                 break;
         }
-    }
-
-    private void shareImageToGroup(final String imgPath) {
-        dialog = WeiboDialogUtils.createLoadingDialog(RenWuActivity.this,"加载中...");
-        ViseHttp.POST(NetConfig.groupList)
-                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.groupList))
-                .addParam("userID", spImp.getUID())
-                .request(new ACallback<String>() {
-                    @Override
-                    public void onSuccess(String data) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(data);
-                            if (jsonObject.getInt("code") == 200){
-                                Gson gson = new Gson();
-                                final MyGroupListModel model = gson.fromJson(data,MyGroupListModel.class);
-                                String[] strs = new String[model.getObj().size()];
-                                for (int i = 0;i<model.getObj().size();i++){
-                                    strs[i] = model.getObj().get(i).getName();
-                                }
-                                AlertDialog.Builder builder = new AlertDialog.Builder(RenWuActivity.this);
-                                builder.setTitle("请选择要分享的群");
-                                builder.setItems(strs, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        // 以单聊类型为例
-                                        SessionTypeEnum sessionType = SessionTypeEnum.Team;
-                                        // 示例图片，需要开发者在相应目录下有图片
-                                        File file = new File(imgPath);
-                                        // 创建一个图片消息
-                                        IMMessage message = MessageBuilder.createImageMessage(model.getObj().get(which).getGroupid(), sessionType, file, file.getName());
-                                        // 发送给对方
-                                        NIMClient.getService(MsgService.class).sendMessage(message, false);
-                                        //跳转至群聊
-                                        NimUIKit.startTeamSession(RenWuActivity.this, model.getObj().get(which).getGroupid());
-                                    }
-                                });
-                                WeiboDialogUtils.closeDialog(dialog);
-                                builder.show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            WeiboDialogUtils.closeDialog(dialog);
-                        }
-                    }
-
-                    @Override
-                    public void onFail(int errCode, String errMsg) {
-                        WeiboDialogUtils.closeDialog(dialog);
-                    }
-                });
     }
 
     private void youxi() {

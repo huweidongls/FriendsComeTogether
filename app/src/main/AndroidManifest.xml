@@ -8,7 +8,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!-- 控制呼吸灯，振动器等，用于新消息提醒 -->网易云
+    <!-- 控制呼吸灯，振动器等，用于新消息提醒 -->
+    网易云
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- 外置存储存取权限 -->
@@ -560,7 +561,8 @@
         <activity android:name=".newpage.DuiZhangXuanZeHuoDongActivity" />
         <activity android:name=".newpage.YouXiFenZuActivity" />
         <activity android:name=".newpage.MyGameCardActivity" />
-        <activity android:name=".newpage.PersonImagesActivity"></activity>
+        <activity android:name=".newpage.PersonImagesActivity" />
+        <activity android:name=".newpage.DuiZhangGameListActivity"></activity>
     </application>
 
 </manifest>

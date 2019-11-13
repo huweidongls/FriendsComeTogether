@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white_ffffff"
+    android:layout_marginTop="10px"
+    android:layout_marginRight="7px"
+    android:layout_marginLeft="7px"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_margin="3px"
+        android:scaleType="centerCrop"
+        android:id="@+id/iv"
+        android:layout_width="match_parent"
+        android:layout_height="400px" />
+    <TextView
+        android:maxLines="1"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="8px"
+        android:textSize="32px"
+        android:id="@+id/tv_question"
+        android:textColor="@color/black_333333"
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:maxLines="1"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="8px"
+        android:textSize="32px"
+        android:textColor="@color/black_333333"
+        android:text=""
+        android:id="@+id/tv_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60px">
+        <LinearLayout
+            android:id="@+id/ll_share_text"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_marginLeft="20px"
+                android:layout_gravity="center_vertical"
+                android:textSize="28px"
+                android:textColor="@color/black_333333"
+                android:text="问 题"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_marginRight="50px"
+                android:src="@mipmap/red_choose_chceked"
+                android:layout_marginLeft="10px"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/iv_choose_wenzi"
+                android:layout_width="30px"
+                android:layout_height="30px" />
+        </LinearLayout>
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30px"
+            android:layout_alignParentRight="true"
+            android:textSize="28px"
+            android:layout_marginTop="10px"
+            android:layout_marginBottom="10px"
+            android:background="@drawable/bg_d84c37_30px"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:id="@+id/btn_share"
+            android:text="转 发"
+            android:layout_width="120px"
+            android:layout_height="50px" />
+    </RelativeLayout>
+</LinearLayout>
