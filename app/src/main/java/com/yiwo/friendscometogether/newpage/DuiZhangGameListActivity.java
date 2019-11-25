@@ -102,12 +102,6 @@ public class DuiZhangGameListActivity extends BaseActivity {
                 return true;
             }
         };
-//        LinearLayoutManager manager = new LinearLayoutManager(DuiZhangGameListActivity.this){
-//            @Override
-//            public boolean canScrollVertically() {
-//                return true;
-//            }
-//        };
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
 

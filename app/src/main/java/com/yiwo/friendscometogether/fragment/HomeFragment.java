@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Point;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
@@ -24,12 +25,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -50,7 +53,9 @@ import com.yiwo.friendscometogether.MainActivity;
 import com.yiwo.friendscometogether.MyApplication;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
+import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
+import com.yiwo.friendscometogether.custom.XieYiDialog;
 import com.yiwo.friendscometogether.model.AllBannerModel;
 import com.yiwo.friendscometogether.model.BaiduCityModel;
 import com.yiwo.friendscometogether.model.CityModel;
@@ -69,10 +74,13 @@ import com.yiwo.friendscometogether.newpage.MessageActivity;
 import com.yiwo.friendscometogether.pages.CityActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.SearchActivity;
+import com.yiwo.friendscometogether.pages.UserAgreementActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.AppUpdateUtil;
 import com.yiwo.friendscometogether.utils.UserUtils;
+import com.yiwo.friendscometogether.utils.ViewUtil;
 import com.yiwo.friendscometogether.vas_sonic.TBSonicRuntime;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.widget.ViewPagerForScrollView;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
@@ -152,6 +160,11 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.tv_weiduxiaoxi)
     TextView tvWeiduxiaoxi;
 
+    //第一个推荐的友聚
+    private ImageView iv_first_tuijian;
+    private TextView tv_first_tuijian_title,tv_first_tuijian_content,tv_youji_look_num;
+    private TextView tv_tuyijian_first_tab_1,tv_tuyijian_first_tab_2;
+    private LinearLayout llTuiJianHuodongFirst;
 //    @BindView(R.id.scroll_view)
 //    ScrollView scrollView;
     private static final int PERMISSION_REQUEST_CODE_STORAGE = 1001;
@@ -203,14 +216,14 @@ public class HomeFragment extends BaseFragment {
 
     private List<View> viewList = new ArrayList<>();
     private View view1,view2,view3,view4;
-    private TextView tv_text_youji,tv_text_youju;
+    private TextView tv_text_youji;
+//    tv_text_youju;
     private NotifyAdatpterBroadcastReceiver broadcastReceiver = new NotifyAdatpterBroadcastReceiver();
     private PreLoadWebYouJiBroadcastReceiver preLoadWebYouJiBroadcastReceiver = new PreLoadWebYouJiBroadcastReceiver();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home2, null);
-
         ButterKnife.bind(this, rootView);
         ScreenAdapterTools.getInstance().loadView(rootView);
         spImp = new SpImp(getContext());
@@ -231,9 +244,30 @@ public class HomeFragment extends BaseFragment {
         viewList.add(view2);
         viewList.add(view3);
         viewList.add(view4);
+        //初始化第一个首位推荐友聚活动
+        llTuiJianHuodongFirst = view1.findViewById(R.id.ll_tuijian_huodong_first);
+        iv_first_tuijian = view1.findViewById(R.id.iv_tuijian_first);
+        ScreenAdapterTools.getInstance().loadView(view1);
+        final ViewGroup.LayoutParams layoutParams = iv_first_tuijian.getLayoutParams();
+        ViewUtil.getViewWidth(iv_first_tuijian, new ViewUtil.OnViewListener() {
+            @Override
+            public void onView(int width, int height) {
+                layoutParams.width = width;
+                layoutParams.height = (int) (width * 0.6);
+                Log.d("asdasdasd2",layoutParams.width+"////"+layoutParams.height);
+                iv_first_tuijian.setLayoutParams(layoutParams);
+            }
+        });
+
+        tv_first_tuijian_title = view1.findViewById(R.id.tv_first_tuijian_title);
+        tv_first_tuijian_content = view1.findViewById(R.id.tv_first_tuijian_content);
+        tv_youji_look_num = view1.findViewById(R.id.tv_youji_look_num);
+        tv_tuyijian_first_tab_1 = view1.findViewById(R.id.tv_tuyijian_first_tab_1);
+        tv_tuyijian_first_tab_2 = view1.findViewById(R.id.tv_tuyijian_first_tab_2);
+
         recyclerView1_1 = view1.findViewById(R.id.rv_home_1_2);
         tv_text_youji = view1.findViewById(R.id.tv_text_youji);
-        tv_text_youju = view1.findViewById(R.id.tv_text_youju);
+//        tv_text_youju = view1.findViewById(R.id.tv_text_youju);
         recyclerView1_2 = view1.findViewById(R.id.rv_home_1_1);
         recyclerView2 = view2.findViewById(R.id.rv_home_2);
         recyclerView3 = view3.findViewById(R.id.rv_home_3);
@@ -478,14 +512,17 @@ public class HomeFragment extends BaseFragment {
                                                 if (model.getObj().getArticle().size()>0){
                                                     mListTuiJian_youji.addAll(model.getObj().getArticle());
                                                     preLoadYouJi_tuijain(model.getObj().getArticle());
-                                                    mListTuiJian_youju.addAll(model.getObj().getActivity());
+//                                                    mListTuiJian_youju.addAll(model.getObj().getActivity().subList(1,model.getObj().getActivity().size()));
+//                                                    initTuiJianFirstHuoDong(model.getObj().getActivity().get(0));
                                                     adapterTuiJian_youji.notifyDataSetChanged();
-                                                    adapterTuiJian_youju.notifyDataSetChanged();
-                                                    if (mListTuiJian_youju.size()>0){
-                                                        tv_text_youju.setVisibility(View.VISIBLE);
-                                                    }else {
-                                                        tv_text_youju.setVisibility(View.GONE);
-                                                    }
+//                                                    adapterTuiJian_youju.notifyDataSetChanged();
+//                                                    if (mListTuiJian_youju.size()>0){
+////                                                        tv_text_youju.setVisibility(View.VISIBLE);
+//                                                        llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
+//                                                    }else {
+//                                                        llTuiJianHuodongFirst.setVisibility(View.GONE);
+////                                                        tv_text_youju.setVisibility(View.GONE);
+//                                                    }
                                                     if (mListTuiJian_youji.size()>0){
                                                         tv_text_youji.setVisibility(View.VISIBLE);
                                                     }else {
@@ -722,7 +759,18 @@ public class HomeFragment extends BaseFragment {
                                 };
                                 recyclerView1_1.setLayoutManager(manager);
                                 recyclerView1_1.setAdapter(adapterTuiJian_youji);
-                                mListTuiJian_youju = model.getObj().getActivity();
+                                mListTuiJian_youju.clear();
+                                if (model.getObj().getActivity().size()>0){
+//                                    tv_text_youju.setVisibility(View.VISIBLE);
+                                    llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
+                                    initTuiJianFirstHuoDong(model.getObj().getActivity().get(0));
+                                    if (model.getObj().getActivity().size()>1){
+                                        mListTuiJian_youju.addAll(model.getObj().getActivity().subList(1,model.getObj().getActivity().size()));
+                                    }
+                                }else {
+//                                    tv_text_youju.setVisibility(View.GONE);
+                                    llTuiJianHuodongFirst.setVisibility(View.GONE);
+                                }
                                 adapterTuiJian_youju = new HomeDataRecommendAdapter2(mListTuiJian_youju);
                                 LinearLayoutManager manager2 = new LinearLayoutManager(getContext()){
                                     @Override
@@ -738,11 +786,6 @@ public class HomeFragment extends BaseFragment {
                                 manager2.setOrientation(LinearLayoutManager.HORIZONTAL);
                                 recyclerView1_2.setLayoutManager(manager2);
                                 recyclerView1_2.setAdapter(adapterTuiJian_youju);
-                                if (mListTuiJian_youju.size()>0){
-                                    tv_text_youju.setVisibility(View.VISIBLE);
-                                }else {
-                                    tv_text_youju.setVisibility(View.GONE);
-                                }
                                 if (mListTuiJian_youji.size()>0){
                                     if (hasPermission()){
                                         preLoadYouJi_tuijain(mListTuiJian_youji);
@@ -895,6 +938,49 @@ public class HomeFragment extends BaseFragment {
                     public void onFail(int errCode, String errMsg) {
                     }
                 });
+    }
+
+    private void initTuiJianFirstHuoDong(final HomeDataModel1.ObjBean.ActivityBean bean) {
+//        private ImageView iv_first_tuijian;
+//        private TextView tv_first_tuijian_title,tv_first_tuijian_content,tv_youji_look_num;
+//        private TextView tv_tuyijian_first_tab_1,tv_tuyijian_first_tab_2;
+        llTuiJianHuodongFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent();
+                if (TextUtils.isEmpty(bean.getPfpwd())) {
+                    intent.setClass(getContext(), DetailsOfFriendTogetherWebActivity.class);
+                    intent.putExtra("pfID", bean.getPfID());
+                    getContext().startActivity(intent);
+                } else {
+                    LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(getContext(), new LookPasswordDialog.SetPasswordListener() {
+                        @Override
+                        public boolean setActivityText(String s) {
+                            if (s.equals(bean.getPfpwd())) {
+                                intent.setClass(getContext(), DetailsOfFriendTogetherWebActivity.class);
+                                intent.putExtra("pfID", bean.getPfID());
+                                getContext().startActivity(intent);
+                                return true;
+                            }else {
+                                Toast.makeText(getContext(),"密码错误",Toast.LENGTH_SHORT).show();
+                                return false;
+                            }
+                        }
+                    });
+                    lookPasswordDialog.show();
+                }
+            }
+        });
+        Glide.with(getContext()).load(bean.getPfpic().get(0)).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_first_tuijian);
+        tv_first_tuijian_title.setText(bean.getPftitle());
+        tv_first_tuijian_content.setText(bean.getPfcontent());
+        tv_youji_look_num.setText(bean.getPflook());
+        if (bean.getActivity_label().size()>0){
+            tv_tuyijian_first_tab_1.setText(bean.getActivity_label().get(0).getName());
+            if (bean.getActivity_label().size()>1){
+                tv_tuyijian_first_tab_2.setText(bean.getActivity_label().get(1).getName());
+            }
+        }
     }
 
 
@@ -1073,13 +1159,26 @@ public class HomeFragment extends BaseFragment {
                                         mListTuiJian_youji.clear();
                                         mListTuiJian_youji.addAll(model.getObj().getArticle());
                                         mListTuiJian_youju.clear();
-                                        mListTuiJian_youju.addAll(model.getObj().getActivity());
+
+                                        if (model.getObj().getActivity().size()>0){
+//                                    tv_text_youju.setVisibility(View.VISIBLE);
+                                            llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
+                                            initTuiJianFirstHuoDong(model.getObj().getActivity().get(0));
+                                            if (model.getObj().getActivity().size()>1){
+                                                mListTuiJian_youju.addAll(model.getObj().getActivity().subList(1,model.getObj().getActivity().size()));
+                                            }
+                                        }else {
+//                                    tv_text_youju.setVisibility(View.GONE);
+                                            llTuiJianHuodongFirst.setVisibility(View.GONE);
+                                        }
                                         adapterTuiJian_youji.notifyDataSetChanged();
                                         adapterTuiJian_youju.notifyDataSetChanged();
                                         if (mListTuiJian_youju.size()>0){
-                                            tv_text_youju.setVisibility(View.VISIBLE);
+//                                            tv_text_youju.setVisibility(View.VISIBLE);
+                                            llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
                                         }else {
-                                            tv_text_youju.setVisibility(View.GONE);
+//                                            tv_text_youju.setVisibility(View.GONE);
+                                            llTuiJianHuodongFirst.setVisibility(View.GONE);
                                         }
                                         if (mListTuiJian_youji.size()>0){
                                             preLoadYouJi_tuijain(mListTuiJian_youji);
@@ -1264,14 +1363,19 @@ public class HomeFragment extends BaseFragment {
                                     mListTuiJian_youji.clear();
                                     mListTuiJian_youji.addAll(model.getObj().getArticle());
                                     mListTuiJian_youju.clear();
-                                    mListTuiJian_youju.addAll(model.getObj().getActivity());
+                                    if (model.getObj().getActivity().size()>0){
+//                                    tv_text_youju.setVisibility(View.VISIBLE);
+                                        llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
+                                        initTuiJianFirstHuoDong(model.getObj().getActivity().get(0));
+                                        if (model.getObj().getActivity().size()>1){
+                                            mListTuiJian_youju.addAll(model.getObj().getActivity().subList(1,model.getObj().getActivity().size()));
+                                        }
+                                    }else {
+//                                    tv_text_youju.setVisibility(View.GONE);
+                                        llTuiJianHuodongFirst.setVisibility(View.GONE);
+                                    }
                                     adapterTuiJian_youji.notifyDataSetChanged();
                                     adapterTuiJian_youju.notifyDataSetChanged();
-                                    if (mListTuiJian_youju.size()>0){
-                                        tv_text_youju.setVisibility(View.VISIBLE);
-                                    }else {
-                                        tv_text_youju.setVisibility(View.GONE);
-                                    }
                                     if (mListTuiJian_youji.size()>0){
                                         tv_text_youji.setVisibility(View.VISIBLE);
                                     }else {
@@ -1311,14 +1415,19 @@ public class HomeFragment extends BaseFragment {
                                     mListTuiJian_youji.clear();
                                     mListTuiJian_youji.addAll(model.getObj().getArticle());
                                     mListTuiJian_youju.clear();
-                                    mListTuiJian_youju.addAll(model.getObj().getActivity());
+                                    if (model.getObj().getActivity().size()>0){
+//                                    tv_text_youju.setVisibility(View.VISIBLE);
+                                        llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
+                                        initTuiJianFirstHuoDong(model.getObj().getActivity().get(0));
+                                        if (model.getObj().getActivity().size()>1){
+                                            mListTuiJian_youju.addAll(model.getObj().getActivity().subList(1,model.getObj().getActivity().size()));
+                                        }
+                                    }else {
+//                                    tv_text_youju.setVisibility(View.GONE);
+                                        llTuiJianHuodongFirst.setVisibility(View.GONE);
+                                    }
                                     adapterTuiJian_youji.notifyDataSetChanged();
                                     adapterTuiJian_youju.notifyDataSetChanged();
-                                    if (mListTuiJian_youju.size()>0){
-                                        tv_text_youju.setVisibility(View.VISIBLE);
-                                    }else {
-                                        tv_text_youju.setVisibility(View.GONE);
-                                    }
                                     if (mListTuiJian_youji.size()>0){
                                         tv_text_youji.setVisibility(View.VISIBLE);
                                     }else {
@@ -1358,14 +1467,19 @@ public class HomeFragment extends BaseFragment {
                                     mListTuiJian_youji.clear();
                                     mListTuiJian_youji.addAll(model.getObj().getArticle());
                                     mListTuiJian_youju.clear();
-                                    mListTuiJian_youju.addAll(model.getObj().getActivity());
+                                    if (model.getObj().getActivity().size()>0){
+//                                    tv_text_youju.setVisibility(View.VISIBLE);
+                                        llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
+                                        initTuiJianFirstHuoDong(model.getObj().getActivity().get(0));
+                                        if (model.getObj().getActivity().size()>1){
+                                            mListTuiJian_youju.addAll(model.getObj().getActivity().subList(1,model.getObj().getActivity().size()));
+                                        }
+                                    }else {
+//                                    tv_text_youju.setVisibility(View.GONE);
+                                        llTuiJianHuodongFirst.setVisibility(View.GONE);
+                                    }
                                     adapterTuiJian_youji.notifyDataSetChanged();
                                     adapterTuiJian_youju.notifyDataSetChanged();
-                                    if (mListTuiJian_youju.size()>0){
-                                        tv_text_youju.setVisibility(View.VISIBLE);
-                                    }else {
-                                        tv_text_youju.setVisibility(View.GONE);
-                                    }
                                     if (mListTuiJian_youji.size()>0){
                                         tv_text_youji.setVisibility(View.VISIBLE);
                                     }else {
@@ -1379,6 +1493,7 @@ public class HomeFragment extends BaseFragment {
                         }
 
                         @Override
+
                         public void onFail(int errCode, String errMsg) {
                             toToast(getContext(),"加载失败...");
                             WeiboDialogUtils.closeDialog(dialog_loading);

@@ -13,8 +13,7 @@
 
         <TextView
             android:id="@+id/ctivity_user_agreement_tv_title"
-            style="@style/tv_top_title"
-            android:text="用户协议" />
+            style="@style/tv_top_title" />
 
         <RelativeLayout
             android:id="@+id/activity_user_agreement_rl_back"

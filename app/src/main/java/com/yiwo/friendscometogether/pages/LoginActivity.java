@@ -81,7 +81,7 @@ public class LoginActivity extends BaseActivity {
         api = UMShareAPI.get(this);
     }
 
-    @OnClick({R.id.rl_set_return, R.id.login_btn, R.id.login_registerTv, R.id.login_forgetPwTv,R.id.tv_XY_TK,R.id.iv_show_pwd})
+    @OnClick({R.id.rl_set_return, R.id.login_btn, R.id.login_registerTv, R.id.login_forgetPwTv,R.id.tv_XY_TK,R.id.tv_TK,R.id.iv_show_pwd})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_set_return:
@@ -104,6 +104,12 @@ public class LoginActivity extends BaseActivity {
                 itA.putExtra("title", "用户协议");
                 itA.putExtra("url", NetConfig.userAgreementUrl);
                 startActivity(itA);
+                break;
+            case R.id.tv_TK:
+                Intent itTk = new Intent(c, UserAgreementActivity.class);
+                itTk.putExtra("title", "隐私政策");
+                itTk.putExtra("url", NetConfig.userAgreementUrl1);
+                startActivity(itTk);
                 break;
             case R.id.iv_show_pwd:
                     if (isShowPwd){

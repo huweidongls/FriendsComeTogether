@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/bg_white_16px"
+    android:orientation="vertical"
+    android:layout_width="700px"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tv_title"
+        android:text="温馨提示"
+        android:textStyle="bold"
+        android:textSize="35px"
+        android:textColor="@color/black_333333"
+        android:layout_marginTop="50px"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_below="@+id/tv_title"
+        android:orientation="vertical"
+        android:layout_marginTop="20px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:text="      欢迎使用瞳伴App！请认真阅读以下《用户协议》和《隐私政策》全部条款，请您同意并接受条款后再开始使用我们的产品，否则将无法继续使用。"
+            android:textSize="32px"
+            android:textColor="@color/black_333333"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_xieyi"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="5px"
+            android:textSize="32px"
+            android:text="1、用户协议"
+            android:textColor="@color/red_d84c37"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_zhengce"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="5px"
+            android:textSize="32px"
+            android:text="2、隐私政策"
+            android:textColor="@color/red_d84c37"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:paddingTop="2px"
+            android:background="@drawable/bg_d1d1d1_16px_bottom"
+            android:orientation="horizontal"
+            android:layout_marginTop="20px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/btn_disagree"
+                android:background="@drawable/bg_white_16px_left"
+                android:layout_marginRight="1px"
+                android:textSize="32px"
+                android:gravity="center"
+                android:text="不同意"
+                android:textColor="@color/black_333333"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="100px" />
+            <TextView
+                android:id="@+id/btn_agree"
+                android:background="@drawable/bg_white_16px_right"
+                android:textSize="32px"
+                android:gravity="center"
+                android:text="同意并继续"
+                android:textColor="@color/red_d84c37"
+                android:layout_marginLeft="1px"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="100px" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

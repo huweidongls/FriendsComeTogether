@@ -18,6 +18,7 @@ public class SpPublic {
     public static String YXtoken = "yx_token";//用户云信token
     public static String Search = "search";//用户搜索历史
     public static String Yd = "search";//引导页
+    public static String AgreeXieYi = "agree_xieyi";//同意协议
 
     public static String WY_UP_ACCID = "wy_up_accid";//网易小视频上传 accid
     public static String WY_UP_TOKEN = "wy_up_token";//网易小视频上传 token

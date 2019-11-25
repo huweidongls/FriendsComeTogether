@@ -24,7 +24,7 @@
             test:radius1="18px"
             />
         <TextView
-            android:maxLines="2"
+            android:maxLines="1"
             android:layout_marginTop="15px"
             android:id="@+id/tv_name"
             android:ellipsize="end"

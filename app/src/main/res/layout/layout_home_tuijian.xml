@@ -1,38 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingLeft="20px"
     android:paddingRight="20px"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:textSize="55px"
-        android:visibility="gone"
-        android:id="@+id/tv_text_youju"
-        android:layout_marginTop="40px"
-        android:textStyle="bold"
-        android:layout_marginLeft="5px"
-        android:layout_marginBottom="23px"
-        android:text="友聚活动"
-        android:textColor="@color/black_333333"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:elevation="1px"
+        android:visibility="visible"
+        android:id="@+id/ll_tuijian_huodong_first"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30px"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_marginTop="20px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+                test:radius1="16px"
+                android:id="@+id/iv_tuijian_first"
+                android:layout_width="match_parent"
+                android:layout_height="440px"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/zanwutupian" />
+            <TextView
+                android:gravity="center_vertical"
+                android:paddingLeft="20px"
+                android:background="@drawable/bg_black_16px_transparent_point_30"
+                android:textColor="@color/white_ffffff"
+                android:textSize="32px"
+                android:text="今日推荐友聚行程"
+                android:layout_width="match_parent"
+                android:layout_height="80px" />
+            <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+                android:src="@mipmap/huodong_tuijian"
+                android:layout_alignParentRight="true"
+                test:right_top_radius1="16px"
+                android:layout_width="80px"
+                android:layout_height="80px" />
+        </RelativeLayout>
+        <TextView
+            android:layout_marginRight="20px"
+            android:layout_marginLeft="20px"
+            android:id="@+id/tv_first_tuijian_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="一次神秘的智慧之旅"
+            android:textColor="@color/black_333333"
+            android:textSize="44px" />
+        <TextView
+            android:layout_marginRight="20px"
+            android:layout_marginLeft="20px"
+            android:id="@+id/tv_first_tuijian_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="一次神秘的智慧之旅"
+            android:textColor="#4c4c4c"
+            android:textSize="35px" />
+        <RelativeLayout
+            android:layout_marginRight="20px"
+            android:layout_marginLeft="20px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20px"
+            android:gravity="center_vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="52px"
+                android:layout_alignParentLeft="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_marginRight="15px"
+                    android:background="@drawable/bg_d84c37_30px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_marginRight="20px"
+                        android:layout_marginBottom="5px"
+                        android:layout_marginTop="5px"
+                        android:layout_marginLeft="20px"
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/white_ffffff"
+                        android:textSize="25px"
+                        android:text="#周末游"
+                        android:id="@+id/tv_tuyijian_first_tab_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:background="@drawable/bg_d84c37_30px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_marginRight="20px"
+                        android:layout_marginBottom="5px"
+                        android:layout_marginTop="5px"
+                        android:layout_marginLeft="20px"
+                        android:textColor="@color/white_ffffff"
+                        android:textSize="25px"
+                        android:text="#周末游"
+                        android:id="@+id/tv_tuyijian_first_tab_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="52px"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="48px"
+                    android:layout_height="31px"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="12px"
+                    android:src="@mipmap/eye_black" />
+
+                <TextView
+                    android:id="@+id/tv_youji_look_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="30px"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:maxWidth="150px"
+                    android:text="35"
+                    android:textColor="#272A2C"
+                    android:textSize="28px" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <!--<TextView-->
+        <!--android:textSize="55px"-->
+        <!--android:visibility="gone"-->
+        <!--android:id="@+id/tv_text_youju"-->
+        <!--android:layout_marginTop="40px"-->
+        <!--android:textStyle="bold"-->
+        <!--android:layout_marginLeft="5px"-->
+        <!--android:layout_marginBottom="23px"-->
+        <!--android:text="友聚活动"-->
+        <!--android:textColor="@color/black_333333"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_home_1_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <TextView
-        android:textSize="55px"
-        android:visibility="gone"
-        android:id="@+id/tv_text_youji"
-        android:textStyle="bold"
-        android:layout_marginLeft="5px"
-        android:layout_marginTop="40px"
-        android:layout_marginBottom="23px"
-        android:text="友记文章"
-        android:textColor="@color/black_333333"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_marginLeft="60px"
+        android:layout_marginRight="60px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:background="#d1d1d1"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="3px"/>
+        <TextView
+            android:background="#FAFAFA"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:layout_centerInParent="true"
+            android:textSize="36px"
+            android:visibility="visible"
+            android:id="@+id/tv_text_youji"
+            android:textStyle="bold"
+            android:layout_marginLeft="5px"
+            android:layout_marginTop="50px"
+            android:layout_marginBottom="30px"
+            android:text="友记文章"
+            android:textColor="@color/black_333333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_home_1_2"
         android:layout_width="match_parent"

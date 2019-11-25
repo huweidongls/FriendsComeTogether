@@ -41,7 +41,8 @@ public class SetActivity extends BaseActivity {
     }
 
     @OnClick({R.id.activity_set_rl_back, R.id.activity_set_rl_upload, R.id.activity_set_rl_feedback,
-            R.id.activity_set_rl_clear_cache, R.id.activity_set_rl_user_agreement, R.id.activity_set_exit_login_bt,R.id.activity_set_rl_check_verson})
+            R.id.activity_set_rl_clear_cache, R.id.activity_set_rl_user_agreement, R.id.activity_set_rl_user_agreement_1,
+            R.id.activity_set_exit_login_bt,R.id.activity_set_rl_check_verson})
     public void OnClick(View v) {
         switch (v.getId()) {
             case R.id.activity_set_rl_back:
@@ -82,6 +83,12 @@ public class SetActivity extends BaseActivity {
                 it.putExtra("title", "用户协议");
                 it.putExtra("url", NetConfig.userAgreementUrl);
                 startActivity(it);
+                break;
+            case R.id.activity_set_rl_user_agreement_1:
+                Intent itTk = new Intent(SetActivity.this, UserAgreementActivity.class);
+                itTk.putExtra("title", "隐私政策");
+                itTk.putExtra("url", NetConfig.userAgreementUrl1);
+                startActivity(itTk);
                 break;
             case R.id.activity_set_exit_login_bt:
 //                toToast(this,"退出登录");

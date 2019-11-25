@@ -133,7 +133,13 @@ public class SpImp {
         editor.putString(SpPublic.WY_UP_TOKEN, wyToken).toString();
         editor.commit();
     }
-
+    public void setIsAgreeXieYi(Boolean b){
+        editor.putBoolean(SpPublic.AgreeXieYi,b);
+        editor.commit();
+    }
+    public Boolean isAgree(){
+        return sp.getBoolean(SpPublic.AgreeXieYi,false);
+    }
     public String getIsAdmin(){
         return sp.getString(SpPublic.IS_ADMIN, "0");
     }

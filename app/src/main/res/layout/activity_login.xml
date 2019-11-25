@@ -168,7 +168,20 @@
             android:textSize="30px"
             android:id="@+id/tv_XY_TK"
             android:textColor="@color/red_d84c37"
-            android:text="用户协议，隐私条款"
+            android:text="《用户协议》"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="30px"
+            android:textColor="@color/black_333333"
+            android:text="和"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="30px"
+            android:id="@+id/tv_TK"
+            android:textColor="@color/red_d84c37"
+            android:text="《隐私政策》"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

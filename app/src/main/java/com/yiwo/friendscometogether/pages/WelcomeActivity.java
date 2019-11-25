@@ -15,9 +15,12 @@ import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.vise.xsnow.cache.SpCache;
 import com.yiwo.friendscometogether.MainActivity;
+import com.yiwo.friendscometogether.MyApplication;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
+import com.yiwo.friendscometogether.custom.XieYiDialog;
 import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
+import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.wangyiyunshipin.utils.AssetCopyer;
 
@@ -39,9 +42,12 @@ public class WelcomeActivity extends BaseActivity {
         StatusBarUtils.setStatusBarTransparent(WelcomeActivity.this);
         spImp = new SpImp(WelcomeActivity.this);
         spCache = new SpCache(WelcomeActivity.this);
-        initAsset();
-        initData();
-
+        if (!spImp.isAgree()){
+            showAgreeDialog();
+        }else {
+            initAsset();
+            initData();
+        }
     }
     private void initAsset() {
         AssetCopyer assetCopyer = new AssetCopyer(this);
@@ -168,6 +174,40 @@ public class WelcomeActivity extends BaseActivity {
 ////            NIMClient.getService(AuthService.class).login(info)
 ////                    .setCallback(callback);
         }
+    }
 
+    private void showAgreeDialog() {
+        XieYiDialog dialog = new XieYiDialog(WelcomeActivity.this, new XieYiDialog.XieYiDialogListener() {
+            @Override
+            public void agreeBtnListen() {
+                spImp.setIsAgreeXieYi(true);
+                initAsset();
+                initData();
+            }
+
+            @Override
+            public void disAgreeBtnListen() {
+                spImp.setIsAgreeXieYi(false);
+                MyApplication.getInstance().exit();
+            }
+
+            @Override
+            public void xieYiTextClickListen() {
+                Intent itA = new Intent(WelcomeActivity.this, UserAgreementActivity.class);
+                itA.putExtra("title", "用户协议");
+                itA.putExtra("url", NetConfig.userAgreementUrl);
+                startActivity(itA);
+            }
+
+            @Override
+            public void zhengCeTextClickListen() {
+                Intent itTk = new Intent(WelcomeActivity.this, UserAgreementActivity.class);
+                itTk.putExtra("title", "隐私政策");
+                itTk.putExtra("url", NetConfig.userAgreementUrl1);
+                startActivity(itTk);
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.show();
     }
 }

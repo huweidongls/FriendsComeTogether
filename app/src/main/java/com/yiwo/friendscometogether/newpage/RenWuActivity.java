@@ -86,7 +86,6 @@ public class RenWuActivity extends BaseActivity {
                 startWeb("http://www.tongbanapp.com/action/ac_coupon/questionAnswerGame");//知识问答链接
                 break;
             case R.id.ll_8:
-//                shareImageToGroup(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator         + "aatb_sonic/IMG_20191105_100935.jpg");
                 Intent intent = new Intent();
                 intent.setClass(RenWuActivity.this,DuiZhangGameListActivity.class);
                 startActivity(intent);
