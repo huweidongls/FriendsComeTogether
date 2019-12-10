@@ -1,13 +1,16 @@
 package com.yiwo.friendscometogether.wangyiyunshipin;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -26,6 +29,8 @@ import com.netease.nim.uikit.common.util.sys.ScreenUtil;
 import com.netease.nim.uikit.common.util.sys.TimeUtil;
 import com.netease.transcoding.TranscodingAPI;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.newpage.UpLoadVideoActivity;
+import com.yiwo.friendscometogether.utils.FileUtils;
 import com.yiwo.friendscometogether.wangyiyunshipin.liveplayer.NEVideoView;
 import com.yiwo.friendscometogether.wangyiyunshipin.liveplayer.VideoConstant;
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.adapter.ShortVideoGalleryAdapter;
@@ -37,6 +42,7 @@ import com.yiwo.friendscometogether.wangyiyunshipin.upload.model.VideoGalleryDat
 import com.yiwo.friendscometogether.wangyiyunshipin.upload.model.VideoItem;
 import com.yiwo.friendscometogether.wangyiyunshipin.utils.SnapShotHelper;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,6 +55,7 @@ import java.util.List;
 
 public class VideoImportActivity extends BaseActivity implements ShortVideoGalleryAdapter.GalleryUiListener, View.OnClickListener, VideoProcessController.VideoProcessCallback {
     public static final int EXTRA_REQUEST_CODE = 1001;
+    public static final String UPLOAD_EXTRA_FILTER_VIDEO = "uploadExtraFilterVideo";
     public static final String EXTRA_FILTER_TIME = "filter_time";
     public static final String EXTRA_OUTPUT_PATH = "output_file";
     private static final int DEFAULT_FRAMES = 4;
@@ -164,7 +171,14 @@ public class VideoImportActivity extends BaseActivity implements ShortVideoGalle
                 Log.d("d导入视频的宽//gao：",wVideo+"////"+hVideo);
                 videoView.upDateVideoSize((int) wVideo,(int) hVideo,0,0);
             }else {
+                long temp;
+                if (videoItem.getWidth() > videoItem.getHeight()){
+                    temp = videoItem.getWidth();
+                    videoItem.setWidth(videoItem.getHeight());
+                    videoItem.setHeight(temp);
+                }
                 videoView.upDateVideoSize((int) videoItem.getWidth(),(int) videoItem.getHeight(),0,0);
+                Log.d("d导入视频的宽//gao：",videoItem.getWidth()+"////"+videoItem.getHeight());
             }
 //            videoView.upDateVideoSize((int) videoItem.getWidth(),(int) videoItem.getHeight(),0,0);
             videoView.setVideoScalingMode(VideoConstant.VIDEO_SCALING_MODE_FILL_BLACK);
@@ -344,9 +358,10 @@ public class VideoImportActivity extends BaseActivity implements ShortVideoGalle
         arr[0] = mediaCaptureOptions.mFilePath;
         inputFilePara.setFilePaths(arr);
         // sdk bug，只有一个视频的时候，参数无效。只能添加这个规避一下
-        inputFilePara.setVideoFadeDuration(0);
-        inputFilePara.setAudioVolume(0.3f);
+//        inputFilePara.setVideoFadeDuration(0);
+//        inputFilePara.setAudioVolume(0.3f);
         videoProcessOptions.setSource(inputFilePara);
+        inputFilePara.setVideoFadeDuration(100);
         // 设置文件剪切参数
         TranscodingAPI.TranTimeCut fileCutPara = videoProcessOptions.getTimeCut();
         int duration = (int) filterTime;
@@ -406,7 +421,33 @@ public class VideoImportActivity extends BaseActivity implements ShortVideoGalle
     public void onVideoProcessFailed(int code) {
         DialogMaker.dismissProgressDialog();
         if (code == 11) {
-            Toast.makeText(this, "不支持该视频格式", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "不支持该视频格式", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(VideoImportActivity.this);
+            builder.setMessage("此视频格式不支持编辑，是否直接上传视频？")
+                    .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            File pictureFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsoluteFile();
+                            File appDir = new File(pictureFolder, "Camera");
+                            if (!appDir.exists()) {
+                                appDir.mkdirs();
+                            }
+                            String fileName = "瞳伴视频_" + System.currentTimeMillis() + ".MP4";
+                            File destFile = new File(appDir, fileName);
+                            FileUtils.copy(new File(videoItem.getFilePath()), destFile);
+                            videoItem.setFilePath(destFile.getPath());
+                            UpLoadVideoActivity.startUpLoadVideoActivity(VideoImportActivity.this, videoItem,videoItem.getFilePath());
+                            Intent intent = new Intent();
+                            intent.putExtra(UPLOAD_EXTRA_FILTER_VIDEO,true);
+                            setResult(Activity.RESULT_OK, intent);
+                            finish();
+                        }
+                    }).setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            }).show();
         }
     }
 

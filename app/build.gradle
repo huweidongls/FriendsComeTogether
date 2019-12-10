@@ -7,8 +7,8 @@ android {
         applicationId "com.yiwo.friendscometogether"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 44
-        versionName "4.4"
+        versionCode 46
+        versionName "4.6"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
@@ -54,6 +54,13 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+
+    configurations {
+        compile.exclude group : 'org.jetbrains' , module : 'annotations'
+    }
+
+
+
     configurations.all {
 
         resolutionStrategy.eachDependency { DependencyResolveDetails details ->
@@ -147,10 +154,11 @@ dependencies {
     implementation files('libs/Livestreaming_v2.1.0.jar')
     implementation files('libs/NELivePlayer-1.3.0.jar')
     compile 'com.github.Jay-Goo:RangeSeekBar:v1.0.7'
-    implementation files('libs/Transcode-2.5.5.jar')
     //okhttp + 拦截器
     api 'com.squareup.okhttp3:okhttp:3.4.1'
     api 'com.github.bumptech.glide:okhttp3-integration:4.3.1'
     //
     compile 'com.tencent.sonic:sdk:3.1.0'
+    compile 'com.github.yyued:SVGAPlayer-Android:2.0.0'
+    implementation files('libs/Transcode-2.5.5.jar')
 }

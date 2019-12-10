@@ -349,4 +349,62 @@ public class TeamDataCache {
             addOrUpdateTeamMember(m);
         }
     }
+    /**
+     * 获取显示名称。用户本人显示“我”
+     *
+     * @param tid
+     * @param account
+     * @return
+     */
+    public String getTeamMemberDisplayName(String tid, String account) {
+        if (account.equals(NimUIKit.getAccount())) {
+            return "我";
+        }
+
+        return getDisplayNameWithoutMe(tid, account);
+    }
+
+    /**
+     * 获取显示名称。用户本人显示“你”
+     *
+     * @param tid
+     * @param account
+     * @return
+     */
+    public String getTeamMemberDisplayNameYou(String tid, String account) {
+        if (account.equals(NimUIKit.getAccount())) {
+            return "你";
+        }
+
+        return getDisplayNameWithoutMe(tid, account);
+    }
+    /**
+     * 获取显示名称。用户本人也显示昵称
+     * 高级群：首先返回群昵称。没有群昵称，则返回备注名。没有设置备注名，则返回用户昵称。
+     * 讨论组：首先返回备注名。没有设置备注名，则返回用户昵称。
+     */
+    public String getDisplayNameWithoutMe(String tid, String account) {
+        String memberNick = getTeamNick(tid, account);
+        if (!TextUtils.isEmpty(memberNick)) {
+            return memberNick;
+        }
+
+        String alias = NimUserInfoCache.getInstance().getAlias(account);
+        if (!TextUtils.isEmpty(alias)) {
+            return alias;
+        }
+
+        return NimUserInfoCache.getInstance().getUserName(account);
+    }
+
+    public String getTeamNick(String tid, String account) {
+        Team team = getTeamById(tid);
+        if (team != null && team.getType() == TeamTypeEnum.Advanced) {
+            TeamMember member = getTeamMember(tid, account);
+            if (member != null && !TextUtils.isEmpty(member.getTeamNick())) {
+                return member.getTeamNick();
+            }
+        }
+        return null;
+    }
 }

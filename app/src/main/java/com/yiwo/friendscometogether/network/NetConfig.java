@@ -408,5 +408,12 @@ public class NetConfig {
     public static String managerComments = "action/ac_user/managerComments";
     //队长游戏列表接口
     public static String pictureGame = "action/ac_coupon/pictureGame";
-
+    //直播信息接口   action/ac_zhibo/zhibo 传uid用户id  返回cid频道id  creator直播人的网易id  hlsPullUrl  httpPullUrl   pushUrl  rtmpPullUrl   roomId聊天室id
+    public static String zhiBo = "action/ac_zhibo/zhibo";
+    //直播列表 传uid用户id  page分页  返回userID直播人的id  hlsPullUrl,  httpPullUrl,  pushUrl,   rtmpPullUrl 直播地址   cid频道id   room_id房间id   username用户名  userpic头像
+    public static String zhiBoList = "action/ac_zhibo/zhiboList";//暂未使用，暂使用首页推荐接口获取
+    //action/ac_zhibo/zihboInfo   传uid用户id   cid频道id   返回zhibostatus直播状态    start_time 直播时间
+    public static String zhiBoInfo = "action/ac_zhibo/zihboInfo";
+    //action/ac_zhibo/   settZhiBoTime  设置开始时间  传uid用户id    starttime开始时间
+    public static String settZhiBoTime = "action/ac_zhibo/setZhiBoTime";
 }

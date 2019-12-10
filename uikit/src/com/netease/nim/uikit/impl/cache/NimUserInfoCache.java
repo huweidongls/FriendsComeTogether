@@ -10,6 +10,7 @@ import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.RequestCallbackWrapper;
 import com.netease.nimlib.sdk.ResponseCode;
+import com.netease.nimlib.sdk.friend.model.Friend;
 import com.netease.nimlib.sdk.uinfo.UserService;
 import com.netease.nimlib.sdk.uinfo.UserServiceObserve;
 import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
@@ -218,6 +219,23 @@ public class NimUserInfoCache {
         }
 
         return accounts;
+    }
+    // 获取用户原本的昵称
+    public String getUserName(String account) {
+        NimUserInfo userInfo = getUserInfo(account);
+        if (userInfo != null && !TextUtils.isEmpty(userInfo.getName())) {
+            return userInfo.getName();
+        } else {
+            return account;
+        }
+    }
+
+    public String getAlias(String account) {
+        Friend friend = FriendDataCache.getInstance().getFriendByAccount(account);
+        if (friend != null && !TextUtils.isEmpty(friend.getAlias())) {
+            return friend.getAlias();
+        }
+        return null;
     }
 
     /**

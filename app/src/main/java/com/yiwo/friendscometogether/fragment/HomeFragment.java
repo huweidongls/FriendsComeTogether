@@ -5,9 +5,11 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.location.Location;
 import android.location.LocationManager;
@@ -29,6 +31,7 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,6 +40,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
+import com.netease.nim.uikit.common.ui.dialog.DialogMaker;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
@@ -59,11 +63,13 @@ import com.yiwo.friendscometogether.custom.XieYiDialog;
 import com.yiwo.friendscometogether.model.AllBannerModel;
 import com.yiwo.friendscometogether.model.BaiduCityModel;
 import com.yiwo.friendscometogether.model.CityModel;
+import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.network.ActivityConfig;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.HomeDataAdapter;
 import com.yiwo.friendscometogether.newadapter.HomeDataRecommendAdapter1;
 import com.yiwo.friendscometogether.newadapter.HomeDataRecommendAdapter2;
+import com.yiwo.friendscometogether.newadapter.HomeDataRecommendLiveListAdapter;
 import com.yiwo.friendscometogether.newadapter.HomeListVideoAdapter;
 import com.yiwo.friendscometogether.newadapter.HomeListYouJiAdapter;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
@@ -71,15 +77,21 @@ import com.yiwo.friendscometogether.newmodel.HomeDataModel1;
 import com.yiwo.friendscometogether.newmodel.HomeVideoListModel;
 import com.yiwo.friendscometogether.newmodel.IndexLabelModel;
 import com.yiwo.friendscometogether.newpage.MessageActivity;
+import com.yiwo.friendscometogether.newpage.NotOnLiveActivity;
+import com.yiwo.friendscometogether.newpage.TestSGVAActivity;
 import com.yiwo.friendscometogether.pages.CityActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.SearchActivity;
 import com.yiwo.friendscometogether.pages.UserAgreementActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.AppUpdateUtil;
+import com.yiwo.friendscometogether.utils.TokenUtils;
 import com.yiwo.friendscometogether.utils.UserUtils;
 import com.yiwo.friendscometogether.utils.ViewUtil;
 import com.yiwo.friendscometogether.vas_sonic.TBSonicRuntime;
+import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
+import com.yiwo.friendscometogether.wangyiyunshipin.server.entity.RoomInfoEntity;
+import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.LiveRoomActivity;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.widget.ViewPagerForScrollView;
 import com.youth.banner.Banner;
@@ -165,6 +177,8 @@ public class HomeFragment extends BaseFragment {
     private TextView tv_first_tuijian_title,tv_first_tuijian_content,tv_youji_look_num;
     private TextView tv_tuyijian_first_tab_1,tv_tuyijian_first_tab_2;
     private LinearLayout llTuiJianHuodongFirst;
+    //直播列表
+    private LinearLayout ll_live;
 //    @BindView(R.id.scroll_view)
 //    ScrollView scrollView;
     private static final int PERMISSION_REQUEST_CODE_STORAGE = 1001;
@@ -190,17 +204,20 @@ public class HomeFragment extends BaseFragment {
 
     RecyclerView recyclerView1_1;//推荐_youji
     RecyclerView recyclerView1_2;//推荐_youju
+    RecyclerView recyclerView_live;//直播列表
     RecyclerView recyclerView2;//关注
     RecyclerView recyclerView3;//友记
     RecyclerView recyclerView4;//小视频
 
     private HomeDataRecommendAdapter1 adapterTuiJian_youji;//推荐列表友记适配器
     private HomeDataRecommendAdapter2 adapterTuiJian_youju;//推荐列表友聚适配器
+    private HomeDataRecommendLiveListAdapter adapterLiveList;//直播列表
     private HomeDataAdapter adapterGuanzhu;//关注列表适配器
     private HomeListYouJiAdapter adapterYouji;//友记列表适配器
     private HomeListVideoAdapter adapterVideos;//视频列表适配器
     private List<HomeDataModel1.ObjBean.ArticleBean> mListTuiJian_youji = new ArrayList<>();//推荐友记list
     private List<HomeDataModel1.ObjBean.ActivityBean> mListTuiJian_youju = new ArrayList<>();//推荐友聚list
+    private List<HomeDataModel1.ObjBean.ZhiboBean> mlistLive = new ArrayList<>();//直播list
     private List<HomeDataModel.ObjBean> mListGuanzhu = new ArrayList<>();//关注列表list
     private List<HomeDataModel.ObjBean> mListYouJi = new ArrayList<>();//友记列表list
     private List<HomeVideoListModel.ObjBean> mListVideos = new ArrayList<>();//视频列表list
@@ -217,6 +234,7 @@ public class HomeFragment extends BaseFragment {
     private List<View> viewList = new ArrayList<>();
     private View view1,view2,view3,view4;
     private TextView tv_text_youji;
+    private boolean cancelEnterRoom;
 //    tv_text_youju;
     private NotifyAdatpterBroadcastReceiver broadcastReceiver = new NotifyAdatpterBroadcastReceiver();
     private PreLoadWebYouJiBroadcastReceiver preLoadWebYouJiBroadcastReceiver = new PreLoadWebYouJiBroadcastReceiver();
@@ -269,6 +287,20 @@ public class HomeFragment extends BaseFragment {
         tv_text_youji = view1.findViewById(R.id.tv_text_youji);
 //        tv_text_youju = view1.findViewById(R.id.tv_text_youju);
         recyclerView1_2 = view1.findViewById(R.id.rv_home_1_1);
+
+        ll_live = view1.findViewById(R.id.ll_live);
+        recyclerView_live = view1.findViewById(R.id.rv_live);
+
+        //ceshi
+        Button button = view1.findViewById(R.id.btn_test);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getContext(), TestSGVAActivity.class);
+                startActivity(intent);
+            }
+        });
         recyclerView2 = view2.findViewById(R.id.rv_home_2);
         recyclerView3 = view3.findViewById(R.id.rv_home_3);
         recyclerView4 = view4.findViewById(R.id.rv_home_4);
@@ -742,13 +774,14 @@ public class HomeFragment extends BaseFragment {
                 .addParam("city", cityName)
                 .request(new ACallback<String>() {
                     @Override
-                    public void onSuccess(String data) {
+                    public void onSuccess(final String data) {
                         try {
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.getInt("code") == 200){
                                 Gson gson = new Gson();
                                 HomeDataModel1 model = gson.fromJson(data, HomeDataModel1.class);
                                 page1 = 2;
+                                //友记
                                 mListTuiJian_youji = model.getObj().getArticle();
                                 adapterTuiJian_youji = new HomeDataRecommendAdapter1(mListTuiJian_youji);
                                 LinearLayoutManager manager = new LinearLayoutManager(getContext()){
@@ -759,7 +792,9 @@ public class HomeFragment extends BaseFragment {
                                 };
                                 recyclerView1_1.setLayoutManager(manager);
                                 recyclerView1_1.setAdapter(adapterTuiJian_youji);
+                                //友聚
                                 mListTuiJian_youju.clear();
+                                //第一条友聚
                                 if (model.getObj().getActivity().size()>0){
 //                                    tv_text_youju.setVisibility(View.VISIBLE);
                                     llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
@@ -771,6 +806,7 @@ public class HomeFragment extends BaseFragment {
 //                                    tv_text_youju.setVisibility(View.GONE);
                                     llTuiJianHuodongFirst.setVisibility(View.GONE);
                                 }
+                                //友聚列表
                                 adapterTuiJian_youju = new HomeDataRecommendAdapter2(mListTuiJian_youju);
                                 LinearLayoutManager manager2 = new LinearLayoutManager(getContext()){
                                     @Override
@@ -786,6 +822,45 @@ public class HomeFragment extends BaseFragment {
                                 manager2.setOrientation(LinearLayoutManager.HORIZONTAL);
                                 recyclerView1_2.setLayoutManager(manager2);
                                 recyclerView1_2.setAdapter(adapterTuiJian_youju);
+                                //直播
+                                mlistLive = model.getObj().getZhibo();
+                                adapterLiveList = new HomeDataRecommendLiveListAdapter(mlistLive);
+                                adapterLiveList.setListener(new HomeDataRecommendLiveListAdapter.LiveListAdapterListener() {
+                                    @Override
+                                    public void onCLickListen(int pos) {
+                                        if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                                            enterLiveRoom(mlistLive.get(pos));
+                                        } else {
+                                            Intent intent = new Intent();
+                                            intent.setClass(getContext(), LoginActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onGuanZhuListen(int pos) {
+                                        guanZhuLivePerson(pos);
+                                    }
+                                });
+                                LinearLayoutManager manager3 = new LinearLayoutManager(getContext()){
+                                    @Override
+                                    public boolean canScrollVertically() {
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean canScrollHorizontally() {
+                                        return true;
+                                    }
+                                };
+                                manager3.setOrientation(LinearLayoutManager.HORIZONTAL);
+                                recyclerView_live.setLayoutManager(manager3);
+                                recyclerView_live.setAdapter(adapterLiveList);
+                                if (mlistLive.size()>0){
+                                    ll_live.setVisibility(View.VISIBLE);
+                                }else {
+                                    ll_live.setVisibility(View.GONE);
+                                }
                                 if (mListTuiJian_youji.size()>0){
                                     if (hasPermission()){
                                         preLoadYouJi_tuijain(mListTuiJian_youji);
@@ -938,6 +1013,70 @@ public class HomeFragment extends BaseFragment {
                     public void onFail(int errCode, String errMsg) {
                     }
                 });
+    }
+
+    private void enterLiveRoom(final HomeDataModel1.ObjBean.ZhiboBean zhiboBean) {
+        dialog_loading = WeiboDialogUtils.createLoadingDialog(getContext(),"进入房间中");
+        ViseHttp.POST(NetConfig.zhiBoInfo)
+                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.zhiBoInfo))
+                .addParam("uid", zhiboBean.getUserID())
+                .addParam("cid",zhiboBean.getCid())
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        Log.d("sdasdaas",data);
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                String liveStatus = jsonObject.getJSONObject("obj").getString("zhibostatus");
+                                String start_time = jsonObject.getJSONObject("obj").getString("start_time");
+//                                if (true){
+                                if (liveStatus.equals("1")){
+                                    RoomInfoEntity roomInfoEntity = new RoomInfoEntity();
+                                    roomInfoEntity.setCid(zhiboBean.getCid());
+                                    roomInfoEntity.setOwner(zhiboBean.getUsername());
+                                    roomInfoEntity.setHlsPullUrl(zhiboBean.getHlsPullUrl());
+                                    roomInfoEntity.setHttpPullUrl(zhiboBean.getHttpPullUrl());
+                                    roomInfoEntity.setRtmpPullUrl(zhiboBean.getRtmpPullUrl());
+                                    roomInfoEntity.setPushUrl(zhiboBean.getPushUrl());
+                                    roomInfoEntity.setRoomid(Integer.parseInt(zhiboBean.getRoom_id()));
+                                    DemoCache.setRoomInfoEntity(roomInfoEntity);
+                                    LiveRoomActivity.startAudience(getContext(), zhiboBean.getRoom_id() + "", zhiboBean.getRtmpPullUrl(), true);
+                                    WeiboDialogUtils.closeDialog(dialog_loading);
+                                }else {
+                                    Intent intent = new Intent();
+                                    intent.setClass(getContext(), NotOnLiveActivity.class);
+                                    intent.putExtra("start_time",start_time);
+                                    intent.putExtra("person_id", zhiboBean.getUserID());
+                                    intent.putExtra("liver_name",zhiboBean.getUsername());
+                                    intent.putExtra("liver_icon",zhiboBean.getUserpic());
+                                    intent.putExtra("guanzhuLiver",zhiboBean.getLike());
+                                    startActivity(intent);
+                                    WeiboDialogUtils.closeDialog(dialog_loading);
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            WeiboDialogUtils.closeDialog(dialog_loading);
+                        }
+
+                    }
+
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+                        WeiboDialogUtils.closeDialog(dialog_loading);
+                        toToast(getContext(),"进入房间失败！");
+                    }
+                });
+
+//        cancelEnterRoom = false;
+//        DialogMaker.showProgressDialog(getContext(), null, "进入房间中", true, new DialogInterface.OnCancelListener() {
+//            @Override
+//            public void onCancel(DialogInterface dialog) {
+//                cancelEnterRoom = true;
+//            }
+//        }).setCanceledOnTouchOutside(false);
     }
 
     private void initTuiJianFirstHuoDong(final HomeDataModel1.ObjBean.ActivityBean bean) {
@@ -1171,8 +1310,18 @@ public class HomeFragment extends BaseFragment {
 //                                    tv_text_youju.setVisibility(View.GONE);
                                             llTuiJianHuodongFirst.setVisibility(View.GONE);
                                         }
+                                        //直播
+                                        mlistLive.clear();
+                                        mlistLive.addAll(model.getObj().getZhibo());
+
                                         adapterTuiJian_youji.notifyDataSetChanged();
                                         adapterTuiJian_youju.notifyDataSetChanged();
+                                        adapterLiveList.notifyDataSetChanged();
+                                        if (mlistLive.size()>0){
+                                            ll_live.setVisibility(View.VISIBLE);
+                                        }else {
+                                            ll_live.setVisibility(View.GONE);
+                                        }
                                         if (mListTuiJian_youju.size()>0){
 //                                            tv_text_youju.setVisibility(View.VISIBLE);
                                             llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
@@ -1669,6 +1818,43 @@ public class HomeFragment extends BaseFragment {
             }else {
                 requestPermission();
             }
+        }
+    }
+    // 直播列表关注
+    private void guanZhuLivePerson(final int position){
+        if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+            if (mlistLive.get(position).getLike().equals("0")){//未关注
+                ViseHttp.POST(NetConfig.userFocusUrl)
+                        .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userFocusUrl))
+                        .addParam("uid", uid)
+                        .addParam("likeId", mlistLive.get(position).getUserID())
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String result) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(result);
+                                    if (jsonObject.getInt("code") == 200) {
+                                        mlistLive.get(position).setLike("1");
+                                        adapterLiveList.notifyDataSetChanged();
+                                        Toast.makeText(getContext(), "关注成功", Toast.LENGTH_SHORT).show();
+                                    }else if(jsonObject.getInt("code") == 400){
+
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+
+                            }
+                        });
+            }
+        } else {
+            Intent intent = new Intent();
+            intent.setClass(getContext(), LoginActivity.class);
+            startActivity(intent);
         }
     }
 

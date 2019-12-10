@@ -65,4 +65,8 @@
   <color name="color_grey_1affffff">#1AFFFFFF</color>
   <color name="color_gray_73ffffff">#73ffffff</color>
   <color name="color_gray_1affffff">#1AFFFFFF</color>
+  <color name="color_chat_text">#ffffff</color>
+  <color name="color_chat_text_name">#d84c37</color>
+  <color name="list_divider">#534f4d</color>
+  <color name="list_select">#238efa</color>
 </resources>

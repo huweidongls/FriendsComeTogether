@@ -46,4 +46,6 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:3.0.1'
     //api 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1' // if you want to use the Glide GPU Filters
     implementation files('libs/AMap2DMap_3.0.0_AMapSearch_3.6.1_AMapLocation_3.2.1_20161228.jar')
+    implementation files('libs/universal-image-loader-1.9.5.jar')
+    implementation files('libs/nim-avchat-3.3.0.jar')
 }

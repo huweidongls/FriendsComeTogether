@@ -137,6 +137,7 @@ public class NEVideoView extends SurfaceView {
         float winRatio = (float) winWidth / winHeight;
         if (mVideoWidth > 0 && mVideoHeight > 0) {
             float aspectRatio = (float) (mVideoWidth) / mVideoHeight;
+//            float aspectRatio = 0.56f;
             if (mPixelSarNum > 0 && mPixelSarDen > 0)
                 aspectRatio = aspectRatio * mPixelSarNum / mPixelSarDen;
             mSurfaceHeight = mVideoHeight;
@@ -164,6 +165,8 @@ public class NEVideoView extends SurfaceView {
                }
             }
             else if (VideoConstant.VIDEO_SCALING_MODE_FILL_BLACK == videoScalingMode) { // 全屏留黑边，信息全保留
+//                layPara.width = 1683;
+//                layPara.height = 2244;
                 if (winRatio > aspectRatio) {
                     layPara.width  = (int)(winHeight * aspectRatio);
                     layPara.height = winHeight;

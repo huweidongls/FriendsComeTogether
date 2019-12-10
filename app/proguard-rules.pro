@@ -51,3 +51,6 @@
 -keep class com.huawei.hms.**{*;}
 
 -keep class com.huawei.android.hms.agent.**{*;}
+
+-keep class com.squareup.wire.** { *; }
+-keep class com.opensource.svgaplayer.proto.** { *; }

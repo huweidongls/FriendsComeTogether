@@ -170,6 +170,9 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
+        if (data.getBooleanExtra(VideoImportActivity.UPLOAD_EXTRA_FILTER_VIDEO,false)){
+            getActivity().finish();
+        }
         if (requestCode == VideoImportActivity.EXTRA_REQUEST_CODE) {
             // 导入视频成功
             currentCount++;

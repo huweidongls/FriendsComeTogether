@@ -122,6 +122,7 @@ public class VideoActivity extends FragmentActivity {
     private EmotionMainFragment emotionMainFragment;
     private Dialog dialog;
     private StandardVideoController controller;
+    private boolean isYouJuVideo = false;
 
     //评论列表
     private ArticleCommentVideoAdapter articleCommentVideoAdapter;
@@ -137,7 +138,9 @@ public class VideoActivity extends FragmentActivity {
         spImp = new SpImp(VideoActivity.this);
         uid = spImp.getUID();
         initData();
-        initPingLun();
+        if (!isYouJuVideo){
+            initPingLun();
+        }
         initEmotionMainFragment(etComment,ivBiaoqing);
     }
 
@@ -327,42 +330,52 @@ public class VideoActivity extends FragmentActivity {
             picUrl = mode.getFmpic();
         }else {
             url = getIntent().getStringExtra("videoUrl");
-            title = getIntent().getStringExtra("title");
-            vid = getIntent().getStringExtra("vid");
-            picUrl = getIntent().getStringExtra("picUrl");
+            title = getIntent().getStringExtra("title")!=null?getIntent().getStringExtra("title"):null;
+            vid = getIntent().getStringExtra("vid")!=null?getIntent().getStringExtra("vid"):null;
+            picUrl = getIntent().getStringExtra("picUrl")!=null?getIntent().getStringExtra("picUrl"):null;
+            //注意：友聚活动WEB页播放视频只有视频链接
+            if (vid == null||title == null||picUrl ==null){
+                isYouJuVideo = true;
+                ll_btns.setVisibility(View.GONE);
+                rlActive.setVisibility(View.GONE);
+            }else {
+                isYouJuVideo = false;
+                ll_btns.setVisibility(View.VISIBLE);
+                rlActive.setVisibility(View.VISIBLE);
+                Log.d("vidvidvid",vid);
+            }
         }
-
-        Log.d("vidvidvid",vid);
-        ViseHttp.POST(NetConfig.videoNumInfo)
-                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.videoNumInfo))
-                .addParam("vID",vid)
-                .addParam("uid",spImp.getUID())
-                .request(new ACallback<String>() {
-                    @Override
-                    public void onSuccess(String data) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(data);
-                            if (jsonObject.getInt("code") == 200){
-                                Log.d("codecode",data);
-                                String status = jsonObject.getJSONObject("obj").getString("status");
-                                String zan_num = jsonObject.getJSONObject("obj").getString("praise_num");
-                                String pinglun_num = jsonObject.getJSONObject("obj").getString("comment_num");
-                                iv_zan.setImageResource(status.equals("0")?R.mipmap.video_zan_border:R.mipmap.video_zan_red);
-                                tv_zan_num.setText(zan_num);
-                                tv_pinglun_num.setText(pinglun_num);
+        if (!isYouJuVideo){
+            ViseHttp.POST(NetConfig.videoNumInfo)
+                    .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.videoNumInfo))
+                    .addParam("vID",vid)
+                    .addParam("uid",spImp.getUID())
+                    .request(new ACallback<String>() {
+                        @Override
+                        public void onSuccess(String data) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(data);
+                                if (jsonObject.getInt("code") == 200){
+                                    Log.d("codecode",data);
+                                    String status = jsonObject.getJSONObject("obj").getString("status");
+                                    String zan_num = jsonObject.getJSONObject("obj").getString("praise_num");
+                                    String pinglun_num = jsonObject.getJSONObject("obj").getString("comment_num");
+                                    iv_zan.setImageResource(status.equals("0")?R.mipmap.video_zan_border:R.mipmap.video_zan_red);
+                                    tv_zan_num.setText(zan_num);
+                                    tv_pinglun_num.setText(pinglun_num);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
 
-                    @Override
-                    public void onFail(int errCode, String errMsg) {
+                        @Override
+                        public void onFail(int errCode, String errMsg) {
 
-                    }
-                });
-
-        tvVideoTitle.setText(title);
+                        }
+                    });
+        }
+        tvVideoTitle.setText(title == null?"":title);
 
         //高级设置（可选，须在start()之前调用方可生效）
         PlayerConfig playerConfig = new PlayerConfig.Builder()
@@ -792,9 +805,12 @@ public class VideoActivity extends FragmentActivity {
 //            ll_btns.setVisibility(ll_btns.getVisibility() == View.VISIBLE ? View.GONE:View.VISIBLE);
 //            ivBack.setVisibility(ivBack.getVisibility() == View.VISIBLE ? View.GONE:View.VISIBLE);
 //            rlActive.setVisibility(rlActive.getVisibility() == View.VISIBLE ? View.GONE:View.VISIBLE);
-            ll_btns.setVisibility(bottomContainer.getVisibility() == View.GONE ? View.VISIBLE:View.GONE);
+            if (!isYouJuVideo){
+                ll_btns.setVisibility(bottomContainer.getVisibility() == View.GONE ? View.VISIBLE:View.GONE);
+                rlActive.setVisibility(bottomContainer.getVisibility() == View.GONE ? View.VISIBLE:View.GONE);
+            }
             ivBack.setVisibility(bottomContainer.getVisibility() == View.GONE ? View.VISIBLE:View.GONE);
-            rlActive.setVisibility(bottomContainer.getVisibility() == View.GONE ? View.VISIBLE:View.GONE);
+
 //            if (bottomContainer == View.GONE){
 //                controller.hide();
 //            }else {

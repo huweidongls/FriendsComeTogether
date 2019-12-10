@@ -26,6 +26,7 @@ import com.netease.nimlib.sdk.StatusBarNotificationConfig;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.mixpush.MixPushConfig;
+import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
 import com.netease.nimlib.sdk.uinfo.model.UserInfo;
@@ -52,6 +53,7 @@ import java.util.List;
 import cn.jpush.android.api.JPushInterface;
 import com.yiwo.friendscometogether.location.NimDemoLocationProvider;
 import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
+import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.fragment.CustomAttachParser;
 
 
 public class MyApplication extends Application {
@@ -125,6 +127,8 @@ public class MyApplication extends Application {
 
         if (NIMUtil.isMainProcess(this)) {
             // 注意：以下操作必须在主进程中进行
+            // 注册自定义消息附件解析器
+            NIMClient.getService(MsgService.class).registerCustomAttachmentParser(new CustomAttachParser());
             // 1、UI相关初始化操作
             // 2、相关Service调用
             // 初始化

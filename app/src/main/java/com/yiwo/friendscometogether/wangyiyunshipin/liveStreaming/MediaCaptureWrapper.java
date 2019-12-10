@@ -31,6 +31,7 @@ public class MediaCaptureWrapper {
     public static final int LD_WIDTH = 320;
     public static final int LD_HEIGHT = 240;
 
+
     private int mVideoPreviewWidth;
     private int mVideoPreviewHeight;
 
@@ -64,10 +65,14 @@ public class MediaCaptureWrapper {
                 mVideoPreviewHeight = 720;
             }
         }
-        else if(mVideoResolution.equals("SD")){
-            mVideoPreviewWidth = SD_WIDTH;
-            mVideoPreviewHeight = SD_HEIGHT;
-        }
+//        if(mVideoResolution.equals("HD")) {
+//                mVideoPreviewWidth = 2160;
+//                mVideoPreviewHeight = 1080;
+//        }
+//        else if(mVideoResolution.equals("SD")){
+//            mVideoPreviewWidth = SD_WIDTH;
+//            mVideoPreviewHeight = SD_HEIGHT;
+//        }
         else {
             mVideoPreviewWidth = LD_WIDTH;
             mVideoPreviewHeight = LD_HEIGHT;

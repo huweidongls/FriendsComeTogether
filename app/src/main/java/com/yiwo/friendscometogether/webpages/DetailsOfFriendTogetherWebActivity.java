@@ -54,6 +54,7 @@ import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.ApplyActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.RealNameActivity;
+import com.yiwo.friendscometogether.pages.VideoActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.ShareUtils;
 
@@ -393,6 +394,10 @@ public class DetailsOfFriendTogetherWebActivity extends BaseSonicWebActivity {
             intent.putExtra("url",url);
             startActivity(intent);
         }
+        @JavascriptInterface
+        public void playpfvideo(String videoUrl){
+            startVideoACtivity(videoUrl);
+        }
     }
     private void showMore(final View view_p) {
 
@@ -502,5 +507,10 @@ public class DetailsOfFriendTogetherWebActivity extends BaseSonicWebActivity {
         String account = spImp.getYXID();
         NimUIKit.setAccount(account);
         NimUIKit.startP2PSession(DetailsOfFriendTogetherWebActivity.this, liaotianAccount);
+    }
+    private void startVideoACtivity(String vurl){
+        Intent it = new Intent(DetailsOfFriendTogetherWebActivity.this, VideoActivity.class);
+        it.putExtra("videoUrl", vurl);
+        startActivity(it);
     }
 }

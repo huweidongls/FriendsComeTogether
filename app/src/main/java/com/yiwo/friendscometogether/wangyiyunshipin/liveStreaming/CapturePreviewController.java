@@ -307,7 +307,7 @@ public class CapturePreviewController extends CapturePreviewContract.CapturePrev
         //step4. 开启直播预览
         if(mLSMediaCapture != null && captureWrapper.isVideo()) {
             mLSMediaCapture.startVideoPreview((NeteaseView) ui.getDisplaySurfaceView(mUseFilter), captureWrapper.getCameraPosition(),
-                    mUseFilter, lsMediaCapture.VideoQuality.HIGH, false);
+                    mUseFilter, lsMediaCapture.VideoQuality.HIGH, true);//参数 b2 是否强制16:9
             m_startVideoCamera = true;
         }
 
@@ -745,6 +745,7 @@ public class CapturePreviewController extends CapturePreviewContract.CapturePrev
             {
                 Log.i(TAG, "test: in handleMessage, MSG_RTMP_URL_ERROR");
                 showToast("RTMP_URL_ERROR 推流已断开");
+
                 onRtmpUrlError();
                 break;
             }

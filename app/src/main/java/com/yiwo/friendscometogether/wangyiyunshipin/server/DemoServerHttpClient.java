@@ -13,6 +13,7 @@ import com.netease.nim.uikit.common.http.NimHttpClient;
 import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.netease.nim.uikit.common.util.string.MD5;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.utils.AndTools;
 import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
 import com.yiwo.friendscometogether.wangyiyunshipin.config.DemoServers;
 import com.yiwo.friendscometogether.wangyiyunshipin.server.entity.AddVideoResponseEntity;
@@ -403,60 +404,62 @@ public class DemoServerHttpClient {
      * @param context
      * @param callback
      */
-//    public void createRoom(Activity context, final DemoServerHttpCallback<RoomInfoEntity> callback){
-//        String url = DemoServers.apiServer() + API_CREATE_ROOM;
-//
-//        Map<String, String> headers = new HashMap<>(1);
-//        headers.put(HEADER_CONTENT_TYPE, "application/x-www-form-urlencoded; charset=utf-8");
-//        headers.put(HEADER_DEMO_ID, HEADER_DEMO_ID_VALUE);
-//
-//        StringBuilder body = new StringBuilder();
+    public void createRoom(Activity context, final DemoServerHttpCallback<RoomInfoEntity> callback){
+        String url = DemoServers.apiServer() + API_CREATE_ROOM;
+
+        Map<String, String> headers = new HashMap<>(1);
+        headers.put(HEADER_CONTENT_TYPE, "application/x-www-form-urlencoded; charset=utf-8");
+        headers.put(HEADER_DEMO_ID, HEADER_DEMO_ID_VALUE);
+
+        StringBuilder body = new StringBuilder();
 //        body.append(REQUEST_SID).append("=").append(DemoCache.getSid()).append("&")
 //            .append(REQUEST_DEVICE_ID).append("=").append(AndTools.getDeviceId(context));
-//
-//        NimHttpClient.getInstance().execute(url, headers, body.toString(), new NimHttpClient.NimHttpCallback() {
-//            @Override
-//            public void onResponse(String response, int code, Throwable exception) {
-//                if (code != 200 || exception != null) {
-//                    LogUtil.e(TAG, "register failed : code = " + code + ", errorMsg = "
-//                            + (exception != null ? exception.getMessage() : "null"));
-//                    if (callback != null) {
-//                        callback.onFailed(code, exception != null ? exception.getMessage() : "null");
-//                    }
-//                    return;
-//                }
-//                try {
-//                    JSONObject resObj = JSONObject.parseObject(response);
-//                    int resCode = resObj.getIntValue(RESULT_KEY_CODE);
-//                    if (resCode == RESULT_CODE_SUCCESS) {
-//                        JSONObject retObj = resObj.getJSONObject(RESULT_KEY_DATA);
-//                        RoomInfoEntity roomInfoEntity = new RoomInfoEntity();
-//                        roomInfoEntity.setRoomid(retObj.getInteger(RESULT_ROOMID));
-//                        roomInfoEntity.setPushUrl(retObj.getString(RESULT_PUSH_URL));
-//                        roomInfoEntity.setRtmpPullUrl(retObj.getString(RESULT_RTMP_URL));
-//                        roomInfoEntity.setHlsPullUrl(retObj.getString(RESULT_HLS_URL));
-//                        roomInfoEntity.setHttpPullUrl(retObj.getString(RESULT_HTTP_URL));
-//                        roomInfoEntity.setCid(retObj.getString(CID));
-//                        callback.onSuccess(roomInfoEntity);
-//                    } else {
-//                        String error = resObj.getString(RESULT_KEY_ERROR_MSG);
-//                        callback.onFailed(resCode, error);
-//                    }
-//                } catch (JSONException e) {
-//                    callback.onFailed(-1, e.getMessage());
-//                } catch (Exception e){
-//                    callback.onFailed(-1, e.getMessage());
-//                }
-//            }
-//        });
-//    }
-//
-//    /**
-//     * 观众获取房间信息接口
-//     * @param mode
-//     * @param address
-//     * @param callback
-//     */
+        body.append(REQUEST_SID).append("=").append("15754633415").append("&")
+                .append(REQUEST_DEVICE_ID).append("=").append(AndTools.getDeviceId(context));
+
+        NimHttpClient.getInstance().execute(url, headers, body.toString(), new NimHttpClient.NimHttpCallback() {
+            @Override
+            public void onResponse(String response, int code, Throwable exception) {
+                if (code != 200 || exception != null) {
+                    LogUtil.e(TAG, "register failed : code = " + code + ", errorMsg = "
+                            + (exception != null ? exception.getMessage() : "null"));
+                    if (callback != null) {
+                        callback.onFailed(code, exception != null ? exception.getMessage() : "null");
+                    }
+                    return;
+                }
+                try {
+                    JSONObject resObj = JSONObject.parseObject(response);
+                    int resCode = resObj.getIntValue(RESULT_KEY_CODE);
+                    if (resCode == RESULT_CODE_SUCCESS) {
+                        JSONObject retObj = resObj.getJSONObject(RESULT_KEY_DATA);
+                        RoomInfoEntity roomInfoEntity = new RoomInfoEntity();
+                        roomInfoEntity.setRoomid(retObj.getInteger(RESULT_ROOMID));
+                        roomInfoEntity.setPushUrl(retObj.getString(RESULT_PUSH_URL));
+                        roomInfoEntity.setRtmpPullUrl(retObj.getString(RESULT_RTMP_URL));
+                        roomInfoEntity.setHlsPullUrl(retObj.getString(RESULT_HLS_URL));
+                        roomInfoEntity.setHttpPullUrl(retObj.getString(RESULT_HTTP_URL));
+                        roomInfoEntity.setCid(retObj.getString(CID));
+                        callback.onSuccess(roomInfoEntity);
+                    } else {
+                        String error = resObj.getString(RESULT_KEY_ERROR_MSG);
+                        callback.onFailed(resCode, error);
+                    }
+                } catch (JSONException e) {
+                    callback.onFailed(-1, e.getMessage());
+                } catch (Exception e){
+                    callback.onFailed(-1, e.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * 观众获取房间信息接口
+     * @param mode
+     * @param address
+     * @param callback
+     */
 //    public void getRoomInfo(int mode, String address, final DemoServerHttpCallback<RoomInfoEntity> callback){
 //        String url = DemoServers.apiServer() + API_ENTER_ROOM;
 //
@@ -510,45 +513,45 @@ public class DemoServerHttpClient {
 //            }
 //        });
 //    }
-//
-//    /**
-//     * 主播退出直播时,调用该接口,通知解散聊天室
-//     */
-//    public void anchorLeave(String roomId, final DemoServerHttpCallback<Void> callback){
-//        String url = DemoServers.apiServer() + API_LEAVE_ROOM;
-//        Map<String, String> headers = new HashMap<>(1);
-//        headers.put(HEADER_CONTENT_TYPE, "application/x-www-form-urlencoded; charset=utf-8");
-//        headers.put(HEADER_DEMO_ID, HEADER_DEMO_ID_VALUE);
-//
-//        StringBuilder body = new StringBuilder();
-//        body.append(REQUEST_SID).append("=").append(DemoCache.getSid()).append("&").append(REQUEST_ROOM_ID)
-//        .append("=").append(roomId);
-//
-//        NimHttpClient.getInstance().execute(url, headers, body.toString(), new NimHttpClient.NimHttpCallback() {
-//            @Override
-//            public void onResponse(String response, int code, Throwable exception) {
-//                if (code != 200 || exception != null) {
-//                    LogUtil.e(TAG, "register failed : code = " + code + ", errorMsg = "
-//                            + (exception != null ? exception.getMessage() : "null"));
-//                    callback.onFailed(code, exception.getMessage());
-//                    return;
-//                }
-//                try {
-//                    JSONObject resObj = JSONObject.parseObject(response);
-//                    int resCode = resObj.getIntValue(RESULT_KEY_CODE);
-//                    if (resCode == RESULT_CODE_SUCCESS) {
-//                        callback.onSuccess(null);
-//                    } else {
-//                        String error = resObj.getString(RESULT_KEY_ERROR_MSG);
-//                        callback.onFailed(resCode, error);
-//                    }
-//                } catch (JSONException e) {
-//                } catch (Exception e){
-//                }
-//            }
-//        });
-//
-//    }
+
+    /**
+     * 主播退出直播时,调用该接口,通知解散聊天室
+     */
+    public void anchorLeave(String roomId, final DemoServerHttpCallback<Void> callback){
+        String url = DemoServers.apiServer() + API_LEAVE_ROOM;
+        Map<String, String> headers = new HashMap<>(1);
+        headers.put(HEADER_CONTENT_TYPE, "application/x-www-form-urlencoded; charset=utf-8");
+        headers.put(HEADER_DEMO_ID, HEADER_DEMO_ID_VALUE);
+
+        StringBuilder body = new StringBuilder();
+        body.append(REQUEST_SID).append("=").append(DemoCache.getSid()).append("&").append(REQUEST_ROOM_ID)
+        .append("=").append(roomId);
+
+        NimHttpClient.getInstance().execute(url, headers, body.toString(), new NimHttpClient.NimHttpCallback() {
+            @Override
+            public void onResponse(String response, int code, Throwable exception) {
+                if (code != 200 || exception != null) {
+                    LogUtil.e(TAG, "register failed : code = " + code + ", errorMsg = "
+                            + (exception != null ? exception.getMessage() : "null"));
+                    callback.onFailed(code, exception.getMessage());
+                    return;
+                }
+                try {
+                    JSONObject resObj = JSONObject.parseObject(response);
+                    int resCode = resObj.getIntValue(RESULT_KEY_CODE);
+                    if (resCode == RESULT_CODE_SUCCESS) {
+                        callback.onSuccess(null);
+                    } else {
+                        String error = resObj.getString(RESULT_KEY_ERROR_MSG);
+                        callback.onFailed(resCode, error);
+                    }
+                } catch (JSONException e) {
+                } catch (Exception e){
+                }
+            }
+        });
+
+    }
 
     /**s
      * 添加上传的视频ID，客户端上传成功后须调用

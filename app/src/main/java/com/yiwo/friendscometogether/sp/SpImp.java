@@ -147,4 +147,11 @@ public class SpImp {
         editor.putString(SpPublic.IS_ADMIN, isAdmin).toString();
         editor.commit();
     }
+    public String getLiveTime(){
+        return sp.getString(SpPublic.LIVE_TIME,"");
+    }
+    public void setLiveTime(String s){
+        editor.putString(SpPublic.LIVE_TIME, s).toString();
+        editor.commit();
+    }
 }

@@ -86,6 +86,8 @@
     <!-- 声明程序使用camera和自动对焦功能 -->
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <!-- 声明程序使用OpenGL ES 2.0 -->
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -562,7 +564,22 @@
         <activity android:name=".newpage.YouXiFenZuActivity" />
         <activity android:name=".newpage.MyGameCardActivity" />
         <activity android:name=".newpage.PersonImagesActivity" />
-        <activity android:name=".newpage.DuiZhangGameListActivity"></activity>
+        <activity android:name=".newpage.DuiZhangGameListActivity" />
+        <!-- 网易云直播 -->
+        <activity
+            android:name=".wangyiyunshipin.wangyiyunlive.EnterLiveActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".wangyiyunshipin.wangyiyunlive.InputActivity"
+            android:theme="@style/InputActivityTheme"
+            android:windowSoftInputMode="stateUnspecified|adjustResize" />
+        <!--android:configChanges="orientation|keyboardHidden|screenSize"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:windowSoftInputMode="stateHidden|adjustNothing"-->
+        <activity android:name=".wangyiyunshipin.wangyiyunlive.LiveRoomActivity" />
+        <activity android:name=".newpage.SetLiveActivity" />
+        <activity android:name=".newpage.NotOnLiveActivity" />
+        <activity android:name=".newpage.TestSGVAActivity"></activity>
     </application>
 
 </manifest>

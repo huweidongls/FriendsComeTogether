@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:test="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingLeft="20px"
-    android:paddingRight="20px"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:paddingLeft="20px"
+        android:paddingRight="20px"
         android:elevation="1px"
         android:visibility="visible"
         android:id="@+id/ll_tuijian_huodong_first"
@@ -14,6 +15,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30px"
         android:orientation="vertical">
+        <Button
+            android:visibility="gone"
+            android:layout_marginTop="50px"
+            android:id="@+id/btn_test"
+            android:layout_width="match_parent"
+            android:layout_height="80px" />
         <RelativeLayout
             android:layout_marginTop="20px"
             android:layout_width="wrap_content"
@@ -143,24 +150,42 @@
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
-
-    <!--<TextView-->
-        <!--android:textSize="55px"-->
-        <!--android:visibility="gone"-->
-        <!--android:id="@+id/tv_text_youju"-->
-        <!--android:layout_marginTop="40px"-->
-        <!--android:textStyle="bold"-->
-        <!--android:layout_marginLeft="5px"-->
-        <!--android:layout_marginBottom="23px"-->
-        <!--android:text="友聚活动"-->
-        <!--android:textColor="@color/black_333333"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
+    <LinearLayout
+        android:background="@color/white_ffffff"
+        android:id="@+id/ll_live"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginRight="20px"
+            android:textSize="35px"
+            android:id="@+id/tv_text_youju"
+            android:layout_marginTop="20px"
+            android:textStyle="bold"
+            android:layout_marginLeft="20px"
+            android:layout_marginBottom="20px"
+            android:text="队长在线"
+            android:textColor="@color/black_333333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginBottom="18px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:id="@+id/rv_live"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="18px"
+        android:paddingLeft="20px"
+        android:paddingRight="20px"
         android:id="@+id/rv_home_1_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <RelativeLayout
+        android:paddingLeft="20px"
+        android:paddingRight="20px"
         android:layout_marginLeft="60px"
         android:layout_marginRight="60px"
         android:layout_width="match_parent"
@@ -188,6 +213,8 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
     <android.support.v7.widget.RecyclerView
+        android:paddingLeft="20px"
+        android:paddingRight="20px"
         android:id="@+id/rv_home_1_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

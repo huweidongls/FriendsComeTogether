@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/white_ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yiwo.friendscometogether.newpage.PersonMainActivity">
+    <RelativeLayout
+        android:id="@+id/rl_top_bar"
+        style="@style/rl_top_bar">
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/tv_top_title"
+            android:text="" />
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView style="@style/iv_return" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:layout_below="@+id/rl_top_bar"
+        android:id="@+id/person_main_refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="150px">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_icon"
+                        android:layout_marginLeft="30px"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/my_head"
+                        android:layout_width="100px"
+                        android:layout_height="100px" />
+                    <TextView
+                        android:layout_marginRight="30px"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/btn_gaunzhu"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textSize="25px"
+                        android:text="关注"
+                        android:textColor="@color/white_ffffff"
+                        android:layout_marginTop="10px"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/bg_red_26px"
+                        android:layout_width="150px"
+                        android:layout_height="50px" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:paddingTop="30px"
+                    android:background="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rl_top">
+                    <ImageView
+                        android:layout_marginTop="50px"
+                        android:layout_marginBottom="50px"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/bg_live_time"
+                        android:layout_width="686px"
+                        android:layout_height="576px" />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_centerInParent="true"
+                        android:layout_width="300px"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_marginBottom="10px"
+                            android:gravity="center"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="30px"
+                            android:text="队长正在休息"
+                            android:textColor="@color/black_333333"
+                            android:id="@+id/tv_text_zanweikaibo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/tv_start_time"
+                            android:gravity="center"
+                            android:textSize="30px"
+                            android:text="敬请期待\n2019年12月30日 12:30\n与您相见"
+                            android:textColor="@color/black_333333"
+                            android:layout_centerInParent="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3px"
+                    android:layout_marginLeft="30px"
+                    android:layout_marginRight="30px"
+                    android:background="#cccccc" />
+                <RelativeLayout
+                    android:id="@+id/rl_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="80px"
+                    android:layout_marginTop="40px">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_tab_4"
+                            android:layout_width="200px"
+                            android:layout_height="80px">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginBottom="35px"
+                                android:text="视频"
+                                android:textColor="@color/black_333333"
+                                android:textSize="35px"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/bottom_line_4"
+                                android:layout_width="100px"
+                                android:layout_height="10px"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/bg_d84c37_30px"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/rl_tab_2"
+                            android:layout_width="200px"
+                            android:layout_height="80px">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginBottom="35px"
+                                android:paddingBottom="1px"
+                                android:text="友记"
+                                android:textColor="@color/black_333333"
+                                android:textSize="35px"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/bottom_line_2"
+                                android:layout_width="100px"
+                                android:layout_height="10px"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/bg_d84c37_30px"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_tab_3"
+                            android:layout_width="200px"
+                            android:layout_height="80px">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginBottom="35px"
+                                android:text="友聚"
+                                android:textColor="@color/black_333333"
+                                android:textSize="35px"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/bottom_line_3"
+                                android:layout_width="100px"
+                                android:layout_height="10px"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/bg_d84c37_30px"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+                <!--android:background="#f5f5f5"-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <!--<RelativeLayout-->
+                        <!--android:visibility="gone"-->
+                        <!--android:id="@+id/rl_pics"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
+                        <!--<android.support.v7.widget.RecyclerView-->
+                            <!--android:id="@+id/rv_pic"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"/>-->
+                    <!--</RelativeLayout>-->
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:id="@+id/rl_youji"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rv_youji"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:id="@+id/rl_youju"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rv_youju"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:id="@+id/rl_vides"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rv_videos"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</RelativeLayout>

@@ -49,4 +49,7 @@
     <string name="filter_b">滤镜B</string>
     <string name="filter_c">滤镜C</string>
     <string name="filter_d">滤镜D</string>
+
+    <string name="no_gift">当前还没收到礼物</string>
+    <string name="share_tip">直播地址已复制,请到第三方播放器打开,或分享给好友</string>
 </resources>

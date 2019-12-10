@@ -44,6 +44,7 @@ import com.yiwo.friendscometogether.pages.MyOrderActivity;
 import com.yiwo.friendscometogether.pages.MyPicturesActivity;
 import com.yiwo.friendscometogether.pages.SetActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.EnterLiveActivity;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.webpages.RenWuWebActivity;
 import com.yiwo.friendscometogether.webpages.ShopInfoWebActivity;

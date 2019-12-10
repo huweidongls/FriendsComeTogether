@@ -28,6 +28,7 @@ import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newmodel.DuiZhangXuanZeHuoDongModel;
 import com.yiwo.friendscometogether.newmodel.MyGroupListModel;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.EnterLiveActivity;
 import com.yiwo.friendscometogether.webpages.RenWuWebActivity;
 
 import org.json.JSONException;
@@ -61,7 +62,7 @@ public class RenWuActivity extends BaseActivity {
         tvYiXuanZeHuoDong.setText("请选择活动");
         spImp = new SpImp(RenWuActivity.this);
     }
-    @OnClick({R.id.activity_ren_wu_rl_back,R.id.ll_1,R.id.ll_2,R.id.ll_3,R.id.ll_4,R.id.ll_5,R.id.ll_6,R.id.ll_7,R.id.ll_8,R.id.tv_yi_xuan_huodong})
+    @OnClick({R.id.activity_ren_wu_rl_back,R.id.ll_1,R.id.ll_2,R.id.ll_3,R.id.ll_4,R.id.ll_5,R.id.ll_6,R.id.ll_7,R.id.ll_8,R.id.tv_yi_xuan_huodong,R.id.ll_go_live,R.id.ll_set_live})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.activity_ren_wu_rl_back:
@@ -101,6 +102,14 @@ public class RenWuActivity extends BaseActivity {
             case R.id.tv_yi_xuan_huodong:
                 Intent itHuoDong = new Intent(RenWuActivity.this, DuiZhangXuanZeHuoDongActivity.class);
                 startActivityForResult(itHuoDong, REQUEST_CODE_XUAN_ZE_HUO_DONG);
+                break;
+            case R.id.ll_go_live:
+                EnterLiveActivity.start(RenWuActivity.this);
+                break;
+            case R.id.ll_set_live:
+                Intent intentLive = new Intent();
+                intentLive.setClass(RenWuActivity.this,SetLiveActivity.class);
+                startActivity(intentLive);
                 break;
         }
     }

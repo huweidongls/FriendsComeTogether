@@ -370,7 +370,18 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
             restoreText(true);
         }
     }
+    // 发送文本消息
+    public void onTextMessageSendButtonPressed(String text) {
+        if(text.isEmpty()){
+            Toast.makeText(container.activity, "请输入后再发送", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        IMMessage textMessage = createTextMessage(text);
 
+        if (container.proxy.sendMessage(textMessage)) {
+            restoreText(true);
+        }
+    }
     protected IMMessage createTextMessage(String text) {
         return MessageBuilder.createTextMessage(container.account, container.sessionType, text);
     }
@@ -663,6 +674,7 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
      * 初始化AudioRecord
      */
     private void initAudioRecord() {
+        Log.d("语音消息录制",""+"initAudioRecord::");
         if (audioMessageHelper == null) {
             UIKitOptions options = NimUIKitImpl.getOptions();
             audioMessageHelper = new AudioRecorder(container.activity, options.audioRecordType, options.audioRecordMaxTime, this);
@@ -673,9 +685,12 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
      * 开始语音录制
      */
     private void onStartAudioRecord() {
+        Log.d("语音消息录制",""+"onStartAudioRecord1::");
         container.activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        Log.d("语音消息录制",""+"onStartAudioRecord2::");
         audioMessageHelper.startRecord();
+        Log.d("语音消息录制",""+"onStartAudioRecord3::");
         cancelled = false;
     }
 
@@ -754,16 +769,18 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
 
     @Override
     public void onRecordStart(File audioFile, RecordType recordType) {
+        Log.d("语音消息录制",""+"onRecordStart::1");
         started = true;
         if (!touched) {
             return;
         }
-
         audioRecordBtn.setText(R.string.record_audio_end);
         audioRecordBtn.setBackgroundResource(R.drawable.nim_message_input_edittext_box_pressed);
-
+        Log.d("语音消息录制",""+"onRecordStart::2");
         updateTimerTip(false); // 初始化语音动画状态
+        Log.d("语音消息录制",""+"onRecordStart::3");
         playAudioRecordAnim();
+        Log.d("语音消息录制",""+"onRecordStart::4");
     }
 
     @Override
@@ -820,7 +837,13 @@ public class InputPanel implements IEmoticonSelectedListener, IAudioRecordCallba
             }
         }
     }
-
+    public void setVisible(boolean visible){
+        if(visible){
+            messageActivityBottomLayout.setVisibility(View.VISIBLE);
+        }else{
+            messageActivityBottomLayout.setVisibility(View.INVISIBLE);
+        }
+    }
     public void switchRobotMode(boolean isRobot) {
         isRobotSession = isRobot;
         if (isRobot) {

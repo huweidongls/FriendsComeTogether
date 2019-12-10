@@ -116,6 +116,7 @@
     <color name="transparent">#00000000</color>
     <color name="white">#FFFFFF</color>
     <declare-styleable name="CircleImageView"><attr format="dimension" name="civ_border_width"/><attr format="color" name="civ_border_color"/><attr format="boolean" name="civ_border_overlay"/><attr format="color" name="civ_fill_color"/></declare-styleable>
+    <declare-styleable name="ImageViewEx"><attr format="reference" name="exiv_default_image_res"/></declare-styleable>
     <declare-styleable name="LoadingView"><attr format="float|reference" name="radius"/><attr format="color|reference" name="left_ball_color"/><attr format="color|reference" name="right_ball_color"/><attr format="float|reference" name="animation_speed"/><attr format="boolean|reference" name="need_animation"/></declare-styleable>
     <dimen name="action_bar_height">48dip</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
@@ -267,6 +268,7 @@
     <string name="im_choose_video_file_size_too_large">视频文件过大，系统限制为20MB</string>
     <string name="image_compressed_size">该原始图片大小为: %1$s,</string>
     <string name="image_show_error">图片显示异常</string>
+    <string name="input_panel_guess">猜 拳</string>
     <string name="input_panel_location">位 置</string>
     <string name="input_panel_photo">图 片</string>
     <string name="input_panel_take">拍 摄</string>
@@ -313,6 +315,7 @@
     <string name="not_allow_empty">不能为空</string>
     <string name="now_allow_space">不能含有空格</string>
     <string name="ok">确定</string>
+    <string name="online">正在直播</string>
     <string name="open">开启</string>
     <string name="over_team_capacity">创建失败，创建群数量达到限制</string>
     <string name="over_team_member_capacity">邀请失败，成员人数上限为%1$d人</string>
