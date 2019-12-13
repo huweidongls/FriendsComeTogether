@@ -573,13 +573,14 @@
             android:name=".wangyiyunshipin.wangyiyunlive.InputActivity"
             android:theme="@style/InputActivityTheme"
             android:windowSoftInputMode="stateUnspecified|adjustResize" />
-        <!--android:configChanges="orientation|keyboardHidden|screenSize"-->
-        <!--android:screenOrientation="portrait"-->
-        <!--android:windowSoftInputMode="stateHidden|adjustNothing"-->
+        <!-- android:configChanges="orientation|keyboardHidden|screenSize" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:windowSoftInputMode="stateHidden|adjustNothing" -->
         <activity android:name=".wangyiyunshipin.wangyiyunlive.LiveRoomActivity" />
         <activity android:name=".newpage.SetLiveActivity" />
         <activity android:name=".newpage.NotOnLiveActivity" />
-        <activity android:name=".newpage.TestSGVAActivity"></activity>
+        <activity android:name=".newpage.TestSGVAActivity" />
+        <activity android:name=".webpages.MyJiFenActivity"></activity>
     </application>
 
 </manifest>

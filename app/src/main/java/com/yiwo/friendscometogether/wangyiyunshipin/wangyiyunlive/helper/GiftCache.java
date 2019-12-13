@@ -32,7 +32,22 @@ public class GiftCache {
         }
         cache.put(roomId, gifts);
     }
+    public void rmove1Gift(String roomId, int type) {
+        Map<Integer, Integer> gifts = cache.get(roomId);
+        if (gifts == null) {
 
+        } else if (!gifts.containsKey(type)) {
+
+        } else {
+            int count = gifts.get(type);
+            if (count>1){
+                gifts.put(type, count - 1 );
+            }else {
+                gifts.remove(type);
+            }
+        }
+        cache.put(roomId, gifts);
+    }
     public Map<Integer, Integer> getGift(String roomId) {
         return cache.get(roomId);
     }

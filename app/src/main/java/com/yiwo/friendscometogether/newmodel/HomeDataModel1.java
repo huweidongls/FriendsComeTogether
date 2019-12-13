@@ -46,7 +46,7 @@ public class HomeDataModel1 {
         private List<ActivityBean> activity;
         private List<ArticleBean> article;
         private List<ZhiboBean> zhibo;
-
+        private String status; // 1 为显示直播列表。
         public List<ActivityBean> getActivity() {
             return activity;
         }
@@ -69,6 +69,14 @@ public class HomeDataModel1 {
 
         public void setZhibo(List<ZhiboBean> zhibo) {
             this.zhibo = zhibo;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
         }
 
         public static class ActivityBean {
@@ -603,6 +611,8 @@ public class HomeDataModel1 {
             private String zhiboAddress;
             private String like;
             private String zhibostatus;
+            private String pfStart;
+            private String pfEnd;
 
             public String getUserID() {
                 return userID;
@@ -698,6 +708,22 @@ public class HomeDataModel1 {
 
             public void setZhibostatus(String zhibostatus) {
                 this.zhibostatus = zhibostatus;
+            }
+
+            public String getPfStart() {
+                return pfStart;
+            }
+
+            public void setPfStart(String pfStart) {
+                this.pfStart = pfStart;
+            }
+
+            public String getPfEnd() {
+                return pfEnd;
+            }
+
+            public void setPfEnd(String pfEnd) {
+                this.pfEnd = pfEnd;
             }
         }
     }

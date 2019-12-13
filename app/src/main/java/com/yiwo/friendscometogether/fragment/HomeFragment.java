@@ -2,6 +2,7 @@ package com.yiwo.friendscometogether.fragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -26,14 +27,21 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -93,6 +101,7 @@ import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
 import com.yiwo.friendscometogether.wangyiyunshipin.server.entity.RoomInfoEntity;
 import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.LiveRoomActivity;
 import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
+import com.yiwo.friendscometogether.webpages.MyJiFenActivity;
 import com.yiwo.friendscometogether.widget.ViewPagerForScrollView;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
@@ -172,6 +181,9 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.tv_weiduxiaoxi)
     TextView tvWeiduxiaoxi;
 
+    @BindView(R.id.rl_ball)
+    RelativeLayout rl_ball;
+
     //第一个推荐的友聚
     private ImageView iv_first_tuijian;
     private TextView tv_first_tuijian_title,tv_first_tuijian_content,tv_youji_look_num;
@@ -179,8 +191,9 @@ public class HomeFragment extends BaseFragment {
     private LinearLayout llTuiJianHuodongFirst;
     //直播列表
     private LinearLayout ll_live;
-//    @BindView(R.id.scroll_view)
-//    ScrollView scrollView;
+    @BindView(R.id.scroll_view)
+    ScrollView scrollView;
+
     private static final int PERMISSION_REQUEST_CODE_STORAGE = 1001;
 
     private LocationManager locationManager;
@@ -238,6 +251,8 @@ public class HomeFragment extends BaseFragment {
 //    tv_text_youju;
     private NotifyAdatpterBroadcastReceiver broadcastReceiver = new NotifyAdatpterBroadcastReceiver();
     private PreLoadWebYouJiBroadcastReceiver preLoadWebYouJiBroadcastReceiver = new PreLoadWebYouJiBroadcastReceiver();
+
+    private boolean  isShowFloatImage = true  ;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -253,6 +268,7 @@ public class HomeFragment extends BaseFragment {
         initRv_Vp();
         return rootView;
     }
+
     private void initRv_Vp() {
         view1 = getLayoutInflater().inflate(R.layout.layout_home_tuijian, null);
         view2 = getLayoutInflater().inflate(R.layout.layout_home_guanzhu, null);
@@ -856,7 +872,8 @@ public class HomeFragment extends BaseFragment {
                                 manager3.setOrientation(LinearLayoutManager.HORIZONTAL);
                                 recyclerView_live.setLayoutManager(manager3);
                                 recyclerView_live.setAdapter(adapterLiveList);
-                                if (mlistLive.size()>0){
+                                if (mlistLive.size()>0 && model.getObj().getStatus().equals("1")){
+//                                if (mlistLive.size()>0){
                                     ll_live.setVisibility(View.VISIBLE);
                                 }else {
                                     ll_live.setVisibility(View.GONE);
@@ -1186,7 +1203,7 @@ public class HomeFragment extends BaseFragment {
     }
     @OnClick({R.id.ll_home_youji_gonglue,R.id.ll_home_youji_all,
                     R.id.ll_home_youji_meishi,R.id.ll_home_youji_tandian,R.id.ll_home_youji_lvxing, R.id.locationRl, R.id.ll_search, R.id.iv_msg,
-    R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl4,R.id.ll_xiaoxi})
+    R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl4,R.id.ll_xiaoxi,R.id.rl_ball})
     public void onClick(View view) {
         MainActivity mainActivity = (MainActivity) getActivity();
         Intent intent = new Intent();
@@ -1270,6 +1287,16 @@ public class HomeFragment extends BaseFragment {
                 viewPager.setCurrentItem(3);
                 type = "4";
                 break;
+            case R.id.rl_ball:
+                if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                    intent.setClass(getContext(), MyJiFenActivity.class);
+                    intent.putExtra("url","http://www.tongbanapp.com/action/ac_mission/mission?uid="+spImp.getUID());
+                    startActivityForResult(intent,2);
+                } else {
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
         }
     }
 
@@ -1317,7 +1344,8 @@ public class HomeFragment extends BaseFragment {
                                         adapterTuiJian_youji.notifyDataSetChanged();
                                         adapterTuiJian_youju.notifyDataSetChanged();
                                         adapterLiveList.notifyDataSetChanged();
-                                        if (mlistLive.size()>0){
+                                        if (mlistLive.size()>0 && model.getObj().getStatus().equals("1")){
+//                                        if (mlistLive.size()>0){
                                             ll_live.setVisibility(View.VISIBLE);
                                         }else {
                                             ll_live.setVisibility(View.GONE);
@@ -1491,6 +1519,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        //requestCode == 1 城市页面 请求码 // 2 任务 页面请求码
         if (requestCode == 1 && data != null && resultCode == 1) {
             CityModel model = (CityModel) data.getSerializableExtra(ActivityConfig.CITY);
             cityTv.setText(model.getName());
@@ -1649,6 +1678,23 @@ public class HomeFragment extends BaseFragment {
                         }
                     });
         }
+        if (requestCode == 2){//任务
+            switch (resultCode){
+                case 1://跳转友记
+                    viewPager.setCurrentItem(2);
+                    type = "3";
+                    break;
+                case 2://跳转友聚
+                    MainActivity mainActivity = (MainActivity) getActivity();
+                    mainActivity.switchFragment(1);
+                    mainActivity.startHuoDong();
+                    break;
+                case 3://跳转视频
+                    viewPager.setCurrentItem(3);
+                    type = "4";
+                    break;
+            }
+        }
     }
     public void scroll2top(){
 //        scrollView.fullScroll(View.FOCUS_UP);
@@ -1675,6 +1721,11 @@ public class HomeFragment extends BaseFragment {
         filter1.addAction("android.friendscometogether.HomeFragment.PreLoadWebYouJiBroadcastReceiver");
         getContext().registerReceiver(preLoadWebYouJiBroadcastReceiver,filter1);
     }
+
+    public boolean isShowFloatImage() {
+        return isShowFloatImage;
+    }
+
     private class NotifyAdatpterBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -1857,5 +1908,54 @@ public class HomeFragment extends BaseFragment {
             startActivity(intent);
         }
     }
+    private int[] getDisplayMetrics(Context context) {
+        DisplayMetrics mDisplayMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(mDisplayMetrics);
+        int W = mDisplayMetrics.widthPixels;
+        int H = mDisplayMetrics.heightPixels;
+        int array[] = {W, H};
+        return array;
+    }
+    public void hideFloatImage() {
+        isShowFloatImage  = false;
+        //位移动画
+        TranslateAnimation ta = new TranslateAnimation(
+                0,//起始x坐标,10表示与初始位置相距10
+                getDisplayMetrics(getContext())[0] - rl_ball.getRight()+(rl_ball.getMeasuredWidth()*0.75f),//结束x坐标
+                0,//起始y坐标
+                0);//结束y坐标（正数向下移动）
+        ta.setDuration(300);
 
+        //渐变动画
+        AlphaAnimation al = new AlphaAnimation(1f, 0.5f);
+        al.setDuration(300);
+
+        AnimationSet set = new AnimationSet(true);
+        //动画完成后不回到原位
+        set.setFillAfter(true);
+        set.addAnimation(ta);
+        set.addAnimation(al);
+        rl_ball.startAnimation(set);
+    }
+    public void showFloatImage() {
+        isShowFloatImage  = true;
+        //位移动画
+        TranslateAnimation ta = new TranslateAnimation(
+                getDisplayMetrics(getContext())[0] - rl_ball.getRight()+(rl_ball.getMeasuredWidth()*0.75f),//起始x坐标
+                0,//结束x坐标
+                0,//起始y坐标
+                0);//结束y坐标（正数向下移动）
+        ta.setDuration(300);
+
+        //渐变动画
+        AlphaAnimation al = new AlphaAnimation(0.5f, 1f);
+        al.setDuration(300);
+
+        AnimationSet set = new AnimationSet(true);
+        //动画完成后不回到原位
+        set.setFillAfter(true);
+        set.addAnimation(ta);
+        set.addAnimation(al);
+        rl_ball.startAnimation(set);
+    }
 }

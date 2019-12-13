@@ -88,7 +88,7 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
     private SVGAParser parser;
     private boolean svgaIsShow = false;
     private List<String> listSvgaQueue = new ArrayList<>();//当前动画队列
-    private String[] arrSvgaAssets = new String[]{"zuanshi.svga","ren.svga","test_svga.svga","tianshi.svga"};//存放svga资源名称
+    private String[] arrSvgaAssets = new String[]{"svga_aixin.svga","svga_bbt.svga","svga_jiezhi.svga","svga_yinliao.svga","svga_youting.svga","svga_zuanshi.svga"};//存放svga资源名称
 
     //人员操作相关
     private ChatRoomMember current_operate_member; //当前正在操作的人员
@@ -235,7 +235,9 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
                 }else if (msg.getAttachment() instanceof GiftAttachment){
                     // 收到礼物消息
                     GiftType type = ((GiftAttachment) msg.getAttachment()).getGiftType();
-                    liveBottomBar.updateGiftList(type);
+                    if (!isAudience){
+                        liveBottomBar.updateGiftList(type,true);
+                    }
                     liveBottomBar.showGiftAnimation(msg);
 
                     addGift2ListQueue(type);
@@ -636,26 +638,38 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
     private void addGift2ListQueue(GiftType type){
         Log.d("SVGALIST:","当前list中 含有"+listSvgaQueue.size()+"个！！"+type);
         switch (type){
-            case ROSE:
+            case AIXIN:
                 listSvgaQueue.add(arrSvgaAssets[0]);
                 if (!svgaIsShow){
                     startSVGA(listSvgaQueue.get(0));
                 }
                 break;
-            case CHOCOLATE:
+            case BANGBANGTANG:
                 listSvgaQueue.add(arrSvgaAssets[1]);
                 if (!svgaIsShow){
                     startSVGA(listSvgaQueue.get(0));
                 }
                 break;
-            case HEART:
+            case JIEZHI:
                 listSvgaQueue.add(arrSvgaAssets[2]);
                 if (!svgaIsShow){
                     startSVGA(listSvgaQueue.get(0));
                 }
                 break;
-            case ICECREAM:
+            case YINLIAO:
                 listSvgaQueue.add(arrSvgaAssets[3]);
+                if (!svgaIsShow){
+                    startSVGA(listSvgaQueue.get(0));
+                }
+                break;
+            case YOUTING:
+                listSvgaQueue.add(arrSvgaAssets[4]);
+                if (!svgaIsShow){
+                    startSVGA(listSvgaQueue.get(0));
+                }
+                break;
+            case ZUANSHI:
+                listSvgaQueue.add(arrSvgaAssets[5]);
                 if (!svgaIsShow){
                     startSVGA(listSvgaQueue.get(0));
                 }

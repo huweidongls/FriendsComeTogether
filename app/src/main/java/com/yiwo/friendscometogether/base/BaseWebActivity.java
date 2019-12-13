@@ -5,6 +5,7 @@ import android.net.http.SslError;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -55,6 +56,7 @@ public class BaseWebActivity extends BaseActivity {
             webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
         }
+        Log.d("webView----","URL::"+url);
         webView.loadUrl(url);
 //        dialogLoading = WeiboDialogUtils.createLoadingDialog(this,"加载中...");
     }

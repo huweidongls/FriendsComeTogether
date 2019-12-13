@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -17,8 +18,10 @@ import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -55,6 +58,8 @@ import com.yiwo.friendscometogether.sp.SpImp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -85,6 +90,7 @@ public class MainActivity extends FragmentActivity {
     FragmentManager fragmentManager = getSupportFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+    private float startY;
     @BindView(R.id.menu_index)
     ImageButton ibIndex;
     @BindView(R.id.menu_friend_together)
@@ -380,6 +386,10 @@ public class MainActivity extends FragmentActivity {
         ibIndex.setSelected(false);
         tvIndex.setSelected(false);
     }
+    public void startHuoDong(){
+        selectButton(ibFriendTogether);
+        selectText(tvFriendTogether);
+    }
     //退出友记 恢复到首页fragment
     public void exitYouji(){
         switchFragment(0);
@@ -565,6 +575,53 @@ public class MainActivity extends FragmentActivity {
             }
         }
         return false;
+    }
+    private Timer timer;
+    /**用户手指按下后抬起的实际*/
+    private long upTime;
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                if (System.currentTimeMillis() - upTime < 1500) {
+                    //本次按下距离上次的抬起小于1.5s时，取消Timer
+                    timer.cancel();
+                }
+                startY = event.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (Math.abs(startY - event.getY()) > 10) {
+                    if (fragmentHome.isShowFloatImage()){
+                        fragmentHome.hideFloatImage();
+                    }
+                }
+                startY = event.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                if (!fragmentHome.isShowFloatImage()){
+                    //开始1.5s倒计时
+                    upTime = System.currentTimeMillis();
+                    timer = new Timer();
+                    timer.schedule(new FloatTask(), 1500);
+                }
+                break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(event);
+    }
+
+    class FloatTask extends TimerTask {
+        @Override
+        public void run() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    fragmentHome.showFloatImage();
+                }
+            });
+        }
     }
 
 }

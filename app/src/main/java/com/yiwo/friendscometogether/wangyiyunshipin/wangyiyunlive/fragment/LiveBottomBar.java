@@ -2,6 +2,7 @@ package com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.fragment;
 
 import android.content.Context;
 import android.text.ClipboardManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +14,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.ResponseCode;
 import com.netease.nimlib.sdk.chatroom.ChatRoomMessageBuilder;
 import com.netease.nimlib.sdk.chatroom.ChatRoomService;
+import com.netease.nimlib.sdk.chatroom.model.ChatRoomInfo;
 import com.netease.nimlib.sdk.chatroom.model.ChatRoomMember;
 import com.netease.nimlib.sdk.chatroom.model.ChatRoomMessage;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newmodel.MyGiftsModel;
+import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
 import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.adapter.GiftAdapter;
 import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.chatroom.helper.ChatRoomMemberCache;
@@ -31,11 +39,19 @@ import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.helper.GiftCac
 import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.model.Gift;
 import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.widget.PeriscopeLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import static com.yiwo.friendscometogether.R2.id.count;
+import static com.yiwo.friendscometogether.utils.TokenUtils.getToken;
 
 /**
  * Created by zhukkun on 1/6/17.
@@ -87,13 +103,33 @@ public class LiveBottomBar extends RelativeLayout {
     private int giftPosition = -1;
 
     private SendGiftListen sendGiftListen;
-
+    private SpImp spImp;
+    private ChatRoomInfo roomInfo;
+    private Context context;
     public LiveBottomBar(Context context, boolean isAudience, String roomId) {
         super(context);
         this.isAudience = isAudience;
         this.roomId = roomId;
+        this.context =context;
+        spImp = new SpImp(context);
         int resourceId = isAudience? R.layout.layout_live_audience_bottom_bar : R.layout.layout_live_captrue_bottom_bar;
         LayoutInflater.from(context).inflate(resourceId, this, true);
+        NIMClient.getService(ChatRoomService.class).fetchRoomInfo(roomId).setCallback(new RequestCallback<ChatRoomInfo>() {
+            @Override
+            public void onSuccess(ChatRoomInfo chatRoomInfo) {
+                roomInfo = chatRoomInfo;
+            }
+
+            @Override
+            public void onFailed(int i) {
+
+            }
+
+            @Override
+            public void onException(Throwable throwable) {
+
+            }
+        });
         initView();
     }
 
@@ -135,6 +171,7 @@ public class LiveBottomBar extends RelativeLayout {
 
             btn_no_filter.setSelected(true);
         }
+        btn_share.setVisibility(GONE);//隐藏分享
     }
 
     // 初始化礼物布局
@@ -160,11 +197,60 @@ public class LiveBottomBar extends RelativeLayout {
             btn_send_gift.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    sendGift();
+                    Log.d("送礼物1：：",GiftType.typeOfValue(giftPosition)+"///"+GiftType.typeOfValue(giftPosition).getValue()+"//"+roomInfo.getCreator());
+
+                    List<String> accounts = new ArrayList<>();
+                    accounts.add(DemoCache.getAccount());
+                    NIMClient.getService(ChatRoomService.class).fetchRoomMembersByIds(roomId,accounts).setCallback(new RequestCallback<List<ChatRoomMember>>() {
+                        @Override
+                        public void onSuccess(List<ChatRoomMember> chatRoomMembers) {
+                            if (chatRoomMembers.get(0).isMuted()){
+                                Toast.makeText(DemoCache.getContext(), "用户被禁言,无法发送礼物", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            Log.d("送礼物2：：",GiftType.typeOfValue(giftPosition)+"///"+GiftType.typeOfValue(giftPosition).getValue()+"//"+roomInfo.getCreator());
+                            ViseHttp.POST(NetConfig.sendPresent)
+                                    .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.sendPresent))
+                                    .addParam("uid", spImp.getUID())
+                                    .addParam("name",GiftType.typeOfValue(giftPosition).getValue()+"")
+                                    .addParam("num",1+"")
+                                    .addParam("touid",roomInfo.getCreator())
+                                    .request(new ACallback<String>() {
+                                        @Override
+                                        public void onSuccess(String data) {
+                                            try {
+                                                JSONObject jsonObject = new JSONObject(data);
+                                                if (jsonObject.getInt("code") == 200){
+                                                    sendGift();
+                                                }else {
+                                                    Toast.makeText(context,"赠送失败!",Toast.LENGTH_SHORT).show();
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFail(int errCode, String errMsg) {
+                                            Toast.makeText(context,"赠送失败!("+errMsg+")",Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
+
+                        @Override
+                        public void onFailed(int i) {
+
+                        }
+
+                        @Override
+                        public void onException(Throwable throwable) {
+
+                        }
+                    });
                 }
             });
-
-            adapter = new GiftAdapter(getContext());
+            adapter = new GiftAdapter(giftList, getContext());
+//            adapter = new GiftAdapter(getContext()); //观众的礼物数量也从接口获取
             giftView.setAdapter(adapter);
 
             giftView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -286,37 +372,96 @@ public class LiveBottomBar extends RelativeLayout {
     }
 
     // 更新收到礼物的数量
-    private boolean updateGiftCount(GiftType type) {
-        for (Gift gift : giftList) {
-            if (type == gift.getGiftType()) {
-                gift.setCount(gift.getCount() + 1);
-                return true;
+    private int updateGiftCount(GiftType type,boolean isAdd) {
+        if (isAdd) {//如果为收到礼物
+            for (Gift gift : giftList) {//遍历礼物列表
+                if (type == gift.getGiftType()) {//如果含有此类型礼物
+                    gift.setCount(gift.getCount() + 1);//数量加一
+                    return 0;//接收到已收到过的的礼物类型
+                }
             }
+            return 1;//没有收到过此类型礼物
+        }else {//如果为送出礼物
+            for (Gift gift : giftList) {//遍历礼物列表
+                if (type == gift.getGiftType()&&gift.getCount()>0) {//如果有此类型礼物
+                    gift.setCount(gift.getCount() - 1);//礼物数量减一
+                    return 2;//正常送出 礼物数量减一
+                }
+            }
+            return 3;//不能送出此类型礼物  因为礼物列表中没有此类型礼物
         }
-        return false;
+
     }
 
-    public void updateGiftList(GiftType type) {
-        if (!updateGiftCount(type)) {
-            giftList.add(new Gift(type, GiftConstant.titles[type.getValue()], 1, GiftConstant.images[type.getValue()]));
+    public void updateGiftList(GiftType type,Boolean isAdd) {
+        if (isAdd){//收到礼物
+            if (updateGiftCount(type,isAdd) == 1) { //没有收到过此类型礼物
+                giftList.add(new Gift(type, GiftConstant.titles[type.getValue()], 1, GiftConstant.images[type.getValue()]));//礼物列表新增类型 数量1
+            }
+            adapter.notifyDataSetChanged();
+            GiftCache.getInstance().saveGift(roomId, type.getValue());
+        }else {
+            if (updateGiftCount(type,isAdd) == 2){;//送出礼物成功
+
+            }
+            adapter.notifyDataSetChanged();
+            GiftCache.getInstance().rmove1Gift(roomId,type.getValue());
         }
-        adapter.notifyDataSetChanged();
-        GiftCache.getInstance().saveGift(roomId, type.getValue());
+
     }
 
     // 取出缓存的礼物
     private void loadGift() {
-        Map gifts = GiftCache.getInstance().getGift(roomId);
-        if (gifts == null) {
-            return;
-        }
-        Iterator<Map.Entry<Integer, Integer>> it = gifts.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<Integer, Integer> entry = it.next();
-            int type = entry.getKey();
-            int count = entry.getValue();
-            giftList.add(new Gift(GiftType.typeOfValue(type), GiftConstant.titles[type], count, GiftConstant.images[type]));
-        }
+//        Map gifts = GiftCache.getInstance().getGift(roomId);
+//        if (gifts == null) {
+//            return;
+//        }
+//        Iterator<Map.Entry<Integer, Integer>> it = gifts.entrySet().iterator();
+//        while (it.hasNext()) {
+//            Map.Entry<Integer, Integer> entry = it.next();
+//            int type = entry.getKey();
+//            int count = entry.getValue();
+//            giftList.add(new Gift(GiftType.typeOfValue(type), GiftConstant.titles[type], count, GiftConstant.images[type]));
+//        }
+        ViseHttp.POST(NetConfig.presentList)
+                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.presentList))
+                .addParam("uid",spImp.getUID())
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                Gson gson = new Gson();
+                                MyGiftsModel myGiftsModel = gson.fromJson(data,MyGiftsModel.class);
+                                for (MyGiftsModel.ObjBean bean :myGiftsModel.getObj()){
+                                    giftList.add(new Gift(GiftType.typeOfValue(Integer.parseInt(bean.getState())), GiftConstant.titles[Integer.parseInt(bean.getState())], Integer.parseInt(bean.getNum()), GiftConstant.images[Integer.parseInt(bean.getState())]));
+                                    Collections.sort(giftList, new Comparator<Gift>() {
+                                        @Override
+                                        public int compare(Gift o1, Gift o2) {
+                                            int diff = o1.getGiftType().getValue() - o2.getGiftType().getValue();
+                                            if (diff>0){
+                                                return 1;
+                                            }else if (diff<0){
+                                                return -1;
+                                            }else {
+                                                return 0;
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
+
     }
 
     // 显示礼物列表
@@ -339,13 +484,19 @@ public class LiveBottomBar extends RelativeLayout {
             return;
         }
         giftLayout.setVisibility(View.GONE);
-        GiftAttachment attachment = new GiftAttachment(GiftType.typeOfValue(giftPosition), 1);
-        ChatRoomMessage message = ChatRoomMessageBuilder.createChatRoomCustomMessage(roomId, attachment);
+        final GiftAttachment attachment = new GiftAttachment(GiftType.typeOfValue(giftPosition), 1);
+        final ChatRoomMessage message = ChatRoomMessageBuilder.createChatRoomCustomMessage(roomId, attachment);
         setMemberType(message);
         NIMClient.getService(ChatRoomService.class).sendMessage(message, false)
                 .setCallback(new RequestCallback<Void>() {
                     @Override
                     public void onSuccess(Void param) {
+                        Log.d("asdasdasdasd","ddddddaaaaaa");
+                        updateGiftList(attachment.getGiftType(),false);
+                        giftAnimation.showGiftAnimation(message);
+                        if (sendGiftListen!=null){
+                            sendGiftListen.send(attachment.getGiftType());
+                        }
                     }
 
                     @Override
@@ -364,11 +515,12 @@ public class LiveBottomBar extends RelativeLayout {
                         Toast.makeText(DemoCache.getContext(), "消息发送失败！", Toast.LENGTH_SHORT).show();
                     }
                 });
-        giftAnimation.showGiftAnimation(message);
-        if (this.sendGiftListen!=null){
-            this.sendGiftListen.send(GiftType.typeOfValue(giftPosition));
-        }
+
         giftPosition = -1; // 发送完毕，置空
+//        if (giftPosition<4){//暂时开启四个礼物真实发送
+//
+//        }
+
     }
 
     // 显示礼物动画

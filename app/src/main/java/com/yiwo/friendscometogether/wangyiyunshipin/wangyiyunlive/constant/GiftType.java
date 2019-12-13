@@ -9,13 +9,13 @@ public enum GiftType {
      */
     UNKNOWN(-1),
     /**
-     * 玫瑰
+     * 爱心
      */
-    ROSE(0),
+    AIXIN(0),
     /**
-     * 巧克力
+     * 棒棒糖
      */
-    CHOCOLATE(1),
+    BANGBANGTANG(1),
 
 //    /**
 //     * 可爱熊
@@ -23,14 +23,22 @@ public enum GiftType {
 //    BEAR(2),
 
     /**
-     * 冰淇淋
+     * 戒指
      */
-    ICECREAM(3),
+    JIEZHI(2),
 
     /**
-     * 爱心//后添加
+     * 爱心//饮料
      */
-    HEART(2);
+    YINLIAO(3),
+    /**
+     * //游艇
+     */
+    YOUTING(4),
+    /**
+     * 钻石
+     */
+    ZUANSHI(5);
     private int value;
 
     GiftType(int value) {

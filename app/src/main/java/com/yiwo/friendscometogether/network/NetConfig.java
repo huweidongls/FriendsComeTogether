@@ -416,4 +416,8 @@ public class NetConfig {
     public static String zhiBoInfo = "action/ac_zhibo/zihboInfo";
     //action/ac_zhibo/   settZhiBoTime  设置开始时间  传uid用户id    starttime开始时间
     public static String settZhiBoTime = "action/ac_zhibo/setZhiBoTime";
+    //action/ac_zhibo  /  sendPresent   送礼物   传name礼物(ID)  爱心 0 / 棒棒糖 1 / 戒指 2 /  饮料 3  / 游艇 4/  钻石 5/   num数量    uid我的id    touid送的人的网易id
+    public static String sendPresent = "action/ac_zhibo/sendPresent";
+    //action/ac_zhibo/presentList   传uid 用户id   返回 presentName礼物名  num数量
+    public static String presentList = "action/ac_zhibo/presentList";
 }

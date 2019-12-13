@@ -2,6 +2,7 @@ package com.yiwo.friendscometogether.newadapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,13 @@ public class HomeDataRecommendLiveListAdapter extends RecyclerView.Adapter<HomeD
         }else {
             holder.tv_live_state.setText("待直播");
         }
-        holder.tv_address.setText("地址："+data.get(position).getZhiboAddress());
+        String time_start = data.get(position).getPfStart();
+        String time_end = data.get(position).getPfEnd();
+        if (((!TextUtils.isEmpty(time_start)) && time_start.length()>2) && ((!TextUtils.isEmpty(time_end)) && time_end.length()>2)){
+            holder.tv_address.setText("["+time_start.substring(time_start.length()-2,time_start.length())+"-"+time_end.substring(time_start.length()-2,time_start.length())+"]"+data.get(position).getZhiboAddress());
+        }else {
+            holder.tv_address.setText(data.get(position).getZhiboAddress());
+        }
         holder.tv_live_person.setText(data.get(position).getUsername());
         holder.btn_gaunzhu.setText(data.get(position).getLike().equals("1")?"已关注":"关注");
         if (listener!= null){
