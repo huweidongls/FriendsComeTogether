@@ -2,6 +2,7 @@ package com.yiwo.friendscometogether.newpage;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -242,11 +243,17 @@ public class MyVideosActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.activity_my_videos_rl_back})
+    @OnClick({R.id.activity_my_videos_rl_back,R.id.activity_my_videos_rl_add_video})
     public void OnClick(View view){
         switch (view.getId()){
             case R.id.activity_my_videos_rl_back:
                 finish();
+                break;
+            case R.id.activity_my_videos_rl_add_video:
+                Intent intent = new Intent();
+                intent.setClass(MyVideosActivity.this, CreateFriendRememberActivityChoosePicOrVideos.class);
+                intent.putExtra(CreateFriendRememberActivityChoosePicOrVideos.ONLY_ADD_VIDEO,true);
+                startActivity(intent);
                 break;
         }
     }

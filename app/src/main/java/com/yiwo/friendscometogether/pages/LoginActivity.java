@@ -176,6 +176,7 @@ public class LoginActivity extends BaseActivity {
                                     spImp.setWyUpAccid(js.optString("wy_up_accid"));
                                     spImp.setWyUpToken(js.optString("wy_up_token"));
                                     spImp.setIsAdmin(js.getString("isAdmin"));
+                                    spImp.setWXUnionID(js.getString("unionid"));
                                     account = js.optString("wy_accid");
                                     //清除vas_sonic缓存
                                     SonicEngine.getInstance().cleanCache();

@@ -52,6 +52,7 @@ public class MyGiftsModel {
         private String presentName;
         private String num;
         private String state;
+        private String integral;//礼物价格
 
         public String getPresentName() {
             return presentName;
@@ -75,6 +76,14 @@ public class MyGiftsModel {
 
         public void setState(String state) {
             this.state = state;
+        }
+
+        public String getIntegral() {
+            return integral;
+        }
+
+        public void setIntegral(String integral) {
+            this.integral = integral;
         }
     }
 }

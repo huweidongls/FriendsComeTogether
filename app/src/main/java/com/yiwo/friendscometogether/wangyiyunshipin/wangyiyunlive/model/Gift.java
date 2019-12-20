@@ -12,13 +12,15 @@ public class Gift {
     private String title;
     private int count;
     private int imageId;
-
-    public Gift(GiftType giftType, String title, int count, int imageId) {
+    private int integral;
+    private boolean isChoosed = false;
+    public Gift(GiftType giftType, String title, int count, int imageId,int integral) {
         super();
         this.giftType = giftType;
         this.title = title;
         this.count = count;
         this.imageId = imageId;
+        this.integral = integral;
     }
 
     public void setGiftType(GiftType giftType) {
@@ -51,5 +53,21 @@ public class Gift {
 
     public void setImageId(int imageId) {
         this.imageId = imageId;
+    }
+
+    public int getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(int integral) {
+        this.integral = integral;
+    }
+
+    public boolean isChoosed() {
+        return isChoosed;
+    }
+
+    public void setChoosed(boolean choosed) {
+        isChoosed = choosed;
     }
 }

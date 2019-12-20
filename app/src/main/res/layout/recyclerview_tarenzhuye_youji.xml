@@ -9,7 +9,7 @@
     android:layout_height="wrap_content">
     <TextView
         android:id="@+id/tv_youji_time"
-        android:text="12月20日"
+        android:text=""
         android:textSize="30px"
         android:textStyle="bold"
         android:textColor="@color/black_333333"
@@ -65,7 +65,7 @@
         android:lines="1"
         android:ellipsize="end"
         android:layout_marginTop="20px"
-        android:text="一次神秘的智慧之旅"
+        android:text=""
         android:textSize="44px"
         android:textColor="#272A2C"
         android:textStyle="bold"
@@ -94,7 +94,7 @@
                 android:layout_marginRight="18px"
                 android:textColor="#272A2C"
                 android:textSize="26px"
-                android:text="北京北京"
+                android:text=""
                 android:lines="1"
                 android:ellipsize="end"
                 android:maxWidth="300px"
@@ -161,7 +161,7 @@
         android:lines="1"
         android:ellipsize="end"
         android:layout_marginTop="10px"
-        android:text="3636人觉得很赞"
+        android:text=""
         android:textColor="#505050"
         android:textSize="24px"
 
@@ -175,7 +175,7 @@
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/tv_youji_pinglun_username_0"
-            android:text="吃货萌："
+            android:text=""
             android:textColor="#272A2C"
             android:textSize="28px"
             android:textStyle="bold"
@@ -186,7 +186,7 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tv_youji_pinglun_content_0"
-            android:text="上海来一局吃货大趴"
+            android:text=""
             android:maxLength="85"
             android:ellipsize="end"
             android:textColor="#505050"
@@ -202,7 +202,7 @@
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/tv_youji_pinglun_username_1"
-            android:text="吃货萌吃货萌吃货萌吃货萌："
+            android:text=""
             android:textColor="#272A2C"
             android:textSize="28px"
             android:textStyle="bold"
@@ -213,7 +213,7 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tv_youji_pinglun_content_1"
-            android:text="上海来一局吃货大趴上海来一局吃货大趴"
+            android:text=""
             android:maxLength="85"
             android:ellipsize="end"
             android:textColor="#505050"
@@ -228,7 +228,7 @@
         android:textColor="#D84C37"
         android:lines="1"
         android:ellipsize="end"
-        android:text="全部40条回复"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <View

@@ -38,6 +38,7 @@ import butterknife.ButterKnife;
 public class CreateFriendRememberActivityChoosePicOrVideos extends BaseActivity {
 
     public static final String EXTRA_FROM_UPLOAD_NOTIFY = "extra_from_upload_notify"; //由上传通知启动
+    public static final String ONLY_ADD_VIDEO = "add_video";
     @BindView(R.id.magic_indicator)
     MagicIndicator magicIndicator;
     @BindView(R.id.vp)
@@ -49,6 +50,7 @@ public class CreateFriendRememberActivityChoosePicOrVideos extends BaseActivity 
 
     private ArrayList<String> mTitleDataList;
     private SimplePagerTitleView simplePagerTitleView;
+    private boolean onlyShowAddVideo = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,7 @@ public class CreateFriendRememberActivityChoosePicOrVideos extends BaseActivity 
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         ButterKnife.bind(CreateFriendRememberActivityChoosePicOrVideos.this);
         StatusBarUtils.setStatusBarTransparent(CreateFriendRememberActivityChoosePicOrVideos.this);
+        onlyShowAddVideo = getIntent().getBooleanExtra(ONLY_ADD_VIDEO,false);
         mFragmentManager = getSupportFragmentManager();
         initData();
     }
@@ -64,15 +67,19 @@ public class CreateFriendRememberActivityChoosePicOrVideos extends BaseActivity 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        fragmentList.get(1).onActivityResult(requestCode, resultCode, data);
+        if(onlyShowAddVideo){
+            fragmentList.get(0).onActivityResult(requestCode, resultCode, data);
+        }else {
+            fragmentList.get(1).onActivityResult(requestCode, resultCode, data);
+        }
         Log.d("onActivityResulton___","requestCode:"+requestCode+"///"+"resultCode:"+resultCode);
     }
 
     private void initData() {
-
-
         fragmentList = new ArrayList<>();
-        fragmentList.add(new CreateFriendRememberNew_ChoosePicsFragment());
+        if (!onlyShowAddVideo){
+            fragmentList.add(new CreateFriendRememberNew_ChoosePicsFragment());
+        }
         fragmentList.add(new TakeVideoFragment_new());
 //        fragmentList.add(new CreateFriendRememberNew_ChoosePicsFragment());
         mViewPagerFragmentAdapter = new AllRememberViewpagerAdapter(mFragmentManager, fragmentList);
@@ -99,7 +106,9 @@ public class CreateFriendRememberActivityChoosePicOrVideos extends BaseActivity 
             }
         });
         mTitleDataList = new ArrayList<>();
-        mTitleDataList.add("相册");
+        if (!onlyShowAddVideo){
+            mTitleDataList.add("相册");
+        }
         mTitleDataList.add("视频");
 //        mTitleDataList.add("拍照");
 

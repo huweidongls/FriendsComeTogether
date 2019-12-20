@@ -23,14 +23,20 @@ android {
         ]
     }
 
-//    signingConfigs {
-//        release {
-//            storeFile file("/mykey.jks")
-//            storePassword "123456"
-//            keyAlias "mykey"
-//            keyPassword "123456"
-//        }
-//    }
+    signingConfigs {
+        release {
+            storeFile file('D:/project/FriendsComeTogether/mykey.jks')
+            storePassword "123456"
+            keyAlias "mykey"
+            keyPassword "123456"
+        }
+        debug {
+            keyAlias 'mykey'
+            storeFile file('D:/project/FriendsComeTogether/mykey.jks')
+            keyPassword '123456'
+            storePassword '123456'
+        }
+    }
 
     packagingOptions {
         exclude 'META-INF/LICENSE'
@@ -39,13 +45,14 @@ android {
     }
 
     buildTypes {
-//        debug {
-//            signingConfig signingConfigs.release
-//        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.release
         }
     }
 

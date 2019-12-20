@@ -79,6 +79,13 @@ public class LiveBottomBar extends RelativeLayout {
 
     private ViewGroup giftLayout; // 礼物布局
     private GridView giftView; // 礼物列表
+    private LinearLayout llGiltNum;// 弹出、隐藏 礼物数量按钮
+    private TextView tvGiftNum;// 已选择礼物数量
+    private LinearLayout llChooseGiftNum;// 选择礼物数量布局
+    private RelativeLayout rlNumOther,rlNum1314,rlNum520,rlNum188,rlNum66,rlNum30,rlNum10,rlNum1;
+    private LinearLayout llNumKeyboard;
+    private TextView tvNo0,tvNo1,tvNo2,tvNo3,tvNo4,tvNo5,tvNo6,tvNo7,tvNo8,tvNo9,tvNosure,tvNodel;
+//    private TextView
     private RelativeLayout giftAnimationViewDown; // 礼物动画布局1
     private RelativeLayout giftAnimationViewUp; // 礼物动画布局2
     private GiftAdapter adapter;
@@ -188,15 +195,23 @@ public class LiveBottomBar extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 giftLayout.setVisibility(View.GONE);
+                if (isAudience){
+                    llChooseGiftNum.setVisibility(GONE);
+                    llNumKeyboard.setVisibility(GONE);
+                }
                 giftPosition = -1;
             }
         });
-
-        if(isAudience) {
+        if(isAudience) {//送礼物有关视图
+            bindSendGiftNum();
             btn_send_gift = findView(R.id.send_gift_btn);
             btn_send_gift.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (giftPosition == -1){
+                        Toast.makeText(getContext(), "请选择礼物", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     Log.d("送礼物1：：",GiftType.typeOfValue(giftPosition)+"///"+GiftType.typeOfValue(giftPosition).getValue()+"//"+roomInfo.getCreator());
 
                     List<String> accounts = new ArrayList<>();
@@ -252,11 +267,19 @@ public class LiveBottomBar extends RelativeLayout {
             adapter = new GiftAdapter(giftList, getContext());
 //            adapter = new GiftAdapter(getContext()); //观众的礼物数量也从接口获取
             giftView.setAdapter(adapter);
-
             giftView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     giftPosition = position;
+                    for(int i=0;i<giftList.size();i++){
+                        View v=parent.getChildAt(i);
+                        if (position == i) {//当前选中的Item改变背景颜色
+                            giftList.get(position).setChoosed(true);
+                        } else {
+                            giftList.get(i).setChoosed(false);
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
                 }
             });
         }else{
@@ -264,6 +287,242 @@ public class LiveBottomBar extends RelativeLayout {
             giftView.setAdapter(adapter);
             noGiftText = findView(R.id.no_gift_tip);
         }
+    }
+
+    private void bindSendGiftNum() {
+        tvGiftNum = findView(R.id.tv_gift_num);
+        llGiltNum = findView(R.id.ll_gilt_num);
+        llChooseGiftNum = findView(R.id.ll_choose_gift_num);
+//        rlNumOther,rlNum1314,rlNum520,rlNum188,rlNum66,rlNum30,rlNum10,rlNum1;
+        rlNumOther = findView(R.id.rl_num_other);
+        rlNum1314 = findView(R.id.rl_num_1314);
+        rlNum520 = findView(R.id.rl_num_520);
+        rlNum188 = findView(R.id.rl_num_188);
+        rlNum66 = findView(R.id.rl_num_66);
+        rlNum30 = findView(R.id.rl_num_30);
+        rlNum10 = findView(R.id.rl_num_10);
+        rlNum1 = findView(R.id.rl_num_1);
+//        tv_num0,tv_num1,tv_num2,tv_num3,tv_num4,tv_num5,tv_num6,tv_num7,tv_num8,tv_num9,tv_num_sure,tv_num_del;
+        tvNo0 = findView(R.id.tv_no0);
+        tvNo1 = findView(R.id.tv_no1);
+        tvNo2 = findView(R.id.tv_no2);
+        tvNo3 = findView(R.id.tv_no3);
+        tvNo4 = findView(R.id.tv_no4);
+        tvNo5 = findView(R.id.tv_no5);
+        tvNo6 = findView(R.id.tv_no6);
+        tvNo7 = findView(R.id.tv_no7);
+        tvNo8 = findView(R.id.tv_no8);
+        tvNo9 = findView(R.id.tv_no9);
+        tvNodel = findView(R.id.tv_no_del);
+        tvNosure = findView(R.id.tv_no_sure);
+
+        llNumKeyboard = findView(R.id.ll_num_keyboard);
+
+        llGiltNum.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                llNumKeyboard.setVisibility(GONE);
+                llChooseGiftNum.setVisibility(llChooseGiftNum.getVisibility() == VISIBLE?GONE:VISIBLE);
+            }
+        });
+        rlNum1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvGiftNum.setText(1+"");
+            }
+        });
+        rlNum10.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvGiftNum.setText(10+"");
+            }
+        });
+        rlNum30.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvGiftNum.setText(30+"");
+            }
+        });
+        rlNum66.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvGiftNum.setText(66+"");
+            }
+        });
+        rlNum188.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvGiftNum.setText(188+"");
+            }
+        });
+        rlNum520.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvGiftNum.setText(520+"");
+            }
+        });
+        rlNum1314.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvGiftNum.setText(1314+"");
+            }
+        });
+        rlNumOther.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvGiftNum.setText(0+"");
+                llChooseGiftNum.setVisibility(GONE);
+                llNumKeyboard.setVisibility(llNumKeyboard.getVisibility() == VISIBLE?GONE:VISIBLE);
+            }
+        });
+        tvNo0.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvGiftNum.getText().length()>=4){
+                    tvGiftNum.setText(9999+"");
+                    Toast.makeText(context,"土豪，一次最多只能送出9999个呦～",Toast.LENGTH_SHORT).show();
+                }else if (tvGiftNum.getText().length() == 1 && tvGiftNum.getText().toString().equals("0")){
+                    tvGiftNum.setText(0+"");
+                }else {
+                    tvGiftNum.append(0+"");
+                }
+            }
+        });
+        tvNo1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvGiftNum.getText().length()>=4){
+                    tvGiftNum.setText(9999+"");
+                    Toast.makeText(context,"土豪，一次最多只能送出9999个呦～",Toast.LENGTH_SHORT).show();
+                }else if (tvGiftNum.getText().length() == 1 && tvGiftNum.getText().toString().equals("0")){
+                    tvGiftNum.setText(1+"");
+                }else {
+                    tvGiftNum.append(1+"");
+                }
+            }
+        });
+        tvNo2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvGiftNum.getText().length()>=4){
+                    tvGiftNum.setText(9999+"");
+                    Toast.makeText(context,"土豪，一次最多只能送出9999个呦～",Toast.LENGTH_SHORT).show();
+                }else if (tvGiftNum.getText().length() == 1 && tvGiftNum.getText().toString().equals("0")){
+                    tvGiftNum.setText(2+"");
+                }else {
+                    tvGiftNum.append(2+"");
+                }
+            }
+        });
+        tvNo3.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvGiftNum.getText().length()>=4){
+                    tvGiftNum.setText(9999+"");
+                    Toast.makeText(context,"土豪，一次最多只能送出9999个呦～",Toast.LENGTH_SHORT).show();
+                }else if (tvGiftNum.getText().length() == 1 && tvGiftNum.getText().toString().equals("0")){
+                    tvGiftNum.setText(3+"");
+                }else {
+                    tvGiftNum.append(3+"");
+                }
+            }
+        });
+        tvNo4.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvGiftNum.getText().length()>=4){
+                    tvGiftNum.setText(9999+"");
+                    Toast.makeText(context,"土豪，一次最多只能送出9999个呦～",Toast.LENGTH_SHORT).show();
+                }else if (tvGiftNum.getText().length() == 1 && tvGiftNum.getText().toString().equals("0")){
+                    tvGiftNum.setText(4+"");
+                }else {
+                    tvGiftNum.append(4+"");
+                }
+            }
+        });
+        tvNo5.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvGiftNum.getText().length()>=4){
+                    tvGiftNum.setText(9999+"");
+                    Toast.makeText(context,"土豪，一次最多只能送出9999个呦～",Toast.LENGTH_SHORT).show();
+                }else if (tvGiftNum.getText().length() == 1 && tvGiftNum.getText().toString().equals("0")){
+                    tvGiftNum.setText(5+"");
+                }else {
+                    tvGiftNum.append(5+"");
+                }
+            }
+        });
+        tvNo6.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvGiftNum.getText().length()>=4){
+                    tvGiftNum.setText(9999+"");
+                    Toast.makeText(context,"土豪，一次最多只能送出9999个呦～",Toast.LENGTH_SHORT).show();
+                }else if (tvGiftNum.getText().length() == 1 && tvGiftNum.getText().toString().equals("0")){
+                    tvGiftNum.setText(6+"");
+                }else {
+                    tvGiftNum.append(6+"");
+                }
+            }
+        });
+        tvNo7.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvGiftNum.getText().length()>=4){
+                    tvGiftNum.setText(9999+"");
+                    Toast.makeText(context,"土豪，一次最多只能送出9999个呦～",Toast.LENGTH_SHORT).show();
+                }else if (tvGiftNum.getText().length() == 1 && tvGiftNum.getText().toString().equals("0")){
+                    tvGiftNum.setText(7+"");
+                }else {
+                    tvGiftNum.append(7+"");
+                }
+            }
+        });
+        tvNo8.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvGiftNum.getText().length()>=4){
+                    tvGiftNum.setText(9999+"");
+                    Toast.makeText(context,"土豪，一次最多只能送出9999个呦～",Toast.LENGTH_SHORT).show();
+                }else if (tvGiftNum.getText().length() == 1 && tvGiftNum.getText().toString().equals("0")){
+                    tvGiftNum.setText(8+"");
+                }else {
+                    tvGiftNum.append(8+"");
+                }
+            }
+        });
+        tvNo9.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvGiftNum.getText().length()>=4){
+                    tvGiftNum.setText(9999+"");
+                    Toast.makeText(context,"土豪，一次最多只能送出9999个呦～",Toast.LENGTH_SHORT).show();
+                }else if (tvGiftNum.getText().length() == 1 && tvGiftNum.getText().toString().equals("0")){
+                    tvGiftNum.setText(9+"");
+                }else {
+                    tvGiftNum.append(9+"");
+                }
+            }
+        });
+        tvNosure.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                llChooseGiftNum.setVisibility(GONE);
+                llNumKeyboard.setVisibility(GONE);
+            }
+        });
+        tvNodel.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String str_num = tvGiftNum.getText().toString();
+                if (str_num.length()>1){
+                    tvGiftNum.setText(tvGiftNum.getText().subSequence(0,str_num.length()-1));
+                }else {
+                    tvGiftNum.setText(0+"");
+                }
+            }
+        });
     }
 
     private void clickView() {
@@ -396,7 +655,7 @@ public class LiveBottomBar extends RelativeLayout {
     public void updateGiftList(GiftType type,Boolean isAdd) {
         if (isAdd){//收到礼物
             if (updateGiftCount(type,isAdd) == 1) { //没有收到过此类型礼物
-                giftList.add(new Gift(type, GiftConstant.titles[type.getValue()], 1, GiftConstant.images[type.getValue()]));//礼物列表新增类型 数量1
+                giftList.add(new Gift(type, GiftConstant.titles[type.getValue()], 1, GiftConstant.images[type.getValue()],GiftConstant.integrals[type.getValue()]));//礼物列表新增类型 数量1
             }
             adapter.notifyDataSetChanged();
             GiftCache.getInstance().saveGift(roomId, type.getValue());
@@ -435,7 +694,8 @@ public class LiveBottomBar extends RelativeLayout {
                                 Gson gson = new Gson();
                                 MyGiftsModel myGiftsModel = gson.fromJson(data,MyGiftsModel.class);
                                 for (MyGiftsModel.ObjBean bean :myGiftsModel.getObj()){
-                                    giftList.add(new Gift(GiftType.typeOfValue(Integer.parseInt(bean.getState())), GiftConstant.titles[Integer.parseInt(bean.getState())], Integer.parseInt(bean.getNum()), GiftConstant.images[Integer.parseInt(bean.getState())]));
+                                    giftList.add(new Gift(GiftType.typeOfValue(Integer.parseInt(bean.getState())), GiftConstant.titles[Integer.parseInt(bean.getState())], Integer.parseInt(bean.getNum()),
+                                            GiftConstant.images[Integer.parseInt(bean.getState())], GiftConstant.integrals[Integer.parseInt(bean.getState())]));
                                     Collections.sort(giftList, new Comparator<Gift>() {
                                         @Override
                                         public int compare(Gift o1, Gift o2) {
@@ -516,7 +776,8 @@ public class LiveBottomBar extends RelativeLayout {
                     }
                 });
 
-        giftPosition = -1; // 发送完毕，置空
+//        giftPosition = -1; // 发送完毕，置空
+
 //        if (giftPosition<4){//暂时开启四个礼物真实发送
 //
 //        }

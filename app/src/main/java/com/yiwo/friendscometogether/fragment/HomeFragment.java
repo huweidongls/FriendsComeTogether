@@ -58,6 +58,9 @@ import com.tencent.sonic.sdk.SonicConfig;
 import com.tencent.sonic.sdk.SonicEngine;
 import com.tencent.sonic.sdk.SonicSession;
 import com.tencent.sonic.sdk.SonicSessionConfig;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -112,6 +115,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -253,6 +257,7 @@ public class HomeFragment extends BaseFragment {
     private PreLoadWebYouJiBroadcastReceiver preLoadWebYouJiBroadcastReceiver = new PreLoadWebYouJiBroadcastReceiver();
 
     private boolean  isShowFloatImage = true  ;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -268,7 +273,6 @@ public class HomeFragment extends BaseFragment {
         initRv_Vp();
         return rootView;
     }
-
     private void initRv_Vp() {
         view1 = getLayoutInflater().inflate(R.layout.layout_home_tuijian, null);
         view2 = getLayoutInflater().inflate(R.layout.layout_home_guanzhu, null);
@@ -309,12 +313,21 @@ public class HomeFragment extends BaseFragment {
 
         //ceshi
         Button button = view1.findViewById(R.id.btn_test);
+        Button button1 = view1.findViewById(R.id.btn_test1);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(getContext(), TestSGVAActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent();
+//                intent.setClass(getContext(), TestSGVAActivity.class);
+//                startActivity(intent);
+
+            }
+        });
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
         recyclerView2 = view2.findViewById(R.id.rv_home_2);
@@ -872,8 +885,8 @@ public class HomeFragment extends BaseFragment {
                                 manager3.setOrientation(LinearLayoutManager.HORIZONTAL);
                                 recyclerView_live.setLayoutManager(manager3);
                                 recyclerView_live.setAdapter(adapterLiveList);
-                                if (mlistLive.size()>0 && model.getObj().getStatus().equals("1")){
-//                                if (mlistLive.size()>0){
+//                                if (mlistLive.size()>0 && model.getObj().getStatus().equals("1")){
+                                if (mlistLive.size()>0){
                                     ll_live.setVisibility(View.VISIBLE);
                                 }else {
                                     ll_live.setVisibility(View.GONE);
@@ -887,6 +900,11 @@ public class HomeFragment extends BaseFragment {
                                     tv_text_youji.setVisibility(View.VISIBLE);
                                 }else {
                                     tv_text_youji.setVisibility(View.GONE);
+                                }
+                                if (model.getObj().getStatus().equals("1")){
+                                    rl_ball.setVisibility(View.VISIBLE);
+                                }else {
+                                    rl_ball.setVisibility(View.GONE);
                                 }
                             }
                         } catch (JSONException e) {
@@ -1344,8 +1362,8 @@ public class HomeFragment extends BaseFragment {
                                         adapterTuiJian_youji.notifyDataSetChanged();
                                         adapterTuiJian_youju.notifyDataSetChanged();
                                         adapterLiveList.notifyDataSetChanged();
-                                        if (mlistLive.size()>0 && model.getObj().getStatus().equals("1")){
-//                                        if (mlistLive.size()>0){
+//                                        if (mlistLive.size()>0 && model.getObj().getStatus().equals("1")){
+                                        if (mlistLive.size()>0){
                                             ll_live.setVisibility(View.VISIBLE);
                                         }else {
                                             ll_live.setVisibility(View.GONE);
@@ -1362,6 +1380,11 @@ public class HomeFragment extends BaseFragment {
                                             tv_text_youji.setVisibility(View.VISIBLE);
                                         }else {
                                             tv_text_youji.setVisibility(View.GONE);
+                                        }
+                                        if (model.getObj().getStatus().equals("1")){
+                                            rl_ball.setVisibility(View.VISIBLE);
+                                        }else {
+                                            rl_ball.setVisibility(View.GONE);
                                         }
                                         page1 = 2;
                                     }
@@ -1917,6 +1940,9 @@ public class HomeFragment extends BaseFragment {
         return array;
     }
     public void hideFloatImage() {
+        if (!(rl_ball.getVisibility()==View.VISIBLE)){
+            return;
+        }
         isShowFloatImage  = false;
         //位移动画
         TranslateAnimation ta = new TranslateAnimation(
@@ -1938,6 +1964,9 @@ public class HomeFragment extends BaseFragment {
         rl_ball.startAnimation(set);
     }
     public void showFloatImage() {
+        if (!(rl_ball.getVisibility()==View.VISIBLE)){
+            return;
+        }
         isShowFloatImage  = true;
         //位移动画
         TranslateAnimation ta = new TranslateAnimation(

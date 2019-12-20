@@ -1,11 +1,13 @@
 package com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -24,15 +26,15 @@ public class GiftAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private List<Gift> gifts;
 
-    public GiftAdapter(Context context) {
-        super();
-        gifts = new ArrayList<Gift>();
-        inflater = LayoutInflater.from(context);
-        for (int i = 0; i < GiftConstant.images.length; i++) {
-            Gift gift = new Gift(GiftType.typeOfValue(i), GiftConstant.titles[i], 1, GiftConstant.images[i]);
-            gifts.add(gift);
-        }
-    }
+//    public GiftAdapter(Context context) {
+//        super();
+//        gifts = new ArrayList<Gift>();
+//        inflater = LayoutInflater.from(context);
+//        for (int i = 0; i < GiftConstant.images.length; i++) {
+//            Gift gift = new Gift(GiftType.typeOfValue(i), GiftConstant.titles[i], 1, GiftConstant.images[i]);
+//            gifts.add(gift);
+//        }
+//    }
 
     public GiftAdapter(List<Gift> gifts, Context context) {
         super();
@@ -65,9 +67,11 @@ public class GiftAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.gift_item, null);
             viewHolder = new ViewHolder();
+            viewHolder.root = convertView.findViewById(R.id.root);
             viewHolder.title = (TextView) convertView.findViewById(R.id.title);
             viewHolder.image = (ImageView) convertView.findViewById(R.id.image);
             viewHolder.count = (TextView) convertView.findViewById(R.id.count);
+            viewHolder.integral = convertView.findViewById(R.id.tv_integral);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -75,13 +79,22 @@ public class GiftAdapter extends BaseAdapter {
         viewHolder.title.setText(gifts.get(position).getTitle());
         viewHolder.image.setImageResource(gifts.get(position).getImageId());
         viewHolder.count.setText(gifts.get(position).getCount() + "");
+        if (gifts.get(position).isChoosed()){
+            Log.d("asdasdasd","gifts.get(position).isChoosed()"+position+"YES");
+            viewHolder.root.setBackgroundResource(R.drawable.item_border_selected);
+        } else {
+            Log.d("asdasdasd","gifts.get(position).isChoosed()"+position+"YES");
+            viewHolder.root.setBackgroundResource(R.drawable.item_border);
+        }
+        viewHolder.integral.setText(gifts.get(position).getIntegral() + "瞳币");
         return convertView;
     }
-
 }
 
 class ViewHolder {
     public TextView title;
     public ImageView image;
     public TextView count;
+    public TextView integral;
+    public LinearLayout root;
 }

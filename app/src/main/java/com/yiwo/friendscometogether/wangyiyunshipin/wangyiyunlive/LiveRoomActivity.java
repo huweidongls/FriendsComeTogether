@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -41,9 +42,13 @@ import com.opensource.svgaplayer.SVGADynamicEntity;
 import com.opensource.svgaplayer.SVGAImageView;
 import com.opensource.svgaplayer.SVGAParser;
 import com.opensource.svgaplayer.SVGAVideoEntity;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
+import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivityChoosePicOrVideos;
+import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.wangyiyunshipin.BaseActivity;
 import com.yiwo.friendscometogether.wangyiyunshipin.NimContract;
 import com.yiwo.friendscometogether.wangyiyunshipin.NimController;
@@ -62,8 +67,15 @@ import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.fragment.LiveB
 import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.fragment.LiveRoomInfoFragment;
 import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.input.InputConfig;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import static com.yiwo.friendscometogether.utils.TokenUtils.getToken;
 
 /**
  * Created by zhukkun on 1/5/17.
@@ -110,6 +122,10 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
     private float screenHeight;
     private boolean isLiveStart; //是否已开启直播
 
+    private int addRobTimes = 0;//添加机器人次数
+
+    private SpImp spImp;
+    private Handler handler;
     /**
      * 静态方法 启动主播
      * @param context 上下文
@@ -143,8 +159,10 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
         super.onCreate(savedInstanceState);
         nimController = new NimController(this, this);
         nimController.onHandleIntent(getIntent());
+        spImp = new SpImp(LiveRoomActivity.this);
         VcloudFileUtils.getInstance(getApplicationContext()).init();
         StatusBarUtils.setStatusBarTransparent(LiveRoomActivity.this);
+        handler = new Handler();
     }
 
     @Override
@@ -210,6 +228,7 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
         chatRoomFragment = (ChatRoomMessageFragment) getSupportFragmentManager().findFragmentById(R.id.chat_room_fragment);
         if (chatRoomFragment != null) {
             initChatRoomFragment();
+            addRob(roomId);
         } else {
             // 如果Fragment还未Create完成，延迟初始化
             getHandler().postDelayed(new Runnable() {
@@ -218,6 +237,53 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
                     onEnterChatRoomSuc(roomId);
                 }
             }, 50);
+        }
+    }
+
+    private void addRob(final String roomId) {
+        Integer time;
+        if (addRobTimes == 0){
+            time = 120000;
+        }else if (addRobTimes == 1){
+            time = 300000;
+        }else if (addRobTimes == 2){
+            time = 300000;
+        }else {
+            return;
+        }
+        if (!isAudience){
+            handler.removeCallbacksAndMessages(null);
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    ViseHttp.POST(NetConfig.addRobot)
+                            .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.addRobot))
+                            .addParam("roomid",roomId)
+                            .request(new ACallback<String>() {
+                                @Override
+                                public void onSuccess(String data) {
+                                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");// HH:mm:ss//获取当前时间
+                                    Date date = new Date(System.currentTimeMillis());
+                                    Log.d("addrobort",data+"\n"+simpleDateFormat.format(date)+"\n"+addRobTimes);
+                                    try {
+                                        JSONObject jsonObject = new JSONObject(data);
+                                        if (jsonObject.getInt("code") == 200){
+                                            addRobTimes++;
+                                            addRob(roomId);
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFail(int errCode, String errMsg) {
+
+                                }
+                            });
+                }
+            },time);
         }
     }
 
@@ -402,18 +468,43 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
     public void normalFinishLive() {
         //主播发送离开房间请求
         if(!isAudience) {
-            DemoServerHttpClient.getInstance().anchorLeave(roomId, new DemoServerHttpClient.DemoServerHttpCallback<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    //正常离开时,服务端会发送解散消息通知,此时根据解散时发送的被踢消息离开房间.
-                }
+//            DemoServerHttpClient.getInstance().anchorLeave(roomId, new DemoServerHttpClient.DemoServerHttpCallback<Void>() {
+//                @Override
+//                public void onSuccess(Void aVoid) {
+//                    //正常离开时,服务端会发送解散消息通知,此时根据解散时发送的被踢消息离开房间.
+//
+//                }
+//
+//                @Override
+//                public void onFailed(int code, String errorMsg) {
+//                }
+//            });
+            Log.d("sdasdadsa",spImp.getYXID()+"///roomId"+roomId);
+            ViseHttp.POST(NetConfig.offRoom)
+                    .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.offRoom))
+                    .addParam("wy_accid",spImp.getYXID())
+                    .addParam("room_id",roomId)
+                    .request(new ACallback<String>() {
+                        @Override
+                        public void onSuccess(String data) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(data);
+                                if (jsonObject.getInt("code") == 200){
+                                    finish();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
 
-                @Override
-                public void onFailed(int code, String errorMsg) {
-                }
-            });
+                        @Override
+                        public void onFail(int errCode, String errMsg) {
+
+                        }
+                    });
+        }else {
+            finish();
         }
-        finish();
     }
 
     @Override
@@ -423,6 +514,9 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
         nimController.logoutChatRoom();
         if(captureFragment!=null) {
             captureFragment.destroyController();
+        }
+        if (handler!=null){
+            handler.removeCallbacksAndMessages(null);
         }
         DialogMaker.dismissProgressDialog();
     }
@@ -502,7 +596,7 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
 
             liveBottomBar.setVisibility(View.GONE);
             rl_member_operate.setVisibility(View.VISIBLE);
-
+            Glide.with(LiveRoomActivity.this).load(member.getAvatar()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(iv_avatar);
             tv_nick_name.setText(member.getNick());
             if(member.isMuted()){
                 btn_mute.setText("解禁");

@@ -16,9 +16,15 @@
         android:layout_marginBottom="30px"
         android:orientation="vertical">
         <Button
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_marginTop="50px"
             android:id="@+id/btn_test"
+            android:layout_width="match_parent"
+            android:layout_height="80px" />
+        <Button
+            android:visibility="visible"
+            android:layout_marginTop="50px"
+            android:id="@+id/btn_test1"
             android:layout_width="match_parent"
             android:layout_height="80px" />
         <RelativeLayout
@@ -57,7 +63,7 @@
             android:layout_marginTop="20px"
             android:ellipsize="end"
             android:lines="1"
-            android:text="一次神秘的智慧之旅"
+            android:text=""
             android:textColor="@color/black_333333"
             android:textSize="44px" />
         <TextView
@@ -68,7 +74,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
-            android:text="一次神秘的智慧之旅"
+            android:text=""
             android:textColor="#4c4c4c"
             android:textSize="35px" />
         <RelativeLayout

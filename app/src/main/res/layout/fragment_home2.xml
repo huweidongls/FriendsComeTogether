@@ -420,6 +420,7 @@
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/rl_ball"
         android:layout_marginBottom="200px"
         android:layout_alignParentRight="true"

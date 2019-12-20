@@ -26,4 +26,6 @@ public class SpPublic {
     public static String IS_ADMIN = "isAdmin";//是否为管理员（用于管理删除友记、视频）0不是管理员 1是
 
     public static String LIVE_TIME = "live_time";//直播时间
+
+    public static String WX_UNIONID = "wx_unionid";//绑定微信 ID
 }

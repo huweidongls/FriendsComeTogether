@@ -154,4 +154,13 @@ public class SpImp {
         editor.putString(SpPublic.LIVE_TIME, s).toString();
         editor.commit();
     }
+
+    public String getWXUnionID(){
+        return sp.getString(SpPublic.WX_UNIONID,"");
+    }
+    public void setWXUnionID(String s){
+        editor.putString(SpPublic.WX_UNIONID, s).toString();
+        editor.commit();
+    }
+
 }

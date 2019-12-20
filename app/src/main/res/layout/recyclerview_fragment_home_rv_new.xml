@@ -90,7 +90,7 @@
             android:layout_marginTop="20px"
             android:ellipsize="end"
             android:lines="1"
-            android:text="一次神秘的智慧之旅"
+            android:text=""
             android:textColor="#272A2C"
             android:textSize="44px"
             android:textStyle="bold" />
@@ -104,7 +104,7 @@
             android:layout_marginTop="20px"
             android:ellipsize="end"
             android:maxLines="3"
-            android:text="从全国各地赶来北京参加【未知饭局】局长会议的各位局长，我们一起度过的不仅仅是一个周末！我们不仅对饭局的点滴进行…"
+            android:text=""
             android:textColor="@color/black_333333"
             android:textSize="36px" />
 
@@ -136,7 +136,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5px"
                     android:layout_marginRight="18px"
-                    android:text="北京"
+                    android:text=""
                     android:textColor="#272A2C"
                     android:textSize="26px" />
 
@@ -233,7 +233,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="1"
-                android:text="哆啦A梦"
+                android:text=""
                 android:textColor="@color/black_333333"
                 android:textSize="32px"
                 android:textStyle="bold"/>
@@ -242,7 +242,7 @@
                 android:id="@+id/tv_youji_time"
                 android:textColor="#484848"
                 android:textSize="24px"
-                android:text="1天前"
+                android:text=""
                 android:layout_below="@+id/tv_youji_nickname"
                 android:layout_marginLeft="18px"
                 android:layout_toRightOf="@+id/iv_youji_avatar"
@@ -329,7 +329,7 @@
             android:layout_marginTop="20px"
             android:ellipsize="end"
             android:lines="1"
-            android:text="一次神秘的智慧之旅"
+            android:text=""
             android:textColor="#272A2C"
             android:textSize="44px"
             android:textStyle="bold" />
@@ -365,7 +365,7 @@
                     android:ellipsize="end"
                     android:lines="1"
                     android:maxWidth="300px"
-                    android:text="北京北京"
+                    android:text=""
                     android:textColor="#272A2C"
                     android:textSize="26px" />
             </LinearLayout>
@@ -436,7 +436,7 @@
             android:layout_marginTop="10px"
             android:ellipsize="end"
             android:lines="1"
-            android:text="3636人觉得很赞"
+            android:text=""
             android:textColor="#505050"
             android:textSize="24px" />
 
@@ -456,7 +456,7 @@
                 android:ellipsize="middle"
                 android:maxWidth="200px"
                 android:singleLine="true"
-                android:text="吃货萌："
+                android:text=""
                 android:textColor="#272A2C"
                 android:textSize="28px"
                 android:textStyle="bold" />
@@ -467,7 +467,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLength="85"
-                android:text="上海来一局吃货大趴"
+                android:text=""
                 android:textColor="#505050"
                 android:textSize="28px" />
         </LinearLayout>
@@ -488,7 +488,7 @@
                 android:ellipsize="middle"
                 android:maxWidth="200px"
                 android:singleLine="true"
-                android:text="吃货萌吃货萌吃货萌吃货萌："
+                android:text=""
                 android:textColor="#272A2C"
                 android:textSize="28px"
                 android:textStyle="bold" />
@@ -499,7 +499,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLength="85"
-                android:text="上海来一局吃货大趴上海来一局吃货大趴"
+                android:text=""
                 android:textColor="#505050"
                 android:textSize="28px" />
         </LinearLayout>
@@ -514,7 +514,7 @@
             android:layout_marginTop="10px"
             android:ellipsize="end"
             android:lines="1"
-            android:text="全部40条回复"
+            android:text=""
             android:textColor="#D84C37"
             android:textSize="24px" />
 

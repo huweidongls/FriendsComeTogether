@@ -418,6 +418,15 @@ public class NetConfig {
     public static String settZhiBoTime = "action/ac_zhibo/setZhiBoTime";
     //action/ac_zhibo  /  sendPresent   送礼物   传name礼物(ID)  爱心 0 / 棒棒糖 1 / 戒指 2 /  饮料 3  / 游艇 4/  钻石 5/   num数量    uid我的id    touid送的人的网易id
     public static String sendPresent = "action/ac_zhibo/sendPresent";
-    //action/ac_zhibo/presentList   传uid 用户id   返回 presentName礼物名  num数量
+    //action/ac_zhibo/presentList   传uid 用户id   返回 presentName礼物名  num数量 //获取礼物列表
     public static String presentList = "action/ac_zhibo/presentList";
+
+    // action/ac_zhibo/addRobot 加机器人   传roomid房间号//直播间添加机器人
+    public static String addRobot = "action/ac_zhibo/addRobot";
+
+    //action/ac_zhibo/   offroom   关闭房间  传room_id 房间id   wy_accid 网易账 //
+    public static String offRoom = "action/ac_zhibo/offroom";
+
+    // action/ac_user/addwxunionid    传uid用户id   unionid微信id //绑定微信唯一标识
+    public static String addWXUnionid = "action/ac_user/addwxunionid";
 }
