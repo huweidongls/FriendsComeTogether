@@ -16,13 +16,13 @@
         android:layout_marginBottom="30px"
         android:orientation="vertical">
         <Button
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_marginTop="50px"
             android:id="@+id/btn_test"
             android:layout_width="match_parent"
             android:layout_height="80px" />
         <Button
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_marginTop="50px"
             android:id="@+id/btn_test1"
             android:layout_width="match_parent"

@@ -1032,14 +1032,14 @@ public class FriendsTogetherFragment extends BaseFragment {
         //关注数量
         if (bean.getUserimgs().size()<1){
             iv_guanzhu_icon1.setVisibility(View.VISIBLE);
-            iv_guanzhu_icon1.setImageResource(R.mipmap.zanwutupian);
+            iv_guanzhu_icon1.setImageResource(R.mipmap.my_head);
             iv_guanzhu_icon2.setVisibility(View.GONE);
             iv_guanzhu_icon3.setVisibility(View.GONE);
             tv_guanzhu_num.setVisibility(View.GONE);
             tv_guanzhu_user_names.setVisibility(View.VISIBLE);
             tv_guanzhu_user_names.setText("还没有人关注");
         }else if (bean.getUserimgs().size()==1){
-            Glide.with(getContext()).load(bean.getUserimgs().get(0)).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_guanzhu_icon1);
+            Glide.with(getContext()).load(bean.getUserimgs().get(0)).apply(new RequestOptions().error(R.mipmap.my_head).placeholder(R.mipmap.my_head)).into(iv_guanzhu_icon1);
             tv_guanzhu_user_names.setText(bean.getUsernames()+"已经关注");
             iv_guanzhu_icon1.setVisibility(View.VISIBLE);
             iv_guanzhu_icon2.setVisibility(View.GONE);
@@ -1047,8 +1047,8 @@ public class FriendsTogetherFragment extends BaseFragment {
             tv_guanzhu_user_names.setVisibility(View.VISIBLE);
             tv_guanzhu_num.setVisibility(View.GONE);
         }else if (bean.getUserimgs().size()==2){
-            Glide.with(getContext()).load(bean.getUserimgs().get(0)).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_guanzhu_icon1);
-            Glide.with(getContext()).load(bean.getUserimgs().get(1)).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_guanzhu_icon2);
+            Glide.with(getContext()).load(bean.getUserimgs().get(0)).apply(new RequestOptions().error(R.mipmap.my_head).placeholder(R.mipmap.my_head)).into(iv_guanzhu_icon1);
+            Glide.with(getContext()).load(bean.getUserimgs().get(1)).apply(new RequestOptions().error(R.mipmap.my_head).placeholder(R.mipmap.my_head)).into(iv_guanzhu_icon2);
             iv_guanzhu_icon1.setVisibility(View.VISIBLE);
             iv_guanzhu_icon2.setVisibility(View.VISIBLE);
             iv_guanzhu_icon3.setVisibility(View.GONE);
@@ -1057,9 +1057,9 @@ public class FriendsTogetherFragment extends BaseFragment {
             tv_guanzhu_user_names.setText(bean.getUsernames());
             tv_guanzhu_num.setText("等"+bean.getAttentionNum()+"人已经关注");
         }else {
-            Glide.with(getContext()).load(bean.getUserimgs().get(0)).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_guanzhu_icon1);
-            Glide.with(getContext()).load(bean.getUserimgs().get(1)).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_guanzhu_icon2);
-            Glide.with(getContext()).load(bean.getUserimgs().get(2)).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_guanzhu_icon3);
+            Glide.with(getContext()).load(bean.getUserimgs().get(0)).apply(new RequestOptions().error(R.mipmap.my_head).placeholder(R.mipmap.my_head)).into(iv_guanzhu_icon1);
+            Glide.with(getContext()).load(bean.getUserimgs().get(1)).apply(new RequestOptions().error(R.mipmap.my_head).placeholder(R.mipmap.my_head)).into(iv_guanzhu_icon2);
+            Glide.with(getContext()).load(bean.getUserimgs().get(2)).apply(new RequestOptions().error(R.mipmap.my_head).placeholder(R.mipmap.my_head)).into(iv_guanzhu_icon3);
             iv_guanzhu_icon1.setVisibility(View.VISIBLE);
             iv_guanzhu_icon2.setVisibility(View.VISIBLE);
             iv_guanzhu_icon3.setVisibility(View.VISIBLE);

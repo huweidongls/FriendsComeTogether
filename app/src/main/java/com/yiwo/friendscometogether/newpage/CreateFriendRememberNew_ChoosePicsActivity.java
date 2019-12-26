@@ -20,6 +20,8 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -301,7 +303,11 @@ public class CreateFriendRememberNew_ChoosePicsActivity extends BaseActivity {
             });
             ImageView imageView = helper.itemView.findViewById(R.id.iv);
 //            imageView.setImageResource(R.mipmap.ic_launcher);
-            Glide.with(context).load(item.getPath()).into(imageView);
+            Glide.with(context).load(item.getPath())
+                    .apply(new RequestOptions()
+                            .skipMemoryCache(true) //禁止Glide内存缓存
+                            .diskCacheStrategy(DiskCacheStrategy.NONE))//不缓存资源
+                    .into(imageView);
         }
     }
 }

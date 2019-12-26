@@ -291,7 +291,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onView(int width, int height) {
                 layoutParams.width = width;
-                layoutParams.height = (int) (width * 0.6);
+                layoutParams.height = (int) (width * 0.7);
                 Log.d("asdasdasd2",layoutParams.width+"////"+layoutParams.height);
                 iv_first_tuijian.setLayoutParams(layoutParams);
             }

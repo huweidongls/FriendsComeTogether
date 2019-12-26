@@ -171,5 +171,8 @@ public class GiftAnimation {
 
         ImageView giftImage = (ImageView) root.findViewById(R.id.gift_image);
         giftImage.setImageResource(GiftConstant.images[attachment.getGiftType().getValue()]);
+
+        TextView giftNum = root.findViewById(R.id.gift_num);
+        giftNum.setText("× "+attachment.getCount());
     }
 }

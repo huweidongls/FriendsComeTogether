@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/bg_white_30px_top"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/tv_text_chongzhi"
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="30px"
+                android:textSize="30px"
+                android:text="余额："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_marginRight="10px"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/tbjf"
+                android:layout_width="30px"
+                android:layout_height="30px" />
+            <TextView
+                android:id="@+id/tv_pop_my_tongbi_num"
+                android:text="0"
+                android:textSize="30px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_text_chongzhi"
+            android:layout_margin="20px"
+            android:text="充值"
+            android:textColor="@color/black_333333"
+            android:textSize="40px"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="10px"
+        android:id="@+id/rv_tongbi_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_chongzhixieyi"
+        android:layout_marginTop="50px"
+        android:layout_marginBottom="30px"
+        android:textSize="30px"
+        android:layout_gravity="center_horizontal"
+        android:text="充值代表已同意瞳伴充值协议"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

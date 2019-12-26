@@ -1,6 +1,7 @@
 package com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -21,9 +23,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alipay.sdk.app.PayTask;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
 import com.netease.nim.uikit.common.ui.dialog.DialogMaker;
 import com.netease.nim.uikit.common.ui.imageview.CircleImageView;
 import com.netease.nim.uikit.common.util.sys.ScreenUtil;
@@ -42,12 +47,19 @@ import com.opensource.svgaplayer.SVGADynamicEntity;
 import com.opensource.svgaplayer.SVGAImageView;
 import com.opensource.svgaplayer.SVGAParser;
 import com.opensource.svgaplayer.SVGAVideoEntity;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
+import com.yiwo.friendscometogether.model.OrderToPayModel;
+import com.yiwo.friendscometogether.model.Paymodel;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.network.UMConfig;
 import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivityChoosePicOrVideos;
+import com.yiwo.friendscometogether.pages.ApplyActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.wangyiyunshipin.BaseActivity;
 import com.yiwo.friendscometogether.wangyiyunshipin.NimContract;
@@ -74,6 +86,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import static com.yiwo.friendscometogether.utils.TokenUtils.getToken;
 
@@ -126,6 +139,9 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
 
     private SpImp spImp;
     private Handler handler;
+
+    private static final int SDK_PAY_FLAG = 1;
+    private IWXAPI api;
     /**
      * 静态方法 启动主播
      * @param context 上下文
@@ -160,9 +176,16 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
         nimController = new NimController(this, this);
         nimController.onHandleIntent(getIntent());
         spImp = new SpImp(LiveRoomActivity.this);
+        api = WXAPIFactory.createWXAPI(LiveRoomActivity.this, null);
         VcloudFileUtils.getInstance(getApplicationContext()).init();
         StatusBarUtils.setStatusBarTransparent(LiveRoomActivity.this);
         handler = new Handler();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        liveBottomBar.refreshMyIntegral();
     }
 
     @Override
@@ -303,6 +326,7 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
                     GiftType type = ((GiftAttachment) msg.getAttachment()).getGiftType();
                     if (!isAudience){
                         liveBottomBar.updateGiftList(type,true);
+                        liveRoomInfoFragment.refreshZhiBoTongBi();
                     }
                     liveBottomBar.showGiftAnimation(msg);
 
@@ -424,6 +448,43 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
             @Override
             public void send(GiftType type) {
                 addGift2ListQueue(type);
+                liveBottomBar.refreshMyIntegral();
+            }
+        });
+        liveBottomBar.setGoPay(new LiveBottomBar.GoPay() {
+            @Override
+            public void pay(int type, String priceId) {
+                Log.d("adasdasdas",priceId);
+                ViseHttp.POST(NetConfig.buyIntegral)
+                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.buyIntegral))
+                        .addParam("paytype",type+"")
+                        .addParam("uid",spImp.getUID())
+                        .addParam("id",priceId)
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                JSONObject jsonObject = null;
+                                try {
+                                    jsonObject = new JSONObject(data);
+                                    if (jsonObject.getInt("code") == 200) {
+                                        Paymodel paymodel = new Gson().fromJson(data, Paymodel.class);
+                                        showToast( "微信支付");
+                                        wxPay(paymodel.getObj());
+                                    }else if(jsonObject.getInt("code") == 300){
+                                        showToast( "支付宝支付");
+                                        Log.e("123123", jsonObject.optString("obj"));
+                                        aliPay(jsonObject.optString("obj"));
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+
+                            }
+                        });
             }
         });
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -770,4 +831,63 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
                 break;
         }
     }
+    public void wxPay(Paymodel.ObjBean model) {
+        api.registerApp(UMConfig.WECHAT_APPID);
+        PayReq req = new PayReq();
+        req.appId = model.getAppId();
+        req.partnerId = model.getPartnerId();
+        req.prepayId = model.getPrepayId();
+        req.nonceStr = model.getNonceStr();
+        req.timeStamp = model.getTimestamp() + "";
+        req.packageValue = model.getPackageX();
+        req.sign = model.getSign();
+        req.extData = "tongbi_chongzhi";
+        api.sendReq(req);
+        liveBottomBar.refreshMyIntegral();
+    }
+
+    public void aliPay(String info) {
+        final String orderInfo = info;   // 订单信息
+
+        Runnable payRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+                PayTask alipay = new PayTask(LiveRoomActivity.this);
+                Map<String, String> result = alipay.payV2(orderInfo,true);
+
+                Message msg = new Message();
+                msg.what = SDK_PAY_FLAG;
+                msg.obj = result;
+                mHandlerPay.sendMessage(msg);
+            }
+        };
+        // 必须异步调用
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
+    @SuppressLint("HandlerLeak")
+    private Handler mHandlerPay = new Handler() {
+        @SuppressWarnings("unused")
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SDK_PAY_FLAG:
+                    Map<String, String> result = (Map<String, String>) msg.obj;
+
+                    for (Map.Entry<String, String> entry : result.entrySet()) {
+                        Log.d("dadaadad",entry.getKey() + ":" + entry.getValue());
+                    }
+
+                    if(result.get("resultStatus").equals("9000")){
+                        Toast.makeText(LiveRoomActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                        if (isAudience){
+                            liveBottomBar.refreshMyIntegral();
+                        }
+//                        getActivity().finish();
+                    }
+                    break;
+            }
+        }
+
+    };
 }

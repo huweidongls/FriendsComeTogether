@@ -33,6 +33,7 @@ import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.StringUtils;
+import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -187,6 +188,7 @@ public class LoginActivity extends BaseActivity {
 
                                     String token = js.optString("token");
                                     LoginInfo info = new LoginInfo(account, token);
+                                    DemoCache.setAccount(account);
                                     RequestCallback<LoginInfo> callback =
                                             new RequestCallback<LoginInfo>() {
                                                 @Override

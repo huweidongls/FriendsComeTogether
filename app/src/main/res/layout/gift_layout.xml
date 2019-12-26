@@ -63,4 +63,15 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@id/background"
         android:layout_marginRight="-10dp" />
+    <TextView
+        android:id="@+id/gift_num"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/gift_image"
+        android:text="0"
+        android:textColor="@color/blue_3dc4ff"
+        android:textSize="20sp"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </RelativeLayout>

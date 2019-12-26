@@ -25,6 +25,7 @@ import java.util.List;
 public class GiftAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private List<Gift> gifts;
+    private boolean isAudience;
 
 //    public GiftAdapter(Context context) {
 //        super();
@@ -36,9 +37,10 @@ public class GiftAdapter extends BaseAdapter {
 //        }
 //    }
 
-    public GiftAdapter(List<Gift> gifts, Context context) {
+    public GiftAdapter(List<Gift> gifts, Context context,boolean isAudience) {
         super();
         this.gifts = gifts;
+        this.isAudience = isAudience;
         inflater = LayoutInflater.from(context);
     }
 
@@ -78,7 +80,12 @@ public class GiftAdapter extends BaseAdapter {
         }
         viewHolder.title.setText(gifts.get(position).getTitle());
         viewHolder.image.setImageResource(gifts.get(position).getImageId());
-        viewHolder.count.setText(gifts.get(position).getCount() + "");
+        if (isAudience){
+            viewHolder.count.setVisibility(View.GONE);
+        }else {
+            viewHolder.integral.setVisibility(View.GONE);
+        }
+        viewHolder.count.setText("*"+gifts.get(position).getCount() + "");
         if (gifts.get(position).isChoosed()){
             Log.d("asdasdasd","gifts.get(position).isChoosed()"+position+"YES");
             viewHolder.root.setBackgroundResource(R.drawable.item_border_selected);

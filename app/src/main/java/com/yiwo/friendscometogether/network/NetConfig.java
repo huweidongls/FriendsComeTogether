@@ -429,4 +429,10 @@ public class NetConfig {
 
     // action/ac_user/addwxunionid    传uid用户id   unionid微信id //绑定微信唯一标识
     public static String addWXUnionid = "action/ac_user/addwxunionid";
+    //action/ac_user/getUserIntegral   获取我的积分  传uid  返回integral
+    public static String getUserIntegral = "action/ac_user/getUserIntegral";
+    //action/ac_zhibo/payIntegralList   充值列表  返回 id  money 钱  integral金币
+    public static String payIntegralList = "action/ac_zhibo/payIntegralList";
+    // action/ac_zhibo/    buyIntegral  购买积分  传paytype 支付类型 0微信 1支付宝    uid用户id  money付款金额      返回订单信息
+    public static String buyIntegral = "action/ac_zhibo/buyIntegral";
 }

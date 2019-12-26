@@ -1,15 +1,26 @@
 package com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.fragment;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.ClipboardManager;
+import android.text.Html;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,9 +36,13 @@ import com.netease.nimlib.sdk.chatroom.model.ChatRoomMember;
 import com.netease.nimlib.sdk.chatroom.model.ChatRoomMessage;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
+import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newadapter.TongBiPriceAdapter;
 import com.yiwo.friendscometogether.newmodel.MyGiftsModel;
+import com.yiwo.friendscometogether.newmodel.TongBiPriceModel;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
 import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.adapter.GiftAdapter;
@@ -46,11 +61,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import static com.yiwo.friendscometogether.R2.id.count;
 import static com.yiwo.friendscometogether.utils.TokenUtils.getToken;
 
 /**
@@ -79,12 +92,32 @@ public class LiveBottomBar extends RelativeLayout {
 
     private ViewGroup giftLayout; // 礼物布局
     private GridView giftView; // 礼物列表
-    private LinearLayout llGiltNum;// 弹出、隐藏 礼物数量按钮
+    private RelativeLayout rlGiltNum;// 弹出、隐藏 礼物数量按钮
     private TextView tvGiftNum;// 已选择礼物数量
     private LinearLayout llChooseGiftNum;// 选择礼物数量布局
     private RelativeLayout rlNumOther,rlNum1314,rlNum520,rlNum188,rlNum66,rlNum30,rlNum10,rlNum1;
     private LinearLayout llNumKeyboard;
     private TextView tvNo0,tvNo1,tvNo2,tvNo3,tvNo4,tvNo5,tvNo6,tvNo7,tvNo8,tvNo9,tvNosure,tvNodel;
+    private TextView tvMyTongBi;//我的瞳币数量
+    //充值————————————
+    private PopupWindow popupWindowPrice;//价格pop
+    private PopupWindow PopupWindowPay;//支付pop
+    private LinearLayout ll_GoChongZhi; //去充值
+    private List<TongBiPriceModel.ObjBean> tongBiPriceModelList = new ArrayList<>();
+//    private TongBiPriceModel [] tongBiPriceModels = new TongBiPriceModel[]{
+//            new TongBiPriceModel("10","1.00"),
+//            new TongBiPriceModel("300","30.00"),
+//            new TongBiPriceModel("1080","1080.00"),
+//            new TongBiPriceModel("5180","518.00"),
+//            new TongBiPriceModel("10000","1000.00"),
+//            new TongBiPriceModel("50000","5000.00")
+//    };
+    RecyclerView recyclerViewChongZhiPrice;
+    GridLayoutManager managerChongZhiPrice;
+    TongBiPriceAdapter adapterChongZhiPrice;
+    private int paytype = 0;
+    private GoPay goPay;
+
 //    private TextView
     private RelativeLayout giftAnimationViewDown; // 礼物动画布局1
     private RelativeLayout giftAnimationViewUp; // 礼物动画布局2
@@ -112,8 +145,10 @@ public class LiveBottomBar extends RelativeLayout {
     private SendGiftListen sendGiftListen;
     private SpImp spImp;
     private ChatRoomInfo roomInfo;
-    private Context context;
-    public LiveBottomBar(Context context, boolean isAudience, String roomId) {
+    private Activity context;
+
+    private Dialog dialog;
+    public LiveBottomBar(Activity context, boolean isAudience, String roomId) {
         super(context);
         this.isAudience = isAudience;
         this.roomId = roomId;
@@ -144,7 +179,34 @@ public class LiveBottomBar extends RelativeLayout {
         bindView();
         initGiftLayout();
         loadGift();
+        getTongBiPrice();
         clickView();
+    }
+
+    private void getTongBiPrice() {
+        ViseHttp.POST(NetConfig.payIntegralList)
+                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.payIntegralList))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                Gson gson = new Gson();
+                                TongBiPriceModel model = gson.fromJson(data,TongBiPriceModel.class);
+                                tongBiPriceModelList.clear();
+                                tongBiPriceModelList.addAll(model.getObj());
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
     }
 
     private void bindView() {
@@ -198,8 +260,11 @@ public class LiveBottomBar extends RelativeLayout {
                 if (isAudience){
                     llChooseGiftNum.setVisibility(GONE);
                     llNumKeyboard.setVisibility(GONE);
+                    if (tvGiftNum.getText().toString().equals("0")){
+                        tvGiftNum.setText("1");
+                    }
                 }
-                giftPosition = -1;
+//                giftPosition = -1;
             }
         });
         if(isAudience) {//送礼物有关视图
@@ -210,6 +275,10 @@ public class LiveBottomBar extends RelativeLayout {
                 public void onClick(View v) {
                     if (giftPosition == -1){
                         Toast.makeText(getContext(), "请选择礼物", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (tvGiftNum.getText().toString().equals("0")){
+                        Toast.makeText(getContext(), "请选择礼物数量", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     Log.d("送礼物1：：",GiftType.typeOfValue(giftPosition)+"///"+GiftType.typeOfValue(giftPosition).getValue()+"//"+roomInfo.getCreator());
@@ -228,7 +297,7 @@ public class LiveBottomBar extends RelativeLayout {
                                     .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.sendPresent))
                                     .addParam("uid", spImp.getUID())
                                     .addParam("name",GiftType.typeOfValue(giftPosition).getValue()+"")
-                                    .addParam("num",1+"")
+                                    .addParam("num",tvGiftNum.getText().toString())
                                     .addParam("touid",roomInfo.getCreator())
                                     .request(new ACallback<String>() {
                                         @Override
@@ -264,7 +333,8 @@ public class LiveBottomBar extends RelativeLayout {
                     });
                 }
             });
-            adapter = new GiftAdapter(giftList, getContext());
+            refreshMyIntegral();//获取自己拥有的瞳币数量
+            adapter = new GiftAdapter(giftList, getContext(),isAudience);
 //            adapter = new GiftAdapter(getContext()); //观众的礼物数量也从接口获取
             giftView.setAdapter(adapter);
             giftView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -283,7 +353,7 @@ public class LiveBottomBar extends RelativeLayout {
                 }
             });
         }else{
-            adapter = new GiftAdapter(giftList, getContext());
+            adapter = new GiftAdapter(giftList, getContext(),isAudience);
             giftView.setAdapter(adapter);
             noGiftText = findView(R.id.no_gift_tip);
         }
@@ -291,7 +361,7 @@ public class LiveBottomBar extends RelativeLayout {
 
     private void bindSendGiftNum() {
         tvGiftNum = findView(R.id.tv_gift_num);
-        llGiltNum = findView(R.id.ll_gilt_num);
+        rlGiltNum = findView(R.id.rl_gilt_num);
         llChooseGiftNum = findView(R.id.ll_choose_gift_num);
 //        rlNumOther,rlNum1314,rlNum520,rlNum188,rlNum66,rlNum30,rlNum10,rlNum1;
         rlNumOther = findView(R.id.rl_num_other);
@@ -316,12 +386,25 @@ public class LiveBottomBar extends RelativeLayout {
         tvNodel = findView(R.id.tv_no_del);
         tvNosure = findView(R.id.tv_no_sure);
 
+        tvMyTongBi = findView(R.id.tv_my_tong_bi);
+        ll_GoChongZhi = findView(R.id.ll_go_chongzhi);
+        ll_GoChongZhi.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupWindowTongBiPrice(tvMyTongBi.getText().toString());
+            }
+        });
+
+
         llNumKeyboard = findView(R.id.ll_num_keyboard);
 
-        llGiltNum.setOnClickListener(new OnClickListener() {
+        rlGiltNum.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 llNumKeyboard.setVisibility(GONE);
+                if (tvGiftNum.getText().toString().equals("0")){
+                    tvGiftNum.setText("1");
+                }
                 llChooseGiftNum.setVisibility(llChooseGiftNum.getVisibility() == VISIBLE?GONE:VISIBLE);
             }
         });
@@ -329,42 +412,49 @@ public class LiveBottomBar extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 tvGiftNum.setText(1+"");
+                llChooseGiftNum.setVisibility(GONE);
             }
         });
         rlNum10.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 tvGiftNum.setText(10+"");
+                llChooseGiftNum.setVisibility(GONE);
             }
         });
         rlNum30.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 tvGiftNum.setText(30+"");
+                llChooseGiftNum.setVisibility(GONE);
             }
         });
         rlNum66.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 tvGiftNum.setText(66+"");
+                llChooseGiftNum.setVisibility(GONE);
             }
         });
         rlNum188.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 tvGiftNum.setText(188+"");
+                llChooseGiftNum.setVisibility(GONE);
             }
         });
         rlNum520.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 tvGiftNum.setText(520+"");
+                llChooseGiftNum.setVisibility(GONE);
             }
         });
         rlNum1314.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 tvGiftNum.setText(1314+"");
+                llChooseGiftNum.setVisibility(GONE);
             }
         });
         rlNumOther.setOnClickListener(new OnClickListener() {
@@ -510,6 +600,9 @@ public class LiveBottomBar extends RelativeLayout {
             public void onClick(View v) {
                 llChooseGiftNum.setVisibility(GONE);
                 llNumKeyboard.setVisibility(GONE);
+                if (tvGiftNum.getText().toString().equals("0")){
+                    tvGiftNum.setText("1");
+                }
             }
         });
         tvNodel.setOnClickListener(new OnClickListener() {
@@ -519,7 +612,7 @@ public class LiveBottomBar extends RelativeLayout {
                 if (str_num.length()>1){
                     tvGiftNum.setText(tvGiftNum.getText().subSequence(0,str_num.length()-1));
                 }else {
-                    tvGiftNum.setText(0+"");
+                    tvGiftNum.setText(1+"");
                 }
             }
         });
@@ -744,8 +837,9 @@ public class LiveBottomBar extends RelativeLayout {
             return;
         }
         giftLayout.setVisibility(View.GONE);
-        final GiftAttachment attachment = new GiftAttachment(GiftType.typeOfValue(giftPosition), 1);
+        final GiftAttachment attachment = new GiftAttachment(GiftType.typeOfValue(giftPosition), Integer.parseInt(tvGiftNum.getText().toString()));
         final ChatRoomMessage message = ChatRoomMessageBuilder.createChatRoomCustomMessage(roomId, attachment);
+//        message.setContent("送出礼物");
         setMemberType(message);
         NIMClient.getService(ChatRoomService.class).sendMessage(message, false)
                 .setCallback(new RequestCallback<Void>() {
@@ -846,7 +940,163 @@ public class LiveBottomBar extends RelativeLayout {
         lastClickTime = currentTime;
         return false;
     }
+    private void showPopupWindowTongBiPrice(String myTongBiNum){
+//        tongBiPriceModelList.clear();
+//        for (TongBiPriceModel model:tongBiPriceModels){
+//            tongBiPriceModelList.add(model);
+//        }
+        if (tongBiPriceModelList.size()<=0){
+            getTongBiPrice();
+        }
+        View view = LayoutInflater.from(context).inflate(R.layout.popupwindow_buy_tongbi_price,null);
+        ScreenAdapterTools.getInstance().loadView(view);
+        recyclerViewChongZhiPrice = view.findViewById(R.id.rv_tongbi_price);
+        managerChongZhiPrice = new GridLayoutManager(context,3);
+        adapterChongZhiPrice = new TongBiPriceAdapter(tongBiPriceModelList, new TongBiPriceAdapter.ItemClickListen() {
+            @Override
+            public void onItemClick(int pos) {
+                showPopupWindowTongBiPay(tongBiPriceModelList.get(pos));
+            }
+        });
+        recyclerViewChongZhiPrice.setLayoutManager(managerChongZhiPrice);
+        recyclerViewChongZhiPrice.setAdapter(adapterChongZhiPrice);
+        TextView tv_pop_my_tongbi_num = view.findViewById(R.id.tv_pop_my_tongbi_num);
+        tv_pop_my_tongbi_num.setText(myTongBiNum);
+        TextView tv_chongzhi_xieyi = view.findViewById(R.id.tv_chongzhixieyi);
+        String str = "充值代表阅读并同意<font color = '#d84c37'>瞳伴充值协议</font>";
+        tv_chongzhi_xieyi.setText(Html.fromHtml(str));
+        tv_chongzhi_xieyi.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+        popupWindowPrice = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+        popupWindowPrice.setTouchable(true);
+        popupWindowPrice.setFocusable(true);
+        // 设置点击窗口外边窗口消失
+        popupWindowPrice.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popupWindowPrice.setOutsideTouchable(true);
+        popupWindowPrice.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+        // 设置popWindow的显示和消失动画
+        popupWindowPrice.setAnimationStyle(R.style.mypopwindow_anim_style);
+        WindowManager.LayoutParams params = context.getWindow().getAttributes();
+        params.alpha = 0.5f;
+        context.getWindow().setAttributes(params);
+        popupWindowPrice.update();
+
+        popupWindowPrice.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            // 在dismiss中恢复透明度
+            public void onDismiss() {
+                WindowManager.LayoutParams params = context.getWindow().getAttributes();
+                params.alpha = 1f;
+                context.getWindow().setAttributes(params);
+            }
+        });
+    }
+    private void showPopupWindowTongBiPay(final TongBiPriceModel.ObjBean bean){
+        popupWindowPrice.dismiss();
+        View view = LayoutInflater.from(context).inflate(R.layout.popupwindow_buy_tongbi_pay,null);
+        ScreenAdapterTools.getInstance().loadView(view);
+        TextView tv_pop_chongzhi_pay_money,tv_pop_chongzhi_pay_tongbi_num;
+        tv_pop_chongzhi_pay_money = view.findViewById(R.id.tv_pop_chongzhi_pay_money);
+        tv_pop_chongzhi_pay_tongbi_num = view.findViewById(R.id.tv_pop_chongzhi_pay_tongbi_num);
+        tv_pop_chongzhi_pay_money.setText("¥ "+bean.getMoney());
+        tv_pop_chongzhi_pay_tongbi_num.setText(bean.getIntegral()+" 瞳币");
+        RelativeLayout rl_close = view.findViewById(R.id.rl_close);
+        rl_close.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupWindowPay.dismiss();
+            }
+        });
+        Button btn_sure_pay = view.findViewById(R.id.btn_sure_pay);
+        btn_sure_pay.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (goPay!=null){
+                    goPay.pay(paytype,bean.getId());
+                }
+            }
+        });
+        final ImageView iv_wechat,iv_alipay;
+        iv_wechat = view.findViewById(R.id.iv_check_wechat);
+        iv_alipay = view.findViewById(R.id.iv_check_alipay);
+        RelativeLayout rl_wechat = view.findViewById(R.id.rl_wechat);
+        rl_wechat.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iv_wechat.setImageResource(R.mipmap.apply_true);
+                iv_alipay.setImageResource(R.mipmap.apply_false);
+                paytype = 0;
+            }
+        });
+        RelativeLayout rl_alipay = view.findViewById(R.id.rl_alipay);
+        rl_alipay.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iv_wechat.setImageResource(R.mipmap.apply_false);
+                iv_alipay.setImageResource(R.mipmap.apply_true);
+                paytype = 1;
+            }
+        });
+
+        PopupWindowPay = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+        PopupWindowPay.setTouchable(true);
+        PopupWindowPay.setFocusable(true);
+        // 设置点击窗口外边窗口消失
+        PopupWindowPay.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        PopupWindowPay.setOutsideTouchable(true);
+        PopupWindowPay.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+        // 设置popWindow的显示和消失动画
+        PopupWindowPay.setAnimationStyle(R.style.mypopwindow_anim_style);
+        WindowManager.LayoutParams params = context.getWindow().getAttributes();
+        params.alpha = 0.5f;
+        context.getWindow().setAttributes(params);
+        PopupWindowPay.update();
+
+        PopupWindowPay.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            // 在dismiss中恢复透明度
+            public void onDismiss() {
+                WindowManager.LayoutParams params = context.getWindow().getAttributes();
+                params.alpha = 1f;
+                context.getWindow().setAttributes(params);
+            }
+        });
+
+    }
+    public void refreshMyIntegral(){
+        if (!isAudience){
+            return;
+        }
+        if (PopupWindowPay != null){
+            PopupWindowPay.dismiss();//支付成功刷新我的瞳币 dismiss支付POP
+        }
+        ViseHttp.POST(NetConfig.getUserIntegral)
+                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.getUserIntegral))
+                .addParam("uid",spImp.getUID())
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                JSONObject jsonObject1 = jsonObject.getJSONObject("obj");
+                                tvMyTongBi.setText(jsonObject1.getString("integral"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
+    }
     private void setMemberType(ChatRoomMessage message) {
         Map<String, Object> ext = new HashMap<>();
         ChatRoomMember chatRoomMember = ChatRoomMemberCache.getInstance().getChatRoomMember(roomId, DemoCache.getAccount());
@@ -886,10 +1136,17 @@ public class LiveBottomBar extends RelativeLayout {
         this.sendGiftListen = sendGiftListen;
     }
 
+    public void setGoPay(GoPay goPay) {
+        this.goPay = goPay;
+    }
+
     /**
      * 送礼物监听 用于更新礼物大动画
      */
     public interface SendGiftListen{
         void send(GiftType type);
+    }
+    public interface GoPay{
+        void pay(int type,String priceId);
     }
 }

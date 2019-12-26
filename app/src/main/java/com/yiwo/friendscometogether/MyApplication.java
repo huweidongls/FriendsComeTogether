@@ -255,7 +255,8 @@ public class MyApplication extends Application {
         String token = spImp.getYXTOKEN();
 
         if (!TextUtils.isEmpty(account) && !TextUtils.isEmpty(token)) {
-            DemoCache.setAccount(account.toLowerCase());
+//            DemoCache.setAccount(account.toLowerCase());
+            DemoCache.setAccount(account);
             return new LoginInfo(account, token);
         } else {
             return null;

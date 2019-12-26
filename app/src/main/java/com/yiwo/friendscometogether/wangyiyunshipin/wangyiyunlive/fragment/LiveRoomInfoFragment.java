@@ -18,14 +18,23 @@ import com.netease.nimlib.sdk.chatroom.ChatRoomService;
 import com.netease.nimlib.sdk.chatroom.model.ChatRoomInfo;
 import com.netease.nimlib.sdk.chatroom.model.ChatRoomMember;
 import com.netease.nimlib.sdk.chatroom.model.ChatRoomNotificationAttachment;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
 import com.yiwo.friendscometogether.R;
+import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.wangyiyunshipin.BaseFragment;
 import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
 import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.LiveRoomActivity;
 import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.adapter.MemberAdapter;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.yiwo.friendscometogether.utils.TokenUtils.getToken;
 
 /**
  * Created by zhukkun on 1/9/17.
@@ -50,13 +59,16 @@ public class LiveRoomInfoFragment extends BaseFragment {
     RecyclerView recyclerView;
     MemberAdapter memberAdapter;
 
+    TextView tvMyTbNum;
     int onlineCount;
 
+    SpImp spImp;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         isAudience = getArguments().getBoolean(EXTRA_IS_AUDIENCE, true);
+        spImp = new SpImp(getContext());
         return inflater.inflate(isAudience ? R.layout.layout_live_audience_room_info : R.layout.layout_live_captrue_room_info, container, false);
     }
 
@@ -74,6 +86,8 @@ public class LiveRoomInfoFragment extends BaseFragment {
         if(isAudience){
             tvMasterName = findView(R.id.master_name);
             masterHead = (ImageView) findViewById(R.id.master_head);
+        }else {
+            tvMyTbNum = (TextView) findViewById(R.id.tv_my_tb_num);
         }
     }
 
@@ -124,6 +138,8 @@ public class LiveRoomInfoFragment extends BaseFragment {
 
                 }
             });
+        }else {
+            refreshZhiBoTongBi();
         }
     }
 
@@ -166,5 +182,32 @@ public class LiveRoomInfoFragment extends BaseFragment {
 
     public ChatRoomMember getMember(String fromAccount) {
         return memberAdapter.getMember(fromAccount);
+    }
+    public void refreshZhiBoTongBi(){
+        if (isAudience){
+            return;
+        }
+        ViseHttp.POST(NetConfig.getUserIntegral)
+                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.getUserIntegral))
+                .addParam("uid",spImp.getUID())
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                JSONObject jsonObject1 = jsonObject.getJSONObject("obj");
+                                tvMyTbNum.setText(jsonObject1.getString("integral"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
     }
 }

@@ -104,7 +104,9 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
         recyclerView.setAdapter(myAdapter);
         myAdapter.setNewData(data_pic);
 //        Log.d("sssssssss",datas.get(0).getList().get(0).getPath());
-        mMCropImageView.setImagePath(data_pic.get(0).getPath());
+        if (data_pic!= null && data_pic.size()>0){
+            mMCropImageView.setImagePath(data_pic.get(0).getPath());
+        }
         // 实现回调接口
         recyclerView.setOnCoordinatorListener(new CoordinatorRecyclerView.OnCoordinatorListener() {
             @Override
