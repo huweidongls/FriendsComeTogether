@@ -231,7 +231,7 @@ public class CaptureFragment extends BaseFragment implements CapturePreviewContr
         btnStartLive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!NetworkUtils.isNetworkConnected(true)) {
+                if(!NetworkUtils.isNetworkConnected(false)) {
                     showToast("无网络,请检查网络设置后重新直播");
                     return;
                 }

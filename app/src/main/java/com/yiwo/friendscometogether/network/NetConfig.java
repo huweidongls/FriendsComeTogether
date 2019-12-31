@@ -435,4 +435,9 @@ public class NetConfig {
     public static String payIntegralList = "action/ac_zhibo/payIntegralList";
     // action/ac_zhibo/    buyIntegral  购买积分  传paytype 支付类型 0微信 1支付宝    uid用户id  money付款金额      返回订单信息
     public static String buyIntegral = "action/ac_zhibo/buyIntegral";
+    //action/ac_zhibo/     buyIntegralList  充值记录列表   传uid用户id   page分页     返回  orderSn订单号  payMoney充值的金额   buyIntegral充值的积分  addTime充值时间   ifPay支付状态   payType支付类型
+    public static String buyIntegralList = "action/ac_zhibo/buyIntegralList";
+    //action/ac_zhibo/    sendList 送礼物列表    传uid用户id   page分页   返回userID送给人的ID    presentName礼物名称   presentImg礼物图片   integral花费的积分    num送的数量    username送给人的名字   addTime送礼物的时间
+    public static String sendList = "action/ac_zhibo/sendList";
+
 }

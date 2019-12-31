@@ -1,7 +1,6 @@
 package com.yiwo.friendscometogether.fragment;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -13,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -27,6 +25,7 @@ import com.yiwo.friendscometogether.model.UserModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newpage.AllHuoDongActivity;
 import com.yiwo.friendscometogether.newpage.AllRememberActivity;
+import com.yiwo.friendscometogether.newpage.ChongZhi_ZengSongListActivity;
 import com.yiwo.friendscometogether.newpage.GuanZhuActivity;
 import com.yiwo.friendscometogether.newpage.MessageActivity;
 import com.yiwo.friendscometogether.newpage.MyContactActivity;
@@ -38,16 +37,11 @@ import com.yiwo.friendscometogether.newpage.SuperLikeActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.LookHistoryActivity;
 import com.yiwo.friendscometogether.pages.MyCommentActivity;
-import com.yiwo.friendscometogether.pages.MyFriendActivity;
 import com.yiwo.friendscometogether.pages.MyInformationActivity;
 import com.yiwo.friendscometogether.pages.MyOrderActivity;
 import com.yiwo.friendscometogether.pages.MyPicturesActivity;
 import com.yiwo.friendscometogether.pages.SetActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
-import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.EnterLiveActivity;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
-import com.yiwo.friendscometogether.webpages.RenWuWebActivity;
-import com.yiwo.friendscometogether.webpages.ShopInfoWebActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -199,7 +193,7 @@ public class MyFragment extends BaseFragment {
 
     @OnClick({R.id.ll_order_all, R.id.ll_to_pay, R.id.ll_to_trip, R.id.ll_to_comment, R.id.ll_return_money, R.id.rl_my_picture,R.id.rl_my_video, R.id.rl_my_friend,
     R.id.rl_my_comment, R.id.rl_history, R.id.rl_person_set, R.id.ll_remember,R.id.ll_guanzhu, R.id.ll_huodong, R.id.ll_message,R.id.ll_person_page,
-            R.id.iv_avatar,R.id.iv_find_super_like,R.id.iv_renwu,R.id.rl_game_group})
+            R.id.iv_avatar,R.id.iv_find_super_like,R.id.iv_renwu,R.id.rl_game_group,R.id.rl_pay_rank})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -386,6 +380,10 @@ public class MyFragment extends BaseFragment {
 //                intent.putExtra("url",NetConfig.BaseUrl+NetConfig.gameList);
 //                startActivity(intent);
                 intent.setClass(getContext(),RenWuActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.rl_pay_rank:
+                intent.setClass(getContext(), ChongZhi_ZengSongListActivity.class);
                 startActivity(intent);
                 break;
         }

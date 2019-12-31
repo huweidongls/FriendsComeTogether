@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_30px"
+    android:paddingBottom="10px"
+    android:layout_marginTop="20px"
+    android:layout_marginLeft="23px"
+    android:layout_marginRight="23px">
+    
+    <RelativeLayout
+        android:layout_marginTop="10px"
+        android:layout_width="match_parent"
+        android:layout_height="60px">
+        <LinearLayout
+            android:layout_marginLeft="26px"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:textStyle=""
+                android:id="@+id/tv_pay_time"
+                android:textColor="#333333"
+                android:textSize="26px"
+                android:text="2019-12-30 10:52"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_marginBottom="10px"
+        android:id="@+id/fragment_all_order_rv_rl_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginRight="10px"
+            android:lines="1"
+            android:layout_centerVertical="true"
+            android:ellipsize="end"
+            android:layout_marginLeft="26px"
+            android:id="@+id/tv_user_name"
+            android:textColor="@color/black_333333"
+            android:textSize="30px"
+            android:text=""
+            android:layout_width="280px"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_toRightOf="@+id/tv_user_name"
+            android:id="@+id/rl_gift"
+            android:orientation="horizontal"
+            android:layout_width="150px"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_gravity="center_vertical"
+                    android:layout_toRightOf="@+id/tv_user_name"
+                    android:src="@mipmap/my_head"
+                    android:id="@+id/iv_gift"
+                    android:layout_centerVertical="true"
+                    android:layout_width="55px"
+                    android:layout_height="55px" />
+                <TextView
+                    android:ellipsize="end"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5px"
+                    android:textSize="30px"
+                    android:text="棒棒糖"
+                    android:layout_toRightOf="@+id/iv_gift"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/black_333333"
+                    android:id="@+id/tv_gift_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_marginLeft="10px"
+            android:textSize="30px"
+            android:text="×1"
+            android:layout_toRightOf="@+id/rl_gift"
+            android:layout_centerVertical="true"
+            android:textColor="@color/red_d84c37"
+            android:id="@+id/tv_gift_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_marginRight="20px"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:text=" -"
+                android:textColor="@color/black_333333"
+                android:textSize="32px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginRight="10px"
+                android:text="100"
+                android:id="@+id/tv_integral"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black_333333"
+                android:textSize="30px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/tbjf"
+                android:layout_width="32px"
+                android:layout_height="32px" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_btns"
+        android:paddingRight="10px"
+        android:layout_width="match_parent"
+        android:layout_height="86px">
+
+        <LinearLayout
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/fragment_to_pay_rv_tv_delete_trip"
+                android:background="@drawable/bg_gray_border_27px"
+                android:layout_marginRight="10px"
+                android:gravity="center"
+                android:textSize="26px"
+                android:textColor="#686868"
+                android:text="删除"
+                android:layout_width="150px"
+                android:layout_height="54px" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

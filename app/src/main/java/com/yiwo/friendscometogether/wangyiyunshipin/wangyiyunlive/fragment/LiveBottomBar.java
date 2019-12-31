@@ -996,6 +996,7 @@ public class LiveBottomBar extends RelativeLayout {
         });
     }
     private void showPopupWindowTongBiPay(final TongBiPriceModel.ObjBean bean){
+        paytype = 0;
         popupWindowPrice.dismiss();
         View view = LayoutInflater.from(context).inflate(R.layout.popupwindow_buy_tongbi_pay,null);
         ScreenAdapterTools.getInstance().loadView(view);

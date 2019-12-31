@@ -98,8 +98,8 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:largeHeap="true"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
@@ -581,7 +581,10 @@
         <activity android:name=".newpage.SetLiveActivity" />
         <activity android:name=".newpage.NotOnLiveActivity" />
         <activity android:name=".newpage.TestSGVAActivity" />
-        <activity android:name=".webpages.MyJiFenActivity"></activity>
+        <activity android:name=".webpages.MyJiFenActivity" />
+        <activity android:name=".newpage.PayRankActivity" />
+        <activity android:name=".newpage.GiftSendListActivity" />
+        <activity android:name=".newpage.ChongZhi_ZengSongListActivity"></activity>
     </application>
 
 </manifest>
