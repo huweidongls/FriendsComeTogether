@@ -165,7 +165,7 @@ public class PersonMainActivity1 extends BaseActivity {
     private int type_tade_or_wode = 0;//0 为他的 1 为我的
     private String person_id;// 进入activity传入的id 可能为云信ID
     private String otherUserId;//储存 接口返回的UID
-    private String  status; //status   =0时传 用户ID    =1时传网易ID
+    private String  status; //status   =0 时传 用户ID    =1 时传网易ID
     private NewPersonMainMode_part1 model;
 
     private List<KVMode> list_label = new ArrayList<>();

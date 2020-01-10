@@ -209,20 +209,23 @@ public class CreateFriendRememberNew_ChoosePicsFragment extends BaseFragment {
                 //用于展示相册初始化界面
                 mediaBeen.add(new PicBean(path,size,displayName));
                 // 获取该图片的父路径名
-                String dirPath = new File(path).getParentFile().getAbsolutePath();
-                //存储对应关系
-                if (allPhotosTemp.containsKey(dirPath)) {
-                    List<PicBean> data = allPhotosTemp.get(dirPath);
-                    data.add(new PicBean(path,size,displayName));
-                    continue;
-                } else {
-                    List<PicBean> data = new ArrayList<>();
-                    data.add(new PicBean(path,size,displayName));
-                    allPhotosTemp.put(dirPath,data);
-                    PicMuluModel model = new PicMuluModel();
-                    model.setMuluName(dirPath);
-                    model.setList(data);
-                    datas.add(model);
+                File file =  new File(path);
+                if ( file.getParentFile().getAbsolutePath()!=null){
+                    String dirPath = file.getParentFile().getAbsolutePath();
+                    //存储对应关系
+                    if (allPhotosTemp.containsKey(dirPath)) {
+                        List<PicBean> data = allPhotosTemp.get(dirPath);
+                        data.add(new PicBean(path,size,displayName));
+                        continue;
+                    } else {
+                        List<PicBean> data = new ArrayList<>();
+                        data.add(new PicBean(path,size,displayName));
+                        allPhotosTemp.put(dirPath,data);
+                        PicMuluModel model = new PicMuluModel();
+                        model.setMuluName(dirPath);
+                        model.setList(data);
+                        datas.add(model);
+                    }
                 }
             }
             PicMuluModel model = new PicMuluModel();

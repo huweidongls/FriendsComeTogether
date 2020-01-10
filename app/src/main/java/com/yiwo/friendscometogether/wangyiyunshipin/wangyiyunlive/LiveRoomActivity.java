@@ -113,7 +113,11 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
     private SVGAParser parser;
     private boolean svgaIsShow = false;
     private List<String> listSvgaQueue = new ArrayList<>();//当前动画队列
-    private String[] arrSvgaAssets = new String[]{"svga_aixin.svga","svga_bbt.svga","svga_jiezhi.svga","svga_yinliao.svga","svga_youting.svga","svga_zuanshi.svga"};//存放svga资源名称
+
+//     {"棒棒糖", "饮料", "魔法棒", "小熊","糖果雨","爱心","捧花","钻石","心雨","戒指","别墅","游艇"};
+    private String[] arrSvgaAssets = new String[]{"svga_bbt.svga","svga_yinliao.svga","svga_mofabang.svga","svga_xiaoxiong.svga",
+                                                "svga_tangguoyu.svga","svga_aixin.svga","svga_penghua.svga","svga_zuanshi.svga",
+                                                        "svga_xinyu.svga","svga_jiezhi.svga","svga_bieshu.svga","svga_youting.svga"};//存放svga资源名称
 
     //人员操作相关
     private ChatRoomMember current_operate_member; //当前正在操作的人员
@@ -792,39 +796,77 @@ public class LiveRoomActivity extends BaseActivity implements NimContract.Ui{
     }
     private void addGift2ListQueue(GiftType type){
         Log.d("SVGALIST:","当前list中 含有"+listSvgaQueue.size()+"个！！"+type);
+//        {"棒棒糖", "饮料", "魔法棒", "小熊","糖果雨","爱心","捧花","钻石","心雨","戒指","别墅","游艇"};
         switch (type){
-            case AIXIN:
+            case BANGBANGTANG:
                 listSvgaQueue.add(arrSvgaAssets[0]);
                 if (!svgaIsShow){
                     startSVGA(listSvgaQueue.get(0));
                 }
                 break;
-            case BANGBANGTANG:
+            case YINLIAO:
                 listSvgaQueue.add(arrSvgaAssets[1]);
                 if (!svgaIsShow){
                     startSVGA(listSvgaQueue.get(0));
                 }
                 break;
-            case JIEZHI:
+            case MOFABANG:
                 listSvgaQueue.add(arrSvgaAssets[2]);
                 if (!svgaIsShow){
                     startSVGA(listSvgaQueue.get(0));
                 }
                 break;
-            case YINLIAO:
+            case XIAOXIONG:
                 listSvgaQueue.add(arrSvgaAssets[3]);
                 if (!svgaIsShow){
                     startSVGA(listSvgaQueue.get(0));
                 }
                 break;
-            case YOUTING:
+            case TANGGUOYU:
                 listSvgaQueue.add(arrSvgaAssets[4]);
                 if (!svgaIsShow){
                     startSVGA(listSvgaQueue.get(0));
                 }
                 break;
-            case ZUANSHI:
+            case AIXIN:
                 listSvgaQueue.add(arrSvgaAssets[5]);
+                if (!svgaIsShow){
+                    startSVGA(listSvgaQueue.get(0));
+                }
+                break;
+            case PENGHUA:
+                listSvgaQueue.add(arrSvgaAssets[6]);
+                if (!svgaIsShow){
+                    startSVGA(listSvgaQueue.get(0));
+                }
+                break;
+            case ZUANSHI:
+                listSvgaQueue.add(arrSvgaAssets[7]);
+                if (!svgaIsShow){
+                    startSVGA(listSvgaQueue.get(0));
+                }
+                break;
+            case XINYU:
+                listSvgaQueue.add(arrSvgaAssets[8]);
+                if (!svgaIsShow){
+                    startSVGA(listSvgaQueue.get(0));
+                }
+                break;
+            //        {"棒棒糖", "饮料", "魔法棒", "小熊","糖果雨","爱心","捧花","钻石","心雨","戒指","别墅","游艇"};
+            case JIEZHI:
+                listSvgaQueue.add(arrSvgaAssets[9]);
+                if (!svgaIsShow){
+                    startSVGA(listSvgaQueue.get(0));
+                }
+                break;
+            case BIESHU:
+                listSvgaQueue.add(arrSvgaAssets[10]);
+                if (!svgaIsShow){
+                    startSVGA(listSvgaQueue.get(0));
+                }
+                break;
+            case YOUTING:
+                listSvgaQueue.add(arrSvgaAssets[11]);
                 if (!svgaIsShow){
                     startSVGA(listSvgaQueue.get(0));
                 }

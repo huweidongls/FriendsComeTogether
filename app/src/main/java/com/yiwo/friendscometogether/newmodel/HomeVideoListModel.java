@@ -46,6 +46,7 @@ public class HomeVideoListModel {
         /**
          * status : 0
          * praise_num : 0
+         * look_num : 0
          * comment_num : 0
          * vID : 88
          * vname : 测试测试
@@ -61,6 +62,7 @@ public class HomeVideoListModel {
 
         private String status;
         private String praise_num;
+        private String look_num;
         private String comment_num;
         private String vID;
         private String vname;
@@ -175,6 +177,14 @@ public class HomeVideoListModel {
 
         public void setAccesspassword(String accesspassword) {
             this.accesspassword = accesspassword;
+        }
+
+        public String getLook_num() {
+            return look_num;
+        }
+
+        public void setLook_num(String look_num) {
+            this.look_num = look_num;
         }
     }
 }

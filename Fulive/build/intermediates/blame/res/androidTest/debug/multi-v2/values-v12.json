@@ -4,7 +4,7 @@
             "outputFile": "D:\\project\\FriendsComeTogether\\Fulive\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v12\\values-v12.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\ljc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\11d3726e750b2e0810df9617d739ebf1\\res\\values-v12\\values-v12.xml",
+                    "source": "C:\\Users\\ljc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\eb05d361d903dbfaf8539059e524bcaa\\res\\values-v12\\values-v12.xml",
                     "from": {
                         "startLines": "2,5,8,9",
                         "startColumns": "4,4,4,4",

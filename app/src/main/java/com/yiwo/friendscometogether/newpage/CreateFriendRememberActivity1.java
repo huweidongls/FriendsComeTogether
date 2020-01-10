@@ -30,9 +30,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
-import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
-import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.google.gson.Gson;
 import com.jph.takephoto.app.TakePhoto;
@@ -45,21 +42,20 @@ import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
-import com.yiwo.friendscometogether.adapter.IntercalationAdapter;
 import com.yiwo.friendscometogether.custom.SetPasswordDialog;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.model.CityModel;
 import com.yiwo.friendscometogether.model.GetFriendActiveListModel;
 import com.yiwo.friendscometogether.model.JsonBean;
 import com.yiwo.friendscometogether.model.NewUserIntercalationPicModel;
-import com.yiwo.friendscometogether.model.UserIntercalationPicModel;
 import com.yiwo.friendscometogether.model.UserLabelModel;
 import com.yiwo.friendscometogether.model.UserReleaseModel;
 import com.yiwo.friendscometogether.network.ActivityConfig;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newadapter.LabelAdapter;
+import com.yiwo.friendscometogether.newadapter.LabelChooseOneAdapter;
 import com.yiwo.friendscometogether.newadapter.NewCreateFriendRemberIntercalationAdapter;
 import com.yiwo.friendscometogether.pages.CityActivity;
-import com.yiwo.friendscometogether.pages.CreateFriendRememberActivity;
 import com.yiwo.friendscometogether.pages.CreateIntercalationActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.GetJsonDataUtil;
@@ -162,6 +158,7 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
     RecyclerView recyclerView;
 
     private NewCreateFriendRemberIntercalationAdapter adapter;
+    private LabelChooseOneAdapter labelAdapter;
     private List<NewUserIntercalationPicModel> mList;
 
     private int mYear;
@@ -219,7 +216,9 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
         mDay = ca.get(Calendar.DAY_OF_MONTH);
 
         spImp = new SpImp(CreateFriendRememberActivity1.this);
-
+        tvCity.setText(spImp.getLastCreateYouJiAddress());
+        tvLabel.setText(spImp.getLastCreateYouJiLabelText());
+        yourChoiceId = spImp.getLastCreateYouJiLabelId();
         init();
         initDatePicker();
         initUpData();
@@ -594,27 +593,28 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
                     Toast.makeText(CreateFriendRememberActivity1.this,"暂无标签",Toast.LENGTH_SHORT).show();
                     break;
                 }
-                OptionsPickerView pvOptions1 = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
-                    @Override
-                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                        //返回的分别是三个级别的选中位置
-//                        String tx = options1Items.get(options1).getPickerViewText() + "-" +
-//                                options2Items.get(options1).get(options2) + "-" +
-//                                options3Items.get(options1).get(options2).get(options3);
-                        tvLabel.setText(labelList.get(options1).getPickerViewText());
-                        yourChoiceId = labelList.get(options1).getLID();
-                    }
-                })
-                        .setTitleText("标签选择")
-                        .setDividerColor(Color.BLACK)
-                        .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
-                        .setContentTextSize(20)
-                        .build();
-
-        /*pvOptions.setPicker(options1Items);//一级选择器
-        pvOptions.setPicker(options1Items, options2Items);//二级选择器*/
-                pvOptions1.setPicker(labelList);//三级选择器
-                pvOptions1.show();
+                showFriendRememberLabelPop();
+//                OptionsPickerView pvOptions1 = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+//                    @Override
+//                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
+//                        //返回的分别是三个级别的选中位置
+////                        String tx = options1Items.get(options1).getPickerViewText() + "-" +
+////                                options2Items.get(options1).get(options2) + "-" +
+////                                options3Items.get(options1).get(options2).get(options3);
+//                        tvLabel.setText(labelList.get(options1).getPickerViewText());
+//                        yourChoiceId = labelList.get(options1).getLID();
+//                    }
+//                })
+//                        .setTitleText("标签选择")
+//                        .setDividerColor(Color.BLACK)
+//                        .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+//                        .setContentTextSize(20)
+//                        .build();
+//
+//        /*pvOptions.setPicker(options1Items);//一级选择器
+//        pvOptions.setPicker(options1Items, options2Items);//二级选择器*/
+//                pvOptions1.setPicker(labelList);//三级选择器
+//                pvOptions1.show();
                 break;
             case R.id.activity_create_friend_remember_rl_active_title:
                 //活动标题
@@ -659,6 +659,76 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
                 llContent.setVisibility(View.VISIBLE);
                 break;
         }
+    }
+
+    private void showFriendRememberLabelPop() {
+        View view = LayoutInflater.from(CreateFriendRememberActivity1.this).inflate(R.layout.popupwindow_rv_choose_label, null);
+        ScreenAdapterTools.getInstance().loadView(view);
+        RelativeLayout rvCancel = view.findViewById(R.id.rv_cancel);
+        RelativeLayout rvSure = view.findViewById(R.id.rv_sure);
+        RecyclerView recyclerView = view.findViewById(R.id.rv);
+
+        GridLayoutManager manager = new GridLayoutManager(CreateFriendRememberActivity1.this, 4){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        recyclerView.setLayoutManager(manager);
+        labelAdapter = new LabelChooseOneAdapter(labelList);
+        recyclerView.setAdapter(labelAdapter);
+        final String[] tmpLabelText = {""};
+        final String[] tmpLabelId = {""};
+        labelAdapter.setListener(new LabelChooseOneAdapter.OnSelectLabelListener() {
+            @Override
+            public void onSelete(int i) {
+                for (UserLabelModel.ObjBean bean : labelList){
+                    bean.setChoose(false);
+                }
+                labelList.get(i).setChoose(true);
+                tmpLabelText[0] = labelList.get(i).getLname();
+                tmpLabelId[0] = labelList.get(i).getLID();
+                labelAdapter.notifyDataSetChanged();
+            }
+        });
+        popupWindow = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setTouchable(true);
+        popupWindow.setFocusable(true);
+        // 设置点击窗口外边窗口消失
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
+        // 设置popWindow的显示和消失动画
+        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.alpha = 0.5f;
+        getWindow().setAttributes(params);
+        popupWindow.update();
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            // 在dismiss中恢复透明度
+            public void onDismiss() {
+                WindowManager.LayoutParams params = getWindow().getAttributes();
+                params.alpha = 1f;
+                getWindow().setAttributes(params);
+            }
+        });
+        rvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            popupWindow.dismiss();
+            }
+        });
+        rvSure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvLabel.setText(tmpLabelText[0]);
+                yourChoiceId = tmpLabelId[0];
+                popupWindow.dismiss();
+            }
+        });
+
     }
 
     @Override
@@ -949,6 +1019,9 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
             @Override
             public void onClick(View view) {
                 dialog = WeiboDialogUtils.createLoadingDialog(CreateFriendRememberActivity1.this, "请等待...");
+                spImp.setLastCreateYouJiLabelText(tvLabel.getText().toString());
+                spImp.setLastCreateYouJiLabelId(yourChoiceId);
+                spImp.setLastCreateYouJiAddress(tvCity.getText().toString());
                 Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
                     @Override
                     public void subscribe(final ObservableEmitter<Map<String, File>> e) throws Exception {
@@ -1066,105 +1139,6 @@ public class CreateFriendRememberActivity1 extends TakePhotoActivity {
                         .subscribe(observer);
             }
         });
-
-//        tvSave.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Observable<File> observable = Observable.create(new ObservableOnSubscribe<File>() {
-//                    @Override
-//                    public void subscribe(final ObservableEmitter<File> e) throws Exception {
-////                        File file = new File(images);
-//                        dialog = WeiboDialogUtils.createLoadingDialog(CreateFriendRememberActivity.this, "请等待...");
-//                        Luban.with(CreateFriendRememberActivity.this)
-//                                .load(images)
-//                                .ignoreBy(100)
-//                                .filter(new CompressionPredicate() {
-//                                    @Override
-//                                    public boolean apply(String path) {
-//                                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-//                                    }
-//                                })
-//                                .setCompressListener(new OnCompressListener() {
-//                                    @Override
-//                                    public void onStart() {
-//                                        // TODO 压缩开始前调用，可以在方法内启动 loading UI
-//                                    }
-//
-//                                    @Override
-//                                    public void onSuccess(File file) {
-//                                        // TODO 压缩成功后调用，返回压缩后的图片文件
-//                                        e.onNext(file);
-//                                    }
-//
-//                                    @Override
-//                                    public void onError(Throwable e) {
-//                                        // TODO 当压缩过程出现问题时调用
-//                                    }
-//                                }).launch();
-//                    }
-//                });
-//                Observer<File> observer = new Observer<File>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(File value) {
-//                        ViseHttp.UPLOAD(NetConfig.userRelease)
-//                                .addHeader("Content-Type","multipart/form-data")
-//                                .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userRelease))
-//                                .addParam("fmtitle", etTitle.getText().toString())
-//                                .addParam("fmcontent", etContent.getText().toString())
-//                                .addParam("fmaddress", tvCity.getText().toString())
-//                                .addParam("uid", uid)
-//                                .addParam("fmlable", yourChoiceId)
-//                                .addParam("fmgotime", tvTimeStart.getText().toString())
-//                                .addParam("fmendtime", tvTimeEnd.getText().toString())
-//                                .addParam("percapitacost", etPrice.getText().toString())
-//                                .addParam("activity_id", TextUtils.isEmpty(tvActiveTitle.getText().toString())?"0":yourChoiceActiveId)
-//                                .addParam("insertatext", tvIsIntercalation.getText().toString().equals("是")?"0":"1")
-//                                .addParam("accesspassword", password)
-//                                .addParam("type", "1")
-//                                .addFile("fmpic", value)
-//                                .request(new ACallback<String>() {
-//                                    @Override
-//                                    public void onSuccess(String data) {
-//                                        try {
-//                                            JSONObject jsonObject = new JSONObject(data);
-//                                            if (jsonObject.getInt("code") == 200) {
-//                                                Toast.makeText(CreateFriendRememberActivity.this, jsonObject.getString("message") + "", Toast.LENGTH_SHORT).show();
-//                                                WeiboDialogUtils.closeDialog(dialog);
-//                                                onBackPressed();
-//                                            }
-//                                        } catch (JSONException e) {
-//                                            e.printStackTrace();
-//                                        }
-//                                    }
-//
-//                                    @Override
-//                                    public void onFail(int errCode, String errMsg) {
-//
-//                                    }
-//                                });
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//
-//                    }
-//                };
-//                observable.observeOn(Schedulers.newThread())
-//                        .subscribeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(observer);
-//            }
-//        });
-
         tvNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

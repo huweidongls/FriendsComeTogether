@@ -3,6 +3,7 @@ package com.yiwo.friendscometogether.newadapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.HomeVideoListModel;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.VideoActivity;
+import com.yiwo.friendscometogether.utils.ViewUtil;
 
 import java.util.List;
 
@@ -41,7 +43,19 @@ public class HomeListVideoAdapter extends RecyclerView.Adapter<HomeListVideoAdap
         return holder;
     }
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+//        final ViewGroup.LayoutParams layoutParams = holder.iv_video.getLayoutParams();
+//            ViewUtil.getViewWidth(holder.iv_video, new ViewUtil.OnViewListener() {
+//                @Override
+//                public void onView(int width, int height) {
+//                    layoutParams.height = width * 2;
+//                    layoutParams.width = width ;
+//                    Log.d("asdasdasd3","HHHH:"+layoutParams.height+"|||WWWWWW:"+layoutParams.width);
+//                    holder.iv_video.setLayoutParams(layoutParams);
+//                    Log.d("asdasdasd3",width+"////"+height);
+//                }
+//            });
+//        Log.d("asdasdasd3","HHHH:"+layoutParams.height+"|||WWWWWW:"+layoutParams.width);
         Glide.with(context).load(data.get(position).getImg()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(holder.iv_video);
         holder.video_tv_youji_title.setText(data.get(position).getVname());
         Glide.with(context).load(data.get(position).getUserpic()).apply(new RequestOptions().placeholder(R.mipmap.my_head).error(R.mipmap.my_head)).into(holder.video_iv_icon_user);
@@ -56,7 +70,8 @@ public class HomeListVideoAdapter extends RecyclerView.Adapter<HomeListVideoAdap
         });
         holder.video_tv_username.setText(data.get(position).getUsername());
         holder.video_tv_time.setText(data.get(position).getVtime());
-        holder.video_tv_good_num.setText(data.get(position).getPraise_num());
+//        holder.video_tv_good_num.setText(data.get(position).getPraise_num());//改为浏览数量
+        holder.video_tv_good_num.setText(data.get(position).getLook_num());
         holder.rv_video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

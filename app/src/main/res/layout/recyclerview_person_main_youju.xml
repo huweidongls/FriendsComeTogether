@@ -23,14 +23,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
-                android:id="@+id/iv"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="400px"
-                android:scaleType="centerCrop"
-                test:left_top_radius1="16px"
-                test:right_top_radius1="16px" />
+                android:layout_height="wrap_content">
+                <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+                    android:id="@+id/iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="400px"
+                    android:scaleType="centerCrop"
+                    test:left_top_radius1="16px"
+                    test:right_top_radius1="16px" />
+                <RelativeLayout
+                    android:layout_alignBottom="@+id/iv"
+                    android:paddingTop="5px"
+                    android:paddingBottom="5px"
+                    android:background="@drawable/bg_black_trans_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_marginLeft="10px"
+                        android:layout_marginRight="10px"
+                        android:id="@+id/tv_qishu"
+                        android:textColor="@color/white_ffffff"
+                        android:textSize="28px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </RelativeLayout>
             <TextView
                 android:id="@+id/tv_name"
                 android:text="标题标题"

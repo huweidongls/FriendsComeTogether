@@ -4,17 +4,7 @@
             "outputFile": "D:\\project\\FriendsComeTogether\\Fulive\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\ljc\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\a141beb83f0984d141fb13f4ceb35ab6\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\ljc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\11d3726e750b2e0810df9617d739ebf1\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\ljc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\eb05d361d903dbfaf8539059e524bcaa\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -30,6 +20,16 @@
                         "endLines": "6",
                         "endColumns": "12",
                         "endOffsets": "289"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\ljc\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\0638d0491f312bbcb252abd82881a220\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
                     }
                 }
             ]

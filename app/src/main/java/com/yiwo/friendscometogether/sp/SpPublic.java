@@ -28,4 +28,12 @@ public class SpPublic {
     public static String LIVE_TIME = "live_time";//直播时间
 
     public static String WX_UNIONID = "wx_unionid";//绑定微信 ID
+
+    //上次创建友记填写的地点 、标签文字、标签ID
+    public static String LAST_CREATE_YOUJI_ADDRESS = "last_create_youji_address";
+    public static String LAST_CREATE_YOUJI_LABEL_TEXT = "last_create_youji_label_text";
+    public static String LAST_CREATE_YOUJI_LABEL_ID = "last_create_youji_label_id";
+    //上次发布视频填写的地点
+    public static String LAST_CREATE_VIDEO_ADDRESS = "last_create_video_address";
+
 }

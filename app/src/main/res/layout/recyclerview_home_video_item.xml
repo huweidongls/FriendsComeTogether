@@ -5,22 +5,24 @@
     android:id="@+id/rl_youju_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <!--android:background="@drawable/bg_white_16px"-->
     <RelativeLayout
         android:elevation="5px"
         android:layout_margin="5px"
         android:id="@+id/rv_video"
         android:layout_width="match_parent"
         android:layout_height="580px"
-        android:background="@drawable/bg_white_16px"
+
         android:visibility="visible">
 
         <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
             android:id="@+id/iv_video"
-            android:layout_above="@+id/ll_video_info"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="580px"
             android:scaleType="centerCrop"
             android:src="@mipmap/welcome"
+            test:left_bottom_radius1="16px"
+            test:right_bottom_radius1="16px"
             test:left_top_radius1="16px"
             test:right_top_radius1="16px" />
 
@@ -32,11 +34,13 @@
             android:layout_marginRight="16px"
             android:layout_marginTop="16px"
             android:src="@mipmap/youji_video" />
+        <!--android:background="@drawable/bg_white_16px"-->
         <LinearLayout
-            android:id="@+id/ll_video_info"
-            android:background="@drawable/bg_white_16px"
-            android:orientation="vertical"
             android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_40trans_16px_bottom"
+            android:paddingBottom="10px"
+            android:id="@+id/ll_video_info"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
@@ -51,7 +55,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="巴厘岛小众神秘彭丽普兰，被认为是世界上最清洁的三个村庄之一巴厘岛小众神秘彭丽普兰，被认为是世界上最清洁的三个村庄之一"
-                android:textColor="@color/black_333333"
+                android:textColor="@color/white_ffffff"
                 android:textSize="30px" />
             <RelativeLayout
                 android:id="@+id/rl_video_info"
@@ -83,7 +87,7 @@
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:text="扁脸折耳猫"
-                        android:textColor="@color/black_333333"
+                        android:textColor="@color/white_ffffff"
                         android:textSize="23px"
                         android:id="@+id/video_tv_username" />
 
@@ -96,7 +100,7 @@
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:text="15小时前"
-                        android:textColor="@color/black_333333"
+                        android:textColor="@color/white_ffffff"
                         android:textSize="24px" />
                 </RelativeLayout>
 
@@ -113,7 +117,7 @@
                         android:layout_width="30px"
                         android:layout_height="30px"
                         android:layout_marginRight="6px"
-                        android:src="@mipmap/youji_dianzan_red" />
+                        android:src="@mipmap/eye_white" />
 
                     <TextView
                         android:layout_gravity="center_vertical"
@@ -122,9 +126,8 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:maxWidth="50px"
                         android:text="15"
-                        android:textColor="@color/black_333333"
+                        android:textColor="@color/white_ffffff"
                         android:textSize="26px" />
                 </LinearLayout>
             </RelativeLayout>

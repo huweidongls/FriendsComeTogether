@@ -47,6 +47,7 @@ public class HomeDataModel1 {
         private List<ArticleBean> article;
         private List<ZhiboBean> zhibo;
         private String status; // 1 为显示直播列表。
+        private String status2; // 1 为显示任务球。
         public List<ActivityBean> getActivity() {
             return activity;
         }
@@ -77,6 +78,14 @@ public class HomeDataModel1 {
 
         public void setStatus(String status) {
             this.status = status;
+        }
+
+        public String getStatus2() {
+            return status2;
+        }
+
+        public void setStatus2(String status2) {
+            this.status2 = status2;
         }
 
         public static class ActivityBean {

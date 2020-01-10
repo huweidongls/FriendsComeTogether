@@ -3,6 +3,7 @@ package com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.fragment;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.GridLayoutManager;
@@ -43,6 +44,8 @@ import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.TongBiPriceAdapter;
 import com.yiwo.friendscometogether.newmodel.MyGiftsModel;
 import com.yiwo.friendscometogether.newmodel.TongBiPriceModel;
+import com.yiwo.friendscometogether.pages.UserAgreementActivity;
+import com.yiwo.friendscometogether.pages.WelcomeActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
 import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.adapter.GiftAdapter;
@@ -281,8 +284,6 @@ public class LiveBottomBar extends RelativeLayout {
                         Toast.makeText(getContext(), "请选择礼物数量", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    Log.d("送礼物1：：",GiftType.typeOfValue(giftPosition)+"///"+GiftType.typeOfValue(giftPosition).getValue()+"//"+roomInfo.getCreator());
-
                     List<String> accounts = new ArrayList<>();
                     accounts.add(DemoCache.getAccount());
                     NIMClient.getService(ChatRoomService.class).fetchRoomMembersByIds(roomId,accounts).setCallback(new RequestCallback<List<ChatRoomMember>>() {
@@ -292,11 +293,10 @@ public class LiveBottomBar extends RelativeLayout {
                                 Toast.makeText(DemoCache.getContext(), "用户被禁言,无法发送礼物", Toast.LENGTH_SHORT).show();
                                 return;
                             }
-                            Log.d("送礼物2：：",GiftType.typeOfValue(giftPosition)+"///"+GiftType.typeOfValue(giftPosition).getValue()+"//"+roomInfo.getCreator());
                             ViseHttp.POST(NetConfig.sendPresent)
                                     .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.sendPresent))
                                     .addParam("uid", spImp.getUID())
-                                    .addParam("name",GiftType.typeOfValue(giftPosition).getValue()+"")
+                                    .addParam("name",giftList.get(giftPosition).getGiftType().getValue()+"")
                                     .addParam("num",tvGiftNum.getText().toString())
                                     .addParam("touid",roomInfo.getCreator())
                                     .request(new ACallback<String>() {
@@ -748,7 +748,9 @@ public class LiveBottomBar extends RelativeLayout {
     public void updateGiftList(GiftType type,Boolean isAdd) {
         if (isAdd){//收到礼物
             if (updateGiftCount(type,isAdd) == 1) { //没有收到过此类型礼物
-                giftList.add(new Gift(type, GiftConstant.titles[type.getValue()], 1, GiftConstant.images[type.getValue()],GiftConstant.integrals[type.getValue()]));//礼物列表新增类型 数量1
+                if (type != GiftType.UNKNOWN){
+                    giftList.add(new Gift(type, GiftConstant.titles[type.getValue()], 1, GiftConstant.images[type.getValue()],GiftConstant.integrals[type.getValue()]+""));//礼物列表新增类型 数量1
+                }
             }
             adapter.notifyDataSetChanged();
             GiftCache.getInstance().saveGift(roomId, type.getValue());
@@ -787,21 +789,23 @@ public class LiveBottomBar extends RelativeLayout {
                                 Gson gson = new Gson();
                                 MyGiftsModel myGiftsModel = gson.fromJson(data,MyGiftsModel.class);
                                 for (MyGiftsModel.ObjBean bean :myGiftsModel.getObj()){
-                                    giftList.add(new Gift(GiftType.typeOfValue(Integer.parseInt(bean.getState())), GiftConstant.titles[Integer.parseInt(bean.getState())], Integer.parseInt(bean.getNum()),
-                                            GiftConstant.images[Integer.parseInt(bean.getState())], GiftConstant.integrals[Integer.parseInt(bean.getState())]));
-                                    Collections.sort(giftList, new Comparator<Gift>() {
-                                        @Override
-                                        public int compare(Gift o1, Gift o2) {
-                                            int diff = o1.getGiftType().getValue() - o2.getGiftType().getValue();
-                                            if (diff>0){
-                                                return 1;
-                                            }else if (diff<0){
-                                                return -1;
-                                            }else {
-                                                return 0;
+                                    if (GiftType.typeOfValue(Integer.parseInt(bean.getState())) != GiftType.UNKNOWN){
+                                        giftList.add(new Gift(GiftType.typeOfValue(Integer.parseInt(bean.getState())), bean.getPresentName(), Integer.parseInt(bean.getNum()),
+                                                GiftConstant.images[Integer.parseInt(bean.getState())], bean.getIntegral()));
+                                        Collections.sort(giftList, new Comparator<Gift>() {
+                                            @Override
+                                            public int compare(Gift o1, Gift o2) {
+                                                int diff = Integer.parseInt(o1.getIntegral()) - Integer.parseInt(o2.getIntegral());
+                                                if (diff>0){
+                                                    return 1;
+                                                }else if (diff<0){
+                                                    return -1;
+                                                }else {
+                                                    return 0;
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
+                                    }
                                 }
                             }
                         } catch (JSONException e) {
@@ -837,7 +841,7 @@ public class LiveBottomBar extends RelativeLayout {
             return;
         }
         giftLayout.setVisibility(View.GONE);
-        final GiftAttachment attachment = new GiftAttachment(GiftType.typeOfValue(giftPosition), Integer.parseInt(tvGiftNum.getText().toString()));
+        final GiftAttachment attachment = new GiftAttachment(giftList.get(giftPosition).getGiftType(), Integer.parseInt(tvGiftNum.getText().toString()));
         final ChatRoomMessage message = ChatRoomMessageBuilder.createChatRoomCustomMessage(roomId, attachment);
 //        message.setContent("送出礼物");
         setMemberType(message);
@@ -968,7 +972,10 @@ public class LiveBottomBar extends RelativeLayout {
         tv_chongzhi_xieyi.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent itA = new Intent(context, UserAgreementActivity.class);
+                itA.putExtra("title", "充值协议");
+                itA.putExtra("url", NetConfig.chongZhiXieYiUrl);
+                context.startActivity(itA);
             }
         });
         popupWindowPrice = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);

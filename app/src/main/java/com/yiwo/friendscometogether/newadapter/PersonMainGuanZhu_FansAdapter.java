@@ -75,15 +75,20 @@ public class PersonMainGuanZhu_FansAdapter extends RecyclerView.Adapter<PersonMa
         }else {
             holder.tv_guanzhu.setVisibility(View.VISIBLE);
         }
-        if(bean.getStatus().equals("1")){
-            holder.tv_guanzhu.setBackgroundResource(R.drawable.bg_red_24px);
-            holder.tv_guanzhu.setTextColor(Color.parseColor("#ffffff"));
-            holder.tv_guanzhu.setText("已关注");
-        }else if(bean.getStatus().equals("0")){
-            holder.tv_guanzhu.setBackgroundResource(R.drawable.bg_gray_border_24px);
-            holder.tv_guanzhu.setTextColor(Color.parseColor("#363636"));
-            holder.tv_guanzhu.setText("+关注");
+        if (bean.getStatus()!=null){
+            if(bean.getStatus().equals("1")){
+                holder.tv_guanzhu.setBackgroundResource(R.drawable.bg_red_24px);
+                holder.tv_guanzhu.setTextColor(Color.parseColor("#ffffff"));
+                holder.tv_guanzhu.setText("已关注");
+            }else if(bean.getStatus().equals("0")){
+                holder.tv_guanzhu.setBackgroundResource(R.drawable.bg_gray_border_24px);
+                holder.tv_guanzhu.setTextColor(Color.parseColor("#363636"));
+                holder.tv_guanzhu.setText("+关注");
+            }
+        }else {
+            holder.tv_guanzhu.setVisibility(View.GONE);
         }
+
         holder.tv_guanzhu.setFocusable(false);
         holder.tv_guanzhu.setOnClickListener(new View.OnClickListener() {
             @Override

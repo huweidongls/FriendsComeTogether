@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/white_F8F8F8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_marginTop="1px"
+            android:layout_width="wrap_content"
+            android:layout_height="80px">
+            <RelativeLayout
+                android:id="@+id/rv_cancel"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="40px"
+                    android:layout_marginLeft="40px"
+                    android:textSize="32px"
+                    android:textColor="@color/red_d84c37"
+                    android:text="取消"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="40px"
+                    android:layout_marginLeft="40px"
+                    android:textSize="32px"
+                    android:textColor="@color/black_333333"
+                    android:text="标签选择"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rv_sure"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="40px"
+                    android:layout_marginLeft="40px"
+                    android:textSize="32px"
+                    android:textColor="@color/red_d84c37"
+                    android:text="确定"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginBottom="30px"
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

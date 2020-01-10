@@ -46,12 +46,14 @@ public class PersonMainActivity_YouJu_Adapter extends RecyclerView.Adapter<Perso
         holder.tv_name.setText(data.get(position).getPftitle());
         holder.tv_address.setText(data.get(position).getPfaddress());
         holder.tv_pinglun_num.setText(data.get(position).getPfcomment());
+        holder.tv_qishu.setText(data.get(position).getBegin_time()+" 至 "+data.get(position).getEnd_time()+"");
         holder.rl_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
                 intent.putExtra("pfID",data.get(position).getPfID());
+                intent.putExtra("phase_id",data.get(position).getPhase_id());
                 context.startActivity(intent);
             }
         });
@@ -69,6 +71,7 @@ public class PersonMainActivity_YouJu_Adapter extends RecyclerView.Adapter<Perso
         private TextView tv_pinglun_num;
         private TextView tv_address;
         private RelativeLayout rl_item;
+        private TextView tv_qishu;
         public ViewHolder(View itemView) {
             super(itemView);
             iv = itemView.findViewById(R.id.iv);
@@ -76,6 +79,7 @@ public class PersonMainActivity_YouJu_Adapter extends RecyclerView.Adapter<Perso
             tv_name = itemView.findViewById(R.id.tv_name);
             tv_address = itemView.findViewById(R.id.tv_address);
             tv_pinglun_num = itemView.findViewById(R.id.tv_pinglun_num);
+            tv_qishu = itemView.findViewById(R.id.tv_qishu);
         }
     }
 }

@@ -31,7 +31,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -312,21 +311,21 @@ public class DetailsOfFriendsWebActivity2 extends BaseSonicWebActivity {
                                               UserGiveModelDao.Properties.ArticleId.eq(fmID))
                                         .build().list().size()<=0) {
                                     isPraise = false;
-                                    Glide.with(DetailsOfFriendsWebActivity2.this).load(R.mipmap.friend_web_zan_gray).into(ivPraise);
+                                    ivPraise.setImageResource(R.mipmap.friend_web_zan_gray);
 //                                    tvPraise.setTextColor(Color.parseColor("#333333"));
                                 } else {
                                     isPraise = true;
-                                    Glide.with(DetailsOfFriendsWebActivity2.this).load(R.mipmap.friend_web_zan_red).into(ivPraise);
+                                    ivPraise.setImageResource(R.mipmap.friend_web_zan_red);
 //                                    tvPraise.setTextColor(Color.parseColor("#d84c37"));
                                 }
                                 //收藏
                                 if (model.getObj().getCollect().equals("0")) {
                                     isStar = false;
-                                    Glide.with(DetailsOfFriendsWebActivity2.this).load(R.mipmap.friend_web_star_gray).into(ivStar);
+                                    ivStar.setImageResource(R.mipmap.friend_web_star_gray);
 //                                    tvStar.setTextColor(Color.parseColor("#333333"));
                                 } else {
                                     isStar = true;
-                                    Glide.with(DetailsOfFriendsWebActivity2.this).load(R.mipmap.friend_web_star_red).into(ivStar);
+                                    ivStar.setImageResource(R.mipmap.friend_web_star_red);
 //                                    tvStar.setTextColor(Color.parseColor("#d84c37"));
                                 }
                                 //插文
@@ -425,7 +424,7 @@ public class DetailsOfFriendsWebActivity2 extends BaseSonicWebActivity {
                                                     .setShareboardclickCallback(new ShareBoardlistener() {
                                                         @Override
                                                         public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
-                                                            ShareUtils.shareWeb(DetailsOfFriendsWebActivity2.this, shareModel.getObj().getUrl(), model.getObj().getWho()+"的友记",
+                                                            ShareUtils.shareWeb(DetailsOfFriendsWebActivity2.this, shareModel.getObj().getUrl()+"&uid="+spImp.getUID(), model.getObj().getWho()+"的友记",
                                                                     shareModel.getObj().getTitle(), shareModel.getObj().getImages(), share_media);
                                                         }
                                                     }).open();
@@ -460,7 +459,7 @@ public class DetailsOfFriendsWebActivity2 extends BaseSonicWebActivity {
                                         try {
                                             JSONObject jsonObject = new JSONObject(data);
                                             if (jsonObject.getInt("code") == 200) {
-                                                Glide.with(DetailsOfFriendsWebActivity2.this).load(R.mipmap.friend_web_zan_red).into(ivPraise);
+                                                ivPraise.setImageResource(R.mipmap.friend_web_zan_red);
 //                                                tvPraise.setTextColor(Color.parseColor("#d84c37"));
                                                 UserGiveModel model = new UserGiveModel();
                                                 model.setUserId(uid);
@@ -496,7 +495,7 @@ public class DetailsOfFriendsWebActivity2 extends BaseSonicWebActivity {
                                         try {
                                             JSONObject jsonObject = new JSONObject(data);
                                             if (jsonObject.getInt("code") == 200) {
-                                                Glide.with(DetailsOfFriendsWebActivity2.this).load(R.mipmap.friend_web_zan_gray).into(ivPraise);
+                                                ivPraise.setImageResource(R.mipmap.friend_web_zan_gray);
 //                                                tvPraise.setTextColor(Color.parseColor("#333333"));
                                                 if (userGiveModelDao.queryBuilder()
                                                         .where(UserGiveModelDao.Properties.UserId.eq(uid),
@@ -531,7 +530,7 @@ public class DetailsOfFriendsWebActivity2 extends BaseSonicWebActivity {
                     finish();
                 } else {
                     if (!isStar) {
-                        Glide.with(DetailsOfFriendsWebActivity2.this).load(R.mipmap.friend_web_star_red).into(ivStar);
+                        ivStar.setImageResource(R.mipmap.friend_web_star_red);
 //                        tvStar.setTextColor(Color.parseColor("#d84c37"));
                         isStar = !isStar;
                         ViseHttp.POST(NetConfig.articleCollectionUrl)
@@ -558,7 +557,7 @@ public class DetailsOfFriendsWebActivity2 extends BaseSonicWebActivity {
                                     }
                                 });
                     } else {
-                        Glide.with(DetailsOfFriendsWebActivity2.this).load(R.mipmap.friend_web_star_gray).into(ivStar);
+                        ivStar.setImageResource(R.mipmap.friend_web_star_gray);
 //                        tvStar.setTextColor(Color.parseColor("#333333"));
                         isStar = !isStar;
                         ViseHttp.POST(NetConfig.articleCollectionUrl)
@@ -792,7 +791,7 @@ public class DetailsOfFriendsWebActivity2 extends BaseSonicWebActivity {
                                                     .setShareboardclickCallback(new ShareBoardlistener() {
                                                         @Override
                                                         public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
-                                                            ShareUtils.shareWeb(DetailsOfFriendsWebActivity2.this, shareModel.getObj().getUrl(), model.getObj().getWho()+"的友记",
+                                                            ShareUtils.shareWeb(DetailsOfFriendsWebActivity2.this, shareModel.getObj().getUrl()+"&uid="+spImp.getUID(), model.getObj().getWho()+"的友记",
                                                                     shareModel.getObj().getTitle(), shareModel.getObj().getImages(), share_media);
                                                         }
                                                     }).open();

@@ -383,8 +383,13 @@ public class MyFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.rl_pay_rank:
-                intent.setClass(getContext(), ChongZhi_ZengSongListActivity.class);
-                startActivity(intent);
+                if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                    intent.setClass(getContext(), ChongZhi_ZengSongListActivity.class);
+                    startActivity(intent);
+                } else {
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
                 break;
         }
     }

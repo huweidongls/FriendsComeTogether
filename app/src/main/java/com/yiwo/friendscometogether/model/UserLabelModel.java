@@ -54,7 +54,7 @@ public class UserLabelModel {
         private String lID;
         private String lname;
         private String luse;
-
+        private boolean isChoose = false;
         public ObjBean(String lID, String lname, String luse) {
             this.lID = lID;
             this.lname = lname;
@@ -88,6 +88,14 @@ public class UserLabelModel {
         @Override
         public String getPickerViewText() {
             return this.lname;
+        }
+
+        public boolean isChoose() {
+            return isChoose;
+        }
+
+        public void setChoose(boolean choose) {
+            isChoose = choose;
         }
     }
 }

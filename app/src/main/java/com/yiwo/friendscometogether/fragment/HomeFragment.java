@@ -517,212 +517,6 @@ public class HomeFragment extends BaseFragment {
 
                     }
                 });
-
-        ClassicsHeader header = new ClassicsHeader(getContext());
-//        header.setAccentColor(Color.WHITE);
-//        header.setPrimaryColor(Color.parseColor("#d84c37"));
-        refreshLayout.setRefreshHeader(header);
-        ClassicsFooter footer = new ClassicsFooter(getContext());
-//        footer.setPrimaryColor(Color.parseColor("#F8F8F8"));
-        refreshLayout.setRefreshFooter(footer);
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                refresh();
-                refreshLayout.finishRefresh(1000);
-            }
-        });
-//        if (!isNetConnect()){
-//            toToast(getContext(),"当前无网络！");
-//            if (labelModel == null){
-//                youji_all.setVisibility(View.GONE);
-//                youji_gonglue.setVisibility(View.GONE);
-//                youji_lvxing.setVisibility(View.GONE);
-//                youji_meishi.setVisibility(View.GONE);
-//                youji_tandian.setVisibility(View.GONE);
-//            }else {
-//                youji_all.setVisibility(View.VISIBLE);
-//                youji_gonglue.setVisibility(View.VISIBLE);
-//                youji_lvxing.setVisibility(View.VISIBLE);
-//                youji_meishi.setVisibility(View.VISIBLE);
-//                youji_tandian.setVisibility(View.VISIBLE);
-//            }
-//            return;
-//        }
-        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(@NonNull final RefreshLayout refreshLayout) {
-                switch (type){
-                    case "1":
-                        ViseHttp.POST(NetConfig.homeRecommend2)
-                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeRecommend2))
-                                .addParam("uid", uid)
-                                .addParam("city", cityName)
-                                .addParam("page",page1+"")
-                                .request(new ACallback<String>() {
-                                    @Override
-                                    public void onSuccess(String data) {
-                                        Log.e("123123", type+"--------"+uid);
-                                        Log.e("123123", data);
-                                        try {
-                                            JSONObject jsonObject = new JSONObject(data);
-                                            if(jsonObject.getInt("code") == 200){
-                                                Gson gson = new Gson();
-                                                HomeDataModel1 model = gson.fromJson(data, HomeDataModel1.class);
-//                                        mList.clear();
-                                                if (model.getObj().getArticle().size()>0){
-                                                    mListTuiJian_youji.addAll(model.getObj().getArticle());
-                                                    preLoadYouJi_tuijain(model.getObj().getArticle());
-//                                                    mListTuiJian_youju.addAll(model.getObj().getActivity().subList(1,model.getObj().getActivity().size()));
-//                                                    initTuiJianFirstHuoDong(model.getObj().getActivity().get(0));
-                                                    adapterTuiJian_youji.notifyDataSetChanged();
-//                                                    adapterTuiJian_youju.notifyDataSetChanged();
-//                                                    if (mListTuiJian_youju.size()>0){
-////                                                        tv_text_youju.setVisibility(View.VISIBLE);
-//                                                        llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
-//                                                    }else {
-//                                                        llTuiJianHuodongFirst.setVisibility(View.GONE);
-////                                                        tv_text_youju.setVisibility(View.GONE);
-//                                                    }
-                                                    if (mListTuiJian_youji.size()>0){
-                                                        tv_text_youji.setVisibility(View.VISIBLE);
-                                                    }else {
-                                                        tv_text_youji.setVisibility(View.GONE);
-                                                    }
-                                                    page1++;
-                                                }
-                                                refreshLayout.finishLoadMore(1000);
-                                            }
-
-                                        } catch (JSONException e) {
-                                            refreshLayout.finishLoadMore(1000);
-                                            e.printStackTrace();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFail(int errCode, String errMsg) {
-                                        refreshLayout.finishLoadMore(1000);
-                                        toToast(getContext(),"加载失败");
-                                    }
-                                });
-                        break;
-                    case "2":
-                        ViseHttp.POST(NetConfig.homeGuanZhu2)
-                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeGuanZhu2))
-                                .addParam("uid", uid)
-                                .addParam("page",page2+"")
-                                .request(new ACallback<String>() {
-                                    @Override
-                                    public void onSuccess(String data) {
-                                        Log.e("123123", type+"--------"+uid);
-                                        Log.e("123123", data);
-                                        try {
-                                            JSONObject jsonObject = new JSONObject(data);
-                                            if(jsonObject.getInt("code") == 200){
-                                                Gson gson = new Gson();
-                                                HomeDataModel model = gson.fromJson(data, HomeDataModel.class);
-//                                        mList.clear();
-                                                if (model.getObj().size()>0){
-                                                    mListGuanzhu.addAll(model.getObj());
-                                                    preLoadYouJi_youji_and_guanzhu(model.getObj());
-                                                    adapterGuanzhu.notifyDataSetChanged();
-                                                    page2++;
-                                                }
-                                                refreshLayout.finishLoadMore(1000);
-                                            }
-
-                                        } catch (JSONException e) {
-                                            refreshLayout.finishLoadMore(1000);
-                                            e.printStackTrace();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFail(int errCode, String errMsg) {
-                                        refreshLayout.finishLoadMore(1000);
-                                        toToast(getContext(),"加载失败");
-                                    }
-                                });
-                        break;
-                    case "3":
-                        ViseHttp.POST(NetConfig.homeYouJi)
-                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeYouJi))
-                                .addParam("uid", uid)
-//                                .addParam("city", cityName)
-                                .addParam("page",page3+"")
-                                .request(new ACallback<String>() {
-                                    @Override
-                                    public void onSuccess(String data) {
-                                        Log.e("123123", type+"--------"+uid);
-                                        Log.e("123123", data);
-                                        try {
-                                            JSONObject jsonObject = new JSONObject(data);
-                                            if(jsonObject.getInt("code") == 200){
-                                                Gson gson = new Gson();
-                                                HomeDataModel model = gson.fromJson(data, HomeDataModel.class);
-//                                        mList.clear();
-                                                if (model.getObj().size()>0){
-                                                    mListYouJi.addAll(model.getObj());
-                                                    preLoadYouJi_youji_and_guanzhu(model.getObj());
-                                                    adapterYouji.notifyDataSetChanged();
-                                                    page3++;
-                                                }
-                                                refreshLayout.finishLoadMore(1000);
-                                            }
-
-                                        } catch (JSONException e) {
-                                            refreshLayout.finishLoadMore(1000);
-                                            e.printStackTrace();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFail(int errCode, String errMsg) {
-                                        refreshLayout.finishLoadMore(1000);
-                                        toToast(getContext(),"加载失败");
-                                    }
-                                });
-                        break;
-                    case "4":
-                        ViseHttp.POST(NetConfig.homeVideo)
-                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeVideo))
-                                .addParam("uid", uid)
-                                .addParam("page",page4+"")
-                                .request(new ACallback<String>() {
-                                    @Override
-                                    public void onSuccess(String data) {
-                                        Log.e("123123", type+"--------"+uid);
-                                        Log.e("123123", data);
-                                        try {
-                                            JSONObject jsonObject = new JSONObject(data);
-                                            if(jsonObject.getInt("code") == 200){
-                                                Gson gson = new Gson();
-                                                HomeVideoListModel model = gson.fromJson(data, HomeVideoListModel.class);
-                                                if (model.getObj().size()>0){
-                                                    mListVideos.addAll(model.getObj());
-                                                    adapterVideos.notifyDataSetChanged();
-                                                    page4++;
-                                                }
-                                                refreshLayout.finishLoadMore(1000);
-                                            }
-
-                                        } catch (JSONException e) {
-                                            refreshLayout.finishLoadMore(1000);
-                                            e.printStackTrace();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFail(int errCode, String errMsg) {
-                                        refreshLayout.finishLoadMore(1000);
-                                        toToast(getContext(),"加载失败");
-                                    }
-                                });
-                        break;
-                }
-            }
-        });
         ViseHttp.POST(NetConfig.allBannerUrl)
                 .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.allBannerUrl))
                 .addParam("type", "1")
@@ -885,8 +679,8 @@ public class HomeFragment extends BaseFragment {
                                 manager3.setOrientation(LinearLayoutManager.HORIZONTAL);
                                 recyclerView_live.setLayoutManager(manager3);
                                 recyclerView_live.setAdapter(adapterLiveList);
-//                                if (mlistLive.size()>0 && model.getObj().getStatus().equals("1")){
-                                if (mlistLive.size()>0){
+                                if (mlistLive.size()>0 && model.getObj().getStatus().equals("1")){
+//                                if (mlistLive.size()>0){
                                     ll_live.setVisibility(View.VISIBLE);
                                 }else {
                                     ll_live.setVisibility(View.GONE);
@@ -901,7 +695,7 @@ public class HomeFragment extends BaseFragment {
                                 }else {
                                     tv_text_youji.setVisibility(View.GONE);
                                 }
-                                if (model.getObj().getStatus().equals("1")){
+                                if (model.getObj().getStatus2().equals("1")){
                                     rl_ball.setVisibility(View.VISIBLE);
                                 }else {
                                     rl_ball.setVisibility(View.GONE);
@@ -1048,6 +842,184 @@ public class HomeFragment extends BaseFragment {
                     public void onFail(int errCode, String errMsg) {
                     }
                 });
+        ClassicsHeader header = new ClassicsHeader(getContext());
+//        header.setAccentColor(Color.WHITE);
+//        header.setPrimaryColor(Color.parseColor("#d84c37"));
+        refreshLayout.setRefreshHeader(header);
+        ClassicsFooter footer = new ClassicsFooter(getContext());
+//        footer.setPrimaryColor(Color.parseColor("#F8F8F8"));
+        refreshLayout.setRefreshFooter(footer);
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                refresh();
+                refreshLayout.finishRefresh(1000);
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull final RefreshLayout refreshLayout) {
+                switch (type){
+                    case "1":
+                        ViseHttp.POST(NetConfig.homeRecommend2)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeRecommend2))
+                                .addParam("uid", uid)
+                                .addParam("city", cityName)
+                                .addParam("page",page1+"")
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        Log.e("123123", type+"--------"+uid);
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if(jsonObject.getInt("code") == 200){
+                                                Gson gson = new Gson();
+                                                HomeDataModel1 model = gson.fromJson(data, HomeDataModel1.class);
+//                                        mList.clear();
+                                                if (model.getObj().getArticle().size()>0){
+                                                    mListTuiJian_youji.addAll(model.getObj().getArticle());
+                                                    preLoadYouJi_tuijain(model.getObj().getArticle());
+                                                    if (mListTuiJian_youji!=null && adapterTuiJian_youji!=null){
+                                                        adapterTuiJian_youji.notifyDataSetChanged();
+                                                    }
+                                                    if (mListTuiJian_youji.size()>0){
+                                                        tv_text_youji.setVisibility(View.VISIBLE);
+                                                    }else {
+                                                        tv_text_youji.setVisibility(View.GONE);
+                                                    }
+                                                    page1++;
+                                                }
+                                                refreshLayout.finishLoadMore(1000);
+                                            }
+
+                                        } catch (JSONException e) {
+                                            refreshLayout.finishLoadMore(1000);
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+                                        refreshLayout.finishLoadMore(1000);
+                                        toToast(getContext(),"加载失败");
+                                    }
+                                });
+                        break;
+                    case "2":
+                        ViseHttp.POST(NetConfig.homeGuanZhu2)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeGuanZhu2))
+                                .addParam("uid", uid)
+                                .addParam("page",page2+"")
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        Log.e("123123", type+"--------"+uid);
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if(jsonObject.getInt("code") == 200){
+                                                Gson gson = new Gson();
+                                                HomeDataModel model = gson.fromJson(data, HomeDataModel.class);
+//                                        mList.clear();
+                                                if (model.getObj().size()>0){
+                                                    mListGuanzhu.addAll(model.getObj());
+                                                    preLoadYouJi_youji_and_guanzhu(model.getObj());
+                                                    adapterGuanzhu.notifyDataSetChanged();
+                                                    page2++;
+                                                }
+
+                                                refreshLayout.finishLoadMore(1000);
+                                            }
+
+                                        } catch (JSONException e) {
+                                            refreshLayout.finishLoadMore(1000);
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+                                        refreshLayout.finishLoadMore(1000);
+                                        toToast(getContext(),"加载失败");
+                                    }
+                                });
+                        break;
+                    case "3":
+                        ViseHttp.POST(NetConfig.homeYouJi)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeYouJi))
+                                .addParam("uid", uid)
+//                                .addParam("city", cityName)
+                                .addParam("page",page3+"")
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        Log.e("123123", type+"--------"+uid);
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if(jsonObject.getInt("code") == 200){
+                                                Gson gson = new Gson();
+                                                HomeDataModel model = gson.fromJson(data, HomeDataModel.class);
+//                                        mList.clear();
+                                                if (model.getObj().size()>0){
+                                                    mListYouJi.addAll(model.getObj());
+                                                    preLoadYouJi_youji_and_guanzhu(model.getObj());
+                                                    adapterYouji.notifyDataSetChanged();
+                                                    page3++;
+                                                }
+                                                refreshLayout.finishLoadMore(1000);
+                                            }
+
+                                        } catch (JSONException e) {
+                                            refreshLayout.finishLoadMore(1000);
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+                                        refreshLayout.finishLoadMore(1000);
+                                        toToast(getContext(),"加载失败");
+                                    }
+                                });
+                        break;
+                    case "4":
+                        ViseHttp.POST(NetConfig.homeVideo)
+                                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeVideo))
+                                .addParam("uid", uid)
+                                .addParam("page",page4+"")
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        Log.e("123123", type+"--------"+uid);
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if(jsonObject.getInt("code") == 200){
+                                                Gson gson = new Gson();
+                                                HomeVideoListModel model = gson.fromJson(data, HomeVideoListModel.class);
+                                                if (model.getObj().size()>0){
+                                                    mListVideos.addAll(model.getObj());
+                                                    adapterVideos.notifyDataSetChanged();
+                                                    page4++;
+                                                }
+                                                refreshLayout.finishLoadMore(1000);
+                                            }
+
+                                        } catch (JSONException e) {
+                                            refreshLayout.finishLoadMore(1000);
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+                                        refreshLayout.finishLoadMore(1000);
+                                        toToast(getContext(),"加载失败");
+                                    }
+                                });
+                        break;
+                }
+            }
+        });
+
     }
 
     private void enterLiveRoom(final HomeDataModel1.ObjBean.ZhiboBean zhiboBean) {
@@ -1059,7 +1031,6 @@ public class HomeFragment extends BaseFragment {
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
-                        Log.d("sdasdaas",data);
                         try {
                             JSONObject jsonObject = new JSONObject(data);
                             if (jsonObject.getInt("code") == 200){
@@ -1334,7 +1305,6 @@ public class HomeFragment extends BaseFragment {
                             @Override
                             public void onSuccess(String data) {
                                 Log.e("123123", type+"--------"+uid);
-                                Log.e("123123", data);
                                 try {
                                     JSONObject jsonObject = new JSONObject(data);
                                     if(jsonObject.getInt("code") == 200){
@@ -1358,12 +1328,12 @@ public class HomeFragment extends BaseFragment {
                                         //直播
                                         mlistLive.clear();
                                         mlistLive.addAll(model.getObj().getZhibo());
-
+//                                        mListTuiJian_youji = null;
                                         adapterTuiJian_youji.notifyDataSetChanged();
                                         adapterTuiJian_youju.notifyDataSetChanged();
                                         adapterLiveList.notifyDataSetChanged();
-//                                        if (mlistLive.size()>0 && model.getObj().getStatus().equals("1")){
-                                        if (mlistLive.size()>0){
+                                        if (mlistLive.size()>0 && model.getObj().getStatus().equals("1")){
+//                                        if (mlistLive.size()>0){
                                             ll_live.setVisibility(View.VISIBLE);
                                         }else {
                                             ll_live.setVisibility(View.GONE);
@@ -1381,7 +1351,7 @@ public class HomeFragment extends BaseFragment {
                                         }else {
                                             tv_text_youji.setVisibility(View.GONE);
                                         }
-                                        if (model.getObj().getStatus().equals("1")){
+                                        if (model.getObj().getStatus2().equals("1")){
                                             rl_ball.setVisibility(View.VISIBLE);
                                         }else {
                                             rl_ball.setVisibility(View.GONE);

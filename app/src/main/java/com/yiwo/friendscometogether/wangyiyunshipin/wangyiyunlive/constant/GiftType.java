@@ -38,7 +38,31 @@ public enum GiftType {
     /**
      * 钻石
      */
-    ZUANSHI(5);
+    ZUANSHI(5),
+    /**
+     * 魔法棒
+     */
+    MOFABANG(6),
+    /**
+     * 心雨
+     */
+    XINYU(7),
+    /**
+     * 别墅
+     */
+    BIESHU(8),
+    /**
+     * 捧花
+     */
+    PENGHUA(9),
+    /**
+     * 小熊
+     */
+    XIAOXIONG(10),
+    /**
+     * 糖果雨
+     */
+    TANGGUOYU(11);
     private int value;
 
     GiftType(int value) {

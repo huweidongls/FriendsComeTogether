@@ -68,11 +68,14 @@ public class UpdateService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        app_name = intent.getStringExtra("app_name");
-        down_url = intent.getStringExtra("down_url");
-        createFile(app_name);
-        createNotification();
-        createThread();
+        if (intent.getStringExtra("app_name") !=null && intent.getStringExtra("down_url")!=null){
+            app_name = intent.getStringExtra("app_name");
+            down_url = intent.getStringExtra("down_url");
+            createFile(app_name);
+            createNotification();
+            createThread();
+        }
+
         return super.onStartCommand(intent, flags, startId);
 
     }

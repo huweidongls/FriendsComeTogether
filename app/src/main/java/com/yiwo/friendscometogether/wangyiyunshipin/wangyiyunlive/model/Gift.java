@@ -12,9 +12,9 @@ public class Gift {
     private String title;
     private int count;
     private int imageId;
-    private int integral;
+    private String integral;
     private boolean isChoosed = false;
-    public Gift(GiftType giftType, String title, int count, int imageId,int integral) {
+    public Gift(GiftType giftType, String title, int count, int imageId,String integral) {
         super();
         this.giftType = giftType;
         this.title = title;
@@ -55,11 +55,11 @@ public class Gift {
         this.imageId = imageId;
     }
 
-    public int getIntegral() {
+    public String getIntegral() {
         return integral;
     }
 
-    public void setIntegral(int integral) {
+    public void setIntegral(String integral) {
         this.integral = integral;
     }
 

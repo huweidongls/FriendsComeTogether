@@ -8,10 +8,11 @@ import java.util.List;
 
 public class PersonMain_YouJu_model {
 
+
     /**
      * code : 200
      * message : 获取成功!
-     * obj : {"activity":[{"pfID":"38","pftitle":"测试活动0522","pfcomment":"0","pfcontent":"","pfpic":"http://www.91yiwo.com/ylyy/uploads/xingcheng/20190522/9274caa91ecd3cff4c6a3517779ad0e5.png","pfaddress":"科技大厦","pflook":"81","pftime":"3星期前","follow":"0","headportrait":"http://www.91yiwo.com/ylyy/uploads/header/2019/04/11/3cf035192d93327b9a6e522a1362b16e155496723011.jpg","username":"哈尔滨友来友约文化传媒有限公司","author":"1"},{"pfID":"38","pftitle":"测试活动0522","pfcomment":"0","pfcontent":"","pfpic":"http://www.91yiwo.com/ylyy/uploads/xingcheng/20190522/9274caa91ecd3cff4c6a3517779ad0e5.png","pfaddress":"科技大厦","pflook":"81","pftime":"3星期前","follow":"0","headportrait":"http://www.91yiwo.com/ylyy/uploads/header/2019/04/11/3cf035192d93327b9a6e522a1362b16e155496723011.jpg","username":"哈尔滨友来友约文化传媒有限公司","author":"1"},{"pfID":"37","pftitle":"瞳伴活动","pfcomment":"0","pfcontent":"","pfpic":"http://www.91yiwo.com/ylyy/uploads/xingcheng/20190528/6f56de80e50c153180218cd9feb68e77.jpg","pfaddress":"哈尔滨","pflook":"9","pftime":"4星期前","follow":"0","headportrait":"http://www.91yiwo.com/ylyy/uploads/header/2019/04/11/3cf035192d93327b9a6e522a1362b16e155496723011.jpg","username":"哈尔滨友来友约文化传媒有限公司","author":"1"},{"pfID":"36","pftitle":"测试活动0522","pfcomment":"0","pfcontent":"","pfpic":"http://www.91yiwo.com/ylyy/uploads/xingcheng/20190522/9274caa91ecd3cff4c6a3517779ad0e5.png","pfaddress":"科技大厦","pflook":"8","pftime":"1个月前","follow":"0","headportrait":"http://www.91yiwo.com/ylyy/uploads/header/2019/04/11/3cf035192d93327b9a6e522a1362b16e155496723011.jpg","username":"哈尔滨友来友约文化传媒有限公司","author":"1"},{"pfID":"34","pftitle":"测试邀请订单","pfcomment":"0","pfcontent":"离开家离开家离开家；离开了就； ","pfpic":"http://www.91yiwo.com/ylyy/uploads/xingcheng/20190507/3e40afa64a0b689b7c9dedec43086e20.jpg","pfaddress":"；离开家；离开家； ；离开家；离开家；离开家；离开家","pflook":"71","pftime":"1个月前","follow":"0","headportrait":"http://www.91yiwo.com/ylyy/uploads/header/2019/04/11/3cf035192d93327b9a6e522a1362b16e155496723011.jpg","username":"哈尔滨友来友约文化传媒有限公司","author":"1"}]}
+     * obj : {"activity":[{"pfID":"78","pftitle":"哈尔滨飞越芽庄8日游","pfcomment":"0","pfcontent":"芽庄市是越南中南部沿海城市，以其质朴的海滩和卓越的潜水环境迅速成为受欢迎的国际旅游目的地，依山傍海、林木郁郁葱葱，芽庄湾是世界最美丽的海湾之一。","pfpic":"http://www.tongbanapp.com/uploads/xingcheng/20191121/9f8b60c7bc129a2ff0451f763360e3e0.jpg","pfaddress":"越南芽庄","pflook":"38599","pftime":"1个月前","begin_time":"2019-12-18","end_time":"2019-12-25","phase_id":"226","follow":"0","headportrait":"http://www.tongbanapp.com/uploads/header/2019/11/13/2a2e3ab4a156d4b2156340570cf73b9415736186374.jpg","username":"哈尔滨观光国际旅行社有限公司","author":"1"}]}
      */
 
     private int code;
@@ -55,17 +56,20 @@ public class PersonMain_YouJu_model {
 
         public static class ActivityBean {
             /**
-             * pfID : 38
-             * pftitle : 测试活动0522
+             * pfID : 78
+             * pftitle : 哈尔滨飞越芽庄8日游
              * pfcomment : 0
-             * pfcontent :
-             * pfpic : http://www.91yiwo.com/ylyy/uploads/xingcheng/20190522/9274caa91ecd3cff4c6a3517779ad0e5.png
-             * pfaddress : 科技大厦
-             * pflook : 81
-             * pftime : 3星期前
+             * pfcontent : 芽庄市是越南中南部沿海城市，以其质朴的海滩和卓越的潜水环境迅速成为受欢迎的国际旅游目的地，依山傍海、林木郁郁葱葱，芽庄湾是世界最美丽的海湾之一。
+             * pfpic : http://www.tongbanapp.com/uploads/xingcheng/20191121/9f8b60c7bc129a2ff0451f763360e3e0.jpg
+             * pfaddress : 越南芽庄
+             * pflook : 38599
+             * pftime : 1个月前
+             * begin_time : 2019-12-18
+             * end_time : 2019-12-25
+             * phase_id : 226
              * follow : 0
-             * headportrait : http://www.91yiwo.com/ylyy/uploads/header/2019/04/11/3cf035192d93327b9a6e522a1362b16e155496723011.jpg
-             * username : 哈尔滨友来友约文化传媒有限公司
+             * headportrait : http://www.tongbanapp.com/uploads/header/2019/11/13/2a2e3ab4a156d4b2156340570cf73b9415736186374.jpg
+             * username : 哈尔滨观光国际旅行社有限公司
              * author : 1
              */
 
@@ -77,6 +81,9 @@ public class PersonMain_YouJu_model {
             private String pfaddress;
             private String pflook;
             private String pftime;
+            private String begin_time;
+            private String end_time;
+            private String phase_id;
             private String follow;
             private String headportrait;
             private String username;
@@ -144,6 +151,30 @@ public class PersonMain_YouJu_model {
 
             public void setPftime(String pftime) {
                 this.pftime = pftime;
+            }
+
+            public String getBegin_time() {
+                return begin_time;
+            }
+
+            public void setBegin_time(String begin_time) {
+                this.begin_time = begin_time;
+            }
+
+            public String getEnd_time() {
+                return end_time;
+            }
+
+            public void setEnd_time(String end_time) {
+                this.end_time = end_time;
+            }
+
+            public String getPhase_id() {
+                return phase_id;
+            }
+
+            public void setPhase_id(String phase_id) {
+                this.phase_id = phase_id;
             }
 
             public String getFollow() {

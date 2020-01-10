@@ -163,4 +163,32 @@ public class SpImp {
         editor.commit();
     }
 
+    public void setLastCreateYouJiAddress(String s){
+        editor.putString(SpPublic.LAST_CREATE_YOUJI_ADDRESS, s).toString();
+        editor.commit();
+    }
+    public String getLastCreateYouJiAddress(){
+        return sp.getString(SpPublic.LAST_CREATE_YOUJI_ADDRESS,"");
+    }
+    public void setLastCreateYouJiLabelText(String s){
+        editor.putString(SpPublic.LAST_CREATE_YOUJI_LABEL_TEXT, s).toString();
+        editor.commit();
+    }
+    public String getLastCreateYouJiLabelText(){
+        return sp.getString(SpPublic.LAST_CREATE_YOUJI_LABEL_TEXT,"");
+    }
+    public void setLastCreateYouJiLabelId(String s){
+        editor.putString(SpPublic.LAST_CREATE_YOUJI_LABEL_ID, s).toString();
+        editor.commit();
+    }
+    public String getLastCreateYouJiLabelId(){
+        return sp.getString(SpPublic.LAST_CREATE_YOUJI_LABEL_ID,"");
+    }
+    public void setLastCreateVideoAddress(String s){
+        editor.putString(SpPublic.LAST_CREATE_VIDEO_ADDRESS, s).toString();
+        editor.commit();
+    }
+    public String getLastCreateVideoAddress(){
+        return sp.getString(SpPublic.LAST_CREATE_VIDEO_ADDRESS,"");
+    }
 }

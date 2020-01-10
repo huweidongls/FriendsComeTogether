@@ -57,7 +57,7 @@ import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.fragment.Custo
 
 
 public class MyApplication extends Application {
-    public static String versionCode = "V2.1.0";
+    public static String versionCode = "V4.8";
     public static String sign = "";
     // 注册获取验证码倒计时
     public static TimeCount timecount;

@@ -14,6 +14,7 @@ import com.netease.nimlib.sdk.chatroom.model.ChatRoomMessage;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
 import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.constant.GiftConstant;
+import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.constant.GiftType;
 import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.fragment.GiftAttachment;
 
 import java.util.LinkedList;
@@ -167,11 +168,11 @@ public class GiftAnimation {
         // gift name & image
         GiftAttachment attachment = (GiftAttachment) message.getAttachment();
         TextView giftText = (TextView) root.findViewById(R.id.gift_name);
-        giftText.setText(GiftConstant.titles[attachment.getGiftType().getValue()]);
-
         ImageView giftImage = (ImageView) root.findViewById(R.id.gift_image);
-        giftImage.setImageResource(GiftConstant.images[attachment.getGiftType().getValue()]);
-
+        if (attachment.getGiftType() != GiftType.UNKNOWN){
+            giftText.setText(GiftConstant.titles[attachment.getGiftType().getValue()]);
+            giftImage.setImageResource(GiftConstant.images[attachment.getGiftType().getValue()]);
+        }
         TextView giftNum = root.findViewById(R.id.gift_num);
         giftNum.setText("× "+attachment.getCount());
     }

@@ -33,7 +33,9 @@ public class NetBroadcastReceiver extends BroadcastReceiver {
             int netWorkState = NetUtil.getNetWorkState(context);
             Log.d("NetBroadcast-WorkState",netWorkState+"");
             // 接口回调传过去状态的类型
-            evevt.onNetChange(netWorkState);
+            if (evevt != null){
+                evevt.onNetChange(netWorkState);
+            }
         }
     }
 

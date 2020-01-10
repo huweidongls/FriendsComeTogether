@@ -100,6 +100,7 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
         ButterKnife.bind(this);
         progressDialog = new ProgressDialog(UpLoadVideoActivity.this);
         spImp = new SpImp(UpLoadVideoActivity.this);
+        tvCity.setText(spImp.getLastCreateVideoAddress());
         editText.addTextChangedListener(textTitleWatcher);
         videoItem = (VideoItem) getIntent().getSerializableExtra(TakeVideoFragment_new.EXTRA_VIDEO_ITEM);
         url_screenshot = getIntent().getStringExtra("screenshot");
@@ -311,6 +312,7 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
                 }else if (TextUtils.isEmpty(tvCity.getText().toString())){
                     Toast.makeText(UpLoadVideoActivity.this, "请填写地点", Toast.LENGTH_SHORT).show();
                 }else {
+                    spImp.setLastCreateVideoAddress(tvCity.getText().toString());
                     uploadFile(videoItem);
                 }
                 popupWindow.dismiss();
@@ -319,6 +321,7 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                spImp.setLastCreateVideoAddress(tvCity.getText().toString());
                 saveVideo2Phone();
                 popupWindow.dismiss();
             }

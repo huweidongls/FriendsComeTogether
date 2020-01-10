@@ -65,7 +65,8 @@ public class HomeListYouJiAdapter extends RecyclerView.Adapter<HomeListYouJiAdap
         });
         holder.tvUsername.setText(data.get(position).getUsername());
         holder.tvTime.setText(data.get(position).getPftime());
-        holder.tvGoodNum.setText(data.get(position).getFmgood());
+//        holder.tvGoodNum.setText(data.get(position).getFmgood());//修改为浏览数量
+        holder.tvGoodNum.setText(data.get(position).getPflook());
         holder.rv_youji.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

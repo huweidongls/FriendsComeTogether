@@ -1,14 +1,23 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'bugly'
+bugly {
+    appId = '20d02c310e' // 注册时分配的App ID
+    appKey = 'fc38b23a-e164-4948-af8d-50ce85a16a72' // 注册时分配的App Key
+    debug = true
+    upload = true
+    uploadMapping = true
+    uploadSymbol = true
+}
 android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.yiwo.friendscometogether"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 47
-        versionName "4.7"
+        versionCode 48
+        versionName "4.8"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
@@ -87,6 +96,7 @@ android {
         }
 
     }
+
     greendao {
         schemaVersion 2
         daoPackage 'com.yiwo.friendscometogether.greendao.gen'

@@ -85,6 +85,7 @@ public class DetailsOfFriendTogetherWebActivity extends BaseSonicWebActivity {
     SpImp spImp;
     private String uid;
     private String pfID;
+    private String phase_id;
     private String url;
     private int chooseDateIndex = 0;
     private YouJuWebModel model;
@@ -112,7 +113,12 @@ public class DetailsOfFriendTogetherWebActivity extends BaseSonicWebActivity {
         pfID = getIntent().getStringExtra("pfID");
         setDatabase();
         lookHistoryDbModelDao = mDaoSession.getLookHistoryDbModelDao();
-        url = NetConfig.BaseUrl+"action/ac_activity/youJuWeb?pfID="+pfID+"&uid="+uid;
+        if (getIntent().getStringExtra("phase_id")!= null){
+            phase_id = getIntent().getStringExtra("phase_id");
+            url = NetConfig.BaseUrl+"action/ac_activity/youJuWeb?pfID="+pfID+"&uid="+uid+"&phase_id="+phase_id;
+        }else {
+            url = NetConfig.BaseUrl+"action/ac_activity/youJuWeb?pfID="+pfID+"&uid="+uid;
+        }
         initWebView(webView,url);
         initIntentSonic(url,webView);
         webView.setWebChromeClient(new WebChromeClient(){
@@ -263,7 +269,7 @@ public class DetailsOfFriendTogetherWebActivity extends BaseSonicWebActivity {
                                                 .setShareboardclickCallback(new ShareBoardlistener() {
                                                     @Override
                                                     public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
-                                                        ShareUtils.shareWeb(DetailsOfFriendTogetherWebActivity.this, shareModel.getObj().getUrl(), shareModel.getObj().getTitle(),
+                                                        ShareUtils.shareWeb(DetailsOfFriendTogetherWebActivity.this, shareModel.getObj().getUrl()+"&uid="+spImp.getUID(), shareModel.getObj().getTitle(),
                                                                 shareModel.getObj().getDesc(), shareModel.getObj().getImages(), share_media);
                                                     }
                                                 }).open();
