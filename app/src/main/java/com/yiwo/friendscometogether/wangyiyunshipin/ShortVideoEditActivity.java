@@ -448,7 +448,7 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
 //                showNameDialog();
                 displayName = "友记视频:" + spImp.getUID()+"-"+TimeUtil.getMonthTimeString(System.currentTimeMillis());
                 videoView.setVisibility(View.GONE);
-                editRoot.setVisibility(View.GONE);
+                editRoot.setVisibility(View.VISIBLE);
                 DialogMaker.showProgressDialog(ShortVideoEditActivity.this, "");
                 stopPlayer();
                 mediaPlayer.stop();
@@ -1169,51 +1169,51 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
      * ************* 设置完成，开始拼接视频 *****************
      */
     // 设置视频名称
-    private void showNameDialog() {
-        final EasyEditDialog_new requestDialog = new EasyEditDialog_new(ShortVideoEditActivity.this);
-        requestDialog.setEditTextMaxLength(200);
-        requestDialog.setTitle("视频名称");
-        requestDialog.setEditHint("新视频" + TimeUtil.getMonthTimeString(System.currentTimeMillis()));
-        requestDialog.setInputType(InputType.TYPE_CLASS_TEXT);
-        requestDialog.setCustomTextWatcher(true);
-        requestDialog.addNegativeButtonListener(R.string.cancel, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestDialog.dismiss();
-            }
-        });
-        requestDialog.addPositiveButtonListener(R.string.save, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                displayName = requestDialog.getEditMessage();
-                if (TextUtils.isEmpty(displayName)) {
-                    Toast.makeText(ShortVideoEditActivity.this, "不能为空", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                requestDialog.dismiss();
-                videoView.setVisibility(View.GONE);
-                editRoot.setVisibility(View.GONE);
-                DialogMaker.showProgressDialog(ShortVideoEditActivity.this, "");
-                stopPlayer();
-
-                startVideoProcess();
-            }
-        });
-        requestDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-            }
-        });
-        requestDialog.show();
-
-        getHandler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputMethodManager.showSoftInput(requestDialog.getmEdit(), 0);
-            }
-        }, 200);
-    }
+//    private void showNameDialog() {
+//        final EasyEditDialog_new requestDialog = new EasyEditDialog_new(ShortVideoEditActivity.this);
+//        requestDialog.setEditTextMaxLength(200);
+//        requestDialog.setTitle("视频名称");
+//        requestDialog.setEditHint("新视频" + TimeUtil.getMonthTimeString(System.currentTimeMillis()));
+//        requestDialog.setInputType(InputType.TYPE_CLASS_TEXT);
+//        requestDialog.setCustomTextWatcher(true);
+//        requestDialog.addNegativeButtonListener(R.string.cancel, new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                requestDialog.dismiss();
+//            }
+//        });
+//        requestDialog.addPositiveButtonListener(R.string.save, new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                displayName = requestDialog.getEditMessage();
+//                if (TextUtils.isEmpty(displayName)) {
+//                    Toast.makeText(ShortVideoEditActivity.this, "不能为空", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                requestDialog.dismiss();
+//                videoView.setVisibility(View.GONE);
+//                editRoot.setVisibility(View.GONE);
+//                DialogMaker.showProgressDialog(ShortVideoEditActivity.this, "");
+//                stopPlayer();
+//
+//                startVideoProcess();
+//            }
+//        });
+//        requestDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//            @Override
+//            public void onCancel(DialogInterface dialog) {
+//            }
+//        });
+//        requestDialog.show();
+//
+//        getHandler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                inputMethodManager.showSoftInput(requestDialog.getmEdit(), 0);
+//            }
+//        }, 200);
+//    }
 
     private int videoWidth;
     private int videoHeight;
@@ -1339,8 +1339,9 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
     private void setTexture(VideoProcessOptions videoProcessOptions) {
         // 按照原始视频大小贴图
         List<TranscodingAPI.TranWaterMark> waterList = new ArrayList<>();
-        TranscodingAPI.TranWaterMark textureMark = null;
-        TranscodingAPI.TranWaterMark wordMark = null;
+        TranscodingAPI.TranWaterMark textureMark = null;//文字贴图
+        TranscodingAPI.TranWaterMark wordMark = null;//图片贴图
+        TranscodingAPI.TranWaterMark wordMarkWaterMark = null;//瞳伴水印
         // 贴图持续时间不能为0
         if (textureBitmap != null && textureDuration != 0) {
             float xpos;
@@ -1508,6 +1509,10 @@ public class ShortVideoEditActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onVideoProcessFailed(int code) {
+        if (code == 11 && pathList.size()>1){
+            Toast.makeText(this, "拼接的视频格式不支持:" + code, Toast.LENGTH_SHORT).show();
+            return;
+        }
         Toast.makeText(this, "视频保存失败:" + code, Toast.LENGTH_SHORT).show();
         // 视频保存失败，直接退出录制界面
         Intent intent = new Intent();

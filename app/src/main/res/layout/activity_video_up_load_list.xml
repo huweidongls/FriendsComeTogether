@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yiwo.friendscometogether.wangyiyunshipin.VideoUpLoadListActivity">
+    <RelativeLayout
+        android:background="@color/red_d84c37"
+        android:layout_height="30dp"
+        android:layout_width="match_parent"
+        android:id="@+id/rl_top"
+        >
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/white_ffffff"
+            android:text="上传列表" />
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="40dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:src="@mipmap/back_w"
+                android:layout_width="15dp"
+                android:layout_height="15dp"/>
+
+        </RelativeLayout>
+
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/activity_up_load_video_rl_complete"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_width="100px"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--<TextView-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:textColor="@color/white_ffffff"-->
+                <!--android:textSize="30px"-->
+                <!--android:text="完成"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+
+        <!--</RelativeLayout>-->
+
+    </RelativeLayout>
+    <com.yiwo.friendscometogether.wangyiyunshipin.widget.RecyclerViewEmptySupport
+        android:layout_below="@+id/rl_top"
+        android:layout_marginTop="10dp"
+        android:id="@+id/video_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp" />
+
+    <include layout="@layout/empty_view" />
+</RelativeLayout>

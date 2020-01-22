@@ -13,6 +13,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -25,6 +26,7 @@ import com.vise.xsnow.http.callback.ACallback;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivityChoosePicOrVideos;
+import com.yiwo.friendscometogether.newpage.UpLoadVideoActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.StringUtils;
 import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
@@ -262,7 +264,7 @@ public class UploadService extends Service {
                     videoItem.setState(STATE_UPLOAD_COMPLETE);
                     UploadTotalDataAccessor.getInstance().uploadSuccess(videoItem);
                     JSONObject json = JSON.parseObject(callRet.getCallbackRetMsg());
-                    Log.d("asdasdsd",json.toJSONString());
+                    Log.d("asdasdsd11",json.toJSONString());
                     if (json != null && json.getInteger("code") == 200) {
                         long vid = json.getJSONObject("ret").getLong("vid");
                         String requestId = json.getString("requestId");
@@ -270,6 +272,7 @@ public class UploadService extends Service {
                         videoItem.setVid(vid);
                         UploadTotalDataAccessor.getInstance().getWaitAddToServerItems().add(videoItem);
                         UploadDbHelper.updateToDb(videoItem);
+                        Log.d("asdasdsd11","aa2");
                         addVideoToDemoServer(videoItem);
                     }
 
@@ -280,6 +283,7 @@ public class UploadService extends Service {
 
                 @Override
                 public void onFailure(CallRet callRet) {
+                    Log.d("asdasdsd11:onFailure",callRet.getCallbackRetMsg());
                     videoItem.setState(STATE_UPLOAD_FAIL);
                     controller.onReceiveUploadCallback(videoItem.getId(), 0, STATE_UPLOAD_FAIL);
                     UploadDbHelper.updateToDb(videoItem);
@@ -351,6 +355,7 @@ public class UploadService extends Service {
                             videoItem.setVid(vid);
                             UploadTotalDataAccessor.getInstance().getWaitAddToServerItems().add(videoItem);
                             UploadDbHelper.updateToDb(videoItem);
+                            Log.d("asdasdsd11","aa3");
                             addVideoToDemoServer(videoItem);
                         }
                     }
@@ -379,7 +384,6 @@ public class UploadService extends Service {
         } else {
             return false;
         }
-
     }
 
     private UploadBuilder getUploadBuild(String name) {
@@ -414,22 +418,28 @@ public class UploadService extends Service {
             @Override
             public void run() {
                 if (videoItem.getType() == UploadType.SHORT_VIDEO) {
-                    ViseHttp.POST(NetConfig.videoInfo)
-                            .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.videoInfo))
-                            .addParam("vid", videoItem.getVid()+"")
+                    Log.d("asdasdsd11","vid::"+videoItem.getVid()+"");
+                    ViseHttp.POST(NetConfig.videoInfoUpload)
+                            .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.videoInfoUpload))
+                            .addParam("vname",videoItem.getVideoFaBuName())
+                            .addParam("vid",videoItem.getVid()+"")
+                            .addParam("uid",spImp.getUID())
+                            .addParam("address",videoItem.getVideoAddress())
                             .request(new ACallback<String>() {
                                 @Override
                                 public void onSuccess(String data) {
+                                    Log.d("asdasdsd11",data);
                                     JSONObject jsonObject = JSONObject.parseObject(data);
                                     int resCode = jsonObject.getIntValue("code");
                                     if(resCode == 200) {
+                                        Toast.makeText(UploadService.this,"发布成功",Toast.LENGTH_SHORT).show();
                                         AddVideoResponseEntity entity = new AddVideoResponseEntity();
                                         JSONObject videoInfoJson = jsonObject.getJSONObject("obj").getJSONObject("ret");
                                         VideoInfoEntity videoInfoEntity = new VideoInfoEntity();
                                         videoInfoEntity.setCreateTime(videoInfoJson.getLongValue("createTime"));
                                         videoInfoEntity.setOrigUrl(videoInfoJson.getString("origUrl"));
                                         videoInfoEntity.setSnapshotUrl(videoInfoJson.getString("snapshotUrl"));
-                                        Log.d("asdasdsd","//00//  "+"\n"+data+"\n"+videoInfoEntity.getSnapshotUrl()+"//////"+videoInfoJson.getString("snapshotUrl"));
+                                        Log.d("asdasdsd ;code == 200","//00//  "+"\n"+data+"\n"+videoInfoEntity.getSnapshotUrl()+"//////"+videoInfoJson.getString("snapshotUrl"));
                                         videoInfoEntity.setUpdateTime(videoInfoJson.getLongValue("updateTime"));
                                         videoInfoEntity.setVid(videoInfoJson.getLongValue("vid"));
                                         videoInfoEntity.setTypeName(videoInfoJson.getString("typeName"));
@@ -437,15 +447,63 @@ public class UploadService extends Service {
                                         videoInfoEntity.setDuration(videoInfoJson.getLong("duration"));
                                         videoInfoEntity.setInitialSize(videoInfoJson.getLong("initialSize"));
                                         entity.setVideoInfoEntity(videoInfoEntity);
+
+                                        UploadDbHelper.removeItemFromDb(videoItem);
+                                        UploadTotalDataAccessor.getInstance().getWaitAddToServerItems().remove(videoItem);
+                                        UploadTotalDataAccessor.getInstance().uploadSuccess(videoItem);
+
                                         controller.onAddVideoResult(200, videoItem.getId(), entity);
+                                    }else {
+                                        Toast.makeText(UploadService.this,"发布失败",Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
                                 @Override
                                 public void onFail(int errCode, String errMsg) {
-                                    controller.onAddVideoResult(errCode, videoItem.getId(), null);
+
                                 }
                             });
+//                    ViseHttp.POST(NetConfig.videoInfo)
+//                            .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.videoInfo))
+//                            .addParam("vid", videoItem.getVid()+"")
+//                            .request(new ACallback<String>() {
+//                                @Override
+//                                public void onSuccess(String data) {
+//                                    Log.d("asdasdsd11",data);
+//                                    JSONObject jsonObject = JSONObject.parseObject(data);
+//                                    int resCode = jsonObject.getIntValue("code");
+//                                    if(resCode == 200) {
+//                                        AddVideoResponseEntity entity = new AddVideoResponseEntity();
+//                                        JSONObject videoInfoJson = jsonObject.getJSONObject("obj").getJSONObject("ret");
+//                                        VideoInfoEntity videoInfoEntity = new VideoInfoEntity();
+//                                        videoInfoEntity.setCreateTime(videoInfoJson.getLongValue("createTime"));
+//                                        videoInfoEntity.setOrigUrl(videoInfoJson.getString("origUrl"));
+//                                        videoInfoEntity.setSnapshotUrl(videoInfoJson.getString("snapshotUrl"));
+//                                        Log.d("asdasdsd ;code == 200","//00//  "+"\n"+data+"\n"+videoInfoEntity.getSnapshotUrl()+"//////"+videoInfoJson.getString("snapshotUrl"));
+//                                        videoInfoEntity.setUpdateTime(videoInfoJson.getLongValue("updateTime"));
+//                                        videoInfoEntity.setVid(videoInfoJson.getLongValue("vid"));
+//                                        videoInfoEntity.setTypeName(videoInfoJson.getString("typeName"));
+//                                        videoInfoEntity.setVideoName(videoInfoJson.getString("videoName"));
+//                                        videoInfoEntity.setDuration(videoInfoJson.getLong("duration"));
+//                                        videoInfoEntity.setInitialSize(videoInfoJson.getLong("initialSize"));
+//                                        entity.setVideoInfoEntity(videoInfoEntity);
+//                                        upload2TongBan(videoItem,videoInfoEntity);
+//                                        UploadDbHelper.removeItemFromDb(videoItem);
+//                                        UploadTotalDataAccessor.getInstance().getWaitAddToServerItems().remove(videoItem);
+//                                        UploadTotalDataAccessor.getInstance().uploadSuccess(videoItem);
+//
+//                                        controller.onAddVideoResult(200, videoItem.getId(), entity);
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void onFail(int errCode, String errMsg) {
+//                                    controller.onAddVideoResult(errCode, videoItem.getId(), null);
+//                                }
+//                            });
+                    /**
+                     *
+                     */
 //                    不使用demo的上传方法！！！
 //                    DemoServerHttpClient.getInstance().addVideo(videoItem.getVid(), videoItem.getDisplayName(), 1, new DemoServerHttpClient.DemoServerHttpCallback<AddVideoResponseEntity>() {
 //                        @Override
@@ -497,6 +555,37 @@ public class UploadService extends Service {
 
             }
         });
+    }
+
+    private void upload2TongBan(VideoItem videoItem,VideoInfoEntity videoInfoEntity) {
+        ViseHttp.POST(NetConfig.upLoadVideo)
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.upLoadVideo))
+                .addParam("userID", spImp.getUID())
+                .addParam("vname",videoItem.getVideoFaBuName())
+                .addParam("vurl",videoInfoEntity.getOrigUrl())
+                .addParam("img",videoInfoEntity.getSnapshotUrl())
+                .addParam("wy_vid",videoInfoEntity.getVid()+"")
+                .addParam("address",videoItem.getVideoAddress())
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            org.json.JSONObject jsonObject = new org.json.JSONObject(data);
+                            if (jsonObject.getInt("code") == 200){
+                                Toast.makeText(UploadService.this,"发布成功",Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(UploadService.this,"发布失败",Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
     }
 
     /**

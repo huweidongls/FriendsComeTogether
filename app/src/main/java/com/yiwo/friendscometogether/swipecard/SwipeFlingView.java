@@ -477,7 +477,8 @@ public class SwipeFlingView extends AdapterView {
             return;
         }
         View activeCard = mActiveCard;
-        if (activeCard != null) {
+//        if (activeCard != null) {
+            if (true) {
             mCurPositon -= 1;
             View lastView = mRecycleBin.getLastActiveView();
             if (lastView != null) {

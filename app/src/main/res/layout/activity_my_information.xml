@@ -594,7 +594,44 @@
                 android:background="@color/line"
                 android:layout_width="match_parent"
                 android:layout_height="12px"/>
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/activity_my_information_rl_duizhang_renzheng"
+                android:layout_width="match_parent"
+                android:layout_height="88px">
 
+                <ImageView
+                    android:id="@+id/activity_my_information_iv__duizhang_renzheng"
+                    android:layout_marginLeft="35px"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/person_renzheng"
+                    android:layout_width="50px"
+                    android:layout_height="50px" />
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10px"
+                    android:layout_toRightOf="@+id/activity_my_information_iv__duizhang_renzheng"
+                    android:textSize="28px"
+                    android:textColor="@color/black_333333"
+                    android:text="申请队长认证"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_marginRight="30px"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/right"
+                    android:layout_width="30px"
+                    android:layout_height="30px" />
+            </RelativeLayout>
+
+            <View
+                android:visibility="gone"
+                android:background="@color/line"
+                android:layout_width="match_parent"
+                android:layout_height="12px"/>
 
 
         </LinearLayout>

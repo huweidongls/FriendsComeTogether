@@ -28,7 +28,7 @@ import com.example.library.banner.layoutmanager.BannerLayoutManager;
 
 import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
 
-public class BannerLayout extends FrameLayout {
+public class BannerLayout extends FrameLayout {/////注意！！调用adapter的NotifyChanged方法将不会循环加载
 
     private int autoPlayDuration;//刷新间隔时间
 

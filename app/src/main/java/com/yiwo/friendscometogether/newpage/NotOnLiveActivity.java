@@ -243,7 +243,7 @@ public class NotOnLiveActivity extends BaseActivity {
                 });
         //----------友聚----------
         ViseHttp.POST(NetConfig.homepagePartthree)
-                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartTwo))
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartthree))
                 .addParam("uid", spImp.getUID())
                 .addParam("tid", person_id)
                 .addParam("status",status)
@@ -350,7 +350,7 @@ public class NotOnLiveActivity extends BaseActivity {
                     case 3:
                         //----------友聚----------
                         ViseHttp.POST(NetConfig.homepagePartthree)
-                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartTwo))
+                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartthree))
                                 .addParam("uid", spImp.getUID())
                                 .addParam("tid", person_id)
                                 .addParam("status",status)

@@ -127,6 +127,9 @@ public class HomeDataRecommendAdapter2 extends RecyclerView.Adapter<HomeDataReco
             tvLab2 = itemView.findViewById(R.id.tv_tab_2);
             iv = itemView.findViewById(R.id.iv);
             ll = itemView.findViewById(R.id.ll);
+            tvName = itemView.findViewById(R.id.tv_name);
+            tvName = itemView.findViewById(R.id.tv_name);
+
         }
     }
 

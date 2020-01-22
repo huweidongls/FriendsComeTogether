@@ -34,6 +34,7 @@ import com.yiwo.friendscometogether.base.BaseActivity;
 import com.yiwo.friendscometogether.custom.DuiZhangShowDialog;
 import com.yiwo.friendscometogether.custom.FriendDescribeDialog;
 import com.yiwo.friendscometogether.custom.HuoZanDialog;
+import com.yiwo.friendscometogether.custom.NotOnLiveDialog;
 import com.yiwo.friendscometogether.model.KVMode;
 import com.yiwo.friendscometogether.model.PersonMain_Pics_model;
 import com.yiwo.friendscometogether.model.PersonMain_YouJu_model;
@@ -215,6 +216,9 @@ public class PersonMainActivity1 extends BaseActivity {
             recycler_view_labels.setVisibility(View.VISIBLE);
             rl_label_text.setVisibility(View.VISIBLE);
         }
+        if (getIntent().getBooleanExtra("is_by_live",false)){
+            showDialogNotOnLive(getIntent().getStringExtra("next_on_live_time"));
+        }
         //---------------先设置label 的 manager-------------
 //        FlowLayoutManager managerFlow = new FlowLayoutManager(){
 //            @Override
@@ -246,6 +250,11 @@ public class PersonMainActivity1 extends BaseActivity {
         bottom_line_2.setVisibility(View.VISIBLE);
         initRecyclerView();
         initRefresh();
+    }
+
+    private void showDialogNotOnLive(String time) {
+        NotOnLiveDialog dialog = new NotOnLiveDialog(PersonMainActivity1.this,time);
+        dialog.show();
     }
 
     private void initRecyclerView() {
@@ -356,7 +365,7 @@ public class PersonMainActivity1 extends BaseActivity {
                 });
         //----------友聚----------
         ViseHttp.POST(NetConfig.homepagePartthree)
-                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartTwo))
+                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartthree))
                 .addParam("uid", spImp.getUID())
                 .addParam("tid", person_id)
                 .addParam("status",status)
@@ -420,7 +429,7 @@ public class PersonMainActivity1 extends BaseActivity {
             @Override
             public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
                 ViseHttp.POST(NetConfig.homepagePartOne)
-                        .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.personMain))
+                        .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartOne))
                         .addParam("uid", spImp.getUID())
                         .addParam("tid", person_id)
                         .addParam("status",status)//=0时传 用户ID    =1时传网易ID
@@ -613,7 +622,7 @@ public class PersonMainActivity1 extends BaseActivity {
                     case 3:
                         //----------友聚----------
                         ViseHttp.POST(NetConfig.homepagePartthree)
-                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartTwo))
+                                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.homepagePartthree))
                                 .addParam("uid", spImp.getUID())
                                 .addParam("tid", person_id)
                                 .addParam("status",status)

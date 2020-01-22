@@ -12,6 +12,9 @@ public class VideoItem implements Serializable {
     String id; //本地视频才具有id
     String uriString;
 
+    String videoFaBuName = "";
+    String videoAddress = "";
+
     String displayName;
     String filePath;
     String dateTaken;//产生的时间
@@ -185,5 +188,21 @@ public class VideoItem implements Serializable {
 
     public void setRequestId(String requestId) {
         this.requestId = requestId;
+    }
+
+    public String getVideoFaBuName() {
+        return videoFaBuName;
+    }
+
+    public void setVideoFaBuName(String videoFaBuName) {
+        this.videoFaBuName = videoFaBuName;
+    }
+
+    public String getVideoAddress() {
+        return videoAddress;
+    }
+
+    public void setVideoAddress(String videoAddress) {
+        this.videoAddress = videoAddress;
     }
 }

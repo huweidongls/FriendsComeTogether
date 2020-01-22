@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_marginBottom="30px"
+        android:id="@+id/rl_tuijian_huodong_first"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.example.library.banner.BannerLayout
+            app:orientation="horizontal"
+            android:layout_centerInParent="true"
+            android:id="@+id/recyclerbanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:background="@color/white_ffffff"
+        android:id="@+id/ll_live"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginRight="20px"
+            android:textSize="32px"
+            android:id="@+id/tv_text_youju"
+            android:layout_marginTop="20px"
+            android:layout_marginLeft="20px"
+            android:layout_marginBottom="20px"
+            android:text="— 队长在线 —"
+            android:textColor="#666666"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:paddingBottom="10px"
+        android:background="@color/white_ffffff"
+        android:paddingLeft="20px"
+        android:paddingRight="20px"
+        android:id="@+id/rv_home_1_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_marginTop="30px"
+        android:background="@color/white_ffffff"
+        android:paddingLeft="20px"
+        android:paddingRight="20px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="32px"
+            android:visibility="visible"
+            android:id="@+id/tv_text_youji"
+            android:layout_marginTop="10px"
+            android:layout_marginLeft="20px"
+            android:layout_marginBottom="15px"
+            android:text="— 友记文章视频 —"
+            android:textColor="#666666"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:background="@color/white_ffffff"
+        android:id="@+id/rv_home_1_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

@@ -551,6 +551,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".newpage.UpLoadVideoActivity" />
+        <activity android:name=".newpage.AddVideoTitleActivity" />
         <!-- 云视频上传服务 -->
         <service android:name=".wangyiyunshipin.upload.controller.UploadService" />
 
@@ -584,7 +585,9 @@
         <activity android:name=".webpages.MyJiFenActivity" />
         <activity android:name=".newpage.PayRankActivity" />
         <activity android:name=".newpage.GiftSendListActivity" />
-        <activity android:name=".newpage.ChongZhi_ZengSongListActivity"></activity>
+        <activity android:name=".newpage.ChongZhi_ZengSongListActivity" />
+        <activity android:name=".wangyiyunshipin.VideoUpLoadListActivity" />
+        <activity android:name=".newpage.ApplyForCaptainActivity"></activity>
     </application>
 
 </manifest>

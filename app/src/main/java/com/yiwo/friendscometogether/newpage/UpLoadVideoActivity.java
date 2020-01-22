@@ -24,7 +24,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -40,12 +39,10 @@ import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseActivity;
-import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
 import com.yiwo.friendscometogether.model.CityModel;
 import com.yiwo.friendscometogether.network.ActivityConfig;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.pages.CityActivity;
-import com.yiwo.friendscometogether.pages.UpdateActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.FileUtils;
 import com.yiwo.friendscometogether.wangyiyunshipin.TakeVideoFragment_new;
@@ -60,7 +57,6 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -229,16 +225,15 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
     public void onDataSetChanged(List<VideoItem> data) {
 
     }
-
     @Override
     public void onAddVideoResult(int code, String id, AddVideoResponseEntity addVideoResponseEntity) {
-        Log.d("asdasdsd",code+"////  "+addVideoResponseEntity.getVideoInfoEntity().getSnapshotUrl()+"//vid:::"+addVideoResponseEntity.getVideoInfoEntity().getVid());
+        Log.d("aaaashangchuan",code+"////  "+addVideoResponseEntity.getVideoInfoEntity().getSnapshotUrl()+"//vid:::"+addVideoResponseEntity.getVideoInfoEntity().getVid());
 //        WeiboDialogUtils.closeDialog(dialog);
         progressDialog.dismiss();
         if (code == 200){
-//            if (addVideoResponseEntity.getVideoInfoEntity()!=null){
-//                Log.d("asdasdsd",addVideoResponseEntity.getVideoInfoEntity().getOrigUrl());
-//            }
+            if (addVideoResponseEntity.getVideoInfoEntity()!=null){
+                Log.d("asdasdsd",addVideoResponseEntity.getVideoInfoEntity().getOrigUrl());
+            }
                 ViseHttp.POST(NetConfig.upLoadVideo)
                         .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.upLoadVideo))
                         .addParam("userID", spImp.getUID())
@@ -313,6 +308,9 @@ public class UpLoadVideoActivity extends BaseActivity implements UploadControlle
                     Toast.makeText(UpLoadVideoActivity.this, "请填写地点", Toast.LENGTH_SHORT).show();
                 }else {
                     spImp.setLastCreateVideoAddress(tvCity.getText().toString());
+//                    VideoUpLoadListActivity.startUpLoadVideoActivity(UpLoadVideoActivity.this,videoItem);
+                    videoItem.setVideoFaBuName(editText.getText().toString());
+                    videoItem.setVideoAddress(tvCity.getText().toString());
                     uploadFile(videoItem);
                 }
                 popupWindow.dismiss();

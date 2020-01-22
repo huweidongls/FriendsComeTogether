@@ -43,7 +43,7 @@ public class UploadController extends BaseUiController<UploadController.UploadUi
     private Handler handler;
 
     private AlertDialog MobileNetworkDialog; //移动网络的提示框
-    private boolean needResumeUpload; //是否需要恢复上传
+    private boolean needResumeUpload = true; //是否需要恢复上传
     private boolean allowMobileNetwork = false; //是否允许移动网络进行上传
     private boolean needToAlert = true;
 
@@ -241,7 +241,7 @@ public class UploadController extends BaseUiController<UploadController.UploadUi
             Log.d("asdasdsd:",";;;binder.startUpload");
             mBinder.startUpload();
         }
-        needResumeUpload = false;
+        needResumeUpload = true;
     }
 
     /**
@@ -297,7 +297,14 @@ public class UploadController extends BaseUiController<UploadController.UploadUi
                     needResumeUpload = true;
 
                     if (!NetworkUtils.isNetworkConnected(false)) {
-                        Toast.makeText(mContext.getApplicationContext(), "网络异常, 恢复后将继续上传", Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(DemoCache.getVisibleActivity() == null ? mContext : DemoCache.getVisibleActivity());
+                        builder.setMessage("网络异常, 恢复后将自动继续上传")
+                                .setNegativeButton("我知道了", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                }).show();
                     } else if (NetworkUtils.getNetworkType() == NetworkUtils.TYPE_MOBILE) {
                         Toast.makeText(mContext.getApplicationContext(), "已切换至蜂窝网络, 暂停上传", Toast.LENGTH_SHORT).show();
                     }

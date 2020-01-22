@@ -42,6 +42,7 @@ import com.netease.vcloud.video.effect.VideoEffect;
 import com.netease.vcloud.video.render.NeteaseView;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
+import com.yiwo.friendscometogether.newpage.AddVideoTitleActivity;
 import com.yiwo.friendscometogether.newpage.UpLoadVideoActivity;
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.MediaCaptureController;
 import com.yiwo.friendscometogether.wangyiyunshipin.shortvideo.model.MediaCaptureOptions;
@@ -189,7 +190,9 @@ public class TakeVideoFragment_new extends BaseFragment implements MediaCaptureC
                 // 视频编辑完成
                 VideoItem videoItem = (VideoItem)  data.getSerializableExtra(EXTRA_VIDEO_ITEM);
                 if (videoItem != null) {
-                    UpLoadVideoActivity.startUpLoadVideoActivity(getContext(), (VideoItem) data.getSerializableExtra(EXTRA_VIDEO_ITEM),videoPathList.get(0));
+                    AddVideoTitleActivity.startUpLoadVideoActivity(getContext(), (VideoItem) data.getSerializableExtra(EXTRA_VIDEO_ITEM),videoPathList.get(0));
+//                    UpLoadVideoActivity.startUpLoadVideoActivity(getContext(), (VideoItem) data.getSerializableExtra(EXTRA_VIDEO_ITEM),videoPathList.get(0));
+//                    VideoUpLoadListActivity.startVideoUpLoadListActivity(getContext(), (VideoItem) data.getSerializableExtra(EXTRA_VIDEO_ITEM));
 //                    Intent intent = new Intent(getContext(),UpLoadVideoActivity.class);
 //                    intent.putExtra(EXTRA_VIDEO_ITEM, data.getSerializableExtra(EXTRA_VIDEO_ITEM));
 //                    getContext().startActivity(intent);

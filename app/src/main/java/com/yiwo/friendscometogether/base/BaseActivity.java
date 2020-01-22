@@ -23,6 +23,7 @@ import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.pages.MyFriendRememberActivity;
 import com.yiwo.friendscometogether.utils.StringUtils;
 import com.yiwo.friendscometogether.utils.TokenUtils;
+import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -41,6 +42,20 @@ public class BaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_base);
         MyApplication.getInstance().addActivity(this);
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DemoCache.setVisibleActivity(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        DemoCache.setVisibleActivity(null);
+    }
+
     /**
      * 检测当的网络（WLAN、3G/2G）状态
      * @param context Context

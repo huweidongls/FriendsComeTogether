@@ -32,6 +32,8 @@ public class NetConfig {
     public static String articleContentUrl = "action/ac_article/article_slide";
     //友聚列表
     public static String friendsTogetherUrl = "action/ac_activity/activity_all_list";
+    //新友聚列表
+    public static String activityAllList = "action/ac_activity/activityAllList";
     //友聚详情
     public static String friendsTogetherDetailsUrl = "action/ac_activity/activity_info";
     //首页友记热门列表
@@ -361,6 +363,8 @@ public class NetConfig {
     public static String upLoadVideo = "action/ac_video/uploadVideo"; //添加视频接口   传userID用户id  vname视频名称   vurl视频地址
     //获取视频信息接口
     public static String videoInfo = "action/ac_video/videoInfo";//   传vid"
+    //新上传视频接口，无需在调用获取视频信息接口 //action/ac_video/   videoInfoUpload  传vname视频标题  vid视频网易id   uid用户id   address地址
+    public static String videoInfoUpload = "action/ac_video/videoInfoUpload";
     //我的视频列表
     public static String myVideo = "action/ac_video/myVideo"; //传userID 用户id   page分页  返回 vID 视频ID   vname名称   vurl地址  vtime时间  img图片地址
     //编辑视频名称
@@ -380,6 +384,10 @@ public class NetConfig {
     //新首页 推荐列表接口
     public static String homeRecommend = "action/ac_activity/HomeRecommend"; //action/ac_activity/HomeRecommend 推荐 传 page 分页 uid用户id 未登录传0    city城市
     public static String homeRecommend2 = "action/ac_activity/HomeRecommend2";
+    /////新首页顶部数据接口  banner 推荐活动 活动队长直播；
+    public static String homePage = "action/ac_home/homePage";
+    ////action/ac_home/homeYouJiVideo   友记列表   传page分页  uid用户Id city城市
+    public static String homeYouJiVideo = "action/ac_home/homeYouJiVideo";
     //新首页 视频列表接口
     public static String homeVideo = "action/ac_activity/HomeVideo";//action/ac_activity/HomeVideo  视频   传page 分页 uid用户id 未登陆传0   返回    status 是否赞过 0未赞 1已赞  praise_num赞数量  comment_num评论数量  vID视频ID  vname视频名称  img图片  vurl视频地址  userID发视频人的ID    vtime发布时间  username发布视频的用户的昵称
     //新首页 友记列表接口
@@ -440,5 +448,7 @@ public class NetConfig {
     public static String buyIntegralList = "action/ac_zhibo/buyIntegralList";
     //action/ac_zhibo/    sendList 送礼物列表    传uid用户id   page分页   返回userID送给人的ID    presentName礼物名称   presentImg礼物图片   integral花费的积分    num送的数量    username送给人的名字   addTime送礼物的时间
     public static String sendList = "action/ac_zhibo/sendList";
+    //action/ac_user/pleaseCaptain 申请成为队长  传uid用户id   captainImg图片
+    public static String pleaseCaptain = "action/ac_user/pleaseCaptain";
 
 }

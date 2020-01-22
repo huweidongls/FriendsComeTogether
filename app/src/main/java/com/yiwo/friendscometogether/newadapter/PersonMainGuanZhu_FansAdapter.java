@@ -75,7 +75,7 @@ public class PersonMainGuanZhu_FansAdapter extends RecyclerView.Adapter<PersonMa
         }else {
             holder.tv_guanzhu.setVisibility(View.VISIBLE);
         }
-        if (bean.getStatus()!=null){
+        if (bean.getStatus()!=null || bean.getStatus().equals("")){
             if(bean.getStatus().equals("1")){
                 holder.tv_guanzhu.setBackgroundResource(R.drawable.bg_red_24px);
                 holder.tv_guanzhu.setTextColor(Color.parseColor("#ffffff"));

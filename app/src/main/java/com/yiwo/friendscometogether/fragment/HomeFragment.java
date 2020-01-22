@@ -6,12 +6,9 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.Point;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
@@ -29,15 +26,12 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -47,8 +41,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.library.banner.BannerLayout;
 import com.google.gson.Gson;
-import com.netease.nim.uikit.common.ui.dialog.DialogMaker;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
@@ -56,11 +50,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tencent.sonic.sdk.SonicConfig;
 import com.tencent.sonic.sdk.SonicEngine;
-import com.tencent.sonic.sdk.SonicSession;
 import com.tencent.sonic.sdk.SonicSessionConfig;
-import com.umeng.socialize.UMAuthListener;
-import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -68,19 +58,17 @@ import com.yiwo.friendscometogether.MainActivity;
 import com.yiwo.friendscometogether.MyApplication;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
-import com.yiwo.friendscometogether.custom.LookPasswordDialog;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
-import com.yiwo.friendscometogether.custom.XieYiDialog;
 import com.yiwo.friendscometogether.model.AllBannerModel;
 import com.yiwo.friendscometogether.model.BaiduCityModel;
 import com.yiwo.friendscometogether.model.CityModel;
-import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.network.ActivityConfig;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.HomeDataAdapter;
 import com.yiwo.friendscometogether.newadapter.HomeDataRecommendAdapter1;
 import com.yiwo.friendscometogether.newadapter.HomeDataRecommendAdapter2;
 import com.yiwo.friendscometogether.newadapter.HomeDataRecommendLiveListAdapter;
+import com.yiwo.friendscometogether.newadapter.HomeFragmentFirstBannerAdapter;
 import com.yiwo.friendscometogether.newadapter.HomeListVideoAdapter;
 import com.yiwo.friendscometogether.newadapter.HomeListYouJiAdapter;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
@@ -88,22 +76,18 @@ import com.yiwo.friendscometogether.newmodel.HomeDataModel1;
 import com.yiwo.friendscometogether.newmodel.HomeVideoListModel;
 import com.yiwo.friendscometogether.newmodel.IndexLabelModel;
 import com.yiwo.friendscometogether.newpage.MessageActivity;
-import com.yiwo.friendscometogether.newpage.NotOnLiveActivity;
-import com.yiwo.friendscometogether.newpage.TestSGVAActivity;
+import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.CityActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.SearchActivity;
-import com.yiwo.friendscometogether.pages.UserAgreementActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.AppUpdateUtil;
 import com.yiwo.friendscometogether.utils.TokenUtils;
 import com.yiwo.friendscometogether.utils.UserUtils;
-import com.yiwo.friendscometogether.utils.ViewUtil;
 import com.yiwo.friendscometogether.vas_sonic.TBSonicRuntime;
 import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
 import com.yiwo.friendscometogether.wangyiyunshipin.server.entity.RoomInfoEntity;
 import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.LiveRoomActivity;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 import com.yiwo.friendscometogether.webpages.MyJiFenActivity;
 import com.yiwo.friendscometogether.widget.ViewPagerForScrollView;
 import com.youth.banner.Banner;
@@ -115,7 +99,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -189,10 +172,12 @@ public class HomeFragment extends BaseFragment {
     RelativeLayout rl_ball;
 
     //第一个推荐的友聚
-    private ImageView iv_first_tuijian;
-    private TextView tv_first_tuijian_title,tv_first_tuijian_content,tv_youji_look_num;
-    private TextView tv_tuyijian_first_tab_1,tv_tuyijian_first_tab_2;
-    private LinearLayout llTuiJianHuodongFirst;
+     BannerLayout recyclerbanner;
+     RelativeLayout rlTuiJianHuodongFirst;
+    private HomeFragmentFirstBannerAdapter firstBannerAdapter;
+    private List<HomeDataModel1.ObjBean.ActivityBean> mListTuiJian_first = new ArrayList<>();//轮播图list
+
+
     //直播列表
     private LinearLayout ll_live;
     @BindView(R.id.scroll_view)
@@ -251,7 +236,6 @@ public class HomeFragment extends BaseFragment {
     private List<View> viewList = new ArrayList<>();
     private View view1,view2,view3,view4;
     private TextView tv_text_youji;
-    private boolean cancelEnterRoom;
 //    tv_text_youju;
     private NotifyAdatpterBroadcastReceiver broadcastReceiver = new NotifyAdatpterBroadcastReceiver();
     private PreLoadWebYouJiBroadcastReceiver preLoadWebYouJiBroadcastReceiver = new PreLoadWebYouJiBroadcastReceiver();
@@ -282,26 +266,12 @@ public class HomeFragment extends BaseFragment {
         viewList.add(view2);
         viewList.add(view3);
         viewList.add(view4);
-        //初始化第一个首位推荐友聚活动
-        llTuiJianHuodongFirst = view1.findViewById(R.id.ll_tuijian_huodong_first);
-        iv_first_tuijian = view1.findViewById(R.id.iv_tuijian_first);
-        ScreenAdapterTools.getInstance().loadView(view1);
-        final ViewGroup.LayoutParams layoutParams = iv_first_tuijian.getLayoutParams();
-        ViewUtil.getViewWidth(iv_first_tuijian, new ViewUtil.OnViewListener() {
-            @Override
-            public void onView(int width, int height) {
-                layoutParams.width = width;
-                layoutParams.height = (int) (width * 0.7);
-                Log.d("asdasdasd2",layoutParams.width+"////"+layoutParams.height);
-                iv_first_tuijian.setLayoutParams(layoutParams);
-            }
-        });
 
-        tv_first_tuijian_title = view1.findViewById(R.id.tv_first_tuijian_title);
-        tv_first_tuijian_content = view1.findViewById(R.id.tv_first_tuijian_content);
-        tv_youji_look_num = view1.findViewById(R.id.tv_youji_look_num);
-        tv_tuyijian_first_tab_1 = view1.findViewById(R.id.tv_tuyijian_first_tab_1);
-        tv_tuyijian_first_tab_2 = view1.findViewById(R.id.tv_tuyijian_first_tab_2);
+        ScreenAdapterTools.getInstance().loadView(view1);
+        //初始化第一个首位推荐友聚活动
+        rlTuiJianHuodongFirst = view1.findViewById(R.id.rl_tuijian_huodong_first);
+        recyclerbanner = view1.findViewById(R.id.recyclerbanner);
+
 
         recyclerView1_1 = view1.findViewById(R.id.rv_home_1_2);
         tv_text_youji = view1.findViewById(R.id.tv_text_youji);
@@ -311,25 +281,6 @@ public class HomeFragment extends BaseFragment {
         ll_live = view1.findViewById(R.id.ll_live);
         recyclerView_live = view1.findViewById(R.id.rv_live);
 
-        //ceshi
-        Button button = view1.findViewById(R.id.btn_test);
-        Button button1 = view1.findViewById(R.id.btn_test1);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setClass(getContext(), TestSGVAActivity.class);
-//                startActivity(intent);
-
-            }
-        });
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         recyclerView2 = view2.findViewById(R.id.rv_home_2);
         recyclerView3 = view3.findViewById(R.id.rv_home_3);
         recyclerView4 = view4.findViewById(R.id.rv_home_4);
@@ -620,14 +571,16 @@ public class HomeFragment extends BaseFragment {
                                 //第一条友聚
                                 if (model.getObj().getActivity().size()>0){
 //                                    tv_text_youju.setVisibility(View.VISIBLE);
-                                    llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
-                                    initTuiJianFirstHuoDong(model.getObj().getActivity().get(0));
-                                    if (model.getObj().getActivity().size()>1){
-                                        mListTuiJian_youju.addAll(model.getObj().getActivity().subList(1,model.getObj().getActivity().size()));
+                                    rlTuiJianHuodongFirst.setVisibility(View.VISIBLE);
+                                    if (model.getObj().getActivity().size()>3){
+                                        initTuiJianFirstHuoDong(model.getObj().getActivity().subList(0,3));
+                                        mListTuiJian_youju.addAll(model.getObj().getActivity().subList(3,model.getObj().getActivity().size()));
+                                    }else {
+                                        initTuiJianFirstHuoDong(model.getObj().getActivity());
                                     }
                                 }else {
 //                                    tv_text_youju.setVisibility(View.GONE);
-                                    llTuiJianHuodongFirst.setVisibility(View.GONE);
+                                    rlTuiJianHuodongFirst.setVisibility(View.GONE);
                                 }
                                 //友聚列表
                                 adapterTuiJian_youju = new HomeDataRecommendAdapter2(mListTuiJian_youju);
@@ -679,8 +632,8 @@ public class HomeFragment extends BaseFragment {
                                 manager3.setOrientation(LinearLayoutManager.HORIZONTAL);
                                 recyclerView_live.setLayoutManager(manager3);
                                 recyclerView_live.setAdapter(adapterLiveList);
-                                if (mlistLive.size()>0 && model.getObj().getStatus().equals("1")){
-//                                if (mlistLive.size()>0){
+//                                if (mlistLive.size()>0 && model.getObj().getStatus().equals("1")){
+                                if (mlistLive.size()>0){
                                     ll_live.setVisibility(View.VISIBLE);
                                 }else {
                                     ll_live.setVisibility(View.GONE);
@@ -1051,12 +1004,10 @@ public class HomeFragment extends BaseFragment {
                                     WeiboDialogUtils.closeDialog(dialog_loading);
                                 }else {
                                     Intent intent = new Intent();
-                                    intent.setClass(getContext(), NotOnLiveActivity.class);
-                                    intent.putExtra("start_time",start_time);
+                                    intent.setClass(getContext(), PersonMainActivity1.class);
+                                    intent.putExtra("is_by_live",true);
+                                    intent.putExtra("next_on_live_time",start_time);
                                     intent.putExtra("person_id", zhiboBean.getUserID());
-                                    intent.putExtra("liver_name",zhiboBean.getUsername());
-                                    intent.putExtra("liver_icon",zhiboBean.getUserpic());
-                                    intent.putExtra("guanzhuLiver",zhiboBean.getLike());
                                     startActivity(intent);
                                     WeiboDialogUtils.closeDialog(dialog_loading);
                                 }
@@ -1085,47 +1036,26 @@ public class HomeFragment extends BaseFragment {
 //        }).setCanceledOnTouchOutside(false);
     }
 
-    private void initTuiJianFirstHuoDong(final HomeDataModel1.ObjBean.ActivityBean bean) {
+    private void initTuiJianFirstHuoDong(List<HomeDataModel1.ObjBean.ActivityBean> datas) {
 //        private ImageView iv_first_tuijian;
 //        private TextView tv_first_tuijian_title,tv_first_tuijian_content,tv_youji_look_num;
 //        private TextView tv_tuyijian_first_tab_1,tv_tuyijian_first_tab_2;
-        llTuiJianHuodongFirst.setOnClickListener(new View.OnClickListener() {
+        mListTuiJian_first.clear();
+        mListTuiJian_first.addAll(datas);
+        firstBannerAdapter = new HomeFragmentFirstBannerAdapter(mListTuiJian_first);
+        recyclerbanner.setAdapter(firstBannerAdapter);
+        recyclerbanner.setMoveSpeed(1f);
+        recyclerbanner.setCenterScale(1f);
+        recyclerbanner.setAutoPlaying(true);
+        recyclerbanner.setAutoPlayDuration(2500);
+        recyclerbanner.setShowIndicator(false);
+        recyclerbanner.setOnCurrentChangeListenner(new BannerLayout.OnCurrentChangeListenner() {
             @Override
-            public void onClick(View v) {
-                final Intent intent = new Intent();
-                if (TextUtils.isEmpty(bean.getPfpwd())) {
-                    intent.setClass(getContext(), DetailsOfFriendTogetherWebActivity.class);
-                    intent.putExtra("pfID", bean.getPfID());
-                    getContext().startActivity(intent);
-                } else {
-                    LookPasswordDialog lookPasswordDialog = new LookPasswordDialog(getContext(), new LookPasswordDialog.SetPasswordListener() {
-                        @Override
-                        public boolean setActivityText(String s) {
-                            if (s.equals(bean.getPfpwd())) {
-                                intent.setClass(getContext(), DetailsOfFriendTogetherWebActivity.class);
-                                intent.putExtra("pfID", bean.getPfID());
-                                getContext().startActivity(intent);
-                                return true;
-                            }else {
-                                Toast.makeText(getContext(),"密码错误",Toast.LENGTH_SHORT).show();
-                                return false;
-                            }
-                        }
-                    });
-                    lookPasswordDialog.show();
-                }
+            public void onCurrentChange(int position) {
+
             }
         });
-        Glide.with(getContext()).load(bean.getPfpic().get(0)).apply(new RequestOptions().error(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv_first_tuijian);
-        tv_first_tuijian_title.setText(bean.getPftitle());
-        tv_first_tuijian_content.setText(bean.getPfcontent());
-        tv_youji_look_num.setText(bean.getPflook());
-        if (bean.getActivity_label().size()>0){
-            tv_tuyijian_first_tab_1.setText(bean.getActivity_label().get(0).getName());
-            if (bean.getActivity_label().size()>1){
-                tv_tuyijian_first_tab_2.setText(bean.getActivity_label().get(1).getName());
-            }
-        }
+
     }
 
 
@@ -1316,14 +1246,16 @@ public class HomeFragment extends BaseFragment {
 
                                         if (model.getObj().getActivity().size()>0){
 //                                    tv_text_youju.setVisibility(View.VISIBLE);
-                                            llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
-                                            initTuiJianFirstHuoDong(model.getObj().getActivity().get(0));
-                                            if (model.getObj().getActivity().size()>1){
-                                                mListTuiJian_youju.addAll(model.getObj().getActivity().subList(1,model.getObj().getActivity().size()));
+                                            rlTuiJianHuodongFirst.setVisibility(View.VISIBLE);
+                                            if (model.getObj().getActivity().size()>3){
+                                                initTuiJianFirstHuoDong(model.getObj().getActivity().subList(0,3));
+                                                mListTuiJian_youju.addAll(model.getObj().getActivity().subList(3,model.getObj().getActivity().size()));
+                                            }else {
+                                                initTuiJianFirstHuoDong(model.getObj().getActivity());
                                             }
                                         }else {
 //                                    tv_text_youju.setVisibility(View.GONE);
-                                            llTuiJianHuodongFirst.setVisibility(View.GONE);
+                                            rlTuiJianHuodongFirst.setVisibility(View.GONE);
                                         }
                                         //直播
                                         mlistLive.clear();
@@ -1340,10 +1272,10 @@ public class HomeFragment extends BaseFragment {
                                         }
                                         if (mListTuiJian_youju.size()>0){
 //                                            tv_text_youju.setVisibility(View.VISIBLE);
-                                            llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
+                                            rlTuiJianHuodongFirst.setVisibility(View.VISIBLE);
                                         }else {
 //                                            tv_text_youju.setVisibility(View.GONE);
-                                            llTuiJianHuodongFirst.setVisibility(View.GONE);
+                                            rlTuiJianHuodongFirst.setVisibility(View.GONE);
                                         }
                                         if (mListTuiJian_youji.size()>0){
                                             preLoadYouJi_tuijain(mListTuiJian_youji);
@@ -1536,14 +1468,16 @@ public class HomeFragment extends BaseFragment {
                                     mListTuiJian_youju.clear();
                                     if (model.getObj().getActivity().size()>0){
 //                                    tv_text_youju.setVisibility(View.VISIBLE);
-                                        llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
-                                        initTuiJianFirstHuoDong(model.getObj().getActivity().get(0));
-                                        if (model.getObj().getActivity().size()>1){
-                                            mListTuiJian_youju.addAll(model.getObj().getActivity().subList(1,model.getObj().getActivity().size()));
+                                        rlTuiJianHuodongFirst.setVisibility(View.VISIBLE);
+                                        if (model.getObj().getActivity().size()>3){
+                                            initTuiJianFirstHuoDong(model.getObj().getActivity().subList(0,3));
+                                            mListTuiJian_youju.addAll(model.getObj().getActivity().subList(3,model.getObj().getActivity().size()));
+                                        }else {
+                                            initTuiJianFirstHuoDong(model.getObj().getActivity());
                                         }
                                     }else {
 //                                    tv_text_youju.setVisibility(View.GONE);
-                                        llTuiJianHuodongFirst.setVisibility(View.GONE);
+                                        rlTuiJianHuodongFirst.setVisibility(View.GONE);
                                     }
                                     adapterTuiJian_youji.notifyDataSetChanged();
                                     adapterTuiJian_youju.notifyDataSetChanged();
@@ -1588,14 +1522,16 @@ public class HomeFragment extends BaseFragment {
                                     mListTuiJian_youju.clear();
                                     if (model.getObj().getActivity().size()>0){
 //                                    tv_text_youju.setVisibility(View.VISIBLE);
-                                        llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
-                                        initTuiJianFirstHuoDong(model.getObj().getActivity().get(0));
-                                        if (model.getObj().getActivity().size()>1){
-                                            mListTuiJian_youju.addAll(model.getObj().getActivity().subList(1,model.getObj().getActivity().size()));
+                                        rlTuiJianHuodongFirst.setVisibility(View.VISIBLE);
+                                        if (model.getObj().getActivity().size()>3){
+                                            initTuiJianFirstHuoDong(model.getObj().getActivity().subList(0,3));
+                                            mListTuiJian_youju.addAll(model.getObj().getActivity().subList(3,model.getObj().getActivity().size()));
+                                        }else {
+                                            initTuiJianFirstHuoDong(model.getObj().getActivity());
                                         }
                                     }else {
 //                                    tv_text_youju.setVisibility(View.GONE);
-                                        llTuiJianHuodongFirst.setVisibility(View.GONE);
+                                        rlTuiJianHuodongFirst.setVisibility(View.GONE);
                                     }
                                     adapterTuiJian_youji.notifyDataSetChanged();
                                     adapterTuiJian_youju.notifyDataSetChanged();
@@ -1640,14 +1576,16 @@ public class HomeFragment extends BaseFragment {
                                     mListTuiJian_youju.clear();
                                     if (model.getObj().getActivity().size()>0){
 //                                    tv_text_youju.setVisibility(View.VISIBLE);
-                                        llTuiJianHuodongFirst.setVisibility(View.VISIBLE);
-                                        initTuiJianFirstHuoDong(model.getObj().getActivity().get(0));
-                                        if (model.getObj().getActivity().size()>1){
-                                            mListTuiJian_youju.addAll(model.getObj().getActivity().subList(1,model.getObj().getActivity().size()));
+                                        rlTuiJianHuodongFirst.setVisibility(View.VISIBLE);
+                                        if (model.getObj().getActivity().size()>3){
+                                            initTuiJianFirstHuoDong(model.getObj().getActivity().subList(0,3));
+                                            mListTuiJian_youju.addAll(model.getObj().getActivity().subList(3,model.getObj().getActivity().size()));
+                                        }else {
+                                            initTuiJianFirstHuoDong(model.getObj().getActivity());
                                         }
                                     }else {
 //                                    tv_text_youju.setVisibility(View.GONE);
-                                        llTuiJianHuodongFirst.setVisibility(View.GONE);
+                                        rlTuiJianHuodongFirst.setVisibility(View.GONE);
                                     }
                                     adapterTuiJian_youji.notifyDataSetChanged();
                                     adapterTuiJian_youju.notifyDataSetChanged();

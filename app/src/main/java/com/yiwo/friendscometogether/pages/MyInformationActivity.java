@@ -41,6 +41,7 @@ import com.yiwo.friendscometogether.model.JsonBean;
 import com.yiwo.friendscometogether.model.OpenLoveTiaoJianModel;
 import com.yiwo.friendscometogether.model.UserModel;
 import com.yiwo.friendscometogether.network.NetConfig;
+import com.yiwo.friendscometogether.newpage.ApplyForCaptainActivity;
 import com.yiwo.friendscometogether.newpage.EditorLabelActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.GetJsonDataUtil;
@@ -261,7 +262,7 @@ public class MyInformationActivity extends TakePhotoActivity {
 
     @OnClick({R.id.activity_my_information_rl_back, R.id.activity_my_information_rl_sex, R.id.activity_my_information_rl_location, R.id.activity_my_information_rl_birthday,
             R.id.activity_my_information_rl_register_time, R.id.activity_my_information_rl_is_single, R.id.activity_my_information_rl_real_name, R.id.activity_my_information_rl_save,
-            R.id.activity_my_information_iv_avatar, R.id.activity_my_information_rl_sign,R.id.ll_woyaolianai})
+            R.id.activity_my_information_iv_avatar, R.id.activity_my_information_rl_sign,R.id.ll_woyaolianai,R.id.activity_my_information_rl_duizhang_renzheng})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -407,6 +408,10 @@ public class MyInformationActivity extends TakePhotoActivity {
                 }else {
                     postLianAiType("0");
                 }
+                break;
+            case R.id.activity_my_information_rl_duizhang_renzheng:
+                    intent.setClass(MyInformationActivity.this, ApplyForCaptainActivity.class);
+                    startActivity(intent);
                 break;
         }
     }

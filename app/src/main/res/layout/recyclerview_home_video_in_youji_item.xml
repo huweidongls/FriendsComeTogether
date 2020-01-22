@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_youju_item"
+    android:layout_width="370px"
+    android:layout_height="wrap_content">
+    <!--android:background="@drawable/bg_white_16px"-->
+    <RelativeLayout
+        android:elevation="5px"
+        android:layout_margin="5px"
+        android:id="@+id/rv_video"
+        android:layout_width="match_parent"
+        android:layout_height="580px"
+
+        android:visibility="visible">
+
+        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            android:id="@+id/iv_video"
+            android:layout_width="match_parent"
+            android:layout_height="580px"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/welcome"
+            test:left_bottom_radius1="16px"
+            test:right_bottom_radius1="16px"
+            test:left_top_radius1="16px"
+            test:right_top_radius1="16px" />
+
+        <ImageView
+            android:layout_width="55px"
+            android:layout_height="55px"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="16px"
+            android:layout_marginTop="16px"
+            android:src="@mipmap/youji_video" />
+        <!--android:background="@drawable/bg_white_16px"-->
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_40trans_16px_bottom"
+            android:paddingBottom="10px"
+            android:id="@+id/ll_video_info"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/video_tv_youji_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10px"
+                android:layout_marginLeft="15px"
+                android:layout_marginRight="15px"
+                android:layout_marginTop="15px"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="巴厘岛小众神秘彭丽普兰，被认为是世界上最清洁的三个村庄之一巴厘岛小众神秘彭丽普兰，被认为是世界上最清洁的三个村庄之一"
+                android:textColor="@color/white_ffffff"
+                android:textSize="30px" />
+            <RelativeLayout
+                android:id="@+id/rl_video_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5px"
+                android:layout_marginBottom="8px"
+                android:layout_marginLeft="16px"
+                android:layout_marginRight="16px">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/video_iv_icon_user"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_marginRight="8px"
+                    android:src="@mipmap/my_head" />
+
+                <RelativeLayout
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/video_iv_icon_user">
+
+                    <TextView
+                        android:maxLength="10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="扁脸折耳猫"
+                        android:textColor="@color/white_ffffff"
+                        android:textSize="23px"
+                        android:id="@+id/video_tv_username" />
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/video_tv_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="15小时前"
+                        android:textColor="@color/white_ffffff"
+                        android:textSize="24px" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/video_iv_icon_user"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16px">
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="30px"
+                        android:layout_height="30px"
+                        android:layout_marginRight="6px"
+                        android:src="@mipmap/eye_white" />
+
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/video_tv_good_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="15"
+                        android:textColor="@color/white_ffffff"
+                        android:textSize="26px" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>

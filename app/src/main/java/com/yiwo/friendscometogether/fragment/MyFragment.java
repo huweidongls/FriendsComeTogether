@@ -42,6 +42,7 @@ import com.yiwo.friendscometogether.pages.MyOrderActivity;
 import com.yiwo.friendscometogether.pages.MyPicturesActivity;
 import com.yiwo.friendscometogether.pages.SetActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.wangyiyunshipin.VideoUpLoadListActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -193,7 +194,7 @@ public class MyFragment extends BaseFragment {
 
     @OnClick({R.id.ll_order_all, R.id.ll_to_pay, R.id.ll_to_trip, R.id.ll_to_comment, R.id.ll_return_money, R.id.rl_my_picture,R.id.rl_my_video, R.id.rl_my_friend,
     R.id.rl_my_comment, R.id.rl_history, R.id.rl_person_set, R.id.ll_remember,R.id.ll_guanzhu, R.id.ll_huodong, R.id.ll_message,R.id.ll_person_page,
-            R.id.iv_avatar,R.id.iv_find_super_like,R.id.iv_renwu,R.id.rl_game_group,R.id.rl_pay_rank})
+            R.id.iv_avatar,R.id.iv_find_super_like,R.id.iv_renwu,R.id.rl_game_group,R.id.rl_pay_rank,R.id.rl_video_upload_list})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -390,6 +391,9 @@ public class MyFragment extends BaseFragment {
                     intent.setClass(getContext(), LoginActivity.class);
                     startActivity(intent);
                 }
+                break;
+            case R.id.rl_video_upload_list:
+                VideoUpLoadListActivity.startVideoUpLoadListActivity(getContext(),null);
                 break;
         }
     }

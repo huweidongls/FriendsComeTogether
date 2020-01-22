@@ -4,12 +4,10 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -41,7 +39,6 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.activecard.CardAdapter;
 import com.yiwo.friendscometogether.base.BaseFragment;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
-import com.yiwo.friendscometogether.imagepreview.StatusBarUtils;
 import com.yiwo.friendscometogether.model.FocusOnToFriendTogetherModel;
 import com.yiwo.friendscometogether.model.FriendsTogetherDetailsModel;
 import com.yiwo.friendscometogether.model.FriendsTogethermodel;
@@ -49,23 +46,17 @@ import com.yiwo.friendscometogether.model.IsRealNameModel;
 import com.yiwo.friendscometogether.model.UserLabelModel;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.FriendsTogetherFragmentLabelTopAdapter;
-import com.yiwo.friendscometogether.newadapter.LabelAdapter;
-import com.yiwo.friendscometogether.newadapter.SwipeFIingViewAdapter;
-import com.yiwo.friendscometogether.newmodel.HomeDataModel;
 import com.yiwo.friendscometogether.newmodel.HuoDongShaiXuanMode;
 import com.yiwo.friendscometogether.newmodel.YouJuTopLabelModel;
 import com.yiwo.friendscometogether.newpage.AllHuoDongActivity;
-import com.yiwo.friendscometogether.newpage.GuanZhuActivity;
 import com.yiwo.friendscometogether.newpage.YoujuShaixuanActivity;
 import com.yiwo.friendscometogether.pages.ApplyActivity;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.pages.RealNameActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
-import com.yiwo.friendscometogether.swipecard.SwipeFlingView;
 import com.yiwo.friendscometogether.utils.ShareUtils;
 import com.yiwo.friendscometogether.utils.TokenUtils;
 import com.yiwo.friendscometogether.vas_sonic.TBSonicRuntime;
-import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -136,7 +127,7 @@ public class FriendsTogetherFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_friends_together3, null);
+        View view = inflater.inflate(R.layout.fragment_friends_together, null);
         ButterKnife.bind(this, view);
         ScreenAdapterTools.getInstance().loadView(view);
         //第一种方式获取屏幕的像素宽高在Activity里面可使用

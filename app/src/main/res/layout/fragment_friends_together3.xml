@@ -161,25 +161,40 @@
         android:layout_above="@+id/rl_bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/iv_zanwu"
-            android:src="@mipmap/zanwushuju"
-            android:layout_centerInParent="true"
-            android:layout_width="550px"
-            android:layout_height="wrap_content" />
         <RelativeLayout
-            android:layout_centerVertical="true"
+            android:paddingTop="15px"
+            android:paddingBottom="20px"
             android:layout_above="@+id/ll_guanzhu_num"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <com.example.library.banner.BannerLayout
+            <com.yiwo.friendscometogether.swipecard.SwipeFlingView
                 android:layout_centerInParent="true"
-                android:id="@+id/recyclerbanner"
-                app:orientation="horizontal"
+                android:id="@+id/swipe_view"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/rlzanwu"
+            android:background="@color/white_ffffff"
+            android:elevation="10px"
+            android:layout_marginTop="50px"
+            android:layout_marginLeft="80px"
+            android:layout_marginRight="80px"
+            android:layout_marginBottom="50px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_marginTop="80px"
+                android:layout_marginBottom="80px"
+                android:id="@+id/iv_zanwu"
+                android:src="@mipmap/pf_zanwu"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/ll_guanzhu_num"
             android:layout_marginBottom="70px"
             android:layout_centerHorizontal="true"
@@ -232,6 +247,20 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
+        <RelativeLayout
+            android:visibility="visible"
+            android:id="@+id/rl_ball"
+            android:layout_marginBottom="80px"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="85px"
+            android:layout_height="85px">
+            <ImageView
+                android:layout_centerVertical="true"
+                android:src="@mipmap/back_ball"
+                android:layout_width="60px"
+                android:layout_height="60px" />
+        </RelativeLayout>
     </RelativeLayout>
     <!--底部按钮隐藏 在banner的item 中操作-->
     <RelativeLayout
@@ -295,4 +324,6 @@
 
 
     </RelativeLayout>
+
+
 </RelativeLayout>

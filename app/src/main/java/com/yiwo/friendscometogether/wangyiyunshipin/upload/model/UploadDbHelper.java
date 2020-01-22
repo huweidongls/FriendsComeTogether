@@ -20,7 +20,7 @@ public class UploadDbHelper extends SQLiteOpenHelper {
     public static final String TAG = "upload db";
 
     private static UploadDbHelper helper = new UploadDbHelper(DemoCache.getContext());
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;//2020.01.14 版本3
     private static final String UPLOAD_TABLE_NAME = "video_upload";
 
     private static final String KEY_USER_ID = "userId";
@@ -36,6 +36,8 @@ public class UploadDbHelper extends SQLiteOpenHelper {
     private static final String KEY_STATE = "state";
     private static final String KEY_TYPE = "type";
 
+    private static final String KEY_FABU_NAME = "fabu_name";
+    private static final String KEY_ADDRESS = "video_address";
 
     private static final String UPLOAD_TABLE_CREATE =
             "CREATE TABLE " + UPLOAD_TABLE_NAME + " (" +
@@ -44,6 +46,10 @@ public class UploadDbHelper extends SQLiteOpenHelper {
                     KEY_URI + " TEXT, " +
                     KEY_FILE_PATH + " TEXT, " +
                     KEY_FILE_NAME + " TEXT, " +
+
+                    KEY_FABU_NAME +" TEXT, " +
+                    KEY_ADDRESS +" TEXT, " +
+
                     KEY_CONTEXT + " TEXT, " +
                     KEY_TOKEN + " TEXT, " +
                     KEY_BUCKET + " TEXT, " +
@@ -63,7 +69,15 @@ public class UploadDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("alter table video_upload add column type integer");
+        if (oldVersion<2){
+            db.execSQL("alter table video_upload add column type integer");
+        }
+        if (oldVersion<3){
+            String sql = "Alter table "+UPLOAD_TABLE_NAME+" add column "+KEY_FABU_NAME+" TEXT ";
+            db.execSQL(sql);
+            String sql2 = "Alter table "+UPLOAD_TABLE_NAME+" add column "+KEY_ADDRESS+" TEXT ";
+            db.execSQL(sql2);
+        }
     }
 
 
@@ -75,6 +89,8 @@ public class UploadDbHelper extends SQLiteOpenHelper {
                 videoItem.getUriString() + "', '" +
                 videoItem.getFilePath() + "', '" +
                 videoItem.getDisplayName() + "', '" +
+                videoItem.getVideoFaBuName() + "', '" +
+                videoItem.getVideoAddress() + "', '" +
                 videoItem.getUploadContext() + "', '" +
                 videoItem.getUploadToken() + "', '" +
                 videoItem.getUploadBucket() + "', '" +
@@ -118,8 +134,8 @@ public class UploadDbHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase database = helper.getReadableDatabase();
         String querySql = "SELECT * FROM " + UPLOAD_TABLE_NAME + " WHERE " +
-                KEY_USER_ID + " =? and " + KEY_TYPE + " =?";
-        Cursor cursor = database.rawQuery(querySql, new String[]{DemoCache.getAccount(), String.valueOf(type)});
+                KEY_USER_ID + " =? and " + KEY_TYPE + " =? and "+ KEY_FABU_NAME +" <>? and "+ KEY_ADDRESS + " <>? ";
+        Cursor cursor = database.rawQuery(querySql, new String[]{DemoCache.getAccount(), String.valueOf(type),"",""});
         for (int i = 0; i < cursor.getCount(); i++) {
             cursor.moveToPosition(i);
             VideoItem videoItem = new VideoItem();
@@ -127,6 +143,8 @@ public class UploadDbHelper extends SQLiteOpenHelper {
             videoItem.setUriString(cursor.getString(cursor.getColumnIndex(KEY_URI)));
             videoItem.setFilePath(cursor.getString(cursor.getColumnIndex(KEY_FILE_PATH)));
             videoItem.setDisplayName(cursor.getString(cursor.getColumnIndex(KEY_FILE_NAME)));
+            videoItem.setVideoFaBuName(cursor.getString(cursor.getColumnIndex(KEY_FABU_NAME)));
+            videoItem.setVideoAddress(cursor.getString(cursor.getColumnIndex(KEY_ADDRESS)));
             videoItem.setUploadContext(!cursor.getString(cursor.getColumnIndex(KEY_CONTEXT)).equals("null") ? cursor.getString(cursor.getColumnIndex(KEY_CONTEXT)) : null);
             videoItem.setUploadToken(!cursor.getString(cursor.getColumnIndex(KEY_TOKEN)).equals("null") ? cursor.getString(cursor.getColumnIndex(KEY_TOKEN)) : null);
             videoItem.setUploadBucket(!cursor.getString(cursor.getColumnIndex(KEY_BUCKET)).equals("null") ? cursor.getString(cursor.getColumnIndex(KEY_BUCKET)) : null);

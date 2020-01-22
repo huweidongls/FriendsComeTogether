@@ -404,6 +404,13 @@ public class DetailsOfFriendTogetherWebActivity extends BaseSonicWebActivity {
         public void playpfvideo(String videoUrl){
             startVideoACtivity(videoUrl);
         }
+        @JavascriptInterface
+        public void jumpyouji(String fmID){
+            Intent intent = new Intent();
+            intent.setClass(DetailsOfFriendTogetherWebActivity.this, DetailsOfFriendsWebActivity2.class);
+            intent.putExtra("fmid", fmID);
+            startActivity(intent);
+        }
     }
     private void showMore(final View view_p) {
 

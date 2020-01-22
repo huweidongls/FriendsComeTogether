@@ -55,7 +55,7 @@ public class PersonMainGuanZhu_FansModel {
         private String userpic;
         private String num;
         private String userID;
-        private String status;
+        private String status = "";
 
         public String getUsername() {
             return username;

@@ -47,7 +47,10 @@ import com.yiwo.friendscometogether.broadcastreceiver.MyYaoQingJinQunBroadcastRe
 import com.yiwo.friendscometogether.custom.OnDoubleClickListener;
 import com.yiwo.friendscometogether.fragment.ChatFragment;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment;
+import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment2;
+import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment3;
 import com.yiwo.friendscometogether.fragment.HomeFragment;
+import com.yiwo.friendscometogether.fragment.HomeFragment1;
 import com.yiwo.friendscometogether.fragment.MyFragment;
 import com.yiwo.friendscometogether.newfragment.YouJiFragment;
 import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivityChoosePicOrVideos;
@@ -55,6 +58,9 @@ import com.yiwo.friendscometogether.newpage.MessageActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.LoginActivity;
 import com.yiwo.friendscometogether.sp.SpImp;
+import com.yiwo.friendscometogether.wangyiyunshipin.VideoUpLoadListActivity;
+import com.yiwo.friendscometogether.wangyiyunshipin.upload.constant.UploadType;
+import com.yiwo.friendscometogether.wangyiyunshipin.upload.controller.UploadController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +96,9 @@ public class MainActivity extends FragmentActivity {
     FragmentManager fragmentManager = getSupportFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-    private float startY;
+    private float home_startY,pf_startY;
+    private float pf_startX;
+    private boolean pfDownOnBall = false;
     @BindView(R.id.menu_index)
     ImageButton ibIndex;
     @BindView(R.id.menu_friend_together)
@@ -133,8 +141,9 @@ public class MainActivity extends FragmentActivity {
     private String account = "";
 
     private ChatFragment fragmentChat;
-//    private HomeFragment1 fragmentHome;
-    private HomeFragment fragmentHome;
+    private FriendsTogetherFragment3 fragmentFriendTogether;
+    //    private HomeFragment1 fragmentHome;
+    private HomeFragment1 fragmentHome;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,6 +158,7 @@ public class MainActivity extends FragmentActivity {
         getPermissions();
 //        initView();
         init();
+        initUpLoadController();
         initSessionListener();
         NIMClient.getService(AuthServiceObserver.class).observeLoginSyncDataStatus(new Observer<LoginSyncStatus>() {
             @Override
@@ -160,6 +170,13 @@ public class MainActivity extends FragmentActivity {
         },true);
         registReceiver();
     }
+
+    private void initUpLoadController() {
+        UploadController.getInstance().init(MainActivity.this);
+        UploadController.getInstance().loadVideoDataFromLocal(UploadType.SHORT_VIDEO);
+//        UploadController.getInstance().attachUi(VideoUpLoadListActivity.this);
+    }
+
     //网易多端登陆监听
     private void observeOtherClientsListen() {
 
@@ -190,6 +207,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        UploadController.getInstance().suspend();
         unregisterReceiver(myGoPersonMainBroadcastReceiver);
         unregisterReceiver(myShenQingJinQunBroadcastReceiver);
         unregisterReceiver(myYaoQingJinQunBroadcastReceiver);
@@ -240,8 +258,9 @@ public class MainActivity extends FragmentActivity {
         rl3.setOnClickListener(listener);
         rl4.setOnClickListener(listener);
         rl5.setOnClickListener(listener);
-        fragmentHome = new HomeFragment();
-        Fragment fragmentFriendTogether = new FriendsTogetherFragment();
+        fragmentHome = new HomeFragment1();
+//        Fragment fragmentFriendTogether = new FriendsTogetherFragment();
+        fragmentFriendTogether = new FriendsTogetherFragment3();
         Fragment fragmentFriendRemember = new YouJiFragment();
         fragmentChat = new ChatFragment();
         Fragment fragmentMy = new MyFragment();
@@ -588,22 +607,48 @@ public class MainActivity extends FragmentActivity {
                     //本次按下距离上次的抬起小于1.5s时，取消Timer
                     timer.cancel();
                 }
-                startY = event.getY();
+                home_startY = event.getY();
+                if (!isTouchView(new View[]{fragmentFriendTogether.rl_ball},event)){
+                    pf_startX = event.getX();
+                    pf_startY =event.getY();
+                }else {
+                    pfDownOnBall = true;
+                }
+
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (Math.abs(startY - event.getY()) > 10) {
+                if (Math.abs(home_startY - event.getY()) > 10) {
                     if (fragmentHome.isShowFloatImage()){
                         fragmentHome.hideFloatImage();
                     }
                 }
-                startY = event.getY();
+                if (!pfDownOnBall){
+                    if (Math.abs(pf_startY - event.getY()) > 10 || Math.abs(pf_startX - event.getX())>10 ) {
+                        if (fragmentFriendTogether.isShowFloatImage()){
+                            fragmentFriendTogether.hideFloatImage();
+                        }
+                        pf_startX = event.getX();
+                        pf_startY = event.getY();
+                    }
+                }
+                home_startY = event.getY();
                 break;
             case MotionEvent.ACTION_UP:
+                pfDownOnBall = false ;
+                fragmentFriendTogether.downOnBall = false;
                 if (!fragmentHome.isShowFloatImage()){
                     //开始1.5s倒计时
                     upTime = System.currentTimeMillis();
                     timer = new Timer();
                     timer.schedule(new FloatTask(), 1500);
+                }
+                if (!isTouchView(new View[]{fragmentFriendTogether.rl_ball},event)){
+                    if (!fragmentFriendTogether.isShowFloatImage()){
+                        //开始1.5s倒计时
+                        upTime = System.currentTimeMillis();
+                        timer = new Timer();
+                        timer.schedule(new FloatTask2(), 1000);
+                    }
                 }
                 break;
             default:
@@ -623,5 +668,29 @@ public class MainActivity extends FragmentActivity {
             });
         }
     }
-
+    class FloatTask2 extends TimerTask {
+        @Override
+        public void run() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    fragmentFriendTogether.showFloatImage();
+                }
+            });
+        }
+    }
+    //是否触摸在指定view上面,对某个控件过滤
+    public boolean isTouchView(View[] views, MotionEvent ev) {
+        if(views ==null|| views.length==0)
+            return false;
+        int[] location =new int[2];
+        for(View view : views) {
+            view.getLocationOnScreen(location);
+            int x = location[0];
+            int y = location[1];
+            if(ev.getX() > x && ev.getX() < (x + view.getWidth())&& ev.getY() > y && ev.getY() < (y + view.getHeight())) {
+                return true;
+            }
+        }return false;
+    }
 }

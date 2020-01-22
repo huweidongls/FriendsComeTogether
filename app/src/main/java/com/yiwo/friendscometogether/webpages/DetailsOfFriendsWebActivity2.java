@@ -639,6 +639,14 @@ public class DetailsOfFriendsWebActivity2 extends BaseSonicWebActivity {
             startActivity(intent);
         }
         @JavascriptInterface
+        public void jumpactivity(String pfID){//相关活动
+            //相关活动跳转
+            Intent intent = new Intent();
+            intent.putExtra("pfID", pfID);
+            intent.setClass(DetailsOfFriendsWebActivity2.this, DetailsOfFriendTogetherWebActivity.class);
+            startActivity(intent);
+        }
+        @JavascriptInterface
         public void pinglun(){//评论跳转
             Intent intent = new Intent();
             if (TextUtils.isEmpty(uid) || uid.equals("0")) {
