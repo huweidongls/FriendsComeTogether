@@ -51,6 +51,7 @@ import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment2;
 import com.yiwo.friendscometogether.fragment.FriendsTogetherFragment3;
 import com.yiwo.friendscometogether.fragment.HomeFragment;
 import com.yiwo.friendscometogether.fragment.HomeFragment1;
+import com.yiwo.friendscometogether.fragment.HomeFragment3;
 import com.yiwo.friendscometogether.fragment.MyFragment;
 import com.yiwo.friendscometogether.newfragment.YouJiFragment;
 import com.yiwo.friendscometogether.newpage.CreateFriendRememberActivityChoosePicOrVideos;
@@ -143,7 +144,7 @@ public class MainActivity extends FragmentActivity {
     private ChatFragment fragmentChat;
     private FriendsTogetherFragment3 fragmentFriendTogether;
     //    private HomeFragment1 fragmentHome;
-    private HomeFragment1 fragmentHome;
+    private HomeFragment3 fragmentHome;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -258,7 +259,7 @@ public class MainActivity extends FragmentActivity {
         rl3.setOnClickListener(listener);
         rl4.setOnClickListener(listener);
         rl5.setOnClickListener(listener);
-        fragmentHome = new HomeFragment1();
+        fragmentHome = new HomeFragment3();
 //        Fragment fragmentFriendTogether = new FriendsTogetherFragment();
         fragmentFriendTogether = new FriendsTogetherFragment3();
         Fragment fragmentFriendRemember = new YouJiFragment();
