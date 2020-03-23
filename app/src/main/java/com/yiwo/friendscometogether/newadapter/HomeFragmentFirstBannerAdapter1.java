@@ -18,6 +18,7 @@ import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.newmodel.HomeDataBannerHuoDongLiveModel;
 import com.yiwo.friendscometogether.sp.SpImp;
 import com.yiwo.friendscometogether.utils.ViewUtil;
+import com.yiwo.friendscometogether.webpages.DetailsOfFriendTogetherWebActivity;
 
 import java.util.List;
 
@@ -61,6 +62,9 @@ public class HomeFragmentFirstBannerAdapter1 extends RecyclerView.Adapter<HomeFr
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent();
+                intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
+                intent.putExtra("pfID", bean.getPfID());
+                context.startActivity(intent);
 //                if (TextUtils.isEmpty(bean.getPfpwd())) {
 //                    intent.setClass(context, DetailsOfFriendTogetherWebActivity.class);
 //                    intent.putExtra("pfID", bean.getPfID());
