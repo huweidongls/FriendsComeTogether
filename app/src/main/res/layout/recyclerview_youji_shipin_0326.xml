@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white_ffffff"
+    android:layout_width="match_parent"
+    android:paddingBottom="10px"
+    android:paddingTop="10px"
+    android:paddingLeft="10px"
+    android:paddingRight="10px"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_alignTop="@+id/ll_top"
+        android:layout_alignBottom="@+id/ll_bottom"
+        android:layout_marginTop="30px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_marginTop="10px"
+            android:layout_marginBottom="10px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:background="@drawable/bg_white_24px"
+            android:elevation="10px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_marginRight="40px"
+        android:layout_marginLeft="40px"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginTop="50px"
+            android:layout_marginRight="15px"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10px"
+                    android:layout_alignParentLeft="true"
+                    android:id="@+id/iv_head"
+                    android:src="@mipmap/my_head"
+                    android:layout_width="120px"
+                    android:layout_height="120px" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/iv_head"
+                    android:layout_toLeftOf="@+id/rl_guanzhu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textStyle="bold"
+                        android:textSize="28px"
+                        android:maxLength="6"
+                        android:ellipsize="middle"
+                        android:text="天水的铺铺铺铺子"
+                        android:textColor="@color/black_101010"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:layout_marginTop="5px"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <RelativeLayout
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/rl_level"
+                            android:layout_alignLeft="@+id/iv_icon"
+                            android:layout_below="@+id/iv_icon"
+                            android:background="@drawable/bg_ffac27_10px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_marginRight="12px"
+                                android:layout_marginLeft="12px"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/black_101010"
+                                android:text="Lv.1"
+                                android:lines="1"
+                                android:textSize="25px"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </RelativeLayout>
+                        <ImageView
+                            android:layout_marginLeft="5px"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/level_qingtong"
+                            android:layout_width="45px"
+                            android:layout_height="45px" />
+                    </LinearLayout>
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15px"
+                    android:layout_marginLeft="15px"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/rl_guanzhu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_centerInParent="true"
+                        android:id="@+id/iv_guanzhu"
+                        android:layout_margin="10px"
+                        android:src="@mipmap/hert_0324_g"
+                        android:layout_width="50px"
+                        android:layout_height="50px" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:lines="1"
+                    android:layout_toRightOf="@+id/iv_local"
+                    android:layout_alignBottom="@+id/iv_local"
+                    android:layout_gravity="bottom"
+                    android:text="印尼巴厘岛"
+                    android:textSize="25px"
+                    android:textColor="@color/black_101010"
+                    android:layout_marginRight="10px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/iv_local"
+                    android:layout_gravity="bottom"
+                    android:src="@mipmap/local_yellow_point"
+                    android:layout_width="40px"
+                    android:layout_height="40px" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="5px"
+                android:layout_marginBottom="5px"
+                android:ellipsize="end"
+                android:text="巴兰海滩，乌鲁瓦图情人崖，海龟岛刻录机布皇宫海结受到法律上的风..."
+                android:textSize="25px"
+                android:textColor="@color/black_101010"
+                android:maxLines="2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+                    android:layout_marginRight="10px"
+                    android:layout_weight="1"
+                    test:radius1="16px"
+                    android:id="@+id/iv_small_1"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/picnull"
+                    android:layout_width="match_parent"
+                    android:layout_height="180px" />
+                <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+                    android:layout_marginRight="10px"
+                    android:layout_weight="1"
+                    test:radius1="16px"
+                    android:id="@+id/iv_small_2"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/picnull"
+                    android:layout_width="match_parent"
+                    android:layout_height="180px" />
+                <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+                    android:layout_marginRight="5px"
+                    android:layout_weight="1"
+                    test:radius1="16px"
+                    android:id="@+id/iv_small_3"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/picnull"
+                    android:layout_width="match_parent"
+                    android:layout_height="180px" />
+            </LinearLayout>
+        </LinearLayout>
+        <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+            android:id="@+id/iv_big"
+            android:src="@mipmap/zanwutupian"
+            android:layout_weight="1.5"
+            test:radius1="16px"
+            android:scaleType="centerCrop"
+            android:layout_alignParentRight="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/ll_bottom"
+        android:layout_below="@+id/ll_top"
+        android:layout_marginTop="10px"
+        android:layout_marginBottom="10px"
+        android:layout_marginRight="45px"
+        android:layout_marginLeft="45px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_marginTop="15px"
+            android:layout_marginRight="15px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_centerVertical="true"
+                android:text="全部*条评论"
+                android:textColor="@color/red_d84c37"
+                android:textSize="28px"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="48px"
+                    android:layout_height="31px"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="12px"
+                    android:src="@mipmap/liulan_new" />
+
+                <TextView
+                    android:id="@+id/tv_youji_look_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="30px"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:maxWidth="150px"
+                    android:text="35"
+                    android:textColor="#272A2C"
+                    android:textSize="28px" />
+
+                <LinearLayout
+                    android:id="@+id/ll_youji_comment"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="42px"
+                        android:layout_height="37px"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="12px"
+                        android:src="@mipmap/pinglun_new" />
+
+                    <TextView
+                        android:id="@+id/tv_youji_comment_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:maxWidth="100px"
+                        android:text="26"
+                        android:textColor="#272A2C"
+                        android:textSize="28px" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_marginTop="10px"
+            android:id="@+id/ll_comment2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="middle"
+                android:maxWidth="200px"
+                android:singleLine="true"
+                android:text="塞北的雪："
+                android:textColor="@color/black_101010"
+                android:textSize="28px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_comment2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLength="85"
+                android:text="主要是人美！"
+                android:textColor="@color/black_101010"
+                android:textSize="28px" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="8px"
+            android:layout_marginBottom="35px"
+            android:id="@+id/ll_comment1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_name1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="middle"
+                android:maxWidth="200px"
+                android:singleLine="true"
+                android:text="雪山飞狐："
+                android:textColor="@color/black_101010"
+                android:textSize="28px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_comment1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLength="85"
+                android:text="地方不错，有时间的去一趟！"
+                android:textColor="@color/black_101010"
+                android:textSize="28px" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

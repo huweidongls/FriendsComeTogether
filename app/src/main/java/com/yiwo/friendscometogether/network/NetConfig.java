@@ -451,4 +451,8 @@ public class NetConfig {
     //action/ac_user/pleaseCaptain 申请成为队长  传uid用户id   captainImg图片
     public static String pleaseCaptain = "action/ac_user/pleaseCaptain";
 
+    ///新首页
+    //action/ac_newHome/tuijian   传uid用户id home推荐接口 city 城市
+    public static String homeTuiJian = "action/ac_newHome/tuijian";
+
 }

@@ -35,14 +35,10 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.library.banner.BannerLayout;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -57,7 +53,6 @@ import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
 import com.yiwo.friendscometogether.MainActivity;
-import com.yiwo.friendscometogether.MyApplication;
 import com.yiwo.friendscometogether.R;
 import com.yiwo.friendscometogether.base.BaseFragment;
 import com.yiwo.friendscometogether.custom.WeiboDialogUtils;
@@ -67,16 +62,19 @@ import com.yiwo.friendscometogether.model.CityModel;
 import com.yiwo.friendscometogether.network.ActivityConfig;
 import com.yiwo.friendscometogether.network.NetConfig;
 import com.yiwo.friendscometogether.newadapter.HomeDataAdapter;
-import com.yiwo.friendscometogether.newadapter.HomeDataRecommendHuoDongLiveAdapter;
-import com.yiwo.friendscometogether.newadapter.HomeDataYouJiVideoAdapter;
 import com.yiwo.friendscometogether.newadapter.HomeFragmentFirstBannerAdapter1;
 import com.yiwo.friendscometogether.newadapter.HomeListVideoAdapter;
 import com.yiwo.friendscometogether.newadapter.HomeListYouJiAdapter;
+import com.yiwo.friendscometogether.newadapter.HomeTui_JianJingCaiLuXian_Adapter;
+import com.yiwo.friendscometogether.newadapter.HomeTuiJian_DuiZhangPuZi_Adapter;
+import com.yiwo.friendscometogether.newadapter.HomeTuiJian_JianTuShiKe_Adapter;
+import com.yiwo.friendscometogether.newadapter.HomeTuiJian_ReMenDuiZhang_Adapter;
+import com.yiwo.friendscometogether.newadapter.HomeTuiJian_YouJiShiPin_Adapter;
 import com.yiwo.friendscometogether.newmodel.HomeDataBannerHuoDongLiveModel;
 import com.yiwo.friendscometogether.newmodel.HomeDataModel;
 import com.yiwo.friendscometogether.newmodel.HomeDataYouJiVideoModel;
+import com.yiwo.friendscometogether.newmodel.HomeTuiJianModel;
 import com.yiwo.friendscometogether.newmodel.HomeVideoListModel;
-import com.yiwo.friendscometogether.newmodel.IndexLabelModel;
 import com.yiwo.friendscometogether.newpage.MessageActivity;
 import com.yiwo.friendscometogether.newpage.PersonMainActivity1;
 import com.yiwo.friendscometogether.pages.CityActivity;
@@ -92,9 +90,8 @@ import com.yiwo.friendscometogether.wangyiyunshipin.DemoCache;
 import com.yiwo.friendscometogether.wangyiyunshipin.server.entity.RoomInfoEntity;
 import com.yiwo.friendscometogether.wangyiyunshipin.wangyiyunlive.LiveRoomActivity;
 import com.yiwo.friendscometogether.webpages.MyJiFenActivity;
+import com.yiwo.friendscometogether.widget.ScrollListenScrollView;
 import com.yiwo.friendscometogether.widget.ViewPagerForScrollView;
-import com.youth.banner.Banner;
-import com.youth.banner.listener.OnBannerListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -117,22 +114,11 @@ public class HomeFragment3 extends BaseFragment {
 
     @BindView(R.id.home_refreshlayout)
     RefreshLayout refreshLayout;
-    @BindView(R.id.fragment_home_banner)
-    Banner banner;
     @BindView(R.id.vp)
     ViewPagerForScrollView viewPager;
     @BindView(R.id.tv_city_name)
     TextView cityTv;
-    @BindView(R.id.ll_home_youji_all)
-    LinearLayout youji_all;
-    @BindView(R.id.ll_home_youji_lvxing)
-    LinearLayout youji_lvxing;
-    @BindView(R.id.ll_home_youji_meishi)
-    LinearLayout youji_meishi;
-    @BindView(R.id.ll_home_youji_tandian)
-    LinearLayout youji_tandian;
-    @BindView(R.id.ll_home_youji_gonglue)
-    LinearLayout youji_gonglue;
+
     @BindView(R.id.tv_rl1)
     TextView tvRl1;
     @BindView(R.id.tv_rl2)
@@ -149,22 +135,6 @@ public class HomeFragment3 extends BaseFragment {
     ImageView v3;
     @BindView(R.id.v4)
     ImageView v4;
-    @BindView(R.id.iv1)
-    ImageView iv1;
-    @BindView(R.id.iv2)
-    ImageView iv2;
-    @BindView(R.id.iv3)
-    ImageView iv3;
-    @BindView(R.id.iv4)
-    ImageView iv4;
-    @BindView(R.id.tv1)
-    TextView tv1;
-    @BindView(R.id.tv2)
-    TextView tv2;
-    @BindView(R.id.tv3)
-    TextView tv3;
-    @BindView(R.id.tv4)
-    TextView tv4;
 
     @BindView(R.id.tv_weiduxiaoxi)
     TextView tvWeiduxiaoxi;
@@ -173,7 +143,8 @@ public class HomeFragment3 extends BaseFragment {
     RelativeLayout rl_ball;
     @BindView(R.id.rl_xiaoxi_num)
     RelativeLayout rl_xiaoxi_num;
-
+    @BindView(R.id.rl_top)
+    RelativeLayout rl_top;
     //第一个推荐的友聚
      BannerLayout recyclerbanner;
      RelativeLayout rlTuiJianHuodongFirst;
@@ -183,7 +154,11 @@ public class HomeFragment3 extends BaseFragment {
 
     //直播列表
     @BindView(R.id.scroll_view)
-    ScrollView scrollView;
+    ScrollListenScrollView scrollView;
+    private int scollYTuiJian = 0 ;
+    private int scollGuanZhu = 0 ;
+    private int scollYouJi = 0 ;
+    private int scollShiPin = 0 ;
 
     private static final int PERMISSION_REQUEST_CODE_STORAGE = 1001;
 
@@ -206,19 +181,29 @@ public class HomeFragment3 extends BaseFragment {
 
     };
 
-    RecyclerView recyclerViewTuiJianYouJi;//推荐_youji
-    RecyclerView recyclerViewTuiJianYouJu;//推荐_youju
 
     RecyclerView recyclerView2;//关注
     RecyclerView recyclerView3;//友记
     RecyclerView recyclerView4;//小视频
 
+    private RelativeLayout rlJianTuShiKe;
+    RecyclerView rvTuJianShiKe;
+    private HomeTuiJian_JianTuShiKe_Adapter jianTuShiKeAdapter;
+    private List<HomeTuiJianModel.ObjBean.YouJiBean> listJianTuShiKe = new ArrayList<>();
 
-    //----------------------推荐活动------------------------------------------------------------------
-    private HomeDataRecommendHuoDongLiveAdapter homeDataRecommendHuoDongLiveAdapter; //推荐活动，直播，
-    private List<HomeDataBannerHuoDongLiveModel.ObjBean.ActivityBean> dataHuoDongLiveModelList = new ArrayList<>();
-    private HomeDataYouJiVideoAdapter adapterTuiJian_youji;//推荐友记适配器
-    private List<HomeDataYouJiVideoModel.ObjBean> mListTuiJian_youji = new ArrayList<>();//推荐友记list
+    private RelativeLayout rlJingCaiLuXian;
+    RecyclerView rvJingCaiLuXian;
+    private HomeTui_JianJingCaiLuXian_Adapter jingCaiLuXianAdapter;
+    private List<HomeTuiJianModel.ObjBean.ActivityBean> listJingCaiLuXian = new ArrayList<>();
+
+    RecyclerView rvReMenDuiZhang;
+    private HomeTuiJian_ReMenDuiZhang_Adapter reMenDuiZhangAdapter;
+    RecyclerView rvDuizhangPuZi;
+    private HomeTuiJian_DuiZhangPuZi_Adapter duiZhangPuZiAdapter;
+    RecyclerView rvYouJiShiPin;
+    private HomeTuiJian_YouJiShiPin_Adapter youJiShiPinAdapter;
+
+
 
     private HomeDataAdapter adapterGuanzhu;//关注列表适配器
     private HomeListYouJiAdapter adapterYouji;//友记列表适配器
@@ -235,12 +220,9 @@ public class HomeFragment3 extends BaseFragment {
     private String cityId = "";
     private String type = "1";
     private String cityName = "";
-    private IndexLabelModel labelModel;
 
     private List<View> viewList = new ArrayList<>();
     private View view1,view2,view3,view4;
-    private TextView tv_text_youji;
-//    tv_text_youju;
     private NotifyAdatpterBroadcastReceiver broadcastReceiver = new NotifyAdatpterBroadcastReceiver();
     private PreLoadWebYouJiBroadcastReceiver preLoadWebYouJiBroadcastReceiver = new PreLoadWebYouJiBroadcastReceiver();
 
@@ -262,7 +244,33 @@ public class HomeFragment3 extends BaseFragment {
         return rootView;
     }
     private void initRv_Vp() {
-        view1 = getLayoutInflater().inflate(R.layout.layout_home_tuijian_1, null);
+
+
+        scrollView.setOnScrollListener(new ScrollListenScrollView.OnScrollListener() {
+            @Override
+            public void onScroll(int scrollY) {
+                switch (type){
+                    case "1":
+                        scollYTuiJian = scrollY;
+                        Log.d("scollYYY_tuijian::",scrollY+"");
+                        break;
+                    case "2":
+                        scollGuanZhu = scrollY;
+                        Log.d("scollYYY_guanzhu::",scrollY+"");
+                        break;
+                    case "3":
+                        scollYouJi = scrollY;
+                        Log.d("scollYYY_youji::",scrollY+"");
+                        break;
+                    case "4":
+                        scollShiPin = scrollY;
+                        Log.d("scollYYY_shipin::",scrollY+"");
+                        break;
+                }
+            }
+        });
+
+        view1 = getLayoutInflater().inflate(R.layout.home_lay_tuijian, null);
         view2 = getLayoutInflater().inflate(R.layout.layout_home_guanzhu, null);
         view3 = getLayoutInflater().inflate(R.layout.layout_home_youji, null);
         view4 = getLayoutInflater().inflate(R.layout.layout_home_shipin, null);
@@ -276,11 +284,108 @@ public class HomeFragment3 extends BaseFragment {
         rlTuiJianHuodongFirst = view1.findViewById(R.id.rl_tuijian_huodong_first);
         recyclerbanner = view1.findViewById(R.id.recyclerbanner);
 
+        //途荐时刻
+        rlJianTuShiKe = view1.findViewById(R.id.rl_jiantushike);
+        rvTuJianShiKe = view1.findViewById(R.id.rv_tuijianshike);
+        LinearLayoutManager managerTuiJianShiKe = new LinearLayoutManager(getContext()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rvTuJianShiKe.setLayoutManager(managerTuiJianShiKe);
+        jianTuShiKeAdapter =  new HomeTuiJian_JianTuShiKe_Adapter(listJianTuShiKe);
+        rvTuJianShiKe.setAdapter(jianTuShiKeAdapter);
 
-        recyclerViewTuiJianYouJi = view1.findViewById(R.id.rv_home_1_2);
-        tv_text_youji = view1.findViewById(R.id.tv_text_youji);
-//        tv_text_youju = view1.findViewById(R.id.tv_text_youju);
-        recyclerViewTuiJianYouJu = view1.findViewById(R.id.rv_home_1_1);
+
+        //精彩路线
+        rlJingCaiLuXian = view1.findViewById(R.id.rl_jingcailuxian);
+        rvJingCaiLuXian = view1.findViewById(R.id.rv_jingcailuxian);
+        LinearLayoutManager mLayoutManagerJingCaiLuXian = new LinearLayoutManager(getContext()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+
+            @Override
+            public boolean canScrollHorizontally() {
+                return true;
+            }
+        };
+        mLayoutManagerJingCaiLuXian.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvJingCaiLuXian.setLayoutManager(mLayoutManagerJingCaiLuXian);
+        jingCaiLuXianAdapter = new HomeTui_JianJingCaiLuXian_Adapter(listJingCaiLuXian);
+        jingCaiLuXianAdapter.setListener(new HomeTui_JianJingCaiLuXian_Adapter.LiveListAdapterListener() {
+            @Override
+            public void onCLickListen(int pos) {
+                if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+                    enterLiveRoom(listJingCaiLuXian.get(pos).getCaptain());
+                } else {
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onGuanZhuListen(int pos) {
+                guanZhuLivePerson(pos);
+            }
+        });
+        rvJingCaiLuXian.setAdapter(jingCaiLuXianAdapter);
+
+
+        //热门队长
+        rvReMenDuiZhang = view1.findViewById(R.id.rv_remenduizhang);
+        StaggeredGridLayoutManager mLayoutManagerReMenDuiZhang = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rvReMenDuiZhang.setLayoutManager(mLayoutManagerReMenDuiZhang);
+        List<String> d1 = new ArrayList<>();
+        d1.add("");
+        d1.add("");
+        d1.add("");
+        d1.add("");
+        d1.add("");
+        d1.add("");
+        reMenDuiZhangAdapter = new HomeTuiJian_ReMenDuiZhang_Adapter(d1);
+        rvReMenDuiZhang.setAdapter(reMenDuiZhangAdapter);
+        //队长铺子
+        rvDuizhangPuZi = view1.findViewById(R.id.rv_duizhangpuzi);
+        LinearLayoutManager managerDuiZhangPuZi = new LinearLayoutManager(getContext()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rvDuizhangPuZi.setLayoutManager(managerDuiZhangPuZi);
+        List<String> d2 = new ArrayList<>();
+        d2.add("");
+        d2.add("");
+        d2.add("");
+        duiZhangPuZiAdapter =  new HomeTuiJian_DuiZhangPuZi_Adapter(d2);
+        rvDuizhangPuZi.setAdapter(duiZhangPuZiAdapter);
+
+        //友记文章视频
+        rvYouJiShiPin = view1.findViewById(R.id.rv_youjishipin);
+        LinearLayoutManager managerYouJiShiPin = new LinearLayoutManager(getContext()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        List<String> d3 = new ArrayList<>();
+        d3.add("");
+        d3.add("");
+        d3.add("");
+        d3.add("");
+        d3.add("");
+        youJiShiPinAdapter = new HomeTuiJian_YouJiShiPin_Adapter(d3);
+        rvYouJiShiPin.setLayoutManager(managerYouJiShiPin);
+        rvYouJiShiPin.setAdapter(youJiShiPinAdapter);
 
         recyclerView2 = view2.findViewById(R.id.rv_home_2);
         recyclerView3 = view3.findViewById(R.id.rv_home_3);
@@ -324,6 +429,7 @@ public class HomeFragment3 extends BaseFragment {
         tvRl2.setTextColor(Color.parseColor("#999999"));
         tvRl3.setTextColor(Color.parseColor("#999999"));
         tvRl4.setTextColor(Color.parseColor("#999999"));
+        rl_top.setBackgroundColor(Color.parseColor("#ffffff"));
 //                        tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
 //                        tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
 //                        tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
@@ -359,6 +465,7 @@ public class HomeFragment3 extends BaseFragment {
                         tvRl2.setTextColor(Color.parseColor("#999999"));
                         tvRl3.setTextColor(Color.parseColor("#999999"));
                         tvRl4.setTextColor(Color.parseColor("#999999"));
+                        rl_top.setBackgroundColor(Color.parseColor("#ffffff"));
 //                        tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
 //                        tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
 //                        tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
@@ -369,6 +476,8 @@ public class HomeFragment3 extends BaseFragment {
                         v4.setVisibility(View.GONE);
 
                         type = "1";
+                        scrollView.scrollTo(0,scollYTuiJian);
+                        Log.d("scollYYY_tuijian_to::",scollYTuiJian+"");
                         break;
                     case 1:
                         if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
@@ -380,6 +489,7 @@ public class HomeFragment3 extends BaseFragment {
                             tvRl2.setTextColor(Color.parseColor("#333333"));
                             tvRl3.setTextColor(Color.parseColor("#999999"));
                             tvRl4.setTextColor(Color.parseColor("#999999"));
+                            rl_top.setBackgroundColor(Color.parseColor("#ffffff"));
 //                            tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
 //                            tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
 //                            tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
@@ -389,6 +499,8 @@ public class HomeFragment3 extends BaseFragment {
                             v3.setVisibility(View.GONE);
                             v4.setVisibility(View.GONE);
                             type = "2";
+                            scrollView.scrollTo(0,scollGuanZhu);
+                            Log.d("scollYYY_guanzhu_to::",scollGuanZhu+"");
                         } else {
                             Intent intent = new Intent();
                             intent.setClass(getContext(), LoginActivity.class);
@@ -405,6 +517,7 @@ public class HomeFragment3 extends BaseFragment {
                         tvRl2.setTextColor(Color.parseColor("#999999"));
                         tvRl3.setTextColor(Color.parseColor("#333333"));
                         tvRl4.setTextColor(Color.parseColor("#999999"));
+                        rl_top.setBackgroundResource(R.drawable.bg_white_down_30px);
 //                        tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
 //                        tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
 //                        tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
@@ -414,6 +527,8 @@ public class HomeFragment3 extends BaseFragment {
                         v3.setVisibility(View.VISIBLE);
                         v4.setVisibility(View.GONE);
                         type = "3";
+                        scrollView.scrollTo(0,scollYouJi);
+                        Log.d("scollYYY_youji_to::",scollYouJi+"");
                         break;
                     case 3:
                         tvRl1.setTextSize(TypedValue.COMPLEX_UNIT_SP, AndTools.px2sp(getContext(),50));
@@ -424,6 +539,7 @@ public class HomeFragment3 extends BaseFragment {
                         tvRl2.setTextColor(Color.parseColor("#999999"));
                         tvRl3.setTextColor(Color.parseColor("#999999"));
                         tvRl4.setTextColor(Color.parseColor("#333333"));
+                        rl_top.setBackgroundResource(R.drawable.bg_white_down_30px);
 //                        tvRl1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
 //                        tvRl2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
 //                        tvRl3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
@@ -433,6 +549,8 @@ public class HomeFragment3 extends BaseFragment {
                         v3.setVisibility(View.GONE);
                         v4.setVisibility(View.VISIBLE);
                         type = "4";
+                        scrollView.scrollTo(0,scollShiPin);
+                        Log.d("scollYYY_shipin_to::",scollShiPin+"");
                         break;
                 }
             }
@@ -442,6 +560,7 @@ public class HomeFragment3 extends BaseFragment {
 
             }
         });
+
     }
 
     @Override
@@ -458,19 +577,6 @@ public class HomeFragment3 extends BaseFragment {
             initData();
         } else if (netMobile == -1) {
             Log.e("2222", "inspectNet:当前没有网络");
-            if (labelModel == null){
-                youji_all.setVisibility(View.GONE);
-                youji_gonglue.setVisibility(View.GONE);
-                youji_lvxing.setVisibility(View.GONE);
-                youji_meishi.setVisibility(View.GONE);
-                youji_tandian.setVisibility(View.GONE);
-            }else {
-                youji_all.setVisibility(View.VISIBLE);
-                youji_gonglue.setVisibility(View.VISIBLE);
-                youji_lvxing.setVisibility(View.VISIBLE);
-                youji_meishi.setVisibility(View.VISIBLE);
-                youji_tandian.setVisibility(View.VISIBLE);
-            }
         }
     }
 
@@ -522,21 +628,6 @@ public class HomeFragment3 extends BaseFragment {
                                 for (int i = 0; i < bannerModel.getObj().size(); i++) {
                                     list.add(bannerModel.getObj().get(i).getPic());
                                 }
-                                init(banner, list);
-                                banner.setOnBannerListener(new OnBannerListener() {
-                                    @Override
-                                    public void OnBannerClick(int position) {
-//                                        if (bannerModel.getObj().get(position).getFirst_type().equals("0")) {
-//                                            Intent intent = new Intent(getContext(), DetailsOfFriendTogetherWebActivity.class);
-//                                            intent.putExtra("pfID", bannerModel.getObj().get(position).getLeftid());
-//                                            startActivity(intent);
-//                                        } else if (bannerModel.getObj().get(position).getFirst_type().equals("1")) {
-//                                            Intent intent = new Intent(getContext(), DetailsOfFriendsWebActivity1.class);
-//                                            intent.putExtra("fmid", bannerModel.getObj().get(position).getLeftid());
-//                                            startActivity(intent);
-//                                        }
-                                    }
-                                });
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -548,41 +639,10 @@ public class HomeFragment3 extends BaseFragment {
 
                     }
                 });
-
-        ViseHttp.POST(NetConfig.indexLabel)
-                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.indexLabel))
-                .request(new ACallback<String>() {
-                    @Override
-                    public void onSuccess(String data) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(data);
-                            if(jsonObject.getInt("code") == 200){
-                                Gson gson = new Gson();
-                                labelModel = gson.fromJson(data, IndexLabelModel.class);
-                                Glide.with(getContext()).load(labelModel.getObj().get(0).getImg()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).error(R.mipmap.zanwutupian)).into(iv1);
-                                tv1.setText(labelModel.getObj().get(0).getLname());
-                                Glide.with(getContext()).load(labelModel.getObj().get(1).getImg()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv2);
-                                tv2.setText(labelModel.getObj().get(1).getLname());
-                                Glide.with(getContext()).load(labelModel.getObj().get(2).getImg()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv3);
-                                tv3.setText(labelModel.getObj().get(2).getLname());
-                                Glide.with(getContext()).load(labelModel.getObj().get(3).getImg()).apply(new RequestOptions().placeholder(R.mipmap.zanwutupian).placeholder(R.mipmap.zanwutupian)).into(iv4);
-                                tv4.setText(labelModel.getObj().get(3).getLname());
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFail(int errCode, String errMsg) {
-
-                    }
-                });
-
         uid = spImp.getUID();
         //推荐
-        ViseHttp.POST(NetConfig.homePage)
-                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homePage))
+        ViseHttp.POST(NetConfig.homeTuiJian)
+                .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeTuiJian))
                 .addParam("uid", uid)
                 .addParam("city", cityName)
                 .request(new ACallback<String>() {
@@ -592,60 +652,82 @@ public class HomeFragment3 extends BaseFragment {
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.getInt("code") == 200){
                                 Gson gson = new Gson();
-                                HomeDataBannerHuoDongLiveModel model = gson.fromJson(data, HomeDataBannerHuoDongLiveModel.class);
+                                HomeTuiJianModel model = gson.fromJson(data, HomeTuiJianModel.class);
                                 //轮播图
-                                if (model.getObj().getBannerList().size()>0){
-//                                    tv_text_youju.setVisibility(View.VISIBLE);
-                                    rlTuiJianHuodongFirst.setVisibility(View.VISIBLE);
-                                    initTuiJianFirstHuoDong(model.getObj().getBannerList());
+//                                if (model.getObj().getBannerList().size()>0){
+////                                    tv_text_youju.setVisibility(View.VISIBLE);
+//                                    rlTuiJianHuodongFirst.setVisibility(View.VISIBLE);
+//                                    initTuiJianFirstHuoDong(model.getObj().getBannerList());
+//                                }else {
+////                                    tv_text_youju.setVisibility(View.GONE);
+//                                    rlTuiJianHuodongFirst.setVisibility(View.GONE);
+//                                }
+
+
+                                //荐途时刻
+                                listJianTuShiKe.clear();
+                                listJianTuShiKe.addAll(model.getObj().getYouJi());
+                                jianTuShiKeAdapter.notifyDataSetChanged();
+                                if (listJianTuShiKe.size()>0){
+                                    if (hasPermission()){
+                                        preLoadYouJi_tuijain(listJianTuShiKe);
+                                    }else {
+                                        requestPermission();
+                                    }
+                                    rlJianTuShiKe.setVisibility(View.VISIBLE);
                                 }else {
-//                                    tv_text_youju.setVisibility(View.GONE);
-                                    rlTuiJianHuodongFirst.setVisibility(View.GONE);
+                                    rlJianTuShiKe.setVisibility(View.GONE);
                                 }
-
-
-                                //友聚
-                                dataHuoDongLiveModelList.clear();
-                                dataHuoDongLiveModelList.addAll(model.getObj().getActivity());
-                                //友聚列表
-                                homeDataRecommendHuoDongLiveAdapter = new HomeDataRecommendHuoDongLiveAdapter(dataHuoDongLiveModelList);
-                                homeDataRecommendHuoDongLiveAdapter.setListener(new HomeDataRecommendHuoDongLiveAdapter.LiveListAdapterListener() {
-                                    @Override
-                                    public void onCLickListen(int pos) {
-                                        if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
-                                            enterLiveRoom(dataHuoDongLiveModelList.get(pos).getCaptain());
-                                        } else {
-                                            Intent intent = new Intent();
-                                            intent.setClass(getContext(), LoginActivity.class);
-                                            startActivity(intent);
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onGuanZhuListen(int pos) {
-                                        guanZhuLivePerson(pos);
-                                    }
-                                });
-                                LinearLayoutManager manager2 = new LinearLayoutManager(getContext()){
-                                    @Override
-                                    public boolean canScrollVertically() {
-                                        return false;
-                                    }
-
-                                    @Override
-                                    public boolean canScrollHorizontally() {
-                                        return true;
-                                    }
-                                };
-                                manager2.setOrientation(LinearLayoutManager.HORIZONTAL);
-                                recyclerViewTuiJianYouJu.setLayoutManager(manager2);
-                                recyclerViewTuiJianYouJu.setAdapter(homeDataRecommendHuoDongLiveAdapter);
-                                //悬浮球
-                                if (model.getObj().getStatus2().equals("1")){
-                                    rl_ball.setVisibility(View.VISIBLE);
+                                //精彩路线
+                                listJingCaiLuXian.clear();
+                                listJingCaiLuXian.addAll(model.getObj().getActivity());
+                                jingCaiLuXianAdapter.notifyDataSetChanged();
+                                if (listJingCaiLuXian.size()>0){
+                                    rlJingCaiLuXian.setVisibility(View.VISIBLE);
                                 }else {
-                                    rl_ball.setVisibility(View.GONE);
+                                    rlJingCaiLuXian.setVisibility(View.GONE);
                                 }
+                                //热门队长
+                                //队长铺子
+//                                //友聚列表
+//                                jingCaiLuXianAdapter = new HomeTui_JianJingCaiLuXian_Adapter(dataHuoDongLiveModelList);
+//                                jingCaiLuXianAdapter.setListener(new HomeTui_JianJingCaiLuXian_Adapter.LiveListAdapterListener() {
+//                                    @Override
+//                                    public void onCLickListen(int pos) {
+//                                        if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
+//                                            enterLiveRoom(dataHuoDongLiveModelList.get(pos).getCaptain());
+//                                        } else {
+//                                            Intent intent = new Intent();
+//                                            intent.setClass(getContext(), LoginActivity.class);
+//                                            startActivity(intent);
+//                                        }
+//                                    }
+//
+//                                    @Override
+//                                    public void onGuanZhuListen(int pos) {
+//                                        guanZhuLivePerson(pos);
+//                                    }
+//                                });
+//                                LinearLayoutManager manager2 = new LinearLayoutManager(getContext()){
+//                                    @Override
+//                                    public boolean canScrollVertically() {
+//                                        return false;
+//                                    }
+//
+//                                    @Override
+//                                    public boolean canScrollHorizontally() {
+//                                        return true;
+//                                    }
+//                                };
+//                                manager2.setOrientation(LinearLayoutManager.HORIZONTAL);
+//                                rvJingCaiLuXian.setLayoutManager(manager2);
+//                                rvJingCaiLuXian.setAdapter(jingCaiLuXianAdapter);
+//                                //悬浮球
+//                                if (model.getObj().getStatus2().equals("1")){
+//                                    rl_ball.setVisibility(View.VISIBLE);
+//                                }else {
+//                                    rl_ball.setVisibility(View.GONE);
+//                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -668,30 +750,20 @@ public class HomeFragment3 extends BaseFragment {
                         try {
                             jsonObject = new JSONObject(data);
                             if(jsonObject.getInt("code") == 200) {
-                                Gson gson = new Gson();
-                                HomeDataYouJiVideoModel model = gson.fromJson(data, HomeDataYouJiVideoModel.class);
-                                page1 = 2;
-                                //友记
-                                mListTuiJian_youji = model.getObj();
-                                adapterTuiJian_youji = new HomeDataYouJiVideoAdapter(mListTuiJian_youji);
-                                LinearLayoutManager manager = new LinearLayoutManager(getContext()){
-                                    @Override
-                                    public boolean canScrollVertically() {
-                                        return false;
-                                    }
-                                };
-                                recyclerViewTuiJianYouJi.setLayoutManager(manager);
-                                recyclerViewTuiJianYouJi.setAdapter(adapterTuiJian_youji);
-                                if (mListTuiJian_youji.size()>0){
-                                    if (hasPermission()){
-                                        preLoadYouJi_tuijain(mListTuiJian_youji);
-                                    }else {
-                                        requestPermission();
-                                    }
-                                    tv_text_youji.setVisibility(View.VISIBLE);
-                                }else {
-                                    tv_text_youji.setVisibility(View.GONE);
-                                }
+//                                Gson gson = new Gson();
+//                                HomeDataYouJiVideoModel model = gson.fromJson(data, HomeDataYouJiVideoModel.class);
+//                                page1 = 2;
+//                                //友记
+//                                mListTuiJian_youji = model.getObj();
+//                                adapterTuiJian_youji = new HomeDataYouJiVideoAdapter(mListTuiJian_youji);
+//                                LinearLayoutManager manager = new LinearLayoutManager(getContext()){
+//                                    @Override
+//                                    public boolean canScrollVertically() {
+//                                        return false;
+//                                    }
+//                                };
+//                                rvYouJiShiPin.setLayoutManager(manager);
+//                                rvYouJiShiPin.setAdapter(adapterTuiJian_youji);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -867,22 +939,22 @@ public class HomeFragment3 extends BaseFragment {
                                         try {
                                             JSONObject jsonObject = new JSONObject(data);
                                             if(jsonObject.getInt("code") == 200){
-                                                Gson gson = new Gson();
-                                                HomeDataYouJiVideoModel model = gson.fromJson(data, HomeDataYouJiVideoModel.class);
-//                                        mList.clear();
-                                                if (model.getObj().size()>0){
-                                                    mListTuiJian_youji.addAll(model.getObj());
-                                                    preLoadYouJi_tuijain(model.getObj());
-                                                    if (mListTuiJian_youji!=null && adapterTuiJian_youji!=null){
-                                                        adapterTuiJian_youji.notifyDataSetChanged();
-                                                    }
-                                                    if (mListTuiJian_youji.size()>0){
-                                                        tv_text_youji.setVisibility(View.VISIBLE);
-                                                    }else {
-                                                        tv_text_youji.setVisibility(View.GONE);
-                                                    }
-                                                    page1++;
-                                                }
+//                                                Gson gson = new Gson();
+//                                                HomeDataYouJiVideoModel model = gson.fromJson(data, HomeDataYouJiVideoModel.class);
+////                                        mList.clear();
+//                                                if (model.getObj().size()>0){
+//                                                    mListTuiJian_youji.addAll(model.getObj());
+//                                                    preLoadYouJi_tuijain(model.getObj());
+//                                                    if (mListTuiJian_youji!=null && adapterTuiJian_youji!=null){
+//                                                        adapterTuiJian_youji.notifyDataSetChanged();
+//                                                    }
+//                                                    if (mListTuiJian_youji.size()>0){
+//                                                        tv_text_youji.setVisibility(View.VISIBLE);
+//                                                    }else {
+//                                                        tv_text_youji.setVisibility(View.GONE);
+//                                                    }
+//                                                    page1++;
+//                                                }
                                                 refreshLayout.finishLoadMore(1000);
                                             }
 
@@ -1016,7 +1088,7 @@ public class HomeFragment3 extends BaseFragment {
 
     }
 
-    private void enterLiveRoom(final HomeDataBannerHuoDongLiveModel.ObjBean.ActivityBean.CaptainBean zhiboBean) {
+    private void enterLiveRoom(final HomeTuiJianModel.ObjBean.ActivityBean.CaptainBean zhiboBean) {
         dialog_loading = WeiboDialogUtils.createLoadingDialog(getContext(),"进入房间中");
         Log.d("asdasdas","UID:"+zhiboBean.getUid()+"///"+zhiboBean.getChannel_id());
         if (zhiboBean.getChannel_id() == null || TextUtils.isEmpty(zhiboBean.getChannel_id())){
@@ -1075,14 +1147,6 @@ public class HomeFragment3 extends BaseFragment {
                             toToast(getContext(),"进入房间失败！");
                         }
                     });
-
-//        cancelEnterRoom = false;
-//        DialogMaker.showProgressDialog(getContext(), null, "进入房间中", true, new DialogInterface.OnCancelListener() {
-//            @Override
-//            public void onCancel(DialogInterface dialog) {
-//                cancelEnterRoom = true;
-//            }
-//        }).setCanceledOnTouchOutside(false);
         }
     }
 
@@ -1173,38 +1237,12 @@ public class HomeFragment3 extends BaseFragment {
             e.printStackTrace();
         }
     }
-    @OnClick({R.id.ll_home_youji_gonglue,R.id.ll_home_youji_all,
-                    R.id.ll_home_youji_meishi,R.id.ll_home_youji_tandian,R.id.ll_home_youji_lvxing, R.id.locationRl, R.id.ll_search, R.id.iv_msg,
+    @OnClick({R.id.locationRl, R.id.ll_search, R.id.iv_msg,
     R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl4,R.id.rl_xiaoxi,R.id.rl_ball})
     public void onClick(View view) {
         MainActivity mainActivity = (MainActivity) getActivity();
         Intent intent = new Intent();
         switch (view.getId()) {
-            case R.id.ll_home_youji_all:
-                MyApplication.sign = "";
-                mainActivity.switchFragment(2);
-                mainActivity.startYouji();
-                break;
-            case R.id.ll_home_youji_lvxing:
-                MyApplication.sign = labelModel.getObj().get(0).getLID();
-                mainActivity.switchFragment(2);
-                mainActivity.startYouji();
-                break;
-            case R.id.ll_home_youji_meishi:
-                MyApplication.sign = labelModel.getObj().get(1).getLID();
-                mainActivity.switchFragment(2);
-                mainActivity.startYouji();
-                break;
-            case R.id.ll_home_youji_tandian:
-                MyApplication.sign = labelModel.getObj().get(2).getLID();
-                mainActivity.switchFragment(2);
-                mainActivity.startYouji();
-                break;
-            case R.id.ll_home_youji_gonglue:
-                MyApplication.sign = labelModel.getObj().get(3).getLID();
-                mainActivity.switchFragment(2);
-                mainActivity.startYouji();
-                break;
             case R.id.locationRl:
                 Intent it = new Intent(getActivity(), CityActivity.class);
                 CityModel model = new CityModel();
@@ -1280,8 +1318,8 @@ public class HomeFragment3 extends BaseFragment {
 //        dialog_loading = WeiboDialogUtils.createLoadingDialog(getContext(),"加载中...");
         switch (type){
             case "1":
-                ViseHttp.POST(NetConfig.homePage)
-                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homePage))
+                ViseHttp.POST(NetConfig.homeTuiJian)
+                        .addParam("app_key", getToken(NetConfig.BaseUrl+NetConfig.homeTuiJian))
                         .addParam("uid", uid)
                         .addParam("city", cityName)
                         .request(new ACallback<String>() {
@@ -1292,39 +1330,53 @@ public class HomeFragment3 extends BaseFragment {
                                     JSONObject jsonObject = new JSONObject(data);
                                     if(jsonObject.getInt("code") == 200){
                                         Gson gson = new Gson();
-                                        HomeDataBannerHuoDongLiveModel model = gson.fromJson(data, HomeDataBannerHuoDongLiveModel.class);
+                                        HomeTuiJianModel model = gson.fromJson(data, HomeTuiJianModel.class);
+                                        //荐途时刻
+                                        listJianTuShiKe.clear();
+                                        listJianTuShiKe.addAll(model.getObj().getYouJi());
+                                        jianTuShiKeAdapter.notifyDataSetChanged();
+                                        if (listJianTuShiKe.size()>0){
+                                            if (hasPermission()){
+                                                preLoadYouJi_tuijain(listJianTuShiKe);
+                                            }else {
+                                                requestPermission();
+                                            }
+                                            rlJianTuShiKe.setVisibility(View.VISIBLE);
+                                        }else {
+                                            rlJianTuShiKe.setVisibility(View.GONE);
+                                        }
+                                        //精彩路线
+                                        listJingCaiLuXian.clear();
+                                        listJingCaiLuXian.addAll(model.getObj().getActivity());
+                                        jingCaiLuXianAdapter.notifyDataSetChanged();
+                                        if (listJingCaiLuXian.size()>0){
+                                            rlJingCaiLuXian.setVisibility(View.VISIBLE);
+                                        }else {
+                                            rlJingCaiLuXian.setVisibility(View.GONE);
+                                        }
+//                                        //轮播图
+//                                        initTuiJianFirstHuoDong(model.getObj().getBannerList());
+//                                        if (model.getObj().getActivity().size()>0){
+//                                            rlTuiJianHuodongFirst.setVisibility(View.VISIBLE);
+//                                        }else {
+//                                            rlTuiJianHuodongFirst.setVisibility(View.GONE);
+//                                        }
 
-                                        if (mListTuiJian_youji.size()>0){
-                                            preLoadYouJi_tuijain(mListTuiJian_youji);
-                                            tv_text_youji.setVisibility(View.VISIBLE);
-                                        }else {
-                                            tv_text_youji.setVisibility(View.GONE);
-                                        }
-                                        //轮播图
-                                        initTuiJianFirstHuoDong(model.getObj().getBannerList());
-                                        if (model.getObj().getActivity().size()>0){
-                                            rlTuiJianHuodongFirst.setVisibility(View.VISIBLE);
-                                        }else {
-                                            rlTuiJianHuodongFirst.setVisibility(View.GONE);
-                                        }
-                                        dataHuoDongLiveModelList.clear();
-                                        dataHuoDongLiveModelList.addAll(model.getObj().getActivity());
-                                        homeDataRecommendHuoDongLiveAdapter.notifyDataSetChanged();
-                                        if (model.getObj().getBannerList().size()>0){
-//                                            tv_text_youju.setVisibility(View.VISIBLE);
-                                            rlTuiJianHuodongFirst.setVisibility(View.VISIBLE);
-                                        }else {
-//                                            tv_text_youju.setVisibility(View.GONE);
-                                            rlTuiJianHuodongFirst.setVisibility(View.GONE);
-                                        }
-                                        if (model.getObj().getStatus2().equals("1")){
-                                            rl_ball.setVisibility(View.VISIBLE);
-                                        }else {
-                                            rl_ball.setVisibility(View.GONE);
-                                        }
+//                                        if (model.getObj().getBannerList().size()>0){
+////                                            tv_text_youju.setVisibility(View.VISIBLE);
+//                                            rlTuiJianHuodongFirst.setVisibility(View.VISIBLE);
+//                                        }else {
+////                                            tv_text_youju.setVisibility(View.GONE);
+//                                            rlTuiJianHuodongFirst.setVisibility(View.GONE);
+//                                        }
+//                                        if (model.getObj().getStatus2().equals("1")){
+//                                            rl_ball.setVisibility(View.VISIBLE);
+//                                        }else {
+//                                            rl_ball.setVisibility(View.GONE);
+//                                        }
                                         page1 = 2;
                                     }
-//                                    WeiboDialogUtils.closeDialog(dialog_loading);
+                                    WeiboDialogUtils.closeDialog(dialog_loading);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -1344,19 +1396,19 @@ public class HomeFragment3 extends BaseFragment {
                             @Override
                             public void onSuccess(String data) {
                                 Log.e("123123", data+"--------");
-                                try {
-                                    JSONObject jsonObject = new JSONObject(data);
-                                    if (jsonObject.getInt("code") == 200){
-                                        Gson gson = new Gson();
-                                        HomeDataYouJiVideoModel model = gson.fromJson(data,HomeDataYouJiVideoModel.class);
-                                        page1 = 2;
-                                        mListTuiJian_youji.clear();
-                                        mListTuiJian_youji.addAll(model.getObj());
-                                        adapterTuiJian_youji.notifyDataSetChanged();
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+//                                try {
+//                                    JSONObject jsonObject = new JSONObject(data);
+//                                    if (jsonObject.getInt("code") == 200){
+//                                        Gson gson = new Gson();
+//                                        HomeDataYouJiVideoModel model = gson.fromJson(data,HomeDataYouJiVideoModel.class);
+//                                        page1 = 2;
+//                                        mListTuiJian_youji.clear();
+//                                        mListTuiJian_youji.addAll(model.getObj());
+//                                        adapterTuiJian_youji.notifyDataSetChanged();
+//                                    }
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
                             }
 
                             @Override
@@ -1460,47 +1512,6 @@ public class HomeFragment3 extends BaseFragment {
                         });
                 break;
         }
-        ViseHttp.POST(NetConfig.allBannerUrl)
-                .addParam("app_key", getToken(NetConfig.BaseUrl + NetConfig.allBannerUrl))
-                .addParam("type", "1")
-                .request(new ACallback<String>() {
-                    @Override
-                    public void onSuccess(String data) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(data);
-                            if (jsonObject.getInt("code") == 200) {
-                                Gson gson = new Gson();
-                                final AllBannerModel bannerModel = gson.fromJson(data, AllBannerModel.class);
-                                List<String> list = new ArrayList<>();
-                                for (int i = 0; i < bannerModel.getObj().size(); i++) {
-                                    list.add(bannerModel.getObj().get(i).getPic());
-                                }
-                                init(banner, list);
-                                banner.setOnBannerListener(new OnBannerListener() {
-                                    @Override
-                                    public void OnBannerClick(int position) {
-//                                        if (bannerModel.getObj().get(position).getFirst_type().equals("0")) {
-//                                            Intent intent = new Intent(getContext(), DetailsOfFriendTogetherWebActivity.class);
-//                                            intent.putExtra("pfID", bannerModel.getObj().get(position).getLeftid());
-//                                            startActivity(intent);
-//                                        } else if (bannerModel.getObj().get(position).getFirst_type().equals("1")) {
-//                                            Intent intent = new Intent(getContext(), DetailsOfFriendsWebActivity1.class);
-//                                            intent.putExtra("fmid", bannerModel.getObj().get(position).getLeftid());
-//                                            startActivity(intent);
-//                                        }
-                                    }
-                                });
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFail(int errCode, String errMsg) {
-
-                    }
-                });
     }
 
     @Override
@@ -1582,24 +1593,24 @@ public class HomeFragment3 extends BaseFragment {
             String action = intent.getAction();
             String id = intent.getStringExtra("deleteID");
             switch (action){
-                case "android.friendscometogether.HomeFragment.TuiJian_Youji":
-                    for (int i =0;i<mListTuiJian_youji.size();i++){
-                        if (mListTuiJian_youji.get(i).getPfID().equals(id)){
-                            mListTuiJian_youji.remove(i);
-                            adapterTuiJian_youji.notifyDataSetChanged();
-                            break;
-                        }
-                    }
-                    break;
-                case "android.friendscometogether.HomeFragment.TuiJian_Youju":
-                    for (int i =0;i<dataHuoDongLiveModelList.size();i++){
-                        if (dataHuoDongLiveModelList.get(i).getPfID().equals(id)){
-                            dataHuoDongLiveModelList.remove(i);
-                            homeDataRecommendHuoDongLiveAdapter.notifyDataSetChanged();
-                            break;
-                        }
-                    }
-                        break;
+//                case "android.friendscometogether.HomeFragment.TuiJian_Youji":
+//                    for (int i =0;i<mListTuiJian_youji.size();i++){
+//                        if (mListTuiJian_youji.get(i).getPfID().equals(id)){
+//                            mListTuiJian_youji.remove(i);
+//                            adapterTuiJian_youji.notifyDataSetChanged();
+//                            break;
+//                        }
+//                    }
+//                    break;
+//                case "android.friendscometogether.HomeFragment.TuiJian_Youju":
+//                    for (int i =0;i<dataHuoDongLiveModelList.size();i++){
+//                        if (dataHuoDongLiveModelList.get(i).getPfID().equals(id)){
+//                            dataHuoDongLiveModelList.remove(i);
+//                            jingCaiLuXianAdapter.notifyDataSetChanged();
+//                            break;
+//                        }
+//                    }
+//                        break;
                 case "android.friendscometogether.HomeFragment.GuanZhu":
                     for (int i =0;i<mListGuanzhu.size();i++){
                         if (mListGuanzhu.get(i).getPfID().equals(id)){
@@ -1666,7 +1677,7 @@ public class HomeFragment3 extends BaseFragment {
                 } else {
                     preLoadYouJi_youji_and_guanzhu(mListYouJi);
                     preLoadYouJi_youji_and_guanzhu(mListGuanzhu);
-                    preLoadYouJi_tuijain(mListTuiJian_youji);
+                    preLoadYouJi_tuijain(listJianTuShiKe);
                 }
             }
         }
@@ -1690,10 +1701,10 @@ public class HomeFragment3 extends BaseFragment {
             }
         }
     }
-    private void preLoadYouJi_tuijain(List<HomeDataYouJiVideoModel.ObjBean> list) {
+    private void preLoadYouJi_tuijain(List<HomeTuiJianModel.ObjBean.YouJiBean> list) {
         Log.d("读写内存权限","youquanxian");
         for (int i = 0 ;i<list.size();i++){
-            String url = NetConfig.BaseUrl+"action/ac_article/youJiWeb?id="+list.get(i).getPfID()+"&uid="+uid;
+            String url = NetConfig.BaseUrl+"action/ac_article/youJiWeb?id="+list.get(i).getFmID()+"&uid="+uid;
             SonicSessionConfig.Builder sessionConfigBuilder = new SonicSessionConfig.Builder();
             sessionConfigBuilder.setSupportLocalServer(true);
             HashMap mapRp = new HashMap();
@@ -1712,7 +1723,7 @@ public class HomeFragment3 extends BaseFragment {
         public void onReceive(Context context, Intent intent) {
             uid = spImp.getUID();
             if (hasPermission()){
-                preLoadYouJi_tuijain(mListTuiJian_youji);
+                preLoadYouJi_tuijain(listJianTuShiKe);
                 preLoadYouJi_youji_and_guanzhu(mListGuanzhu);
                 preLoadYouJi_youji_and_guanzhu(mListYouJi);
             }else {
@@ -1720,15 +1731,17 @@ public class HomeFragment3 extends BaseFragment {
             }
         }
     }
-    // 直播列表关注
+
+
+//     直播列表关注
     private void guanZhuLivePerson(final int position){
         Log.d("adasds",position+"");
         if (!TextUtils.isEmpty(uid) && !uid.equals("0")) {
-            if (dataHuoDongLiveModelList.get(position).getCaptain().getFollow().equals("0")){//未关注
+            if (listJingCaiLuXian.get(position).getCaptain().getFollow().equals("0")){//未关注
                 ViseHttp.POST(NetConfig.userFocusUrl)
                         .addParam("app_key", TokenUtils.getToken(NetConfig.BaseUrl + NetConfig.userFocusUrl))
                         .addParam("uid", uid)
-                        .addParam("likeId", dataHuoDongLiveModelList.get(position).getCaptain().getUid())
+                        .addParam("likeId", listJingCaiLuXian.get(position).getCaptain().getUid())
                         .request(new ACallback<String>() {
                             @Override
                             public void onSuccess(String result) {
@@ -1736,8 +1749,8 @@ public class HomeFragment3 extends BaseFragment {
                                 try {
                                     JSONObject jsonObject = new JSONObject(result);
                                     if (jsonObject.getInt("code") == 200) {
-                                        dataHuoDongLiveModelList.get(position).getCaptain().setFollow("1");
-                                        homeDataRecommendHuoDongLiveAdapter.notifyDataSetChanged();
+                                        listJingCaiLuXian.get(position).getCaptain().setFollow("1");
+                                        jingCaiLuXianAdapter.notifyDataSetChanged();
                                         Toast.makeText(getContext(), "关注成功", Toast.LENGTH_SHORT).show();
                                     }else if(jsonObject.getInt("code") == 400){
 
@@ -1759,6 +1772,8 @@ public class HomeFragment3 extends BaseFragment {
             startActivity(intent);
         }
     }
+
+
     private int[] getDisplayMetrics(Context context) {
         DisplayMetrics mDisplayMetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(mDisplayMetrics);

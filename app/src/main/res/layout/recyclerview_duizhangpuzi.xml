@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:test="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white_ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_marginLeft="50px"
+        android:layout_marginRight="20px"
+        android:layout_alignTop="@+id/iv_big"
+        android:layout_alignBottom="@+id/iv_big"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <View
+            android:translationZ="8px"
+            android:elevation="10px"
+            android:layout_marginTop="30px"
+            android:layout_marginBottom="30px"
+            android:layout_marginRight="5px"
+            android:background="@drawable/bg_white_24px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+    <com.yiwo.friendscometogether.widget.CustomRoundAngleImageView
+        android:layout_marginTop="8px"
+        android:layout_marginBottom="8px"
+        android:layout_marginLeft="20px"
+        test:radius1="16px"
+        android:id="@+id/iv_big"
+        android:layout_width="260px"
+        android:layout_height="350px"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/zanwutupian" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_alignBottom="@+id/iv_big"
+        android:layout_alignTop="@+id/iv_big"
+        android:layout_toRightOf="@+id/iv_big"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginBottom="40px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_marginTop="5px"
+                android:layout_marginRight="40px"
+                android:layout_alignParentRight="true"
+                android:id="@+id/iv_head"
+                android:src="@mipmap/my_head"
+                android:layout_width="125px"
+                android:layout_height="125px" />
+            <LinearLayout
+                android:id="@+id/ll_name"
+                android:layout_marginTop="40px"
+                android:layout_marginRight="10px"
+                android:orientation="vertical"
+                android:layout_toLeftOf="@+id/iv_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_gravity="right"
+                    android:textSize="30px"
+                    android:maxLength="5"
+                    android:ellipsize="middle"
+                    android:text="天水的铺子"
+                    android:textColor="@color/black_101010"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_marginRight="5px"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/level_qingtong"
+                        android:layout_width="45px"
+                        android:layout_height="45px" />
+                    <RelativeLayout
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/rl_level"
+                        android:layout_alignLeft="@+id/iv_icon"
+                        android:layout_below="@+id/iv_icon"
+                        android:background="@drawable/bg_ffac27_10px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_marginRight="12px"
+                            android:layout_marginLeft="12px"
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/black_101010"
+                            android:text="Lv.1"
+                            android:lines="1"
+                            android:textSize="25px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_marginRight="30px"
+                android:layout_marginTop="45px"
+                android:id="@+id/rl_guanzhu"
+                android:layout_toLeftOf="@+id/ll_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:id="@+id/iv_guanzhu"
+                    android:layout_margin="10px"
+                    android:src="@mipmap/hert_0324_g"
+                    android:layout_width="50px"
+                    android:layout_height="50px" />
+            </RelativeLayout>
+        </RelativeLayout>
+        <TextView
+            android:text="纯五常香米，政府背书5kg.."
+            android:layout_marginTop="20px"
+            android:layout_width="match_parent"
+            android:textColor="@color/black_101010"
+            android:textSize="28px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="40px"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="10px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="40px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_gravity="bottom"
+                android:textColor="@color/red_d84c37"
+                android:textSize="25px"
+                android:text="¥"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="5px"
+                android:textSize="32px"
+                android:textColor="@color/red_d84c37"
+                android:text="89.00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_marginTop="8px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="40px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:id="@+id/ll_xingxing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@mipmap/pingxing"
+                    android:layout_marginRight="5px"
+                    android:layout_width="28px"
+                    android:layout_height="28px" />
+                <ImageView
+                    android:src="@mipmap/pingxing"
+                    android:layout_marginRight="5px"
+                    android:layout_width="28px"
+                    android:layout_height="28px" />
+                <ImageView
+                    android:src="@mipmap/pingxing"
+                    android:layout_marginRight="5px"
+                    android:layout_width="28px"
+                    android:layout_height="28px" />
+                <ImageView
+                    android:src="@mipmap/pingxing"
+                    android:layout_marginRight="5px"
+                    android:layout_width="28px"
+                    android:layout_height="28px" />
+                <ImageView
+                    android:src="@mipmap/pingxing"
+                    android:layout_marginRight="5px"
+                    android:layout_width="28px"
+                    android:layout_height="28px" />
+            </LinearLayout>
+            <TextView
+                android:layout_toRightOf="@+id/ll_xingxing"
+                android:gravity="right"
+                android:layout_centerVertical="true"
+                android:text="共0人参与评论"
+                android:layout_width="match_parent"
+                android:textColor="@color/black_101010"
+                android:textSize="27px"
+                android:layout_marginLeft="20px"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
